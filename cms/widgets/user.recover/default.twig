@@ -1,0 +1,15 @@
+	<form method="post">
+		<input type="hidden" name="UserRecover" value="1" />
+		
+		{% if widget.error %}
+		<div class="callout alert">{{ widget.error }}</div>
+		{% endif %}
+		
+		{% if widget.success %}
+		<div class="callout success">{{ widget.success }}</div>
+		{% endif %}
+		
+		<label>{{ _('Логин или Email') }}</label>
+		<input type="text" required name="value" value="{% if widget.post.value is defined %}{{ widget.post.value }}{% endif %}">
+		<button type="submit" class="button small-expanded">{{ _('Восстановить пароль') }}</button>
+    </form>

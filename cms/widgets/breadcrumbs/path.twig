@@ -1,0 +1,6 @@
+{% for c in widget.items %}
+	
+	<a href="{{ c.url }}">{{ c.name|striptags }}</a>
+	{% if not loop.last %}/{% endif %}
+
+{% endfor %}	

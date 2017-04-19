@@ -1,0 +1,96 @@
+{% if widget.getParam('ajax') %}<div id="{{ widget.uniqueId }}-wrapper">{% endif %}
+<table class="text-center" id="{{ widget.uniqueId }}">
+            <tbody>
+              <tr>
+			  
+                <th colspan="2" class="text-left"><a class="x-month-link" data-date="{{ widget.date|date_modify('last day of previous month')|date('Y-m-d') }}" href="{{ widget.getMonthUrl("#{widget.date|date_modify('last day of previous month')|date('Y-m-d')}") }}"><i class="fa fa-long-arrow-left fa-2x"></i></a></th>
+                <th colspan="3">{{ widget.getMonth( widget.date|date('n') ) }} {{ widget.date|date('Y') }}</th>
+                <th colspan="2" class="text-right"><a class="x-month-link" data-date="{{ widget.date|date_modify('first day of next month')|date('Y-m-d') }}" href="{{ widget.getMonthUrl("#{widget.date|date_modify('first day of next month')|date('Y-m-d')}") }}"><i class="fa fa-long-arrow-right fa-2x"></i></a></th>
+
+              </tr>
+              <tr>
+                <th>{{ _('Пн') }}</th>
+                <th>{{ _('Вт') }}</th>
+                <th>{{ _('Ср') }}</th>
+                <th>{{ _('Чт') }}</th>
+                <th>{{ _('Пт') }}</th>
+                <th>{{ _('Сб') }}</th>
+                <th>{{ _('Вс') }}</th>
+              </tr>
+			  
+			  <tr>
+              {% if widget.date|date_modify('first day of this month')|date('N') - 1 > 0 %}
+                            {% for i in range( widget.date|date_modify('first day of this month')|date('N') - 1, 1, -1) %}
+                                <td class="text-secondary">{{ widget.date|date_modify('first day of this month')|date_modify("-#{i} days")|date('j') }}</td>
+                            {% endfor %} 
+              {% endif %}                   
+                        
+              {% for i in range( 1, widget.date|date('t') ) %}
+                                <td>
+                                {% if attribute( widget.calendar, i ) is defined or active is defined and i == widget.date|date('d') %}
+                                    <a{% if attribute( widget.calendar, i ) is defined %} href="{{ widget.getDayUrl("#{widget.date|date('Y-m')}-#{i}") }}"{% endif %}><strong>									
+                                {% endif %}
+                                    {{ i }}
+                                {% if attribute( widget.calendar, i ) is defined or active is defined and i == widget.date|date('d') %}
+                                    </strong></a>
+                                {% endif %}                                
+                                </td>
+					{% if widget.date|date_modify('first day of this month')|date_modify("+#{i} days")|date('N') == 1 %}
+					</tr>
+					<tr>
+					{% endif %}
+              {% endfor %}
+                            
+              {% if widget.date|date_modify('last day of this month')|date('N') < 7 %}
+                            {% for i in range( widget.date|date_modify('last day of this month')|date('N') + 1, 7) %}
+                                <td class="text-secondary">{{ widget.date|date_modify('last day of this month')|date_modify("+#{i-widget.date|date_modify('last day of this month')|date('N')} days")|date('j') }}</td>
+                            {% endfor %} 
+              {% endif %} 			  
+			  </tr>			  
+			  
+            </tbody>
+</table>
+{% if widget.getParam('ajax') %}</div>{% endif %}
+
+{% if widget.getParam('ajax') %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
+});
+function {{ widget.uniqueId|replace({'-':'_'}) }}_hook_links()
+{
+	var monthLink = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-month-link");
+	for (var i = 0; i  < monthLink.length; i++) monthLink[i].addEventListener("click", {{ widget.uniqueId|replace({'-':'_'}) }}_monthClick);
+}
+function {{ widget.uniqueId|replace({'-':'_'}) }}_monthClick(e)
+{
+	e.preventDefault();
+	
+	var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
+	widget.innerHTML = '{{ _('Подождите ...') }}';
+	
+	var request = new XMLHttpRequest();
+	var body = '{% for name,value in widget.setParam("ajax",0).setParam("catalog",widget.catalog.id).params %}params[{{ name }}]={% if name == "date" %}'+this.dataset.date+'{% else %}{{ value|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
+	request.open('POST', '{{ widget.getAjaxUrl()|raw }}', true);
+	request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+	request.onload = function (e) {
+		if (request.readyState === 4) {
+
+			// Проверяем успешность GET-запроса
+			if (request.status === 200) {
+				widget.innerHTML = request.responseText;
+				{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
+			} else {
+				console.error(request.statusText);
+            }
+        }
+    };
+
+    request.onerror = function (e) {
+        console.error(request.statusText);
+    };
+
+	request.send(body);
+}
+</script>	
+{% endif %}

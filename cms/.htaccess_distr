@@ -1,0 +1,25 @@
+<Files ~ "^\.cache">
+  Order Allow,Deny
+  Allow from All
+</Files>
+<Files ~ "^\..*">
+  Order Allow,Deny
+  Deny from All
+</Files>
+
+AddDefaultCharset Off
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d [OR]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteCond %{REQUEST_URI} !^/cms
+RewriteRule  ^.*$ cms/fo.php
+RewriteCond %{REQUEST_URI} ^/plugins/(.+)\.php$
+RewriteRule  ^.*$ cms/include/plugin_call.php
+
+DirectoryIndex index.html index.php
+
+php_flag always_populate_raw_post_data on
+php_flag suhosin.cookie.encrypt off

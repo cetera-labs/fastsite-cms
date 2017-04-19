@@ -1,0 +1,50 @@
+<form>
+	<div class="row">
+		<div class="small-12 medium-6 large-6 columns">
+			<label>
+                <input type="text" name="{{ widget.getParam('query_param') }}" value="{{ widget.queryValue() }}" placeholder="{{ widget.getParam('query_placeholder') }}">
+            </label>
+        </div>
+        <div class="small-12 medium-3 large-2 columns end">
+              <input type="submit" value="{{ widget.getParam('button_text') }}" class="button expanded">
+        </div>
+    </div>
+</form>
+{% if widget.querySubmitted() %}
+
+	{% set list = widget.getResults() %}
+	{% if not list or not list.getCountAll() %}
+	
+		{% set list = null %}
+	
+	{% else %}
+	
+		{% set first = (list.getCurrentPageNumber()-1) * widget.getParam('items_per_page') + 1 %}
+		{% set last = (list.getCurrentPageNumber() == list.getPageCount())?list.getCountAll():list.getCurrentPageNumber()*list.count() %}
+
+	{% endif %}
+	
+	{% if not list %}
+	
+		<p>{{ _('Поиск не дал результатов') }}</p>
+		
+	{% else %}
+		<p>Результаты поиска {{ first }} - {{ last }} из {{ list.getCountAll() }}</p>
+		{% for m in list %}
+			<hr><p></p>					
+			<h4><a href="{{ m.url }}">{{ m.name|raw }}</a></h4>
+			<p>{{ m.short|striptags|raw }}</p>
+			{% if widget.getParam('show_date') or widget.getParam('show_path') %}
+			<p>
+				{% if widget.getParam('show_date') %}{{ _('Изменен') }}: {{ m.dat|date(widget.getParam('date_format')) }}{% endif %}
+				{% if widget.getParam('show_date') and widget.getParam('show_path') %}<br>{% endif %}
+				{% if widget.getParam('show_path') %}<small>{{ _('Путь') }}: {% widget 'Breadcrumbs' with { template : widget.getParam('path_template'), catalog : m.catalog } %}</small>{% endif %}				
+			</p>
+			{% endif %}		
+		{% endfor %}
+		
+		{{ widget.getPaginator()|raw }}
+
+	{% endif %}
+	
+{% endif %}

@@ -1,0 +1,108 @@
+{% block html %} 
+	{% if widget.application.getUser() %} 
+
+		{# Пользователь авторизован - ссылка на профайл и ссылка для выхода #}
+		<p><a href="{{ widget.param('profile_url') }}">{{ widget.application.user.name }}</a> | <a href="/cms/logout.php">{{ _('Выход') }}</a></p>
+
+	{% else %}
+
+		<div id="{{ widget.getUniqueId() }}-wrapper">
+		{% block form %} 
+			{# Пользователь не авторизован - форма входа #}
+			<form method="post" id="{{ widget.getUniqueId() }}_form">
+				<input type="hidden" name="UserAuth" value="{{ widget.getUniqueId() }}" />
+				<label>{{ _('Логин или Email') }}</label>
+				<input name="login" required type="text" value="{{ widget.login }}" class="{% if widget.login_error %} is-invalid-input{% endif %}">
+				{% if widget.login_error %}
+				<span class="form-error is-visible">{{ widget.login_error }}</span>
+				{% endif %}		
+				<label>{{ _('Пароль') }}</label>
+				<input type="password" name="password" class="{% if widget.password_error %} is-invalid-input{% endif %}">
+				{% if widget.password_error %}
+				<span class="form-error is-visible">{{ widget.password_error }}</span>
+				{% endif %}
+				{% if widget.param('recover_password_url') %}
+					<p><a title="" href="{{ widget.param('recover_password_url') }}">{{ _('Забыли пароль?') }}</a></p>
+				{% endif %}
+				{% if widget.param('register_url') %}
+					<p><a title="" href="{{ widget.param('register_url') }}">{{ _('Регистрация') }}</a></p>
+				{% endif %}
+				<button type="submit" class="button small-expanded">{{ _('Войти') }}</button>
+					
+			</form>
+			
+			{% if widget.param('social') %}
+			  <p class="text-center social">Войти через: 
+				  <span data-ulogin="display=buttons;fields=email;optional=nickname,first_name,last_name,photo;redirect_uri={{ widget.redirect }}" id="uLogin">
+					  &nbsp;<a data-uloginbutton="vkontakte" class="fa-stack fa-lg text-vk" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="twitter" class="fa-stack fa-lg text-twi" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="facebook" class="fa-stack fa-lg text-fb" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="google" class="fa-stack fa-lg text-gp" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></a>  
+				  </span>
+			  </p>
+			{% endif %}
+		{% endblock %}
+		</div>
+		
+	{% endif %}
+{% endblock %}	
+
+{% if not widget.application.getUser() %} 
+	{% set script %}
+		{% block script %} 
+			{% if widget.getParam('ajax') and not widget.getParam('ajaxCall') %}
+				document.addEventListener('DOMContentLoaded', function () {
+					{{ widget.uniqueId }}_hook();
+				});
+
+				function {{ widget.uniqueId }}_hook(){
+					var form = document.querySelector("#{{ widget.uniqueId }}_form");
+					if (form) {
+						form.addEventListener('submit', function (e) {
+							e.preventDefault();
+							
+							var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
+							widget.innerHTML = '{{ _('Подождите ...') }}';
+							
+							var request = new XMLHttpRequest();							
+							var data = new FormData(e.target);
+							data.append('params[ajaxCall]', 1);
+							{% for name,value in widget.setParam("ajax",0).params %}
+							data.append('params[{{ name }}]', '{{ value }}');
+							{% endfor %}
+							
+							request.open('POST', '{{ widget.getAjaxUrl()|raw }}', true);
+							request.onload = function (e) {
+								if (request.readyState === 4) {
+
+									// Проверяем успешность GET-запроса
+									if (request.status === 200) {
+									
+										var data = JSON.parse(request.responseText);
+										if (data.success) {
+											var event = new CustomEvent('cetera.user.auth');
+											document.dispatchEvent(event);
+										}
+										if (data.html) {
+											widget.innerHTML = data.html;
+											{{ widget.uniqueId }}_hook();										
+										}										
+										if (data.redirect) {
+											document.location = data.redirect;
+										}
+									} else {
+										console.error(request.statusText);
+									}
+								}
+							};
+							request.onerror = function (e) { console.error(request.statusText); };
+							request.send(data);						
+							
+						});
+					}			
+				}
+			{% endif %}
+		{% endblock %}	
+	{% endset %}
+	{% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
+{% endif %}	

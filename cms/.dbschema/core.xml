@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<schema>
+
+<table name="dir_structure" engine="MyISAM">
+    <field name="id" type="mediumint(8) unsigned" null="0" auto_increment="1" />
+    <field name="data_id" type="mediumint(8) unsigned" null="0" default="1" />
+    <field name="lft" type="mediumint(8) unsigned" null="0" default="1" />
+    <field name="rght" type="mediumint(8) unsigned" null="0" default="1" />
+    <field name="level" type="tinyint(3) unsigned" null="0" default="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="NewIndex" unique="0">
+        <column name="lft" />
+        <column name="rght" />
+        <column name="level" />
+    </key>
+    <key name="data_id" unique="0">
+        <column name="data_id" />
+    </key>
+</table>
+
+<table name="field_link" engine="MyISAM">
+    <field name="link_id" type="int(3) unsigned" null="0" auto_increment="1" />
+    <field name="link_type" type="tinyint(3) unsigned" null="0" default="0" />
+    <field name="structure_id" type="int(3) unsigned" null="1" default="0" />
+    <field name="structure_type" type="varchar(128)" null="1" />
+    <field name="link_value" type="varchar(255)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="link_id" />
+    </key>
+</table>
+
+<table name="server_aliases" engine="MyISAM">
+    <field name="id" type="int(10) unsigned" null="0" default="0" />
+    <field name="name" type="varchar(64)" null="0" />
+    <key name="NewIndex" unique="0">
+        <column name="id" />
+    </key>
+</table>
+
+<table name="types" engine="MyISAM">
+    <field name="id" type="int(10)" null="0" auto_increment="1" />
+    <field name="alias" type="varchar(100)" null="0" />
+    <field name="describ" type="varchar(128)" null="1" />
+    <field name="fixed" type="tinyint(4)" null="0" default="0" />
+    <field name="plugin" type="varchar(32)" null="1" />
+    <field name="handler" type="varchar(32)" null="1" />
+	<field name="url_template" type="varchar(50)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="alias" unique="1">
+        <column name="alias" />
+    </key>
+</table>
+
+<table name="types_fields" engine="MyISAM">
+    <field name="field_id" type="mediumint(9)" null="0" auto_increment="1" />
+    <field name="id" type="int(10)" null="0" default="0" />
+    <field name="name" type="varchar(64)" null="0" />
+    <field name="type" type="tinyint(4)" null="0" default="0" />
+    <field name="describ" type="varchar(255)" null="1" />
+    <field name="len" type="smallint(4)" null="1" />
+    <field name="fixed" type="tinyint(4)" null="0" default="0" />
+    <field name="required" type="tinyint(4)" null="0" default="0" />
+    <field name="shw" type="tinyint(4)" null="0" default="1" />
+    <field name="tag" type="int(11)" null="0" default="0" />
+    <field name="pseudo_type" type="mediumint(8) unsigned" null="0" default="0" />
+    <field name="default_value" type="varchar(255)" null="1" />
+    <field name="editor" type="tinyint(4)" null="0" default="0" />
+    <field name="editor_user" type="varchar(255)" null="1" />
+    <field name="page" type="varchar(20)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="field_id" />
+    </key>
+    <key name="id" unique="0">
+        <column name="id" />
+    </key>
+</table>
+
+<table name="types_fields_catalogs">
+    <field name="field_id" type="int(11)" null="0" />
+    <field name="type_id" type="int(11)" null="0" />
+    <field name="catalog_id" type="int(11)" null="0" />
+    <field name="force_show" type="tinyint(4)" null="0" default="0" />
+    <field name="force_hide" type="tinyint(4)" null="0" default="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="type_id" />
+        <column name="catalog_id" />
+        <column name="field_id" />
+    </key>
+</table>
+
+<table name="users_auth">
+    <field name="user_id" type="int(10) unsigned" null="0" />
+    <field name="uniq" type="char(32)" null="0" />
+    <field name="ip" type="varchar(15)" null="0" />
+    <field name="time" type="int(10) unsigned" null="0" default="0" />
+    <field name="remember" type="tinyint(3) unsigned" null="0" default="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="uniq" />
+        <column name="ip" />
+    </key>
+    <key name="time" unique="0">
+        <column name="remember" />
+        <column name="time" />
+    </key>
+</table>
+
+<table name="users_external">
+    <field name="user_id" type="int(10) unsigned" null="0" />
+    <field name="external_type" type="tinyint(3)" null="0" />
+    <field name="external_id" type="varchar(200)" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="user_id" />
+        <column name="external_type" />
+    </key>
+</table>
+
+<table name="users_groups">
+    <field name="id" type="int(11)" null="0" auto_increment="1" />
+    <field name="name" type="varchar(100)" null="0" />
+    <field name="describ" type="varchar(1000)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+</table>
+
+<table name="users_groups_membership" engine="MyISAM">
+    <field name="user_id" type="int(10) unsigned" null="0" />
+    <field name="group_id" type="int(10)" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="user_id" />
+        <column name="group_id" />
+    </key>
+</table>
+
+<table name="users_groups_allow_cat" engine="MyISAM">
+    <field name="group_id" type="int(11)" null="0" />
+    <field name="catalog_id" type="int(10) unsigned" null="0" />
+    <field name="permission" type="tinyint(3) unsigned" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="group_id" />
+        <column name="catalog_id" />
+        <column name="permission" />
+    </key>
+</table>
+
+<table name="users_groups_deny_filesystem" engine="MyISAM">
+    <field name="group_id" type="int(11)" null="0" />
+    <field name="path" type="varchar(255)" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="group_id" />
+        <column name="path" />
+    </key>
+</table>
+
+<table name="session_data" engine="MyISAM">
+    <field name="id" type="char(32)" null="0" />
+    <field name="value" type="text" null="1" />
+    <field name="timestamp" type="int(11)" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="idx" unique="0">
+        <column name="timestamp" />
+    </key>
+</table>
+
+<table name="event_log" engine="MyISAM">
+    <field name="id" type="int(11) unsigned" null="0" auto_increment="1" />
+    <field name="user_id" type="int(11) unsigned" null="1" />
+    <field name="code" type="smallint(11) unsigned" null="0" default="0" />
+    <field name="dat" type="datetime" null="0" />
+    <field name="text" type="text" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="user_id">
+        <column name="user_id" />
+    </key>
+    <key name="dat">
+        <column name="dat" />
+    </key>
+    <key name="code">
+        <column name="code" />
+    </key>
+</table>
+
+<table name="vars" engine="MyISAM">
+    <field name="id" type="int(10) unsigned" null="0" auto_increment="1" />
+    <field name="name" type="varchar(255)" null="0" />
+    <field name="value" type="varchar(255)" null="1" />
+    <field name="describ" type="varchar(255)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="name" unique="1">
+        <column name="name" />
+    </key>
+</table>
+
+<table name="vars_servers" engine="MyISAM">
+    <field name="var_id" type="int(3) unsigned" null="0" />
+    <field name="server_id" type="int(3) unsigned" null="0" />
+    <field name="value" type="varchar(255)" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="var_id" />
+        <column name="server_id" />
+    </key>
+</table>
+
+<table name="lock" engine="MyISAM">
+    <field name="type_id" type="int(10) unsigned" null="0" />
+    <field name="material_id" type="int(10) unsigned" null="0" />
+    <field name="user_id" type="int(10) unsigned" null="0" />
+    <field name="dat" type="datetime" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="type_id" />
+        <column name="material_id" />
+    </key>
+</table>
+
+<table name="menus">
+    <field name="id" type="int(10) unsigned" null="0" auto_increment="1"  />
+    <field name="alias" type="varchar(20)" null="0" />
+    <field name="name" type="varchar(200)" null="0" />
+    <field name="data" type="text" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="alias">
+        <column name="alias" />
+    </key>
+</table>
+
+<table name="widgets_containers">
+    <field name="widget_id" type="int(10) unsigned" null="0"  />
+    <field name="container_id" type="int(10) unsigned" null="0" />
+    <field name="position" type="int(10) unsigned" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="widget_id" />
+        <column name="container_id" />
+    </key>
+</table>
+
+<table name="widgets">
+    <field name="id" type="int(10) unsigned" null="0" auto_increment="1" />
+    <field name="widgetName" type="varchar(100)" null="0" />
+    <field name="params" type="text" null="1" />
+    <field name="widgetAlias" type="varchar(20)" null="1" />
+    <field name="widgetTitle" type="varchar(100)" null="1" />
+    <field name="widgetDisabled" type="tinyint(4)" null="0" default="0" />
+    <field name="protected" type="tinyint(4)" null="0" default="0" />   
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="alias">
+        <column name="widgetAlias" />
+    </key>
+</table>
+
+<table name="theme_config">
+    <field name="theme_name" type="varchar(150)" null="0" />
+    <field name="server_id" type="int(10) unsigned" null="0" />
+    <field name="config" type="text" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="theme_name" />
+        <column name="server_id" />
+    </key>
+</table>
+
+<table name="config">
+    <field name="class" type="varchar(150)" null="0" />
+    <field name="key" type="varchar(50)" null="0" />
+    <field name="value" type="text" null="1" />
+    <key name="PRIMARY" unique="1">
+        <column name="class" />
+        <column name="key" />
+    </key>
+</table>
+
+<table name="mail_templates">
+    <field name="id" type="int(10) unsigned" null="0" auto_increment="1" />
+	<field name="event" type="varchar(50)" null="0" />
+	<field name="active" type="tinyint(3)" null="0" default="1" />
+	<field name="content_type" type="varchar(50)" null="0" default="text/html" />
+	<field name="mail_subject" type="varchar(500)" null="0" />
+	<field name="mail_body" type="text" null="0" />
+	<field name="mail_from_name" type="varchar(100)" null="1" />
+	<field name="mail_from_email" type="varchar(100)" null="0" />
+	<field name="mail_to" type="varchar(200)" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="id" />
+    </key>
+    <key name="event">
+        <column name="event" />
+    </key>	
+</table>
+
+<object name="materials" description="Материалы" fixed="1" handler="" plugin="">
+    <field name="tag" type="3" pseudo_type="0" description="Сортировка" length="1" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="name" type="1" pseudo_type="0" description="Заголовок" length="1024" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="alias" type="1" pseudo_type="0" description="Alias" length="255" show="1" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="dat" type="5" pseudo_type="0" description="Дата создания" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="dat_update" type="5" pseudo_type="0" description="Дата изменения" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="type" type="3" pseudo_type="0" description="Свойства" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="idcat" type="3" pseudo_type="0" description="Раздел" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+</object>
+
+</schema>

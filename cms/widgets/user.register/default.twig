@@ -1,0 +1,48 @@
+{% block html %}
+	{% if not widget.success %}
+	
+		{% if widget.error and widget.error|length>1 %}
+		<div class="callout alert">{{ widget.error }}</div>
+		{% endif %}	
+	
+		{% block form %}
+		<form method="post">
+			<input type="hidden" name="UserRegister" value="1" />
+			
+			<label>{{ _('Логин') }}</label>
+			<input name="login" required type="text" value="{% if widget.post %}{{ widget.post.login }}{% endif %}" class="{% if widget.login_error %} is-invalid-input{% endif %}">
+			{% if widget.login_error %}<span class="form-error is-visible">{{ widget.login_error }}</span>{% endif %}	
+
+			<label>{{ _('Email') }}</label>
+			<input name="email" required type="email" value="{% if widget.post %}{{ widget.post.email }}{% endif %}" class="{% if widget.email_error %} is-invalid-input{% endif %}">
+			{% if widget.email_error %}<span class="form-error is-visible">{{ widget.email_error }}</span>{% endif %}	
+
+			<label>{{ _('Ваше имя') }}</label>
+			<input name="name" required type="text" value="{% if widget.post %}{{ widget.post.name }}{% endif %}">		
+			
+			<label>{{ _('Придумайте пароль') }}</label>
+			<input type="password" required name="password" class="{% if widget.password_error %} is-invalid-input{% endif %}">
+			{% if widget.password_error %}<span class="form-error is-visible">{{ widget.password_error }}</span>{% endif %}
+
+			<label>{{ _('Повторите пароль') }}</label>
+			<input type="password" required name="password2">	
+
+			{% if widget.showRecaptcha %}
+			<div class="g-recaptcha" data-sitekey="{{ widget.getParam('recaptcha_site_key') }}"></div>
+			{% if widget.recaptcha_error %}<span class="form-error is-visible">{{ widget.recaptcha_error }}</span>{% endif %}
+			{% endif %}		
+			
+			<button type="submit" class="button small-expanded">{{ _('Зарегистрироваться') }}</button>
+		</form> 
+		{% endblock %}
+		
+	{% else %}
+
+		{% block success %}
+		<div class="success callout">
+		  <p>{{ _('Вы были успешно зарегистрированы!') }}</p>
+		</div>
+		{% endblock %}
+
+	{% endif %}
+{% endblock %}

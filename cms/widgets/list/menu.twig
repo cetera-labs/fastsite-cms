@@ -1,0 +1,5 @@
+<ul class="{{ widget.getParam('css_class') }}">
+{% for c in widget.children %}
+	<li class="{{ widget.getParam('css_row') }}"><a href="{{ c.url }}">{{ c.name|raw }}</a></li>
+{% endfor %}
+</ul>

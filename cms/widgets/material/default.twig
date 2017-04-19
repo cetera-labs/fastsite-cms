@@ -1,0 +1,34 @@
+<div class="x-cetera-widget" data-class="Cetera.fo.Material" data-id="{{ widget.material.id }}" data-type="{{ widget.material.objectDefinition.alias }}">
+{% block html %}
+{% if widget.getMaterial %}
+
+	<h1>{{ widget.material.name|raw }}</h1>
+	
+	<div class="content">
+		{% if widget.getParam('show_pic') and widget.material.pic %}
+		<div class="left picture">
+			<img src="{{ widget.material.pic }}" />
+		</div>
+		{% endif %}
+		
+		{{ widget.material.text|raw }}
+			
+		{% block share %}
+		{% if widget.getParam('share_buttons') %}
+		<div class="callout share text-center">
+		
+			<span class="show-for-large text-medium-gray">{{ _('Поделиться в соц. сетях') }}:  </span>
+			<noindex>
+            <a rel="nofollow" class="fa-stack fa-lg text-vk" href="http://vkontakte.ru/share.php?url=http://{{ s.SERVER_NAME }}{{ widget.material.url }}{% if widget.material.pic %}&image=http://{{ s.SERVER_NAME }}{{ widget.material.pic }}{% endif %}" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></a>
+			<a rel="nofollow" class="fa-stack fa-lg text-twi" href="http://twitter.com/intent/tweet?text={{ widget.material.name }}&url=http://{{ s.SERVER_NAME }}{{ widget.material.url }}" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a>
+			<a rel="nofollow" class="fa-stack fa-lg text-fb" href="http://www.facebook.com/sharer.php?u=http://{{ s.SERVER_NAME }}{{ widget.material.url }}" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a>
+			<a rel="nofollow" class="fa-stack fa-lg text-gp" href="https://plus.google.com/share?url=http://{{ s.SERVER_NAME }}{{ widget.material.url }}" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></a>
+			</noindex>
+		</div>			
+		{% endif %}	
+		{% endblock %}
+	</div>
+
+{% endif %}
+{% endblock %}
+</div>

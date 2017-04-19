@@ -1,0 +1,62 @@
+body {
+    padding: 0px;
+    background-color: window;
+}
+
+h1 {
+    padding: 8px;
+    font-size: 18px;
+    color: inactivecaptiontext;
+    font-family: Tahoma;
+    margin: 0px;
+}
+
+h1 b {
+    color: captiontext;
+}
+
+hr {
+	color: buttonface;
+	height: 1px;
+}
+
+p {
+	margin-bottom: 10px;
+	margin-top: 5px;
+}
+
+.content {
+    padding: 10px;
+}
+
+.header {
+    border-top: 1px solid window;
+}
+
+.about {
+    width: 500px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 20px;
+	padding-top: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.info {
+	margin: 20px;
+}
+
+.info td {
+	padding: 5px 5px 30px 5px;
+}
+
+.info td.icon {
+	width: 20px;
+}
+
+.simple td {
+	padding: 0;
+}

@@ -1,0 +1,21 @@
+{% extends '@widget_distrib/material/default.twig' %}
+		
+{% block share %}
+
+	<p><hr></p>
+	<div class="row">
+		<div class="medium-6 small-12 columns">
+		{% if widget.material.getPrev() %}
+			<p><a class="button" href="{{ widget.material.getPrev().url }}"><i class="fa fa-long-arrow-left"></i>&nbsp;&nbsp;{{ widget.material.getPrev().name }}</a></p>
+		{% endif %}
+		</div>
+		<div class="medium-6 small-12 columns text-right">
+		{% if widget.material.getNext() %}
+			<p><a class="button" href="{{ widget.material.getNext().url }}">{{ widget.material.getNext().name }}&nbsp;&nbsp;<i class="fa fa-long-arrow-right"></i></a></p>
+		{% endif %}
+		</div>
+	</div>
+	
+	{{ parent() }}
+	
+{% endblock %}

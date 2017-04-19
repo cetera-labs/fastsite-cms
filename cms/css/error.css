@@ -1,0 +1,23 @@
+body {background-color: #336699;}
+.panel { 
+    border: 3px solid #FF6633; 
+    background-color: #FF6633; 
+    width: 550px; 
+    text-align:center; 
+    font-size: 19px; 
+    font-family:tahoma,arial,helvetica,sans-serif;
+}
+
+.panel div { 
+    padding: 15px;
+    border: 2px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.panel .extend { 
+    color: #000000;
+    background-color: #FFFFFF;
+    font-size: 14px; 
+    text-align: left;
+    font-family: arial;
+}

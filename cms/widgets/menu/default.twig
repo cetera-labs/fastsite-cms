@@ -1,0 +1,24 @@
+{% if widget.children|length > 0 or widget.getMaterials()|length > 0 %}
+<ul{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}"{% endif %}>
+
+	{% for c in widget.children %}
+    
+    <li class="catalog {% if widget.getParam('css_class') %} {{  widget.getParam('css_class') }}__item{% endif %}{% if widget.application.getCatalog().path.has(c) %} active{% endif %}">
+    
+        <a href="{{ c.url }}"{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}__link"{% endif %}>{{ c.name|raw }}</a>
+		{{ widget.showSubmenu(c)|raw }}
+        
+    </li>
+    
+    {% endfor %}
+	
+	{% for m in widget.getMaterials() %}
+	
+    <li class="material {% if widget.getParam('css_class') %} {{  widget.getParam('css_class') }}__item{% endif %}">    
+        <a href="{{ m.url }}"{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}__link"{% endif %}>{{ m.name|raw }}</a>        
+    </li>
+    
+    {% endfor %}	
+    
+</ul>
+{% endif %}

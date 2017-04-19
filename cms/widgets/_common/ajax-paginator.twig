@@ -1,0 +1,55 @@
+{% set script %}
+	{% block script %} 
+		{% if widget.getParam('ajax') and not widget.getParam('ajaxCall') %}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
+		});
+		function {{ widget.uniqueId|replace({'-':'_'}) }}_hook_links(){
+			var pageLink = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages a");
+			for (var i = 0; i  < pageLink.length; i++) pageLink[i].addEventListener("click", {{ widget.uniqueId|replace({'-':'_'}) }}_pageClick);
+		}
+
+		function {{ widget.uniqueId|replace({'-':'_'}) }}_pageClick(e)
+		{
+			e.preventDefault();
+			{{ widget.uniqueId|replace({'-':'_'}) }}_loadpage( this.dataset.page );
+		}
+		
+		var {{ widget.uniqueId|replace({'-':'_'}) }}_currentpage = 1;
+		function {{ widget.uniqueId|replace({'-':'_'}) }}_loadpage( page )
+		{
+		    {{ widget.uniqueId|replace({'-':'_'}) }}_currentpage = page;
+			
+			var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
+			widget.innerHTML = '<div class="row column">{{ _('Подождите ...') }}</div>';
+			
+			var request = new XMLHttpRequest();
+			var body = '{% for name,value in widget.params %}params[{{ name }}]={% if name == "page" %}' + page + '{% else %}{{ value|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
+			request.open('POST', '{{ widget.getAjaxUrl()|raw }}', true);
+			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+			request.onload = function (e) {
+				if (request.readyState === 4) {
+
+					// Проверяем успешность GET-запроса
+					if (request.status === 200) {
+						widget.innerHTML = request.responseText;
+						{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
+						jQuery(document).foundation();
+					} else {
+						console.error(request.statusText);
+					}
+				}
+			};
+
+			request.onerror = function (e) {
+				console.error(request.statusText);
+			};
+
+			request.send(body);		
+		
+		}
+		{% endif %}
+	{% endblock %}	
+{% endset %}
+{% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
