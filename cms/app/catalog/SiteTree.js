@@ -54,7 +54,7 @@ Ext.define('Cetera.catalog.SiteTree', {
 	},
         
     initComponent : function(){
-        
+
         this.store = new Ext.data.TreeStore({
             model: Cetera.model.SiteTree,
             root: {

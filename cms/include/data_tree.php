@@ -32,7 +32,7 @@ if ($node == 'root') {
         'qtip' => '',
         'leaf' => FALSE,
         'mtype' => 0,
-        'disabled' => ($nocatselect || $norootselect)?TRUE:FALSE
+        'disabled' => ($nocatselect || $norootselect || $only > 0)?TRUE:FALSE
     );
 
 } else {

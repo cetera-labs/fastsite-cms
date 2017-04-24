@@ -41,6 +41,8 @@ Ext.define('Cetera.window.SiteTree', {
         
         this.buttons = [
             {
+				itemId: 'ok-button',
+				disabled: true,
                 text: text1,
                 scope: this,
                 handler: function() { 
@@ -58,8 +60,15 @@ Ext.define('Cetera.window.SiteTree', {
         this.callParent();
         
         this.on('show',function() {
+			if (this.expand) this.tree.expandPath(this.expand, 'id', '/');
             if (this.path) this.tree.selectPath(this.path, 'id', '/');
         } , this);
+		
+		this.tree.on('select', function(){
+			
+			this.down('#ok-button').enable();
+			
+		},this);
     },
     
 	setOnly : function(value) {

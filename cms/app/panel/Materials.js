@@ -144,9 +144,10 @@ Ext.define('Cetera.panel.Materials', {
     
         if (!this.siteTree) {
             this.siteTree = Ext.create('Cetera.window.SiteTree', {
-                path   : '/root/item-0',
+                expand   : '/root/item-0',
                 nolink : 1,
                 rule   : '5u6',
+				norootselect: 1,
                 only   : this.mat_type
             });
             this.siteTree.on('select', function(res) {
