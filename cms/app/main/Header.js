@@ -24,6 +24,11 @@ Ext.define('Cetera.main.Header', {
         },	
 		'->',
 		{
+            xtype: 'button',
+			text: _('Сообщить об ошибке'),
+            href: 'https://cetera.ru/support/default.php?project=CCD&lang='+Config.locale
+        },		
+		{
 			iconCls: 'icon-help',
 			xtype: 'button',
 			text: _('Справка'),
