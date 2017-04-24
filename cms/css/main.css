@@ -215,37 +215,16 @@ body .main-navigation .x-treelist-item-selected > .x-treelist-row {
 
 #app-header-title {
     background:url(../images/cmslogo_small.gif) no-repeat left center;
-    padding: 0 0 0 25px;
+    padding: 0 25px 0 25px;
     font-weight: bold;
     font-size: 120%;
-}
-
-#app-header {
-    color: #fff;
-}
-
-#app-header a {
-    color: #fff;
 }
 
 .x-grid-row-summary .x-grid-cell-inner {
     font-weight: bold;
 }
 
-#app-header {background-color: #336699;}
-
-/*a { color:#336699; text-decoration:underline; }
-a:hover, a:active { color:#CD2114; text-decoration:underline; }*/
-
 .w-window, .x-layer { overflow: visible!important; }
-
-.header-item {
-	
-	margin-left: 5px;
-	padding-left: 5px;
-	border-left: 1px solid #fff;	
-	
-}
 
 /* Catalogs tree */
 .tree-folder-visible { background-image:url(../images/folder1.gif)!important;}
