@@ -27,13 +27,11 @@ if (isset($_REQUEST['templateDir'])) {
 
     $dir = DOCROOT.$_REQUEST['templateDir'];
     
-} else {
-
-    $c = Catalog::getById($_REQUEST['catalog_id']);
-    
-    if ($c->getParentServer()->templateDir) 
-        $dir = DOCROOT.$c->getParentServer()->templateDir;
-        else $dir = TEMPLATES_DIR; 
+} 
+else {
+    $c = Catalog::getById($_REQUEST['catalog_id']); 
+	$application->setServer($c);	
+	$dir = $application->getTemplateDir();
 }
 
 if (file_exists($dir) && is_dir($dir)) {
@@ -53,7 +51,7 @@ if (file_exists($dir) && is_dir($dir)) {
     
     }
 	
-	$dir .= '/design';
+	$dir .= '/'.TWIG_TEMPLATES_PATH;
 	
 	if (file_exists($dir) && is_dir($dir)) {
 

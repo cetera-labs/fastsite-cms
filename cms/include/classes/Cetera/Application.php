@@ -679,11 +679,11 @@ class Application {
     {
         if (is_a($server,'Cetera\\Server')) {
             $this->_server = $server;
-            return;
+            return $this;
         }
         if (is_int($server)) {
             $this->_server = Server::getById($server);
-            return;        
+            return $this;        
         }
     }    
     
@@ -1456,7 +1456,7 @@ class Application {
 		
 		if (!$this->twig)
 		{
-			$loader = new \Twig_Loader_Filesystem( $this->getTemplateDir().'/design');
+			$loader = new \Twig_Loader_Filesystem( $this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH);
 			
 			if (file_exists($this->getTemplateDir().'/widgets'))
 				$loader->addPath( $this->getTemplateDir().'/widgets' ,'widget' );

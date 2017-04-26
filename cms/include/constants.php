@@ -63,6 +63,7 @@ define('PREFS_FILE',   DOCROOT.'.prefs');
 define ('DB_SCHEMA', CMSROOT.'.dbschema/core.xml');
 define ('DB_DATA', CMSROOT.'.dbschema/core.sql');
 define ('TEMPLATES_DIR', DOCROOT.'.templates');
+define ('TWIG_TEMPLATES_PATH', 'design');
 
 define ('BOOTSTRAP_SCRIPT', 'bootstrap.php');
 

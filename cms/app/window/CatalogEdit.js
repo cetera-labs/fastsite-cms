@@ -7,7 +7,8 @@ Ext.define('Cetera.window.CatalogEdit', {
 		'Cetera.field.MaterialType',
 		'Cetera.field.Aliases',
 		'Cetera.field.Folder',
-		'Cetera.field.MaterialType'
+		'Cetera.field.MaterialType',
+		'Cetera.field.SectionController'
 	],
 
 	closable:true,
@@ -113,22 +114,6 @@ Ext.define('Cetera.window.CatalogEdit', {
 				
 		if (!this.catalog.is_root)
 		{
-			
-			this.controllerLookupStore = Ext.create('Ext.data.JsonStore', {
-				fields: ['name'],
-				proxy: {
-					type: 'ajax',
-					url: 'include/data_templates.php',
-					reader: {
-						type: 'json',
-						root: 'rows'
-					},					
-					extraParams: {
-						'catalog_id': this.catalog.id
-					}  
-				}                                  
-			}); 			
-		
 			var fields = [				
 				{
 					fieldLabel: Config.Lang.name,
@@ -159,29 +144,14 @@ Ext.define('Cetera.window.CatalogEdit', {
 					name: 'templateDir',
 					value: this.catalog.aliases,
 					regex: /^[\/\.\-\_A-Z0-9]+$/i,
-					value: this.catalog.templateDir,
-					listeners: {
-						blur: {
-							scope: this,
-							fn: function(fld){ 
-								this.controllerLookupStore.proxy.extraParams.templateDir = fld.getValue();
-							}
-						}
-					} 				
+					value: this.catalog.templateDir 				
 				});			
 			}
 			
-			Ext.Array.push(fields,{
-				xtype: 'combo',
-				fieldLabel: _('Контроллер'),
-				valueField: 'name',
-				displayField: 'name',
-				name: 'template',
-				store: this.controllerLookupStore,
-				triggerAction: 'all',
-				selectOnFocus:true,
-				value: this.catalog.template
-			});	
+			Ext.Array.push(fields, {
+				xtype: 'section_controller',
+				section: this.catalog
+			});				
 
 			if (!this.catalog.is_server)
 			{

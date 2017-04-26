@@ -18,6 +18,16 @@ $res = array(
     'success' => false,
 );
 
+if ($_REQUEST['action'] == 'get_twig_template_file') {
+	
+    $c = Catalog::getById($_REQUEST['section_id']); 
+	$application->setServer($c);	
+	$dir = $application->getTemplateDir();
+	$res['success'] = true;
+	$res['filename'] = str_replace(DOCROOT,'/',$application->getTemplateDir().'/'.TWIG_TEMPLATES_PATH.'/'.$_REQUEST['name']);
+
+}
+
 if ($_REQUEST['action'] == 'file_info') {
 	
 	$file = ltrim($_REQUEST['file'],'/');
