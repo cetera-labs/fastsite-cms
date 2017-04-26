@@ -169,13 +169,13 @@ class Plugin implements \ArrayAccess  {
             mkdir(WWWROOT . PLUGIN_DIR);
 
         if (!is_writable(WWWROOT . PLUGIN_DIR))
-            throw new Exception($translator->_('Каталог') . ' ' . DOCROOT . PLUGIN_DIR . ' ' . $translator->_('недоступен для записи'));
+            throw new \Exception($translator->_('Каталог') . ' ' . DOCROOT . PLUGIN_DIR . ' ' . $translator->_('недоступен для записи'));
 
 		$d = false;   
         try
 		{			
             $client = new \GuzzleHttp\Client();
-            $res = $client->get(PLUGINS_INFO . '?download=' . $plugin);
+			$res = $client->request('GET', PLUGINS_INFO . '?download=' . $plugin, ['verify'=>false]);
             $d = $res->getBody();
 
             if (!$d) throw new \Exception('Не удалось скачать плагин');
