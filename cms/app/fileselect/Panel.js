@@ -25,15 +25,7 @@ Ext.define('Cetera.fileselect.Panel', {
             },
             scope: this
         });
-        
-        this.btnUpload2 = new Ext.Button({
-            disabled: true,
-            iconCls:'icon-upload2',
-            tooltip:'<b>' + Config.Lang.doUpload3 + '</b>',
-            handler: this.showUploadWindow2,
-            scope: this
-        });
-        
+                
         this.btnFolderCreate = new Ext.Button({
             iconCls:'icon-new_folder',
             disabled: true,
@@ -74,7 +66,7 @@ Ext.define('Cetera.fileselect.Panel', {
                 },
                 scope: this
             },'-',
-            this.btnUpload,this.btnUpload2,'-',
+            this.btnUpload,'-',
             this.btnDeleteFile,'-',
             this.btnFolderCreate,this.btnFolderDelete,'-',{
                 iconCls: 'icon-table',
@@ -345,7 +337,6 @@ Ext.define('Cetera.fileselect.Panel', {
         if (node) {
             var ro = node.get('readOnly');
             this.btnUpload.setDisabled(ro);
-            this.btnUpload2.setDisabled(ro);
             this.btnFolderCreate.setDisabled(ro);
             this.btnFolderDelete.setDisabled(ro);
             var regexp = /\|/g;
@@ -360,7 +351,6 @@ Ext.define('Cetera.fileselect.Panel', {
             this.statusBar.setStatus({text: this.path});
         } else {
             this.btnUpload.setDisabled(true);
-            this.btnUpload2.setDisabled(true);
             this.btnFolderCreate.setDisabled(true);
             this.btnFolderDelete.setDisabled(true);
             this.path = false;
@@ -492,27 +482,5 @@ Ext.define('Cetera.fileselect.Panel', {
                     }
                 });
         }, this);
-    },
-    
-    showUploadWindow2: function() {
-        var win = new Ext.Window({
-            width: 648,
-            height: 410,
-            border: false,
-            modal: true,
-            title: Config.Lang.upload3,
-            html: '<applet code="wjhk.jupload2.JUploadApplet" archive="/cms/include/wjhk.jupload.jar" width="635" height="380" alt="" mayscript="true">'
-                 +'<param name="postURL" value="/cms/include/action_files.php?action=upload2&path='+this.path+'" />'
-                 +'<param name="maxChunkSize" value="500000" />'
-                 +'<param name="uploadPolicy" value="DefaultUploadPolicy" />'
-                 +'<param name="nbFilesPerRequest" value="1" />'
-                 +'<param name="debugLevel" value="0" />'
-                 +'<param name="showLogWindow" value="false" />'
-                 +'<param name="formdata" value="gallery" />'
-                 +'<param name="specificHeaders" value="Cookie: PHPSESSID=' + Ext.util.Cookies.get('PHPSESSID') + ';" />'
-                 +'Java 1.5 or higher plugin required. </applet>'
-        });
-        win.on('close',this.reloadFiles,this);
-        win.show();
     }
 });

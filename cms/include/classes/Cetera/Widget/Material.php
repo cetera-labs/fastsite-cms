@@ -45,8 +45,8 @@ class Material extends Templateable {
 			$this->setMetaPicture($m->pic);
 			
 			$a = $this->application;
-			$a->addHeadString('<meta property="og:url" content="http://'.$_SERVER['SERVER_NAME'].$m->url.'"/>', 'og:url');	
-			$a->addHeadString('<meta property="og:type" content="article"/>', 'og:type');
+			//$a->addHeadString('<meta property="og:url" content="http://'.$_SERVER['SERVER_NAME'].$m->url.'"/>', 'og:url');	
+			//$a->addHeadString('<meta property="og:type" content="article"/>', 'og:type');
 		
 			if ($m->meta_keywords) 			
 			{

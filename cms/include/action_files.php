@@ -124,47 +124,6 @@ if ($_REQUEST['action'] == 'create_folder') {
     
 }
 
-if ($_REQUEST['action'] == 'upload2') {
-
-    try {
-
-        $tmpname = 'tmp';
-        $path = DOCROOT.ltrim($_REQUEST['path'],'/');
-        
-        foreach ($_FILES as $file => $fileArray) {
-        
-            $hr = fopen($fileArray['tmp_name'], "rb");
-            $hw = fopen($path.$tmpname, "ab");
-            fwrite($hw, fread($hr, filesize($fileArray['tmp_name'])));
-            fclose($hr);
-            fclose($hw);
-            
-            if (!isset($_REQUEST['jupart']) || $_REQUEST['jufinal']) {
-                check_upload_file_name($fileArray['name']);
-                
-                $n = 2;
-                $fname_orig = explode('.',$fileArray['name']);
-                
-                while (file_exists($path.$fileArray['name'])) {
-                    $dummy = $fname_orig;
-                    $dummy[0] .= '_'.$n++;
-                    $fileArray['name'] = implode('.', $dummy);
-                }     
-                
-                rename($path.$tmpname,$path.$fileArray['name']);
-                check_upload_file( $path.$fileArray['name'] );
-            }
-            
-        }
-        echo "SUCCESS\n";
-        die();
-        
-    } catch (Exception $e) {
-        echo('ERROR: '.$e->getMessage());
-    }
-    
-}
-
 if ($_REQUEST['action'] == 'upload') {
 
     if ($_FILES['file']['error']) { 
