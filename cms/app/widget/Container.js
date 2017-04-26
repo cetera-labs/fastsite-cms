@@ -103,7 +103,11 @@ Ext.define('Cetera.widget.ContainerProperties', {
                 fieldLabel: 'Alias',
                 name: 'widgetAlias',
                 regex: /^[\.\-\_A-Z0-9]+$/i
-            }]
+            },{
+				fieldLabel: _('Шаблон'),
+				xtype: 'widgettemplate',
+				widget: 'Container'
+			}]
         });
         
         this.callParent();

@@ -51,7 +51,7 @@ class Container extends Templateable {
             $f = self::getDbConnection()->fetchAssoc('SELECT * FROM widgets WHERE widgetAlias=? ORDER BY id DESC', array( $params['alias'] ));
             if ($f) {
                 $id = $f['id']; 
-                $params = unserialize($f['params']);                
+				$params = array_merge(unserialize($f['params']), $params);
             } 			
 		}		
 		

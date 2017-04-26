@@ -137,7 +137,7 @@ Ext.define('Cetera.widget.ContainerMain', {
 
 Ext.define('Cetera.widget.ContainerMainProperties', {
     extend : 'Cetera.widget.WidgetProperties',
-    height: 130,
+    height: 150,
     title: Config.Lang.addArea,
     
     initComponent : function(){
@@ -159,7 +159,11 @@ Ext.define('Cetera.widget.ContainerMainProperties', {
                 fieldLabel: 'Alias',
                 name: 'widgetAlias',
                 regex: /^[\.\-\_A-Z0-9]+$/i
-            }]
+            },{
+				fieldLabel: _('Шаблон'),
+				xtype: 'widgettemplate',
+				widget: 'Container'
+			}]
         });
         
         this.callParent();
