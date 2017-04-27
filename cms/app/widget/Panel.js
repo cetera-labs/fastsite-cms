@@ -60,14 +60,7 @@ Ext.define('Cetera.widget.Panel', {
             
             addContainer : function(params) {
                 var container = Ext.create('Cetera.widget.ContainerMain', params);
-                 
                 this.add(container); 
-                 
-                if (params.widgets)
-                    Ext.Array.each(params.widgets, function(params) {
-                        container.addWidget(params, true);
-                    }, container); 
-                    
                 return container;
                 
             }

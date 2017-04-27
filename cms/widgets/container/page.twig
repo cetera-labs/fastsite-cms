@@ -1,0 +1,10 @@
+{% if layout is not defined %}
+	{% set layout = 'layout.twig' %}
+{% endif %}
+{% extends layout %}
+
+{% block main %}
+	{% for w in widget.getChildren() %}
+		{{ w.getHtml()|raw }}
+	{% endfor %}
+{% endblock %}

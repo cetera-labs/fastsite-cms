@@ -15,6 +15,8 @@ Ext.define('Cetera.widget.ContainerMain', {
     },
     
     widgetName: 'Container',  
+	
+	params: {},
     
     initComponent : function(){
     
@@ -68,6 +70,12 @@ Ext.define('Cetera.widget.ContainerMain', {
             });
         
         }, this); 
+		
+		if (this.widgets) {
+			Ext.Array.each(this.widgets, function(params) {
+				this.addWidget(params, true);
+			}, this); 
+		}
 
     },
     
@@ -102,14 +110,15 @@ Ext.define('Cetera.widget.ContainerMain', {
         return true;
     },
     
-    getParams : function() {           
-        return {
-            'widgetTitle': this.widgetTitle,
-            'widgetAlias': this.widgetAlias
-        };
+    getParams : function() { 
+		params = this.params;
+        params.widgetTitle = this.widgetTitle;
+        params.widgetAlias = this.widgetAlias;
+        return params;
     },
 
     setParams : function(params) {
+		this.params = params;
         this.widgetTitle = params.widgetTitle;
         this.widgetAlias = params.widgetAlias;
     },    
