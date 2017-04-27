@@ -140,6 +140,7 @@ Ext.define('Cetera.field.SectionController', {
 						id: 0,
 						container_id: 0,
 						widgetAlias: widgetAlias,
+						template: 'page.twig',
 						widgetName: 'Container',
 						widgetTitle: _('Область')
 					},
@@ -157,7 +158,6 @@ Ext.define('Cetera.field.SectionController', {
 
 			}
         }, this);
-		
 		
 	},
 	

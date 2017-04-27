@@ -73,7 +73,7 @@ Ext.define('Cetera.window.CatalogEdit', {
                     xtype: 'button',
                     text: Config.Lang.ok,
 					scope: this,
-                    handler: function() { this.save(); this.close(); }
+                    handler: function() { this.save(true); }
                 },
 				{
                     xtype: 'button',
@@ -85,7 +85,7 @@ Ext.define('Cetera.window.CatalogEdit', {
                     xtype: 'button',
                     text: _('Применить'),
 					scope: this,
-                    handler: function() { this.save(); }
+                    handler: function() { this.save(false); }
                 }				
 			]
 		});
@@ -657,7 +657,7 @@ Ext.define('Cetera.window.CatalogEdit', {
 		
 	},
 	
-	save: function() {
+	save: function(close) {
 		
 		if (this.catalog.user_fields)
 		{
@@ -700,7 +700,8 @@ Ext.define('Cetera.window.CatalogEdit', {
 			waitMsg: _('Подождите ...'),
 			scope: this,
 			success: function(form, action) {
-				tree.reload(action.result.path);                  
+				tree.reload(action.result.path); 
+				if (close) this.close();
 			},
 			failure: function(form, action) {
                 var obj = Ext.decode(action.response.responseText);			
