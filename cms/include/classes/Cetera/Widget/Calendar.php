@@ -20,7 +20,7 @@ class Calendar extends Templateable {
 		'date_param'  => 'date',
 		'date'        => null,
 		'day_url'     => '?{date_param}={date}',
-		'month_url'   => '?{date_param}={date}',
+		'month_url'   => '?{date_param}={date}&month=1',
 		'subsections' => true,
 		'ajax'        => false,
     );

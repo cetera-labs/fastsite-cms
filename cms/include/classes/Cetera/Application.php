@@ -1608,6 +1608,11 @@ class Application {
 		}		
 	}
 	
+	public function getRequest($key) 
+	{
+		return $_REQUEST[$key];
+	}
+	
 	public static function error_handler($errno, $errstr, $errfile, $errline ) {
 		
 		$application = self::$_instance;
