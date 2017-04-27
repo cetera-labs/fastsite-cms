@@ -20,7 +20,7 @@ Ext.define('Cetera.field.Folder', {
         this.trigger2Cls = 'icon-folder';
         this.editable    = false;  
 		
-		if (this.mat_type) this.url = '/cms/include/data_tree_materials_by_type.php?type=gallery';
+		if (this.mat_type) this.url = '/cms/include/data_tree_materials_by_type.php?type='+this.mat_type;
     
         this.window = Ext.create('Cetera.window.SiteTree', {
             exclude: this.exclude,
@@ -57,9 +57,11 @@ Ext.define('Cetera.field.Folder', {
 		this.callParent([value]);		
 	},	
         
-    setValue : function(value, displayOK) {
+    setValue : function(value, displayOK, mat_type) {
+		
+		if (!mat_type) mat_type = this.mat_type;
 
-        var obj = Ext.JSON.decode(value, true);
+		var obj = Ext.JSON.decode(value, true);
         if (obj instanceof Object) {
         
             this.setDisplayValue(obj.name);
@@ -80,10 +82,10 @@ Ext.define('Cetera.field.Folder', {
                     scope: this
                 });        
             }
-			else if (!displayOK && value && this.materials && this.mat_type)
+			else if (!displayOK && value && this.materials && mat_type)
 			{
                 Ext.Ajax.request({
-                    url: '/cms/include/action_materials.php?action=get_path_info&mat_id='+value+'&type='+this.mat_type,
+                    url: '/cms/include/action_materials.php?action=get_path_info&mat_id='+value+'&type='+mat_type,
                     success: function(response){
                         var obj = Ext.decode(response.responseText);
                         this.setDisplayValue(obj.displayPath);
