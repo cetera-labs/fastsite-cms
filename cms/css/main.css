@@ -298,6 +298,7 @@ body .main-navigation .x-treelist-item-selected > .x-treelist-row {
 .icon-save-as { background:url(../images/16X16/save_as2.gif) no-repeat center center !important; }
 .icon-settings { background:url(../images/16X16/settings.gif) no-repeat center center !important; }
 .icon-unpack { background:url(../images/16X16/unpack.gif) no-repeat center center !important; }
+.icon-crop { background:url(../images/crop.png) no-repeat center center !important; }
 
 .x-toolbar .x-item-disabled {
     cursor: default;

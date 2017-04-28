@@ -21,4 +21,6 @@ class TranslateDummy {
     public function _($text) {
         return $text;
     }
+	
+	public function addTranslation() {}
 }

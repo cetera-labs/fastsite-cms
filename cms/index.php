@@ -21,6 +21,7 @@ if (isset($_POST['token'])) {
     <meta charset="utf-8">
     <title><?php echo APP_NAME; ?></title>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.css">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	
 	<?php if (isset($_GET['ext6'])) : ?>
@@ -59,6 +60,8 @@ if (isset($_POST['token'])) {
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify-html.js"></script>
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify.js"></script>
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/minify/htmlminifier.min.js"></script>
+	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/ace/ace.js"></script>
+	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.js"></script>
     <script src="//ulogin.ru/js/ulogin.js"></script>
     
 <?php if ($application->getVar('setup_done')) : ?>    

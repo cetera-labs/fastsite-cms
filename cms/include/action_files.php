@@ -180,11 +180,13 @@ if ($_REQUEST['action'] == 'upload') {
         $n = 2;
         $fname_orig = explode('.',$_FILES["file"]["name"]);
         
-        while (file_exists(DOCROOT.$path.$_FILES["file"]["name"])) {
-            $dummy = $fname_orig;
-            $dummy[0] .= '_'.$n++;
-            $_FILES["file"]["name"] = implode('.', $dummy);
-        }
+		if (!isset($_REQUEST['overwrite']) || !$_REQUEST['overwrite']) {
+			while (file_exists(DOCROOT.$path.$_FILES["file"]["name"])) {
+				$dummy = $fname_orig;
+				$dummy[0] .= '_'.$n++;
+				$_FILES["file"]["name"] = implode('.', $dummy);
+			}
+		}
         
         move_uploaded_file($_FILES["file"]["tmp_name"], DOCROOT.$path.$_FILES["file"]["name"]);
         
@@ -192,6 +194,7 @@ if ($_REQUEST['action'] == 'upload') {
         
         $res['success'] = true;
         $res['file'] = $_FILES["file"]["name"];
+		$res['path'] = $s->last_upload_path;
     
     }
 }

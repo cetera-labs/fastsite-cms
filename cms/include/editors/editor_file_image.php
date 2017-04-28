@@ -16,8 +16,8 @@ function editor_file_image_draw($field_def, $fieldvalue) {
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
                         value: '<?=str_replace("\r",'\r',str_replace("\n",'\n',addslashes($fieldvalue)))?>',
-                        height: 150
+                        height: 170
                     })
 <?
-    return 150;
+    return 170;
 }

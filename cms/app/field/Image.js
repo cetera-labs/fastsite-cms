@@ -15,16 +15,19 @@ Ext.define('Cetera.field.Image', {
  
     },
     
-    setValue : function(value) {
+    setValue : function(value, keepBackup) {
     
-        this.backupValue = this.getValue();
-    
+		if (!this.backupValue) this.backupValue = this.getValue();
+	
         this.info.update('');
     
         if (value) {
-            this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=300&height='+this.height+'&src='+value+'">');
+			
+			if (!keepBackup) this.backupValue = false;
+			
+            this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+value+'&r='+( new Date() * 1 )+'">');
             this.btnDelete.show();
-            this.btnUnDelete.hide();
+			this.btnCrop.show();
             
 			this.info.update(value);
             Ext.Ajax.request({
@@ -40,14 +43,25 @@ Ext.define('Cetera.field.Image', {
             });            
             
         } else {
+			
+			if (!keepBackup && !this.backupValue) this.backupValue = this.getValue();
+			
             if (this.backupValue) {
-                this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=300&height='+this.height+'&src='+this.backupValue+'"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); line-height: '+this.height+'px">'+Config.Lang.picToBeDeleted+'</div>');
-                this.btnUnDelete.show();
+                this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+this.backupValue+'&r='+( new Date() * 1 )+'"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); line-height: '+this.height+'px">'+Config.Lang.picToBeDeleted+'</div>');
             } else {
                 this.preview.update('');
             }
             this.btnDelete.hide();
+			this.btnCrop.hide();
         }
+		
+		if (this.backupValue) {
+			this.btnRestore.show();
+		} 
+		else {
+			this.btnRestore.hide();
+		}
+		
         this.callParent(arguments);
     
     },
@@ -92,8 +106,7 @@ Ext.define('Cetera.field.Image', {
             border  : false,
             bodyCls :'chess',
             bodyStyle : 'text-align: center; display: table-cell; vertical-align: middle',
-            width   : '60%',
-            region  : 'west'
+            region  : 'center'
         });
         
         this.info = Ext.create('Ext.Panel',{
@@ -134,8 +147,19 @@ Ext.define('Cetera.field.Image', {
                 this.setValue('');
             }
         });
-        this.btnUnDelete = Ext.create('Ext.Button',{
-            text  : Config.Lang.unDelete,
+        this.btnCrop = Ext.create('Ext.Button',{
+            text    : _('Обрезать'),
+            iconCls : 'icon-crop',
+            hidden  : true,
+            scope   : this,
+            width   : '100%',
+            handler : function() {
+				this.getCropWindow().show().setValue(this.backupValue?this.backupValue:this.getValue());
+            }
+        });		
+        this.btnRestore = Ext.create('Ext.Button',{
+            text  : _('Восстановить'),
+			iconCls : 'icon-undo',
             hidden: true,
             scope   : this,
             width   : 200,
@@ -153,7 +177,8 @@ Ext.define('Cetera.field.Image', {
             items: [
                 this.preview,
                 {
-                    region    : 'center',
+                    region    : 'east',
+					width     : 200,
                     border    : false,
                     bodyStyle :'background: none; padding-left: 5px',                    
                     layout: {
@@ -164,8 +189,9 @@ Ext.define('Cetera.field.Image', {
                     items     : [
                         this.btnSelect, 
                         this.btnUpload, 
+						this.btnCrop, 
                         this.btnDelete, 
-                        this.btnUnDelete,
+                        this.btnRestore,						
                         this.info
                     ]
                 }
@@ -173,10 +199,21 @@ Ext.define('Cetera.field.Image', {
         });    
     
     },
+	
+    getCropWindow : function() {
+		if (!this.cropWindow) {
+			this.cropWindow = Ext.create('Cetera.window.ImageCrop');
+			this.cropWindow.on('crop',function(value){
+				this.setValue(value, true);
+			},this);
+        }
+        return this.cropWindow;      
+    },	
     
   	onDestroy: function(){
-        this.window.destroy();
-        this.uploadWindow.destroy();
+        if (this.window) this.window.destroy();
+        if (this.uploadWindow) this.uploadWindow.destroy();
+		if (this.cropWindow) this.cropWindow.destroy();
         this.callParent(arguments);
   	}
 	

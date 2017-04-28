@@ -395,13 +395,14 @@ class Application {
     public function getTranslator()
     {
         if (!$this->_translator) {
-			
+
 			$this->_translator = new \Zend_Translate(   
 				'gettext', 
 				CMSROOT . 'lang',  
 				$this->_locale,  
 				array('scan'=>\Zend_Translate::LOCALE_FILENAME)
 			); 
+
         }
         return $this->_translator;
     }

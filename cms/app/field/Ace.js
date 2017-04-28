@@ -8,18 +8,8 @@ Ext.define('Cetera.field.Ace', {
 				
 		this.callParent();
 		this.on('boxready', function(){
-
-			if (typeof ace === "undefined") {
-
-				Ext.Loader.loadScript({
-					url: '/library/ace/ace.js',
-					onLoad: this.initEditor,
-					scope: this
-				});
-				
-			} else {
-				this.initEditor();
-			} 		
+			
+			this.initEditor();		
 		
 		}, this);
 	},

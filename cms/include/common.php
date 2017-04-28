@@ -27,14 +27,14 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 
 //include DOCROOT.LIBRARY_PATH . '/vendor/autoload.php';
 include DOCROOT.LIBRARY_PATH . '/vendor/composer/autoload_real.php';
-ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b::getLoader();
+\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b::getLoader();
 
 $loader = new \Composer\Autoload\ClassLoader();
 $loader->add('Cetera', __DIR__.'/classes');
 $loader->add('Dklab', __DIR__.'/classes');
 $loader->register();
 
-$application = Cetera\Application::getInstance();
+$application = \Cetera\Application::getInstance();
 
 if ($application->getVar('class_compability')) {
     // Backward compability
