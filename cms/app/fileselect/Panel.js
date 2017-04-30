@@ -1,11 +1,13 @@
 Ext.define('Cetera.fileselect.Panel', {
 
     extend:'Ext.Panel',
+	
+	requires: 'Cetera.Ajax',
 
     fileData: null,
     
   	onDestroy: function(){
-    		this.uploadWindow.close();
+		if (this.cropWindow) this.cropWindow.destroy();
         this.callParent(arguments);
   	},
 
@@ -13,23 +15,34 @@ Ext.define('Cetera.fileselect.Panel', {
         
         if (!this.activePanel) this.activePanel = 0;
         
-        this.btnUpload = new Ext.Button({
-            iconCls:'icon-upload',
+        this.btnUpload = Ext.create('Ext.form.field.File',{
+			buttonOnly: true,
+			style: {
+				overflow: 'hidden'
+			},		
+			buttonConfig: {
+				iconCls:'icon-upload',
+				text: _('Загрузить файл')
+			},
             disabled: true,
-            tooltip:'<b>' + Config.Lang.doUpload2 + '</b>',
-            handler: function () { 
-                if (this.tree.getSelectionModel().getLastSelected()) {
-                    this.uploadWindow.setPath(this.path);
-                    this.uploadWindow.show();
-                }
-            },
-            scope: this
+            listeners: {
+				afterrender: function(el) {
+					el.fileInputEl.set({ multiple: 'multiple' });					
+				},
+				change: function(el, value) {										
+					var input = el.fileInputEl.dom;	
+					for(var i=0;i<input.files.length;i++){						
+						this.uploadFile(input.files[i], i == input.files.length-1);												
+					}							
+				},
+				scope: this
+			}
         });
                 
         this.btnFolderCreate = new Ext.Button({
             iconCls:'icon-new_folder',
             disabled: true,
-            tooltip:  Config.Lang.dirCreate,
+            tooltip:  _('Создать каталог'),
             handler: this.createFolder,
             scope: this
         });
@@ -37,7 +50,7 @@ Ext.define('Cetera.fileselect.Panel', {
         this.btnFolderDelete = new Ext.Button({
             iconCls:'icon-folder_delete',
             disabled: true,
-            tooltip:  Config.Lang.dirDelete,
+            tooltip:  _('Удалить каталог'),
             handler: this.deleteFolder,
             scope: this
         });
@@ -45,16 +58,24 @@ Ext.define('Cetera.fileselect.Panel', {
         this.btnDeleteFile = new Ext.Button({
             iconCls:'icon-delete',
             disabled: true,
-            tooltip:  Config.Lang.fileDelete,
+            text:  _('Удалить файл'),
             handler: this.deleteFile,
             scope: this
         });
+		
+        this.btnCropFile = new Ext.Button({
+            iconCls:'icon-crop',
+            disabled: true,
+            text:  _('Кадрировать'),
+            handler: this.cropFile,
+            scope: this
+        });		
         
         this.tbar = new Ext.Toolbar({
             region: 'north',
             items: [{
                 iconCls:'icon-reload',
-                tooltip: Config.Lang.refresh,
+                tooltip: _('Обновить'),
                 handler: function () { 
                     var sn = this.tree.getSelectionModel().getLastSelected();
                     if (sn) var path = sn.getPath();
@@ -67,7 +88,7 @@ Ext.define('Cetera.fileselect.Panel', {
                 scope: this
             },'-',
             this.btnUpload,'-',
-            this.btnDeleteFile,'-',
+            this.btnCropFile, this.btnDeleteFile,'-',
             this.btnFolderCreate,this.btnFolderDelete,'-',{
                 iconCls: 'icon-table',
                 toggleGroup: '1',
@@ -91,12 +112,7 @@ Ext.define('Cetera.fileselect.Panel', {
             }
             ]
         });
-                
-        this.uploadWindow = Ext.create('Cetera.window.Upload', { path: this.path});
-        this.uploadWindow.on('successUpload', function(info){
-           this.reloadFiles(info.file);
-        }, this);
-    
+             
         this.tree = new Ext.tree.TreePanel({
             title: Config.Lang.directories,
             region:'center',
@@ -233,7 +249,7 @@ Ext.define('Cetera.fileselect.Panel', {
                 	data.html += '  <embed src="'+this.comp.path+data.name+'" wmode="opaque" quality="high" width="170" height="145" type="application/x-shockwave-flash" pluginspace="http://www.macromedia.com/go/getflashplayer"></embed>\n';
                 	data.html += '</object>';
                 } else if (data.type > 0) {
-                    data.url = '/cms/include/image.php?src='+this.comp.path+data.name+'&width=170&height=145&cache=1&dontenlarge=1&quality=90';
+                    data.url = '/imagetransform/width_170_height_145_enlarge_0'+this.comp.path+data.name;
                     data.dim = data.width+'x'+data.height+'px';
                     data.html = '<img src="'+data.url+'" title="'+data.name+'">';
                 } else {
@@ -259,7 +275,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
 		
 		this.filesSite = new Ext.Panel({
-		    region: 'center',
+		    flex: 1,
 		    border: false,
             layout: 'card',
             activeItem: this.activePanel,
@@ -277,6 +293,18 @@ Ext.define('Cetera.fileselect.Panel', {
             items: this.history
         });
 		
+		this.centerPanel = new Ext.Panel({
+			region: 'center',
+			layout: {
+				type: 'vbox',
+				align: 'stretch'
+			},
+			border: false,
+			items: [
+				this.filesSite
+			]
+        });		
+		
         this.items = [
             {
                 region: 'west',
@@ -293,12 +321,103 @@ Ext.define('Cetera.fileselect.Panel', {
                     this.historyCnt
                 ]
             },
-            this.filesSite
+			this.centerPanel
+            
         ];
         this.layout = 'border';
         
         this.statusBar = Ext.create('Ext.ux.StatusBar', {text: '&nbsp;'});
         this.bbar = this.statusBar;
+		
+		this.btnOkResize = Ext.create('Ext.Button', {
+			text: _('Выбрать уменьшенный'),
+			scope: this,
+			disabled: true,
+			menu: {
+				plain: true,
+				items: [{
+					text: _('Оригинальный размер'),
+					scope: this,
+					handler: function() {
+						this.fireEvent('select', this.url, this.file, this.path);
+					}
+				},{
+					text: _('Маленький') + ' (427x320)',
+					scope: this,
+					handler: function() {
+						this.fireEvent('select', '/imagetransform/width_427_height_320'+this.url, this.file, this.path);
+					}
+				},{
+					text: _('Средний') + ' (600x450)',
+					scope: this,
+					handler: function() {
+						this.fireEvent('select', '/imagetransform/width_600_height_450'+this.url, this.file, this.path);
+					}
+				},{
+					text: _('Большой') + ' (800x600)',
+					scope: this,
+					handler: function() {
+						this.fireEvent('select', '/imagetransform/width_800_height_600'+this.url, this.file, this.path);
+					}
+				},{
+					text: _('пользовательский:'),
+					scope: this,
+					handler: function() {
+						var s = this.btnOkResize.menu.getComponent('size');
+						var w = s.getComponent('width').getValue();
+						var h = s.getComponent('height').getValue();
+						this.fireEvent('select', '/imagetransform/width_'+w+'_height_'+h+this.url, this.file, this.path);
+					}
+				},{
+					xtype: 'fieldcontainer',
+					itemId: 'size',
+					cls: 'x-field',
+					layout: 'hbox',
+					items: [{
+						xtype: 'numberfield',
+						width: 50,
+						itemId: 'width',
+						flex: 1,
+						value: 1600,
+						step: 100,
+						minValue: 0						
+					},{ 
+						xtype: 'displayfield',
+						margin: '0 5',
+						value: 'x'
+					},{
+						xtype: 'numberfield',
+						width: 50,
+						itemId:  'height',
+						flex: 1,
+						value: 1200,
+						step: 100,
+						minValue: 0	
+					}]
+				}]
+			}
+		});		
+		
+		this.btnOk = Ext.create('Ext.Button', {
+			text: _('Ok'),
+			scope: this,
+			disabled: true,
+			handler: function() {
+				this.fireEvent('select', this.url, this.file, this.path);
+			}
+		});
+		
+        this.buttons = [
+			this.btnOkResize,
+            this.btnOk,
+            {
+				text: _('Отмена'), 
+				scope: this,
+				handler: function() {
+					this.fireEvent('cancel');
+				}
+			}
+        ]			
         
         this.historyStore.load();
         
@@ -309,6 +428,9 @@ Ext.define('Cetera.fileselect.Panel', {
                 elDom.style.padding = '2px 0 0 5px';
             }
         }, this);
+		
+		//this.files.on('dblclick', selectedHandler);
+		//this.files2.on('dblclick', selectedHandler);		
 
         this.on('render', function() {
             if (!this.tree.getRootNode().isExpanded())
@@ -374,24 +496,33 @@ Ext.define('Cetera.fileselect.Panel', {
     },
 
     onFileSelected: function(dv, sel) {
-        this.btnDeleteFile.setDisabled(sel.length == 0);
-		    if(sel.length > 0) {
-		        this.files.getSelectionModel().doSelect(sel, false, true);
-		        this.files2.getSelectionModel().doSelect(sel, false, true);
+		
+		this.isImage = false;
+		
+		if(sel.length > 0) {
+		    this.files.getSelectionModel().doSelect(sel, false, true);
+		    this.files2.getSelectionModel().doSelect(sel, false, true);
             var data = sel[0];
             this.fileData = data;
-			      this.file = data.get('name');
-			      if (this.path+this.file != this.url)
-    			     this.url = this.path+this.file;
-            
-		    }else{
+			this.file = data.get('name');
+			if (this.path+this.file != this.url)
+    		this.url = this.path+this.file;  
+			var ext = this.file.split('.').pop().toLowerCase();
+			if (ext == 'jpeg' ||ext == 'jpg' ||ext == 'gif' ||ext == 'png')
+				this.isImage = true;
+		}
+		else{
     		    this.files.getSelectionModel().clearSelections();
     		    this.files2.getSelectionModel().clearSelections();
     		    this.fileData = null;
     		    this.file = '';
     		    this.url = '';
-		    }
-		    this.fireEvent('select');
+		}
+			
+        this.btnDeleteFile.setDisabled(sel.length == 0);
+		this.btnOk.setDisabled(sel.length == 0);
+		this.btnCropFile.setDisabled(!this.isImage);
+		this.btnOkResize.setDisabled(!this.isImage);		
     },
     
     reloadFiles: function(fileName) {
@@ -482,5 +613,65 @@ Ext.define('Cetera.fileselect.Panel', {
                     }
                 });
         }, this);
-    }
+    },
+	
+    cropFile: function () {
+		this.getCropWindow().show().setValue( this.path+this.file );
+    },
+	
+    getCropWindow : function() {
+		if (!this.cropWindow) {
+			this.cropWindow = Ext.create('Cetera.window.ImageCrop');
+			this.cropWindow.on('crop',function(value){
+				this.reloadFiles( value.split('/').pop() );	
+			},this);
+        }
+        return this.cropWindow;      
+    },
+
+	uploadFile: function(file, files_reload) {
+		var me = this;
+		var path = this.path;
+			
+		var formData = new FormData();
+		formData.append('file', file); 
+		
+		var prefix = _('Загрузка')+': '+file.name;
+		
+		var progress = Ext.create('Ext.ProgressBar', {
+			bodyCls: 'x-window-body-default',        
+			cls: 'x-window-body-default',
+			text: prefix + ' - ' + _('ожидание'),
+			margin: 3
+		});
+		me.centerPanel.insert(0,progress);
+
+		Cetera.Ajax.request({
+			url: 'include/action_files.php?action=upload&path='+path,
+			method: 'POST',
+			rawData: formData,
+			ignoreHeaders: true,
+			success: function(resp) {
+				var obj = Ext.decode(resp.responseText);
+				if (obj.success) {								
+					if (files_reload && path == me.path) me.reloadFiles(obj.file);								
+				}
+				setTimeout(function(){
+					me.centerPanel.remove(progress, true);
+				},500);				
+			},
+			failure: function(resp) {
+				if (files_reload && path == me.path) me.reloadFiles();
+				progress.updateProgress( 0, prefix + ' - ' + _('Ошибка! (Превышен размер файла?)') );
+				setTimeout(function(){
+					me.centerPanel.remove(progress, true);
+				},5000);
+			},
+			uploadProgress: function(e) {
+				progress.updateProgress( e.loaded/e.total, prefix + ' - ' + parseInt(e.loaded*100/e.total)+'%' );
+			},
+			scope: me
+		});							
+		
+	}
 });

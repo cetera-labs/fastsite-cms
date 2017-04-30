@@ -67,8 +67,7 @@ Ext.define('Cetera.window.ImageCrop', {
 		var path = p.join('/');
 		
 		this.cropper.getCroppedCanvas().toBlob(function(blob){
-			var formData = new FormData();
-			
+			var formData = new FormData();			
 			formData.append('file', blob, baseName);
 			me.setLoading(true);
 			Cetera.Ajax.request({

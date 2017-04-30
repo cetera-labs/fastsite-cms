@@ -14,39 +14,21 @@ Ext.define('Cetera.fileselect.Window', {
             activePanel: this.activePanel
         });
                       
-        this.width = 830;
-        this.height = 450;
+        this.width = '80%';
+        this.height = '90%';
         this.layout = 'fit';
         this.modal = true;
         this.items = this.panel;
         this.border = false; 
-
-        this.btnOk = Ext.create('Ext.Button', {
-                text: Ext.MessageBox.buttonText.ok,
-                disabled: true,
-                handler: function() { 
-                    this.fireEvent('select', this.panel.url);
-                    this.hide(); 
-                },
-                scope: this
-        });
         
-        this.buttons = [
-            this.btnOk,
-            {
-                text: Ext.MessageBox.buttonText.cancel,
-                handler: function() { 
-                    this.hide(); 
-                },
-                scope: this
-            }
-        ];
-        
-        this.panel.on('select', function() {
-            if (this.panel.file)
-                this.btnOk.enable();
-                else this.btnOk.disable();
+        this.panel.on('select', function(url) {
+            this.fireEvent('select', url);
+            this.hide();
         } ,this);
+		
+        this.panel.on('cancel', function() {
+            this.hide();
+        } ,this);		
     
         this.callParent();
     },

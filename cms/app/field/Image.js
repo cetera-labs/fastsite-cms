@@ -14,6 +14,20 @@ Ext.define('Cetera.field.Image', {
         return false;
  
     },
+	
+	getRealValue(value) {
+		var a = value.split('/');
+		a.shift();
+		if (a.shift() == 'imagetransform') {
+			a.shift();
+			value = '/' + a.join('/');
+		}
+		return value;
+	},
+	
+	getPreviewSrc: function(value) {
+		return '/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+this.getRealValue(value)+'&r='+( new Date() * 1 );
+	},
     
     setValue : function(value, keepBackup) {
     
@@ -24,8 +38,7 @@ Ext.define('Cetera.field.Image', {
         if (value) {
 			
 			if (!keepBackup) this.backupValue = false;
-			
-            this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+value+'&r='+( new Date() * 1 )+'">');
+			this.preview.update('<img src="'+this.getPreviewSrc(value)+'">');
             this.btnDelete.show();
 			this.btnCrop.show();
             
@@ -47,7 +60,7 @@ Ext.define('Cetera.field.Image', {
 			if (!keepBackup && !this.backupValue) this.backupValue = this.getValue();
 			
             if (this.backupValue) {
-                this.preview.update('<img src="/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+this.backupValue+'&r='+( new Date() * 1 )+'"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); line-height: '+this.height+'px">'+Config.Lang.picToBeDeleted+'</div>');
+                this.preview.update('<img src="'+this.getPreviewSrc(this.backupValue)+'"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); line-height: '+this.height+'px">'+Config.Lang.picToBeDeleted+'</div>');
             } else {
                 this.preview.update('');
             }
@@ -148,13 +161,13 @@ Ext.define('Cetera.field.Image', {
             }
         });
         this.btnCrop = Ext.create('Ext.Button',{
-            text    : _('Обрезать'),
+            text    : _('Кадрировать'),
             iconCls : 'icon-crop',
             hidden  : true,
             scope   : this,
             width   : '100%',
             handler : function() {
-				this.getCropWindow().show().setValue(this.backupValue?this.backupValue:this.getValue());
+				this.getCropWindow().show().setValue( this.getRealValue(this.backupValue?this.backupValue:this.getValue()) );
             }
         });		
         this.btnRestore = Ext.create('Ext.Button',{
