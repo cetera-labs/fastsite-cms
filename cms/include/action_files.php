@@ -135,8 +135,15 @@ if ($_REQUEST['action'] == 'create_folder') {
 }
 
 if ($_REQUEST['action'] == 'upload') {
+	
+	$_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
 
-    if ($_FILES['file']['error']) { 
+	if (!isset($_FILES['file'])) {
+		
+        throw new \Exception( $translator->_('Нет файла') );
+		
+	}
+    elseif ($_FILES['file']['error']) { 
         switch ($_FILES['file']['error']) {
             case UPLOAD_ERR_INI_SIZE:
             case UPLOAD_ERR_FORM_SIZE:
@@ -161,7 +168,8 @@ if ($_REQUEST['action'] == 'upload') {
         $res['success'] = false;
         $res['message'] = $msg;
         
-    } else {
+    }
+	else {
     
         $path = trim($_REQUEST['path'],'/').'/';
            

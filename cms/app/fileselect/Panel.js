@@ -662,10 +662,15 @@ Ext.define('Cetera.fileselect.Panel', {
 			},
 			failure: function(resp) {
 				if (files_reload && path == me.path) me.reloadFiles();
-				progress.updateProgress( 0, prefix + ' - ' + _('Ошибка! (Превышен размер файла?)') );
+				
 				setTimeout(function(){
 					me.centerPanel.remove(progress, true);
 				},5000);
+				
+				var msg = _('Ошибка!');
+				var o = Ext.decode(resp.responseText);
+				if (o.message) msg += ' '+o.message;				
+				progress.updateProgress( 0, prefix + ' - ' + msg );
 			},
 			uploadProgress: function(e) {
 				progress.updateProgress( e.loaded/e.total, prefix + ' - ' + parseInt(e.loaded*100/e.total)+'%' );
