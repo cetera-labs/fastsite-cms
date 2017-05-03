@@ -2,6 +2,8 @@
 namespace Cetera;
 include('../include/common_bo.php');
 
+$t = $application->getTranslator();
+
 define('STRUCTURE_BACKUP', 'dir_data_backup');
 
 $res = array(
@@ -27,7 +29,7 @@ if ($_REQUEST['db_structure']) {
       			if (!$terror && $table) $msg .= ' <b class="ok">ОК</b>';
       			if ($table) $msg .= '<br />';
       			if ($module != $error['module']) $msg .= '<div class="hdr"><b><u>Модуль '.$error['module'].'</u></b></div>';
-      			$msg .= '&nbsp;&nbsp;&nbsp;&nbsp;<span>Таблица '.$error['table'].'</span>';
+      			$msg .= '&nbsp;&nbsp;&nbsp;&nbsp;<span>'.$t->_('Таблица').' '.$error['table'].'</span>';
       			$terror = false;
     		}
     		        
@@ -45,7 +47,7 @@ if ($_REQUEST['db_structure']) {
         			mysql_query($query);
               
         			if (mysql_error()) {
-        				if (!$terror) $msg .= '<b class="error">Ошибка</b>';
+        				if (!$terror) $msg .= '<b class="error">'.$t->_('Ошибка').'</b>';
         				$terror = true;
         				$msg .= '<div class="note">'.mysql_error().'<pre>'.$query.'</pre></div>';
         			}
@@ -150,7 +152,7 @@ if ($_REQUEST['cat_structure']) {
 		fssql_query('INSERT INTO dir_structure (data_id, lft, rght, level) VALUES ('.$item['data_id'].','.$item['lft'].','.$item['rght'].','.$item['level'].')');
 	
 	
-	$res['text'] .= '<b class="ok">Структура разделов ОК</b></div><br clear="all" /><div class="note">Backup структуры сохранен в таблице '.STRUCTURE_BACKUP.'</div>';
+	$res['text'] .= '<b class="ok">'.$t->_('Структура разделов').' ОК</b></div><br clear="all" /><div class="note">Backup saved in table '.STRUCTURE_BACKUP.'</div>';
   
   
 }

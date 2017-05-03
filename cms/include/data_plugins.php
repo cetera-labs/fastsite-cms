@@ -19,7 +19,9 @@ if (sizeof($plugins)) {
 		$d = $res->getBody();  		
         $plugins_lib = json_decode( $res->getBody(), true);
         
-    } catch (\Exception $e) {}        
+    } catch (\Exception $e) {}    
+
+	$l = (string)$application->getLocale();
     
     foreach ($plugins as $id => $p) {
     
@@ -42,10 +44,10 @@ if (sizeof($plugins)) {
         $data[] = array(
             'id'          => $p->name,
             'upgrade'     => $p['upgrade'],
-            'description' => $p['description'],
+            'description' => isset($p['description_'.$l])?$p['description_'.$l]:$p['description'],
             'version'     => $p['version'],
             'disabled'    => $p['disabled'],
-            'title'       => $p['title'],
+            'title'       => isset($p['title_'.$l])?$p['title_'.$l]:$p['title'],
         );            
     
     }

@@ -17,8 +17,13 @@ try {
     if (is_array($plugins)) {
     
         $installed = Plugin::enum();
+		
+		$l = (string)$application->getLocale();
     
         foreach ($plugins as $id => $p) {
+			
+            $plugins[$id]['description'] = isset($plugins[$id]['description_'.$l])?$plugins[$id]['description_'.$l]:$plugins[$id]['description'];
+            $plugins[$id]['title'] = isset($plugins[$id]['title_'.$l])?$plugins[$id]['title_'.$l]:$plugins[$id]['title'];	
             
             if (isset($installed[$p['id']])) {
                 $plugins[$id]['installed'] = true;

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 08:43+0300\n"
-"PO-Revision-Date: 2017-05-03 09:30+0300\n"
+"POT-Creation-Date: 2017-05-03 13:22+0300\n"
+"PO-Revision-Date: 2017-05-03 13:26+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -224,8 +224,8 @@ msgstr "Identifier"
 msgid "Название"
 msgstr "Name"
 
-#: app/theme/Settings.js:38 include/classes/Cetera/ObjectDefinition.php:192
-#: include/ui_material_edit.php:133 lang/data.php:99 lang/data.php:197
+#: app/theme/Settings.js:38 include/ui_material_edit.php:133 lang/data.php:99
+#: lang/data.php:197
 msgid "Автор"
 msgstr "Author"
 
@@ -476,6 +476,96 @@ msgstr "Message"
 msgid "Параметры"
 msgstr "Parameters"
 
+#: include/action_check.php:8
+msgid "таблица не найдела"
+msgstr "table is not found"
+
+#: include/action_check.php:9
+msgid "неверный тип таблицы"
+msgstr "invalid table type"
+
+#: include/action_check.php:10 include/action_check.php:17
+msgid "не найдено поле"
+msgstr "field is not found"
+
+#: include/action_check.php:11
+msgid "лишнее поле"
+msgstr "unnesessary field"
+
+#: include/action_check.php:12 include/action_check.php:18
+msgid "неверное поле"
+msgstr "invalid field"
+
+#: include/action_check.php:13
+msgid "лишний индекс"
+msgstr "unnesessary index"
+
+#: include/action_check.php:14
+msgid "не найден индекс"
+msgstr "index is not found"
+
+#: include/action_check.php:15
+msgid "неверный индекс"
+msgstr "invalid index"
+
+#: include/action_check.php:16
+msgid "не найден тип материалов"
+msgstr "Materials type is not found"
+
+#: include/action_check.php:19
+msgid "Не найден виджет"
+msgstr "Widget is not found"
+
+#: include/action_check.php:38
+msgid "Модуль"
+msgstr "Module"
+
+#: include/action_check.php:39
+msgid "Таблица"
+msgstr "Table"
+
+#: include/action_check.php:43
+msgid "ожилалось"
+msgstr "expected"
+
+#: include/action_check.php:48
+msgid "Обнаружены ошибки в структуре БД"
+msgstr "There is errors in the database"
+
+#: include/action_check.php:56
+msgid "Нарушено правило"
+msgstr ""
+
+#: include/action_check.php:57
+msgid "Левый ключ ВСЕГДА меньше правого"
+msgstr ""
+
+#: include/action_check.php:58
+msgid "Наименьший левый ключ ВСЕГДА равен 1"
+msgstr ""
+
+#: include/action_check.php:59
+msgid "Наибольший правый ключ ВСЕГДА равен двойному числу узлов"
+msgstr ""
+
+#: include/action_check.php:60
+msgid "Разница между правым и левым ключом ВСЕГДА нечетное число"
+msgstr ""
+
+#: include/action_check.php:61
+msgid ""
+"Если уровень узла нечетное число то тогда левый ключ ВСЕГДА нечетное число, "
+"то же самое и для четных чисел"
+msgstr ""
+
+#: include/action_check.php:62
+msgid "Ключи ВСЕГДА уникальны, вне зависимости от того правый он или левый"
+msgstr ""
+
+#: include/action_check.php:95
+msgid "Обнаружены ошибки в структуре разделов"
+msgstr ""
+
 #: include/action_del_widget.php:7
 msgid "Виджет защищен."
 msgstr "Widget protected."
@@ -555,118 +645,118 @@ msgstr "Files"
 msgid "Ключевые слова"
 msgstr "Keywords"
 
-#: include/classes/Cetera/Application.php:895
+#: include/classes/Cetera/Application.php:914
 msgid "Все"
 msgstr "All"
 
-#: include/classes/Cetera/Application.php:901
+#: include/classes/Cetera/Application.php:920
 msgid "Пользователи BackOffice"
 msgstr "BackOffice users"
 
-#: include/classes/Cetera/Application.php:902
+#: include/classes/Cetera/Application.php:921
 msgid "Имеют право входа в систему управления сайтом"
 msgstr "Access to the content management system is available for"
 
-#: include/classes/Cetera/Application.php:907
+#: include/classes/Cetera/Application.php:926
 msgid "Администраторы"
 msgstr "Administrators"
 
-#: include/classes/Cetera/Application.php:908
+#: include/classes/Cetera/Application.php:927
 msgid "Администраторы имеют полные, ничем неограниченные права доступа"
 msgstr "Administrators have complete and unrestricted access rights"
 
-#: include/classes/Cetera/Application.php:1121
+#: include/classes/Cetera/Application.php:1140
 #, php-format
 msgid "Виджет \"%s\" не зарегистрирован"
 msgstr "Widget \"% s\" is not registered"
 
-#: include/classes/Cetera/Application.php:1192
+#: include/classes/Cetera/Application.php:1211
 msgid "Контейнер"
 msgstr "Container"
 
-#: include/classes/Cetera/Application.php:1200
+#: include/classes/Cetera/Application.php:1219
 msgid "Меню раздела"
 msgstr "Section menu"
 
-#: include/classes/Cetera/Application.php:1207
+#: include/classes/Cetera/Application.php:1226
 msgid "Пользовательское меню"
 msgstr "Custom menu"
 
-#: include/classes/Cetera/Application.php:1214
+#: include/classes/Cetera/Application.php:1233
 msgid "Список материалов"
 msgstr "Material list"
 
-#: include/classes/Cetera/Application.php:1228 include/field_editors.php:164
+#: include/classes/Cetera/Application.php:1247 include/field_editors.php:164
 #: include/setup.php:237 lang/data.php:159
 msgid "Файл"
 msgstr "File"
 
-#: include/classes/Cetera/Application.php:1235
+#: include/classes/Cetera/Application.php:1254
 msgid "Страничная навигация"
 msgstr "Pagination"
 
-#: include/classes/Cetera/Application.php:1242
+#: include/classes/Cetera/Application.php:1261
 msgid "\"Хлебные крошки\""
 msgstr "\"Breadcrumbs\""
 
-#: include/classes/Cetera/Application.php:1249
+#: include/classes/Cetera/Application.php:1268
 msgid "Поиск по сайту"
 msgstr "Site search"
 
-#: include/classes/Cetera/Application.php:1256 include/field_editors.php:171
+#: include/classes/Cetera/Application.php:1275 include/field_editors.php:171
 #: lang/data.php:181
 msgid "Материал"
 msgstr "Material"
 
-#: include/classes/Cetera/Application.php:1270
+#: include/classes/Cetera/Application.php:1289
 msgid "Календарь"
 msgstr "Calendar"
 
-#: include/classes/Cetera/Application.php:1277
+#: include/classes/Cetera/Application.php:1296
 msgid "Форма входа"
 msgstr "Login form"
 
-#: include/classes/Cetera/Application.php:1284
+#: include/classes/Cetera/Application.php:1303
 msgid "Форма регистрации"
 msgstr "Registration form"
 
-#: include/classes/Cetera/Application.php:1291
+#: include/classes/Cetera/Application.php:1310
 msgid "Персональные данные"
 msgstr "Personal data"
 
-#: include/classes/Cetera/Application.php:1298
+#: include/classes/Cetera/Application.php:1317
 msgid "Форма восстановления пароля"
 msgstr "Password recovery form"
 
-#: include/classes/Cetera/Application.php:1311
+#: include/classes/Cetera/Application.php:1330
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: include/classes/Cetera/Application.php:1312
+#: include/classes/Cetera/Application.php:1331
 msgid "E-mail пользователя"
 msgstr "User Email"
 
-#: include/classes/Cetera/Application.php:1313
+#: include/classes/Cetera/Application.php:1332
 msgid "Имя пользователя"
 msgstr "User name"
 
-#: include/classes/Cetera/Application.php:1314
+#: include/classes/Cetera/Application.php:1333
 msgid "Пароль пользователя"
 msgstr "User Password"
 
-#: include/classes/Cetera/Application.php:1315
+#: include/classes/Cetera/Application.php:1334
 msgid "Имя сайта"
 msgstr "Site name"
 
-#: include/classes/Cetera/Application.php:1316
+#: include/classes/Cetera/Application.php:1335
 msgid "Адрес сайта"
 msgstr "Site url"
 
-#: include/classes/Cetera/Application.php:1319
+#: include/classes/Cetera/Application.php:1338
 msgid "Регистрация пользователя"
 msgstr "Registration"
 
-#: include/classes/Cetera/Application.php:1320
+#: include/classes/Cetera/Application.php:1339
 msgid "Восстановление пароля пользователя"
 msgstr "Recover password"
 
@@ -746,8 +836,7 @@ msgstr "The ability to see section in the structure"
 msgid "Публикация материалов"
 msgstr "Material publication"
 
-#: include/classes/Cetera/Catalog.php:1402
-#: include/classes/Cetera/ObjectDefinition.php:193 include/ui_cat_props.php:69
+#: include/classes/Cetera/Catalog.php:1402 include/ui_cat_props.php:69
 #: include/ui_groups.php:43 include/ui_groups.php:204
 #: include/ui_material_edit.php:92 include/ui_users.php:115 lang/data.php:71
 msgid "Свойства"
@@ -850,33 +939,6 @@ msgstr "Materials limit exceeded"
 #, php-format
 msgid "Неизвестная ошибка (%s)"
 msgstr "Unknown error (%s)"
-
-#: include/classes/Cetera/ObjectDefinition.php:187 lang/data.php:62
-msgid "Сортировка"
-msgstr "Sort"
-
-#: include/classes/Cetera/ObjectDefinition.php:188
-#: include/ui_material_edit.php:135 lang/data.php:98
-msgid "Заголовок"
-msgstr "Title"
-
-#: include/classes/Cetera/ObjectDefinition.php:189 include/ui_cat_props.php:463
-#: include/ui_material_edit.php:132
-msgid "Alias"
-msgstr "Alias"
-
-#: include/classes/Cetera/ObjectDefinition.php:190
-#: include/ui_material_edit.php:134
-msgid "Дата создания"
-msgstr "Date of creation"
-
-#: include/classes/Cetera/ObjectDefinition.php:191
-msgid "Дата изменения"
-msgstr "Date of change"
-
-#: include/classes/Cetera/ObjectDefinition.php:194 lang/data.php:60
-msgid "Раздел"
-msgstr "Section"
 
 #: include/classes/Cetera/Plugin.php:166
 msgid "Загрузка плагина"
@@ -1090,17 +1152,17 @@ msgstr "Material has been unpublished"
 msgid "Изменен пользователь"
 msgstr "User has been changed"
 
-#: include/data_plugins_lib.php:35 include/data_themes_lib.php:33
+#: include/data_plugins_lib.php:40 include/data_themes_lib.php:33
 #, php-format
 msgid "Не подходящая версия Cetera CMS. Требуется %s или выше"
 msgstr "Incompatible version of Cetera CMS. %s or higher is required."
 
-#: include/data_plugins_lib.php:40 include/data_themes_lib.php:38
+#: include/data_plugins_lib.php:45 include/data_themes_lib.php:38
 #, php-format
 msgid "Не подходящая версия Cetera CMS. Требуется не выше %s"
 msgstr "Incompatible version of Cetera CMS. %s or lower is required."
 
-#: include/data_types.php:82
+#: include/data_types.php:88
 msgid "Без материалов"
 msgstr "Without materials"
 
@@ -1380,6 +1442,10 @@ msgstr "Main"
 msgid "Домен"
 msgstr "Domain"
 
+#: include/ui_cat_props.php:463 include/ui_material_edit.php:132
+msgid "Alias"
+msgstr "Alias"
+
 #: include/ui_cat_props.php:473 lang/data.php:24
 msgid "Синонимы"
 msgstr "Synonyms"
@@ -1444,6 +1510,14 @@ msgstr "Delete a group"
 #: include/ui_material_edit.php:49
 msgid "Материал заблокирован другим пользователем."
 msgstr "The material is blocked by another user."
+
+#: include/ui_material_edit.php:134
+msgid "Дата создания"
+msgstr "Date of creation"
+
+#: include/ui_material_edit.php:135 lang/data.php:98
+msgid "Заголовок"
+msgstr "Title"
 
 #: include/ui_material_edit.php:253
 msgid "Состоит в"
@@ -1698,9 +1772,17 @@ msgstr "Depth"
 msgid "Корневой раздел"
 msgstr "Root section"
 
+#: lang/data.php:60
+msgid "Раздел"
+msgstr "Section"
+
 #: lang/data.php:61
 msgid "Порядок"
 msgstr "Order"
+
+#: lang/data.php:62
+msgid "Сортировка"
+msgstr "Sort"
 
 #: lang/data.php:63
 msgid "Сорт."
@@ -2269,6 +2351,9 @@ msgstr "Register"
 msgid "Вы были успешно зарегистрированы!"
 msgstr "You have been successfully registered!"
 
+#~ msgid "Дата изменения"
+#~ msgstr "Date of change"
+
 #~ msgid "Сайты"
 #~ msgstr "Sites"
 
@@ -2295,9 +2380,6 @@ msgstr "You have been successfully registered!"
 
 #~ msgid "Тэг"
 #~ msgstr "Tag"
-
-#~ msgid "Таблица"
-#~ msgstr "Table"
 
 #~ msgid "-- нет файлов --"
 #~ msgstr "-- no files --"

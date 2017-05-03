@@ -86,8 +86,11 @@ Ext.application({
 						login: {
 							fn: function(data){
 								Config.user = data.user;
-								me.login.destroy();                            
-								me.showUI();                         
+								me.login.destroy();  
+								if (data.locale && Config.locale != data.locale) {
+									Config.locale = data.locale;
+								}
+								me.launch();
 							}
 						}
 					}            
