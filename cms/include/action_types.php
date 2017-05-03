@@ -295,7 +295,6 @@ try {
         $od->update(array(
             'alias'   => $rows->alias, 
             'describ' => $rows->describ, 
-            'fixed'   => 0, 
             'handler' => $rows->handler, 
             'plugin'  => $rows->plugin
         ));

@@ -66,6 +66,9 @@ class ObjectField implements \ArrayAccess {
 
     public function offsetGet($offset) {
         $offset = $this->fixOffset($offset);
+		if ($offset == 'describ') {
+			return Application::getInstance()->decodeLocaleString( $this->container[$offset] );
+		}
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
     
