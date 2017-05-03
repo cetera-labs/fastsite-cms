@@ -2,8 +2,7 @@ Ext.define('Cetera.main.Navigation', {
 
     extend:'Ext.tree.TreePanel',
 
-    id:'main_navigation',
-    title: Config.Lang.navigation,   
+    id:'main_navigation',  
     rootVisible:false,
     lines:false,
     autoScroll:true,

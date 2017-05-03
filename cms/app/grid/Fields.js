@@ -58,6 +58,9 @@ Ext.define('Cetera.grid.Fields', {
 					header: Config.Lang.description, 
 					dataIndex: 'describ', 
 					flex: 1,
+					renderer: function(value,m,rec) {
+						return rec.get('describDisplay');
+					},					
 					editor: {
 						allowBlank: false
 					}					

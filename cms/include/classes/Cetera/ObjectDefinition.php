@@ -184,14 +184,14 @@ class ObjectDefinition extends Base {
             
         $translator = Application::getInstance()->getTranslator();              
             
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'tag',        3,'".$translator->_('Сортировка')."',  1, 1, 0, 1, 1)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'name',       1,'".$translator->_('Заголовок')."',       99, 1, 0, 1, 2)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'alias',      1,'".$translator->_('Alias')."',     255, 1, 1, 1, 3)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat',        5,'".$translator->_('Дата создания')."', 1, 1, 1, 0, 5)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat_update', 5,'".$translator->_('Дата изменения')."', 1, 1, 1, 0, 6)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'".$translator->_('Автор')."',      -2, 1, 1, 0, 4,1003)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'".$translator->_('Свойства')."',               1, 1, 1, 0, 7)");
-        fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'idcat',      3,'".$translator->_('Раздел')."',         1, 1, 1, 0, 8)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'tag',        3,'Sort[ru=Сортировка]',  1, 1, 0, 1, 1)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'name',       1,'Title[ru=Заголовок]',       99, 1, 0, 1, 2)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'alias',      1,'Alias',     255, 1, 1, 1, 3)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat',        5,'Date create[ru=Дата создания]', 1, 1, 1, 0, 5)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat_update', 5,'Edit date[ru=Дата изменения]', 1, 1, 1, 0, 6)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'Author[ru=Автор]',      -2, 1, 1, 0, 4,1003)");
+    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]',               1, 1, 1, 0, 7)");
+        fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'idcat',      3,'Section[ru=Раздел]',         1, 1, 1, 0, 8)");
 
         return new self($id, $params['alias']);
       
@@ -398,7 +398,7 @@ class ObjectDefinition extends Base {
     
         $params = self::fix_params($params);
       
-    	  $oldalias = $this->getAlias();
+    	$oldalias = $this->getAlias();
         $alias = $params['alias'];
          
         if ($alias != $oldalias) { // Переименуем тип
@@ -432,13 +432,27 @@ class ObjectDefinition extends Base {
     
         	  fssql_query("ALTER TABLE $oldalias RENAME $alias");
         	  fssql_query("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
+			  
+			  $this->_table = $alias;
     	  } // if
     
         $sql = array();
-        if (isset($params['fixed'])) $sql[] = 'fixed='.(int)$params['fixed'];
-        if (isset($params['describ'])) $sql[] = 'describ="'.mysql_real_escape_string($params['describ']).'"';
-        if (isset($params['handler'])) $sql[] = 'handler="'.mysql_real_escape_string($params['handler']).'"';
-        if (isset($params['plugin'])) $sql[] = 'plugin="'.mysql_real_escape_string($params['plugin']).'"';
+        if (isset($params['fixed'])) {
+			$sql[] = 'fixed='.(int)$params['fixed'];
+			$this->_fixed = (int)$params['fixed'];
+		}
+        if (isset($params['describ'])) {
+			$sql[] = 'describ="'.mysql_real_escape_string($params['describ']).'"';
+			$this->_description = $params['describ'];
+		}
+        if (isset($params['handler'])) {
+			$sql[] = 'handler="'.mysql_real_escape_string($params['handler']).'"';
+			$this->_handler = $params['handler'];
+		}
+        if (isset($params['plugin'])) {
+			$sql[] = 'plugin="'.mysql_real_escape_string($params['plugin']).'"';
+			$this->_plugin = $params['plugin'];
+		}
         
         if (count($sql)) fssql_query('update types set '.implode(',',$sql).' where id='.$this->id);
         
@@ -482,6 +496,7 @@ class ObjectDefinition extends Base {
         fssql_query("INSERT INTO types_fields 
         		     (tag,  name,        type,       pseudo_type,       len,       describ,        shw,        required,       fixed,       id,       editor,       editor_user, default_value, page) 
           VALUES ($tag,'".$params['name']."',".$params['type'].",".$params['pseudo_type'].",".$params['len'].",'".$params['describ']."',".$params['shw'].",".$params['required'].",".$params['fixed'].",".$this->id.", ".(int)$params['editor'].",'".$params['editor_user']."','".mysql_real_escape_string($params['default_value'])."','".mysql_real_escape_string($params['page'])."')");
+		return mysql_insert_id();
     } 
        
 	/**
@@ -713,6 +728,24 @@ class ObjectDefinition extends Base {
     	  $r = fssql_query("select alias from types where id=$len");
     	}
     	if ($r)	return mysql_result($r,0);
-    }                
+    }
+	
+	public function getDescriptionDisplay()
+	{
+		return Application::getInstance()->decodeLocaleString($this->description);
+	}		
+
+	public function toArray()
+	{
+        return array(
+            'id'      => (int)$this->id,
+            'alias'   => $this->alias,
+            'describ' => $this->description,
+			'describDisplay' => $this->descriptionDisplay,
+            'fixed'   => (int)$this->fixed,
+            'plugin'  => $this->handler,
+            'handler' => $this->plugin
+        );		
+	}
 
 }

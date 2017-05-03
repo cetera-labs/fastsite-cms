@@ -137,6 +137,7 @@ Ext.application({
         }, this);    
     
         mainTree = Ext.create('Cetera.main.Tree', {
+			title: _('Структура'),
             border: false,
             anchor:'100% 100%'
         });    
@@ -176,6 +177,7 @@ Ext.application({
         }); 
 
 		navigation = Ext.create('Cetera.main.Navigation', {
+			title: _('Навигация'), 
             split: true,           
             border:true,
             region:'north',

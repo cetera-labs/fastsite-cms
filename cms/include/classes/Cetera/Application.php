@@ -407,6 +407,25 @@ class Application {
         return $this->_translator;
     }
 	
+	public function decodeLocaleString($string) {
+		if (preg_match_all('/([^\[]*)(\[(\w\w)=([^\]]*)\])+/U', $string, $m)) {
+			// default
+			$value = $m[1][0];
+
+			// search locale
+			foreach ($m[3] as $key => $locale) {
+				if ($this->getLocale() == $locale) {
+					$value = $m[4][$key];
+					break;
+				}
+			}			
+			return $value;
+		}
+		else {
+			return $string;
+		}
+	}	
+	
 	protected function loadVars()
 	{
         if (!$this->_config) {

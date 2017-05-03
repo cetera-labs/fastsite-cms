@@ -42,7 +42,7 @@
 <table name="types" engine="MyISAM">
     <field name="id" type="int(10)" null="0" auto_increment="1" />
     <field name="alias" type="varchar(100)" null="0" />
-    <field name="describ" type="varchar(128)" null="1" />
+    <field name="describ" type="varchar(1000)" null="1" />
     <field name="fixed" type="tinyint(4)" null="0" default="0" />
     <field name="plugin" type="varchar(32)" null="1" />
     <field name="handler" type="varchar(32)" null="1" />
@@ -60,7 +60,7 @@
     <field name="id" type="int(10)" null="0" default="0" />
     <field name="name" type="varchar(64)" null="0" />
     <field name="type" type="tinyint(4)" null="0" default="0" />
-    <field name="describ" type="varchar(255)" null="1" />
+    <field name="describ" type="varchar(1000)" null="1" />
     <field name="len" type="smallint(4)" null="1" />
     <field name="fixed" type="tinyint(4)" null="0" default="0" />
     <field name="required" type="tinyint(4)" null="0" default="0" />
@@ -299,14 +299,14 @@
     </key>	
 </table>
 
-<object name="materials" description="Материалы" fixed="1" handler="" plugin="">
-    <field name="tag" type="3" pseudo_type="0" description="Сортировка" length="1" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
-    <field name="name" type="1" pseudo_type="0" description="Заголовок" length="1024" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
+<object name="materials" description="Materials[ru=Материалы]" fixed="1" handler="" plugin="">
+    <field name="tag" type="3" pseudo_type="0" description="Sort[ru=Сортировка]" length="1" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="name" type="1" pseudo_type="0" description="Title[ru=Заголовок]" length="1024" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="alias" type="1" pseudo_type="0" description="Alias" length="255" show="1" required="1" fixed="1" editor="0" editor_user="" default_value="" />
-    <field name="dat" type="5" pseudo_type="0" description="Дата создания" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
-    <field name="dat_update" type="5" pseudo_type="0" description="Дата изменения" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
-    <field name="type" type="3" pseudo_type="0" description="Свойства" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
-    <field name="idcat" type="3" pseudo_type="0" description="Раздел" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="dat" type="5" pseudo_type="0" description="Date create[ru=Дата создания]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="dat_update" type="5" pseudo_type="0" description="Edit date[ru=Дата изменения]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="type" type="3" pseudo_type="0" description="Properties[ru=Свойства]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="idcat" type="3" pseudo_type="0" description="Section[ru=Раздел]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
 </object>
 
 </schema>

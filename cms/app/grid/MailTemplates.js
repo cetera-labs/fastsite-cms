@@ -15,9 +15,9 @@ Ext.define('Cetera.grid.MailTemplates', {
 
     columns: [
 		{text: "ID", width: 50, dataIndex: 'id'},
-		{text: "Акт.",  width: 60, dataIndex: 'active', renderer: function (value) { if (value) return 'Да'; else return 'Нет'; }},
+		{text: _("Акт."),  width: 60, dataIndex: 'active', renderer: function (value) { if (value) return _('Да'); else return _('Нет'); }},
 		{
-			text: "Событие",  
+			text: _("Событие"),  
 			flex: 1, 
 			dataIndex: 'event', 
 			renderer: function (value) { 
@@ -27,7 +27,7 @@ Ext.define('Cetera.grid.MailTemplates', {
 				return value;
 			}
 		},
-        {text: "Тема",  flex: 1, dataIndex: 'mail_subject'}
+        {text: _('Тема'),  flex: 1, dataIndex: 'mail_subject'}
     ],
 	
 	store: {

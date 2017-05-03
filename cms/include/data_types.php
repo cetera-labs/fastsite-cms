@@ -24,7 +24,8 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'pages') {
         $data[] = $f;
     }
     
-} elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
+} 
+elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
 	
 	if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
 	
@@ -43,6 +44,8 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'pages') {
    
    while ($f = mysql_fetch_assoc($r))
 	{
+		$f['id'] = (int)$f['id'];
+		
         if (($f['type']==FIELD_LINK || $f['type']==FIELD_LINKSET) && $f['len'] > 0) {
             try {
               $c = Catalog::getById($f['len']);
@@ -72,10 +75,13 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'pages') {
 			}	
 		}
 		
+		$f['describDisplay'] = $application->decodeLocaleString($f['describ']);
+
         $data[] = $f;
     }
     
-} else {
+} 
+else {
 
     if ($_REQUEST['empty']) $data[] = array(
         'id'      => 0,
@@ -92,6 +98,7 @@ if (isset($_GET['mode']) && $_GET['mode'] == 'pages') {
         $f['id'] = (int)$f['id'];
         $f['fixed'] = (int)$f['fixed'];
         if (!$f['describ']) $f['describ'] = $f['alias'];
+		$f['describDisplay'] = $application->decodeLocaleString($f['describ']);
         $data[] = $f;
     }
     

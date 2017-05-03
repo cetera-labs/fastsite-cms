@@ -135,10 +135,10 @@ class BackOffice {
             
                 $this->_modules['types'] = array(
                 			'position' => MENU_SERVICE,
-                      'name' 	   => $translator->_('Типы материалов'),
+                            'name' 	   => $translator->_('Типы материалов'),
                 			'icon'     => 'images/setup_small.gif',
 							'iconCls'  => 'x-fa fa-cogs',
-                			'class'    => 'Cetera.types.Panel'
+                			'class'    => 'Cetera.panel.MaterialTypes'
                 );
                 
                 $this->_modules['users'] = array(

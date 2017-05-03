@@ -6,9 +6,9 @@ TRUNCATE TABLE types;
 INSERT INTO `types` 
 (`id`, `alias`, `describ`, `fixed`, `plugin`, `handler`)
 VALUES
-(1,'materials', 'Материалы',1,'',''),
-(2,'users','Пользователи',1,'',''),
-(4,'dir_data','Разделы',1,'','');
+(1,'materials', 'Materials[ru=Материалы]',1,'',''),
+(2,'users',     'Users[ru=Пользователи]',1,'',''),
+(4,'dir_data',  'Sections[ru=Разделы]',1,'','');
 
 # --------------------------------------------------------
 
@@ -16,35 +16,35 @@ TRUNCATE TABLE types_fields;
 
 INSERT INTO `types_fields` 
 (`field_id`, `id`, `name`, `type`, `describ`, `len`, `fixed`, `required`, `shw`, `tag`, `pseudo_type`, `default_value`, `editor`, `editor_user`, `page`) VALUES
-(1, 1, 'name', 1,              'Заголовок',        1024, 1, 0, 1, 2,  0, NULL, 0, NULL, NULL),
+(1, 1, 'name', 1,              'Title[ru=Заголовок]',        1024, 1, 0, 1, 2,  0, NULL, 0, NULL, NULL),
 (8, 1, 'alias', 1,             'Alias',            255,  1, 1, 1, 3,  0, NULL, 0, NULL, NULL),
-(7, 1, 'autor', 6,             'Автор',            -1,   1, 1, 0, 4,  1003, NULL, 0, NULL, NULL),
-(4, 1, 'dat_update', 5,      'Дата редактирования',1,    1, 1, 0, 5,  0, NULL, 0, NULL, NULL),
-(3, 1, 'dat', 5,               'Дата создания',    1,    1, 1, 0, 6,  0, NULL, 0, NULL, NULL),
-(2, 1, 'idcat', 3,             'раздел',           1,    1, 1, 0, 7,  0, NULL, 0, NULL, NULL),
-(5, 1, 'tag', 3,               'Сортировка',       1,    1, 0, 1, 1,  0, 100, 0, NULL, NULL),
+(7, 1, 'autor', 6,             'Author[ru=Автор]',            -1,   1, 1, 0, 4,  1003, NULL, 0, NULL, NULL),
+(4, 1, 'dat_update', 5,        'Edit date[ru=Дата редактирования]',1,    1, 1, 0, 5,  0, NULL, 0, NULL, NULL),
+(3, 1, 'dat', 5,               'Creation date[ru=Дата создания]',    1,    1, 1, 0, 6,  0, NULL, 0, NULL, NULL),
+(2, 1, 'idcat', 3,             'Section[ru=Раздел]',           1,    1, 1, 0, 7,  0, NULL, 0, NULL, NULL),
+(5, 1, 'tag', 3,               'Sort[ru=Сортировка]',       1,    1, 0, 1, 1,  0, 100, 0, NULL, NULL),
 (6, 1, 'type', 3,              '',                 1,    1, 1, 0, 8,  0, NULL, 0, NULL, NULL),
 (9, 1, 'meta_title', 1,        'Meta title',       1000, 0, 0, 1, 13, 0, '', 1, '', 'SEO'),
 (10, 1, 'meta_keywords', 1,    'Meta keywords',    1000, 0, 0, 1, 14, 0, '', 16, '', 'SEO'),
 (11, 1, 'meta_description', 1, 'Meta description', 1000, 0, 0, 1, 15, 0, '', 16, '', 'SEO'),
-(12, 1, 'text', 2,             'Редактирование',   1,    0, 0, 1, 16, 0, '', 29, '', ''),
-(14, 1, 'short', 1,            'Вводная',          1000, 0, 0, 1, 18, 0, '', 33, '', NULL),
-(15, 1, 'pic', 4,              'Картинка',         1,    0, 0, 1, 19, 0, '', 32, '', NULL),
+(12, 1, 'text', 2,             'Edit[ru=Редактирование]',   1,    0, 0, 1, 16, 0, '', 29, '', ''),
+(14, 1, 'short', 1,            'Lead[ru=Вводная]',          1000, 0, 0, 1, 18, 0, '', 33, '', NULL),
+(15, 1, 'pic', 4,              'Picture[ru=Картинка]',         1,    0, 0, 1, 19, 0, '', 32, '', NULL),
 
-(21, 4, 'meta_title', 1, 'Meta title', 1000, 0, 0, 1, 11, 0, '', 1, '', 'SEO'),
-(22, 4, 'meta_keywords', 1, 'Meta keywords', 1000, 0, 0, 1, 12, 0, '', 1, '', 'SEO'),
+(21, 4, 'meta_title', 1,       'Meta title', 1000, 0, 0, 1, 11, 0, '', 1, '', 'SEO'),
+(22, 4, 'meta_keywords', 1,    'Meta keywords', 1000, 0, 0, 1, 12, 0, '', 1, '', 'SEO'),
 (23, 4, 'meta_description', 1, 'Meta description', 1000, 0, 0, 1, 13, 0, '', 16, '', 'SEO'),
-(24, 4, 'pic', 4, 'Картинка', 1, 0, 0, 1, 14, 0, '', 4, '', NULL),
+(24, 4, 'pic', 4,              'Picture[ru=Картинка]', 1, 0, 0, 1, 14, 0, '', 4, '', NULL),
 
-(30, 2, 'login', 1, 'Login', 255, 1, 1, 1, 30, 0, NULL, 0, NULL, NULL),
-(31, 2, 'name', 1, 'Имя', 255, 1, 0, 1, 31, 0, NULL, 0, NULL, NULL),
-(32, 2, 'password', 1, 'Password', 32, 1, 1, 1, 32, 0, NULL, 27, NULL, NULL),
-(33, 2, 'email', 1, 'E-mail', 255, 1, 0, 1, 33, 0, NULL, 28, NULL, NULL),
-(34, 2, 'describ', 1, 'Описание', 1000, 1, 0, 1, 34, 0, NULL, 15, NULL, NULL),
-(35, 2, 'date_reg', 5, 'Дата регистрации', 64, 1, 1, 0, 35, 0, NULL, 0, NULL, NULL),
-(36, 2, 'last_login', 5, 'Дата входа', 100, 1, 0, 0, 36, 0, NULL, 0, NULL, NULL),
-(37, 2, 'disabled', 9, 'Заблокирован', 1, 1, 0, 1, 37, 0, NULL, 0, NULL, NULL),
-(40, 2, 'phone', 1, 'Телефон', 100, 1, 0, 1, 40, 0, '', 1, '', NULL);
+(30, 2, 'login', 1,      'Login', 255, 1, 1, 1, 30, 0, NULL, 0, NULL, NULL),
+(31, 2, 'name', 1,       'Name[ru=Имя]', 255, 1, 0, 1, 31, 0, NULL, 0, NULL, NULL),
+(32, 2, 'password', 1,   'Password', 32, 1, 1, 1, 32, 0, NULL, 27, NULL, NULL),
+(33, 2, 'email', 1,      'E-mail', 255, 1, 0, 1, 33, 0, NULL, 28, NULL, NULL),
+(34, 2, 'describ', 1,    'Description[ru=Описание]', 1000, 1, 0, 1, 34, 0, NULL, 15, NULL, NULL),
+(35, 2, 'date_reg', 5,   'Registration date[ru=Дата регистрации]', 64, 1, 1, 0, 35, 0, NULL, 0, NULL, NULL),
+(36, 2, 'last_login', 5, 'Last login[ru=Дата входа]', 100, 1, 0, 0, 36, 0, NULL, 0, NULL, NULL),
+(37, 2, 'disabled', 9,   'Disabled[ru=Заблокирован]', 1, 1, 0, 1, 37, 0, NULL, 0, NULL, NULL),
+(40, 2, 'phone', 1,      'Phone[ru=Телефон]', 100, 1, 0, 1, 40, 0, '', 1, '', NULL);
 # --------------------------------------------------------
 
 DROP TABLE IF EXISTS `users`;

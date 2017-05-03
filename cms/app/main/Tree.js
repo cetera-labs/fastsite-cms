@@ -4,7 +4,6 @@ Ext.define('Cetera.main.Tree', {
     requires: 'Cetera.model.SiteTree',
     
     id:'main_tree',
-    title: Config.Lang.sites,
     rootVisible:false,
     lines:false,
     autoScroll:true,

@@ -1,3 +1,4 @@
+_('Почтовый шаблон');
 Ext.define('Cetera.window.MailTemplate', {
     extend:'Ext.Window',
 
@@ -11,7 +12,7 @@ Ext.define('Cetera.window.MailTemplate', {
 		pack: 'start',
 		align: 'stretch'
 	},
-	title: 'Почтовый шаблон',
+	title: _('Почтовый шаблон'),
 	lastFocus: null,
 	
     items: [
@@ -33,7 +34,7 @@ Ext.define('Cetera.window.MailTemplate', {
 			items: [
 				{
 					itemId: 'event',
-					fieldLabel: 'Событие',
+					fieldLabel: _('Событие'),
 					name: 'event',
 					xtype: 'combobox',
 					allowBlank: false,
@@ -53,12 +54,12 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: 'Активность',
+					fieldLabel: _('Активен'),
 					name: 'active',
 					xtype: 'checkboxfield'
 				},	
 				{
-					fieldLabel: 'Тип письма',
+					fieldLabel: _('Тип письма'),
 					name: 'content_type',
 					xtype: 'combobox',
 					allowBlank: false,
@@ -68,7 +69,7 @@ Ext.define('Cetera.window.MailTemplate', {
 					store: {
 						fields: ['id', 'name'],
 						data: [
-							{id: 'text/plain', name:"Текст"},
+							{id: 'text/plain', name:_("Текст")},
 							{id: 'text/html', name:"HTML"}
 						],
 						proxy: {
@@ -77,7 +78,7 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: 'От кого',
+					fieldLabel: _('От кого'),
 					name: 'mail_from_email',
 					listeners: {
 						focus: function(elm) {
@@ -86,7 +87,7 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: 'Кому',
+					fieldLabel: _('Кому'),
 					name: 'mail_to',
 					allowBlank: false,
 					listeners: {
@@ -96,7 +97,7 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: 'Тема',
+					fieldLabel: _('Тема'),
 					name: 'mail_subject',
 					allowBlank: false,
 					listeners: {
@@ -106,7 +107,7 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: 'Сообщение',
+					fieldLabel: _('Сообщение'),
 					name: 'mail_body',
 					allowBlank: false,
 					xtype: 'textarea',
@@ -121,7 +122,7 @@ Ext.define('Cetera.window.MailTemplate', {
 			
 			buttons: [
 				{
-					text    : 'OK',
+					text    : _('OK'),
 					handler : function() {
 						var f = this.up('form').getForm();
 						if (!f.isValid()) return;
@@ -130,7 +131,7 @@ Ext.define('Cetera.window.MailTemplate', {
 						this.up('window').destroy();
 					}
 				},{
-					text    : 'Отмена',
+					text    : _('Отмена'),
 					handler : function() {
 						this.up('window').destroy();
 					}
@@ -138,7 +139,7 @@ Ext.define('Cetera.window.MailTemplate', {
 			]
 		},
 		{
-			title: 'Параметры',
+			title: _('Параметры'),
 			itemId: 'parameters',
 			width: 300,
 			data: null,

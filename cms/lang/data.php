@@ -117,7 +117,6 @@ $data = array(
 			'total'    => $translator->_('Всего'),
 			'users'    => $translator->_('Пользователи'),
 
-			'sites' => $translator->_('Сайты'),
 			'createServer' => $translator->_('Создать сервер'),
 			'newCatalog' => $translator->_('Новый раздел'),
 			'newLink' => $translator->_('Создать ссылку на раздел'),
@@ -127,7 +126,6 @@ $data = array(
 			'copyMaterials' => $translator->_('Копировать материалы'),
 			'copyTo' => $translator->_('Копировать в'),
 			'confirmation' => $translator->_('Подтверждение'),
-			'navigation' => $translator->_('Навигация'),
 
 			'login' 		=> $translator->_('Вход'),
 			'logout' 	=> $translator->_('Выход'),

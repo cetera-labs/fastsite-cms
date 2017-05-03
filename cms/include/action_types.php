@@ -172,7 +172,7 @@ try {
           	
           	if ($_REQUEST['action'] == 'field_create') {
             
-                      $od->addField(array(
+                      $field_id= $od->addField(array(
                           'name' => $name, 
                           'type' => $type, 
                           'pseudo_type' => $pseudo_type, 
@@ -208,6 +208,22 @@ try {
             }
             
             $res['success'] = true; 
+			$res['rows'] = array(
+			  'id' => (int)$field_id,
+			  'name' => $name, 
+			  'type' => $type, 
+			  'pseudo_type' => $pseudo_type, 
+			  'describ' => $describ, 
+			  'describDisplay' => $application->decodeLocaleString($describ), 
+			  'len' => $len, 
+			  'shw' => $shw, 
+			  'required' => $required, 
+			  'fixed' => 0, 
+			  'editor' => $editor, 
+			  'editor_user' => $editor_user, 
+			  'default_value' => $default_value,
+			  'page' => $page,			
+			);
         }
     }
     
@@ -262,7 +278,7 @@ try {
     
     if ($_REQUEST['action'] == 'type_create') {
         $rows = json_decode($_POST['rows']);
-				$od = ObjectDefinition::create(array(
+		$od = ObjectDefinition::create(array(
             'alias'   => $rows->alias, 
             'describ' => $rows->describ, 
             'fixed'   => 0, 
@@ -270,14 +286,7 @@ try {
             'plugin'  => $rows->plugin
         ));        
         $res['success'] = true;
-        $res['rows'] = array(
-            'id'      => $od->id,
-            'alias'   => $rows->alias,
-            'describ' => $rows->describ,
-            'fixed'   => 0,
-            'plugin'  => $rows->handler,
-            'handler' => $rows->plugin
-        );
+        $res['rows'] = $od->toArray();
     }
     
     if ($_REQUEST['action'] == 'type_update') {
@@ -291,6 +300,7 @@ try {
             'plugin'  => $rows->plugin
         ));
         $res['success'] = true;
+		$res['rows'] = $od->toArray();
     }
     
     if ($_REQUEST['action'] == 'type_delete') {

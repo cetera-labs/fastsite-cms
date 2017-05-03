@@ -21,6 +21,8 @@ class Util {
      */         
     private function __construct() {}
     
+	
+	
     /**
     * Send a GET requst using cURL
     * @param string $url to request

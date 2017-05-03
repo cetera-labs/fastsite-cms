@@ -1,6 +1,7 @@
 Ext.require('Cetera.model.MaterialType');
+Ext.require('Cetera.model.ObjectField');
 
-Ext.define('Cetera.types.Panel', {
+Ext.define('Cetera.panel.MaterialTypes', {
 
     extend:'Ext.Panel',
 
@@ -56,7 +57,7 @@ Ext.define('Cetera.types.Panel', {
 			autoSync:   true,
 			batch:      false,
        			
-			fields: ['id','fixed','shw','required','name','describ','type','type_name','editor','editor_user','default_value','len','path','page','tag'],
+			model: 'Cetera.model.ObjectField',
 			
             proxy: {
                 type: 'ajax',
@@ -306,7 +307,10 @@ Ext.define('Cetera.types.Panel', {
                     width: 150, 
                     sortable: true, 
                     dataIndex: 'describ', 
-                    flex: 1,                
+                    flex: 1,        
+					renderer: function(value,m,rec) {
+						return rec.get('describDisplay');
+					},
                     editor: this.compact ? false : {}
                 },{
                     header: 'Plugin', 
