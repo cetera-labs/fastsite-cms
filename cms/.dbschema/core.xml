@@ -303,6 +303,7 @@
     <field name="tag" type="3" pseudo_type="0" description="Sort[ru=Сортировка]" length="1" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="name" type="1" pseudo_type="0" description="Title[ru=Заголовок]" length="1024" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="alias" type="1" pseudo_type="0" description="Alias" length="255" show="1" required="1" fixed="1" editor="0" editor_user="" default_value="" />
+	<field name="autor" type="6" pseudo_type="1003" description="Author[ru=Автор]" length="1" show="1" required="1" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="dat" type="5" pseudo_type="0" description="Date create[ru=Дата создания]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="dat_update" type="5" pseudo_type="0" description="Edit date[ru=Дата изменения]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />
     <field name="type" type="3" pseudo_type="0" description="Properties[ru=Свойства]" length="1" show="0" required="1" fixed="1" editor="0" editor_user="" default_value="" />

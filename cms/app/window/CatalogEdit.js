@@ -326,9 +326,9 @@ Ext.define('Cetera.window.CatalogEdit', {
                           checkchange: function (c, rowIndex, checked, eOpts) {
                               var record = this.permGrid.store.getAt( rowIndex );
                               if (checked) {
-                                  this.catalog.permissions[record.getId()].groups.push(this.selectedGroup)
+								  Ext.Array.push( this.catalog.permissions[record.getId()].groups, this.selectedGroup );
                               } else {
-                                  this.catalog.permissions[record.getId()].groups.remove(this.selectedGroup);
+								  Ext.Array.remove( this.catalog.permissions[record.getId()].groups, this.selectedGroup );
                               }
                           }, 
                           scope: this
