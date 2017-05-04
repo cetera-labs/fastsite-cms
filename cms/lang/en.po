@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 08:33+0300\n"
-"PO-Revision-Date: 2017-05-04 08:40+0300\n"
+"POT-Creation-Date: 2017-05-04 10:32+0300\n"
+"PO-Revision-Date: 2017-05-04 10:32+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -99,7 +99,7 @@ msgstr "user defined:"
 msgid "Ok"
 msgstr "Ok"
 
-#: app/fileselect/Panel.js:414 app/theme/Settings.js:75
+#: app/fileselect/Panel.js:414 app/panel/Menu.js:266 app/theme/Settings.js:75
 #: app/window/CatalogEdit.js:627 app/window/CatalogPrefs.js:24
 #: app/window/ImageCrop.js:27 app/window/MailTemplate.js:134
 #: include/editors/ckeditor/plugins/widgets/plugin.php:82
@@ -161,6 +161,51 @@ msgstr "Developer guide"
 #: app/main/Header.js:44
 msgid "Вопросы и ответы"
 msgstr "FAQ"
+
+#: app/panel/Menu.js:22 app/panel/Menu.js:289
+msgid "Добавить меню"
+msgstr "Add menu"
+
+#: app/panel/Menu.js:29 app/panel/Menu.js:376
+msgid "Удалить меню"
+msgstr "Delete menu"
+
+#: app/panel/Menu.js:36
+msgid "Переименовать"
+msgstr "Rename"
+
+#: app/panel/Menu.js:44
+msgid "Добавить ссылку"
+msgstr "Add URL"
+
+#: app/panel/Menu.js:52
+msgid "Изменить ссылку"
+msgstr "Edit URL"
+
+#: app/panel/Menu.js:60
+msgid "Удалить элемент"
+msgstr "Delete item"
+
+#: app/panel/Menu.js:301
+msgid "Добавить внешнюю ссылку"
+msgstr "Add URL"
+
+#: app/panel/Menu.js:316 app/panel/Menu.js:331 include/ui_material_edit.php:135
+#: lang/data.php:98
+msgid "Заголовок"
+msgstr "Title"
+
+#: app/panel/Menu.js:325
+msgid "Изменить внешнюю ссылку"
+msgstr "Edit URL"
+
+#: app/panel/Menu.js:346
+msgid "Переименовать меню"
+msgstr "Rename menu"
+
+#: app/panel/Menu.js:376 lang/data.php:191
+msgid "Вы уверены?"
+msgstr "Are you sure?"
 
 #: app/panel/Repair.js:34
 msgid "анализировать структуру БД"
@@ -1547,10 +1592,6 @@ msgstr "The material is blocked by another user."
 msgid "Дата создания"
 msgstr "Date of creation"
 
-#: include/ui_material_edit.php:135 lang/data.php:98
-msgid "Заголовок"
-msgstr "Title"
-
 #: include/ui_material_edit.php:253
 msgid "Состоит в"
 msgstr "Member of"
@@ -2143,10 +2184,6 @@ msgstr "Shut off"
 #: lang/data.php:189
 msgid "Включить"
 msgstr "Shut on"
-
-#: lang/data.php:191
-msgid "Вы уверены?"
-msgstr "Are you shure?"
 
 #: lang/data.php:194
 msgid "установлен"

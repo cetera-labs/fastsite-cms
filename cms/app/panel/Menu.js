@@ -19,21 +19,21 @@ Ext.define('Cetera.panel.Menu', {
                 scope: this
             },{
                 iconCls:'icon-plus',
-                text:'Добавить меню',
+                text: _('Добавить меню'),
                 handler: this.addMenu,
                 scope: this
             },{
                 id: 'tb_menu_delete',
                 iconCls:'icon-minus',
                 disabled: true,
-                text:'Удалить меню',
+                text: _('Удалить меню'),
                 handler: this.deleteMenu,
                 scope: this
             },{
                 id: 'tb_menu_rename',
                 iconCls:'icon-edit',
                 disabled: true,
-                text:'Переименовать',
+                text: _('Переименовать'),
                 handler: this.renameMenu,
                 scope: this
             },'-',	
@@ -41,7 +41,7 @@ Ext.define('Cetera.panel.Menu', {
                 itemId: 'add_item',
                 iconCls:'icon-new',
                 disabled: true,
-                text:'Добавить ссылку',
+                text: _('Добавить ссылку'),
                 handler: this.addItem,
                 scope: this
             },	
@@ -49,7 +49,7 @@ Ext.define('Cetera.panel.Menu', {
                 itemId: 'edit_item',
                 iconCls:'icon-edit',
                 disabled: true,
-                text:'Изменить ссылку',
+                text: _('Изменить ссылку'),
                 handler: this.editItem,
                 scope: this
             },				
@@ -57,7 +57,7 @@ Ext.define('Cetera.panel.Menu', {
                 id: 'tb_menu_deleteitem',
                 iconCls:'icon-delete',
                 disabled: true,
-                text:'Удалить элемент',
+                text: _('Удалить элемент'),
                 handler: this.deleteItem,
                 scope: this
             }
@@ -263,7 +263,7 @@ Ext.define('Cetera.panel.Menu', {
                     }
                 },{
                     xtype: 'button',
-                    text: 'Отмена',
+                    text: _('Отмена'),
                     handler: function() { this.up('form').win.close(); }
                 }
             ]
@@ -286,7 +286,7 @@ Ext.define('Cetera.panel.Menu', {
     
     addMenu: function() {
     
-        this.prompt('Добавить меню', '', '', function(values){
+        this.prompt(_('Добавить меню'), '', '', function(values){
             this.call({ 
                 action: 'create', 
                 name: values.name,
@@ -298,7 +298,7 @@ Ext.define('Cetera.panel.Menu', {
 	
     addItem: function() {
     
-        this.prompt('Добавить внешнюю ссылку', '', '', function(values){
+        this.prompt(_('Добавить внешнюю ссылку'), '', '', function(values){
 			
 			var c = Ext.create('Cetera.model.Menu', {
 				children: [],
@@ -313,7 +313,7 @@ Ext.define('Cetera.panel.Menu', {
 			n.insertChild(0, c);
 			this.saveMenu(n);
 			
-        },this,'Заголовок','URL');
+        },this,_('Заголовок'),'URL');
     
     },	
 	
@@ -322,13 +322,13 @@ Ext.define('Cetera.panel.Menu', {
 		var sn = this.menus.getSelectionModel().getLastSelected();
 		var data = sn.get('data').split('-');
 	
-        this.prompt('Изменить внешнюю ссылку', this.restoreDash(data[3]), this.restoreDash(data[1]), function(values){
+        this.prompt(_('Изменить внешнюю ссылку'), this.restoreDash(data[3]), this.restoreDash(data[1]), function(values){
 			
 			sn.set('name', values.name + ' ['+values.alias+']' );
 			sn.set('data', 'url-'+this.replaceDash(values.alias)+'-name-'+this.replaceDash(values.name) );			
 			this.saveMenu( this.getSelectedMenuNode() );
 			
-        },this,'Заголовок','URL');
+        },this,_('Заголовок'),'URL');
     
     },	
 	
@@ -343,7 +343,7 @@ Ext.define('Cetera.panel.Menu', {
     renameMenu: function() {
         var sn = this.menus.getSelectionModel().getLastSelected();
         if (!sn) return;    
-        this.prompt('Переименовать меню', sn.get('menu_name'), sn.get('menu_alias'), function(values){
+        this.prompt(_('Переименовать меню'), sn.get('menu_name'), sn.get('menu_alias'), function(values){
 
             this.call({ 
                 action: 'rename', 
@@ -373,7 +373,7 @@ Ext.define('Cetera.panel.Menu', {
     },
     
     deleteMenu: function() {
-        Ext.MessageBox.confirm('Удалить меню', 'Вы уверены?', function(btn) {
+        Ext.MessageBox.confirm(_('Удалить меню'), _('Вы уверены?'), function(btn) {
             if (btn == 'yes') {
                        
                 this.call({ 

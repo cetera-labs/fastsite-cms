@@ -22,7 +22,15 @@
 		    {{ widget.uniqueId|replace({'-':'_'}) }}_currentpage = page;
 			
 			var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
-			widget.innerHTML = '<div class="row column">{{ _('Подождите ...') }}</div>';
+			
+			var loading = '<div id="{{ widget.uniqueId }}-loading">{% block loading %}{{ _('Подождите ...') }}{% endblock %}</div>';
+			{% if widget.getParam('infinite') %}
+				widget.innerHTML += loading;
+				var p = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages");
+				for (var i = 0; i  < p.length; i++) p[i].parentNode.removeChild(p[i]);
+			{% else %}
+				widget.innerHTML = loading;
+			{% endif %}
 			
 			var request = new XMLHttpRequest();
 			var body = '{% for name,value in widget.params %}params[{{ name }}]={% if name == "page" %}' + page + '{% else %}{{ value|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
@@ -33,7 +41,8 @@
 
 					// Проверяем успешность GET-запроса
 					if (request.status === 200) {
-						widget.innerHTML = request.responseText;
+						var ldr = document.querySelector("#{{ widget.uniqueId }}-loading");
+						ldr.outerHTML = request.responseText;
 						{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
 						jQuery(document).foundation();
 					} else {

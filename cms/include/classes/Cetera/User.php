@@ -445,7 +445,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         unset($this->fields['login']);
         
         // запретить смену пароля админу
-        if ($this->id == 1 && Application::getInstance()->getUser()->id != 1)
+        if ($this->id == 1 && Application::getInstance()->getUser()->id > 0 && Application::getInstance()->getUser()->id != 1)
             unset($this->fields['password']);
         
         $values .= $this->saveDynamicFields(null, $hidden);

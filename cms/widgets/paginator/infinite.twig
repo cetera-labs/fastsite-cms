@@ -1,0 +1,7 @@
+{% if widget.hasPages() and widget.getIterator().getCurrentPageNumber() < widget.getIterator().getPageCount() %}
+
+<div class="row column text-center">
+	<a class="button" href="{{ widget.getUrl(widget.getIterator().getCurrentPageNumber()+1) }}" data-page="{{ widget.getIterator().getCurrentPageNumber()+1 }}">{{ _('Показать еще') }}</a>
+</div>
+
+{% endif %}
