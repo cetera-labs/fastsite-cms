@@ -24,7 +24,7 @@ Ext.define('Cetera.theme.Add', {
             comp: this,
             tpl  : Ext.create('Ext.XTemplate',
 					'<div class="panel x-panel-body-default" style="text-align: center;background-color: #efffef; margin: 5px">',                     
-						'<a href="https://ceteralabs.ru/webdevelopment/website/order-design/" target="_blank" style="font-weight: bold;position: relative; color:#000; padding: 5px 10px; margin-top: 20px" class="x-btn x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon">Заказ индивидуального дизайна</a>',
+						'<a href="https://cetera.ru/webdevelopment/website/order-design/" target="_blank" style="font-weight: bold;position: relative; color:#000; padding: 5px 10px; margin-top: 20px" class="x-btn x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon">'+_('Заказ индивидуального дизайна')+'</a>',
 					'</div>',
 				'<br clear="all"><h1>'+_('Темы от Cetera')+'</h1>',					
                 '<tpl for=".">',

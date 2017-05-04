@@ -361,7 +361,7 @@ Ext.create('Ext.Button', {
                 <?php if ($new_version) {?>
                 
                 <div class="new_version">
-                    <p><?=$translator->_('Обнаружена новая версия ');?><?=APP_NAME?> <b>v<?=$info['version']?></b></p>
+                    <p><?=$translator->_('Обнаружена новая версия');?> <?=APP_NAME?> <b>v<?=$info['version']?></b></p>
                     <p><?=$info['describ']?></p>
                     <?if ($can_auto) {?>
                     <div id="upgrade"></div><div id="log"></div>

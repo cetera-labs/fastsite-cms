@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 08:02+0300\n"
-"PO-Revision-Date: 2017-05-04 08:06+0300\n"
+"POT-Creation-Date: 2017-05-04 08:33+0300\n"
+"PO-Revision-Date: 2017-05-04 08:40+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -191,6 +191,18 @@ msgstr "Wait..."
 #: app/panel/Repair.js:92
 msgid "Ошибок не обнаружено."
 msgstr "No errors found."
+
+#: app/plugin/Add.js:27
+msgid "Открыть счет в банке \"Точка\""
+msgstr "Open a Bank \"Tochka\" account"
+
+#: app/plugin/Add.js:32
+msgid "Заказать модуль"
+msgstr "Order personal module"
+
+#: app/theme/Add.js:27
+msgid "Заказ индивидуального дизайна"
+msgstr "Order your own design"
 
 #: app/theme/Add.js:29
 msgid "Темы от Cetera"
@@ -617,7 +629,7 @@ msgstr "Error"
 
 #: include/action_fix.php:155
 msgid "Структура разделов"
-msgstr ""
+msgstr "Section structure"
 
 #: include/action_groups.php:43
 msgid "Группа с таким именем уже существует."
@@ -639,7 +651,7 @@ msgstr "Invalid password"
 
 #: include/action_themes.php:53
 msgid "Не указан ключ разработчика"
-msgstr ""
+msgstr "No developer key found"
 
 #: include/action_types.php:20
 msgid "Неизвестная ошибка"
@@ -655,15 +667,15 @@ msgstr "Keywords"
 
 #: include/action_upgrade.php:41
 msgid "Проверка совместимости"
-msgstr ""
+msgstr "Chicking compability"
 
 #: include/action_upgrade.php:71 upgrade.php:95 upgrade.php:198
 msgid "Не удалось распаковать архив"
-msgstr ""
+msgstr "Can't open archive"
 
 #: include/action_upgrade.php:76 upgrade.php:104 upgrade.php:205
 msgid "Не удалось открыть архив"
-msgstr ""
+msgstr "Can't extract archive"
 
 #: include/classes/Cetera/Application.php:914
 msgid "Все"
@@ -1654,8 +1666,8 @@ msgid "Информация о системе"
 msgstr "About"
 
 #: include/welcome_new.php:364
-msgid "Обнаружена новая версия "
-msgstr "A new version is detected"
+msgid "Обнаружена новая версия"
+msgstr "The new version detected"
 
 #: include/welcome_new.php:369
 msgid ""
@@ -2420,6 +2432,9 @@ msgstr "Register"
 #: widgets/user.register/default.twig:43
 msgid "Вы были успешно зарегистрированы!"
 msgstr "You have been successfully registered!"
+
+#~ msgid "Обнаружена новая версия "
+#~ msgstr "A new version is detected"
 
 #~ msgid "Дата изменения"
 #~ msgstr "Date of change"
