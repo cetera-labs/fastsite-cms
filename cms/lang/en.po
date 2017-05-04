@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 13:22+0300\n"
-"PO-Revision-Date: 2017-05-03 13:26+0300\n"
+"POT-Creation-Date: 2017-05-04 08:02+0300\n"
+"PO-Revision-Date: 2017-05-04 08:06+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,11 +16,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: app.js:140 include/setup.php:103
+#: app.js:143 include/setup.php:103
 msgid "Структура"
 msgstr "Structure"
 
-#: app.js:180
+#: app.js:183
 msgid "Навигация"
 msgstr "Navigation"
 
@@ -50,7 +50,7 @@ msgstr "Area"
 
 #: app/fileselect/Panel.js:25 lang/data.php:162
 msgid "Загрузить файл"
-msgstr "Load file..."
+msgstr "Upload file..."
 
 #: app/fileselect/Panel.js:45 lang/data.php:166
 msgid "Создать каталог"
@@ -62,7 +62,7 @@ msgstr "Delete folder"
 
 #: app/fileselect/Panel.js:61 lang/data.php:168
 msgid "Удалить файл"
-msgstr "Delete file?"
+msgstr "Delete file"
 
 #: app/fileselect/Panel.js:78 app/window/CatalogEdit.js:489
 #: include/ui_cat_props.php:146 include/ui_eventlog.php:64
@@ -520,7 +520,7 @@ msgstr "Widget is not found"
 msgid "Модуль"
 msgstr "Module"
 
-#: include/action_check.php:39
+#: include/action_check.php:39 include/action_fix.php:32
 msgid "Таблица"
 msgstr "Table"
 
@@ -611,6 +611,14 @@ msgstr "Directory \"% s\" is not accessible for writing"
 msgid "Не удалось удалить файл."
 msgstr "File delete failed."
 
+#: include/action_fix.php:50 include/action_upgrade.php:51 lang/data.php:179
+msgid "Ошибка"
+msgstr "Error"
+
+#: include/action_fix.php:155
+msgid "Структура разделов"
+msgstr ""
+
 #: include/action_groups.php:43
 msgid "Группа с таким именем уже существует."
 msgstr "User group already exists."
@@ -644,6 +652,18 @@ msgstr "Files"
 #: include/action_types.php:148 include/field_editors.php:176
 msgid "Ключевые слова"
 msgstr "Keywords"
+
+#: include/action_upgrade.php:41
+msgid "Проверка совместимости"
+msgstr ""
+
+#: include/action_upgrade.php:71 upgrade.php:95 upgrade.php:198
+msgid "Не удалось распаковать архив"
+msgstr ""
+
+#: include/action_upgrade.php:76 upgrade.php:104 upgrade.php:205
+msgid "Не удалось открыть архив"
+msgstr ""
 
 #: include/classes/Cetera/Application.php:914
 msgid "Все"
@@ -2088,10 +2108,6 @@ msgstr "Recent"
 msgid "Сервер"
 msgstr "Server"
 
-#: lang/data.php:179
-msgid "Ошибка"
-msgstr "Error"
-
 #: lang/data.php:180
 msgid "Подробнее"
 msgstr "More information"
@@ -2210,6 +2226,60 @@ msgstr "Welcome to the installation wizard"
 #: setup.php:338
 msgid "Подождите..."
 msgstr "Wait ..."
+
+#: upgrade.php:26
+msgid "Загрузка обновления"
+msgstr "Downloading upgrade"
+
+#: upgrade.php:27
+msgid "Установка"
+msgstr "Installing"
+
+#: upgrade.php:28
+msgid "Проверка доп. библиотек"
+msgstr "Checking libraries"
+
+#: upgrade.php:29
+msgid "Установка библиотек"
+msgstr "Installing libraries"
+
+#: upgrade.php:30 upgrade.php:31
+msgid "Проверка БД"
+msgstr "Checking Database"
+
+#: upgrade.php:49
+#, php-format
+msgid "Требуется PHP %s или выше. Обновление невозможно."
+msgstr "PHP %s or higher required. Unable to continue."
+
+#: upgrade.php:74 upgrade.php:173
+#, php-format
+msgid "Не удалось получить файл"
+msgstr "File download error"
+
+#: upgrade.php:112 upgrade.php:212
+#, php-format
+msgid "Ошибка обновления"
+msgstr "Upgrade error"
+
+#: upgrade.php:150
+#, php-format
+msgid "Отмена. Необходимо обновление доп. библиотек."
+msgstr "Libraries upgrade required. Cancelling."
+
+#: upgrade.php:152
+#, php-format
+msgid "Нуждается в обновлении"
+msgstr "Must be upgraded"
+
+#: upgrade.php:154
+msgid "Загрузка доп. библиотек"
+msgstr "Downloading libraries"
+
+#: upgrade.php:220
+#, php-format
+msgid "Не требуется."
+msgstr "Correct."
 
 #: widgets/_common/page404.twig:2
 msgid "Ошибка 404: страница не найдена"

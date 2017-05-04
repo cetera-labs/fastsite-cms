@@ -14,6 +14,8 @@ include('common_bo.php');
 
 if (!$noauth && !$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
 
+$t = $application->getTranslator();
+
 $res = array(
     'success' => false,
     'message' => ''
@@ -36,7 +38,7 @@ try {
         $res['next']    = array(
             'action' => 'upgrade',
             'url'    => '/'.UPGRADE_SCRIPT,
-            'text'   => 'Проверка совместимости'
+            'text'   => $t->_('Проверка совместимости'),
         );
         
         $res['message'] = '<span style="color:green;">OK</span><br>';          
@@ -46,7 +48,7 @@ try {
     
 } catch (Exception $e) {
   
-     $res['message'] = '<span style="color:red;">Ошибка</span><br>';
+     $res['message'] = '<span style="color:red;">'.$t->_('Ошибка').'</span><br>';
      if ($e->getMessage()) $res['message'] .= '<span style="color:red; font-size: 70%">'.$e->getMessage().'</span><br>';  
      
 }
@@ -66,10 +68,10 @@ function load_upgrade_script() {
     if($zip->open(WWWROOT.UPGRADE_FILE)===TRUE) { 
     
     			if(!$zip->extractTo(WWWROOT))
-              throw new Exception('Не удалось распаковать архив '.WWWROOT.UPGRADE_FILE);   
+              throw new Exception( $t->_('Не удалось распаковать архив').' '.WWWROOT.UPGRADE_FILE);   
               
     			$zip->close(); 
           unlink(WWWROOT.UPGRADE_FILE); 
           
-    } else throw new Exception('Не удалось открыть архив '.WWWROOT.UPGRADE_FILE);   
+    } else throw new Exception($t->_('Не удалось открыть архив').' '.WWWROOT.UPGRADE_FILE);   
 }

@@ -236,7 +236,7 @@ class ObjectRenderer {
         $this->fields_def = array();   
         
         foreach ($fields as $id => $f) {         
-    
+
             if (!$f['shw'] &&  $f['name'] != 'alias') continue;
     
             $this->fields_def[$id] = $f;
