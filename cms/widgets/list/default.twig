@@ -39,5 +39,6 @@
 {% endblock %}
 
 {% block script %}
-	{% include "@widget/_common/ajax-paginator.twig" %}
+	{% set loading %}{% block loading %}{{ _('Подождите ...') }}{% endblock %}{% endset %}
+	{% include "@widget/_common/ajax-paginator.twig" with { loading: loading } %}
 {% endblock %}

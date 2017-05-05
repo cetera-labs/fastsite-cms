@@ -23,7 +23,8 @@
 			
 			var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
 			
-			var loading = '<div id="{{ widget.uniqueId }}-loading">{% block loading %}{{ _('Подождите ...') }}{% endblock %}</div>';
+			
+			var loading = '<div id="{{ widget.uniqueId }}-loading">{{ loading|replace({"\n":'',"\r":'',"'","\'"})|raw }}</div>';
 			{% if widget.getParam('infinite') %}
 				widget.innerHTML += loading;
 				var p = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages");

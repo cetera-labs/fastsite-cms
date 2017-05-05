@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 10:32+0300\n"
-"PO-Revision-Date: 2017-05-04 10:32+0300\n"
+"POT-Creation-Date: 2017-05-05 08:36+0300\n"
+"PO-Revision-Date: 2017-05-05 08:37+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -230,6 +230,7 @@ msgstr "Correct the errors found"
 #: app/panel/Repair.js:89 app/panel/Repair.js:105 app/window/CatalogEdit.js:700
 #: include/ui_cat_props.php:734 include/ui_groups.php:239
 #: include/ui_material_edit.php:501 lang/data.php:143 lang/data.php:208
+#: widgets/list/default.twig:42
 msgid "Подождите ..."
 msgstr "Wait..."
 
@@ -315,35 +316,39 @@ msgstr "OK"
 msgid "Шаблон"
 msgstr "Template"
 
-#: app/widget/List.js:32
+#: app/widget/List.js:44
 msgid "Возрастанию"
 msgstr "Ascending"
 
-#: app/widget/List.js:33
+#: app/widget/List.js:45
 msgid "Убыванию"
 msgstr "Descending"
 
-#: app/widget/List.js:44
+#: app/widget/List.js:59
 msgid "Ссылка на раздел"
 msgstr "Section link"
 
-#: app/widget/List.js:49
+#: app/widget/List.js:65
 msgid "Страницы"
 msgstr "Pages"
 
-#: app/widget/List.js:53
+#: app/widget/List.js:74
 msgid "показать навигацию"
 msgstr "page navigation"
 
-#: app/widget/List.js:62
+#: app/widget/List.js:78
+msgid "AJAX навигация"
+msgstr "AJAX mode"
+
+#: app/widget/List.js:83
+msgid "бесконечная лента"
+msgstr "infinite loading"
+
+#: app/widget/List.js:98
 msgid "query параметр"
 msgstr "query parameter"
 
-#: app/widget/List.js:72
-msgid "AJAX навигация"
-msgstr "Ajax mode"
-
-#: app/widget/List.js:80
+#: app/widget/List.js:103
 msgid "ссылка на страницу"
 msgstr "page URL"
 
@@ -2095,7 +2100,7 @@ msgstr "Down"
 
 #: lang/data.php:151
 msgid "Изменить"
-msgstr "Change"
+msgstr "Edit"
 
 #: lang/data.php:153
 msgid "Удаление"
@@ -2147,7 +2152,7 @@ msgstr "Folders"
 
 #: lang/data.php:172
 msgid "нет файлов"
-msgstr "No files"
+msgstr "no files"
 
 #: lang/data.php:175
 msgid "Размер"
@@ -2179,7 +2184,7 @@ msgstr "Image will be deleted"
 
 #: lang/data.php:188
 msgid "Отключить"
-msgstr "Shut off"
+msgstr "Disable"
 
 #: lang/data.php:189
 msgid "Включить"
@@ -2413,6 +2418,10 @@ msgstr "You are on page"
 #: widgets/paginator/default.twig:25 widgets/paginator/default.twig:27
 msgid "Следующая"
 msgstr "Next"
+
+#: widgets/paginator/infinite.twig:4
+msgid "Показать еще"
+msgstr ""
 
 #: widgets/search/default.twig:29
 msgid "Поиск не дал результатов"
