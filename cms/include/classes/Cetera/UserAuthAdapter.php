@@ -97,7 +97,8 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
         else
         {
 			$user = null;
-            if ($this->_username) $user = User::getByLogin($this->_username);            
+            if ($this->_username) $user = User::getByLogin($this->_username);  
+
 			if (!$user && $this->_email) $user = User::getByEmail($this->_email);
 
             if (!$user || !$user->isEnabled() || (!$user->allowBackOffice() && $this->_backoffice))
@@ -106,9 +107,7 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
                 return $this->_authenticateCreateAuthResult();
             }
             
-            $crypted_pass = md5($this->_password);
-            
-          	if ($crypted_pass != $user->password)
+          	if (!$user->checkPassword($this->_password))
             {
                   $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
                   return $this->_authenticateCreateAuthResult(); 

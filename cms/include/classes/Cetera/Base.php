@@ -51,7 +51,7 @@ abstract class Base {
      */   	 
     protected function setFields($fields) 
     {
-    	  foreach ($fields as $name => $value) {
+    	foreach ($fields as $name => $value) {
             $property = '_' . $name;
             if (property_exists($this, $property)) $this->$property = $value;
         }

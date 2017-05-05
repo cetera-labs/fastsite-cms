@@ -96,6 +96,14 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		
 	}
 	
+    public static function fetch($data, $type = 0, $table = null)
+    {
+		if ( is_array($data) && isset($data['id']) && isset($data['password']) ) {
+			$data['__password_crypted'] = true;
+		}
+		return parent::fetch($data, $type, $table);
+	}		
+	
     /**
      * Возвращает пользователя по ID
      *   
@@ -430,6 +438,40 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
        $application = Application::getInstance();
        $application->eventLog(EVENT_USER_PROP, $str);		
     }
+	
+    public function setFields($fields)
+    {
+		if (!isset($fields['__password_crypted']) && isset($fields['password'])) {
+			if ($fields['password'] == PASSWORD_NOT_CHANGED) {
+				unset($fields['password']);
+			}			
+			elseif ($this->id == 1 && Application::getInstance()->getUser()->id > 0 && Application::getInstance()->getUser()->id != 1) {
+				// запретить смену пароля админу
+				unset($fields['password']);
+			}
+			else {
+				$this->setPassword($fields['password']);
+				$fields['password'] = $this->password;
+			}
+		}
+		
+		if (isset($fields['__password_crypted'])) {
+			unset($fields['__password_crypted']);
+		}
+		
+        return parent::setFields($fields, $from_db);    
+    } 	
+	
+    public function setPassword($value)
+    {   
+		$this->fields['password'] = md5($value);
+		return $this;
+	}	
+	
+    public function checkPassword($value)
+    {   
+		return $this->password == md5($value);
+	}	
     
     public function save($hidden = true)
     {       
@@ -443,10 +485,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         $values = 'login="'.mysql_escape_string($this->fields['login']).'"';
         $login = $this->fields['login'];
         unset($this->fields['login']);
-        
-        // запретить смену пароля админу
-        if ($this->id == 1 && Application::getInstance()->getUser()->id > 0 && Application::getInstance()->getUser()->id != 1)
-            unset($this->fields['password']);
         
         $values .= $this->saveDynamicFields(null, $hidden);
    

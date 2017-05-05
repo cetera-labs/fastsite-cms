@@ -862,27 +862,17 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				{
         	          			
         	    }
-				elseif ($type == FIELD_HLINK)
-				{
+				elseif ($type == FIELD_HLINK) {
         	        $values .= ",`".$name."`='".(int)process_hlink($this->fields[$name])."'";         
         	    } 
-				elseif ($type == FIELD_DATETIME)
-				{
+				elseif ($type == FIELD_DATETIME) {
         	        if (!$this->fields[$name])
         		        $values .= ",`".$name."`=NULL";
         	    	    else $values .= ",`".$name."`='".$this->fields[$name]."'"; 
         		
         	    } 
-				else 
-				{ 
-        	    
-        	        if ($field['editor'] == EDITOR_TEXT_PASSWORD) 
-				    {
-                        if ($this->fields[$name] == PASSWORD_NOT_CHANGED) continue;
-                        $this->fields[$name] = md5($this->fields[$name]);
-                    }      		    
+				else { 
         	        $values .= ',`'.$name.'`="'.mysql_escape_string($this->fields[$name]).'"'; 
-        		
         	    }
            }
         }
