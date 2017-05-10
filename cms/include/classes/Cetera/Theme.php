@@ -319,6 +319,21 @@ class Theme implements \ArrayAccess  {
 			$settings
 		);
 		$dump->start($this->getPath().'/'.THEME_DB_DATA);
+		
+		// записываем зависимости плагинов
+		$requires = array();
+		foreach (Plugin::enum() as $p) {
+			if ($p->isEnabled()) {
+				$requires[] = array(
+					'plugin'  => $p->name,
+					'version' => $p->version,
+				);
+			}
+		}
+		
+		$info = $this->loadInfo();
+		$info['requires'] = $requires;
+		$this->saveInfo($info);
 	}
 	
 	public function rename($name)

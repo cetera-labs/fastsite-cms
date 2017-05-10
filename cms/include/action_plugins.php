@@ -21,8 +21,8 @@ $res = array(
     'errors' => array()
 );
 
-$action = $_POST['action'];
-$plugin = $_POST['plugin'];
+$action = $_REQUEST['action'];
+$plugin = $_REQUEST['plugin'];
 
 if ($action == 'delete_data')
 {
