@@ -570,7 +570,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		return $u;
 	}
 	
-	public function recoverPassword($mailFrom = 'no-reply@cetera.ru')
+	public function recoverPassword($mailFrom = 'no-reply@cetera.ru', $fromName = false)
 	{
 		$a = Application::getInstance();
 		$t = $a->getTranslator();
@@ -592,6 +592,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			$mail->CharSet = 'utf-8';
 			$mail->ContentType = 'text/plain';
 			$mail->From = $mailFrom;
+			$mail->FromName = $fromName;
 			$mail->Subject = $t->_('Ваш пароль на сайт ').$a->getServer()->name;
 			$mail->Body = $t->_('Ваш новый пароль: ').$pass;
 			$mail->Send();				

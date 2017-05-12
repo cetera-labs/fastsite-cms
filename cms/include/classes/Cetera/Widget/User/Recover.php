@@ -42,8 +42,13 @@ class Recover extends \Cetera\Widget\Templateable {
 			else
 			{
 				try {
-					$u->recoverPassword($this->getParam('from_email'));			
-					$this->success = $this->t->_('Новый пароль выслан вам по электронной почте');
+					$u->recoverPassword($this->getParam('from_email'), $this->getParam('from_name'));			
+					if ($this->getParam('success_message')) {
+						$this->success = $this->getParam('success_message');
+					}
+					else {
+						$this->success = $this->t->_('Новый пароль выслан вам по электронной почте');
+					}
 					$this->post['value'] = '';					
 				}
 				catch (\Exception $e) {

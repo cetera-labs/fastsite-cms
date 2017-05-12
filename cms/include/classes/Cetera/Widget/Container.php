@@ -134,7 +134,7 @@ class Container extends Templateable {
 	 */		
 	public function getXml()
     {
-		$res  = '<widgetcontainer widgetAlias="'.$this->widgetAlias.'" widgetTitle="'.$this->widgetTitle.'" widgetDisabled="'.(int)$this->widgetDisabled.'" widgetProtected="'.(int)$this->widgetProtected.'">'."\n\n";
+		$res  = '<widgetcontainer widgetAlias="'.htmlspecialchars($this->widgetAlias).'" widgetTitle="'.htmlspecialchars($this->widgetTitle).'" widgetDisabled="'.(int)$this->widgetDisabled.'" widgetProtected="'.(int)$this->widgetProtected.'">'."\n\n";
 		foreach ($this->getChildren() as $w) {
 			$res .= $w->getXml()."\n";
 		}

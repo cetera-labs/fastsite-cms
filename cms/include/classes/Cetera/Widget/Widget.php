@@ -236,7 +236,7 @@ class Widget {
 	 */		
 	public function getXml()
     {
-		$res  = '<widget widgetTitle="'.$this->widgetTitle.'" widgetName="'.$this->widgetName.'">'."\n";
+		$res  = '<widget widgetTitle="'.htmlspecialchars($this->widgetTitle).'" widgetName="'.htmlspecialchars($this->widgetName).'">'."\n";
 		$res .= "<![CDATA[\n".serialize($this->getParams())."\n]]>\n";
 		$res .= '</widget>'."\n";
 		return $res;

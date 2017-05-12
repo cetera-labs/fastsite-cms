@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-05 08:36+0300\n"
-"PO-Revision-Date: 2017-05-05 08:40+0300\n"
+"PO-Revision-Date: 2017-05-11 09:25+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -2421,7 +2421,7 @@ msgstr "Next"
 
 #: widgets/paginator/infinite.twig:4
 msgid "Показать еще"
-msgstr ""
+msgstr "Show more"
 
 #: widgets/search/default.twig:29
 msgid "Поиск не дал результатов"
