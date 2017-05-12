@@ -18,6 +18,8 @@ class Recover extends \Cetera\Widget\Templateable {
 		'unique_email' => false,
 	    'template'     => 'default.twig',
 		'from_email'   => 'no-reply@cetera.ru',
+		'from_name'    => false,
+		'ajax'         => false,
     ); 
 
 	protected function init()
