@@ -44,10 +44,6 @@ Ext.define('Cetera.main.Header', {
 				text: _('Вопросы и ответы'),
 				href: 'http://www.fastsite.ru/help/faq/',
 				hrefTarget: '_blank'
-			},{
-				text:'API',
-				href: 'https://cetera.ru/forclients/api/',
-				hrefTarget: '_blank'
 			}]
 		},
 		{ xtype: 'tbseparator' },

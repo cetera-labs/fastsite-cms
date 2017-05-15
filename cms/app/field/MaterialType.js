@@ -5,7 +5,7 @@ Ext.define('Cetera.field.MaterialType', {
     alias: 'widget.materialtypefield',
     
     valueField: 'id',
-    displayField: 'describ',
+    displayField: 'describDisplay',
 								
     triggerAction: 'all',
     editable: false,
@@ -18,7 +18,7 @@ Ext.define('Cetera.field.MaterialType', {
         Ext.apply(this, {
 			
 			store: new Ext.data.JsonStore({
-				fields: ['id', 'describ'],
+				fields: ['id', 'describ', 'describDisplay'],
                 autoLoad: true,
                 proxy: {
                     type: 'ajax',

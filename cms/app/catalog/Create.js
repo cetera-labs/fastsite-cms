@@ -1,6 +1,10 @@
 Ext.define('Cetera.catalog.Create', {
 
     extend:'Ext.FormPanel',
+	
+	requires: [
+		'Cetera.field.MaterialType'
+	],	
     
     labelAlign: 'right',
         fieldDefaults : { 
@@ -28,30 +32,15 @@ Ext.define('Cetera.catalog.Create', {
                     allowBlank:false,
                     regex: /^[\.\-\_A-Z0-9]+$/i,
                 },
-                {
-                    xtype: 'combo',
-                    fieldLabel: Config.Lang.materialType,
-                    valueField: 'id',
-                    displayField: 'describ',
-                    name: 'typ',
-                    store: new Ext.data.JsonStore({
-                        fields: ['id', 'describ'],
-                        autoLoad: true,  
-                        proxy: {
-                            type: 'ajax',
-                            url: 'include/data_types.php?linkable=1&empty=1',
-                            reader: {
-                                type: 'json',
-                                root: 'rows'
-                            }
-                        }
-                    }),
-                    triggerAction: 'all',
-                    selectOnFocus:true,
-                    editable: false,
-                    allowBlank: false,
-                    value: this.materialsType                
-                }
+				{
+					xtype: 'materialtypefield',
+					fieldLabel: _('Тип материалов'),
+					name: 'typ',
+					empty: 1,
+					linkable: 1,
+					allowBlank: false,
+					value: this.materialsType  
+				}
             ],
             
             buttons: [
