@@ -299,17 +299,40 @@ class Theme implements \ArrayAccess  {
 			'dir_data', 'dir_structure', 'menus', 'types', 'types_fields'
 		);
 		
+		$schema = new Schema();
+		
+		// записываем зависимости плагинов
+		$requires = array();
+		foreach (Plugin::enum() as $p) {
+			if ($p->isEnabled()) {
+				$requires[] = array(
+					'plugin'  => $p->name,
+					'version' => $p->version,
+				);
+				
+				$res = $schema->parseSchema('plugin_'.$p->name);
+				foreach ($res['tables'] as $t) {
+					$tables[] = $t['name'];
+				}
+			}
+		}
+		
+		$info = $this->loadInfo();
+		$info['requires'] = $requires;
+		$this->saveInfo($info);		
+		
+		// сохраняем таблицы БД
 		$types = $a->getDbConnection()->fetchAll('SELECT * FROM types WHERE alias NOT IN ("users","dir_data")');
 		foreach ($types as $t) $tables[] = $t['alias'];
 		
 		$settings = array(
-			'include-tables' => array_unique($tables),
-            'add-drop-table' => true,
+			'include-tables'     => array_unique($tables),
+            'add-drop-table'     => true,
             'single-transaction' => false,
-            'lock-tables' => false,
-            'add-locks' => false,		
-			'extended-insert' => false,
-			'no-autocommit' => false,
+            'lock-tables'        => false,
+            'add-locks'          => false,		
+			'extended-insert'    => false,
+			'no-autocommit'      => false,
 		);
 		
 		$dump = new \Ifsnop\Mysqldump\Mysqldump(
@@ -320,20 +343,6 @@ class Theme implements \ArrayAccess  {
 		);
 		$dump->start($this->getPath().'/'.THEME_DB_DATA);
 		
-		// записываем зависимости плагинов
-		$requires = array();
-		foreach (Plugin::enum() as $p) {
-			if ($p->isEnabled()) {
-				$requires[] = array(
-					'plugin'  => $p->name,
-					'version' => $p->version,
-				);
-			}
-		}
-		
-		$info = $this->loadInfo();
-		$info['requires'] = $requires;
-		$this->saveInfo($info);
 	}
 	
 	public function rename($name)
