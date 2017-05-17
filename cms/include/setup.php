@@ -7,8 +7,15 @@ include('common.php');
 
 if ($application->getVar('setup_done')) die();
 
-if ($step >= 4) $application->connectDb();
+if ($step >= 4) {
+	$application->connectDb();
+	$application->initSession();
+}
 $translator = $application->getTranslator();
+
+if (isset($_REQUEST['locale'])) {
+	$application->setLocale($_REQUEST['locale'], $step >= 4);
+}
 
 $res = array();
 

@@ -65,10 +65,6 @@ Ext.onReady(function(){
     });
     current_step = 1;
     
-    <?php if (isset($_REQUEST['locale'])) : ?>
-        current_step = 2;
-    <?php endif; ?>
-    
     step();    
 });
 
@@ -112,13 +108,13 @@ function step8() {
             xtype: 'radiogroup',
             items: [
                 {
-                    boxLabel: 'да', 
+                    boxLabel: '<?=$translator->_('да')?>', 
                     name: 'create', 
                     inputValue: 1,
                     checked: true
                 },
                 {
-                    boxLabel: 'нет, нужна чистая установка', 
+                    boxLabel: '<?=$translator->_('нет, нужна чистая установка')?>', 
                     name: 'create',
                     inputValue: 0
                 }
@@ -126,7 +122,7 @@ function step8() {
         },
 		{
 			xtype: 'combo',
-            fieldLabel: 'Выберите тему:',
+            fieldLabel: '<?=$translator->_('Выберите тему:')?>',
             valueField: 'id',
             displayField: 'title',
             name: 'theme',
@@ -192,7 +188,7 @@ function step3() {
 // Проверка окружения
 function step2() {
     if ('<?=$application->getLocale()->toString()?>' != locale.getValue()) {
-        location = 'setup.php?locale=' + locale.getValue();
+        location = 'index.php?locale=' + locale.getValue();
     } else {
         request_action();
     }
@@ -263,7 +259,7 @@ function build_form(w, h, items) {
     form = Ext.create('Ext.form.FormPanel', {
         items: items,
         waitMsgTarget: true,
-        url: 'include/setup.php',
+        url: 'include/setup.php?locale=<?=$application->getLocale()?>',
         baseParams: {step: current_step},
         fieldDefaults : { 
             labelWidth: 105
@@ -297,7 +293,7 @@ function request_action(params) {
     win.setLoading(true);  
     //win.center();
     Ext.Ajax.request({
-        url: 'include/setup.php',
+        url: 'include/setup.php?locale=<?=$application->getLocale()?>',
         params: params,
         scope: this,
 		timeout: 600000,

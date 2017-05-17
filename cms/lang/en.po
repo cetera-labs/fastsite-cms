@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-05 08:36+0300\n"
-"PO-Revision-Date: 2017-05-11 09:25+0300\n"
+"POT-Creation-Date: 2017-05-17 10:00+0300\n"
+"PO-Revision-Date: 2017-05-17 10:05+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,13 +16,18 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: app.js:143 include/setup.php:103
+#: app.js:143 include/setup.php:110
 msgid "Структура"
 msgstr "Structure"
 
 #: app.js:183
 msgid "Навигация"
 msgstr "Navigation"
+
+#: app/catalog/Create.js:37 app/window/CatalogEdit.js:182
+#: include/ui_cat_props.php:538 lang/data.php:95
+msgid "Тип материалов"
+msgstr "Materials type"
 
 #: app/field/Image.js:164 app/fileselect/Panel.js:69
 msgid "Кадрировать"
@@ -117,7 +122,7 @@ msgstr "Upload"
 msgid "ожидание"
 msgstr "ready"
 
-#: app/fileselect/Panel.js:670 app/window/Upload.js:102 include/setup.php:287
+#: app/fileselect/Panel.js:670 app/window/Upload.js:102 include/setup.php:294
 msgid "Ошибка!"
 msgstr "Error!"
 
@@ -384,17 +389,13 @@ msgstr "Apply"
 
 #: app/window/CatalogEdit.js:149 include/classes/Cetera/Plugin.php:172
 #: include/classes/Cetera/Theme.php:56 include/classes/Cetera/Theme.php:59
-#: include/setup.php:276 include/ui_cat_props.php:494
+#: include/setup.php:283 include/ui_cat_props.php:494
 msgid "Каталог"
 msgstr "Folder"
 
 #: app/window/CatalogEdit.js:168 include/ui_cat_props.php:525
 msgid "Размещение"
 msgstr "Folder location"
-
-#: app/window/CatalogEdit.js:182 include/ui_cat_props.php:538 lang/data.php:95
-msgid "Тип материалов"
-msgstr "Materials type"
 
 #: app/window/CatalogEdit.js:193 include/ui_cat_props.php:548
 msgid "автоматически заполнять alias материалов"
@@ -687,7 +688,7 @@ msgstr "User group already exists."
 
 #: include/action_login.php:13 include/action_login.php:45
 #: include/classes/Cetera/Exception/CMS.php:112
-#: include/classes/Cetera/Widget/User/Recover.php:40
+#: include/classes/Cetera/Widget/User/Recover.php:42
 msgid "Пользователь не найден"
 msgstr "User not found"
 
@@ -769,7 +770,7 @@ msgid "Список материалов"
 msgstr "Material list"
 
 #: include/classes/Cetera/Application.php:1247 include/field_editors.php:164
-#: include/setup.php:237 lang/data.php:159
+#: include/setup.php:244 lang/data.php:159
 msgid "Файл"
 msgstr "File"
 
@@ -1066,26 +1067,26 @@ msgstr "does not exist"
 msgid "Начальная структура сайта"
 msgstr "Initial site structure"
 
-#: include/classes/Cetera/User.php:513
+#: include/classes/Cetera/User.php:551
 #: include/classes/Cetera/Widget/User/ProfileEdit.php:73
 msgid "Пользователь с таким e-mail уже зарегистрирован"
 msgstr "Another user with same email has been registered already"
 
-#: include/classes/Cetera/User.php:519
-#: include/classes/Cetera/Widget/User/ProfileEdit.php:45 include/setup.php:66
-#: include/setup.php:67
+#: include/classes/Cetera/User.php:557
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:45 include/setup.php:73
+#: include/setup.php:74
 msgid "Пароли не совпадают"
 msgstr "Passwords don't match"
 
-#: include/classes/Cetera/User.php:541
+#: include/classes/Cetera/User.php:579
 msgid "У пользователя не указан e-mail"
 msgstr "The user has unknown e-mail"
 
-#: include/classes/Cetera/User.php:557
+#: include/classes/Cetera/User.php:596
 msgid "Ваш пароль на сайт "
 msgstr "Your password on site"
 
-#: include/classes/Cetera/User.php:558
+#: include/classes/Cetera/User.php:597
 msgid "Ваш новый пароль: "
 msgstr "Your new password is:"
 
@@ -1177,12 +1178,12 @@ msgstr "Old password"
 msgid "Новый пароль"
 msgstr "New password"
 
-#: include/classes/Cetera/Widget/User/ProfileEdit.php:151 setup.php:164
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:151 setup.php:160
 #: widgets/user.register/default.twig:27
 msgid "Повторите пароль"
 msgstr "Confirm password"
 
-#: include/classes/Cetera/Widget/User/Recover.php:46
+#: include/classes/Cetera/Widget/User/Recover.php:52
 msgid "Новый пароль выслан вам по электронной почте"
 msgstr "The new password has been sent to you"
 
@@ -1309,7 +1310,7 @@ msgid "Набор файлов"
 msgstr "Fileset"
 
 #: include/field_editors.php:174 include/ui_eventlog.php:102
-#: include/ui_users.php:209 lang/data.php:132 setup.php:161
+#: include/ui_users.php:209 lang/data.php:132 setup.php:157
 msgid "Пользователь"
 msgstr "User"
 
@@ -1409,7 +1410,7 @@ msgstr "Editing reals"
 msgid "Редактирование ключевых слов"
 msgstr "Keywords editing"
 
-#: include/field_editors.php:204 lang/data.php:133 setup.php:163
+#: include/field_editors.php:204 lang/data.php:133 setup.php:159
 #: widgets/user.auth/default.twig:19
 msgid "Пароль"
 msgstr "Password"
@@ -1434,41 +1435,41 @@ msgstr "Select picture"
 msgid "Редактируемая группа материалов"
 msgstr "Editable group of materials"
 
-#: include/setup.php:88
+#: include/setup.php:95
 msgid "Установка кодировки БД"
 msgstr "Defining database character encoding"
 
-#: include/setup.php:115
+#: include/setup.php:122
 msgid "Данные"
 msgstr "Data"
 
-#: include/setup.php:137
+#: include/setup.php:144
 msgid "Ошибка при выборе базы данных"
 msgstr "Database select error"
 
-#: include/setup.php:145
+#: include/setup.php:152
 #, php-format
 msgid "Требуется версия MySQL не ниже %s<br />Обнаружена версия &mdash; %s"
 msgstr ""
 "MySQL version not below% s  is required<br /> detected version & mdash; % s"
 
-#: include/setup.php:161
+#: include/setup.php:168
 msgid "Проверка окружения"
 msgstr "Environment check"
 
-#: include/setup.php:162
+#: include/setup.php:169
 msgid "требуется"
 msgstr "required"
 
-#: include/setup.php:162
+#: include/setup.php:169
 msgid "обнаружено"
 msgstr "found"
 
-#: include/setup.php:173
+#: include/setup.php:180
 msgid "Файловая система"
 msgstr "File system"
 
-#: include/setup.php:198
+#: include/setup.php:205
 msgid ""
 "В процессе проверки конфигурации сервера были обнаружены критические ошибки."
 "<br /><b>Установка невозможна.</b>"
@@ -1476,7 +1477,7 @@ msgstr ""
 "Critical errors were found in the process of checking the server "
 "configuration. <br /> <b> Installation is impossible . </ b>"
 
-#: include/setup.php:200
+#: include/setup.php:207
 msgid ""
 "В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. "
 "Рекомендуется устранить их перед продолжением установки."
@@ -1484,31 +1485,31 @@ msgstr ""
 "In the process of server configuration checks some problems were detected. "
 "It is recommended to fix them before continuing the installation."
 
-#: include/setup.php:201
+#: include/setup.php:208
 msgid "Проверка закончена"
 msgstr "Check is done"
 
-#: include/setup.php:224
+#: include/setup.php:231
 #, php-format
 msgid "Файл %s недоступен для записи"
 msgstr "File \"%s\" is not writeable"
 
-#: include/setup.php:232
+#: include/setup.php:239
 #, php-format
 msgid "Невозможно создать файл %s"
 msgstr "Can't create file \"%s\""
 
-#: include/setup.php:252
+#: include/setup.php:259
 #, php-format
 msgid "Каталог %s недоступен для записи"
 msgstr "Directory \"%s\" is not writeable"
 
-#: include/setup.php:267
+#: include/setup.php:274
 #, php-format
 msgid "Невозможно создать каталог %s"
 msgstr "Can't create directory \"%s\""
 
-#: include/setup.php:286 include/welcome_new.php:357 lang/data.php:102
+#: include/setup.php:293 lang/data.php:102
 msgid "Внимание!"
 msgstr "Warning!"
 
@@ -1694,28 +1695,11 @@ msgstr "Website content management system"
 msgid "Компания"
 msgstr "Company"
 
-#: include/welcome_new.php:357
-msgid ""
-"Данный программный продукт защищен законами об авторских правах и "
-"международными соглашениями. Его незаконное воспроизведение или "
-"распространение в целом, а также его частей, равно как и использование "
-"отдельных частей системы в составе других программ запрещено и влечет "
-"гражданскую, административную и уголовную ответственность."
-msgstr ""
-"This software is protected by copyright laws and international treaties. Its "
-"illegal reproduction or distribution in whole and its parts, as well as the "
-"use of certain parts of the system as part of other programs is prohibited "
-"and entails civil, administrative and criminal liability."
-
-#: include/welcome_new.php:359
-msgid "Информация о системе"
-msgstr "About"
-
-#: include/welcome_new.php:364
+#: include/welcome_new.php:363
 msgid "Обнаружена новая версия"
 msgstr "The new version detected"
 
-#: include/welcome_new.php:369
+#: include/welcome_new.php:368
 msgid ""
 "Автоматическое обновление невозможно. Обратитесь в компанию Cetera labs для "
 "обновления системы."
@@ -1723,18 +1707,18 @@ msgstr ""
 "Automatic update is impossible. Contact Cetera labs support to upgrade the "
 "system."
 
-#: include/welcome_new.php:376
+#: include/welcome_new.php:375
 msgid ""
 "Вы используйте beta-версию. Возможен откат для последнюю стабильную версию "
 msgstr ""
 "You're using a beta-version. Rollback to the latest stable version is "
 "possible."
 
-#: include/welcome_new.php:382
+#: include/welcome_new.php:381
 msgid "Вы используете самую свежую версию"
 msgstr "You are using the latest version"
 
-#: include/welcome_new.php:388
+#: include/welcome_new.php:387
 msgid "Обнаружена новая beta-версия "
 msgstr "A new beta-version is detected"
 
@@ -1963,7 +1947,7 @@ msgstr "From this section"
 msgid "типа"
 msgstr "type"
 
-#: lang/data.php:93
+#: lang/data.php:93 setup.php:111
 msgid "да"
 msgstr "yes"
 
@@ -2062,7 +2046,7 @@ msgstr "Login"
 msgid "Выход"
 msgstr "Logout"
 
-#: lang/data.php:134 setup.php:209
+#: lang/data.php:134 setup.php:205
 msgid "Язык"
 msgstr "Language"
 
@@ -2250,34 +2234,42 @@ msgstr "Visit website"
 msgid "Повторить"
 msgstr "Retry"
 
-#: setup.php:89
+#: setup.php:85
 #, php-format
 msgid "установка системы %s прошла успешно"
 msgstr ""
-"<h1>Congratulations!</h1>The system is successfully installed<strong>%s</"
+"<h1>Congratulations!</h1>The system is successfully installed <strong>%s</"
 "strong>."
 
-#: setup.php:110
+#: setup.php:106
 msgid "Установить стандартную тему?"
 msgstr "Install default theme?"
 
-#: setup.php:160
+#: setup.php:117
+msgid "нет, нужна чистая установка"
+msgstr "no, make clean install"
+
+#: setup.php:125
+msgid "Выберите тему:"
+msgstr "Select theme:"
+
+#: setup.php:156
 msgid "Введите данные администратора системы"
 msgstr "Enter the system administrator information"
 
-#: setup.php:162
+#: setup.php:158
 msgid "E-mail"
 msgstr "E-mail"
 
-#: setup.php:183
+#: setup.php:179
 msgid "Настройка доступа к БД MySQL"
 msgstr "MySQL connection setup"
 
-#: setup.php:242
+#: setup.php:238
 msgid "Добро пожаловать в программу установки"
 msgstr "Welcome to the installation wizard"
 
-#: setup.php:338
+#: setup.php:334
 msgid "Подождите..."
 msgstr "Wait ..."
 
@@ -2435,7 +2427,7 @@ msgstr "Changed"
 msgid "Путь"
 msgstr "Path"
 
-#: widgets/user.auth/default.twig:14 widgets/user.recover/default.twig:12
+#: widgets/user.auth/default.twig:14 widgets/user.recover/default.twig:17
 msgid "Логин или Email"
 msgstr "Login or Email"
 
@@ -2451,7 +2443,7 @@ msgstr "Registration"
 msgid "Войти"
 msgstr "Login"
 
-#: widgets/user.recover/default.twig:14
+#: widgets/user.recover/default.twig:19
 msgid "Восстановить пароль"
 msgstr "Recover the password "
 
@@ -2478,6 +2470,21 @@ msgstr "Register"
 #: widgets/user.register/default.twig:43
 msgid "Вы были успешно зарегистрированы!"
 msgstr "You have been successfully registered!"
+
+#~ msgid ""
+#~ "Данный программный продукт защищен законами об авторских правах и "
+#~ "международными соглашениями. Его незаконное воспроизведение или "
+#~ "распространение в целом, а также его частей, равно как и использование "
+#~ "отдельных частей системы в составе других программ запрещено и влечет "
+#~ "гражданскую, административную и уголовную ответственность."
+#~ msgstr ""
+#~ "This software is protected by copyright laws and international treaties. "
+#~ "Its illegal reproduction or distribution in whole and its parts, as well "
+#~ "as the use of certain parts of the system as part of other programs is "
+#~ "prohibited and entails civil, administrative and criminal liability."
+
+#~ msgid "Информация о системе"
+#~ msgstr "About"
 
 #~ msgid "Обнаружена новая версия "
 #~ msgstr "A new version is detected"

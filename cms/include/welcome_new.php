@@ -354,9 +354,8 @@ Ext.create('Ext.Button', {
                 <hr noshade />
                 <div align="left">
                 &copy; 2000-<?=date('Y',time());?> <?=$translator->_('Компания')?> <a href="http://<?=APP_WWW?>" target="_blank">Cetera labs</a><br /><BR />
-                <strong><?=$translator->_('Внимание!')?></strong> <?=$translator->_('Данный программный продукт защищен законами об авторских правах и международными соглашениями. Его незаконное воспроизведение или распространение в целом, а также его частей, равно как и использование отдельных частей системы в составе других программ запрещено и влечет гражданскую, административную и уголовную ответственность.')?>
-                <br>
-                <a href="http://<?=APP_WWW?>" target="_blank"><?=$translator->_('Информация о системе')?></a><br>
+                <a href="https://github.com/cetera-labs/cetera-cms/blob/master/LICENSE">MIT License</a><br>
+
                 </div>
                 <?php if ($new_version) {?>
                 
