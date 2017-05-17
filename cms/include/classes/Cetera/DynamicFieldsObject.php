@@ -830,17 +830,23 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					confirm_added($tbl, Application::getInstance()->getUser()->id);
 				}
         
-				if ( $type==FIELD_MATERIAL && !(int)$this->fields[$name] )
-				{
-					$r1 = fssql_query('SELECT `'.$name.'` FROM '.$this->table.' WHERE id='.$this->id);
-					while ($f1 = mysql_fetch_row($r1))
-					{ 
-						 if ($f1[0])
-						 {
-							 $m = Material::getById($f1[0], 0, $tbl);
-							 $m->delete();							 
-						 }
-					}					
+				if ( $type==FIELD_MATERIAL ) {
+					
+					if ($value = json_decode($this->fields[$name], true) ) {
+						if (isset($value['id'])) {
+							$this->fields[$name] = $value['id'];
+						}
+					}
+					
+					if (!(int)$this->fields[$name]) {					
+						$data = $this->getDbConnection()->fetchAssoc('SELECT `'.$name.'` as fld FROM '.$this->table.' WHERE idcat < 0 and id='.$this->id);
+						foreach ($data as $f1) { 
+							 if ($f1['fld']) {
+								 $m = Material::getById($f1['fld'], 0, $tbl);
+								 $m->delete();							 
+							 }
+						}	
+					}
 				}
 		
                 if ($type == FIELD_LONGTEXT) 

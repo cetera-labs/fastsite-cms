@@ -279,39 +279,45 @@ class ObjectRenderer {
     /**
      * getLinkTypes
      * 
-     * возвращает список типов материалов в которых есть поля типа FIELD_LINK - ссылки на редактируемый материал
+     * возвращает список типов материалов в которых есть поля типа FIELD_LINK или FIELD_MATERIAL - ссылки на редактируемый материал
      * 
      * @return array
      **/	
 	private function getLinks()
 	{
 		if (!$this->objectId) return;
-		if ($this->catalog <= 0) return;
+
+		// поля типа FIELD_MATERIAL
+		$fields = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_MATERIAL.' and pseudo_type=0 and len='.$this->objectDefinition->id);		
 		
-		$catalog = Catalog::getById($this->catalog);
-		
-		// итератор всех разделов имеющих тип материалов как у редактируемого материала
-		$sections = new Iterator\Catalog\Catalog();
-		$sections->where('typ='.$this->objectDefinition->id);
-		if (!count($sections)) return;
-		
-		// получаем все поля, ссылающиеся на эти разделы
-		$data = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_LINK.' and pseudo_type=0 and len IN ('.implode(',',$sections->idArray()).')');
-		
+		// поля типа FIELD_LINK
+		if ($this->catalog > 0) {		
+			$catalog = Catalog::getById($this->catalog);			
+			// итератор всех разделов имеющих тип материалов как у редактируемого материала
+			$sections = new Iterator\Catalog\Catalog();
+			$sections->where('typ='.$this->objectDefinition->id);
+			if (!count($sections)) return;
+			
+			// получаем все поля, ссылающиеся на эти разделы
+			$data = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_LINK.' and pseudo_type=0 and len IN ('.implode(',',$sections->idArray()).')');
+
+			foreach ($data as $f) {				
+				$c = Catalog::getById($f['len']);
+				// оставляем только поля, ссылающиеся на раздел текущего материала или его родителей
+				if ($catalog->path->has( $c )) {
+					$fields[] = $f;
+				}				
+			}			
+		}
+				
 		ob_start();
-		foreach ($data as $f) {
-			
-			$c = Catalog::getById($f['len']);
-			// оставляем только поля, ссылающиеся на раздел текущего материала или его родителей
-			if ($catalog->path->has( $c )) {
-				$od = ObjectDefinition::findById($f['id']);		
-				$f['page'] = $od->getDescription().' /';
-				$f['editor_str'] = 'editor_linkset_link';
-				if ( file_exists('editors/'.$f['editor_str'].'.php') ) 
-					include_once('editors/'.$f['editor_str'].'.php');
-				$this->fields_def[] = $f;
-			}
-			
+		foreach ($fields as $f) {			
+			$od = ObjectDefinition::findById($f['id']);		
+			$f['describ'] = $od->getDescriptionDisplay();
+			$f['editor_str'] = 'editor_linkset_link';
+			if ( file_exists('editors/'.$f['editor_str'].'.php') ) 
+				include_once('editors/'.$f['editor_str'].'.php');
+			$this->fields_def[] = $f;
 		}
 		$this->initData .= ob_get_contents();
 		ob_end_clean();					

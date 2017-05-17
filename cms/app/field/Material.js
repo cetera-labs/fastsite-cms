@@ -14,7 +14,7 @@ Ext.define('Cetera.field.Material', {
     },
         
     setValue : function(value, displayOK) {
-    
+	
         var obj = Ext.JSON.decode(value, true);
         if (obj instanceof Object) {
         

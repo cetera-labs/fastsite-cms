@@ -33,15 +33,43 @@ Ext.define('Cetera.field.LinkSet_Link', {
 				extraParams: {
 					'id'   : 0, 
 					'type' : this.mat_type,
-					'filter': this.mat_filter,
+					'filter': this.field_name+'='+this.parent_id,
 					limit  : Config.defaultPageSize
 				}
 			}		
 		
 		});
-			 
-        return Ext.create('Ext.grid.GridPanel', {
+		
+		this.editAction = new Ext.Action({
+			tooltip: Config.Lang.edit,
+			disabled: true,
+			scope: this,
+			handler: function () { this.edit(this.grid.getSelectionModel().getSelection()[0].getId()); },
+			iconCls:'icon-edit'
+		});	
 
+		this.deleteAction = new Ext.Action({
+			tooltip: Config.Lang.delete,
+			disabled: true,
+			scope: this,
+			handler: function () { this.deleteMat(); },
+			iconCls:'icon-delete',
+		});			
+			 
+        this.grid = Ext.create('Ext.grid.GridPanel', {
+
+			tbar: [
+				{
+					itemId:  'tb_mat_new',
+					iconCls: 'icon-new',
+					tooltip: Config.Lang.newMaterial,
+					handler: function () { this.edit(0); },
+					scope:   this
+				},
+				this.editAction,
+				this.deleteAction			
+			],
+		
 			bbar: Ext.create('Ext.PagingToolbar', {
 				store: this.store,
 				items: [Config.Lang.filter + ': ', Ext.create('Cetera.field.Search', {
@@ -88,8 +116,80 @@ Ext.define('Cetera.field.LinkSet_Link', {
 					getSortParam: function(){ return 'E.name'; }
 				}
 			]
-        });	       
+        });
+		
+        this.grid.getSelectionModel().on({
+            'selectionchange' : function(sm){
+                var hs = sm.hasSelection();               
+                this.editAction.setDisabled(!hs);
+                this.deleteAction.setDisabled(!hs);				
+            },
+            'beforeselect' : function(t , record, index, eOpts) {
+                if (record.get('disabled')) return false;
+            },
+            scope:this
+        });		
+
+		return this.grid;
     
     }, 
+	
+	edit: function(id) {
+		
+		var me = this;
+		
+		if (me.editWindow) me.editWindow.destroy();
+        me.editWindow = Ext.create('Cetera.window.MaterialEdit', { 
+            listeners: {
+                close: {
+                    fn: function(win){
+                        me.store.load();
+                    },
+                    scope: this
+                }
+            }
+        });	
+		        
+        Ext.Loader.loadScript({
+            url: 'include/ui_material_edit.php?type='+me.mat_type+'&idcat=-1&id='+id,
+            onLoad: function() { 
+                var cc = Ext.create('MaterialEditor'+me.mat_type, {win: me.editWindow});
+                if (cc) cc.show();
+				if (!id) {
+					cc.getForm().findField( me.field_name ).setValue( me.parent_id );
+				}
+            }
+        });	
+		
+	},
+	
+    deleteMat: function() {
+        Ext.MessageBox.confirm(Config.Lang.materialDelete, Config.Lang.r_u_sure, function(btn) {
+            if (btn == 'yes') this.call('delete');
+        }, this);
+    },
+	
+    call: function(action, cat) {
+        Ext.Ajax.request({
+            url: 'include/action_materials.php',
+            params: { 
+                action: action, 
+                type: this.mat_type, 
+                'sel[]': this.getSelected(),
+                cat: cat
+            },
+            scope: this,
+            success: function(resp) {
+                this.store.load();
+            }
+        });
+    },
+
+    getSelected: function() {
+        var a = this.grid.getSelectionModel().getSelection();
+        ret = [];
+        for (var i=0; i<a.length; i++) ret[i] = a[i].getId();
+        return ret;
+    }	
     
 });

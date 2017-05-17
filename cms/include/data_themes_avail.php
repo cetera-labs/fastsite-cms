@@ -6,9 +6,8 @@ header('Content-Type: application/json');
 try {
 
 	$client = new \GuzzleHttp\Client();
-    $res = $client->get(THEMES_INFO);  		
+    $res = $client->get(THEMES_INFO, ['verify'=>false]);  		
     $themes = json_decode( $res->getBody(), true);
-
     if (is_array($themes)) {
         
         foreach ($themes as $id => $p) {
@@ -26,7 +25,7 @@ try {
 
 } catch (\Exception $e) {
 
-    $themes = array();
+    //$themes = array();
     
 }
 

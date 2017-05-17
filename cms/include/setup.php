@@ -7,14 +7,13 @@ include('common.php');
 
 if ($application->getVar('setup_done')) die();
 
-if ($step >= 4) {
-	$application->connectDb();
-	$application->initSession();
-}
+if ($step >= 4) $application->connectDb();
+if ($step >= 6) $application->initSession();
+
 $translator = $application->getTranslator();
 
 if (isset($_REQUEST['locale'])) {
-	$application->setLocale($_REQUEST['locale'], $step >= 4);
+	$application->setLocale($_REQUEST['locale'], $step >= 6);
 }
 
 $res = array();
@@ -183,9 +182,9 @@ elseif ($step == 2) {
     $mode = 2;
     print '<tr><td colspan="3" class="left">';
     if (copy(CMSROOT.'.htaccess_distr',DOCROOT.'.htaccess')) {
-        print 'Файл <b>.htaccess</b></td><td>'.status(0).'</td></tr>'; 
+        print $translator->_('Файл').' <b>.htaccess</b></td><td>'.status(0).'</td></tr>'; 
     } else {
-        print 'Не удалось создать <b>.htaccess</b></td><td>'.status(0).'</td></tr>'; 
+		printf($translator->_('Невозможно создать файл %s'), '.htaccess');
         print '</td><td>'.status(2).'</td></tr>';    
     }
     

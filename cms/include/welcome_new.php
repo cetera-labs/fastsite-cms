@@ -26,7 +26,7 @@ if ($user->allowAdmin()) {
         try {
     		
     		    $client = new \GuzzleHttp\Client();
-    		    $res = $client->get(DISTRIB_INFO);
+    		    $res = $client->get(DISTRIB_INFO, ['verify'=>false]);
             $info = json_decode( $res->getBody(), true);
     		
             $can_auto = is_writable(CMSROOT) && is_writable(WWWROOT);

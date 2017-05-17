@@ -57,7 +57,7 @@ $field_editors = array(
 					   ),
 	FIELD_LONGTEXT => array(
 						EDITOR_TEXT_CKEDITOR,
-            EDITOR_TEXT_CKEDITOR_SMALL,
+                        EDITOR_TEXT_CKEDITOR_SMALL,
 						EDITOR_TEXT_AREA,
 						EDITOR_USER,
 					   ),
@@ -91,6 +91,7 @@ $field_editors = array(
   
 	FIELD_LINK		=> array(
 						EDITOR_LINK_DEFAULT,
+						EDITOR_HIDDEN,
 						EDITOR_USER,
 	),
   
@@ -102,7 +103,7 @@ $field_editors = array(
   
 	FIELD_MATSET	=> array(
 						EDITOR_MATSET_DEFAULT,
-            EDITOR_MATSET_RICH,
+                        EDITOR_MATSET_RICH,
 						EDITOR_USER,
 	),
   
@@ -140,19 +141,21 @@ $field_editors = array(
 	),
 						
 	FIELD_MATERIAL => array(
-						EDITOR_MATERIAL_DEFAULT,
-						EDITOR_USER,
+		EDITOR_MATERIAL_DEFAULT,
+		EDITOR_HIDDEN,
+		EDITOR_TEXT_DEFAULT,
+		EDITOR_USER,
 	),
 
 	PSEUDO_FIELD_TAGS => array(
-						EDITOR_TAGS_DEFAULT,
+			EDITOR_TAGS_DEFAULT,
             EDITOR_LINKSET_DEFAULT,
             EDITOR_USER,
 	),
   
-  PSEUDO_FIELD_CATOLOGS => array(
-						EDITOR_LINKSET_CATALOG,
-						EDITOR_USER,
+    PSEUDO_FIELD_CATOLOGS => array(
+		EDITOR_LINKSET_CATALOG,
+		EDITOR_USER,
 	),
 );
  

@@ -127,15 +127,16 @@ function step8() {
             displayField: 'title',
             name: 'theme',
             store: new Ext.data.JsonStore({
-				fields: ['id', 'title'],
+				fields: ['id', 'title','locale'],
                 root: 'rows',
                 autoLoad: true,
+				filters: [{property: 'locale', value: '<?=$application->getLocale()?>'}],
                 proxy: {
 					type: 'ajax',
                     url: 'include/data_themes_avail.php'
                 }
             }),
-			value: 'corp',
+			value: 'corp<?=($application->getLocale()=='en')?'-en':''?>',
             triggerAction: 'all',
             editable: false,
             allowBlank: true     

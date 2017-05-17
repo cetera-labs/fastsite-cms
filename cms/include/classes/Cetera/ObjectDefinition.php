@@ -281,7 +281,8 @@ class ObjectDefinition extends Base {
         if (null === $this->_description) $this->fetchData();
         return $this->_description;    
     } 
-    
+	
+   
 	/**
 	 * @internal
 	 */	
@@ -729,11 +730,14 @@ class ObjectDefinition extends Base {
     	}
     	if ($r)	return mysql_result($r,0);
     }
-	
-	public function getDescriptionDisplay()
-	{
-		return Application::getInstance()->decodeLocaleString($this->description);
-	}		
+
+	/**
+	 * @internal
+	 */	
+    public function getDescriptionDisplay()
+    {
+		return Application::getInstance()->decodeLocaleString( $this->getDescription() ); 
+    } 		
 
 	public function toArray()
 	{
