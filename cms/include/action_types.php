@@ -161,70 +161,64 @@ try {
                     
             } // switch
         }
-        
-        if ($type==FIELD_ENUM && !check_enum($len)) {
-        
-            throw new Exception\Form(Exception\CMS::ENUM_FIELD ,'variants');
-            
-        } else {
-                   
-            $od = new ObjectDefinition($type_id);
-          	
-          	if ($_REQUEST['action'] == 'field_create') {
-            
-                      $field_id= $od->addField(array(
-                          'name' => $name, 
-                          'type' => $type, 
-                          'pseudo_type' => $pseudo_type, 
-                          'describ' => $describ, 
-                          'len' => $len, 
-                          'shw' => $shw, 
-                          'required' => $required, 
-                          'fixed' => 0, 
-                          'editor' => $editor, 
-                          'editor_user' => $editor_user, 
-                          'default_value' => $default_value,
-                          'page' => $page,
-                      ));            
-                
-            } else {
-            
-                      $od->updateField(array(
-                          'field_id' => $field_id,
-                          'name' => $name, 
-                          'type' => $type, 
-                          'pseudo_type' => $pseudo_type, 
-                          'describ' => $describ, 
-                          'len' => $len, 
-                          'shw' => $shw, 
-                          'required' => $required, 
-                          'fixed' => 0, 
-                          'editor' => $editor, 
-                          'editor_user' => $editor_user, 
-                          'default_value' => $default_value,
-                          'page' => $page,
-                      ));                      
-            
-            }
-            
-            $res['success'] = true; 
-			$res['rows'] = array(
-			  'id' => (int)$field_id,
-			  'name' => $name, 
-			  'type' => $type, 
-			  'pseudo_type' => $pseudo_type, 
-			  'describ' => $describ, 
-			  'describDisplay' => $application->decodeLocaleString($describ), 
-			  'len' => $len, 
-			  'shw' => $shw, 
-			  'required' => $required, 
-			  'fixed' => 0, 
-			  'editor' => $editor, 
-			  'editor_user' => $editor_user, 
-			  'default_value' => $default_value,
-			  'page' => $page,			
-			);
-        }
+                           
+		$od = new ObjectDefinition($type_id);
+		
+		if ($_REQUEST['action'] == 'field_create') {
+		
+			  $field_id= $od->addField(array(
+				  'name' => $name, 
+				  'type' => $type, 
+				  'pseudo_type' => $pseudo_type, 
+				  'describ' => $describ, 
+				  'len' => $len, 
+				  'shw' => $shw, 
+				  'required' => $required, 
+				  'fixed' => 0, 
+				  'editor' => $editor, 
+				  'editor_user' => $editor_user, 
+				  'default_value' => $default_value,
+				  'page' => $page,
+			  ));            
+			
+		} else {
+		
+			  $od->updateField(array(
+				  'field_id' => $field_id,
+				  'name' => $name, 
+				  'type' => $type, 
+				  'pseudo_type' => $pseudo_type, 
+				  'describ' => $describ, 
+				  'len' => $len, 
+				  'shw' => $shw, 
+				  'required' => $required, 
+				  'fixed' => 0, 
+				  'editor' => $editor, 
+				  'editor_user' => $editor_user, 
+				  'default_value' => $default_value,
+				  'page' => $page,
+			  ));                      
+		
+		}
+		
+		$res['success'] = true; 
+		$res['rows'] = array(
+		  'id' => (int)$field_id,
+		  'name' => $name, 
+		  'type' => $type, 
+		  'pseudo_type' => $pseudo_type, 
+		  'describ' => $describ, 
+		  'describDisplay' => $application->decodeLocaleString($describ), 
+		  'len' => $len, 
+		  'shw' => $shw, 
+		  'required' => $required, 
+		  'fixed' => 0, 
+		  'editor' => $editor, 
+		  'editor_user' => $editor_user, 
+		  'default_value' => $default_value,
+		  'page' => $page,			
+		);
+
     }
     
     if ($_REQUEST['action'] == 'field_delete') {
@@ -321,17 +315,3 @@ try {
 }
 
 echo json_encode($res);
-
-
-
-function check_enum($len) {
-    $vals = explode(',', stripslashes($len));
-    foreach ($vals as $val) {
-        $val = trim($val);
-        if (!$val) return FALSE;
-        if (substr($val, 0, 1) != "'") return FALSE;
-        if (substr($val, -1) != "'") return FALSE;
-    }
-    return TRUE;
-}
-?>
