@@ -525,13 +525,15 @@ class Application {
     {     
         if ($this->_connected) return;
         
-        try {
-			    mysql_connect($this->getVar('dbhost'),$this->getVar('dbuser'),$this->getVar('dbpass'));
-        	mysql_select_db($this->getVar('dbname'));
-    		} catch (\Exception $e) {
-    			throw new \Exception($e->getMessage());
-    		}
-        mysql_query('SET NAMES utf8');
+		if (function_exists('mysql_connect')) {
+			try {
+				mysql_connect($this->getVar('dbhost'),$this->getVar('dbuser'),$this->getVar('dbpass'));
+				mysql_select_db($this->getVar('dbname'));
+			} catch (\Exception $e) {
+				throw new \Exception($e->getMessage());
+			}
+			mysql_query('SET NAMES utf8');
+		}
 
         $connectionParams = array(
             'dbname'   => $this->getVar('dbname'),

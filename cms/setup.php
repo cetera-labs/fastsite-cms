@@ -299,20 +299,26 @@ function request_action(params) {
         scope: this,
 		timeout: 600000,
         success: function(resp) {
-            var obj = Ext.decode(resp.responseText);
-            win.add(textPanel(obj.text));
-            win.doLayout();
-            win.center();
-            win.setLoading(false);
-            if (obj.error) {
-                buttons_error();
-            } else {
-                buttons_ok();
-            }
-            if (obj.warning) {
-                retry.show();
-                retry.enable();
-            }
+			win.setLoading(false);
+			try {
+				var obj = Ext.decode(resp.responseText);
+				win.add(textPanel(obj.text));
+				win.doLayout();
+				win.center();
+				if (obj.error) {
+					buttons_error();
+				} else {
+					buttons_ok();
+				}
+				if (obj.warning) {
+					retry.show();
+					retry.enable();
+				}				
+			}
+			catch (e) {
+				alert(resp.responseText);
+				buttons_error();
+			}
         },
         failure: function() {
             buttons_error();
@@ -339,8 +345,13 @@ function submit_form() {
         },
         failure:  function(form, action) {
             buttons_error();
-            var obj = Ext.decode(action.response.responseText);
-            if (obj.message) alert(obj.message);
+			try {
+				var obj = Ext.decode(action.response.responseText);
+				if (obj.message) alert(obj.message);
+			}
+			catch (e) {
+				alert(action.response.responseText);
+			}			
         }
     });
 }

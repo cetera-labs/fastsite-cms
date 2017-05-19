@@ -300,32 +300,33 @@ class Schema {
 		return $this->readDumpFile($sql_file);
     }  
      
-    public function readDumpFile($sql_file) 
+    public function readDumpFile($sql_file, $fast = false) 
     {
-    	  if (!$sql_file) return FALSE;
-	    	if (!file_exists($sql_file) || !is_file($sql_file)) throw new Exception\CMS(Exception\CMS::FILE_NOT_FOUND, $sql_file);
+    	if (!$sql_file) return FALSE;
+	    if (!file_exists($sql_file) || !is_file($sql_file)) throw new Exception\CMS(Exception\CMS::FILE_NOT_FOUND, $sql_file);
 		
-		    if (!filesize($sql_file)) return;
+		if (!filesize($sql_file)) return;
 			
-		set_time_limit(1000);
-			
-		    $sql_query = fread(fopen($sql_file, 'r'), filesize($sql_file));
-	      if (get_magic_quotes_runtime() == 1) $sql_query = stripslashes($sql_query);
-    		$sql_query    = trim($sql_query);
-    		$sql_query    = $this->removeRemarks($sql_query);
+		$sql_query = fread(fopen($sql_file, 'r'), filesize($sql_file));
+	    if (get_magic_quotes_runtime() == 1) $sql_query = stripslashes($sql_query);
+    	$sql_query    = trim($sql_query);
+		
+		if ($fast) {
+			$this->dbConnection->executeQuery($sql_query);
+		}
+		else {
+		    set_time_limit(1000);
+	        $sql_query    = $this->removeRemarks($sql_query);
     		$pieces       = $this->splitSqlFile($sql_query, ';');
-    		$pieces_count = count($pieces);
 		
-		    $count = 0;
-		    for ($i = 0; $i < $pieces_count; $i++) {
+		    for ($i = 0; $i < count($pieces); $i++) {
     		    $a_sql_query = trim($pieces[$i]);
     		    if (!empty($a_sql_query) && $a_sql_query[0] != '#') {
-                //print $a_sql_query."\n\n\n";
-        		    $result = $this->dbConnection->executeQuery($a_sql_query);
-        			  $count++;
+        		    $this->dbConnection->executeQuery($a_sql_query);
     		    }
     		}
-    		return;
+		}
+    	return;
     }
 
     /*

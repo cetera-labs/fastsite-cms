@@ -16,6 +16,9 @@ namespace Cetera;
  * @package CeteraCMS
  */ 
 class Util {
+	
+	use DbConnection;
+	
     /**
      * Нельзя создать экземпляр класса. Только статические методы.
      */         
@@ -110,16 +113,17 @@ class Util {
     * @throws Exception\CMS    
     **/ 
     public static function copyRecord($table, $id_row, $id, $replace) {
-    	$query = "SELECT * FROM $table WHERE $id_row='$id'";
-    	$r = fssql_query($query);
+		$conn = self::getDbConnection();
+		
+    	$r = fssql_query("SELECT * FROM $table WHERE $id_row='$id'");
     	if (!mysql_num_rows($r)) throw new Exception\CMS('Source record id not found');
     	$row = mysql_fetch_assoc($r);
     	foreach ($replace as $name => $value)
     		if (isset($row[$name])) $row[$name] = $value;
     	unset($row[$id_row]);
     	foreach($row as $_id => $_value) $row[$_id] = mysql_escape_string($_value);
-    	fssql_query("INSERT INTO $table (".implode(',', array_keys($row)).") VALUES ('".implode("','", array_values($row))."')");
-    	return mysql_insert_id(); 
+    	$conn->executeQuery("INSERT INTO $table (".implode(',', array_keys($row)).") VALUES ('".implode("','", array_values($row))."')");
+    	return $conn->lastInsertId();
     }
     
     /*
@@ -130,15 +134,16 @@ class Util {
     * @param array $replace ассоциативный массив названий и значений столбцов, которые нужно заменить, а не копировать
     **/ 
     function copyRecords($table, $where, $replace = NULL, $ignore = NULL) {
-    	$query = "SELECT * FROM $table WHERE $where";
-    	$r = fssql_query($query);
+		$conn = self::getDbConnection();
+		
+    	$r = fssql_query("SELECT * FROM $table WHERE $where");
     	while($row = mysql_fetch_assoc($r)){
     		if (is_array($replace)) foreach ($replace as $name => $value)
     			if (isset($row[$name])) $row[$name] = $value;
     		if (is_array($ignore)) foreach ($ignore as $name)
     			if (isset($row[$name])) unset($row[$name]);
     		$query = "INSERT INTO $table (".implode(',', array_keys($row)).") VALUES ('".implode("','", array_values($row))."')";
-    		fssql_query($query);	
+    		$conn->executeQuery($query);	
     	} // while
     	return TRUE;
     }
@@ -150,13 +155,17 @@ class Util {
     * @param string $ver версия в формате x.y.z
     */
     public static function getMysqlVersion() {
-        $result = fssql_query('SELECT VERSION()');
-        if ($result != FALSE && mysql_num_rows($result) > 0) {
-            $my_ver = mysql_result($result,0);
+		
+		$conn = self::getDbConnection();
+		
+        $data = $conn->fetchArray('SELECT VERSION()');
+        if ($data[0]) {
+            $my_ver = $data[0];
         } else {
-            $result = fssql_query('SHOW VARIABLES LIKE \'version\'');
-            if ($result != FALSE && mysql_num_rows($result) > 0)
-                $my_ver = mysql_result($result,0);
+			$data = $conn->fetchArray('SHOW VARIABLES LIKE \'version\'');
+            if ($data[0]) {
+				$my_ver = $data[0];
+			}
         }
     
         if (!isset($my_ver)) $my_ver = '3.21.0';

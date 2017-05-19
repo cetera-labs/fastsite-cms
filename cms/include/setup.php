@@ -72,9 +72,9 @@ if ($step == 6) {
             $res['errors']['password'] = $translator->_('Пароли не совпадают');
             $res['errors']['password2'] = $translator->_('Пароли не совпадают');
         } else {
-            fssql_query('DELETE FROM users WHERE id=1');
-            fssql_query('DELETE FROM users WHERE login="'.mysql_escape_string($_POST['login']).'"');
-            fssql_query('INSERT INTO users SET id=1, login="'.mysql_escape_string($_POST['login']).'", password="'.md5($_POST['password']).'", email="'.mysql_escape_string($_POST['email']).'", date_reg=NOW(), disabled=0');
+            $application->getConn()->executeQuery('DELETE FROM users WHERE id=1');
+            $application->getConn()->executeQuery('DELETE FROM users WHERE login=?',[$_POST['login']]);
+            $application->getConn()->executeQuery('INSERT INTO users SET id=1, login=?, password=?, email=?, date_reg=NOW(), disabled=0',[$_POST['login'],md5($_POST['password']),$_POST['email']]);
         }
     
     } catch (Exception $e) {
@@ -94,7 +94,7 @@ elseif ($step == 5) {
     $str .= '<tr><td class="left">'.$translator->_('Установка кодировки БД').'</td><td>';
     try {
         $application->getConn()->executeQuery( 'ALTER DATABASE `'.$application->getVar('dbname').'` DEFAULT CHARSET utf8' );
-	      $str .= status(0);
+	    $str .= status(0);
     } catch (\Exception $e) {
         $res['error'] = true;
         $str .= status(1, $e->getMessage());
@@ -138,14 +138,39 @@ elseif ($step == 5) {
 elseif ($step == 3) {
 
     $res['success'] = true;
-    mysql_connect($_POST['dbhost'],$_POST['dbuser'],$_POST['dbpass']);
-    if(!mysql_select_db($_POST['dbname'])) {
-        $res['message'] = $translator->_('Ошибка при выборе базы данных').'<br />'.mysql_error();
-        fssql_query('CREATE DATABASE `'.$_POST['dbname'].'`');
-        if (!mysql_select_db($_POST['dbname'])) throw new Exception\CMS(mysql_error());
-    }
     
-    $my_ver = Util::getMysqlVersion();	
+	$params = array(
+		'user'     => $_POST['dbuser'],
+		'password' => $_POST['dbpass'],
+		'host'     => $_POST['dbhost'],
+		'driver'   => $application->getVar('dbdriver')?$application->getVar('dbdriver'):'pdo_mysql',
+	);
+	
+	
+	$conn_test = \Doctrine\DBAL\DriverManager::getConnection( 
+		$params, 
+		new \Doctrine\DBAL\Configuration()
+	); 	
+	
+	$params['dbname'] = $_POST['dbname'];
+	
+	try {
+		$conn = \Doctrine\DBAL\DriverManager::getConnection( 
+			$params, 
+			new \Doctrine\DBAL\Configuration()
+		); 	
+
+		$application->setDbConnection( $conn );
+		$my_ver = Util::getMysqlVersion();			
+		
+	}
+	catch (\Exception $e) {
+        $res['message'] = $translator->_('Ошибка при выборе базы данных').'<br />'.$e->getMessage();
+        $conn_test->executeQuery('CREATE DATABASE `'.$_POST['dbname'].'`');
+        $my_ver = Util::getMysqlVersion();	
+	}
+	
+	$conn_test->close();
 
     if (version_compare(MYSQL_VER, $my_ver) > 0)
         throw new Exception\CMS(sprintf($translator->_('Требуется версия MySQL не ниже %s<br />Обнаружена версия &mdash; %s'),MYSQL_VER,$my_ver));

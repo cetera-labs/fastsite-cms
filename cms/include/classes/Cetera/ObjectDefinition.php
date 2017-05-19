@@ -20,6 +20,8 @@ namespace Cetera;
  * @property-read string $handler перехватчик, подключаемый при сорхранении материалов данного типа
  **/
 class ObjectDefinition extends Base {
+	
+	use DbConnection;
 
 	/**
 	 * Пользовательские классы для определенных типов материалов
@@ -165,33 +167,36 @@ class ObjectDefinition extends Base {
             throw new Exception\CMS(Exception\CMS::TYPE_RESERVED);
         }
       	
-        $r  = fssql_query("select id from types where alias='".$params['alias']."'");
-        if (mysql_numrows($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
+		$conn = DbConnection::getDbConnection();
+		
+        $r  = $conn->fetchAll("select id from types where alias='".$params['alias']."'");
+        if (count($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
         
-        fssql_query('DROP TABLE IF EXISTS '.$params['alias']);
+        $conn->executeQuery('DROP TABLE IF EXISTS '.$params['alias']);
         
-      	fssql_query("create table ".$params['alias']." (
+      	$conn->executeQuery("create table ".$params['alias']." (
             id int(11) NOT NULL auto_increment, idcat int(11), dat datetime, dat_update datetime, name varchar(2048),
          		type int(11), autor int(11) DEFAULT '0' NOT NULL, tag int(11) DEFAULT '1' NOT NULL, alias varchar(255) NOT NULL, 
             PRIMARY KEY (id), KEY idcat (idcat), KEY dat (dat), KEY alias (alias)
         )"); 
 
-        fssql_query("
-			INSERT INTO types (alias,describ, fixed, handler, plugin) 
-			values ('".mysql_real_escape_string($params['alias'])."','".mysql_real_escape_string($params['describ'])."', ".(int)$params['fixed'].", '".mysql_real_escape_string($params['handler'])."', '".mysql_real_escape_string($params['plugin'])."')");
+        $conn->executeQuery(
+			"INSERT INTO types (alias,describ, fixed, handler, plugin) values (?,?,?,?,?)",
+			array($params['alias'], $params['describ'], (int)$params['fixed'], $params['handler'], $params['plugin'])
+		);
         
-		$id = mysql_insert_id();
+		$id = $conn->lastInsertId();
             
         $translator = Application::getInstance()->getTranslator();              
             
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'tag',        3,'Sort[ru=Сортировка]',  1, 1, 0, 1, 1)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'name',       1,'Title[ru=Заголовок]',       99, 1, 0, 1, 2)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'alias',      1,'Alias',     255, 1, 1, 1, 3)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat',        5,'Date create[ru=Дата создания]', 1, 1, 1, 0, 5)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat_update', 5,'Edit date[ru=Дата изменения]', 1, 1, 1, 0, 6)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'Author[ru=Автор]',      -2, 1, 1, 0, 4,1003)");
-    	fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]',               1, 1, 1, 0, 7)");
-        fssql_query("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'idcat',      3,'Section[ru=Раздел]',         1, 1, 1, 0, 8)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'tag',        3,'Sort[ru=Сортировка]',  1, 1, 0, 1, 1)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'name',       1,'Title[ru=Заголовок]',       99, 1, 0, 1, 2)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'alias',      1,'Alias',     255, 1, 1, 1, 3)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat',        5,'Date create[ru=Дата создания]', 1, 1, 1, 0, 5)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat_update', 5,'Edit date[ru=Дата изменения]', 1, 1, 1, 0, 6)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'Author[ru=Автор]',      -2, 1, 1, 0, 4,1003)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]',               1, 1, 1, 0, 7)");
+        $conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'idcat',      3,'Section[ru=Раздел]',         1, 1, 1, 0, 8)");
 
         return new self($id, $params['alias']);
       
@@ -224,9 +229,9 @@ class ObjectDefinition extends Base {
     public function getId()
     {
         if (!$this->_id) {
-            $r = fssql_query('select * from types where alias="'.mysql_real_escape_string($this->table).'"');
-    		    if (mysql_num_rows($r)) 
-          			$this->setData(mysql_fetch_assoc($r));   	
+            $r = DbConnection::getDbConnection()->fetchAssoc('select * from types where alias=?',[$this->table]);
+    		if ($r) 
+          		$this->setData($r);   	
                 else throw new Exception\CMS('Type for table "'.$this->table.'" is not found.');        
         }
         return $this->_id;
@@ -237,10 +242,13 @@ class ObjectDefinition extends Base {
 	 */	
     private function fetchData()
     {
-    		$r = fssql_query("select * from types where id=".$this->id);
-        if (mysql_num_rows($r)) {
-    			  $this->setData(mysql_fetch_assoc($r));                
-    		} else throw new Exception\CMS('Materials table for type '.$this->id.' is not found.');     
+    	$r = DbConnection::getDbConnection()->fetchAssoc("select * from types where id=?",[$this->id]);
+        if ($r) {
+    	    $this->setData($r);                
+    	} 
+		else {
+			throw new Exception\CMS('Materials table for type '.$this->id.' is not found.');     
+		}
     }
     
 	/**
@@ -322,11 +330,10 @@ class ObjectDefinition extends Base {
         if (is_a($dir, 'Cetera\\Catalog'))
 		{
             while ($dir->inheritFields && !$dir->isRoot()) $dir = $dir->getParent();
-            if (!$dir->inheritFields)
-			{
-                $r = fssql_query("SELECT * FROM types_fields_catalogs WHERE type_id=".$this->id.' and catalog_id='.$dir->id);
+            if (!$dir->inheritFields) {
+                $r = DbConnection::getDbConnection()->fetchAll('SELECT * FROM types_fields_catalogs WHERE type_id=? and catalog_id=?',[$this->id,$dir->id]);
                 $inherit = array();
-                while($f = mysql_fetch_assoc($r)) $inherit[$f['field_id']] = $f;
+                foreach ($r as $f) $inherit[$f['field_id']] = $f;
             }
         }   
         
@@ -368,20 +375,20 @@ class ObjectDefinition extends Base {
 	 * Удаляет тип материалов
 	 */		
     public function delete() {
-        $r = fssql_query( "select id from dir_data where typ=".$this->id);
-        while ($f = mysql_fetch_row($r)) {
+        $r = DbConnection::getDbConnection()->fetchAll( "select id from dir_data where typ=?", [$this->id] );
+        foreach ($r as $f) {
             $c = Catalog::getById($f[0]);
             $c->delete();
         }
-        fssql_query("drop table ".$this->table);
-        fssql_query("delete from types where id=".$this->id);
-        fssql_query("delete from types_fields where id=".$this->id);
+        DbConnection::getDbConnection()->executeQuery("drop table ".$this->table);
+        DbConnection::getDbConnection()->executeQuery("delete from types where id=".$this->id);
+        DbConnection::getDbConnection()->executeQuery("delete from types_fields where id=".$this->id);
         
         // удалить все поля - ссылки на материалы этого типа
-        $r = fssql_query('SELECT A.field_id, A.name, B.alias FROM types_fields A, types B WHERE A.type='.FIELD_MATSET.' and A.len='.$this->id.' and A.id=B.id');
-        while($f = mysql_fetch_assoc($r)){ 
-            fssql_query('DROP TABLE '.$f['alias'].'_'.$alias.'_'.$f['name']);
-      	    fssql_query('DELETE FROM types_fields WHERE field_id='.$f['field_id']);
+        $r = DbConnection::getDbConnection()->fetchAll('SELECT A.field_id, A.name, B.alias FROM types_fields A, types B WHERE A.type=? and A.len=? and A.id=B.id', [FIELD_MATSET, $this->id]);
+        foreach ($r as $f) {
+            DbConnection::getDbConnection()->executeQuery('DROP TABLE '.$f['alias'].'_'.$alias.'_'.$f['name']);
+      	    DbConnection::getDbConnection()->executeQuery('DELETE FROM types_fields WHERE field_id='.$f['field_id']);
         }    
     }
     
@@ -408,31 +415,31 @@ class ObjectDefinition extends Base {
                 throw new Exception\CMS(Exception\CMS::TYPE_RESERVED);
             }
               
-        	  $r  = fssql_query("select id from types where alias='$alias'");
-        	  if (mysql_numrows($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
+        	  $r  = DbConnection::getDbConnection()->fetchAll("select id from types where alias=?",[$alias]);
+        	  if (count($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
     
-        	  $r = fssql_query("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=".$this->id." and C.id=B.len and B.type=7 and A.id=B.id");
-        	  while ($f = mysql_fetch_row($r)) {
-        		    fssql_query('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
+        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=".$this->id." and C.id=B.len and B.type=7 and A.id=B.id");
+        	  foreach ($r as $f) {
+        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
         	  }
     
-        	  $r = fssql_query("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=B.len and C.id=A.id and B.type=7 and B.id=".$this->id);
-        	  while ($f = mysql_fetch_row($r)) {
-        		    fssql_query('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
+        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=B.len and C.id=A.id and B.type=7 and B.id=".$this->id);
+        	  foreach ($r as $f) {
+        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
         	  }
     
-        	  $r = fssql_query("select A.alias, B.name from types A, types_fields B where B.type=8 and A.id=B.id and B.len=".$this->id);
-        	  while ($f = mysql_fetch_row($r)) {
-        		    fssql_query('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
+        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and A.id=B.id and B.len=".$this->id);
+        	  foreach ($r as $f) {
+        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
         	  }
     
-        	  $r = fssql_query("select A.alias, B.name from types A, types_fields B where B.type=8 and B.id=".$this->id." and B.len=A.id");
-        	  while ($f = mysql_fetch_row($r)) {
-        		    fssql_query('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
+        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and B.id=".$this->id." and B.len=A.id");
+        	  foreach ($r as $f) {
+        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
         	  }
     
-        	  fssql_query("ALTER TABLE $oldalias RENAME $alias");
-        	  fssql_query("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
+        	  DbConnection::getDbConnection()->executeQuery("ALTER TABLE $oldalias RENAME $alias");
+        	  DbConnection::getDbConnection()->executeQuery("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
 			  
 			  $this->_table = $alias;
     	  } // if
@@ -455,7 +462,7 @@ class ObjectDefinition extends Base {
 			$this->_plugin = $params['plugin'];
 		}
         
-        if (count($sql)) fssql_query('update types set '.implode(',',$sql).' where id='.$this->id);
+        if (count($sql)) DbConnection::getDbConnection()->executeQuery('update types set '.implode(',',$sql).' where id='.$this->id);
         
         return $this;
     }  
@@ -473,8 +480,8 @@ class ObjectDefinition extends Base {
         
         if ($params['type'] > 0) {
         
-            $r = fssql_query('SELECT COUNT(*) FROM types_fields WHERE id='.$this->id.' and name="'.$params['name'].'"');
-            if (mysql_result($r,0)) throw new Exception\CMS(Exception\CMS::FIELD_EXISTS);
+            $r = DbConnection::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM types_fields WHERE id=? and name=?',[$this->id,$params['name']],0);
+            if ( $r>0 ) throw new Exception\CMS(Exception\CMS::FIELD_EXISTS);
         
             $alias = $this->table;
             if ( $params['type'] != FIELD_LINKSET && $params['type'] != FIELD_MATSET )
@@ -483,7 +490,7 @@ class ObjectDefinition extends Base {
                 $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
                 $sql = "ALTER TABLE $alias ADD ".$params['name']." $def";
                 $params['len'] = (integer) $params['len'];
-                fssql_query($sql);
+                DbConnection::getDbConnection()->executeQuery($sql);
             } 
 			else 
 			{    			
@@ -492,12 +499,12 @@ class ObjectDefinition extends Base {
             
         }
         
-        $r = fssql_query("select max(tag) from types_fields where id=".$this->id);
-        $tag = mysql_result($r,0)+1;
-        fssql_query("INSERT INTO types_fields 
-        		     (tag,  name,        type,       pseudo_type,       len,       describ,        shw,        required,       fixed,       id,       editor,       editor_user, default_value, page) 
-          VALUES ($tag,'".$params['name']."',".$params['type'].",".$params['pseudo_type'].",".$params['len'].",'".$params['describ']."',".$params['shw'].",".$params['required'].",".$params['fixed'].",".$this->id.", ".(int)$params['editor'].",'".$params['editor_user']."','".mysql_real_escape_string($params['default_value'])."','".mysql_real_escape_string($params['page'])."')");
-		return mysql_insert_id();
+		$tag = DbConnection::getDbConnection()->fetchColumn("select max(tag) from types_fields where id=?",[$this->id],0) + 1;
+        DbConnection::getDbConnection()->executeQuery(
+			"INSERT INTO types_fields (tag,name,type,pseudo_type,len,describ,shw,required,fixed,id,editor,editor_user, default_value, page) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+			[$tag,$params['name'],$params['type'],$params['pseudo_type'],$params['len'],$params['describ'],$params['shw'],$params['required'],$params['fixed'],$this->id,(int)$params['editor'],$params['editor_user'],$params['default_value'],$params['page']]
+		);
+		return DbConnection::getDbConnection()->lastInsertId();
     } 
        
 	/**
@@ -513,9 +520,8 @@ class ObjectDefinition extends Base {
 
         $alias = $this->table;
             
-		$r = fssql_query('SELECT type,len,name FROM types_fields WHERE field_id='.$params['field_id']);
-        if (!$r || !mysql_num_rows($r)) throw new Exception\CMS(Exception\CMS::EDIT_FIELD);
-        $f = mysql_fetch_row($r);
+		$f = DbConnection::getDbConnection()->fetchArray('SELECT type,len,name FROM types_fields WHERE field_id='.$params['field_id']);
+        if (!$f) throw new Exception\CMS(Exception\CMS::EDIT_FIELD);
                 
         $type_old = $f[0];
         $len_old  = $f[1];
@@ -553,7 +559,7 @@ class ObjectDefinition extends Base {
 									}
 									else
 									{
-										fssql_query("alter table `$alias` drop `".$name_old."`");
+										DbConnection::getDbConnection()->executeQuery("alter table `$alias` drop `".$name_old."`");
 										$action = false;
 									}
 									
@@ -566,13 +572,13 @@ class ObjectDefinition extends Base {
 							}                     
 							
 							if ($action)
-									fssql_query("alter table `$alias` $action `".$params['name']."` $def");
+									DbConnection::getDbConnection()->executeQuery("alter table `$alias` $action `".$params['name']."` $def");
 								
 						  } else {
 						
 							if ($type_old >= 0) {
 								if ($type_old != FIELD_LINKSET && $type_old != FIELD_MATSET ) {
-									  fssql_query("alter table `$alias` drop `".$name_old."`");
+									  DbConnection::getDbConnection()->executeQuery("alter table `$alias` drop `".$name_old."`");
 									} else {
 									  self::drop_link_table($alias, $name_old, $type_old, $len_old, $this->id, $params['pseudo_type']);
 									}
@@ -595,7 +601,7 @@ class ObjectDefinition extends Base {
 							  $tbl1 = self::get_table($f[0],$f[1], $this->id,$params['pseudo_type']);
 							  $sql = "alter table ".$alias."_".$tbl1."_".$f[2]." rename ".$alias."_".$tbl."_".$params['name'];
 						  }
-						  fssql_query($sql);
+						  DbConnection::getDbConnection()->executeQuery($sql);
 					  
 			}
 			
@@ -623,7 +629,7 @@ class ObjectDefinition extends Base {
 					WHERE field_id=".$params['field_id'];			
 		}
 		
-		fssql_query($sql);    
+		DbConnection::getDbConnection()->executeQuery($sql);    
     }  
 
     /**
@@ -654,18 +660,13 @@ class ObjectDefinition extends Base {
      **/
     private function _get_fields() {
     
-        if (!$this->fields_def) {
-        		$r = fssql_query("SELECT * FROM types_fields WHERE id=".$this->id.' ORDER BY tag');
-        		if ($r) {
-        		    $this->fields_def = array();
-        			while($f = mysql_fetch_assoc($r))
-					{
-						$key = $f['name'];
-						while (isset($this->fields_def[$key])) $key .= '_';
-						$this->fields_def[$key] = ObjectField::factory($f, $this);
-        			} 
-
-        		}
+        if (!$this->fields_def) {				
+			$r = DbConnection::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE id=? ORDER BY tag', [$this->id]);
+			foreach($r as $f) {
+				$key = $f['name'];
+				while (isset($this->fields_def[$key])) $key .= '_';
+				$this->fields_def[$key] = ObjectField::factory($f, $this);
+			} 
         }
         return $this->fields_def;
     }
@@ -703,8 +704,8 @@ class ObjectDefinition extends Base {
      * @internal
      **/	
     public static function create_link_table($fieldtable, $fieldname, $type, $len, $id, $pseudo_type = 0) {
-      $tbl = self::get_table($type,$len, $id,$pseudo_type);
-    	fssql_query("CREATE TABLE IF NOT EXISTS ".$fieldtable."_".$tbl."_".$fieldname." (id int(11) not null, dest int(11) not null, tag int(11) DEFAULT '0' NOT NULL, PRIMARY KEY (id, dest), key dest (dest))");
+        $tbl = self::get_table($type,$len, $id,$pseudo_type);
+    	DbConnection::getDbConnection()->executeQuery("CREATE TABLE IF NOT EXISTS ".$fieldtable."_".$tbl."_".$fieldname." (id int(11) not null, dest int(11) not null, tag int(11) DEFAULT '0' NOT NULL, PRIMARY KEY (id, dest), key dest (dest))");
     }
     
     /**
@@ -712,7 +713,7 @@ class ObjectDefinition extends Base {
      **/	
     public static function drop_link_table($fieldtable, $fieldname, $type, $len, $id, $pseudo_type = 0) {
     	$tbl = self::get_table($type,$len, $id, $pseudo_type);
-    	fssql_query("DROP TABLE IF EXISTS ".$fieldtable."_".$tbl."_".$fieldname);
+    	DbConnection::getDbConnection()->executeQuery("DROP TABLE IF EXISTS ".$fieldtable."_".$tbl."_".$fieldname);
     }
     
     /**
@@ -723,12 +724,12 @@ class ObjectDefinition extends Base {
        
     	if ($field_type == FIELD_LINKSET && $len) {
     	    if ($len == CATALOG_VIRTUAL_USERS) return User::TABLE;
-    	  	$r = fssql_query("select A.alias from types A, dir_data B where A.id = B.typ and B.id=$len");
+    	  	$r = DbConnection::getDbConnection()->fetchColumn("select A.alias from types A, dir_data B where A.id = B.typ and B.id=?",[$len],0);
     	} else {
     	  if ($field_type == FIELD_LINKSET) $len = $type_id;
-    	  $r = fssql_query("select alias from types where id=$len");
+    	  $r = DbConnection::getDbConnection()->fetchColumn("select alias from types where id=?",[$len],0);
     	}
-    	if ($r)	return mysql_result($r,0);
+    	return $r;
     }
 
 	/**

@@ -100,10 +100,9 @@ class Theme implements \ArrayAccess  {
 		$t = new self($theme);
 		Plugin::installRequirements($t->requires, $status, $translator);		
 		
-		if ($extract_initial_data && file_exists($themePath.'/'.THEME_DB_DATA))
-		{
+		if ($extract_initial_data && file_exists($themePath.'/'.THEME_DB_DATA)) {
 			if ($status) $status($translator->_('Начальная структура сайта'), true);      
-			$schema->readDumpFile($themePath.'/'.THEME_DB_DATA);
+			$schema->readDumpFile($themePath.'/'.THEME_DB_DATA, true);
 			if ($status) $status('OK', false);  	
 		}
 		

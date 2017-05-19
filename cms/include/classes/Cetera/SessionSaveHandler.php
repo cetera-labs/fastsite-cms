@@ -17,6 +17,7 @@ namespace Cetera;
  */ 
 class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
 {
+	use DbConnection;
 
     /**
      * Open Session - retrieve resources
@@ -44,8 +45,7 @@ class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
      */
     public function read($id)
     { 
-        $r = fssql_query('SELECT value FROM session_data WHERE id="'.mysql_real_escape_string($id).'"');
-        if (mysql_num_rows($r)) return mysql_result($r,0);
+		return $this->getDbConnection()->fetchColumn('SELECT value FROM session_data WHERE id=?',[$id],0);
     }
 
     /**
@@ -57,8 +57,8 @@ class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
     public function write($id, $data)
     {
         if (!$data) 
-            fssql_query('DELETE FROM session_data WHERE id="'.mysql_real_escape_string($id).'"');
-            else fssql_query('REPLACE INTO session_data SET timestamp='.time().', id="'.mysql_real_escape_string($id).'", value="'.mysql_real_escape_string($data).'"');
+            $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
+            else $this->getDbConnection()->executeQuery('REPLACE INTO session_data SET timestamp=?, id=?, value=?',[time(),$id,$data]);
     }
 
     /**
@@ -69,7 +69,7 @@ class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
      */
     public function destroy($id)
     {
-        fssql_query('DELETE FROM session_data WHERE id="'.mysql_real_escape_string($id).'"');
+        $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
     }
 
     /**
@@ -80,7 +80,7 @@ class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
      */
     public function gc($maxlifetime)
     {
-        fssql_query('DELETE FROM session_data WHERE timestamp<'.(time()-$maxlifetime));
+        $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE timestamp<?',[time()-$maxlifetime]);
     }
 
 }
