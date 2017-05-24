@@ -109,22 +109,22 @@ class Schema {
     				$query = 'ALTER TABLE `'.$error['table'].'` ADD `'.$error['field'].'` '.$this->getFieldDef($tables[$error['table']]['fields'][$error['field']], false);
     				break;
     			case self::EXTRA_FIELD:
-    				$query = 'ALTER IGNORE TABLE `'.$error['table'].'` DROP `'.$error['field'].'`';
+    				$query = 'ALTER TABLE `'.$error['table'].'` DROP `'.$error['field'].'`';
     				break;
     			case self::FIELD_DONT_MATCH:
-    				$query = 'ALTER IGNORE TABLE `'.$error['table'].'` CHANGE `'.$error['field'].'` `'.$error['field'].'` '.$this->getFieldDef($tables[$error['table']]['fields'][$error['field']]);
+    				$query = 'ALTER TABLE `'.$error['table'].'` CHANGE `'.$error['field'].'` `'.$error['field'].'` '.$this->getFieldDef($tables[$error['table']]['fields'][$error['field']]);
     				break;		
     			case self::EXTRA_KEY:
-    				$query = 'ALTER IGNORE TABLE `'.$error['table'].'` DROP ';
+    				$query = 'ALTER TABLE `'.$error['table'].'` DROP ';
     				if ($error['found'] == 'PRIMARY') 
     					$query .= 'PRIMARY KEY';
     					else $query .= 'INDEX '.$error['found'];
     				break;
     			case self::KEY_NOT_FOUND:
-    				$query = 'ALTER IGNORE TABLE `'.$error['table'].'` ADD '.$this->getIndexDef($tables[$error['table']]['keys'][$error['kid']]);
+    				$query = 'ALTER TABLE `'.$error['table'].'` ADD '.$this->getIndexDef($tables[$error['table']]['keys'][$error['kid']]);
     				break;
     			case self::KEY_DONT_MATCH:
-    				$query = 'ALTER IGNORE TABLE `'.$error['table'].'` DROP ';
+    				$query = 'ALTER TABLE `'.$error['table'].'` DROP ';
     				if ($tables[$error['table']]['keys'][$error['kid']]['name'] == 'PRIMARY')
     					$query .= 'PRIMARY KEY';
     					else $query .= 'INDEX '.$tables[$error['table']]['keys'][$error['kid']]['name']; 

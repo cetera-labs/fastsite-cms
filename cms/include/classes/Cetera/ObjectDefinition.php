@@ -370,6 +370,17 @@ class ObjectDefinition extends Base {
             throw new \Exception('Поле "'.$fieldName.'" не найдено');
         }
     } 
+	
+	/**
+	 * Возвращает true если существует поле у данного типа материалов
+	 *
+	 * @param string $fieldName имя поля
+	 * @return boolean
+	 */		
+    public function hasField($fieldName) {
+        $fields = $this->_get_fields();
+        return isset($fields[$fieldName]);
+    } 	
     
 	/**
 	 * Удаляет тип материалов

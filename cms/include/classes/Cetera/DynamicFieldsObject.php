@@ -884,6 +884,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         }
         return $values;
     }
+
 }
 
 /**

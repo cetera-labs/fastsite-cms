@@ -149,7 +149,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
 		fp.required.setDisabled(0);
         fp.hidden.setValue(false);
 		fp.hidden.setDisabled(0);
-        fp.size.setValue('1000');
+        fp.size.setValue('100');
 		fp.size.setDisabled(0);
         fp.variants.setValue('');
 		fp.variants.setDisabled(0);
