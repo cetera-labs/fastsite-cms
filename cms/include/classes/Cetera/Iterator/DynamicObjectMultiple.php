@@ -102,16 +102,9 @@ class DynamicObjectMultiple extends DbObject {
         if ($this->sync && $this->countAll !== null) return $this->countAll;
         
         $query = $this->getQuery();
-                            
+		                            
         $stmt = $this->getDbConnection()->query($query);  
-        if ($stmt->rowCount() > 1)
-        {
-            $this->countAll = $stmt->rowCount();
-        } 
-        else
-        {
-            $this->countAll = $stmt->fetchColumn();
-        }
+        $this->countAll = $stmt->rowCount();
         
         return $this->countAll;  
     }	
@@ -141,7 +134,7 @@ class DynamicObjectMultiple extends DbObject {
 			$group = '';
 			$where = $this->where;
 			$f = array();
-			foreach (array_unique($this->fields) as $field) {
+			foreach (array_unique($this->fields) as $key => $field) {
 				if ($field == 'id' || $od->hasField($field)) {
 					$f[] = 'main.'.$field;
 					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);
@@ -158,9 +151,25 @@ class DynamicObjectMultiple extends DbObject {
 							if ($link['len'] != $od->id) {
 								throw new \Exception('field doesnt exist');
 							}
-							$from .= ' INNER JOIN `'.$link_od->table.'` link ON (main.id=link.'.$parts[1].')';
-							$f[] = 'link.`'.$parts[2].'` as `'.$field.'`';
-							$where = str_replace('`'.$field.'`', 'link.`'.$parts[2].'`', $where);
+							$from .= ' LEFT JOIN `'.$link_od->table.'` link'.$key.' ON (main.id=link'.$key.'.'.$parts[1].')';
+							$f[] = 'link'.$key.'.`'.$parts[2].'` as `'.$field.'`';
+							$where = str_replace('`'.$field.'`', 'link'.$key.'.`'.$parts[2].'`', $where);
+						}
+						elseif (count($parts) == 2) {
+							$link = $od->getField($parts[0]);
+							if (is_subclass_of($link, '\Cetera\ObjectFieldLinkSetAbstract')) {
+								$from .= ' LEFT JOIN `'.$link->getLinkTable().'` mlink'.$key.' ON (main.id=mlink'.$key.'.id) LEFT JOIN `'.$link->getTable().'` link'.$key.' ON (mlink'.$key.'.dest=link'.$key.'.id)';
+								$f[] = 'link'.$key.'.`'.$parts[1].'` as `'.$field.'`';
+								$where = str_replace('`'.$field.'`', 'link'.$key.'.`'.$parts[1].'`', $where);
+							}
+							elseif (is_subclass_of($link, '\Cetera\ObjectFieldLinkAbstract')) {
+								$from .= ' LEFT JOIN `'.$link->getTable().'` link'.$key.' ON (main.`'.$parts[0].'`=link'.$key.'.id)';
+								$f[] = 'link'.$key.'.`'.$parts[1].'` as `'.$field.'`';
+								$where = str_replace('`'.$field.'`', 'link'.$key.'.`'.$parts[1].'`', $where);
+							}
+							else {
+								throw new \Exception('field doesnt exist');
+							}
 						}
 						else {
 							throw new \Exception('field doesnt exist');
