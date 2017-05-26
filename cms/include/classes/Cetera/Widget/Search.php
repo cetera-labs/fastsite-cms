@@ -75,7 +75,7 @@ class Search extends Templateable {
 					$sections =  array_merge($sections, $c->getSubs());
 					else $sections[] = $c->id;
 			}
-			$where = 'idcat IN ('.implode(',', array_unique($sections)) .')';
+			$where = '`idcat` IN ('.implode(',', array_unique($sections)) .')';
 			
 			$where2 = $this->buildWhere();
 						
@@ -180,8 +180,10 @@ class Search extends Templateable {
 	{
 		$f = trim($this->getParam('fields'));
 		if (!$f) $f = 'name';
-		$fields = explode(',', $f);
-		array_walk($fields, 'trim');
+		$fields = array();
+		foreach (explode(',', $f) as $field) {
+			$fields[] = trim($field);
+		}
 		return $fields;
 	}		
 	
@@ -195,6 +197,7 @@ class Search extends Templateable {
 		
 		$res = array();
 		foreach ($fields as $f) {
+			$f = '`'.$f.'`';
 			$res2 = array();
 			foreach ($words as $key => $word) {
 				$res3 = array();

@@ -2,176 +2,1229 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-03-12 15:33+0300\n"
-"PO-Revision-Date: 2016-12-22 14:42+0300\n"
+"POT-Creation-Date: 2017-05-26 08:25+0300\n"
+"PO-Revision-Date: 2017-05-26 08:26+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"Language: ru\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.8.11\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: bo.php:144
-msgid "Загрузка ..."
+#: app.js:143 include/setup.php:109
+msgid "Структура"
+msgstr "Структура"
+
+#: app.js:183
+msgid "Навигация"
+msgstr "Навигация"
+
+#: app/catalog/Create.js:37 app/window/CatalogEdit.js:182
+#: include/ui_cat_props.php:538 lang/data.php:95
+msgid "Тип материалов"
+msgstr "Тип материалов"
+
+#: app/field/Image.js:164 app/fileselect/Panel.js:69
+msgid "Кадрировать"
+msgstr ""
+
+#: app/field/Image.js:174
+msgid "Восстановить"
+msgstr ""
+
+#: app/field/SectionController.js:7 include/ui_cat_props.php:511
+msgid "Контроллер"
+msgstr ""
+
+#: app/field/SectionController.js:133
+msgid "Виджет не найден"
+msgstr ""
+
+#: app/field/SectionController.js:133
+msgid "Создать виджет?"
+msgstr ""
+
+#: app/field/SectionController.js:145 app/widget/Panel.js:168 lang/data.php:54
+msgid "Область"
+msgstr ""
+
+#: app/fileselect/Panel.js:25 lang/data.php:162
+#, fuzzy
+msgid "Загрузить файл"
 msgstr "Загрузка ..."
 
-#: bo.php:182
-msgid "Ошибка"
-msgstr "Ошибка"
-
-#: bo.php:183
-msgid "Ошибка создания класса"
-msgstr "Ошибка создания класса"
-
-#: bo.php:318
-msgid "Добро пожаловать"
-msgstr "Добро пожаловать"
-
-#: bo.php:364
-msgid "Система контент-менеджмента веб-сайтов"
-msgstr "Система контент-менеджмента веб-сайтов"
-
-#: bo.php:366
-msgid "Компания"
-msgstr "Компания"
-
-#: login.php:28
-msgid "Пользователь не найден"
-msgstr "Пользователь не найден"
-
-#: login.php:33
-msgid "Неправильный пароль"
-msgstr "Неправильный пароль"
-
-#: login.php:49
-msgid "Вход в систему"
-msgstr "Вход в систему"
-
-#: login.php:67 setup.php:294
+#: app/fileselect/Panel.js:45 lang/data.php:166
 #, fuzzy
-msgid "Подождите..."
+msgid "Создать каталог"
+msgstr "Невозможно создать каталог %s"
+
+#: app/fileselect/Panel.js:53 lang/data.php:167
+#, fuzzy
+msgid "Удалить каталог"
+msgstr "Удалить материал"
+
+#: app/fileselect/Panel.js:61 lang/data.php:168
+#, fuzzy
+msgid "Удалить файл"
+msgstr "Удалить поле?"
+
+#: app/fileselect/Panel.js:78 app/window/CatalogEdit.js:489
+#: include/ui_cat_props.php:146 include/ui_eventlog.php:64
+#: include/ui_groups.php:23 include/ui_users.php:85 include/welcome_new.php:255
+#: include/welcome_new.php:277 lang/data.php:142 lang/data.php:190
+msgid "Обновить"
+msgstr "Обновить"
+
+#: app/fileselect/Panel.js:333
+msgid "Выбрать уменьшенный"
+msgstr ""
+
+#: app/fileselect/Panel.js:339
+msgid "Оригинальный размер"
+msgstr ""
+
+#: app/fileselect/Panel.js:345
+msgid "Маленький"
+msgstr ""
+
+#: app/fileselect/Panel.js:351
+msgid "Средний"
+msgstr ""
+
+#: app/fileselect/Panel.js:357
+msgid "Большой"
+msgstr ""
+
+#: app/fileselect/Panel.js:363
+msgid "пользовательский:"
+msgstr ""
+
+#: app/fileselect/Panel.js:402
+msgid "Ok"
+msgstr ""
+
+#: app/fileselect/Panel.js:414 app/panel/Menu.js:266 app/theme/Settings.js:75
+#: app/window/CatalogEdit.js:627 app/window/CatalogPrefs.js:24
+#: app/window/ImageCrop.js:27 app/window/MailTemplate.js:134
+#: include/editors/ckeditor/plugins/widgets/plugin.php:82
+#: include/ui_cat_props.php:280 include/ui_cat_props.php:785
+#: include/ui_cat_props.php:823 include/ui_groups.php:97
+#: include/ui_material_edit.php:415 lang/data.php:145
+msgid "Отмена"
+msgstr "Отмена"
+
+#: app/fileselect/Panel.js:639 app/window/Upload.js:87
+msgid "Загрузка"
+msgstr ""
+
+#: app/fileselect/Panel.js:644
+msgid "ожидание"
+msgstr ""
+
+#: app/fileselect/Panel.js:670 app/window/Upload.js:102 include/setup.php:318
+msgid "Ошибка!"
+msgstr "Ошибка!"
+
+#: app/grid/MailTemplates.js:18 lang/data.php:47
+msgid "Акт."
+msgstr ""
+
+#: app/grid/MailTemplates.js:18
+msgid "Да"
+msgstr ""
+
+#: app/grid/MailTemplates.js:18
+msgid "Нет"
+msgstr ""
+
+#: app/grid/MailTemplates.js:20 app/window/MailTemplate.js:37
+#: include/ui_eventlog.php:100
+#, fuzzy
+msgid "Событие"
+msgstr "Свойства"
+
+#: app/grid/MailTemplates.js:30 app/window/MailTemplate.js:100 lang/data.php:48
+#, fuzzy
+msgid "Тема"
+msgstr "Отмена"
+
+#: app/main/Header.js:28
+msgid "Сообщить об ошибке"
+msgstr ""
+
+#: app/main/Header.js:34
+msgid "Справка"
+msgstr "Справка"
+
+#: app/main/Header.js:36
+msgid "Руководство пользователя"
+msgstr ""
+
+#: app/main/Header.js:40
+msgid "Руководство разработчика"
+msgstr ""
+
+#: app/main/Header.js:44
+msgid "Вопросы и ответы"
+msgstr ""
+
+#: app/panel/Menu.js:22 app/panel/Menu.js:289
+msgid "Добавить меню"
+msgstr ""
+
+#: app/panel/Menu.js:29 app/panel/Menu.js:376
+msgid "Удалить меню"
+msgstr ""
+
+#: app/panel/Menu.js:36
+msgid "Переименовать"
+msgstr ""
+
+#: app/panel/Menu.js:44
+msgid "Добавить ссылку"
+msgstr ""
+
+#: app/panel/Menu.js:52
+msgid "Изменить ссылку"
+msgstr ""
+
+#: app/panel/Menu.js:60
+msgid "Удалить элемент"
+msgstr ""
+
+#: app/panel/Menu.js:301
+msgid "Добавить внешнюю ссылку"
+msgstr ""
+
+#: app/panel/Menu.js:316 app/panel/Menu.js:331 include/ui_material_edit.php:135
+#: lang/data.php:98
+msgid "Заголовок"
+msgstr "Заголовок"
+
+#: app/panel/Menu.js:325
+msgid "Изменить внешнюю ссылку"
+msgstr ""
+
+#: app/panel/Menu.js:346
+msgid "Переименовать меню"
+msgstr ""
+
+#: app/panel/Menu.js:376 lang/data.php:191
+msgid "Вы уверены?"
+msgstr ""
+
+#: app/panel/Repair.js:34
+msgid "анализировать структуру БД"
+msgstr ""
+
+#: app/panel/Repair.js:44
+#, fuzzy
+msgid "игнорировать лишние поля в таблицах"
+msgstr "Редактирование ключевых слов"
+
+#: app/panel/Repair.js:50
+msgid "игнорировать лишние индексы в таблицах"
+msgstr ""
+
+#: app/panel/Repair.js:65
+#, fuzzy
+msgid "Анализировать"
+msgstr "Копировать"
+
+#: app/panel/Repair.js:71
+msgid "Исправить обнаруженные ошибки"
+msgstr ""
+
+#: app/panel/Repair.js:89 app/panel/Repair.js:105 app/window/CatalogEdit.js:700
+#: include/ui_cat_props.php:734 include/ui_groups.php:239
+#: include/ui_material_edit.php:501 lang/data.php:143 lang/data.php:208
+#: widgets/list/default.twig:42
+msgid "Подождите ..."
 msgstr "Подождите ..."
 
-#: login.php:89 setup.php:125
-msgid "Пользователь"
-msgstr "Пользователь"
+#: app/panel/Repair.js:92
+msgid "Ошибок не обнаружено."
+msgstr ""
 
-#: login.php:93 setup.php:127
-msgid "Пароль"
-msgstr "Пароль"
+#: app/plugin/Add.js:27
+msgid "Открыть счет в банке \"Точка\""
+msgstr ""
 
-#: login.php:99 setup.php:173
-msgid "Язык"
-msgstr "Язык"
+#: app/plugin/Add.js:32
+msgid "Заказать модуль"
+msgstr ""
 
-#: login.php:129
-msgid "запомнить"
-msgstr "запомнить"
+#: app/theme/Add.js:27
+msgid "Заказ индивидуального дизайна"
+msgstr ""
 
-#: login.php:156
-msgid "Вход"
-msgstr "Вход"
+#: app/theme/Add.js:29
+msgid "Темы от Cetera"
+msgstr ""
 
-#: setup.php:35
-msgid "уже установлена"
-msgstr "уже установлена"
+#: app/theme/Add.js:31
+msgid "Темы от сообщества"
+msgstr ""
 
-#: setup.php:52
-msgid "Назад"
-msgstr "Назад"
+#: app/theme/List.js:61 app/theme/Settings.js:5
+msgid "Конфигурация"
+msgstr ""
 
-#: setup.php:60
-msgid "Повторить"
-msgstr "Повторить"
+#: app/theme/List.js:71 app/theme/List.js:77
+msgid "Выгрузить в MarketPlace"
+msgstr ""
 
-#: setup.php:67
-msgid "Дальше"
-msgstr "Дальше"
+#: app/theme/List.js:80
+msgid "Успешное завершение"
+msgstr ""
 
-#: setup.php:110
-#, php-format
-msgid "установка системы %s прошла успешно"
-msgstr "<h1>Поздравляем!</h1>Установка системы <strong>%s</strong> прошла успешно.<br /><br />Нажмите кнопку \"Дальше\" для входа в систему."
+#: app/theme/List.js:80
+msgid "Тема выгружена в MarketPlace"
+msgstr ""
 
-#: setup.php:124
-msgid "Введите данные администратора системы"
-msgstr "Введите данные администратора системы"
+#: app/theme/Settings.js:25
+msgid "Идентификатор"
+msgstr ""
 
-#: setup.php:126
-msgid "E-mail"
-msgstr "E-mail"
+#: app/theme/Settings.js:32
+msgid "Название"
+msgstr ""
 
-#: setup.php:128
-msgid "Повторите пароль"
-msgstr "Повторите пароль"
+#: app/theme/Settings.js:38 include/ui_material_edit.php:133 lang/data.php:99
+#: lang/data.php:197
+msgid "Автор"
+msgstr "Автор"
 
-#: setup.php:147
-msgid "Настройка доступа к БД MySQL"
-msgstr "Настройка доступа к БД MySQL"
+#: app/theme/Settings.js:44
+msgid "Версия темы"
+msgstr ""
 
-#: setup.php:206
-msgid "Добро пожаловать в программу установки"
-msgstr "Добро пожаловать в программу установки"
+#: app/theme/Settings.js:51 app/window/CatalogEdit.js:589
+#: include/ui_cat_props.php:242 include/ui_groups.php:74
+#: include/ui_groups.php:127 lang/data.php:76
+msgid "Описание"
+msgstr "Описание"
 
-#: include/action_files.php:68
+#: app/theme/Settings.js:56
+msgid "запретить обновление темы"
+msgstr ""
+
+#: app/theme/Settings.js:61
+msgid "режим разработчика"
+msgstr ""
+
+#: app/theme/Settings.js:69 app/window/CatalogPrefs.js:18
+#: app/window/MailTemplate.js:125 include/ui_cat_props.php:779
+#: include/ui_cat_props.php:817 include/ui_material_edit.php:405
+#: lang/data.php:144
+msgid "OK"
+msgstr "OK"
+
+#: app/widget/ContainerMain.js:172 lang/data.php:56
+#, fuzzy
+msgid "Шаблон"
+msgstr "Каталог"
+
+#: app/widget/List.js:44
+msgid "Возрастанию"
+msgstr ""
+
+#: app/widget/List.js:45
+msgid "Убыванию"
+msgstr ""
+
+#: app/widget/List.js:59
+msgid "Ссылка на раздел"
+msgstr "Ссылка на раздел"
+
+#: app/widget/List.js:65
+msgid "Страницы"
+msgstr ""
+
+#: app/widget/List.js:74
+msgid "показать навигацию"
+msgstr ""
+
+#: app/widget/List.js:78
+msgid "AJAX навигация"
+msgstr ""
+
+#: app/widget/List.js:83
+msgid "бесконечная лента"
+msgstr ""
+
+#: app/widget/List.js:98
+msgid "query параметр"
+msgstr ""
+
+#: app/widget/List.js:103
+msgid "ссылка на страницу"
+msgstr ""
+
+#: app/widget/Material.js:35
+msgid "показать кнопки шаринга в соцсетях"
+msgstr ""
+
+#: app/widget/Material.js:42
+msgid "показать иллюстрацию"
+msgstr ""
+
+#: app/widget/Menu.js:33
+msgid ""
+"Если корневой раздел не указан, будет использован раздел той страницы, на "
+"которой показан виджет."
+msgstr ""
+
+#: app/widget/Menu.js:34
+msgid "Для вывода всех подразделов установите глубину = 0"
+msgstr ""
+
+#: app/widget/Widget.js:12
+msgid "Виджет"
+msgstr ""
+
+#: app/widget/Widget.js:158 lang/data.php:187
+msgid "отключен"
+msgstr ""
+
+#: app/window/CatalogEdit.js:86 lang/data.php:50
+msgid "Применить"
+msgstr ""
+
+#: app/window/CatalogEdit.js:149 include/classes/Cetera/Plugin.php:172
+#: include/classes/Cetera/Theme.php:56 include/classes/Cetera/Theme.php:59
+#: include/setup.php:307 include/ui_cat_props.php:494
+msgid "Каталог"
+msgstr "Каталог"
+
+#: app/window/CatalogEdit.js:168 include/ui_cat_props.php:525
+#, fuzzy
+msgid "Размещение"
+msgstr "Размер"
+
+#: app/window/CatalogEdit.js:193 include/ui_cat_props.php:548
+#, fuzzy
+msgid "автоматически заполнять alias материалов"
+msgstr "Количество материалов"
+
+#: app/window/CatalogEdit.js:211 include/ui_cat_props.php:565
+#, fuzzy
+msgid "на основании даты"
+msgstr "Название редактора"
+
+#: app/window/CatalogEdit.js:222 include/ui_cat_props.php:575
+msgid "транслит заголовка"
+msgstr ""
+
+#: app/window/CatalogEdit.js:233
+msgid "ID материала"
+msgstr ""
+
+#: app/window/CatalogEdit.js:243 include/ui_cat_props.php:584
+#, fuzzy
+msgid "скрытый"
+msgstr "Закрыть"
+
+#: app/window/CatalogEdit.js:257 include/ui_cat_props.php:596
+msgid "Связан с"
+msgstr ""
+
+#: app/window/CatalogEdit.js:317 app/window/CatalogEdit.js:404
+#: include/ui_cat_props.php:320 include/ui_cat_props.php:632
+#, fuzzy
+msgid "Разрешения"
+msgstr "Разделы"
+
+#: app/window/CatalogEdit.js:322 include/ui_cat_props.php:325
+#, fuzzy
+msgid "Разрешить"
+msgstr "Разрешить доступ"
+
+#: app/window/CatalogEdit.js:411 include/ui_cat_props.php:639
+#, fuzzy
+msgid "наследовать разрешения родительского раздела"
+msgstr "создать ссылки для подразделов"
+
+#: app/window/CatalogEdit.js:429 include/ui_cat_props.php:657
+#: include/ui_material_edit.php:293
+msgid "Группы"
+msgstr "Группы"
+
+#: app/window/CatalogEdit.js:474 app/window/CatalogEdit.js:587
+#: include/ui_cat_props.php:130 include/ui_cat_props.php:240
+#: include/ui_cat_props.php:457 include/ui_groups.php:126
+#: include/ui_users.php:49 lang/data.php:173
+msgid "Имя"
+msgstr "Имя"
+
+#: app/window/CatalogEdit.js:479 app/window/CatalogEdit.js:588
+#: include/ui_cat_props.php:135 include/ui_cat_props.php:241
+#, fuzzy
+msgid "Значение"
+msgstr "Описание"
+
+#: app/window/CatalogEdit.js:494 include/ui_cat_props.php:151
+#, fuzzy
+msgid "Новая переменная"
+msgstr "Подтверждение"
+
+#: app/window/CatalogEdit.js:506 include/ui_cat_props.php:162
+msgid "Редактировать"
+msgstr "Редактировать"
+
+#: app/window/CatalogEdit.js:520 include/ui_cat_props.php:175
+#: include/ui_groups.php:36 include/ui_users.php:97 lang/data.php:107
+#: lang/data.php:152
+msgid "Удалить"
+msgstr "Удалить"
+
+#: app/window/CatalogEdit.js:530 include/ui_cat_props.php:184
+msgid "Переопределить"
+msgstr ""
+
+#: app/window/CatalogEdit.js:544 include/ui_cat_props.php:197
+msgid "Удалить переопределение"
+msgstr ""
+
+#: app/window/CatalogEdit.js:606
+#: include/editors/ckeditor/plugins/widgets/plugin.php:42
+#: include/ui_cat_props.php:259 include/ui_groups.php:93
+msgid "ОК"
+msgstr "ОК"
+
+#: app/window/CatalogEdit.js:638 include/ui_cat_props.php:669
+#, fuzzy
+msgid "Переменные"
+msgstr "Переместить"
+
+#: app/window/CatalogPrefs.js:6 include/ui_cat_props.php:807
+msgid "Настройки раздела"
+msgstr ""
+
+#: app/window/CatalogPrefs.js:57 include/ui_cat_props.php:871
+msgid "Поле"
+msgstr ""
+
+#: app/window/CatalogPrefs.js:63 include/ui_cat_props.php:876
+msgid "Показать"
+msgstr ""
+
+#: app/window/CatalogPrefs.js:72 include/ui_cat_props.php:885
+msgid "Скрыть"
+msgstr ""
+
+#: app/window/CatalogPrefs.js:95 include/ui_cat_props.php:908
+msgid "Видимость полей"
+msgstr ""
+
+#: app/window/CatalogPrefs.js:104 include/ui_cat_props.php:917
+msgid "наследовать настройки родительского раздела"
+msgstr ""
+
+#: app/window/MailTemplate.js:1 app/window/MailTemplate.js:15
+msgid "Почтовый шаблон"
+msgstr ""
+
+#: app/window/MailTemplate.js:57
+msgid "Активен"
+msgstr ""
+
+#: app/window/MailTemplate.js:62
+msgid "Тип письма"
+msgstr ""
+
+#: app/window/MailTemplate.js:72
+msgid "Текст"
+msgstr ""
+
+#: app/window/MailTemplate.js:81
+msgid "От кого"
+msgstr ""
+
+#: app/window/MailTemplate.js:90
+msgid "Кому"
+msgstr ""
+
+#: app/window/MailTemplate.js:110 include/welcome_new.php:226
+msgid "Сообщение"
+msgstr ""
+
+#: app/window/MailTemplate.js:142
+msgid "Параметры"
+msgstr ""
+
+#: include/action_check.php:8
+msgid "таблица не найдела"
+msgstr ""
+
+#: include/action_check.php:9
+msgid "неверный тип таблицы"
+msgstr ""
+
+#: include/action_check.php:10 include/action_check.php:17
+msgid "не найдено поле"
+msgstr ""
+
+#: include/action_check.php:11
+msgid "лишнее поле"
+msgstr ""
+
+#: include/action_check.php:12 include/action_check.php:18
+msgid "неверное поле"
+msgstr ""
+
+#: include/action_check.php:13
+msgid "лишний индекс"
+msgstr ""
+
+#: include/action_check.php:14
+msgid "не найден индекс"
+msgstr ""
+
+#: include/action_check.php:15
+msgid "неверный индекс"
+msgstr ""
+
+#: include/action_check.php:16
+msgid "не найден тип материалов"
+msgstr ""
+
+#: include/action_check.php:19
+msgid "Не найден виджет"
+msgstr ""
+
+#: include/action_check.php:38
+msgid "Модуль"
+msgstr ""
+
+#: include/action_check.php:39 include/action_fix.php:32
+msgid "Таблица"
+msgstr ""
+
+#: include/action_check.php:43
+msgid "ожилалось"
+msgstr ""
+
+#: include/action_check.php:48
+msgid "Обнаружены ошибки в структуре БД"
+msgstr ""
+
+#: include/action_check.php:56
+msgid "Нарушено правило"
+msgstr ""
+
+#: include/action_check.php:57
+msgid "Левый ключ ВСЕГДА меньше правого"
+msgstr ""
+
+#: include/action_check.php:58
+msgid "Наименьший левый ключ ВСЕГДА равен 1"
+msgstr ""
+
+#: include/action_check.php:59
+msgid "Наибольший правый ключ ВСЕГДА равен двойному числу узлов"
+msgstr ""
+
+#: include/action_check.php:60
+msgid "Разница между правым и левым ключом ВСЕГДА нечетное число"
+msgstr ""
+
+#: include/action_check.php:61
+msgid ""
+"Если уровень узла нечетное число то тогда левый ключ ВСЕГДА нечетное число, "
+"то же самое и для четных чисел"
+msgstr ""
+
+#: include/action_check.php:62
+msgid "Ключи ВСЕГДА уникальны, вне зависимости от того правый он или левый"
+msgstr ""
+
+#: include/action_check.php:95
+msgid "Обнаружены ошибки в структуре разделов"
+msgstr ""
+
+#: include/action_del_widget.php:7
+msgid "Виджет защищен."
+msgstr ""
+
+#: include/action_files.php:71
+msgid "Невозможно сохранить файл"
+msgstr ""
+
+#: include/action_files.php:143
+msgid "Нет файла"
+msgstr ""
+
+#: include/action_files.php:150 include/ck_file_uploader.php:10
 msgid "Слишком большой размер файла"
 msgstr "Слишком большой размер файла"
 
-#: include/action_files.php:71
+#: include/action_files.php:153 include/ck_file_uploader.php:13
 #, fuzzy
 msgid "Ошибка. Загружена лишь часть файла"
 msgstr "Ошибка загрузки окна"
 
-#: include/action_files.php:74
+#: include/action_files.php:156 include/ck_file_uploader.php:16
 #, fuzzy
 msgid "Ошибка. Нет файла"
 msgstr "Выбор файла"
 
-#: include/action_files.php:77
+#: include/action_files.php:159 include/ck_file_uploader.php:19
 msgid "Не найден временный каталог для сохранения загруженного файла"
 msgstr ""
 
-#: include/action_files.php:80
+#: include/action_files.php:162 include/ck_file_uploader.php:22
 #, fuzzy
 msgid "Ошибка при сохранении загруженного файла"
 msgstr "Ошибка при выборе базы данных"
 
-#: include/action_files.php:83
+#: include/action_files.php:165 include/ck_file_uploader.php:25
 #, fuzzy
 msgid "Невозможно загрузить данный тип файла"
 msgstr "Невозможно создать файл %s"
 
-#: include/action_files.php:90
-#, fuzzy
-msgid "Каталог \""
-msgstr "Каталог"
+#: include/action_files.php:180 include/ck_file_uploader.php:36
+#, php-format
+msgid "Каталог \"%s\" недоступен для записи"
+msgstr ""
 
-#: include/action_files.php:99
+#: include/action_files.php:215
 #, fuzzy
 msgid "Не удалось удалить файл."
 msgstr "Невозможно создать файл %s"
 
-#: include/action_groups.php:42
+#: include/action_fix.php:50 include/action_upgrade.php:51 lang/data.php:179
+msgid "Ошибка"
+msgstr "Ошибка"
+
+#: include/action_fix.php:155
+msgid "Структура разделов"
+msgstr ""
+
+#: include/action_groups.php:43
 #, fuzzy
 msgid "Группа с таким именем уже существует."
 msgstr "Такой раздел уже существует"
+
+#: include/action_login.php:13 include/action_login.php:45
+#: include/classes/Cetera/Exception/CMS.php:112
+#: include/classes/Cetera/Widget/User/Recover.php:42
+msgid "Пользователь не найден"
+msgstr "Пользователь не найден"
+
+#: include/action_login.php:19
+msgid "Новый пароль отправлен"
+msgstr ""
+
+#: include/action_login.php:50 include/classes/Cetera/Exception/CMS.php:113
+msgid "Неправильный пароль"
+msgstr "Неправильный пароль"
+
+#: include/action_themes.php:53
+msgid "Не указан ключ разработчика"
+msgstr ""
 
 #: include/action_types.php:20
 msgid "Неизвестная ошибка"
 msgstr "Неизвестная ошибка"
 
-#: include/action_types.php:67
+#: include/action_types.php:107
 msgid "Файлы"
 msgstr "Файлы"
 
-#: include/action_types.php:78
+#: include/action_types.php:148 include/field_editors.php:179
 msgid "Ключевые слова"
 msgstr "Ключевые слова"
+
+#: include/action_upgrade.php:41
+msgid "Проверка совместимости"
+msgstr ""
+
+#: include/action_upgrade.php:71 upgrade.php:95 upgrade.php:198
+msgid "Не удалось распаковать архив"
+msgstr ""
+
+#: include/action_upgrade.php:76 upgrade.php:104 upgrade.php:205
+msgid "Не удалось открыть архив"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:916
+#, fuzzy
+msgid "Все"
+msgstr "Выше"
+
+#: include/classes/Cetera/Application.php:922
+#, fuzzy
+msgid "Пользователи BackOffice"
+msgstr "Пользователи"
+
+#: include/classes/Cetera/Application.php:923
+msgid "Имеют право входа в систему управления сайтом"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:928
+msgid "Администраторы"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:929
+msgid "Администраторы имеют полные, ничем неограниченные права доступа"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1142
+#, php-format
+msgid "Виджет \"%s\" не зарегистрирован"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1213
+msgid "Контейнер"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1221
+msgid "Меню раздела"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1228
+msgid "Пользовательское меню"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1235
+msgid "Список материалов"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1249 include/field_editors.php:167
+#: include/setup.php:210 include/setup.php:268 lang/data.php:159
+msgid "Файл"
+msgstr "Файл"
+
+#: include/classes/Cetera/Application.php:1256
+msgid "Страничная навигация"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1263
+msgid "\"Хлебные крошки\""
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1270
+msgid "Поиск по сайту"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1277 include/field_editors.php:174
+#: lang/data.php:181
+msgid "Материал"
+msgstr "Материал"
+
+#: include/classes/Cetera/Application.php:1291
+msgid "Календарь"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1298
+msgid "Форма входа"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1305
+msgid "Форма регистрации"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1312
+msgid "Персональные данные"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1319
+msgid "Форма восстановления пароля"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1332
+msgid "ID пользователя"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1333
+msgid "E-mail пользователя"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1334
+msgid "Имя пользователя"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1335
+msgid "Пароль пользователя"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1336
+msgid "Имя сайта"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1337
+msgid "Адрес сайта"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1340
+msgid "Регистрация пользователя"
+msgstr ""
+
+#: include/classes/Cetera/Application.php:1341
+msgid "Восстановление пароля пользователя"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:102
+msgid "Материалы"
+msgstr "Материалы"
+
+#: include/classes/Cetera/BackOffice.php:113
+msgid "Шаблоны виджетов"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:122
+msgid "Области"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:130 lang/data.php:57
+msgid "Меню"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:138
+msgid "Типы материалов"
+msgstr "Типы материалов"
+
+#: include/classes/Cetera/BackOffice.php:146 lang/data.php:118
+msgid "Пользователи"
+msgstr "Пользователи"
+
+#: include/classes/Cetera/BackOffice.php:155
+#, fuzzy
+msgid "Группы пользователей"
+msgstr "Выбор пользователей"
+
+#: include/classes/Cetera/BackOffice.php:164
+#, fuzzy
+msgid "Журнал"
+msgstr "Справка"
+
+#: include/classes/Cetera/BackOffice.php:173
+#, fuzzy
+msgid "Проверка и ремонт БД"
+msgstr "Проверка закончена"
+
+#: include/classes/Cetera/BackOffice.php:182
+msgid "Почтовые шаблоны"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:190 include/data_ui.php:35
+msgid "Плагины"
+msgstr "Плагины"
+
+#: include/classes/Cetera/BackOffice.php:196 lang/data.php:193
+msgid "Добавить плагин"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:205
+msgid "Темы"
+msgstr ""
+
+#: include/classes/Cetera/BackOffice.php:211 lang/data.php:44
+msgid "Установить тему"
+msgstr ""
+
+#: include/classes/Cetera/Catalog.php:1369 include/ui_cat_props.php:24
+#, fuzzy
+msgid "Работа со своими материалами"
+msgstr "Редактирование материала"
+
+#: include/classes/Cetera/Catalog.php:1370 include/ui_cat_props.php:25
+#, fuzzy
+msgid "Работа с материалами других авторов"
+msgstr "Показать материалы из подразделов"
+
+#: include/classes/Cetera/Catalog.php:1371 include/ui_cat_props.php:26
+#, fuzzy
+msgid "Администрирование раздела"
+msgstr "Редактирование материала"
+
+#: include/classes/Cetera/Catalog.php:1372 include/ui_cat_props.php:27
+msgid "Возможность видеть раздел в структуре"
+msgstr ""
+
+#: include/classes/Cetera/Catalog.php:1373 include/ui_cat_props.php:28
+#, fuzzy
+msgid "Публикация материалов"
+msgstr "Группа материалов"
+
+#: include/classes/Cetera/Catalog.php:1402 include/ui_cat_props.php:69
+#: include/ui_groups.php:43 include/ui_groups.php:204
+#: include/ui_material_edit.php:92 include/ui_users.php:115 lang/data.php:71
+msgid "Свойства"
+msgstr "Свойства"
+
+#: include/classes/Cetera/Exception/CMS.php:107
+msgid "Исчерпан лимит на количество серверов в системе"
+msgstr "Исчерпан лимит на количество серверов в системе"
+
+#: include/classes/Cetera/Exception/CMS.php:108
+msgid "Неверный параметр"
+msgstr "Неверный параметр"
+
+#: include/classes/Cetera/Exception/CMS.php:109
+#, php-format
+msgid "Раздел уже существует \"%s\""
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:110
+msgid "Существует файл или каталог с таким именем"
+msgstr "Существует файл или каталог с таким именем"
+
+#: include/classes/Cetera/Exception/CMS.php:111
+msgid "Материал не найден"
+msgstr "Материал не найден"
+
+#: include/classes/Cetera/Exception/CMS.php:114
+msgid "Вы не опознаны"
+msgstr "Вы не опознаны. Повторите <b><a href=\"%s\">вход в систему</a></b>"
+
+#: include/classes/Cetera/Exception/CMS.php:115
+msgid "Неправильный E-mail"
+msgstr "Неправильный E-mail"
+
+#: include/classes/Cetera/Exception/CMS.php:116
+#, php-format
+msgid "Ошибка SQL: %s"
+msgstr "Ошибка SQL: %s"
+
+#: include/classes/Cetera/Exception/CMS.php:117
+msgid "Такой пользователь уже существует"
+msgstr "Такой пользователь уже существует"
+
+#: include/classes/Cetera/Exception/CMS.php:118
+#: include/classes/Cetera/Exception/CMS.php:119
+#: include/classes/Cetera/Exception/CMS.php:120
+#: include/classes/Cetera/Exception/CMS.php:125
+#: include/classes/Cetera/Exception/CMS.php:126
+#: include/classes/Cetera/Exception/CMS.php:131
+#: include/classes/Cetera/Exception/CMS.php:132
+#: include/classes/Cetera/Exception/CMS.php:133
+#: include/classes/Cetera/Exception/CMS.php:134
+#: include/classes/Cetera/Exception/CMS.php:135
+msgid "-"
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:121
+msgid "Такой E-mail уже существует"
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:122
+msgid "Невозможно содать тему обсуждения"
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:123
+msgid "Сообщение уже существует"
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:124 include/ui_cat_props.php:36
+msgid "Недостаточно полномочий для совершения этого действия"
+msgstr "Недостаточно полномочий для совершения этого действия"
+
+#: include/classes/Cetera/Exception/CMS.php:127
+msgid "Поле c таким Alias уже существует"
+msgstr ""
+
+#: include/classes/Cetera/Exception/CMS.php:128
+#, php-format
+msgid "Поле \"%s\" обязательно для заполнения"
+msgstr "Поле \"%s\" обязательно для заполнения"
+
+#: include/classes/Cetera/Exception/CMS.php:129
+msgid "Раздел не найден"
+msgstr "Раздел не найден"
+
+#: include/classes/Cetera/Exception/CMS.php:130
+#, fuzzy
+msgid "Материал с таким alias уже существует"
+msgstr "Такой раздел уже существует"
+
+#: include/classes/Cetera/Exception/CMS.php:136
+#, php-format
+msgid "Файл не найден: %s"
+msgstr "Файл не найден: %s"
+
+#: include/classes/Cetera/Exception/CMS.php:137
+msgid "Вы превысили лимит на количество материалов"
+msgstr "Вы превысили лимит на количество материалов"
+
+#: include/classes/Cetera/Exception/CMS.php:139
+#, php-format
+msgid "Неизвестная ошибка (%s)"
+msgstr "Неизвестная ошибка (%s)"
+
+#: include/classes/Cetera/Plugin.php:166
+msgid "Загрузка плагина"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:172 include/classes/Cetera/Theme.php:59
+msgid "недоступен для записи"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:187
+msgid "Не удалось скачать плагин."
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:188
+msgid "Переустановка ранее загруженного плагина"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:200
+msgid "Удаление предыдущей версии"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:205 include/classes/Cetera/Theme.php:80
+msgid "Распаковка архива"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:220 include/classes/Cetera/Theme.php:95
+msgid "Модификация БД"
+msgstr ""
+
+#: include/classes/Cetera/Plugin.php:237
+msgid "Проверка зависимостей:"
+msgstr ""
+
+#: include/classes/Cetera/Theme.php:51
+msgid "Загрузка темы"
+msgstr ""
+
+#: include/classes/Cetera/Theme.php:56
+msgid "не существует"
+msgstr ""
+
+#: include/classes/Cetera/Theme.php:104
+msgid "Начальная структура сайта"
+msgstr ""
+
+#: include/classes/Cetera/User.php:551
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:73
+msgid "Пользователь с таким e-mail уже зарегистрирован"
+msgstr ""
+
+#: include/classes/Cetera/User.php:557
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:45 include/setup.php:72
+#: include/setup.php:73
+msgid "Пароли не совпадают"
+msgstr "Пароли не совпадают"
+
+#: include/classes/Cetera/User.php:579
+msgid "У пользователя не указан e-mail"
+msgstr ""
+
+#: include/classes/Cetera/User.php:596
+msgid "Ваш пароль на сайт "
+msgstr ""
+
+#: include/classes/Cetera/User.php:597
+msgid "Ваш новый пароль: "
+msgstr ""
+
+#: include/classes/Cetera/Widget/Breadcrumbs.php:21
+msgid "Главная"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:31
+msgid "Январь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:32
+msgid "Февраль"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:33
+msgid "Март"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:34
+msgid "Апрель"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:35
+msgid "Май"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:36
+msgid "Июнь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:37
+msgid "Июль"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:38
+msgid "Август"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:39
+msgid "Сентябрь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:40
+msgid "Октябрь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:41
+msgid "Ноябрь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Calendar.php:42
+msgid "Декабрь"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Search.php:31
+msgid "Введите строку для поиска"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Search.php:32
+msgid "Искать"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Section.php:45
+msgid "Страница не найдена"
+msgstr ""
+
+#: include/classes/Cetera/Widget/Traits/ReCaptcha.php:32
+msgid "Проверка не пройдена"
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:48
+msgid "Вы ввели неправильный пароль"
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:86
+msgid "Данные сохранены"
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:100
+msgid "Данные не сохранены. Исправьте ошибки и повторите попытку."
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:133
+msgid "Старый пароль"
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:142
+msgid "Новый пароль"
+msgstr ""
+
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:151 setup.php:161
+#: widgets/user.register/default.twig:27
+msgid "Повторите пароль"
+msgstr "Повторите пароль"
+
+#: include/classes/Cetera/Widget/User/Recover.php:52
+msgid "Новый пароль выслан вам по электронной почте"
+msgstr ""
+
+#: include/common_eventlog.php:3
+msgid "Вход в систему"
+msgstr "Вход в систему"
 
 #: include/common_eventlog.php:4
 #, fuzzy
@@ -222,2200 +1275,2033 @@ msgstr "Группа материалов"
 msgid "Разпубликован материал"
 msgstr "Группа материалов"
 
-#: include/common_types.php:101
-msgid "Тэг"
+#: include/common_eventlog.php:14
+msgid "Изменен пользователь"
 msgstr ""
 
-#: include/common_types.php:102
-msgid "Заголовок"
-msgstr "Заголовок"
-
-#: include/common_types.php:103
-msgid "Alias"
-msgstr "Alias"
-
-#: include/common_types.php:104
-msgid "Дата создания"
-msgstr "Дата создания"
-
-#: include/common_types.php:105
-#, fuzzy
-msgid "Дата изменения"
-msgstr "Дата создания"
-
-#: include/common_types.php:106
-msgid "Автор"
-msgstr "Автор"
-
-#: include/common_types.php:107
-msgid "Свойства"
-msgstr "Свойства"
-
-#: include/common_types.php:108
-#, fuzzy
-msgid "Раздел"
-msgstr "Разделы"
-
-#: include/component_file_field.php:54
-#, fuzzy
-msgid "Загрузить файл"
-msgstr "Загрузка ..."
-
-#: include/component_file_field.php:65
-#, fuzzy
-msgid "Загрузить несколько файлов"
-msgstr "Загрузка/редактирование группы файлов"
-
-#: include/component_file_field.php:73 include/component_file_field.php:486
-#, fuzzy
-msgid "Создать каталог"
-msgstr "Невозможно создать каталог %s"
-
-#: include/component_file_field.php:81 include/component_file_field.php:510
-#, fuzzy
-msgid "Удалить каталог"
-msgstr "Удалить материал"
-
-#: include/component_file_field.php:89 include/component_file_field.php:531
-#, fuzzy
-msgid "Удалить файл"
-msgstr "Удалить поле?"
-
-#: include/component_file_field.php:98 include/component_site_tree.php:105
-msgid "Обновить"
-msgstr "Обновить"
-
-#: include/component_file_field.php:115
-msgid "Таблица"
+#: include/data_plugins_lib.php:40 include/data_themes_lib.php:33
+#, php-format
+msgid "Не подходящая версия Cetera CMS. Требуется %s или выше"
 msgstr ""
 
-#: include/component_file_field.php:125
-#, fuzzy
-msgid "Эскизы"
-msgstr "Вниз"
-
-#: include/component_file_field.php:147
-#, fuzzy
-msgid "Выберите файл"
-msgstr "Выбор файла"
-
-#: include/component_file_field.php:148
-msgid "Файл"
-msgstr "Файл"
-
-#: include/component_file_field.php:160
-#, fuzzy
-msgid "Загрузка файла"
-msgstr "Загрузка ..."
-
-#: include/component_file_field.php:165
-#, fuzzy
-msgid "Загрузить"
-msgstr "Закрыть"
-
-#: include/component_file_field.php:186 include/component_file_field.php:598
-#: include/component_site_tree.php:170 include/component_user_select.php:33
-msgid "Отмена"
-msgstr "Отмена"
-
-#: include/component_file_field.php:195
-#, fuzzy
-msgid "Каталоги"
-msgstr "Каталог"
-
-#: include/component_file_field.php:257 include/component_file_field.php:321
-msgid "-- нет файлов --"
-msgstr "-- нет файлов --"
-
-#: include/component_file_field.php:259 include/component_user_select.php:181
-#: include/component_user_select.php:194
-msgid "Имя"
-msgstr "Имя"
-
-#: include/component_file_field.php:262
-msgid "Дата"
-msgstr "Дата"
-
-#: include/component_file_field.php:268
-msgid "Размер"
-msgstr "Размер"
-
-#: include/component_file_field.php:377
-#, fuzzy
-msgid "Недавние"
-msgstr "Удалить"
-
-#: include/component_file_field.php:486
-#, fuzzy
-msgid "Введите имя"
-msgstr "Доменное имя"
-
-#: include/component_file_field.php:510 include/component_file_field.php:531
-msgid "Вы уверены"
-msgstr "Вы уверены"
-
-#: include/component_file_field.php:553
-#, fuzzy
-msgid "Загрузка файлов"
-msgstr "Набор файлов"
-
-#: include/component_file_field.php:573
-msgid "Выбор файла"
-msgstr "Выбор файла"
-
-#: include/component_file_field.php:590
-msgid "ОК"
-msgstr "ОК"
-
-#: include/component_set_field.php:84
-msgid "Выше"
-msgstr "Выше"
-
-#: include/component_set_field.php:92
-msgid "Ниже"
-msgstr "Ниже"
-
-#: include/component_site_tree.php:164
-msgid "OK"
-msgstr "OK"
-
-#: include/component_user_select.php:20
-msgid "Пользователи"
-msgstr "Пользователи"
-
-#: include/component_user_select.php:27
-msgid "Ok"
+#: include/data_plugins_lib.php:45 include/data_themes_lib.php:38
+#, php-format
+msgid "Не подходящая версия Cetera CMS. Требуется не выше %s"
 msgstr ""
 
-#: include/component_user_select.php:140
-#, fuzzy
-msgid "Показывать только пользователей BackOffice"
-msgstr "Набор пользователей"
-
-#: include/component_user_select.php:147
-msgid "Фильтр"
+#: include/data_types.php:88
+msgid "Без материалов"
 msgstr ""
 
-#: include/component_user_select.php:180 include/component_user_select.php:193
-msgid "Псевдоним"
-msgstr "Псевдоним"
-
-#: include/component_user_select.php:227
-#, fuzzy
-msgid "Всего"
-msgstr "Выбор"
-
-#: include/field_editors.php:148
-msgid "Текстовый (1-65535 байт)"
-msgstr "Текстовый (1-65535 байт)"
-
-#: include/field_editors.php:149
-msgid "Большой текст (до 16 Мб)"
-msgstr "Большой текст (до 16 Мб)"
-
-#: include/field_editors.php:150
-msgid "Огромный текст (до 4 Гб)"
-msgstr "Огромный текст (до 4 Гб)"
-
-#: include/field_editors.php:151
-msgid "Целочисленный"
-msgstr "Целочисленный"
-
-#: include/field_editors.php:152
-msgid "Действительное число"
-msgstr "Действительное число"
-
-#: include/field_editors.php:154
-msgid "Дата/Время"
-msgstr "Дата/Время"
-
-#: include/field_editors.php:155
-msgid "Ссылка на другой материал"
-msgstr "Ссылка на другой материал"
-
-#: include/field_editors.php:156
-msgid "Ссылка на группу материалов"
-msgstr "Ссылка на группу материалов"
-
-#: include/field_editors.php:157
-msgid "Группа материалов"
-msgstr "Группа материалов"
-
-#: include/field_editors.php:158
-msgid "Логическое"
-msgstr "Логическое"
-
-#: include/field_editors.php:159
-msgid "Выбор"
-msgstr "Выбор"
-
-#: include/field_editors.php:161
-msgid "Ссылка"
-msgstr "Ссылка"
-
-#: include/field_editors.php:162
-msgid "Материал"
-msgstr "Материал"
-
-#: include/field_editors.php:163
-msgid "Набор файлов"
-msgstr "Набор файлов"
-
-#: include/field_editors.php:165
-msgid "Набор пользователей"
-msgstr "Набор пользователей"
-
-#: include/field_editors.php:168
-msgid "текст"
-msgstr "текст"
-
-#: include/field_editors.php:169
-msgid "структура"
-msgstr "структура"
-
-#: include/field_editors.php:172
-msgid "Однострочный редактор текста"
-msgstr "Однострочный редактор текста"
-
-#: include/field_editors.php:173
-msgid "WYSIWYG HTML редактор"
-msgstr "WYSIWYG HTML редактор"
-
-#: include/field_editors.php:174
-msgid "Ввод числовых значений"
-msgstr "Ввод числовых значений"
-
-#: include/field_editors.php:176
-msgid "Выбор даты/времени"
-msgstr "Выбор даты/времени"
-
-#: include/field_editors.php:177
-msgid "Выбор материала из структуры"
-msgstr "Выбор материала из структуры"
-
-#: include/field_editors.php:178
-msgid "Выбор группы материалов"
-msgstr "Выбор группы материалов"
-
-#: include/field_editors.php:179
-msgid "Редактирование группы материалов"
-msgstr "Редактирование группы материалов"
-
-#: include/field_editors.php:180
-msgid "Флажок (Checkbox)"
-msgstr "Флажок (Checkbox)"
-
-#: include/field_editors.php:181
-msgid "Выбор да/нет (Radio)"
-msgstr "Выбор да/нет (Radio)"
-
-#: include/field_editors.php:182
-msgid "Выпадающий список"
-msgstr "Выпадающий список"
-
-#: include/field_editors.php:183
-msgid "Выбор формы (выпадающий список)"
-msgstr "Выбор формы (выпадающий список)"
-
-#: include/field_editors.php:184
-msgid "Стандартный редактор ссылок"
-msgstr "Стандартный редактор ссылок"
-
-#: include/field_editors.php:185
-msgid "Однострочный редактор текста (только лат. и цифр. символы)"
-msgstr "Однострочный редактор текста (только лат. и цифр. символы)"
-
-#: include/field_editors.php:186
-msgid "Компактный WYSIWYG HTML редактор"
-msgstr "Компактный WYSIWYG HTML редактор"
-
-#: include/field_editors.php:187
-msgid "Многострочный редактор текста"
-msgstr "Многострочный редактор текста"
-
-#: include/field_editors.php:188
-msgid "отсутствует"
-msgstr "отсутствует"
-
-#: include/field_editors.php:189
-msgid "Специальный редактор"
-msgstr "Специальный редактор"
-
-#: include/field_editors.php:190
-msgid "Загрузка/редактирование группы файлов"
-msgstr "Загрузка/редактирование группы файлов"
-
-#: include/field_editors.php:191
-msgid "Выбор группы материалов флажками"
-msgstr "Выбор группы материалов флажками"
-
-#: include/field_editors.php:192
-msgid "Загрузка/редактирование изображений"
-msgstr "Загрузка/редактирование изображений"
-
-#: include/field_editors.php:193
-msgid "Выбор пользователя"
-msgstr "Выбор пользователя"
-
-#: include/field_editors.php:194
-msgid "Выбор пользователей"
-msgstr "Выбор пользователей"
-
-#: include/field_editors.php:195
-msgid "Редактирование материала"
-msgstr "Редактирование материала"
-
-#: include/field_editors.php:196
-msgid "Редактирование действительных чисел"
-msgstr "Редактирование действительных чисел"
-
-#: include/field_editors.php:197
-msgid "Редактирование ключевых слов"
-msgstr "Редактирование ключевых слов"
-
-#: include/field_editors.php:199
-msgid "CKEditor"
-msgstr ""
-
-#: include/htmleditor_plugins.php:65 include/htmleditor_plugins.php:67
-#, fuzzy
-msgid "Вставить/Редактировать изображение"
-msgstr "Загрузка/редактирование изображений"
-
-#: include/htmleditor_plugins.php:88
-msgid "URL"
-msgstr ""
-
-#: include/htmleditor_plugins.php:98
-msgid "Альтернативный текст"
-msgstr ""
-
-#: include/htmleditor_plugins.php:113
-#, fuzzy
-msgid "Ширина"
-msgstr "Справка"
-
-#: include/htmleditor_plugins.php:118
-#, fuzzy
-msgid "Высота"
-msgstr "Выход"
-
-#: include/htmleditor_plugins.php:123 include/htmleditor_plugins.php:271
-msgid "Бордюр"
-msgstr ""
-
-#: include/htmleditor_plugins.php:128
-msgid "Горизонтальный отступ"
-msgstr ""
-
-#: include/htmleditor_plugins.php:133
-#, fuzzy
-msgid "Вертикальный отступ"
-msgstr "Запретить доступ"
-
-#: include/htmleditor_plugins.php:137
-#, fuzzy
-msgid "Выравнивание"
-msgstr "Внимание!"
-
-#: include/htmleditor_plugins.php:144
-msgid "По левому краю"
-msgstr ""
-
-#: include/htmleditor_plugins.php:145
-msgid "Абс понизу"
-msgstr ""
-
-#: include/htmleditor_plugins.php:146
-#, fuzzy
-msgid "Абс посередине"
-msgstr "Подтверждение"
-
-#: include/htmleditor_plugins.php:147
-#, fuzzy
-msgid "По базовой линии"
-msgstr "Пользователи"
-
-#: include/htmleditor_plugins.php:148
-#, fuzzy
-msgid "Понизу"
-msgstr "Вниз"
-
-#: include/htmleditor_plugins.php:149
-#, fuzzy
-msgid "Посередине"
-msgstr "Подтверждение"
-
-#: include/htmleditor_plugins.php:150
-#, fuzzy
-msgid "По правому краю"
-msgstr "Справка"
-
-#: include/htmleditor_plugins.php:151
-msgid "Текст наверху"
-msgstr ""
-
-#: include/htmleditor_plugins.php:152
-#, fuzzy
-msgid "Поверху"
-msgstr "Вверх"
-
-#: include/htmleditor_plugins.php:167
-#, fuzzy
-msgid "Предварительный просмотр"
-msgstr "Неверный параметр"
-
-#: include/htmleditor_plugins.php:177
-#, fuzzy
-msgid "Свойства изображения"
-msgstr "Свойства раздела"
-
-#: include/htmleditor_plugins.php:266
-#, fuzzy
-msgid "Вставить таблицу"
-msgstr "Отменить публикацию"
-
-#: include/htmleditor_plugins.php:267
-#, fuzzy
-msgid "Вставить"
-msgstr "Сохранить"
-
-#: include/htmleditor_plugins.php:269
-#, fuzzy
-msgid "Строки"
-msgstr "Ссылка"
-
-#: include/htmleditor_plugins.php:270
-msgid "Столбцы"
-msgstr ""
-
-#: include/htmleditor_plugins.php:272
-#, fuzzy
-msgid "Пометить ячейки"
-msgstr "Изменить поле"
-
-#: include/main_menu.php:17 include/main_navigation.php:25
-msgid "Сайт"
-msgstr "Сайт"
-
-#: include/main_menu.php:30 include/main_navigation.php:36
-msgid "Интерактивы"
-msgstr "Интерактивы"
-
-#: include/main_menu.php:44 include/main_navigation.php:45
+#: include/data_ui.php:18
+msgid "Добро пожаловать"
+msgstr "Добро пожаловать"
+
+#: include/data_ui.php:27
 msgid "Сервис"
 msgstr "Сервис"
 
-#: include/main_menu.php:58 include/main_navigation.php:54
-msgid "Плагины"
-msgstr "Плагины"
+#: include/data_ui.php:31
+msgid "Сайт"
+msgstr "Сайт"
 
-#: include/main_menu.php:70
-msgid "Справка"
-msgstr "Справка"
+#: include/field_editors.php:162
+msgid "Текстовый (1-65535 байт)"
+msgstr "Текстовый (1-65535 байт)"
 
-#: include/main_menu.php:74
-msgid "О системе"
-msgstr "О системе"
+#: include/field_editors.php:163
+msgid "Большой текст (до 16 Мб)"
+msgstr "Большой текст (до 16 Мб)"
 
-#: include/main_menu.php:83
-msgid "Выход"
-msgstr "Выход"
+#: include/field_editors.php:164
+msgid "Огромный текст (до 4 Гб)"
+msgstr "Огромный текст (до 4 Гб)"
 
-#: include/main_navigation.php:14
-msgid "Навигация"
-msgstr "Навигация"
+#: include/field_editors.php:165
+msgid "Целочисленный"
+msgstr "Целочисленный"
 
-#: include/main_tree.php:14
-msgid "Разделы"
-msgstr "Разделы"
+#: include/field_editors.php:166
+msgid "Действительное число"
+msgstr "Действительное число"
 
-#: include/main_tree.php:39 include/main_tree.php:428
-msgid "Создать сервер"
-msgstr "Создать сервер"
+#: include/field_editors.php:168
+msgid "Дата/Время"
+msgstr "Дата/Время"
 
-#: include/main_tree.php:45 include/main_tree.php:436
-#: include/ui_cat_create.php:86
-msgid "Новый раздел"
-msgstr "Новый раздел"
+#: include/field_editors.php:169
+msgid "Ссылка на другой материал"
+msgstr "Ссылка на другой материал"
 
-#: include/main_tree.php:51 include/main_tree.php:443
-msgid "Создать ссылку на раздел"
-msgstr "Создать ссылку на раздел"
+#: include/field_editors.php:170
+msgid "Ссылка на группу материалов"
+msgstr "Ссылка на группу материалов"
 
-#: include/main_tree.php:59 include/main_tree.php:419
-#: include/ui_cat_props.php:43
-msgid "Свойства раздела"
-msgstr "Свойства раздела"
+#: include/field_editors.php:171 include/field_editors.php:190
+msgid "Группа материалов"
+msgstr "Группа материалов"
 
-#: include/main_tree.php:66 include/main_tree.php:450
-msgid "Вверх"
-msgstr "Вверх"
+#: include/field_editors.php:172
+msgid "Логическое"
+msgstr "Логическое"
 
-#: include/main_tree.php:73 include/main_tree.php:457
-msgid "Вниз"
-msgstr "Вниз"
+#: include/field_editors.php:173
+msgid "Выбор"
+msgstr "Выбор"
 
-#: include/main_tree.php:80 include/main_tree.php:464
-msgid "Копировать"
-msgstr "Копировать"
+#: include/field_editors.php:176
+msgid "Набор файлов"
+msgstr "Набор файлов"
 
-#: include/main_tree.php:87 include/main_tree.php:471
-#: include/ui_cat_props.php:552 include/ui_cat_props.php:701
-msgid "Удалить"
-msgstr "Удалить"
+#: include/field_editors.php:177 include/ui_eventlog.php:102
+#: include/ui_users.php:209 lang/data.php:132 setup.php:158
+msgid "Пользователь"
+msgstr "Пользователь"
 
-#: include/main_tree.php:323
-msgid "Копировать подразделы"
-msgstr "Копировать подразделы"
+#: include/field_editors.php:178
+msgid "Набор пользователей"
+msgstr "Набор пользователей"
 
-#: include/main_tree.php:324
-msgid "Копировать материалы"
-msgstr "Копировать материалы"
+#: include/field_editors.php:180
+msgid "Ссылка на разделы"
+msgstr ""
 
-#: include/main_tree.php:336 include/ui_cat_create.php:100
-#: include/ui_cat_props.php:653
-msgid "Подождите ..."
-msgstr "Подождите ..."
+#: include/field_editors.php:184
+msgid "Однострочный редактор текста"
+msgstr "Однострочный редактор текста"
 
-#: include/main_tree.php:356
-msgid "Копировать в"
-msgstr "Копировать в"
+#: include/field_editors.php:185
+msgid "Ввод числовых значений"
+msgstr "Ввод числовых значений"
 
-#: include/main_tree.php:378
-msgid "Подтверждение"
-msgstr "Подтверждение"
+#: include/field_editors.php:186 lang/data.php:164
+msgid "Выбор файла"
+msgstr "Выбор файла"
 
-#: include/main_tree.php:378
-msgid "Вы действительно хотите удалить раздел?"
-msgstr "Вы действительно хотите удалить раздел?"
+#: include/field_editors.php:187
+msgid "Выбор даты/времени"
+msgstr "Выбор даты/времени"
 
-#: include/setup.php:21 include/setup.php:22
-msgid "Пароли не совпадают"
-msgstr "Пароли не совпадают"
+#: include/field_editors.php:188
+msgid "Выбор материала из структуры"
+msgstr "Выбор материала из структуры"
 
-#: include/setup.php:50
+#: include/field_editors.php:189
+msgid "Выбор группы материалов"
+msgstr "Выбор группы материалов"
+
+#: include/field_editors.php:191
+msgid "Флажок (Checkbox)"
+msgstr "Флажок (Checkbox)"
+
+#: include/field_editors.php:192
+msgid "Выбор да/нет (Radio)"
+msgstr "Выбор да/нет (Radio)"
+
+#: include/field_editors.php:193
+msgid "Выпадающий список"
+msgstr "Выпадающий список"
+
+#: include/field_editors.php:194
+msgid "Выбор формы (выпадающий список)"
+msgstr "Выбор формы (выпадающий список)"
+
+#: include/field_editors.php:195
+msgid "Однострочный редактор текста (только лат. и цифр. символы)"
+msgstr "Однострочный редактор текста (только лат. и цифр. символы)"
+
+#: include/field_editors.php:196
+msgid "Многострочный редактор текста"
+msgstr "Многострочный редактор текста"
+
+#: include/field_editors.php:197
+msgid "отсутствует"
+msgstr "отсутствует"
+
+#: include/field_editors.php:198
+msgid "Специальный редактор"
+msgstr "Специальный редактор"
+
+#: include/field_editors.php:199
+msgid "Загрузка/редактирование группы файлов"
+msgstr "Загрузка/редактирование группы файлов"
+
+#: include/field_editors.php:200
+msgid "Выбор группы материалов флажками"
+msgstr "Выбор группы материалов флажками"
+
+#: include/field_editors.php:201
+msgid "Загрузка/редактирование изображений"
+msgstr "Загрузка/редактирование изображений"
+
+#: include/field_editors.php:202
+msgid "Выбор пользователя"
+msgstr "Выбор пользователя"
+
+#: include/field_editors.php:203
+msgid "Выбор пользователей"
+msgstr "Выбор пользователей"
+
+#: include/field_editors.php:204
+msgid "Редактирование материала"
+msgstr "Редактирование материала"
+
+#: include/field_editors.php:205
+msgid "Редактирование действительных чисел"
+msgstr "Редактирование действительных чисел"
+
+#: include/field_editors.php:206
+msgid "Редактирование ключевых слов"
+msgstr "Редактирование ключевых слов"
+
+#: include/field_editors.php:207 lang/data.php:133 setup.php:160
+#: widgets/user.auth/default.twig:19
+msgid "Пароль"
+msgstr "Пароль"
+
+#: include/field_editors.php:208
+msgid "CKEditor"
+msgstr ""
+
+#: include/field_editors.php:209
+msgid "Выбор разделов"
+msgstr ""
+
+#: include/field_editors.php:210
+msgid "CKEditor малый"
+msgstr ""
+
+#: include/field_editors.php:211
+msgid "Выбор рисунка"
+msgstr ""
+
+#: include/field_editors.php:212
+msgid "Редактируемая группа материалов"
+msgstr ""
+
+#: include/setup.php:94
 msgid "Установка кодировки БД"
 msgstr "Установка кодировки БД"
 
-#: include/setup.php:63
-msgid "Структура"
-msgstr "Структура"
-
-#: include/setup.php:75
+#: include/setup.php:121
 msgid "Данные"
 msgstr "Данные"
 
-#: include/setup.php:97
+#: include/setup.php:168
 msgid "Ошибка при выборе базы данных"
 msgstr "Ошибка при выборе базы данных"
 
-#: include/setup.php:105
+#: include/setup.php:176
 #, php-format
 msgid "Требуется версия MySQL не ниже %s<br />Обнаружена версия &mdash; %s"
 msgstr "Требуется версия MySQL не ниже %s<br />Обнаружена версия &mdash; %s"
 
-#: include/setup.php:124
+#: include/setup.php:192
 msgid "Проверка окружения"
 msgstr "Проверка окружения"
 
-#: include/setup.php:125
+#: include/setup.php:193
 msgid "требуется"
 msgstr "требуется"
 
-#: include/setup.php:125
+#: include/setup.php:193
 msgid "обнаружено"
 msgstr "обнаружено"
 
-#: include/setup.php:137
+#: include/setup.php:204
 msgid "Файловая система"
 msgstr "Файловая система"
 
-#: include/setup.php:149
-msgid "В процессе проверки конфигурации сервера были обнаружены критические ошибки.<br /><b>Установка невозможна.</b>"
-msgstr "В процессе проверки конфигурации сервера были обнаружены критические ошибки.<br /><b>Установка невозможна.</b>"
-
-#: include/setup.php:151
-msgid "В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. Рекомендуется устранить их перед продолжением установки."
-msgstr "В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. Рекомендуется устранить их перед продолжением установки."
-
-#: include/setup.php:152
-msgid "Проверка закончена"
-msgstr "Проверка закончена"
-
-#: include/setup.php:169
-#, php-format
-msgid "Файл %s недоступен для записи"
-msgstr "Файл %s недоступен для записи"
-
-#: include/setup.php:177
+#: include/setup.php:212 include/setup.php:263
 #, php-format
 msgid "Невозможно создать файл %s"
 msgstr "Невозможно создать файл %s"
 
-#: include/setup.php:197
+#: include/setup.php:229
+msgid ""
+"В процессе проверки конфигурации сервера были обнаружены критические ошибки."
+"<br /><b>Установка невозможна.</b>"
+msgstr ""
+"В процессе проверки конфигурации сервера были обнаружены критические ошибки."
+"<br /><b>Установка невозможна.</b>"
+
+#: include/setup.php:231
+msgid ""
+"В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. "
+"Рекомендуется устранить их перед продолжением установки."
+msgstr ""
+"В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. "
+"Рекомендуется устранить их перед продолжением установки."
+
+#: include/setup.php:232
+msgid "Проверка закончена"
+msgstr "Проверка закончена"
+
+#: include/setup.php:255
+#, php-format
+msgid "Файл %s недоступен для записи"
+msgstr "Файл %s недоступен для записи"
+
+#: include/setup.php:283
 #, php-format
 msgid "Каталог %s недоступен для записи"
 msgstr "Каталог %s недоступен для записи"
 
-#: include/setup.php:212
+#: include/setup.php:298
 #, php-format
 msgid "Невозможно создать каталог %s"
 msgstr "Невозможно создать каталог %s"
 
-#: include/setup.php:221
-msgid "Каталог"
-msgstr "Каталог"
-
-#: include/setup.php:231
+#: include/setup.php:317 lang/data.php:102
 msgid "Внимание!"
 msgstr "Внимание!"
 
-#: include/setup.php:232
-msgid "Ошибка!"
-msgstr "Ошибка!"
+#: include/ui_cat_props.php:53 lang/data.php:123
+msgid "Свойства раздела"
+msgstr "Свойства раздела"
 
-#: include/ui_cat_create.php:38 include/ui_cat_props.php:357
-msgid "Тип материалов"
-msgstr "Тип материалов"
-
-#: include/ui_cat_create.php:56 include/ui_cat_props.php:204
-#: include/ui_cat_props.php:444 include/ui_cat_props.php:450
-msgid "Описание"
-msgstr "Описание"
-
-#: include/ui_cat_props.php:20
-#, fuzzy
-msgid "Работа со своими материалами"
-msgstr "Редактирование материала"
-
-#: include/ui_cat_props.php:21
-#, fuzzy
-msgid "Работа с материалами других авторов"
-msgstr "Показать материалы из подразделов"
-
-#: include/ui_cat_props.php:22
-#, fuzzy
-msgid "Администрирование раздела"
-msgstr "Редактирование материала"
-
-#: include/ui_cat_props.php:23
-msgid "Возможность видеть раздел в структуре"
-msgstr ""
-
-#: include/ui_cat_props.php:24
-#, fuzzy
-msgid "Публикация материалов"
-msgstr "Группа материалов"
-
-#: include/ui_cat_props.php:62
-#, fuzzy
-msgid "Разрешить"
-msgstr "Разрешить доступ"
-
-#: include/ui_cat_props.php:84 include/ui_cat_props.php:461
-#, fuzzy
-msgid "Разрешения"
-msgstr "Разделы"
-
-#: include/ui_cat_props.php:203 include/ui_cat_props.php:514
-#, fuzzy
-msgid "Значение"
-msgstr "Описание"
-
-#: include/ui_cat_props.php:270
+#: include/ui_cat_props.php:449 lang/data.php:23
 #, fuzzy
 msgid "Основные"
 msgstr "Данные"
 
-#: include/ui_cat_props.php:282
+#: include/ui_cat_props.php:463
 #, fuzzy
 msgid "Домен"
 msgstr "Отмена"
 
-#: include/ui_cat_props.php:291
+#: include/ui_cat_props.php:463 include/ui_material_edit.php:132
+msgid "Alias"
+msgstr "Alias"
+
+#: include/ui_cat_props.php:473 lang/data.php:24
 #, fuzzy
 msgid "Синонимы"
 msgstr "Псевдоним"
 
-#: include/ui_cat_props.php:312
-#, fuzzy
-msgid "Каталог шаблонов"
-msgstr "Набор файлов"
-
-#: include/ui_cat_props.php:321
-#, fuzzy
-msgid "Шаблон"
-msgstr "Каталог"
-
-#: include/ui_cat_props.php:338
-#, fuzzy
-msgid "Размещение"
-msgstr "Размер"
-
-#: include/ui_cat_props.php:350
-#, fuzzy
-msgid "Картинка"
-msgstr "Справка"
-
-#: include/ui_cat_props.php:376
-#, fuzzy
-msgid "автоматически заполнять alias материалов"
-msgstr "Количество материалов"
-
-#: include/ui_cat_props.php:391
-#, fuzzy
-msgid "на основании даты"
-msgstr "Название редактора"
-
-#: include/ui_cat_props.php:401
-msgid "транслит заголовка"
+#: include/ui_cat_props.php:760 lang/data.php:68
+msgid "Настроить"
 msgstr ""
 
-#: include/ui_cat_props.php:410
-#, fuzzy
-msgid "изменять дату материалов"
-msgstr "Количество материалов"
-
-#: include/ui_cat_props.php:418
-#, fuzzy
-msgid "скрытый"
-msgstr "Закрыть"
-
-#: include/ui_cat_props.php:430
-msgid "Связан с"
-msgstr ""
-
-#: include/ui_cat_props.php:466
-#, fuzzy
-msgid "наследовать разрешения родительского раздела"
-msgstr "создать ссылки для подразделов"
-
-#: include/ui_cat_props.php:484
-msgid "Группы"
-msgstr "Группы"
-
-#: include/ui_cat_props.php:498
-#, fuzzy
-msgid "Переменные"
-msgstr "Переместить"
-
-#: include/ui_cat_props.php:528
-#, fuzzy
-msgid "Новая переменная"
-msgstr "Подтверждение"
-
-#: include/ui_cat_props.php:539
-msgid "Редактировать"
-msgstr "Редактировать"
-
-#: include/ui_cat_props.php:676
-#, fuzzy
-msgid "Сервер"
-msgstr "Сервис"
-
-#: include/ui_cat_props.php:695
-msgid "Добавить"
-msgstr "Добавить"
-
-#: include/ui_common.php:15
-msgid "Ошибка AJAX"
-msgstr "Ошибка AJAX"
-
-#: include/ui_common.php:47 include/ui_common.php:53 include/ui_common.php:56
-msgid "Подробнее"
-msgstr "Подробнее"
-
-#: include/ui_common.php:104
-msgid "Ошибка загрузки окна"
-msgstr "Ошибка загрузки окна"
-
-#: include/ui_common.php:179
-msgid "Только целые положительные числа или 0"
-msgstr ""
-
-#: include/ui_eventlog.php:55 include/ui_eventlog.php:126
+#: include/ui_eventlog.php:69 include/ui_eventlog.php:141
 #, fuzzy
 msgid "Очистить журнал"
 msgstr "Запретить доступ"
 
-#: include/ui_eventlog.php:59
+#: include/ui_eventlog.php:73
 #, fuzzy
 msgid "Фильтр событий"
 msgstr "Типы материалов"
 
-#: include/ui_eventlog.php:74
+#: include/ui_eventlog.php:92 include/ui_users.php:165 lang/data.php:117
 #, fuzzy
-msgid "Событие"
-msgstr "Свойства"
+msgid "Всего"
+msgstr "Выбор"
 
-#: include/ui_eventlog.php:77
+#: include/ui_eventlog.php:109 lang/data.php:174
+msgid "Дата"
+msgstr "Дата"
+
+#: include/ui_eventlog.php:110
 #, fuzzy
 msgid "Дополнительно"
 msgstr "запомнить"
 
-#: include/ui_groups.php:25 include/ui_groups.php:206
+#: include/ui_eventlog.php:141 include/ui_groups.php:196
+#: include/ui_users.php:200
+msgid "Вы уверены"
+msgstr "Вы уверены"
+
+#: include/ui_groups.php:29 include/ui_groups.php:215
 #, fuzzy
 msgid "Новая группа"
 msgstr "Членство в группах"
 
-#: include/ui_groups.php:48
+#: include/ui_groups.php:51
 #, fuzzy
 msgid "члены группы"
 msgstr "Членство в группах"
 
-#: include/ui_groups.php:49
+#: include/ui_groups.php:52
 #, fuzzy
 msgid "Пользователи группы"
 msgstr "Пользовательские типы"
 
-#: include/ui_groups.php:65
+#: include/ui_groups.php:70
 #, fuzzy
 msgid "Имя группы"
 msgstr "Группы"
 
-#: include/ui_groups.php:127
+#: include/ui_groups.php:133
 #, fuzzy
 msgid "Встроенные группы"
 msgstr "Встроенные типы"
 
-#: include/ui_groups.php:127
+#: include/ui_groups.php:133
 #, fuzzy
 msgid "Пользовательские группы"
 msgstr "Пользовательские типы"
 
-#: include/ui_groups.php:187
+#: include/ui_groups.php:196
 #, fuzzy
 msgid "Удаление группы"
 msgstr "Членство в группах"
 
-#: include/ui_link_create.php:36
-msgid "создать ссылки для подразделов"
-msgstr "создать ссылки для подразделов"
+#: include/ui_material_edit.php:49
+msgid "Материал заблокирован другим пользователем."
+msgstr ""
 
-#: include/ui_link_create.php:44
-msgid "Ссылка на"
-msgstr "Ссылка на"
+#: include/ui_material_edit.php:134
+msgid "Дата создания"
+msgstr "Дата создания"
 
-#: include/ui_link_create.php:81
-msgid "Ссылка на раздел"
-msgstr "Ссылка на раздел"
-
-#: include/ui_materials.php:14
-msgid "Опубликован"
-msgstr "Опубликован"
-
-#: include/ui_materials.php:15
-msgid "Не опубликован"
-msgstr "Не опубликован"
-
-#: include/ui_materials.php:38
-msgid "Создать"
-msgstr "Создать"
-
-#: include/ui_materials.php:46
-msgid "Создать по образцу"
-msgstr "Создать по образцу"
-
-#: include/ui_materials.php:72
-msgid "Опубликовать"
-msgstr "Опубликовать"
-
-#: include/ui_materials.php:80
-msgid "Отменить публикацию"
-msgstr "Отменить публикацию"
-
-#: include/ui_materials.php:88
-msgid "Посмотреть на сервере"
-msgstr "Посмотреть на сервере"
-
-#: include/ui_materials.php:99
-msgid "Переместить"
-msgstr "Переместить"
-
-#: include/ui_materials.php:140
-msgid "Показать материалы из подразделов"
-msgstr "Показать материалы из подразделов"
-
-#: include/ui_materials.php:163
-msgid "№"
-msgstr "№"
-
-#: include/ui_materials.php:258
-msgid "Удалить материал"
-msgstr "Удалить материал"
-
-#: include/ui_material_edit.php:162
+#: include/ui_material_edit.php:253
 msgid "Состоит в"
 msgstr "Состоит в"
 
-#: include/ui_material_edit.php:301
+#: include/ui_material_edit.php:359
 msgid "Членство в группах"
 msgstr "Членство в группах"
 
-#: include/ui_material_edit.php:318
+#: include/ui_material_edit.php:377 lang/data.php:69
+#: widgets/user.profile.edit/default.twig:24
 msgid "Сохранить"
 msgstr "Сохранить"
 
-#: include/ui_material_edit.php:327
+#: include/ui_material_edit.php:386
 msgid "Сохранить и опубликовать"
 msgstr "Сохранить и опубликовать"
 
-#: include/ui_material_edit.php:374 include/ui_users.php:42
-msgid "Новый пользователь"
-msgstr "Новый пользователь"
+#: include/ui_material_edit.php:395
+msgid "Предпросмотр"
+msgstr ""
 
-#: include/ui_server_create.php:30
-msgid "Доменное имя"
-msgstr "Доменное имя"
+#: include/ui_users.php:47 lang/data.php:116
+msgid "Псевдоним"
+msgstr "Псевдоним"
 
-#: include/ui_server_create.php:84
-msgid "Новый сервер"
-msgstr "Новый сервер"
-
-#: include/ui_types.php:121
-msgid "Внимание!\\n\\nВы удаляете тип"
-msgstr "Внимание!\\n\\nВы удаляете тип"
-
-#: include/ui_types.php:121
-msgid "Вместе с этим будут удалены все разделы этого типа,\\nвсе шаблоны заданные этих разделах,\\nа также все материалы из этих разделов.\\n\\nПродолжить?"
-msgstr "Вместе с этим будут удалены все разделы этого типа,\\nвсе шаблоны заданные этих разделах,\\nа также все материалы из этих разделов.\\n\\nПродолжить?"
-
-#: include/ui_types.php:143
-msgid "Добавить поле"
-msgstr "Добавить поле"
-
-#: include/ui_types.php:165
-msgid "Изменить поле"
-msgstr "Изменить поле"
-
-#: include/ui_types.php:208
-msgid "Удалить поле?"
-msgstr "Удалить поле?"
-
-#: include/ui_types.php:240
-msgid "Новый тип материалов"
-msgstr "Новый тип материалов"
-
-#: include/ui_types.php:246 include/ui_types.php:341
-msgid "Изменить"
-msgstr "Изменить"
-
-#: include/ui_types.php:290
-msgid "Встроенные типы"
-msgstr "Встроенные типы"
-
-#: include/ui_types.php:290
-msgid "Пользовательские типы"
-msgstr "Пользовательские типы"
-
-#: include/ui_types.php:370 include/ui_types.php:371
-msgid "нет"
-msgstr "нет"
-
-#: include/ui_types.php:370 include/ui_types.php:371
-msgid "да"
-msgstr "да"
-
-#: include/ui_types.php:370 include/ui_types.php:457
-msgid "Скрытое поле"
-msgstr "Скрытое поле"
-
-#: include/ui_types.php:371 include/ui_types.php:456
-msgid "Обязательное поле"
-msgstr "Обязательное поле"
-
-#: include/ui_types.php:374 include/ui_types.php:467
-msgid "Тип данных"
-msgstr "Тип данных"
-
-#: include/ui_types.php:405
-msgid "Поля"
-msgstr "Поля"
-
-#: include/ui_types.php:423
-msgid "Закрыть"
-msgstr "Закрыть"
-
-#: include/ui_types.php:448
-msgid "Неправильный размер"
-msgstr "Неправильный размер"
-
-#: include/ui_types.php:454
-msgid "Имя поля"
-msgstr "Имя поля"
-
-#: include/ui_types.php:455
-msgid "Алиас"
-msgstr "Алиас"
-
-#: include/ui_types.php:460
-msgid "Варианты значений"
-msgstr "Варианты значений"
-
-#: include/ui_types.php:461
-msgid "Значение по умолчанию"
-msgstr "Значение по умолчанию"
-
-#: include/ui_types.php:462
-msgid "Название редактора"
-msgstr "Название редактора"
-
-#: include/ui_types.php:463
-msgid "Из раздела"
-msgstr "Из раздела"
-
-#: include/ui_types.php:464
-msgid "Из текущего раздела"
-msgstr "Из текущего раздела"
-
-#: include/ui_types.php:489
-msgid "типа"
-msgstr "типа"
-
-#: include/ui_types.php:502
-msgid "Редактор поля"
-msgstr "Редактор поля"
-
-#: include/ui_users.php:54
-msgid "Запретить доступ"
-msgstr "Запретить доступ"
-
-#: include/ui_users.php:60
-msgid "Разрешить доступ"
-msgstr "Разрешить доступ"
-
-#: include/ui_users.php:102
+#: include/ui_users.php:50
 msgid "Дата регистрации"
 msgstr "Дата регистрации"
 
-#: include/ui_users.php:103
+#: include/ui_users.php:51
 msgid "Дата последнего входа"
 msgstr "Дата последнего входа"
 
-#: include/ui_users.php:181
+#: include/ui_users.php:91
+msgid "Новый пользователь"
+msgstr "Новый пользователь"
+
+#: include/ui_users.php:103
+msgid "Запретить доступ"
+msgstr "Запретить доступ"
+
+#: include/ui_users.php:109
+msgid "Разрешить доступ"
+msgstr "Разрешить доступ"
+
+#: include/ui_users.php:122 lang/data.php:114
+#, fuzzy
+msgid "Показывать только пользователей BackOffice"
+msgstr "Набор пользователей"
+
+#: include/ui_users.php:141 lang/data.php:115
+msgid "Фильтр"
+msgstr ""
+
+#: include/ui_users.php:200
 msgid "Удаление пользователя"
 msgstr "Удаление пользователя"
 
-#: include/welcome_new.php:16
-msgid "не ограничен"
-msgstr "не ограничен"
-
-#: include/welcome_new.php:17
-msgid "до"
-msgstr "до"
-
-#: include/welcome_new.php:20 include/welcome_new.php:24
-msgid "не ограничено"
-msgstr "не ограничено"
-
-#: include/welcome_new.php:52
-msgid "Информация о лицензии"
-msgstr "Информация о лицензии"
-
-#: include/welcome_new.php:55
-msgid "Срок действия"
-msgstr "Срок действия"
-
-#: include/welcome_new.php:56
-msgid "Количество виртуальных серверов"
-msgstr "Количество виртуальных серверов"
-
-#: include/welcome_new.php:57
-msgid "Количество материалов"
-msgstr "Количество материалов"
-
-#: include/welcome_new.php:65
-msgid "Данный программный продукт защищен законами об авторских правах и международными соглашениями. Его незаконное воспроизведение или распространение в целом, а также его частей, равно как и использование отдельных частей системы в составе других программ запрещено и влечет гражданскую, административную и уголовную ответственность."
-msgstr "Данный программный продукт защищен законами об авторских правах и международными соглашениями. Его незаконное воспроизведение или распространение в целом, а также его частей, равно как и использование отдельных частей системы в составе других программ запрещено и влечет гражданскую, административную и уголовную ответственность."
-
-#: include/welcome_new.php:67
-msgid "Информация о новых версиях системы"
-msgstr "Информация о новых версиях системы"
-
-#: include/classes/Application.php:435
-msgid "Материалы"
-msgstr "Материалы"
-
-#: include/classes/Application.php:450
-msgid "Типы материалов"
-msgstr "Типы материалов"
-
-#: include/classes/Application.php:474
-#, fuzzy
-msgid "Группы пользователей"
-msgstr "Выбор пользователей"
-
-#: include/classes/Application.php:486
-#, fuzzy
-msgid "Журнал"
-msgstr "Справка"
-
-#: include/classes/Application.php:666
-#, fuzzy
-msgid "Все"
-msgstr "Выше"
-
-#: include/classes/Application.php:672
-#, fuzzy
-msgid "Пользователи BackOffice"
-msgstr "Пользователи"
-
-#: include/classes/Application.php:673
-msgid "Имеют право входа в систему управления сайтом"
+#: include/welcome_new.php:182
+msgid "Как опубликовать материал?"
 msgstr ""
 
-#: include/classes/Application.php:678
-msgid "Администраторы"
+#: include/welcome_new.php:195
+msgid "Настроить тему оформления"
 msgstr ""
 
-#: include/classes/Application.php:679
-msgid "Администраторы имеют полные, ничем неограниченные права доступа"
+#: include/welcome_new.php:220
+msgid "Скрыть подсказки"
 msgstr ""
 
-#: include/classes/Exception.php:107
-msgid "Исчерпан лимит на количество серверов в системе"
-msgstr "Исчерпан лимит на количество серверов в системе"
+#: include/welcome_new.php:227
+msgid "Вы можете настроить тему в любое время в модуле \"Темы\""
+msgstr ""
 
-#: include/classes/Exception.php:108
-msgid "Неверный параметр"
-msgstr "Неверный параметр"
+#: include/welcome_new.php:255 include/welcome_new.php:277
+msgid "прямо сейчас"
+msgstr ""
 
-#: include/classes/Exception.php:109
-msgid "Такой раздел уже существует"
-msgstr "Такой раздел уже существует"
+#: include/welcome_new.php:266
+msgid "Вернуть "
+msgstr ""
 
-#: include/classes/Exception.php:110
-msgid "Существует файл или каталог с таким именем"
-msgstr "Существует файл или каталог с таким именем"
+#: include/welcome_new.php:288
+msgid "Запрос к серверу обновлений"
+msgstr ""
 
-#: include/classes/Exception.php:111
-msgid "Материал не найден"
-msgstr "Материал не найден"
+#: include/welcome_new.php:336
+msgid "Поздравляем с успешной установкой Cetera CMS"
+msgstr ""
 
-#: include/classes/Exception.php:114
-msgid "Вы не опознаны"
-msgstr "Вы не опознаны. Повторите <b><a href=\"%s\">вход в систему</a></b>"
+#: include/welcome_new.php:349
+msgid "Система контент-менеджмента веб-сайтов"
+msgstr "Система контент-менеджмента веб-сайтов"
 
-#: include/classes/Exception.php:115
-msgid "Неправильный E-mail"
-msgstr "Неправильный E-mail"
+#: include/welcome_new.php:356
+msgid "Компания"
+msgstr "Компания"
 
-#: include/classes/Exception.php:116
-#, php-format
-msgid "Ошибка SQL: %s"
-msgstr "Ошибка SQL: %s"
+#: include/welcome_new.php:363
+msgid "Обнаружена новая версия"
+msgstr ""
 
-#: include/classes/Exception.php:117
-msgid "Такой пользователь уже существует"
-msgstr "Такой пользователь уже существует"
+#: include/welcome_new.php:368
+msgid ""
+"Автоматическое обновление невозможно. Обратитесь в компанию Cetera labs для "
+"обновления системы."
+msgstr ""
 
-#: include/classes/Exception.php:124
-msgid "Недостаточно полномочий для совершения этого действия"
-msgstr "Недостаточно полномочий для совершения этого действия"
+#: include/welcome_new.php:375
+msgid ""
+"Вы используйте beta-версию. Возможен откат для последнюю стабильную версию "
+msgstr ""
 
-#: include/classes/Exception.php:128
-#, php-format
-msgid "Поле \"%s\" обязательно для заполнения"
-msgstr "Поле \"%s\" обязательно для заполнения"
+#: include/welcome_new.php:381
+msgid "Вы используете самую свежую версию"
+msgstr ""
 
-#: include/classes/Exception.php:129
-msgid "Раздел не найден"
-msgstr "Раздел не найден"
+#: include/welcome_new.php:387
+msgid "Обнаружена новая beta-версия "
+msgstr ""
 
-#: include/classes/Exception.php:130
-#, fuzzy
-msgid "Материал с таким alias уже существует"
-msgstr "Такой раздел уже существует"
+#: index.php:80
+msgid "Недостаточно полномочий"
+msgstr ""
 
-#: include/classes/Exception.php:136
-#, php-format
-msgid "Файл не найден: %s"
-msgstr "Файл не найден: %s"
+#: lang/data.php:16
+msgid "Такой шаблон уже существует. Перезаписать?"
+msgstr ""
 
-#: include/classes/Exception.php:137
-msgid "Вы превысили лимит на количество материалов"
-msgstr "Вы превысили лимит на количество материалов"
+#: lang/data.php:17
+msgid "материал редактируется пользователем <{0}>"
+msgstr ""
 
-#: include/classes/Exception.php:139
-#, php-format
-msgid "Неизвестная ошибка (%s)"
-msgstr "Неизвестная ошибка (%s)"
+#: lang/data.php:18
+msgid "Сбросить к первоначальному значению"
+msgstr ""
 
-#: include/editors/editor_common.php:19
+#: lang/data.php:20 setup.php:33
+msgid "Назад"
+msgstr "Назад"
+
+#: lang/data.php:21 setup.php:48
+msgid "Дальше"
+msgstr "Дальше"
+
+#: lang/data.php:26
+msgid "Материал не сохранен"
+msgstr ""
+
+#: lang/data.php:27
+msgid "Материал сохранен"
+msgstr ""
+
+#: lang/data.php:28
+msgid "Исправьте неправильно заполненные поля"
+msgstr ""
+
+#: lang/data.php:30
+msgid "3 или 6 знаков"
+msgstr ""
+
+#: lang/data.php:31
+msgid "Неправильный формат"
+msgstr ""
+
+#: lang/data.php:33
+msgid "Только целые положительные числа или 0"
+msgstr ""
+
+#: lang/data.php:34
 #, fuzzy
 msgid "Страница"
 msgstr "Сохранить"
 
-#: include/editors/editor_hlink_default.php:87
-#, fuzzy
-msgid "Выбрать"
-msgstr "Выбор"
-
-#: include/editors/editor_matset_default.php:122
-#, fuzzy
-msgid "Добавить материал"
-msgstr "Удалить материал"
-
-#: include/editors/editor_matset_default.php:128
-#, fuzzy
-msgid "Изменить материал"
-msgstr "Удалить материал"
-
-#: module_banners/action_banners.php:120
-#, fuzzy
-msgid "Нет кода баннера."
-msgstr "Свойства раздела"
-
-#: module_banners/action_banners.php:342
-msgid "Нельзя удалить непустую группу"
+#: lang/data.php:35
+msgid "Файл не существует"
 msgstr ""
 
-#: module_banners/action_banners.php:353
-msgid "У этого рекламодателя есть баннеры"
+#: lang/data.php:36
+msgid "Создать файл?"
 msgstr ""
 
-#: module_banners/action_banners.php:375
-#, fuzzy
-msgid "Рекламодатель с таким логином уже существует"
-msgstr "Такой пользователь уже существует"
-
-#: module_banners/action_banners.php:378
-#, fuzzy
-msgid "Рекламодатель с таким именем уже существует"
-msgstr "Такой раздел уже существует"
-
-#: module_banners/action_banners.php:397
-#, fuzzy
-msgid "Группа с таким псевдонимом уже существует"
-msgstr "Такой раздел уже существует"
-
-#: module_banners/client_login.php:16
-#, fuzzy
-msgid "Просмотр баннеров"
-msgstr "Посмотреть на сервере"
-
-#: module_banners/client_login.php:79
-#, fuzzy
-msgid "показать с"
-msgstr "Добавить"
-
-#: module_banners/client_login.php:81 module_banners/client_login.php:299
-#, fuzzy
-msgid "по"
-msgstr "до"
-
-#: module_banners/client_login.php:84 module_banners/client_login.php:304
-#, fuzzy
-msgid "Сегодня"
-msgstr "Компания"
-
-#: module_banners/client_login.php:93 module_banners/client_login.php:314
-msgid "В этом месяце"
+#: lang/data.php:37
+msgid "Доступ запрещен"
 msgstr ""
 
-#: module_banners/client_login.php:102 module_banners/client_login.php:324
-#, fuzzy
-msgid "За все время"
-msgstr "Дата/Время"
-
-#: module_banners/client_login.php:118 module_banners/client_login.php:131
-#: module_banners/client_login.php:353
-#, fuzzy
-msgid "Показы"
-msgstr "Плагины"
-
-#: module_banners/client_login.php:122 module_banners/client_login.php:136
-#: module_banners/client_login.php:354
-#, fuzzy
-msgid "Клики"
-msgstr "Алиас"
-
-#: module_banners/client_login.php:151
-msgid "По часам"
+#: lang/data.php:38
+msgid "Файл изменен"
 msgstr ""
 
-#: module_banners/client_login.php:161
-#, fuzzy
-msgid "По дням"
-msgstr "Поля"
-
-#: module_banners/client_login.php:171
-msgid "По месяцам"
+#: lang/data.php:39
+msgid "Сохранить изменения?"
 msgstr ""
 
-#: module_banners/client_login.php:205
-#, fuzzy
-msgid "Просмотр статистики баннера"
-msgstr "Посмотреть на сервере"
-
-#: module_banners/client_login.php:293
-msgid "Просмотр"
+#: lang/data.php:41
+msgid "Развернуть все"
 msgstr ""
 
-#: module_banners/client_login.php:297
-msgid "статистика с"
+#: lang/data.php:42
+msgid "Ошибка соединения с сервером."
 msgstr ""
 
-#: module_banners/client_login.php:344
-#, fuzzy
-msgid "Актив"
-msgstr "Автор"
-
-#: module_banners/client_login.php:350
-msgid "Всего:"
+#: lang/data.php:45
+msgid "Активировать"
 msgstr ""
 
-#: module_banners/config.php:24
-#, fuzzy
-msgid "Пользователи баннерной системы"
-msgstr "Пользователь не найден"
-
-#: module_banners/config.php:25
-msgid "Имеют доступ к администрированию баннеров"
+#: lang/data.php:46
+msgid "Активность"
 msgstr ""
 
-#: module_banners/config.php:33
-#, fuzzy
-msgid "Баннеры"
-msgstr "Размер"
-
-#: module_banners/config.php:41
-#, fuzzy
-msgid "Рекламные слова"
-msgstr "Ключевые слова"
-
-#: module_banners/stats_months.php:14
-#, fuzzy
-msgid "январь"
-msgstr "Вверх"
-
-#: module_banners/stats_months.php:15
-#, fuzzy
-msgid "февраль"
-msgstr "Пароль"
-
-#: module_banners/stats_months.php:16
-#, fuzzy
-msgid "март"
-msgstr "Закрыть"
-
-#: module_banners/stats_months.php:17
-#, fuzzy
-msgid "апрель"
-msgstr "Пароль"
-
-#: module_banners/stats_months.php:18
-#, fuzzy
-msgid "май"
-msgstr "Файл"
-
-#: module_banners/stats_months.php:19
-msgid "июнь"
+#: lang/data.php:49
+msgid "Используется"
 msgstr ""
 
-#: module_banners/stats_months.php:20
-#, fuzzy
-msgid "июль"
-msgstr "Пароль"
-
-#: module_banners/stats_months.php:21
-msgid "август"
+#: lang/data.php:51
+msgid "Настройки темы"
 msgstr ""
 
-#: module_banners/stats_months.php:22
-msgid "сентябрь"
+#: lang/data.php:53
+msgid "Добавить область"
 msgstr ""
 
-#: module_banners/stats_months.php:23
-#, fuzzy
-msgid "октябрь"
-msgstr "Повторить"
-
-#: module_banners/stats_months.php:24
-#, fuzzy
-msgid "ноябрь"
-msgstr "Повторить"
-
-#: module_banners/stats_months.php:25
-#, fuzzy
-msgid "декабрь"
-msgstr "Добавить"
-
-#: module_banners/ui_adwords.php:58 module_banners/ui_banner_properties.php:85
-#, fuzzy
-msgid "Статистика"
-msgstr "Ссылка"
-
-#: module_banners/ui_adwords_properties.php:7
-#: module_banners/ui_adwords_properties.php:146
-#: module_banners/ui_banner_properties.php:7
-#: module_banners/ui_banner_properties.php:427
-#, fuzzy
-msgid "Свойства баннера"
-msgstr "Свойства раздела"
-
-#: module_banners/ui_adwords_properties.php:43
-#: module_banners/ui_banner_properties.php:109
-#, fuzzy
-msgid "активный"
-msgstr "Интерактивы"
-
-#: module_banners/ui_adwords_properties.php:48
-msgid "Рекламные слова<br />(через запятую)"
+#: lang/data.php:55
+msgid "Создать виджет"
 msgstr ""
 
-#: module_banners/ui_adwords_properties.php:53
-#: module_banners/ui_banner_properties.php:28
-msgid "URL перехода"
+#: lang/data.php:58
+msgid "Глубина"
 msgstr ""
 
-#: module_banners/ui_adwords_properties.php:58
-#: module_banners/ui_banner_properties.php:137
-#, fuzzy
-msgid "Показывать"
-msgstr "Добавить"
-
-#: module_banners/ui_adwords_properties.php:60
-#: module_banners/ui_banner_properties.php:139
-msgid "c"
+#: lang/data.php:59
+msgid "Корневой раздел"
 msgstr ""
 
-#: module_banners/ui_adwords_properties.php:66
+#: lang/data.php:60
 #, fuzzy
-msgid "Рекламный код"
-msgstr "Редактор поля"
+msgid "Раздел"
+msgstr "Разделы"
 
-#: module_banners/ui_adwords_properties.php:71
-msgid "показывать рекламный код"
+#: lang/data.php:61
+msgid "Порядок"
 msgstr ""
 
-#: module_banners/ui_adwords_properties.php:78
-#: module_banners/ui_banner_properties.php:237
-#, fuzzy
-msgid "Ограничение показа"
-msgstr "Значение по умолчанию"
-
-#: module_banners/ui_adwords_properties.php:84
-msgid "показывать только посетителям из стран"
+#: lang/data.php:62
+msgid "Сортировка"
 msgstr ""
 
-#: module_banners/ui_adwords_properties.php:156
-#: module_banners/ui_banner_properties.php:454
-#, fuzzy
-msgid "Новый баннер"
-msgstr "Новый раздел"
-
-#: module_banners/ui_adwords_stats.php:7
-#, fuzzy
-msgid "Статистика рекламных слов"
-msgstr "Редактирование ключевых слов"
-
-#: module_banners/ui_adwords_stats.php:36
-#, fuzzy
-msgid "Слово"
-msgstr "Заголовок"
-
-#: module_banners/ui_banners.php:163
-#: module_banners/ui_banner_properties.php:207
-#, fuzzy
-msgid "Очередь"
-msgstr "Пароль"
-
-#: module_banners/ui_banners.php:164
-#, fuzzy
-msgid "Вес"
-msgstr "нет"
-
-#: module_banners/ui_banners.php:236
-#, fuzzy
-msgid "Рекламодатели"
-msgstr "Пользователи"
-
-#: module_banners/ui_banners.php:236
-#, fuzzy
-msgid "Группы баннеров"
-msgstr "Группа материалов"
-
-#: module_banners/ui_banners.php:250
-#, fuzzy
-msgid "Новая группа баннеров"
-msgstr "Выбор группы материалов"
-
-#: module_banners/ui_banners.php:258 module_banners/ui_member_properties.php:85
-#, fuzzy
-msgid "Новый рекламодатель"
-msgstr "Новый пользователь"
-
-#: module_banners/ui_banners.php:280
-#, fuzzy
-msgid "Подтверждение удаления"
-msgstr "Подтверждение"
-
-#: module_banners/ui_banners.php:280
-#, fuzzy
-msgid "Вы действительно хотите это сделать?"
-msgstr "Вы действительно хотите удалить раздел?"
-
-#: module_banners/ui_banners.php:346
-#, fuzzy
-msgid "Удалить баннер"
-msgstr "Удалить поле?"
-
-#: module_banners/ui_banner_properties.php:115
-#, fuzzy
-msgid "Группа"
-msgstr "Группы"
-
-#: module_banners/ui_banner_properties.php:125
-#: module_banners/ui_member_properties.php:7
-#: module_banners/ui_member_properties.php:80
-#, fuzzy
-msgid "Рекламодатель"
-msgstr "Пользователь"
-
-#: module_banners/ui_banner_properties.php:146
-msgid "Вес баннера"
+#: lang/data.php:63
+msgid "Сорт."
 msgstr ""
 
-#: module_banners/ui_banner_properties.php:154
-#, fuzzy
-msgid "Всего показов"
-msgstr "Добро пожаловать"
-
-#: module_banners/ui_banner_properties.php:162
-#: module_banners/ui_banner_properties.php:181
-#, fuzzy
-msgid "Ограничение"
-msgstr "не ограничено"
-
-#: module_banners/ui_banner_properties.php:173
-#, fuzzy
-msgid "Всего кликов"
-msgstr "Не опубликован"
-
-#: module_banners/ui_banner_properties.php:192
-#, fuzzy
-msgid "Лимит показов"
-msgstr "Тип материалов"
-
-#: module_banners/ui_banner_properties.php:195
-#, fuzzy
-msgid "показывать баннер пользователю не более"
-msgstr "Показать материалы из подразделов"
-
-#: module_banners/ui_banner_properties.php:203
-#, fuzzy
-msgid "раз в сутки"
-msgstr "Вход в систему"
-
-#: module_banners/ui_banner_properties.php:223
-msgid "поверить наличие ссылок во flash"
+#: lang/data.php:64
+msgid "Кол-во материалов"
 msgstr ""
 
-#: module_banners/ui_banner_properties.php:227
-msgid "HTML код"
+#: lang/data.php:66
+msgid "Доменное имя"
+msgstr "Доменное имя"
+
+#: lang/data.php:67
+msgid "Ссылка на"
+msgstr "Ссылка на"
+
+#: lang/data.php:70
+msgid "Сохранить как"
 msgstr ""
 
-#: module_banners/ui_banner_properties.php:254
-#, fuzzy
-msgid "показывать посетителям из"
-msgstr "Копировать материалы"
-
-#: module_banners/ui_banner_properties.php:261
-msgid "не показывать посетителям из"
+#: lang/data.php:73
+msgid ""
+"Внимание!<br>Вы удаляете тип {0}. Вместе с этим будут удалены все разделы "
+"этого типа,<br>а также все материалы из этих разделов.\\n\\nПродолжить?"
 msgstr ""
 
-#: module_banners/ui_banner_properties.php:265
-#, fuzzy
-msgid "Комментарий"
-msgstr "Компания"
+#: lang/data.php:74
+msgid "Добавить поле"
+msgstr "Добавить поле"
 
-#: module_banners/ui_banner_properties.php:318
-msgid "<p>Flash-файл, который находится в баннере, содержит жестко закодированные URL-ы. Баннерная система не сможет отслеживать клики для этого баннера, если вы не преобразуете эти линки. Ниже вы найдете список всех URL внутри этого Flash-файла. Если вы хотите их преобразовать, нажмите <b>Преобразовать</b>, в противном случае <b>Отмена</b>.</p><p>Заметьте: если вы щелкнете по Преобразовать, Flash-файл будет физически изменен.  Пожалуйста, сохраните резервную копию исходного файла. Вне зависимости от того, какой версией Flash был создан этот баннер, получившийся файл потребует Flash 4 (или старше) проигрыватель для корректного отображения.</p>"
-msgstr ""
-
-#: module_banners/ui_banner_properties.php:321
-#, fuzzy
-msgid "Преобразовать"
-msgstr "Пользователь"
-
-#: module_banners/ui_banner_properties.php:524
-#, fuzzy
-msgid "Ссылок не обнаружено"
-msgstr "обнаружено"
-
-#: module_banners/ui_banner_stats.php:140
-#, fuzzy
-msgid "Графики"
-msgstr "Справка"
-
-#: module_banners/ui_country.php:17
-#, fuzzy
-msgid "Страна"
-msgstr "Справка"
-
-#: module_banners/ui_country.php:24
-#, fuzzy
-msgid "Регион"
-msgstr "Плагины"
-
-#: module_banners/ui_country.php:28
-#, fuzzy
-msgid "Город"
-msgstr "Вход"
-
-#: module_banners/ui_group_properties.php:7
-#: module_banners/ui_group_properties.php:140
-#, fuzzy
-msgid "Свойства группы"
-msgstr "Членство в группах"
-
-#: module_banners/ui_group_properties.php:21
-#, fuzzy
-msgid "Метод показа"
-msgstr "Скрытое поле"
-
-#: module_banners/ui_group_properties.php:25
-msgid "обычный"
-msgstr ""
-
-#: module_banners/ui_group_properties.php:26
-msgid "через Javascript"
-msgstr ""
-
-#: module_banners/ui_group_properties.php:27
-msgid "через IFRAME"
-msgstr ""
-
-#: module_banners/ui_group_properties.php:39
-#, fuzzy
-msgid "Очередность показа"
-msgstr "Отменить публикацию"
-
-#: module_banners/ui_group_properties.php:43
-msgid "случайная"
-msgstr ""
-
-#: module_banners/ui_group_properties.php:44
-msgid "случайная с учетом \"веса\" баннера"
-msgstr ""
-
-#: module_banners/ui_group_properties.php:45
-#, fuzzy
-msgid "циклическая"
-msgstr "Логическое"
-
-#: module_banners/ui_group_properties.php:65
-msgid "Динамически менять (сек)"
-msgstr ""
-
-#: module_banners/ui_member_properties.php:33
-#, fuzzy
-msgid "Логин"
-msgstr "Плагины"
-
-#: module_banners/ui_member_properties.php:41
-#, fuzzy
-msgid "админ"
-msgstr "Отмена"
-
-#: module_dbrepair/config.php:16
-#, fuzzy
-msgid "Проверка и ремонт БД"
-msgstr "Проверка закончена"
-
-#: module_dbrepair/ui.php:31
-msgid "анализировать структуру БД"
-msgstr ""
-
-#: module_dbrepair/ui.php:42
-#, fuzzy
-msgid "игнорировать лишние поля в таблицах"
-msgstr "Редактирование ключевых слов"
-
-#: module_dbrepair/ui.php:48
-msgid "игнорировать лишние индексы в таблицах"
-msgstr ""
-
-#: module_dbrepair/ui.php:54
-#, fuzzy
-msgid "анализировать структуру разделов"
-msgstr "Создать ссылку на раздел"
-
-#: module_dbrepair/ui.php:63
-#, fuzzy
-msgid "Анализировать"
-msgstr "Копировать"
-
-#: module_dbrepair/ui.php:67
-#, fuzzy
-msgid "Исправить"
-msgstr "Сохранить"
-
-#: module_forum/common_forums.php:14
-#, fuzzy
-msgid "создавать темы"
-msgstr "Создать сервер"
-
-#: module_forum/common_forums.php:15
-#, fuzzy
-msgid "отвечать в темах"
-msgstr "Копировать материалы"
-
-#: module_forum/common_forums.php:16
-#, fuzzy
-msgid "редактировать свои сообщения"
-msgstr "Копировать подразделы"
-
-#: module_forum/common_forums.php:17
-#, fuzzy
-msgid "редактировать любые сообщения"
-msgstr "Редактирование ключевых слов"
-
-#: module_forum/common_forums.php:18
-msgid "создаваемые темы премодерируемы"
-msgstr ""
-
-#: module_forum/common_forums.php:19
-msgid "создаваемые сообщения премодерируемы"
-msgstr ""
-
-#: module_forum/config.php:20 module_forum/ui_forums.php:164
-#, fuzzy
-msgid "Форумы"
-msgstr "Группы"
-
-#: module_forum/ui_forums.php:29
-#, fuzzy
-msgid "Ответов"
-msgstr "Отмена"
-
-#: module_forum/ui_forums.php:89
-#, fuzzy
-msgid "Закрыть тему"
-msgstr "Закрыть"
-
-#: module_forum/ui_forums.php:96
-msgid "Открыть тему"
-msgstr ""
-
-#: module_forum/ui_forums.php:105
-#, fuzzy
-msgid "Показать ответы"
-msgstr "Создать сервер"
-
-#: module_forum/ui_forums.php:183 module_forum/ui_forums_replace.php:11
-#, fuzzy
-msgid "Автозамена"
-msgstr "Отмена"
-
-#: module_forum/ui_forums.php:194 module_forum/ui_forums_properties.php:239
-#, fuzzy
-msgid "Новый форум"
-msgstr "Новый сервер"
-
-#: module_forum/ui_forums.php:212
-#, fuzzy
-msgid "Удалить форум"
-msgstr "Удалить поле?"
-
-#: module_forum/ui_forums.php:214
-#, fuzzy
-msgid "Вы действительно хотите удалить форум?"
-msgstr "Вы действительно хотите удалить раздел?"
-
-#: module_forum/ui_forums.php:278
-#, fuzzy
-msgid "Ожидает премодерации"
-msgstr "Дата регистрации"
-
-#: module_forum/ui_forums.php:283
-msgid "Тема закрыта"
-msgstr ""
-
-#: module_forum/ui_forums.php:317
-#, fuzzy
-msgid "Удалить сообщение"
-msgstr "Удалить поле?"
-
-#: module_forum/ui_forums_replace.php:56
-#, fuzzy
-msgid "Изменить группу"
+#: lang/data.php:75
+msgid "Изменить поле"
 msgstr "Изменить поле"
 
-#: module_forum/ui_forums_replace.php:56 module_forum/ui_forums_replace.php:269
-#, fuzzy
-msgid "Введите название группы:"
-msgstr "Редактирование группы материалов"
+#: lang/data.php:77
+msgid "Новый тип материалов"
+msgstr "Новый тип материалов"
 
-#: module_forum/ui_forums_replace.php:152
-#, fuzzy
-msgid "Новая автозамена"
-msgstr "Проверка закончена"
+#: lang/data.php:78
+msgid "Встроенные типы"
+msgstr "Встроенные типы"
 
-#: module_forum/ui_forums_replace.php:195
-#, fuzzy
-msgid "Строка для замены"
-msgstr "Ссылка на раздел"
+#: lang/data.php:79
+msgid "Пользовательские типы"
+msgstr "Пользовательские типы"
 
-#: module_forum/ui_forums_replace.php:198
-msgid "На что заменяется"
+#: lang/data.php:80
+msgid "Тип данных"
+msgstr "Тип данных"
+
+#: lang/data.php:81
+msgid "Поля"
+msgstr "Поля"
+
+#: lang/data.php:82
+msgid "Неправильный размер"
+msgstr "Неправильный размер"
+
+#: lang/data.php:83
+msgid "Обязательное поле"
+msgstr "Обязательное поле"
+
+#: lang/data.php:84
+msgid "Скрытое поле"
+msgstr "Скрытое поле"
+
+#: lang/data.php:85
+msgid "Видимое"
 msgstr ""
 
-#: module_forum/ui_forums_replace.php:201
-msgid "Способ замены"
+#: lang/data.php:86
+msgid "Варианты значений"
+msgstr "Варианты значений"
+
+#: lang/data.php:87
+msgid "Значение по умолчанию"
+msgstr "Значение по умолчанию"
+
+#: lang/data.php:88
+msgid "Редактор"
 msgstr ""
 
-#: module_forum/ui_forums_replace.php:206
-#, fuzzy
-msgid "Простая замена"
-msgstr "Проверка закончена"
+#: lang/data.php:89
+msgid "Из раздела"
+msgstr "Из раздела"
 
-#: module_forum/ui_forums_replace.php:206
-msgid "Регулярное выражение"
+#: lang/data.php:90
+msgid "Из текущего раздела"
+msgstr "Из текущего раздела"
+
+#: lang/data.php:91
+msgid "От раздела"
 msgstr ""
 
-#: module_forum/ui_forums_replace.php:215
-#, fuzzy
-msgid "включить"
-msgstr "Удалить"
+#: lang/data.php:92
+msgid "типа"
+msgstr "типа"
 
-#: module_forum/ui_forums_replace.php:267
-#: module_forum/ui_forums_replace.php:269
-#, fuzzy
-msgid "Создать группу"
+#: lang/data.php:93 setup.php:111
+msgid "да"
+msgstr "да"
+
+#: lang/data.php:94
+msgid "нет"
+msgstr "нет"
+
+#: lang/data.php:97
+msgid "№"
+msgstr "№"
+
+#: lang/data.php:100
+msgid "Опубликован"
+msgstr "Опубликован"
+
+#: lang/data.php:101
+msgid "Не опубликован"
+msgstr "Не опубликован"
+
+#: lang/data.php:103
+msgid ""
+"Этот раздел является ссылкой. Перейти в исходный раздел для просмотра "
+"материалов?"
+msgstr ""
+
+#: lang/data.php:104
+msgid "Удалить материал"
+msgstr "Удалить материал"
+
+#: lang/data.php:105
+msgid "Создать"
+msgstr "Создать"
+
+#: lang/data.php:106
+msgid "Создать по образцу"
+msgstr "Создать по образцу"
+
+#: lang/data.php:108
+msgid "Опубликовать"
+msgstr "Опубликовать"
+
+#: lang/data.php:109
+msgid "Распубликовать"
+msgstr ""
+
+#: lang/data.php:110
+msgid "Посмотреть на сервере"
+msgstr "Посмотреть на сервере"
+
+#: lang/data.php:111
+msgid "Переместить"
+msgstr "Переместить"
+
+#: lang/data.php:112
+msgid "Показать материалы из подразделов"
+msgstr "Показать материалы из подразделов"
+
+#: lang/data.php:120
+msgid "Создать сервер"
 msgstr "Создать сервер"
 
-#: module_forum/ui_forums_replace.php:277
-#, fuzzy
-msgid "Удалить группу"
-msgstr "Удалить поле?"
+#: lang/data.php:121
+msgid "Новый раздел"
+msgstr "Новый раздел"
 
-#: module_forum/ui_forums_replace.php:298
+#: lang/data.php:122
+msgid "Создать ссылку на раздел"
+msgstr "Создать ссылку на раздел"
+
+#: lang/data.php:124
+msgid "Копировать"
+msgstr "Копировать"
+
+#: lang/data.php:125
+msgid "Копировать подразделы"
+msgstr "Копировать подразделы"
+
+#: lang/data.php:126
+msgid "Копировать материалы"
+msgstr "Копировать материалы"
+
+#: lang/data.php:127
+msgid "Копировать в"
+msgstr "Копировать в"
+
+#: lang/data.php:128
+msgid "Подтверждение"
+msgstr "Подтверждение"
+
+#: lang/data.php:130
+msgid "Вход"
+msgstr "Вход"
+
+#: lang/data.php:131 widgets/user.auth/default.twig:5
+msgid "Выход"
+msgstr "Выход"
+
+#: lang/data.php:134 setup.php:206
+msgid "Язык"
+msgstr "Язык"
+
+#: lang/data.php:135
+msgid "запомнить"
+msgstr "запомнить"
+
+#: lang/data.php:136
+msgid "Забыли пароль"
+msgstr ""
+
+#: lang/data.php:137
+msgid "Создать новый пароль и отправить его на e-mail?"
+msgstr ""
+
+#: lang/data.php:138
+msgid "Введите имя пользователя"
+msgstr ""
+
+#: lang/data.php:140 lang/data.php:150
+msgid "Добавить"
+msgstr "Добавить"
+
+#: lang/data.php:141
+msgid "Закрыть"
+msgstr "Закрыть"
+
+#: lang/data.php:147
+msgid "Выше"
+msgstr "Выше"
+
+#: lang/data.php:148
+msgid "Ниже"
+msgstr "Ниже"
+
+#: lang/data.php:151
+msgid "Изменить"
+msgstr "Изменить"
+
+#: lang/data.php:153
 #, fuzzy
 msgid "Удаление"
 msgstr "Удалить"
 
-#: module_forum/ui_forums_replace.php:306
+#: lang/data.php:155
+#, fuzzy
+msgid "Загрузка файла"
+msgstr "Загрузка ..."
+
+#: lang/data.php:156
+msgid "Загрузить с компьютера"
+msgstr ""
+
+#: lang/data.php:157
+#, fuzzy
+msgid "Загрузка файлов"
+msgstr "Набор файлов"
+
+#: lang/data.php:158
+msgid "Каталог на сервере"
+msgstr ""
+
+#: lang/data.php:160
+#, fuzzy
+msgid "Выберите файл"
+msgstr "Выбор файла"
+
+#: lang/data.php:161
+#, fuzzy
+msgid "Загрузить"
+msgstr "Закрыть"
+
+#: lang/data.php:163
+#, fuzzy
+msgid "Загрузить несколько файлов"
+msgstr "Загрузка/редактирование группы файлов"
+
+#: lang/data.php:165
+msgid "Выбрать из структуры"
+msgstr ""
+
+#: lang/data.php:169
+msgid "В виде таблицы"
+msgstr ""
+
+#: lang/data.php:170
+#, fuzzy
+msgid "Эскизы"
+msgstr "Вниз"
+
+#: lang/data.php:171
+#, fuzzy
+msgid "Каталоги"
+msgstr "Каталог"
+
+#: lang/data.php:172
+msgid "нет файлов"
+msgstr ""
+
+#: lang/data.php:175
+msgid "Размер"
+msgstr "Размер"
+
+#: lang/data.php:176
+#, fuzzy
+msgid "Недавние"
+msgstr "Удалить"
+
+#: lang/data.php:178
+#, fuzzy
+msgid "Сервер"
+msgstr "Сервис"
+
+#: lang/data.php:180
+msgid "Подробнее"
+msgstr "Подробнее"
+
+#: lang/data.php:182
+msgid "Отменить удаление"
+msgstr ""
+
+#: lang/data.php:183
+msgid "- без заголовка -"
+msgstr ""
+
+#: lang/data.php:185
+msgid "Изображение будет удалено"
+msgstr ""
+
+#: lang/data.php:188
+msgid "Отключить"
+msgstr ""
+
+#: lang/data.php:189
 #, fuzzy
 msgid "Включить"
 msgstr "Удалить"
 
-#: module_forum/ui_forums_replace.php:313
-#, fuzzy
-msgid "Выключить"
-msgstr "Удалить"
+#: lang/data.php:194
+msgid "установлен"
+msgstr ""
 
-#: module_mail_lists/action_mail_lists.php:46
-#, fuzzy
-msgid "Рассылка не существует"
-msgstr "Такой раздел уже существует"
+#: lang/data.php:195
+msgid "установлена"
+msgstr ""
 
-#: module_mail_lists/action_mail_lists.php:51
-#: module_mail_lists/action_mail_lists.php:71
-#: module_mail_lists/data_history.php:15
-#, fuzzy
-msgid "Рассылка окончена"
-msgstr "Проверка закончена"
+#: lang/data.php:196
+msgid "Версия"
+msgstr ""
 
-#: module_mail_lists/action_mail_lists.php:72
-#, fuzzy
-msgid "Рассылка невозможна. Нет подписанных пользователей."
-msgstr "Набор пользователей"
+#: lang/data.php:198
+msgid "CMS"
+msgstr ""
 
-#: module_mail_lists/action_mail_lists.php:81
+#: lang/data.php:199
+msgid "любая"
+msgstr ""
+
+#: lang/data.php:200
+msgid "от"
+msgstr ""
+
+#: lang/data.php:201
+msgid "до"
+msgstr "до"
+
+#: lang/data.php:202
+msgid "Установить"
+msgstr ""
+
+#: lang/data.php:203
+msgid "Обновить/Переустановить"
+msgstr ""
+
+#: lang/data.php:204
+msgid "Установка/обновление"
+msgstr ""
+
+#: lang/data.php:205
+msgid "доступна свежая версия"
+msgstr ""
+
+#: lang/data.php:206
+msgid "Загрузка ..."
+msgstr "Загрузка ..."
+
+#: lang/data.php:207
+msgid "Перезагрузка ..."
+msgstr ""
+
+#: lang/data.php:209
+msgid "Перейти на сайт"
+msgstr ""
+
+#: setup.php:41
+msgid "Повторить"
+msgstr "Повторить"
+
+#: setup.php:85
 #, php-format
-msgid "Разослано %s писем (%s%%)"
+msgid "установка системы %s прошла успешно"
+msgstr ""
+"<h1>Поздравляем!</h1>Установка системы <strong>%s</strong> прошла успешно."
+"<br /><br />Нажмите кнопку \"Дальше\" для входа в систему."
+
+#: setup.php:106
+msgid "Установить стандартную тему?"
 msgstr ""
 
-#: module_mail_lists/action_mail_lists.php:165
-#, fuzzy
-msgid "Рассылка с таким именем уже существует"
-msgstr "Такой раздел уже существует"
-
-#: module_mail_lists/config.php:21
-#, fuzzy
-msgid "Рассылки"
-msgstr "Ссылка"
-
-#: module_mail_lists/data_history.php:12
-msgid "Рассылка сформирована (отложена)"
+#: setup.php:117
+msgid "нет, нужна чистая установка"
 msgstr ""
 
-#: module_mail_lists/data_history.php:13
-#, fuzzy
-msgid "Рассылка запланирована"
-msgstr "Ссылка на раздел"
-
-#: module_mail_lists/data_history.php:14
-msgid "Идет рассылка"
+#: setup.php:125
+msgid "Выберите тему:"
 msgstr ""
 
-#: module_mail_lists/data_history.php:16
-#, fuzzy
-msgid "Рассылка приостановлена"
-msgstr "уже установлена"
+#: setup.php:157
+msgid "Введите данные администратора системы"
+msgstr "Введите данные администратора системы"
 
-#: module_mail_lists/data_history.php:17
-#, fuzzy
-msgid "Рассылка отменена пользователем"
-msgstr "Набор пользователей"
+#: setup.php:159
+msgid "E-mail"
+msgstr "E-mail"
 
-#: module_mail_lists/ui_mail_lists.php:91
-#: module_mail_lists/ui_mail_list_properties.php:72
-#, fuzzy
-msgid "Разослать"
-msgstr "Создать"
+#: setup.php:180
+msgid "Настройка доступа к БД MySQL"
+msgstr "Настройка доступа к БД MySQL"
 
-#: module_mail_lists/ui_mail_lists.php:147
-#, fuzzy
-msgid "Удалить рассылку"
-msgstr "Удалить поле?"
+#: setup.php:239
+msgid "Добро пожаловать в программу установки"
+msgstr "Добро пожаловать в программу установки"
 
-#: module_mail_lists/ui_mail_list_choose.php:13
+#: setup.php:341
 #, fuzzy
-msgid "Выбор материалов для рассылки"
-msgstr "Выбор материала из структуры"
+msgid "Подождите..."
+msgstr "Подождите ..."
 
-#: module_mail_lists/ui_mail_list_choose.php:81
-#, fuzzy
-msgid "Выберете материал"
-msgstr "Выбор группы материалов"
-
-#: module_mail_lists/ui_mail_list_properties.php:22
-msgid "только подписанные"
+#: upgrade.php:26
+msgid "Загрузка обновления"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:53
-#, fuzzy
-msgid "Статус"
-msgstr "Структура"
-
-#: module_mail_lists/ui_mail_list_properties.php:61
-#, fuzzy
-msgid "Очистить историю"
-msgstr "Запретить доступ"
-
-#: module_mail_lists/ui_mail_list_properties.php:63
-#, fuzzy
-msgid "Очистка истории"
-msgstr "Дата регистрации"
-
-#: module_mail_lists/ui_mail_list_properties.php:105
-#, fuzzy
-msgid "Добавить раздел"
-msgstr "Добавить поле"
-
-#: module_mail_lists/ui_mail_list_properties.php:109
-#, fuzzy
-msgid "Выберете раздел"
-msgstr "Новый раздел"
-
-#: module_mail_lists/ui_mail_list_properties.php:128
-#, fuzzy
-msgid "Удалить раздел"
-msgstr "Удалить поле?"
-
-#: module_mail_lists/ui_mail_list_properties.php:157
-#, fuzzy
-msgid "От"
-msgstr "нет"
-
-#: module_mail_lists/ui_mail_list_properties.php:161
-msgid "Content-type"
-msgstr "Content-type"
-
-#: module_mail_lists/ui_mail_list_properties.php:173
-msgid "Тема письма"
-msgstr "Тема письма"
-
-#: module_mail_lists/ui_mail_list_properties.php:176
-#, fuzzy
-msgid "Фильтр материалов"
-msgstr "Типы материалов"
-
-#: module_mail_lists/ui_mail_list_properties.php:180
-#, fuzzy
-msgid "Расписание"
-msgstr "Описание"
-
-#: module_mail_lists/ui_mail_list_properties.php:186
-#, fuzzy
-msgid "Периодичность"
-msgstr "Переместить"
-
-#: module_mail_lists/ui_mail_list_properties.php:192
-msgid "по дням"
+#: upgrade.php:27
+msgid "Установка"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:193
-#, fuzzy
-msgid "по неделям"
-msgstr "Из раздела"
-
-#: module_mail_lists/ui_mail_list_properties.php:194
-msgid "по месяцам"
+#: upgrade.php:28
+msgid "Проверка доп. библиотек"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:217
+#: upgrade.php:29
+msgid "Установка библиотек"
+msgstr ""
+
+#: upgrade.php:30 upgrade.php:31
+msgid "Проверка БД"
+msgstr ""
+
+#: upgrade.php:49
+#, php-format
+msgid "Требуется PHP %s или выше. Обновление невозможно."
+msgstr ""
+
+#: upgrade.php:74 upgrade.php:173
+#, php-format
+msgid "Не удалось получить файл"
+msgstr ""
+
+#: upgrade.php:112 upgrade.php:212
+#, php-format
+msgid "Ошибка обновления"
+msgstr ""
+
+#: upgrade.php:150
+#, php-format
+msgid "Отмена. Необходимо обновление доп. библиотек."
+msgstr ""
+
+#: upgrade.php:152
+#, php-format
+msgid "Нуждается в обновлении"
+msgstr ""
+
+#: upgrade.php:154
+msgid "Загрузка доп. библиотек"
+msgstr ""
+
+#: upgrade.php:220
+#, php-format
+msgid "Не требуется."
+msgstr ""
+
+#: widgets/_common/page404.twig:2
+msgid "Ошибка 404: страница не найдена"
+msgstr ""
+
+#: widgets/_common/page404.twig:7
+msgid "К сожалению, запрашиваемый Вами документ не найден на этом сервере."
+msgstr ""
+
+#: widgets/_common/page404.twig:8
+msgid "Наиболее частые причины, приводящие к данной ошибке, следующие:"
+msgstr ""
+
+#: widgets/_common/page404.twig:10
+msgid "переход по ошибочной ссылке;"
+msgstr ""
+
+#: widgets/_common/page404.twig:11
+msgid "неправильный ввод адреса."
+msgstr ""
+
+#: widgets/_common/page404.twig:13
+msgid "Решения:"
+msgstr ""
+
+#: widgets/_common/page404.twig:15
+msgid "исправьте адрес, ошибочно набранный в адресной строке браузера;"
+msgstr ""
+
+#: widgets/_common/page404.twig:16
+msgid ""
+"попробуйте начать поиск необходимого материала с <a href=\"/\">главной "
+"страницы нашего сайта</a>."
+msgstr ""
+
+#: widgets/calendar/default.twig:12
 msgid "Пн"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:218
+#: widgets/calendar/default.twig:13
 #, fuzzy
 msgid "Вт"
 msgstr "нет"
 
-#: module_mail_lists/ui_mail_list_properties.php:219
+#: widgets/calendar/default.twig:14
 msgid "Ср"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:220
+#: widgets/calendar/default.twig:15
 #, fuzzy
 msgid "Чт"
 msgstr "нет"
 
-#: module_mail_lists/ui_mail_list_properties.php:221
+#: widgets/calendar/default.twig:16
 #, fuzzy
 msgid "Пт"
 msgstr "нет"
 
-#: module_mail_lists/ui_mail_list_properties.php:222
+#: widgets/calendar/default.twig:17
 msgid "Сб"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:223
+#: widgets/calendar/default.twig:18
 msgid "Вс"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:234
-#, fuzzy
-msgid "каждый"
-msgstr "Данные"
-
-#: module_mail_lists/ui_mail_list_properties.php:241
-msgid "день"
+#: widgets/material/default.twig:20
+msgid "Поделиться в соц. сетях"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:245
-msgid "месяца"
+#: widgets/paginator/default.twig:7 widgets/paginator/default.twig:9
+msgid "Предыдущая"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_properties.php:253
-#: module_mail_lists/ui_mail_list_properties.php:258
-#, fuzzy
-msgid "Шаблон письма"
-msgstr "Файловая система"
-
-#: module_mail_lists/ui_mail_list_properties.php:265
-#, fuzzy
-msgid "Разделы для рассылки"
-msgstr "Раздел не найден"
-
-#: module_mail_lists/ui_mail_list_properties.php:275
-#, fuzzy
-msgid "История"
-msgstr "Состоит в"
-
-#: module_mail_lists/ui_mail_list_properties.php:341
-#, fuzzy
-msgid "Новая рассылка"
-msgstr "Файловая система"
-
-#: module_mail_lists/ui_mail_list_properties.php:386
-#, fuzzy
-msgid "Сохранение..."
-msgstr "Сохранить"
-
-#: module_mail_lists/ui_mail_list_send.php:14
-#, fuzzy
-msgid "Рассылка"
-msgstr "Ссылка"
-
-#: module_mail_lists/ui_mail_list_send.php:22
-#, fuzzy
-msgid "Тема"
-msgstr "Отмена"
-
-#: module_mail_lists/ui_mail_list_send.php:28
-msgid "Провести рассылку"
+#: widgets/paginator/default.twig:7 widgets/paginator/default.twig:9
+#: widgets/paginator/default.twig:25 widgets/paginator/default.twig:27
+msgid "страница"
 msgstr ""
 
-#: module_mail_lists/ui_mail_list_send.php:36
-#, fuzzy
-msgid "Рассылка ..."
-msgstr "Загрузка ..."
-
-#: module_mail_lists/ui_mail_list_send.php:50
-#, fuzzy
-msgid "Приостановить"
-msgstr "Сохранить"
-
-#: module_mail_lists/ui_mail_list_send.php:54
-#, fuzzy
-msgid "Отменить"
-msgstr "Изменить"
-
-#: module_mail_lists/ui_mail_list_send.php:57
-#: module_mail_lists/ui_mail_list_send.php:72
-#: module_mail_lists/ui_mail_list_send.php:76
-#, fuzzy
-msgid "Отменить рассылку"
-msgstr "Отменить публикацию"
-
-#: module_mail_lists/ui_mail_list_send.php:67
-#, fuzzy
-msgid "Отложить рассылку"
-msgstr "Отменить публикацию"
-
-#: module_stats/ui_stats.php:109
-msgid "Хиты"
+#: widgets/paginator/default.twig:16
+msgid "Вы на странице"
 msgstr ""
 
-#: module_stats/ui_stats.php:110
-#, fuzzy
-msgid "Хосты"
-msgstr "Группы"
-
-#: module_stats/ui_stats.php:111
-#, fuzzy
-msgid "Сессии"
-msgstr "Сервис"
-
-#: module_stats/ui_stats.php:150
-msgid "с"
+#: widgets/paginator/default.twig:25 widgets/paginator/default.twig:27
+msgid "Следующая"
 msgstr ""
 
-#: module_stats/ui_stats.php:184
-#, fuzzy
-msgid "Посещаемость"
-msgstr "Переместить"
-
-#: module_stats/ui_stats.php:226
-msgid "Популярность страниц"
+#: widgets/paginator/infinite.twig:4
+msgid "Показать еще"
 msgstr ""
 
-#: module_stats/ui_stats.php:237 module_stats/ui_stats.php:265
-#: module_stats/ui_stats.php:285
-#, fuzzy
-msgid "Кол-во"
-msgstr "Заголовок"
+#: widgets/search/default.twig:29
+msgid "Поиск не дал результатов"
+msgstr ""
 
-#: module_stats/ui_stats.php:254
-#, fuzzy
-msgid "Популярность разделов"
-msgstr "Добавить поле"
+#: widgets/search/default.twig:39
+msgid "Изменен"
+msgstr ""
 
-#: module_stats/ui_stats.php:274
-#, fuzzy
-msgid "Поисковые фразы"
-msgstr "Пользовательские типы"
+#: widgets/search/default.twig:41
+msgid "Путь"
+msgstr ""
 
-#: module_stats/ui_stats.php:284
+#: widgets/user.auth/default.twig:14 widgets/user.recover/default.twig:17
+msgid "Логин или Email"
+msgstr ""
+
+#: widgets/user.auth/default.twig:25
+msgid "Забыли пароль?"
+msgstr ""
+
+#: widgets/user.auth/default.twig:28
+msgid "Регистрация"
+msgstr ""
+
+#: widgets/user.auth/default.twig:30
+msgid "Войти"
+msgstr ""
+
+#: widgets/user.recover/default.twig:19
+msgid "Восстановить пароль"
+msgstr ""
+
+#: widgets/user.register/default.twig:12
 #, fuzzy
-msgid "Фраза"
-msgstr "Справка"
+msgid "Логин"
+msgstr "Плагины"
+
+#: widgets/user.register/default.twig:16
+msgid "Email"
+msgstr ""
+
+#: widgets/user.register/default.twig:20
+msgid "Ваше имя"
+msgstr ""
+
+#: widgets/user.register/default.twig:23
+msgid "Придумайте пароль"
+msgstr ""
+
+#: widgets/user.register/default.twig:35
+msgid "Зарегистрироваться"
+msgstr ""
+
+#: widgets/user.register/default.twig:43
+msgid "Вы были успешно зарегистрированы!"
+msgstr ""
+
+#~ msgid "Ошибка создания класса"
+#~ msgstr "Ошибка создания класса"
+
+#~ msgid "уже установлена"
+#~ msgstr "уже установлена"
+
+#, fuzzy
+#~ msgid "Каталог \""
+#~ msgstr "Каталог"
+
+#, fuzzy
+#~ msgid "Дата изменения"
+#~ msgstr "Дата создания"
+
+#~ msgid "-- нет файлов --"
+#~ msgstr "-- нет файлов --"
+
+#, fuzzy
+#~ msgid "Введите имя"
+#~ msgstr "Доменное имя"
+
+#~ msgid "Ссылка"
+#~ msgstr "Ссылка"
+
+#~ msgid "текст"
+#~ msgstr "текст"
+
+#~ msgid "структура"
+#~ msgstr "структура"
+
+#~ msgid "WYSIWYG HTML редактор"
+#~ msgstr "WYSIWYG HTML редактор"
+
+#~ msgid "Редактирование группы материалов"
+#~ msgstr "Редактирование группы материалов"
+
+#~ msgid "Стандартный редактор ссылок"
+#~ msgstr "Стандартный редактор ссылок"
+
+#~ msgid "Компактный WYSIWYG HTML редактор"
+#~ msgstr "Компактный WYSIWYG HTML редактор"
+
+#, fuzzy
+#~ msgid "Вставить/Редактировать изображение"
+#~ msgstr "Загрузка/редактирование изображений"
+
+#, fuzzy
+#~ msgid "Ширина"
+#~ msgstr "Справка"
+
+#, fuzzy
+#~ msgid "Высота"
+#~ msgstr "Выход"
+
+#, fuzzy
+#~ msgid "Вертикальный отступ"
+#~ msgstr "Запретить доступ"
+
+#, fuzzy
+#~ msgid "Выравнивание"
+#~ msgstr "Внимание!"
+
+#, fuzzy
+#~ msgid "Абс посередине"
+#~ msgstr "Подтверждение"
+
+#, fuzzy
+#~ msgid "По базовой линии"
+#~ msgstr "Пользователи"
+
+#, fuzzy
+#~ msgid "Понизу"
+#~ msgstr "Вниз"
+
+#, fuzzy
+#~ msgid "Посередине"
+#~ msgstr "Подтверждение"
+
+#, fuzzy
+#~ msgid "По правому краю"
+#~ msgstr "Справка"
+
+#, fuzzy
+#~ msgid "Поверху"
+#~ msgstr "Вверх"
+
+#, fuzzy
+#~ msgid "Предварительный просмотр"
+#~ msgstr "Неверный параметр"
+
+#, fuzzy
+#~ msgid "Свойства изображения"
+#~ msgstr "Свойства раздела"
+
+#, fuzzy
+#~ msgid "Вставить таблицу"
+#~ msgstr "Отменить публикацию"
+
+#, fuzzy
+#~ msgid "Вставить"
+#~ msgstr "Сохранить"
+
+#, fuzzy
+#~ msgid "Строки"
+#~ msgstr "Ссылка"
+
+#, fuzzy
+#~ msgid "Пометить ячейки"
+#~ msgstr "Изменить поле"
+
+#~ msgid "Интерактивы"
+#~ msgstr "Интерактивы"
+
+#~ msgid "О системе"
+#~ msgstr "О системе"
+
+#~ msgid "Разделы"
+#~ msgstr "Разделы"
+
+#~ msgid "Вверх"
+#~ msgstr "Вверх"
+
+#~ msgid "Вниз"
+#~ msgstr "Вниз"
+
+#~ msgid "Вы действительно хотите удалить раздел?"
+#~ msgstr "Вы действительно хотите удалить раздел?"
+
+#, fuzzy
+#~ msgid "Каталог шаблонов"
+#~ msgstr "Набор файлов"
+
+#, fuzzy
+#~ msgid "Картинка"
+#~ msgstr "Справка"
+
+#, fuzzy
+#~ msgid "изменять дату материалов"
+#~ msgstr "Количество материалов"
+
+#~ msgid "Ошибка AJAX"
+#~ msgstr "Ошибка AJAX"
+
+#~ msgid "Ошибка загрузки окна"
+#~ msgstr "Ошибка загрузки окна"
+
+#~ msgid "создать ссылки для подразделов"
+#~ msgstr "создать ссылки для подразделов"
+
+#~ msgid "Отменить публикацию"
+#~ msgstr "Отменить публикацию"
+
+#~ msgid "Новый сервер"
+#~ msgstr "Новый сервер"
+
+#~ msgid "Внимание!\\n\\nВы удаляете тип"
+#~ msgstr "Внимание!\\n\\nВы удаляете тип"
+
+#~ msgid ""
+#~ "Вместе с этим будут удалены все разделы этого типа,\\nвсе шаблоны "
+#~ "заданные этих разделах,\\nа также все материалы из этих разделов.\\n"
+#~ "\\nПродолжить?"
+#~ msgstr ""
+#~ "Вместе с этим будут удалены все разделы этого типа,\\nвсе шаблоны "
+#~ "заданные этих разделах,\\nа также все материалы из этих разделов.\\n"
+#~ "\\nПродолжить?"
+
+#~ msgid "Удалить поле?"
+#~ msgstr "Удалить поле?"
+
+#~ msgid "Имя поля"
+#~ msgstr "Имя поля"
+
+#~ msgid "Алиас"
+#~ msgstr "Алиас"
+
+#~ msgid "Название редактора"
+#~ msgstr "Название редактора"
+
+#~ msgid "Редактор поля"
+#~ msgstr "Редактор поля"
+
+#~ msgid "не ограничен"
+#~ msgstr "не ограничен"
+
+#~ msgid "не ограничено"
+#~ msgstr "не ограничено"
+
+#~ msgid "Информация о лицензии"
+#~ msgstr "Информация о лицензии"
+
+#~ msgid "Срок действия"
+#~ msgstr "Срок действия"
+
+#~ msgid "Количество виртуальных серверов"
+#~ msgstr "Количество виртуальных серверов"
+
+#~ msgid "Количество материалов"
+#~ msgstr "Количество материалов"
+
+#~ msgid ""
+#~ "Данный программный продукт защищен законами об авторских правах и "
+#~ "международными соглашениями. Его незаконное воспроизведение или "
+#~ "распространение в целом, а также его частей, равно как и использование "
+#~ "отдельных частей системы в составе других программ запрещено и влечет "
+#~ "гражданскую, административную и уголовную ответственность."
+#~ msgstr ""
+#~ "Данный программный продукт защищен законами об авторских правах и "
+#~ "международными соглашениями. Его незаконное воспроизведение или "
+#~ "распространение в целом, а также его частей, равно как и использование "
+#~ "отдельных частей системы в составе других программ запрещено и влечет "
+#~ "гражданскую, административную и уголовную ответственность."
+
+#~ msgid "Информация о новых версиях системы"
+#~ msgstr "Информация о новых версиях системы"
+
+#~ msgid "Такой раздел уже существует"
+#~ msgstr "Такой раздел уже существует"
+
+#, fuzzy
+#~ msgid "Выбрать"
+#~ msgstr "Выбор"
+
+#, fuzzy
+#~ msgid "Добавить материал"
+#~ msgstr "Удалить материал"
+
+#, fuzzy
+#~ msgid "Изменить материал"
+#~ msgstr "Удалить материал"
+
+#, fuzzy
+#~ msgid "Нет кода баннера."
+#~ msgstr "Свойства раздела"
+
+#, fuzzy
+#~ msgid "Рекламодатель с таким логином уже существует"
+#~ msgstr "Такой пользователь уже существует"
+
+#, fuzzy
+#~ msgid "Рекламодатель с таким именем уже существует"
+#~ msgstr "Такой раздел уже существует"
+
+#, fuzzy
+#~ msgid "Группа с таким псевдонимом уже существует"
+#~ msgstr "Такой раздел уже существует"
+
+#, fuzzy
+#~ msgid "Просмотр баннеров"
+#~ msgstr "Посмотреть на сервере"
+
+#, fuzzy
+#~ msgid "показать с"
+#~ msgstr "Добавить"
+
+#, fuzzy
+#~ msgid "по"
+#~ msgstr "до"
+
+#, fuzzy
+#~ msgid "Сегодня"
+#~ msgstr "Компания"
+
+#, fuzzy
+#~ msgid "За все время"
+#~ msgstr "Дата/Время"
+
+#, fuzzy
+#~ msgid "Показы"
+#~ msgstr "Плагины"
+
+#, fuzzy
+#~ msgid "Клики"
+#~ msgstr "Алиас"
+
+#, fuzzy
+#~ msgid "По дням"
+#~ msgstr "Поля"
+
+#, fuzzy
+#~ msgid "Просмотр статистики баннера"
+#~ msgstr "Посмотреть на сервере"
+
+#, fuzzy
+#~ msgid "Актив"
+#~ msgstr "Автор"
+
+#, fuzzy
+#~ msgid "Пользователи баннерной системы"
+#~ msgstr "Пользователь не найден"
+
+#, fuzzy
+#~ msgid "Баннеры"
+#~ msgstr "Размер"
+
+#, fuzzy
+#~ msgid "Рекламные слова"
+#~ msgstr "Ключевые слова"
+
+#, fuzzy
+#~ msgid "январь"
+#~ msgstr "Вверх"
+
+#, fuzzy
+#~ msgid "февраль"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~ msgid "март"
+#~ msgstr "Закрыть"
+
+#, fuzzy
+#~ msgid "апрель"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~ msgid "май"
+#~ msgstr "Файл"
+
+#, fuzzy
+#~ msgid "июль"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~ msgid "октябрь"
+#~ msgstr "Повторить"
+
+#, fuzzy
+#~ msgid "ноябрь"
+#~ msgstr "Повторить"
+
+#, fuzzy
+#~ msgid "декабрь"
+#~ msgstr "Добавить"
+
+#, fuzzy
+#~ msgid "Статистика"
+#~ msgstr "Ссылка"
+
+#, fuzzy
+#~ msgid "Свойства баннера"
+#~ msgstr "Свойства раздела"
+
+#, fuzzy
+#~ msgid "активный"
+#~ msgstr "Интерактивы"
+
+#, fuzzy
+#~ msgid "Показывать"
+#~ msgstr "Добавить"
+
+#, fuzzy
+#~ msgid "Рекламный код"
+#~ msgstr "Редактор поля"
+
+#, fuzzy
+#~ msgid "Ограничение показа"
+#~ msgstr "Значение по умолчанию"
+
+#, fuzzy
+#~ msgid "Новый баннер"
+#~ msgstr "Новый раздел"
+
+#, fuzzy
+#~ msgid "Статистика рекламных слов"
+#~ msgstr "Редактирование ключевых слов"
+
+#, fuzzy
+#~ msgid "Слово"
+#~ msgstr "Заголовок"
+
+#, fuzzy
+#~ msgid "Очередь"
+#~ msgstr "Пароль"
+
+#, fuzzy
+#~ msgid "Вес"
+#~ msgstr "нет"
+
+#, fuzzy
+#~ msgid "Рекламодатели"
+#~ msgstr "Пользователи"
+
+#, fuzzy
+#~ msgid "Группы баннеров"
+#~ msgstr "Группа материалов"
+
+#, fuzzy
+#~ msgid "Новая группа баннеров"
+#~ msgstr "Выбор группы материалов"
+
+#, fuzzy
+#~ msgid "Новый рекламодатель"
+#~ msgstr "Новый пользователь"
+
+#, fuzzy
+#~ msgid "Подтверждение удаления"
+#~ msgstr "Подтверждение"
+
+#, fuzzy
+#~ msgid "Вы действительно хотите это сделать?"
+#~ msgstr "Вы действительно хотите удалить раздел?"
+
+#, fuzzy
+#~ msgid "Удалить баннер"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "Группа"
+#~ msgstr "Группы"
+
+#, fuzzy
+#~ msgid "Рекламодатель"
+#~ msgstr "Пользователь"
+
+#, fuzzy
+#~ msgid "Всего показов"
+#~ msgstr "Добро пожаловать"
+
+#, fuzzy
+#~ msgid "Ограничение"
+#~ msgstr "не ограничено"
+
+#, fuzzy
+#~ msgid "Всего кликов"
+#~ msgstr "Не опубликован"
+
+#, fuzzy
+#~ msgid "Лимит показов"
+#~ msgstr "Тип материалов"
+
+#, fuzzy
+#~ msgid "показывать баннер пользователю не более"
+#~ msgstr "Показать материалы из подразделов"
+
+#, fuzzy
+#~ msgid "раз в сутки"
+#~ msgstr "Вход в систему"
+
+#, fuzzy
+#~ msgid "показывать посетителям из"
+#~ msgstr "Копировать материалы"
+
+#, fuzzy
+#~ msgid "Комментарий"
+#~ msgstr "Компания"
+
+#, fuzzy
+#~ msgid "Преобразовать"
+#~ msgstr "Пользователь"
+
+#, fuzzy
+#~ msgid "Ссылок не обнаружено"
+#~ msgstr "обнаружено"
+
+#, fuzzy
+#~ msgid "Графики"
+#~ msgstr "Справка"
+
+#, fuzzy
+#~ msgid "Страна"
+#~ msgstr "Справка"
+
+#, fuzzy
+#~ msgid "Регион"
+#~ msgstr "Плагины"
+
+#, fuzzy
+#~ msgid "Город"
+#~ msgstr "Вход"
+
+#, fuzzy
+#~ msgid "Свойства группы"
+#~ msgstr "Членство в группах"
+
+#, fuzzy
+#~ msgid "Метод показа"
+#~ msgstr "Скрытое поле"
+
+#, fuzzy
+#~ msgid "Очередность показа"
+#~ msgstr "Отменить публикацию"
+
+#, fuzzy
+#~ msgid "циклическая"
+#~ msgstr "Логическое"
+
+#, fuzzy
+#~ msgid "админ"
+#~ msgstr "Отмена"
+
+#, fuzzy
+#~ msgid "анализировать структуру разделов"
+#~ msgstr "Создать ссылку на раздел"
+
+#, fuzzy
+#~ msgid "Исправить"
+#~ msgstr "Сохранить"
+
+#, fuzzy
+#~ msgid "создавать темы"
+#~ msgstr "Создать сервер"
+
+#, fuzzy
+#~ msgid "отвечать в темах"
+#~ msgstr "Копировать материалы"
+
+#, fuzzy
+#~ msgid "редактировать свои сообщения"
+#~ msgstr "Копировать подразделы"
+
+#, fuzzy
+#~ msgid "редактировать любые сообщения"
+#~ msgstr "Редактирование ключевых слов"
+
+#, fuzzy
+#~ msgid "Форумы"
+#~ msgstr "Группы"
+
+#, fuzzy
+#~ msgid "Ответов"
+#~ msgstr "Отмена"
+
+#, fuzzy
+#~ msgid "Закрыть тему"
+#~ msgstr "Закрыть"
+
+#, fuzzy
+#~ msgid "Показать ответы"
+#~ msgstr "Создать сервер"
+
+#, fuzzy
+#~ msgid "Автозамена"
+#~ msgstr "Отмена"
+
+#, fuzzy
+#~ msgid "Новый форум"
+#~ msgstr "Новый сервер"
+
+#, fuzzy
+#~ msgid "Удалить форум"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "Вы действительно хотите удалить форум?"
+#~ msgstr "Вы действительно хотите удалить раздел?"
+
+#, fuzzy
+#~ msgid "Ожидает премодерации"
+#~ msgstr "Дата регистрации"
+
+#, fuzzy
+#~ msgid "Удалить сообщение"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "Изменить группу"
+#~ msgstr "Изменить поле"
+
+#, fuzzy
+#~ msgid "Введите название группы:"
+#~ msgstr "Редактирование группы материалов"
+
+#, fuzzy
+#~ msgid "Новая автозамена"
+#~ msgstr "Проверка закончена"
+
+#, fuzzy
+#~ msgid "Строка для замены"
+#~ msgstr "Ссылка на раздел"
+
+#, fuzzy
+#~ msgid "Простая замена"
+#~ msgstr "Проверка закончена"
+
+#, fuzzy
+#~ msgid "включить"
+#~ msgstr "Удалить"
+
+#, fuzzy
+#~ msgid "Создать группу"
+#~ msgstr "Создать сервер"
+
+#, fuzzy
+#~ msgid "Удалить группу"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "Выключить"
+#~ msgstr "Удалить"
+
+#, fuzzy
+#~ msgid "Рассылка не существует"
+#~ msgstr "Такой раздел уже существует"
+
+#, fuzzy
+#~ msgid "Рассылка окончена"
+#~ msgstr "Проверка закончена"
+
+#, fuzzy
+#~ msgid "Рассылка невозможна. Нет подписанных пользователей."
+#~ msgstr "Набор пользователей"
+
+#, fuzzy
+#~ msgid "Рассылка с таким именем уже существует"
+#~ msgstr "Такой раздел уже существует"
+
+#, fuzzy
+#~ msgid "Рассылки"
+#~ msgstr "Ссылка"
+
+#, fuzzy
+#~ msgid "Рассылка запланирована"
+#~ msgstr "Ссылка на раздел"
+
+#, fuzzy
+#~ msgid "Рассылка приостановлена"
+#~ msgstr "уже установлена"
+
+#, fuzzy
+#~ msgid "Рассылка отменена пользователем"
+#~ msgstr "Набор пользователей"
+
+#, fuzzy
+#~ msgid "Разослать"
+#~ msgstr "Создать"
+
+#, fuzzy
+#~ msgid "Удалить рассылку"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "Выбор материалов для рассылки"
+#~ msgstr "Выбор материала из структуры"
+
+#, fuzzy
+#~ msgid "Выберете материал"
+#~ msgstr "Выбор группы материалов"
+
+#, fuzzy
+#~ msgid "Статус"
+#~ msgstr "Структура"
+
+#, fuzzy
+#~ msgid "Очистить историю"
+#~ msgstr "Запретить доступ"
+
+#, fuzzy
+#~ msgid "Очистка истории"
+#~ msgstr "Дата регистрации"
+
+#, fuzzy
+#~ msgid "Добавить раздел"
+#~ msgstr "Добавить поле"
+
+#, fuzzy
+#~ msgid "Выберете раздел"
+#~ msgstr "Новый раздел"
+
+#, fuzzy
+#~ msgid "Удалить раздел"
+#~ msgstr "Удалить поле?"
+
+#, fuzzy
+#~ msgid "От"
+#~ msgstr "нет"
+
+#~ msgid "Content-type"
+#~ msgstr "Content-type"
+
+#~ msgid "Тема письма"
+#~ msgstr "Тема письма"
+
+#, fuzzy
+#~ msgid "Фильтр материалов"
+#~ msgstr "Типы материалов"
+
+#, fuzzy
+#~ msgid "Расписание"
+#~ msgstr "Описание"
+
+#, fuzzy
+#~ msgid "Периодичность"
+#~ msgstr "Переместить"
+
+#, fuzzy
+#~ msgid "по неделям"
+#~ msgstr "Из раздела"
+
+#, fuzzy
+#~ msgid "каждый"
+#~ msgstr "Данные"
+
+#, fuzzy
+#~ msgid "Шаблон письма"
+#~ msgstr "Файловая система"
+
+#, fuzzy
+#~ msgid "Разделы для рассылки"
+#~ msgstr "Раздел не найден"
+
+#, fuzzy
+#~ msgid "История"
+#~ msgstr "Состоит в"
+
+#, fuzzy
+#~ msgid "Новая рассылка"
+#~ msgstr "Файловая система"
+
+#, fuzzy
+#~ msgid "Сохранение..."
+#~ msgstr "Сохранить"
+
+#, fuzzy
+#~ msgid "Рассылка"
+#~ msgstr "Ссылка"
+
+#, fuzzy
+#~ msgid "Рассылка ..."
+#~ msgstr "Загрузка ..."
+
+#, fuzzy
+#~ msgid "Приостановить"
+#~ msgstr "Сохранить"
+
+#, fuzzy
+#~ msgid "Отменить"
+#~ msgstr "Изменить"
+
+#, fuzzy
+#~ msgid "Отменить рассылку"
+#~ msgstr "Отменить публикацию"
+
+#, fuzzy
+#~ msgid "Отложить рассылку"
+#~ msgstr "Отменить публикацию"
+
+#, fuzzy
+#~ msgid "Хосты"
+#~ msgstr "Группы"
+
+#, fuzzy
+#~ msgid "Сессии"
+#~ msgstr "Сервис"
+
+#, fuzzy
+#~ msgid "Посещаемость"
+#~ msgstr "Переместить"
+
+#, fuzzy
+#~ msgid "Кол-во"
+#~ msgstr "Заголовок"
+
+#, fuzzy
+#~ msgid "Популярность разделов"
+#~ msgstr "Добавить поле"
+
+#, fuzzy
+#~ msgid "Поисковые фразы"
+#~ msgstr "Пользовательские типы"
+
+#, fuzzy
+#~ msgid "Фраза"
+#~ msgstr "Справка"
 
 #~ msgid "Не найден лицензионный файл"
 #~ msgstr "Не найден лицензионный файл"

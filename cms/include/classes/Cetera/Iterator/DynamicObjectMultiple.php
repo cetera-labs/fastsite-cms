@@ -137,7 +137,42 @@ class DynamicObjectMultiple extends DbObject {
 		$q = array();
 		foreach ($this->objectDefinitionArray as $od)
 		{
-			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $this->fields).' FROM `'.$od->table.'`'.$this->where;
+			$from = '`'.$od->table.'` main';
+			$group = '';
+			$where = $this->where;
+			$f = array();
+			foreach (array_unique($this->fields) as $field) {
+				if ($field == 'id' || $od->hasField($field)) {
+					$f[] = 'main.'.$field;
+					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);
+				}
+				else {
+					try {
+						$parts = explode('.', $field);
+						if (count($parts) == 3) {
+							$link_od = \Cetera\ObjectDefinition::findByTable( $parts[0] );
+							if (!$link_od->hasField($parts[2]) || !$link_od->hasField($parts[1])){
+								throw new \Exception('field doesnt exist');
+							}
+							$link = $link_od->getField($parts[1]);
+							if ($link['len'] != $od->id) {
+								throw new \Exception('field doesnt exist');
+							}
+							$from .= ' INNER JOIN `'.$link_od->table.'` link ON (main.id=link.'.$parts[1].')';
+							$f[] = 'link.`'.$parts[2].'` as `'.$field.'`';
+							$where = str_replace('`'.$field.'`', 'link.`'.$parts[2].'`', $where);
+						}
+						else {
+							throw new \Exception('field doesnt exist');
+						}
+					}
+					catch (\Exception $e) {
+						$f[] = 'NULL as `'.$field.'`';
+						$where = str_replace('`'.$field.'`', 'NULL', $where);
+					}
+				}
+			}
+			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $f).' FROM '.$from.' '.$where.' GROUP BY main.id';
 		}
 		return implode(' UNION ', $q);
     } 	
