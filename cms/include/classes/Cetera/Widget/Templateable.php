@@ -56,21 +56,16 @@ class Templateable extends Widget {
 					
 					ob_start();
 					
-					if (file_exists(WWWROOT.$tpl) )
-					{
-						include( WWWROOT.$tpl );
+					$tpl = strtolower($this->widgetName).'/'.$tpl;
+										
+					if (file_exists($this->application->getTemplateDir().'/widgets/'.$tpl) ) {
+						include($this->application->getTemplateDir().'/widgets/'.$tpl);
+					} 
+					elseif (file_exists( CMSROOT.'/widgets/'.$tpl ) ) {			
+						include( CMSROOT.'/widgets/'.$tpl );
 					}
-					else 
-					{
-						$tpl = strtolower($this->widgetName).'/'.$tpl;
-						if (file_exists($this->application->getTemplateDir().'/widgets/'.$tpl) )
-						{
-							include($this->application->getTemplateDir().'/widgets/'.$tpl);
-						} 
-						elseif (file_exists( CMSROOT.'/widgets/'.$tpl ) ) 
-						{			
-							include( CMSROOT.'/widgets/'.$tpl );
-						}
+					else {
+						print 'Template '.$tpl.' is not found';
 					}
 				  
 					$result = ob_get_contents();
