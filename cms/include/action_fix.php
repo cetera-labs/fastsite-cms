@@ -37,20 +37,21 @@ if ($_REQUEST['db_structure']) {
     		
         		if (!isset($tables[$error['table']])) {
         		    $res = $schema->parseSchema($error['module']);
-                $tables = array_merge($tables, $res['tables']);
+                    $tables = array_merge($tables, $res['tables']);
         		}        
         
         		$query = $schema->get_fix_query($tables, $error);
         		
         		if ($query) {
-    
-        			mysql_query($query);
-              
-        			if (mysql_error()) {
+					
+					try {
+						$application->getConn()->executeQuery($query);
+					}
+					catch (\Exception $e) {
         				if (!$terror) $msg .= '<b class="error">'.$t->_('Ошибка').'</b>';
         				$terror = true;
-        				$msg .= '<div class="note">'.mysql_error().'<pre>'.$query.'</pre></div>';
-        			}
+        				$msg .= '<div class="note">'.$e->getMessage().'<pre>'.$query.'</pre></div>';						
+					}
     
         		}
             

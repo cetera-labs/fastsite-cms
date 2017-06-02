@@ -106,7 +106,15 @@ class Schema {
     				$query = 'ALTER TABLE `'.$error['table'].'` ENGINE='.$tables[$error['table']]['engine'];
     				break;
     			case self::FIELD_NOT_FOUND:
-    				$query = 'ALTER TABLE `'.$error['table'].'` ADD `'.$error['field'].'` '.$this->getFieldDef($tables[$error['table']]['fields'][$error['field']], false);
+					$field = $tables[$error['table']]['fields'][$error['field']];
+    				$query = 'ALTER TABLE `'.$error['table'].'` ADD `'.$error['field'].'` '.$this->getFieldDef($field, false);
+					if (isset($field['auto_increment']) && $field['auto_increment']) {
+						$query .= ";\nALTER TABLE `".$error['table'].'` ADD INDEX tmp_'.$error['field'].' (`'.$error['field'].'`)';
+						$query .= ";\nALTER TABLE `".$error['table'].'` CHANGE `'.$error['field'].'` `'.$error['field'].'` '.$this->getFieldDef($field);
+						//$query .= ";\nALTER TABLE `".$error['table'].'` CHANGE `'.$error['field'].'` `'.$error['field'].'` '.$this->getFieldDef($field, false);
+						//$query .= ";\nALTER TABLE `".$error['table'].'` ADD PRIMARY KEY (`'.$error['field'].'`)';
+						//$query .= ";\nALTER TABLE `".$error['table'].'` DROP INDEX tmp_'.$error['field'];
+					}
     				break;
     			case self::EXTRA_FIELD:
     				$query = 'ALTER TABLE `'.$error['table'].'` DROP `'.$error['field'].'`';
@@ -583,14 +591,14 @@ class Schema {
 			if (!isset($dbtable['keys'][$kid])) {
 			    $res[] = array(
 					'error'    => self::KEY_NOT_FOUND,
-					'field'    => $key['name'].' ('.implode(',', $key['columns']).')',
+					'field'    => $this->getIndexDef($key),//$key['name'].' ('.implode(',', $key['columns']).')',
 					'table'    => $table['name'],
 					'module'   => $module,
 					'kid'	   => $kid,
 				);
 				continue;		    
 			}
-			
+						
 			if (($dbtable['keys'][$kid]['columns'] != $key['columns'])||($dbtable['keys'][$kid]['unique'] != $key['unique'])) {
 			    $res[] = array(
 					'error'  => self::KEY_DONT_MATCH,
@@ -598,8 +606,8 @@ class Schema {
 					'table'  => $table['name'],
 					'module' => $module,
 					'kid'	 => $kid,
-					'expected' => '('.implode(',', $key['columns']).')'.($key['unique']?' UNIQUE':''),
-					'found'    => '('.implode(',', $dbtable['keys'][$kid]['columns']).')'.($dbtable['keys'][$kid]['unique']?' UNIQUE':'')
+					'expected' => $this->getIndexDef($key),//'('.implode(',', $key['columns']).')'.($key['unique']?' UNIQUE':''),
+					'found'    => $this->getIndexDef($dbtable['keys'][$kid]),//'('.implode(',', $dbtable['keys'][$kid]['columns']).')'.($dbtable['keys'][$kid]['unique']?' UNIQUE':'')
 				);
 			}
 			
@@ -677,10 +685,18 @@ class Schema {
     		$sql .= "PRIMARY KEY (`";
     		else {
     			if ($key['unique']) $sql .= "UNIQUE ";
-    			$sql .= "INDEX `".$key['name']."` (`";
+    			$sql .= "INDEX `".$key['name']."` (";
     		}
-    	$sql .= implode("`,`", $key['columns']);
-    	$sql .= "`)";
+		
+		foreach ($key['columns'] as $i => $col) {
+			if ($i) $sql .= ',';
+			$sql .= '`'.$col['name'].'`';
+			if ($col['length']) {
+				$sql .= '('.$col['length'].')';
+			}
+		}
+		
+    	$sql .= ")";
     	return $sql;
     }
     
@@ -726,14 +742,21 @@ class Schema {
     				'columns' => array()
     			);	    
     		}
-    		$key['columns'][] = $f['Column_name'];
+    		$col = array(
+				'name' => $f['Column_name']
+			);
+			if ($f['Sub_part']) {
+				$col['length'] = $f['Sub_part'];
+			}
+			$key['columns'][] = $col;
+			
     		$prevkey = $f['Key_name'];
     	}
     	if ($prevkey) {
     		if (!isset($table['keys'])) $table['keys'] = array();
     		$table['keys'][$key['name']] = $key;
     	}
-    	
+		    	
     	return $table;
     }
     
@@ -808,7 +831,7 @@ class Schema {
         
     		if ($value['tag'] == 'column' && isset($value['attributes']['name'])) {
     			if (!isset($key['columns'])) $key['columns'] = array();
-    			$key['columns'][] = $value['attributes']['name'];
+    			$key['columns'][] = $value['attributes'];
     		}
         
     	}
