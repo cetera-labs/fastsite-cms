@@ -314,26 +314,34 @@ class Schema {
 	    if (!file_exists($sql_file) || !is_file($sql_file)) throw new Exception\CMS(Exception\CMS::FILE_NOT_FOUND, $sql_file);
 		
 		if (!filesize($sql_file)) return;
-			
-		$sql_query = fread(fopen($sql_file, 'r'), filesize($sql_file));
-	    if (get_magic_quotes_runtime() == 1) $sql_query = stripslashes($sql_query);
-    	$sql_query    = trim($sql_query);
-		
+					
 		if ($fast) {
+			$sql_query = fread(fopen($sql_file, 'r'), filesize($sql_file));
+			if (get_magic_quotes_runtime() == 1) $sql_query = stripslashes($sql_query);
+			$sql_query    = trim($sql_query);
 			$this->dbConnection->executeQuery($sql_query);
 		}
 		else {
-		    set_time_limit(1000);
-	        $sql_query    = $this->removeRemarks($sql_query);
-    		$pieces       = $this->splitSqlFile($sql_query, ';');
-		
-		    for ($i = 0; $i < count($pieces); $i++) {
-    		    $a_sql_query = trim($pieces[$i]);
-    		    if (!empty($a_sql_query) && $a_sql_query[0] != '#') {
-        		    $this->dbConnection->executeQuery($a_sql_query);
-    		    }
-    		}
+			
+			$templine = '';
+			$lines = file($sql_file); // Read entire file
+
+			foreach ($lines as $line){
+				// Skip it if it's a comment
+				if (substr($line, 0, 2) == '--' || $line == '' || substr($line, 0, 2) == '/*' )
+					continue;
+
+				// Add this line to the current segment
+				$templine .= $line;
+				// If it has a semicolon at the end, it's the end of the query
+				if (substr(trim($line), -1, 1) == ';')
+				{
+					$this->dbConnection->executeQuery($templine);
+					$templine = '';
+				}
+		    }
 		}
+			
     	return;
     }
 

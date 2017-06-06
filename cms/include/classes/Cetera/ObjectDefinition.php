@@ -426,33 +426,33 @@ class ObjectDefinition extends Base {
                 throw new Exception\CMS(Exception\CMS::TYPE_RESERVED);
             }
               
-        	  $r  = DbConnection::getDbConnection()->fetchAll("select id from types where alias=?",[$alias]);
-        	  if (count($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
+        	$r  = DbConnection::getDbConnection()->fetchAll("select id from types where alias=?",[$alias]);
+        	if (count($r)) throw new Exception\CMS(Exception\CMS::TYPE_EXISTS);
     
-        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=".$this->id." and C.id=B.len and B.type=7 and A.id=B.id");
-        	  foreach ($r as $f) {
-        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
-        	  }
+        	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=".$this->id." and C.id=B.len and B.type=7 and A.id=B.id");
+        	foreach ($r as $f) {
+        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f['alias'].'_'.$oldalias.'_'.$f['name'].' RENAME '.$f['alias'].'_'.$alias.'_'.$f['name']);
+        	}
     
-        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=B.len and C.id=A.id and B.type=7 and B.id=".$this->id);
-        	  foreach ($r as $f) {
-        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
-        	  }
+        	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=B.len and C.id=A.id and B.type=7 and B.id=".$this->id);
+        	foreach ($r as $f) {
+        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f['alias'].'_'.$f[].' RENAME '.$alias.'_'.$f['alias'].'_'.$f['name']);
+        	}
     
-        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and A.id=B.id and B.len=".$this->id);
-        	  foreach ($r as $f) {
-        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f[0].'_'.$oldalias.'_'.$f[1].' RENAME '.$f[0].'_'.$alias.'_'.$f[1]);
-        	  }
+        	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and A.id=B.id and B.len=".$this->id);
+        	foreach ($r as $f) {
+        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$f['alias'].'_'.$oldalias.'_'.$f['name'].' RENAME '.$f['alias'].'_'.$alias.'_'.$f['name']);
+        	}
     
-        	  $r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and B.id=".$this->id." and B.len=A.id");
-        	  foreach ($r as $f) {
-        		    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f[0].'_'.$f[1].' RENAME '.$alias.'_'.$f[0].'_'.$f[1]);
-        	  }
+        	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and B.id=".$this->id." and B.len=A.id");
+        	foreach ($r as $f) {
+        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f['alias'].'_'.$f['name'].' RENAME '.$alias.'_'.$f['alias'].'_'.$f['name']);
+        	}
     
-        	  DbConnection::getDbConnection()->executeQuery("ALTER TABLE $oldalias RENAME $alias");
-        	  DbConnection::getDbConnection()->executeQuery("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
+        	DbConnection::getDbConnection()->executeQuery("ALTER TABLE $oldalias RENAME $alias");
+        	DbConnection::getDbConnection()->executeQuery("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
 			  
-			  $this->_table = $alias;
+			$this->_table = $alias;
     	  } // if
     
         $sql = array();
