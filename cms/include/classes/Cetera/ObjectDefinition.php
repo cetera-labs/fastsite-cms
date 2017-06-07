@@ -436,7 +436,7 @@ class ObjectDefinition extends Base {
     
         	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B, dir_data C where C.typ=B.len and C.id=A.id and B.type=7 and B.id=".$this->id);
         	foreach ($r as $f) {
-        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f['alias'].'_'.$f[].' RENAME '.$alias.'_'.$f['alias'].'_'.$f['name']);
+        	    DbConnection::getDbConnection()->executeQuery('ALTER TABLE '.$oldalias.'_'.$f['alias'].'_'.$f['name'].' RENAME '.$alias.'_'.$f['alias'].'_'.$f['name']);
         	}
     
         	$r  = DbConnection::getDbConnection()->fetchAll("select A.alias, B.name from types A, types_fields B where B.type=8 and A.id=B.id and B.len=".$this->id);

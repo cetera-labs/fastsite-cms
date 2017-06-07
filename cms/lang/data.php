@@ -1,11 +1,15 @@
 <?php
 namespace Cetera;
 
-include('../include/common.php');
+include_once('../include/common.php');
 
 $application->connectDb();
 $application->initSession();
 $application->initPlugins();
+
+if (isset($_REQUEST['locale'])) {
+	$application->setLocale($_REQUEST['locale']);
+}
 
 $translator = $application->getTranslator();  
 foreach (Theme::enum() as $theme)

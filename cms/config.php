@@ -125,7 +125,7 @@ foreach ($application->getRegisteredWidgets() as $item) {
 		Ext.Loader.loadScript(url);
 
 		Ext.Ajax.request({
-			url: '/cms/lang/data.php',
+			url: '/cms/lang/data.php?locale='+locale,
 			success: function(response, opts) {
 				Config.Lang = Ext.decode(response.responseText);
 
