@@ -690,7 +690,7 @@ class Schema {
     {
     	$sql = '';
     	if ($key['name'] == 'PRIMARY') 
-    		$sql .= "PRIMARY KEY (`";
+    		$sql .= "PRIMARY KEY (";
     		else {
     			if ($key['unique']) $sql .= "UNIQUE ";
     			$sql .= "INDEX `".$key['name']."` (";
