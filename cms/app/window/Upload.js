@@ -101,8 +101,10 @@ Ext.define('Cetera.window.Upload', {
 				},
 				failure: function(resp) {
 					var msg = _('Ошибка!');
-                    var o = Ext.decode(resp.responseText);
-                    if (o.message) msg += ' '+o.message;
+					try {
+						var o = Ext.decode(resp.responseText);
+						if (o.message) msg += ' '+o.message;
+					} catch (e) {}
 					me.progress.updateProgress( 0, prefix + ' - ' + msg );					
 				},
 				uploadProgress: function(e) {

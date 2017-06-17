@@ -25,6 +25,13 @@ mb_internal_encoding("UTF-8");
 
 ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'include/classes'.PATH_SEPARATOR.DOCROOT.LIBRARY_PATH);
 
+if (!file_exists(DOCROOT.LIBRARY_PATH)) {
+	
+	echo 'Download and unpack <a href="http://cetera.ru/cetera_cms/library.zip">http://cetera.ru/cetera_cms/library.zip</a> at your webserver home folder.';
+	die();
+	
+}
+
 //include DOCROOT.LIBRARY_PATH . '/vendor/autoload.php';
 include DOCROOT.LIBRARY_PATH . '/vendor/composer/autoload_real.php';
 \ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b::getLoader();
