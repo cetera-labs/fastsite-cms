@@ -21,7 +21,15 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
     // Получаем заголовок материала и id раздела в котором он находится
 	$lnk_name = $lnk_idcat = $lnk_cat = '';
 	if ($fieldvalue && $tbl) {
-		$r = fssql_query("select name,idcat from ".$tbl." where id=".(int)$fieldvalue);
+		
+		if ($a = json_decode($fieldvalue, true) ) {
+			$mid = $a['id'];
+		}
+		else {
+			$mid = (int)$fieldvalue;
+		}
+		
+		$r = fssql_query("select name,idcat from ".$tbl." where id=".$mid);
 		list($lnk_name,$lnk_idcat) = mysql_fetch_row($r);	
 		if ($lnk_idcat) {
 		    $c = Cetera\Catalog::getById($lnk_idcat);
@@ -35,7 +43,7 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
                         displayValue: '<?=($fieldvalue?$lnk_cat.' / '.$lnk_name:'')?>',
-                        value: '<?=$fieldvalue?>',
+                        value: '<?=addslashes($fieldvalue)?>',
                         from: '<?=$field_def['len']?>',
                         materials: 1,
                         nocatselect: 1,
