@@ -181,7 +181,7 @@ if ($_REQUEST['action'] == 'upload') {
         }
         
         $s = $application->getSession();
-        $s->last_upload_path = '/'.$path;
+        $s->last_upload_path = str_replace('//','/','/'.$path);
         check_upload_file_name($_FILES["file"]["name"]);
         
         $n = 2;

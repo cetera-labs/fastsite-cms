@@ -390,8 +390,18 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      */ 
     public function getUrl()
     {
-        if ($this->_url === FALSE) $this->fillPath();
-        return $this->_url;
+		if ($this->isLink()) {
+			if ($this->getParentServer()->id != $this->prototype->getParentServer()->id) {
+				return $this->prototype->getFullUrl();
+			}
+			else {
+				return $this->prototype->getUrl();
+			}
+		}
+		else {
+			if ($this->_url === FALSE) $this->fillPath();
+			return $this->_url;
+		}
     } 
     
     /**
