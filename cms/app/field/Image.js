@@ -112,26 +112,84 @@ Ext.define('Cetera.field.Image', {
     getPanel : function() {
 
         this.getWindow();
-        this.getUploadWindow();    
-    
+        this.getUploadWindow();
+
+        this.btnCounter = Ext.create('Ext.Button',{
+            scope   : this,
+            border    : false,
+            style : 'background:url(images/counterclockwise-arrow.png);margin-right:5px;opacity:0;transition:0.5s;',
+            width   : 30,
+            height   : 30,
+            handler : function() {
+                this.doRotate(90);
+            }
+        });
+
+        this.btnClockwise = Ext.create('Ext.Button',{
+            scope   : this,
+            border    : false,
+            style : 'background:url(images/clockwise-arrow.png);opacity:0;transition:0.5s;',
+            width   : 30,
+            height   : 30,
+            handler : function() {
+                this.doRotate(-90);
+            }
+        });
+
+        this.rotationPlate = Ext.create('Ext.Panel',{
+            region    : 'south',
+            height    : 35,
+            border    : false,
+            bodyStyle :'background:none',
+            items     : [
+                this.btnCounter,
+                this.btnClockwise
+            ]
+        });
+
         this.preview = Ext.create('Ext.Panel',{
             layout  : 'border',
             border  : false,
             bodyCls :'chess',
             bodyStyle : 'text-align: center; display: table-cell; vertical-align: middle',
-            region  : 'center'
+            region  : 'center',
+            listeners: {
+                'render' : {
+                    scope: this,
+                    fn: function(e) {
+                        var clockwise = this.btnClockwise;
+                        var counter = this.btnCounter;
+                        e.getEl().on('mouseover', function(event) {
+                            clockwise.getEl().setStyle('opacity', '0.7');
+                            counter.getEl().setStyle('opacity', '0.7');
+                            if (clockwise.getEl().contains(event.target)) {
+                                clockwise.getEl().setStyle('opacity', '1');
+                            } else if (counter.getEl().contains(event.target)) {
+                                counter.getEl().setStyle('opacity', '1');
+                            }
+                        });
+                        e.getEl().on('mouseout', function() {
+                            clockwise.getEl().setStyle('opacity', '0');
+                            counter.getEl().setStyle('opacity', '0');
+                        });
+                    }
+                }
+            },
+            items   : [
+                this.rotationPlate
+            ]
         });
-        
+
         this.info = Ext.create('Ext.Panel',{
 			width   : '100%',
             layout  : 'border',
             border  : false,
             bodyStyle : '',
             html    : 'info',
-            padding : '10 0 0 0', 
+            padding : '10 0 0 0',
             flex    : 1
-        });        
-        
+        });
+
         this.btnSelect = Ext.create('Ext.Button',{
             text  : Config.Lang.selectFile,
             iconCls: 'icon-folder',
@@ -139,8 +197,9 @@ Ext.define('Cetera.field.Image', {
             width   : '100%',
             handler : function() {
                 this.window.show();
-            }            
+            }
         });
+
         this.btnUpload = Ext.create('Ext.Button',{
             text  : Config.Lang.upload2,
             iconCls: 'icon-upload',
@@ -150,6 +209,7 @@ Ext.define('Cetera.field.Image', {
                 this.uploadWindow.show();
             }            
         });
+
         this.btnDelete = Ext.create('Ext.Button',{
             text    : Config.Lang.remove,
             iconCls : 'icon-delete',
@@ -160,6 +220,7 @@ Ext.define('Cetera.field.Image', {
                 this.setValue('');
             }
         });
+
         this.btnCrop = Ext.create('Ext.Button',{
             text    : _('Кадрировать'),
             iconCls : 'icon-crop',
@@ -169,7 +230,8 @@ Ext.define('Cetera.field.Image', {
             handler : function() {
 				this.getCropWindow().show().setValue( this.getRealValue(this.backupValue?this.backupValue:this.getValue()) );
             }
-        });		
+        });
+
         this.btnRestore = Ext.create('Ext.Button',{
             text  : _('Восстановить'),
 			iconCls : 'icon-undo',
@@ -180,7 +242,7 @@ Ext.define('Cetera.field.Image', {
                 this.setValue(this.backupValue);
             }            
         });
-    
+
         return new Ext.Panel({
             layout    : 'border',
             height    : this.height,
@@ -202,7 +264,7 @@ Ext.define('Cetera.field.Image', {
                     items     : [
                         this.btnSelect, 
                         this.btnUpload, 
-						this.btnCrop, 
+						this.btnCrop,
                         this.btnDelete, 
                         this.btnRestore,						
                         this.info
@@ -221,13 +283,23 @@ Ext.define('Cetera.field.Image', {
 			},this);
         }
         return this.cropWindow;      
-    },	
+    },
     
   	onDestroy: function(){
         if (this.window) this.window.destroy();
         if (this.uploadWindow) this.uploadWindow.destroy();
 		if (this.cropWindow) this.cropWindow.destroy();
         this.callParent(arguments);
-  	}
-	
+  	},
+
+    doRotate: function(direction) {
+        Cetera.Ajax.request({
+            url: 'include/action_files.php?action=rotate&file='+this.getValue()+'&rotang='+direction,
+            timeout: 1000000,
+            success: function() {
+                this.setValue(this.getValue());
+            },
+            scope: this
+        });
+    }
 });
