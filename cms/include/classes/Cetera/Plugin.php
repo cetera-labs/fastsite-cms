@@ -63,7 +63,8 @@ class Plugin implements \ArrayAccess  {
     }
     
     public function delete($data = false)
-    {     
+    {    
+		if ($this->name == 'partner') return;
         if ($data) {
             $schema = new Schema();  
             $schema->dropSchema($this->name);      

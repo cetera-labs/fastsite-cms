@@ -83,6 +83,11 @@ $pieces = explode('/',$application->getUnparsedUrl());
 
 if (!$application->getServer()) throw new \Cetera\Exception\HTTP(404, 'Server is not found');
 
+if ($application->getCatalog()->isLink()) {
+	header('Location: '.$application->getCatalog()->prototype->getFullUrl(), true, 301);
+	die();
+}
+
 $t = $application->getServer()->getTheme();
 if ($t) $t->addTranslation($application->getTranslator());
 
