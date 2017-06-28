@@ -53,7 +53,7 @@ class ImageTransform {
     public function __construct($src = null) 
     {
 		$this->src = $src;
-		$this->default = $_SERVER['DOCUMENT_ROOT'].'/cms/images/cmslogo_bw.png';
+		$this->default = WWWROOT.'/cms/images/cmslogo_bw.png';
     }	
 	
     public static function create($src = null) 
@@ -611,7 +611,7 @@ class ImageTransform {
 				
 				$wm = $a->getVar($var);
 				if (is_array($wm)) {
-					$img->addWatermark($_SERVER['DOCUMENT_ROOT'].$wm['src'], $wm);
+					$img->addWatermark(WWWROOT.$wm['src'], $wm);
 				}
 				
 				if ($wm['nostore']) $nostore = true;
