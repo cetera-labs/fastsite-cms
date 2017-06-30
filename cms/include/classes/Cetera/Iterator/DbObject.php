@@ -37,7 +37,12 @@ abstract class DbObject extends Object {
         $this->query = $this->getDbConnection()->createQueryBuilder();
 		$this->dontUsePaging = true;
         
-    } 
+    }
+
+    function __clone()
+    {
+        $this->query = clone $this->query;
+    }	
     
     protected function fetchElements()
     {
