@@ -11,17 +11,22 @@
  
 function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
 
-    if (!$field_def['len']) $field_def['len'] = $idcat;
-    
-	// получаем имя таблицы и id типа материала, на который ссылка
-	if (!$field_def['len']) $field_def['len'] = $idcat;
-	$r = fssql_query("select A.alias,A.id from types A, dir_data B where A.id = B.typ and B.id=".$field_def['len']);
-    list($tbl,$only) = mysql_fetch_row($r);
+	if ($field_def['type'] == FIELD_LINK) {
+		if (!$field_def['len']) $field_def['len'] = $idcat;    
+		$from_section = $field_def['len'];
+		// получаем имя таблицы и id типа материала, на который ссылка
+		$section = \Cetera\Catalog::getById($field_def['len']);
+		$only = $section->getMaterialsObjectDefinition()->id;
+	}
+	else {
+		$from_section = 0;
+		$only = $field_def['len'];
+	}
 		   
     // Получаем заголовок материала и id раздела в котором он находится
+	/*
 	$lnk_name = $lnk_idcat = $lnk_cat = '';
-	if ($fieldvalue && $tbl) {
-		
+	if ($fieldvalue) {		
 		if ($a = json_decode($fieldvalue, true) ) {
 			$mid = $a['id'];
 		}
@@ -29,22 +34,21 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
 			$mid = (int)$fieldvalue;
 		}
 		
-		$r = fssql_query("select name,idcat from ".$tbl." where id=".$mid);
-		list($lnk_name,$lnk_idcat) = mysql_fetch_row($r);	
-		if ($lnk_idcat) {
-		    $c = Cetera\Catalog::getById($lnk_idcat);
-            if ($c) $lnk_cat = $c->getPath()->implode();
-        }
+		$material = \Cetera\Material::getById($mid, $only);
+		$lnk_name = $material->name;
+        $lnk_cat = $material->catalog->getPath()->implode();
 	}
+	*/
 	
 ?>
                     Ext.create('Cetera.field.Folder', {
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
-                        displayValue: '<?=($fieldvalue?$lnk_cat.' / '.$lnk_name:'')?>',
+                        //displayValue: '<?=($fieldvalue?$lnk_cat.' / '.$lnk_name:'')?>',
                         value: '<?=addslashes($fieldvalue)?>',
-                        from: '<?=$field_def['len']?>',
+                        from: '<?=$from_section?>',
+						only: '<?=$only?>',
                         materials: 1,
                         nocatselect: 1,
                         matsort: 'dat DESC'

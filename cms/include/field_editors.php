@@ -142,8 +142,8 @@ $field_editors = array(
 						
 	FIELD_MATERIAL => array(
 		EDITOR_MATERIAL_DEFAULT,
+		EDITOR_LINK_DEFAULT,
 		EDITOR_HIDDEN,
-		EDITOR_TEXT_DEFAULT,
 		EDITOR_USER,
 	),
 
