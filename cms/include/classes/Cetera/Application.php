@@ -1235,6 +1235,13 @@ class Application {
 				'describ' => $t->_('Список материалов'),
 				'icon'    => '/cms/images/icon_list.png'
 			),
+			
+			'Filter' => array(
+				'name'    => 'Filter',
+				'class'   => '\\Cetera\\Widget\\Filter',
+				'describ' => $t->_('Фильтр'),
+				'not_placeable' => true
+			),			
 					
 			'Html' => array(
 				'name'    => 'Html',

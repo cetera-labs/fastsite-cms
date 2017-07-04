@@ -32,7 +32,7 @@ class Backend {
             $app = \Cetera\Application::getInstance();
         
             if ($app->getVar('cache_memcache') && self::isMemcachedAvailable()) {
-                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Memcached());
+                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached());
             } elseif ($app->getVar('cache_file') && self::isFilecacheAvailable()) {
                 $backend = new \Zend_Cache_Backend_File(array('cache_dir'=>FILECACHE_DIR, 'hashed_directory_level'=>1));
             } else {

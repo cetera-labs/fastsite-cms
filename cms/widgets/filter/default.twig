@@ -1,0 +1,163 @@
+{% block html %}
+<div id="{{ widget.uniqueId }}" class="{{ widget.getParam('css_class') }}">
+
+	{% block responsive_toggle %}
+	<p class="show-for-small-only" data-responsive-toggle="filter-{{ widget.uniqueId }}" data-hide-for="medium">
+		<span class="button light-gray expanded" data-toggle><i class="fa fa-lg fa-filter"></i>&nbsp;{{ _('Фильтр') }}</span>
+	</p>
+	{% endblock %}
+	
+	<div id="filter-{{ widget.uniqueId }}">
+	
+		{{ widget.widgetTitle|raw }}
+
+		<form action="{{ widget.getParam('action') }}">
+			<ul class="accordion {{ widget.getParam('css_class') }}__items" data-accordion data-multi-expand="true" data-allow-all-closed="true">
+			{% for f in widget.filter.getInfo() %}
+				<li class="accordion-item x-filter {{ widget.getParam('css_class') }}__item{% if f.submitted or (not widget.filter.isActive() and loop.first) %} is-active{% endif %}" data-accordion-item>
+					<a class="accordion-title {{ widget.getParam('css_class') }}__title" href="#">
+						<strong>{{ f.describ }}</strong>
+					</a>
+					<div class="accordion-content {{ widget.getParam('css_class') }}__content" data-tab-content>
+
+						<div class="clearfix">
+							<a href="#" title="{{ _('Сбросить этот фильтр') }}" class="x-clear float-right">сбросить</a>
+						</div>
+						
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_NUMERIC_SLIDER') %}
+							
+							{% block numeric_slider %}
+								<div class="x-sale-slider-range" data-control-start="sliderOutputStart" data-control-end="sliderOutputEnd" data-start="{{ f.min }}" data-end="{{ f.max }}" data-initial-start="{{ f.value_min }}" data-initial-end="{{ f.value_max }}"></div>
+															
+								<div class="row collapse">
+								  <div class="small-6 column">
+									<input name="{{ widget.filter.name }}[{{ f.name }}_min]" id="sliderOutputStart" data-default="{{ f.min }}" value="{{ f.value_min }}" type="text">
+								  </div>
+								  <div class="small-6 column">
+									<input name="{{ widget.filter.name }}[{{ f.name }}_max]" id="sliderOutputEnd" data-default="{{ f.max }}" value="{{ f.value_max }}" type="text">
+								  </div>
+								</div>
+							{% endblock %}
+									
+						{% endif %}
+						
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_NUMERIC') %}	
+							
+							{% block numeric %}								
+								<div class="row collapse">
+								  <div class="small-6 column">
+									<input name="{{ widget.filter.name }}[{{ f.name }}_min]" id="sliderOutputStart" data-default="{{ f.min }}" value="{{ f.value_min }}" type="text">
+								  </div>
+								  <div class="small-6 column">
+									<input name="{{ widget.filter.name }}[{{ f.name }}_max]" id="sliderOutputEnd" data-default="{{ f.max }}" value="{{ f.value_max }}" type="text">
+								  </div>
+								</div>	
+							{% endblock %}
+							
+						{% endif %}		
+
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_CHECKBOX') %}										
+									
+							{% block checkbox %}	
+								{% if f.iterator %}				
+									{% for m in f.iterator %}
+									<label><input name="{{ widget.filter.name }}[{{ f.name }}][{{ m.id }}]" {% if f.value[m.id] is defined and f.value[m.id] %}checked{% endif %} value="1" type="checkbox">{{ m.name }}</label>						
+									{% endfor %}
+								{% else %}
+									<b><input name="{{ widget.filter.name }}[{{ f.name }}]" {% if f.value %}checked{% endif %} value="1" type="checkbox" >&nbsp;{{ f.describ }}</b>				
+								{% endif %}	
+							{% endblock %}
+											
+						{% endif %}
+						
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_RADIO') %}
+							{% block radio %}
+								{% for m in f.iterator %}
+								<label><input name="{{ widget.filter.name }}[{{ f.name }}]" {% if m.id==f.value %}checked{% endif %} value="{{ m.id }}" type="radio">{{ m.name }}</label>						
+								{% endfor %}						
+							{% endblock %}
+						{% endif %}	
+
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_DROPDOWN') %}
+							{% block dropdown %}
+								<select name="{{ widget.filter.name }}[{{ f.name }}]">
+									<option value=""></option>						
+									{% for m in f.iterator %}
+									<option value="{{ m.id }}" {% if m.id==f.value %}selected{% endif %}>{{ m.name }}</option>						
+									{% endfor %}
+								</select>						
+							{% endblock %}
+						{% endif %}	
+				
+					</div>
+				</li>
+								
+			{% endfor %}
+			</ul>
+
+			{% block buttons %}
+			<div class="{{ widget.getParam('css_class') }}__buttons">
+				<button class="button primary expanded {{ widget.getParam('css_class') }}__submit" type="submit"><i class="fa fa-filter fa-lg"></i>&nbsp;{{ _('Применить') }}</button>
+				<button class="button light-gray expanded x-clear-all {{ widget.getParam('css_class') }}__clear"><i class="fa fa-ban fa-lg"></i>&nbsp;{{ _('Сбросить фильтр') }}</button>
+			</div>
+			{% endblock %}
+		
+		</form>
+	</div>
+</div>
+{% endblock %}	  
+
+{% set script %}
+	{% block script %}
+	document.addEventListener('DOMContentLoaded', function () {
+	
+		jQuery('#{{ widget.uniqueId }} .x-clear').click(function(){
+			filterClearFilter( jQuery(this).parents('.x-filter') );
+			return false;
+		});
+		
+		jQuery('#{{ widget.uniqueId }} .x-clear-all').click(function(){
+			filterClearFilter( jQuery('#{{ widget.uniqueId }}') );
+			jQuery('#{{ widget.uniqueId }} form').submit();
+			return false;
+		});	
+
+		jQuery('#{{ widget.uniqueId }}').find('.x-filter').each(function(){
+			filterCheckFilter( jQuery(this) );
+		});
+		
+		jQuery('#{{ widget.uniqueId }} input, #{{ widget.uniqueId }} select').on('change', function(){
+			filterCheckFilter( jQuery(this).parents('.x-filter') );
+		});		
+	
+	});
+	function filterClearFilter(elm) {
+		elm.find('input[type="text"]').each(function(){
+			jQuery(this).val( jQuery(this).attr('data-default') ).trigger('change');
+		});	
+		elm.find('input:checked').prop('checked', false);
+		elm.find('select').val('');
+		filterCheckFilter(elm);
+	}
+	function filterCheckFilter(elm) {
+		var c = elm.find('.x-clear');
+		if (elm.find('input[type="checkbox"], input[type="radio"]').length>0)
+		{
+			c.toggle(  elm.find(':checked').length > 0 );
+		}
+		if (elm.find('select').length>0)
+		{
+			c.toggle( elm.find('select').val() != '' );
+		}
+		if (elm.find('input[type="text"]').length>0)
+		{
+			var f = false;
+			elm.find('input[type="text"]').each(function(){
+				if (jQuery(this).val() != jQuery(this).attr('data-default')) f = true;
+			});
+			c.toggle( f );
+		}			
+	}
+	{% endblock %}
+{% endset %}
+{% do widget.application.addHeadString( "<script>#{script}</script>" ) %}

@@ -101,6 +101,11 @@ abstract class ObjectFieldLinkAbstract extends ObjectField {
     final public function getTable() {
         return $this->getObjectDefinition()->table;
     }
+	
+	public function getIterator()
+	{
+		return $this->getObjectDefinition()->getMaterials();
+	}
 
 }
 
@@ -151,6 +156,19 @@ trait ObjectFieldCatalogTrait {
     {
         return new ObjectDefinition(Catalog::TYPE, Catalog::TABLE);
     }
+	
+    private $catalog = null;
+
+    public function getCatalog()
+    {
+        if (!$this->catalog) $this->catalog = Catalog::getById($this->container['len']);
+        return $this->catalog;
+    }
+	
+	public function getIterator()
+	{
+		return $this->getCatalog()->getChildren();
+	}		
     
 }
 
@@ -172,6 +190,11 @@ trait ObjectFieldLinkTrait {
     {
         return $this->getCatalog()->getMaterialsObjectDefinition();
     }
+	
+	public function getIterator()
+	{
+		return $this->getCatalog()->getMaterials();
+	}	
 }
 
 /**

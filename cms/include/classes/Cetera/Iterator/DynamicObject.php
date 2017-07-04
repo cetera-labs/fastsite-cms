@@ -94,6 +94,11 @@ class DynamicObject extends DbObject {
         }
 		
 		return parent::where($where, $combination);    
-    }       
+    } 
+
+    public function getObjectDefinition()
+    {
+		return $this->objectDefinition;
+	}		
 
 }
