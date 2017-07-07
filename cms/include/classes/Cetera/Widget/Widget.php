@@ -54,8 +54,8 @@ class Widget {
 		$this->uniqueCount = self::$count++;
 		
         if ($this->getId()) {
-            $r = fssql_query('SELECT container_id FROM widgets_containers WHERE widget_id='.$this->getId());
-            while ($f = mysql_fetch_assoc($r))  
+			$r = \Cetera\DbConnection::getDbConnection()->fetchAll('SELECT container_id FROM widgets_containers WHERE widget_id=?', array($this->getId()));
+			foreach ($r as $f)
                 $this->containers[] = $f['container_id'];
         }
 		$this->application = \Cetera\Application::getInstance();
@@ -184,8 +184,8 @@ class Widget {
     {
         if (!$this->getId()) return TRUE;
         if ($this->widgetProtected) return FALSE;
-        fssql_query('DELETE FROM widgets WHERE id='.$this->getId());
-        fssql_query('DELETE FROM widgets_containers WHERE widget_id='.$this->getId().' or container_id='.$this->getId());
+        $this->getDbConnection()->executeQuery('DELETE FROM widgets WHERE id=?', array( $this->getId() ));
+        $this->getDbConnection()->executeQuery('DELETE FROM widgets_containers WHERE widget_id=? or container_id=?', array( $this->getId(),$this->getId() ));
         return TRUE;
     }
     

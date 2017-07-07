@@ -159,8 +159,10 @@ class ObjectDefinition extends Base {
 	 * @throws Exception\CMS если тип с таким alias уже существует
 	 * @throws Exception\CMS если alias зарезервирован
 	 */		
-    public static function create($params)
+    public static function create()
     {
+		$params = func_get_arg(0);
+		
         $params = self::fix_params($params);
         
       	if (!$params['fixed'] && in_array($params['alias'], self::$reserved_aliases)) {

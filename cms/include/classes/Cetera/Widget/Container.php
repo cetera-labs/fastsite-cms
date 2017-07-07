@@ -59,8 +59,8 @@ class Container extends Templateable {
 		
         if ($this->getId())
 		{
-            $r = fssql_query('SELECT widget_id FROM widgets_containers WHERE container_id='.$this->getId().' ORDER BY position');
-            while ($f = mysql_fetch_assoc($r))  
+			$r = self::getDbConnection()->fetchAll('SELECT widget_id FROM widgets_containers WHERE container_id=? ORDER BY position', array( $this->getId() ));
+            foreach ($r as $f)
                 $this->widgets[] = (int)$f['widget_id'];
         }
     }
