@@ -7,7 +7,7 @@
  **/
 
 set_time_limit(99999);
-
+define('DOCROOT', __DIR__.'/../');
 require('include/common.php');
 $application->connectDb();
 $application->initPlugins();

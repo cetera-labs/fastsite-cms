@@ -1,3 +1,4 @@
+{% if loading is not defined %}{% set loading %}{{ _('Подождите ...') }}{% endset %}{% endif %}
 {% set script %}
 	{% block script %} 
 		{% if widget.getParam('ajax') and not widget.getParam('ajaxCall') %}

@@ -85,6 +85,7 @@ else {
 
     if ($_REQUEST['empty']) $data[] = array(
         'id'      => 0,
+		'describDisplay' => '- '.$translator->_('Без материалов').' -',
         'describ' => '- '.$translator->_('Без материалов').' -'
     ); 
 
