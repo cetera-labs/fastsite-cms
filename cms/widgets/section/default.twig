@@ -24,16 +24,17 @@
 	<h1>{{ widget.catalog.name }}</h1>
 
 	{% widget 'List' with { 
-		catalog:   widget.catalog.id, 
-		template:  widget.getParam('list_template'), 
-		where:     widget.getParam('list_where'), 
-		page:      widget.getParam('list_page'), 
-		page_param:widget.getParam('list_page_param'), 
-		limit:     widget.getParam('list_limit'), 
-		order:     widget.getParam('list_order'), 
-		sort:      widget.getParam('list_sort'), 
-		paginator: widget.getParam('list_paginator'),
-		css_class: widget.getParam('list_css_class'), 		
+		catalog:    widget.catalog.id, 
+		template:   widget.getParam('list_template'), 
+		where:      widget.getParam('list_where'), 
+		page:       widget.getParam('list_page'), 
+		page_param: widget.getParam('list_page_param'), 
+		limit:      widget.getParam('list_limit'), 
+		order:      widget.getParam('list_order'), 
+		subsections:widget.getParam('list_subsections'), 
+		sort:       widget.getParam('list_sort'), 
+		paginator:  widget.getParam('list_paginator'),
+		css_class:  widget.getParam('list_css_class'), 		
 		paginator_template:  widget.getParam('paginator_template')
 	} %}	
 	

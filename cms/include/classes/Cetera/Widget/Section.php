@@ -40,6 +40,7 @@ class Section extends Templateable {
 			'list_sort'              => 'DESC',
 			'list_paginator'         => true,	
 			'list_template'          => null,
+			'list_subsections'		 => false,
 			'paginator_template'     => null,
 			
 			'page404_title'          => $this->t->_('Страница не найдена'),

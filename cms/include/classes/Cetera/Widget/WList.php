@@ -41,6 +41,7 @@ class WList extends Templateable {
 			'paginator_template' => false,
 			'ajax'               => false,
 			'infinite'           => false,
+			'subsections'		 => false,
 			'css_class'          => 'content',
 			'css_row'            => '',
 			'template'		     => 'default.twig',

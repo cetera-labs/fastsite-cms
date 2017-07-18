@@ -59,7 +59,14 @@ Ext.define('Cetera.field.Folder', {
         
     setValue : function(value, displayOK, mat_type) {
 		
-		if (!mat_type) mat_type = this.mat_type;
+		if (!mat_type) {
+			if (this.mat_type) {
+				mat_type = this.mat_type;
+			}
+			else if (this.only) {
+				mat_type = this.only;
+			}
+		}
 
 		var obj = Ext.JSON.decode(value, true);
         if (obj instanceof Object) {
