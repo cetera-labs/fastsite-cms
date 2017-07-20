@@ -30,10 +30,10 @@ Ext.define('Cetera.catalog.ServerCreate', {
             xtype: 'combo',
             fieldLabel: Config.Lang.materialType,
             valueField: 'id',
-            displayField: 'describ',
+            displayField: 'describDisplay',
             name: 'typ',
             store: new Ext.data.JsonStore({
-                fields: ['id', 'describ'],
+                fields: ['id', 'describDisplay'],
                 autoLoad: true,  
                 proxy: {
                     type: 'ajax',
