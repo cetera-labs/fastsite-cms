@@ -253,7 +253,7 @@ abstract class DbObject extends Object {
         return $this;
     }   
     
-    public function orderBy($order, $sort = null, $add = true)
+    public function orderBy($order, $sort = null, $add = false)
     {
         $this->query->add('orderBy', $order . ' ' . (!$sort ? 'ASC' : $sort), $add);
         $this->sync = false;
