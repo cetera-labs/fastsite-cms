@@ -183,7 +183,7 @@ class DynamicObjectMultiple extends DbObject {
 			}
 			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $f).' FROM '.$from.' '.$where.' GROUP BY main.id';
 		}
-		return implode(' UNION ', $q);
+		return implode(' UNION ', $q).$this->order;
     } 	
 
 }
