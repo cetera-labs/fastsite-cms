@@ -26,12 +26,19 @@ Ext.define('Cetera.field.Ace', {
 		});
     },
 	
+    onResize : function(){
+		var me = this;
+        this.callParent(arguments);
+		if (me.editor) {
+			me.editor.resize();				
+		}        
+    },	
+	
 	setValue : function(value, internal){
 		var me = this;
 		this.callParent([value]);
 		if (internal) return;
-		if (me.editor)
-		{
+		if (me.editor) {
 			me.editor.setValue(value);
 			me.editor.scrollToLine(0);
 			me.editor.gotoLine(1);				
