@@ -310,7 +310,7 @@ class Theme implements \ArrayAccess  {
 				);
 				
 				$res = $schema->parseSchema('plugin_'.$p->name);
-				foreach ($res['tables'] as $t) {
+				if (is_array($res['tables'])) foreach ($res['tables'] as $t) {
 					$tables[] = $t['name'];
 				}
 			}
