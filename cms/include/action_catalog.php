@@ -87,16 +87,22 @@ if ($_POST['action'] == 'cat_save') {
     if ($catalog->isRoot()) {
         fssql_query('TRUNCATE TABLE vars');
         if (isset($_POST['vars']))
-            foreach ($_POST['vars'] as $var) 
-                fssql_query('INSERT INTO vars SET '.($var['id']?'id='.(int)$var['id'].', ':'').'name="'.mysql_escape_string($var['name']).'", value="'.mysql_escape_string($var['value']).'", describ="'.mysql_escape_string($var['describ']).'"');
+            foreach ($_POST['vars'] as $var) {
+				$application->getConn()->insert('vars', $var);
+			}
     } else {
-        fssql_query('DELETE FROM vars_servers WHERE server_id='.$catalog->id);
+		$application->getConn()->delete('vars_servers', array('server_id' => $catalog->id));
         if (isset($_POST['vars']))
             foreach ($_POST['vars'] as $var) {
-                $r = fssql_query('SELECT value FROM vars WHERE id='.(int)$var['id']);
-                if (!mysql_num_rows($r)) continue;
-                if ($var['value'] != mysql_result($r,0))
-                    fssql_query('INSERT INTO vars_servers SET var_id='.(int)$var['id'].', server_id='.$catalog->id.', value="'.mysql_escape_string($var['value']).'"');
+				$data = $application->getConn()->fetchAll('SELECT value FROM vars WHERE id=?',array((int)$var['id']));
+				if (!count($data)) continue;
+                if ($var['value'] != $data[0]['value']) {
+					$data = $application->getConn()->insert('vars_servers', array(
+						'var_id' => (int)$var['id'],
+						'server_id' => $catalog->id,
+						'value' => $var['value'],
+					));
+				}
             }      
     }
 

@@ -87,12 +87,11 @@ if ($_REQUEST['db_structure']) {
 if ($_REQUEST['cat_structure']) {
 	
 	// Backup
-	fssql_query('DROP TABLE IF EXISTS '.STRUCTURE_BACKUP);
-	$r = fssql_query('SHOW CREATE TABLE dir_structure');
-	$f = mysql_fetch_row($r);
+	$application->getConn()->executeQuery('DROP TABLE IF EXISTS '.STRUCTURE_BACKUP);
+	$f = $application->getConn()->fetchArray('SHOW CREATE TABLE dir_structure');
 	$query = str_replace('dir_structure', STRUCTURE_BACKUP, $f[1]);
-	fssql_query($query);
-	fssql_query('INSERT INTO '.STRUCTURE_BACKUP.' SELECT * FROM dir_structure');
+	$application->getConn()->executeQuery($query);
+	$application->getConn()->executeQuery('INSERT INTO '.STRUCTURE_BACKUP.' SELECT * FROM dir_structure');
 	
 	$structure = array(
 		1 => array(
@@ -104,8 +103,8 @@ if ($_REQUEST['cat_structure']) {
 			'level'		=> 0,
 		)
 	);
-	$r = fssql_query('SELECT * FROM dir_structure ORDER BY lft');
-	while($f = mysql_fetch_assoc($r)) {
+	$r = $application->getConn()->query('SELECT * FROM dir_structure ORDER BY lft');
+	while($f = $r->fetch()) {
 		$f['id']++;
 		if ($f['data_id']) $struct[] = $f;
 	}

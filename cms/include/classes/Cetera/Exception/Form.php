@@ -33,6 +33,6 @@ class Form extends CMS
     public function __construct($code, $field, $param = false)
     {
         $this->field = $field;
-        parent::__construct($code, $param);
+        parent::__construct($code, $param, true);
     }
 }

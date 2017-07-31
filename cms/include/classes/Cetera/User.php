@@ -152,9 +152,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
   	public static function getAuthorized($identity)
   	{       
         $conn = self::getDbConnection();
-        $conn->executeQuery('DELETE FROM users_auth WHERE remember = 0 and time < ?', array(time()-AUTH_INACTIVITY_SECONDS));
-        $conn->executeUpdate('UPDATE users_auth SET time=? WHERE user_id=? and uniq=? and ip=?', array( time(), (int)$identity['user_id'], $identity['uniq'], $_SERVER['REMOTE_ADDR'] ));
-        
+        $conn->executeUpdate('UPDATE users_auth SET time=? WHERE user_id=? and uniq=? and ip=?', array( time(), (int)$identity['user_id'], $identity['uniq'], $_SERVER['REMOTE_ADDR'] ));        
         $fields = $conn->fetchAssoc('SELECT A.* FROM users A LEFT JOIN users_auth B ON (A.id=B.user_id) WHERE B.user_id=? and B.uniq=?', array( (int)$identity['user_id'], $identity['uniq'] ));  
         
         if ($fields) {		
@@ -332,8 +330,8 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     public function allowFilesystem($path)
     {
         if (!$this->allowBackOffice()) return FALSE;
-        $r = fssql_query('SELECT COUNT(*) FROM users_groups_deny_filesystem WHERE path="'.mysql_escape_string($path).'" and group_id IN ('.implode(',',$this->getGroups()).')');
-        if ($r && mysql_num_rows($r) && mysql_result($r,0)>0) return FALSE;       
+        $r = self::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM users_groups_deny_filesystem WHERE path=? and group_id IN ('.implode(',',$this->getGroups()).')', array($path), 0);
+        if ($r > 0) return FALSE;       
         return TRUE;
     }
     
@@ -381,8 +379,8 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         if (!$this->_groups) {
             $this->_groups = array(GROUP_ALL);
             if ($this->id == ADMIN_ID) $this->_groups[] = GROUP_ADMIN;
-            $r = fssql_query('SELECT group_id FROM users_groups_membership WHERE user_id='.$this->id);
-            while ($f = mysql_fetch_assoc($r)) $this->_groups[] = $f['group_id'];
+            $r = self::getDbConnection()->fetchAll('SELECT group_id FROM users_groups_membership WHERE user_id='.$this->id);
+            foreach ($r as $f) $this->_groups[] = $f['group_id'];
         }
         return $this->_groups;
     }
@@ -402,7 +400,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     {
         $id = \Zend_Auth::getInstance()->getIdentity();
         if (!$id) return;
-        fssql_query("DELETE FROM users_auth WHERE user_id=".$id['user_id']." and uniq='".$id['uniq']."'");
+        self::getDbConnection()->executeQuery("DELETE FROM users_auth WHERE user_id=".$id['user_id']." and uniq='".$id['uniq']."'");
         \Zend_Auth::getInstance()->clearIdentity();
 		\Zend_Session::forgetMe();		
     }
@@ -416,8 +414,10 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     public function authorize($remember)
     {
         $uniq = md5 (uniqid (rand()));
-        fssql_query('UPDATE '.User::TABLE.' SET last_login=NOW() WHERE id='.$this->id);
-        fssql_query('INSERT INTO users_auth SET user_id='.$this->id.', remember='.(int)$remember.',uniq="'.$uniq.'", ip="'.$_SERVER['REMOTE_ADDR'].'", time='.time());
+		$conn = self::getDbConnection();
+        $conn->executeQuery('UPDATE '.User::TABLE.' SET last_login=NOW() WHERE id='.$this->id);
+		$conn->executeQuery('DELETE FROM users_auth WHERE remember = 0 and time < ?', array(time()-AUTH_INACTIVITY_SECONDS));
+        $conn->executeQuery('INSERT INTO users_auth SET user_id='.$this->id.', remember='.(int)$remember.',uniq="'.$uniq.'", ip="'.$_SERVER['REMOTE_ADDR'].'", time='.time());
         return $uniq;
     }
     
@@ -429,10 +429,10 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     public function delete()
     {
         if ($this->id == 0 || $this->id == ADMIN_ID) return FALSE;
-		
+		$conn = self::getDbConnection();
 		$str .= 'DELETE [LOGIN='.$this->login.'][ID='.$this->id.']';
-        fssql_query('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
-        fssql_query('DELETE FROM users_auth WHERE user_id='.$this->id);
+        $conn->executeQuery('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
+        $conn->executeQuery('DELETE FROM users_auth WHERE user_id='.$this->id);
         parent::delete();
 		
        $application = Application::getInstance();
@@ -479,10 +479,10 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         
 		if (!$this->fields['login']) throw new Exception\Form(Exception\CMS::FIELD_NOT_FOUND, 'login', 'login');
 		
-        $r = fssql_query('SELECT COUNT(*) FROM '.$this->table.' WHERE login="'.mysql_escape_string($this->fields['login']).'" and id<>'.(int)$this->id);
-	      if (mysql_result($r, 0)) throw new Exception\Form(Exception\CMS::USER_EXISTS, 'login');
+        $r = self::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM '.$this->table.' WHERE login=? and id<>?', array($this->fields['login'], (int)$this->id), 0 );
+	    if ($r > 0) throw new Exception\Form(Exception\CMS::USER_EXISTS, 'login');
         
-        $values = 'login="'.mysql_escape_string($this->fields['login']).'"';
+        $values = 'login="'.addslashes($this->fields['login']).'"';
         $login = $this->fields['login'];
         unset($this->fields['login']);
         
@@ -496,20 +496,20 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			$str = 'CREATE';
         }
 		
-        fssql_query($sql);
+        self::getDbConnection()->executeQuery($sql);
 		
 		$this->fields['login'] = $login;
         
-        if (!$this->id) $this->_id = mysql_insert_id();  
+        if (!$this->id) $this->_id = self::getDbConnection()->lastInsertId();  
       
         $this->saveDynimicLinks();   
        
         if (isset($this->fields['groups']) && is_array($this->fields['groups']))
         {
-            fssql_query('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
+            self::getDbConnection()->executeQuery('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
             foreach($this->fields['groups'] as $gid) 
               if ($gid && ($this->id != 1 || $gid != GROUP_ADMIN))
-                fssql_query('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
+                self::getDbConnection()->executeQuery('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
         }
        
        $application = Application::getInstance();

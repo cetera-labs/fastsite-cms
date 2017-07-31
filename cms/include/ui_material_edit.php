@@ -45,8 +45,8 @@ try {
 	}
 	
     if ($type && $id) {        
-        $r = fssql_query('SELECT user_id FROM `lock` WHERE  dat >= NOW()-INTERVAL 10 SECOND and material_id='.$id.' and type_id='.$type);
-        if (mysql_num_rows($r)) throw new Exception\CMS( $translator->_('Материал заблокирован другим пользователем.') );
+	    $r = $application->getConn()->fetchAssoc('SELECT user_id FROM `lock` WHERE  dat >= NOW()-INTERVAL 10 SECOND and material_id=? and type_id=?', array($id,$type) );
+        if ($r) throw new Exception\CMS( $translator->_('Материал заблокирован другим пользователем.'), false, true );
     }	
 	
 	$math = $objectDefinition->table;

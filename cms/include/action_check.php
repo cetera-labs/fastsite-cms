@@ -63,33 +63,28 @@ if ($_REQUEST['cat_structure']) {
 	
 	// Левый ключ ВСЕГДА меньше правого
 	$query = 'SELECT COUNT(*) FROM dir_structure WHERE lft >= rght';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) > 0) $errorText .= $l_rule_broken.$l_rule1.'<br />';
+	$r = $application->getConn()->fetchArray( 'SELECT COUNT(*) FROM dir_structure WHERE lft >= rght');
+	if ($r[0] > 0) $errorText .= $l_rule_broken.$l_rule1.'<br />';
 	
 	// Наименьший левый ключ ВСЕГДА равен 1
-	$query = 'SELECT MIN(lft) FROM dir_structure';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) != 1) $errorText .= $l_rule_broken.$l_rule2.'<br />';
+	$r = $application->getConn()->fetchArray( 'SELECT MIN(lft) FROM dir_structure');
+	if ($r[0] != 1) $errorText .= $l_rule_broken.$l_rule2.'<br />';
 
 	// Наибольший правый ключ ВСЕГДА равен двойному числу узлов
-	$query = 'SELECT MAX(rght) - 2*COUNT(*) FROM dir_structure';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) != 0) $errorText .= $l_rule_broken.$l_rule3.'<br />';
+	$r = $application->getConn()->fetchArray('SELECT MAX(rght) - 2*COUNT(*) FROM dir_structure');
+	if ($r[0] != 0) $errorText .= $l_rule_broken.$l_rule3.'<br />';
 	
 	// Разница между правым и левым ключом ВСЕГДА нечетное число
-	$query = 'SELECT SUM(IF(MOD(rght-lft,2)=1,0,1)) FROM dir_structure';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) > 0) $errorText .= $l_rule_broken.$l_rule4.'<br />';
+	$r = $application->getConn()->fetchArray('SELECT SUM(IF(MOD(rght-lft,2)=1,0,1)) FROM dir_structure');
+	if ($r[0] > 0) $errorText .= $l_rule_broken.$l_rule4.'<br />';
 	
 	// Если уровень узла нечетное число то тогда левый ключ ВСЕГДА нечетное число, то же самое и для четных чисел
-	$query = 'SELECT SUM(IF(MOD(lft,2)+MOD(level,2)=1,0,1)) FROM dir_structure';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) > 0) $errorText .= $l_rule_broken.$l_rule5.'<br />';
+	$r = $application->getConn()->fetchArray('SELECT SUM(IF(MOD(lft,2)+MOD(level,2)=1,0,1)) FROM dir_structure');
+	if ($r[0] > 0) $errorText .= $l_rule_broken.$l_rule5.'<br />';
 	
 	// Ключи ВСЕГДА уникальны, вне зависимости от того правый он или левый
-	$query = 'SELECT count(*) FROM dir_structure a, dir_structure b WHERE a.lft=b.rght or (a.lft=b.lft and a.id<>b.id) or (a.rght=b.rght and a.id<>b.id)';
-	$r = mysql_query($query);
-	if ($r && mysql_result($r,0) > 0) $errorText .= $l_rule_broken.$l_rule6.'<br />';
+	$r = $application->getConn()->fetchArray('SELECT count(*) FROM dir_structure a, dir_structure b WHERE a.lft=b.rght or (a.lft=b.lft and a.id<>b.id) or (a.rght=b.rght and a.id<>b.id)');
+	if ($r[0] > 0) $errorText .= $l_rule_broken.$l_rule6.'<br />';
 	
 	if ($errorText) {
 		$res['text'] .= '<b class="error">'.$t->_('Обнаружены ошибки в структуре разделов').'</b><div class="note">'.$errorText.'</div>';

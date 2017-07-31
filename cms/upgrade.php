@@ -133,7 +133,7 @@ if ($action == 'upgrade') {
     		
     		$query = $schema->get_fix_query($tables, $error);
     		
-    		if ($query) mysql_query($query);
+    		if ($query) $application->getConn()->executeQuery($query);
     		
     		$module = $error['module'];
     		$table = $error['table'];    

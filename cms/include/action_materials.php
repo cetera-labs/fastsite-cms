@@ -76,9 +76,10 @@ if ($action == 'permissions') {
     $right[2] = $user->allowCat(PERM_CAT_MAT_PUB, $id); // Публикация материалов
 
     $right[3] = '';
-    $r = fssql_query('SELECT preview, typ FROM dir_data WHERE id='.(int)$id);
-    if ($r && mysql_num_rows($r))
-        list($right[3], $right[4]) = mysql_fetch_array($r);
+	
+	$f = $application->getConn()->fetchArray('SELECT preview, typ FROM dir_data WHERE id=?',array((int)$id));
+    if ($f)
+        list($right[3], $right[4]) = $f;
     
     if ($right[3]) $right[3] = trim($right[3],'/').'/';
     $right[3] = $catalog->url.$right[3];
@@ -91,9 +92,8 @@ if ($action == 'permissions') {
 
 if ($action == 'mark_del' && is_array($sel)) {
   
-    $r = fssql_query("SELECT alias FROM types WHERE id=".$_POST['mat_type']);
-    $table = mysql_result($r,0);
-	fssql_query("update $table set type=type|".MATH_DELETED." where id IN (".implode(',',$sel).")");
+    $table = $application->getConn()->fetchColumn('SELECT alias FROM types WHERE id=?',array($_POST['mat_type']),0);
+	$application->getConn()->executeQuery("update $table set type=type|".MATH_DELETED." where id IN (".implode(',',$sel).")");
 	$res['success'] = true;
 
 }
@@ -119,20 +119,19 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
     $where = '';
 	if ($action == 'up') {
 		$catalog->fixMaterialTags();
-		$r = fssql_query("select id from ".$objectDefinition->table." where id in (".implode(',',$sel).") order by tag");
+		$r = $application->getConn()->query("select id from ".$objectDefinition->table." where id in (".implode(',',$sel).") order by tag");
 		$sel = array();
-		while($f = mysql_fetch_row($r)) $sel[] = $f[0];
+		while($f = $r->fetch()) $sel[] = $f['id'];
 	}
 	if ($action == 'down') {
 		$catalog->fixMaterialTags();
-		$r = fssql_query("select id from ".$objectDefinition->table." where id in (".implode(',',$sel).") order by tag desc");
+		$r = $application->getConn()->query("select id from ".$objectDefinition->table." where id in (".implode(',',$sel).") order by tag desc");
 		$sel = array();
-		while($f = mysql_fetch_row($r)) $sel[] = $f[0];
+		while($f = $r->fetch()) $sel[] = $f['id'];
 	}
 	
-    $r = fssql_query("select handler from types where alias = '".$objectDefinition->table."'");
-    if ($r && mysql_num_rows($r)) {
-        $handler = mysql_result($r,0);
+    $handler = $application->getConn()->fetchColumn("select handler from types where alias = ?",array($objectDefinition->table));
+    if ($handler) {
         if (substr($handler, -4) != '.php') $handler .= '.php';
         if ($handler && file_exists(PLUGIN_MATH_DIR.'/'.$handler)) 
             include(PLUGIN_MATH_DIR.'/'.$handler);
@@ -156,23 +155,20 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
 		  $where="id=$val"; else $where .= " or id=$val";
 
 	  if ($action == 'up') {
-          $r = fssql_query("select tag from ".$objectDefinition->table." where id=$val");
-  		  $f = mysql_fetch_row($r);
-  		  $tag = $f[0];
-  		  $r = fssql_query("select A.tag,A.id from ".$objectDefinition->table." A where A.tag<$tag and($cats) order by A.tag desc limit 0,1");
-  		  if ($f = mysql_fetch_row($r)) {
-    	    fssql_query("update ".$objectDefinition->table." set tag=$f[0] where id=$val");
-			fssql_query("update ".$objectDefinition->table." set tag=$tag where id=$f[1]");
+          $tag = $application->getConn()->fetchColumn("select tag from ".$objectDefinition->table." where id=?",array($val),0);
+
+  		  $f = $application->getConn()->fetchArray("select A.tag,A.id from ".$objectDefinition->table." A where A.tag<$tag and($cats) order by A.tag desc limit 0,1");
+  		  if ($f) {
+    	    $application->getConn()->executeQuery("update ".$objectDefinition->table." set tag=$f[0] where id=$val");
+			$application->getConn()->executeQuery("update ".$objectDefinition->table." set tag=$tag where id=$f[1]");
   		  }
 	  }
 	  if ($action == 'down') {
-          $r = fssql_query("select tag,idcat from ".$objectDefinition->table." where id=$val");
-  		  $f = mysql_fetch_row($r);
-  		  $tag = $f[0];
-  		  $r = fssql_query("select A.tag,A.id from ".$objectDefinition->table." A where A.tag>$tag and($cats) order by A.tag limit 0,1");
-  		  if ($f = mysql_fetch_row($r)) {
-    	    fssql_query("update ".$objectDefinition->table." set tag=$f[0] where id=$val");
-			fssql_query("update ".$objectDefinition->table." set tag=$tag where id=$f[1]");
+          $tag = $application->getConn()->fetchColumn("select tag,idcat from ".$objectDefinition->table." where id=?",array($val),0);
+  		  $f = $application->getConn()->fetchArray("select A.tag,A.id from ".$objectDefinition->table." A where A.tag>$tag and($cats) order by A.tag limit 0,1");
+  		  if ($f) {
+    	    $application->getConn()->executeQuery("update ".$objectDefinition->table." set tag=$f[0] where id=$val");
+			$application->getConn()->executeQuery("update ".$objectDefinition->table." set tag=$tag where id=$f[1]");
   		  }
 		}
 		
@@ -196,13 +192,11 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
 	}
 	if ($action == 'move') {
 	
-	    $r = fssql_query("SELECT MAX(tag) FROM ".$objectDefinition->table." WHERE idcat=".$_POST['cat']);
-	    $tt = mysql_result($r,0) + 1;	
+	    $tt = 1 + $application->getConn()->fetchColumn("SELECT MAX(tag) FROM ".$objectDefinition->table." WHERE idcat=?",array($_POST['cat']),0);
 	    $stat = "update ".$objectDefinition->table." set idcat=".$_POST['cat'].", tag=$tt";
 
-	
     }
-    if ($stat) fssql_query("$stat where ($where)");
+    if ($stat) $application->getConn()->executeQuery("$stat where ($where)");
     
     if ($action == 'move' || $action == 'unpub' || $action == 'pub') {
     
@@ -224,4 +218,3 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
 
 
 echo json_encode($res);
-?>
