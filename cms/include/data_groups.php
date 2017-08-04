@@ -14,8 +14,8 @@ $data = $application->getGroups();
 
 if (!isset($_REQUEST['all'])) unset($data[GROUP_ALL]);
 
-$r = fssql_query('SELECT *, 1 as user_defined FROM users_groups ORDER BY name');
-while ($f = mysql_fetch_assoc($r)) $data[$f['id']] = $f;
+$r =  $application->getConn()->fetchAll('SELECT *, 1 as user_defined FROM users_groups ORDER BY name');
+foreach ($r as $f) $data[$f['id']] = $f;
 
 $d = array();
 

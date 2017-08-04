@@ -21,9 +21,10 @@ $res = array(
 
 $math = $_REQUEST['table'];
 
+$handler = $application->getConn()->fetchColumn("SELECT handler FROM types WHERE alias = ?", array($math), 0);
+
 $r = fssql_query("SELECT handler FROM types WHERE alias = '$math'");
-if ($r && mysql_num_rows($r)) {
-    $handler = mysql_result($r,0);
+if ($handler) {
     if (substr($handler, -4) != '.php') $handler .= '.php';
     if ($handler && file_exists(PLUGIN_MATH_DIR.'/'.$handler)) 
         include(PLUGIN_MATH_DIR.'/'.$handler);

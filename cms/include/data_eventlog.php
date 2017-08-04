@@ -24,23 +24,22 @@ $query = '
     FROM event_log A 
     LEFT JOIN users B ON (B.id = A.user_id)
     WHERE code IN ('.implode(',', $_REQUEST['filter']).')
-    ORDER BY '.mysql_escape_string($_REQUEST['sort']).' '.mysql_escape_string($_REQUEST['dir']).', id DESC';
+    ORDER BY '.$_REQUEST['sort'].' '.$_REQUEST['dir'].', id DESC';
  
 if (isset($_REQUEST['start']) && isset($_REQUEST['limit']))
     $query .= ' LIMIT '.(int)$_REQUEST['start'].','.(int)$_REQUEST['limit'];
 
-$r = fssql_query($query);
+$r = $application->getConn()->fetchAll($query);
 
-while ($f = mysql_fetch_assoc($r)) {
+foreach ($r as $f) {
     $f['name'] = $event_name_code[$f['code']];
     $data[] = $f;
 }
 
-$total = mysql_result(fssql_query('SELECT FOUND_ROWS()'),0);
+$total = $application->getConn()->fetchColumn('SELECT FOUND_ROWS()',[],0);
 
 echo json_encode(array(
     'success' => true,
     'total'   => $total,
     'rows'    => $data
 ));
-?>

@@ -59,7 +59,7 @@ try {
         else $fields = $_REQUEST['fields'];
     
     if (!isset($_REQUEST['query'])) $_REQUEST['query'] = '';
-    $query = '%'.mysql_escape_string($_REQUEST['query']).'%';
+    $query = '%'.$_REQUEST['query'].'%';
     
     $math_at_once = $_REQUEST['limit'];
     $m_first = $_REQUEST['start'];
@@ -86,16 +86,14 @@ try {
                   $where
             ORDER BY $sort $order
             LIMIT $m_first,$math_at_once";	
-    $r  = fssql_query($sql);
-    
+    $r = $application->getConn()->fetchAll($sql);
 	//print $sql;
 	
-    $all_filter = mysql_result(mysql_query('SELECT FOUND_ROWS()'),0);
+    $all_filter = $application->getConn()->fetchColumn('SELECT FOUND_ROWS()',[],0);
         
     $materials = array();
     
-    while ($f = mysql_fetch_assoc($r)) 
-	{        
+    foreach ($r as $f) {     
         $f['icon'] = ($f['type'] & MATH_PUBLISHED)?1:0;
         $f['disabled'] = $f['locked'] || !(($f['autor_id']==$user->id && $right[0])||($f['autor_id']!=$user->id && $right[1]));        
         $materials[] = $f;        

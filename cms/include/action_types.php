@@ -100,8 +100,8 @@ try {
             switch($pseudo_type){
               	case PSEUDO_FIELD_FILESET: 
 
-            		  $r = fssql_query('SELECT id FROM types WHERE alias="material_files"');
-            		  if (!mysql_num_rows($r)) {
+					  $len = $application->getConn()->fetchColumn('SELECT id FROM types WHERE alias="material_files"', array(), 0);
+            		  if (!$len) {
 							  $od = ObjectDefinition::create(array(
 								  'alias'   => 'material_files', 
 								  'describ' => $translator->_('Файлы'), 
@@ -134,23 +134,19 @@ try {
 								  'editor_user' => EDITOR_DHTML_SHORT, 
 								  'default_value' => ''
 							  ));
-            			  } else {
-            				  $len = mysql_result($r,0);
             			  }
                 		break;
                     
               	case PSEUDO_FIELD_TAGS: 
 
-              			$r = fssql_query('SELECT id FROM types WHERE alias="material_tags"');
-              			if (!mysql_num_rows($r)) {	  
-              				$od = ObjectDefinition::create(array(
-                          'alias'   => 'material_tags', 
-                          'describ' => $translator->_('Ключевые слова'), 
-                          'fixed'   => 1
-                      ));
-                      $len = $od->id;
-              			} else {
-              				$len = mysql_result($r,0);
+						$len = $application->getConn()->fetchColumn('SELECT id FROM types WHERE alias="material_tags"', array(), 0);
+              			if ($len) {	  
+              				  $od = ObjectDefinition::create(array(
+								  'alias'   => 'material_tags', 
+								  'describ' => $translator->_('Ключевые слова'), 
+								  'fixed'   => 1
+							  ));
+							  $len = $od->id;
               			}
                 		break;
                     
@@ -223,10 +219,8 @@ try {
     
     if ($_REQUEST['action'] == 'field_delete') {
     
-        $r = fssql_query("select type, id, name, len, pseudo_type from types_fields where field_id=".$_REQUEST['id']);
-        if (mysql_num_rows($r)) {
-            $f = mysql_fetch_assoc($r);
-            
+		$f = $application->getConn()->fetchAssoc('select type, id, name, len, pseudo_type from types_fields where field_id=?', array($_REQUEST['id']));
+        if ($f) {            
             if ($f['type'] > 0) {
             
                 $od = new ObjectDefinition($f['id']);             
@@ -239,33 +233,29 @@ try {
               	}
             }
             
-        	  fssql_query("delete from types_fields where field_id=".$_REQUEST['id']);
-        	  $res['success'] = true;
-    	 }
+			$application->getConn()->executeQuery('delete from types_fields where field_id=?', array($_REQUEST['id']));
+        	$res['success'] = true;
+        }
     }
     
     if ($_REQUEST['action'] == 'field_up') {
-      $r = fssql_query("select tag, id from types_fields where field_id=".(int)$_POST['id']);
-      list($tag, $type_id) = mysql_fetch_row($r);
-      $r = fssql_query("select field_id, tag from types_fields where id=$type_id and tag<$tag order by tag desc limit 1");
-      $f = mysql_fetch_row($r);
+      list($tag, $type_id) = $application->getConn()->fetchArray('select tag, id from types_fields where field_id=?', array($_REQUEST['id']));
+	  $f = $application->getConn()->fetchArray('select field_id, tag from types_fields where id=? and tag<? order by tag desc limit 1', array($type_id, $tag));
       if ($f[0]) {
     	  if ($f[1] == $tag) $tag++;
-    	  fssql_query("update types_fields set tag=$f[1] where field_id=".(int)$_POST['id']);
-    	  fssql_query("update types_fields set tag=$tag where field_id=".(int)$f[0]);
+		  $application->getConn()->executeQuery('update types_fields set tag=? where field_id=?', array($f[1],$_REQUEST['id']));
+		  $application->getConn()->executeQuery('update types_fields set tag=? where field_id=?', array($tag,$f[0]));
       }
       $res['success'] = true;
     }
     
     if ($_REQUEST['action'] == 'field_down') {
-      $r = fssql_query("select tag, id from types_fields where field_id=".(int)$_POST['id']);
-      list($tag, $type_id) = mysql_fetch_row($r);
-      $r = fssql_query("select field_id, tag from types_fields where id=$type_id and tag>$tag order by tag limit 1");
-      $f = mysql_fetch_row($r);
+      list($tag, $type_id) = $application->getConn()->fetchArray('select tag, id from types_fields where field_id=?', array($_REQUEST['id']));
+	  $f = $application->getConn()->fetchArray('select field_id, tag from types_fields where id=? and tag>? order by tag desc limit 1', array($type_id, $tag));
       if ($f[0]) {
     	  if ($f[1] == $tag) $tag--;
-    	  fssql_query("update types_fields set tag=$f[1] where field_id=".(int)$_POST['id']);
-    	  fssql_query("update types_fields set tag=$tag where field_id=".(int)$f[0]);
+		  $application->getConn()->executeQuery('update types_fields set tag=? where field_id=?', array($f[1],$_REQUEST['id']));
+		  $application->getConn()->executeQuery('update types_fields set tag=? where field_id=?', array($tag,$f[0]));
       }
       $res['success'] = true;
     }
