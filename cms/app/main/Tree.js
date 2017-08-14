@@ -231,16 +231,6 @@ Ext.define('Cetera.main.Tree', {
 			catalog_id: this.getSelectedId()
 		}); 
 		
-		/*        
-        Ext.Loader.loadScript({
-            url: 'include/ui_cat_props.php?id='+this.getSelectedId(),
-            onLoad: function() { 
-                var cc = Ext.create('CatPropsWindow');             
-                if (cc) cc.show();  
-            }
-        });
-		*/
-		
 
     },
     

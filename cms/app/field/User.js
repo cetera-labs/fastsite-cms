@@ -1,6 +1,8 @@
 Ext.define('Cetera.field.User', {
 
     extend:'Cetera.field.Trigger',
+	requires: 'Cetera.model.User',
+	alias : 'widget.userfield',
     
     initComponent : function(){
     
@@ -33,11 +35,20 @@ Ext.define('Cetera.field.User', {
             this.callParent([obj.id]);
         } else {
             this.callParent([value]);
+			if (value) {
+				var User = Ext.ModelManager.getModel('Cetera.model.User');
+				User.load(value, {
+					scope: this,
+					success: function(user) {
+						this.setDisplayValue(user.get('login'));
+					}
+				});				
+			}
         }
     },
             
   	onDestroy: function(){
-  		  this.window.close();
-  		  this.callParent();
+		this.window.close();
+  		this.callParent();
   	}
 });
