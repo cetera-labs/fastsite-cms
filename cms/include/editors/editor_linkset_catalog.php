@@ -11,6 +11,7 @@
  **/
 
 function editor_linkset_catalog_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
+	global $application;
 ?>
                     Ext.create('Cetera.field.DirSet', {
                         fieldLabel: '<?=$field_def['describ']?>',
@@ -26,22 +27,21 @@ function editor_linkset_catalog_draw($field_def, $fieldvalue, $id = false, $idca
 	$tbl = \Cetera\Catalog::TABLE;
   	
 	if ($id) {
-		$r = fssql_query("select dest from ".$math."_".$tbl."_".$field_def['name']." where id=$id order by tag");
+		$r = $application->getDbConnection()->query("select dest from ".$math."_".$tbl."_".$field_def['name']." where id=$id order by tag");
 		$first = 1;
-    while ($f = mysql_fetch_row($r)) {
-      $_id = $f[0];
-      $name = '';
-      $parent = $_id;
-			while ($parent) {
-		    	$r1 = fssql_query("select A.name, C.data_id from dir_data A, dir_structure B, dir_structure C where B.data_id=$parent and A.id=B.data_id and C.lft<B.lft and C.rght>B.rght and C.level=B.level-1");
-				  $f1 = mysql_fetch_row($r1);
-		    	if ($name) $name = $f1[0].' / '.$name; else $name = $f1[0];
-				  $parent = $f1[1];
-		  }
-		  if (!$first) print ',';
-		  $first = 0;
-			print "[".(int)$_id.", '".addslashes($name)."']";
-	  }
+		while ($f = $r->fetch()) {
+		  $_id = $f['dest'];
+		  $name = '';
+		  $parent = $_id;
+			  while ($parent) {
+					$f1 = $application->getDbConnection()->fetchArray("select A.name, C.data_id from dir_data A, dir_structure B, dir_structure C where B.data_id=$parent and A.id=B.data_id and C.lft<B.lft and C.rght>B.rght and C.level=B.level-1");
+					if ($name) $name = $f1[0].' / '.$name; else $name = $f1[0];
+					$parent = $f1[1];
+			  }
+			  if (!$first) print ',';
+			  $first = 0;
+			  print "[".(int)$_id.", '".addslashes($name)."']";
+		}
 	}
 ?>
                             ]

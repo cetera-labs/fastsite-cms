@@ -10,6 +10,7 @@
  **/
  
 function editor_linkset_checkbox_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
+	global $application;
 ?>
                     Ext.create('Cetera.field.CheckList',{
                         fieldLabel: '<?=$field_def['describ']?>',
@@ -20,14 +21,12 @@ function editor_linkset_checkbox_draw($field_def, $fieldvalue, $id = false, $idc
                             fields: ['id','name','selected'],
                             data: [
 <?
-	$r = @fssql_query("select A.alias, A.id from types A, dir_data B where A.id = B.typ and B.id=".$field_def['len']);
-	$tbl = mysql_result($r,0, 'alias');
-	$type = mysql_result($r,0, 'id');
+	list($tbl,$type) = $application->getDbConnection()->fetchArray("select A.alias, A.id from types A, dir_data B where A.id = B.typ and B.id=".$field_def['len']);
 	
 	$linked = array();
 	if ($id) {
-		$r = fssql_query("SELECT A.id FROM ".$tbl." A, ".$math."_".$tbl."_".$field_def['name']." B WHERE A.id = B.dest and B.id=$id");
-		while ($f = mysql_fetch_row($r)) $linked[] = $f[0];
+		$r = $application->getDbConnection()->query("SELECT A.id FROM ".$tbl." A, ".$math."_".$tbl."_".$field_def['name']." B WHERE A.id = B.dest and B.id=$id");
+		while ($f = $r->fetch()) $linked[] = $f['id'];
 	}	
 
 	$sql = '
@@ -37,12 +36,12 @@ function editor_linkset_checkbox_draw($field_def, $fieldvalue, $id = false, $idc
 		LEFT JOIN dir_data A ON (B.data_id=A.id)
 		WHERE C.data_id='.$field_def['len'].' and A.typ='.$type.'
 		ORDER BY B.lft';
-	$r = fssql_query($sql);
+	$r = $application->getDbConnection()->query($sql);
 	$first = 1;
-	while($f = mysql_fetch_assoc($r)) {    
+	while ($f = $r->fetch()) {    
 		$sql = 'SELECT id,name FROM '.$tbl.' WHERE idcat='.$f['id'].' and type&'.MATH_PUBLISHED.'=1 ORDER BY name';
-		$r1 = fssql_query($sql);	
-		while($f1 = mysql_fetch_assoc($r1)) {
+		$r1 = $application->getDbConnection()->query($sql);	
+		while($f1 = $r1->fetch()) {
 		  	if (!$first) print ',';
 		  	$first = 0;
 			print "[".(int)$f1['id'].", '".str_replace("\n",'',addslashes($f1['name']))."',".(in_array($f1['id'], $linked)?' true':' false')."]";

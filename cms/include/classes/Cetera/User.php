@@ -31,16 +31,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 	
 	private $_external = FALSE;
     
-      
-    // DEPRECATED
-  	public static function getByResult($r)
-    {   
-        if ($r && mysql_num_rows($r)) { 
-            $fields = mysql_fetch_assoc($r);
-            return self::fetch($fields);  
-        }  
-  	}   
-
   	public static function enum()
     {   
         return new Iterator\User();

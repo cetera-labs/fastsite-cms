@@ -10,9 +10,9 @@
  **/
  
 function editor_link_user_draw($field_def, $fieldvalue) {
+	global $application;
 
-    $r = fssql_query('SELECT IF(name<>"" and name IS NOT NULL, name, login) as autor FROM users WHERE id='.(int)$fieldvalue);
-    if (mysql_num_rows($r)) $uname = mysql_result($r,0);
+    $uname = $application->getDbConnection()->fetchColumn('SELECT IF(name<>"" and name IS NOT NULL, name, login) as autor FROM users WHERE id='.(int)$fieldvalue);
     
 ?>
                     Ext.create('Cetera.field.User', {

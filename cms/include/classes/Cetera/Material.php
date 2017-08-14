@@ -310,15 +310,14 @@ class Material extends DynamicFieldsObject implements SiteItem {
 			{
 				$sql .= ' WHERE idcat='.$this->idcat;
 			}
-			$r = mysql_query($sql);
-			if ($r && mysql_num_rows($r)) $this->fields['tag'] = mysql_result($r,0)+100; else $tag = 100;
+			$tag = $this->getDbConnection()->fetchColumn($sql);
+			if ($tag) $this->fields['tag'] = $tag+100; else $this->fields['tag'] = 100;
 		}
 		
 		$generateAlias = false;
         if ($this->idcat >= 0) {
             if (!$this->alias) {
-              	$r = fssql_query("SELECT tablename,type from dir_data where id=".$this->idcat);
-              	if (mysql_num_rows($r)) list($catname, $t) = mysql_fetch_row($r);
+				list($catname, $t) = $this->getDbConnection()->fetchArray("SELECT tablename,type from dir_data where id=".$this->idcat);
             
               	if ($t & Catalog::AUTOALIAS) {
               		if ($t & Catalog::AUTOALIAS_ID) {
@@ -344,10 +343,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
 			$i = 2;
 			do
 			{
-				$sql = 'SELECT COUNT(*) FROM '.$this->table.' WHERE alias="'.mysql_escape_string($this->alias).'" and idcat='.$this->idcat;
+				$sql = 'SELECT COUNT(*) FROM '.$this->table.' WHERE alias='.$this->getDbConnection()->quote($this->alias).' and idcat='.$this->idcat;
 				if ($this->id) $sql .= ' and id<>'.$this->id;
-				$r = fssql_query($sql);
-				$found = mysql_result($r, 0);
+				$found = $this->getDbConnection()->fetchColumn($sql);
 				if ($found && !$unique_alias) throw new Exception\Form(Exception\CMS::ALIAS_EXISTS, 'alias');			
 				if ($found) $this->alias = $orig_alias.'_'.$i++;
 			} 
@@ -363,7 +361,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
         $author = json_decode( $this->fields['autor'] );
         if ( is_object($author) ) $this->fields['autor'] = $author->id;
         
-        $values = 'alias="'.$this->alias.'", name="'.mysql_escape_string($this->fields['name']).'",idcat='.$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
+        $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->fields['name']).',idcat='.$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
         
         $values .= $this->saveDynamicFields(array('name', 'alias', 'idcat', 'autor'), $hidden);
              
@@ -376,10 +374,10 @@ class Material extends DynamicFieldsObject implements SiteItem {
             $sql = "INSERT INTO ".$this->table." SET ".$values;
             
         }
-        fssql_query($sql);
+        $this->getDbConnection()->executeQuery($sql);
         
 		if (!$this->id) {
-			$this->_id = mysql_insert_id();  
+			$this->_id = $this->getDbConnection()->lastInsertId();  
 			
 			if ($generateAlias) {
 				$this->_alias = $this->id;

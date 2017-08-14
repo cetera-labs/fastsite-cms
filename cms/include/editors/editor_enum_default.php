@@ -10,6 +10,7 @@
  **/
 
 function editor_enum_default_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
+	global $application;
 ?>
                     new Ext.form.ComboBox({
                         fieldLabel: '<?=$field_def['describ']?>',
@@ -20,8 +21,7 @@ function editor_enum_default_draw($field_def, $fieldvalue, $id = false, $idcat =
                             fields: ['value'],
                             data : [
                             <?php
-                            $r = fssql_query("SHOW COLUMNS FROM $math LIKE '".$field_def['name']."'");
-                            $g = mysql_fetch_row($r);
+                            $g = $application->getDbConnection()->fetchArray("SHOW COLUMNS FROM $math LIKE '".$field_def['name']."'");
                             $variant = substr($g[1],6,strlen($g[1])-8);
                             $variants = explode("','",$variant);
                             print "['".implode("'],['",$variants)."']";

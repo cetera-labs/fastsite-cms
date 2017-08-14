@@ -80,7 +80,7 @@ class Calendar extends Templateable {
 	public function getCalendar()
 	{	
 		list($y,$m,$d) = explode('-', $this->getDate() );
-		$m = '"'.mysql_real_escape_string($m.'.'.$y).'"';		
+		$m = $this->application->getDbConnection()->quote($m.'.'.$y);
 		
 		$month = $this->getCatalog()->getMaterials()->select('DATE_FORMAT(dat,"%e") as day')->where('DATE_FORMAT(dat,"%m.%Y") = '.$m);
 		if ($this->getParam('subsections')) $month->subFolders();

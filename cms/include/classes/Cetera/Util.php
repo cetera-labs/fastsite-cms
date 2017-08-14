@@ -115,40 +115,16 @@ class Util {
     public static function copyRecord($table, $id_row, $id, $replace) {
 		$conn = self::getDbConnection();
 		
-    	$r = fssql_query("SELECT * FROM $table WHERE $id_row='$id'");
-    	if (!mysql_num_rows($r)) throw new Exception\CMS('Source record id not found');
-    	$row = mysql_fetch_assoc($r);
+    	$row = $conn->fetchAssoc("SELECT * FROM $table WHERE $id_row='$id'");
+    	if (!$row) throw new Exception\CMS('Source record id not found');
     	foreach ($replace as $name => $value)
     		if (isset($row[$name])) $row[$name] = $value;
     	unset($row[$id_row]);
-    	foreach($row as $_id => $_value) $row[$_id] = mysql_escape_string($_value);
-    	$conn->executeQuery("INSERT INTO $table (".implode(',', array_keys($row)).") VALUES ('".implode("','", array_values($row))."')");
+    	foreach($row as $_id => $_value) $row[$_id] = $conn->quote($_value);
+    	$conn->executeQuery("INSERT INTO $table (".implode(',', array_keys($row)).") VALUES (".implode(",", array_values($row))."'");
     	return $conn->lastInsertId();
     }
-    
-    /*
-    * Создает копию нескольких записей
-    * 
-    * @param string $table имя таблицы
-    * @param string $where условие, по которому выбираются записи
-    * @param array $replace ассоциативный массив названий и значений столбцов, которые нужно заменить, а не копировать
-    **/ 
-    function copyRecords($table, $where, $replace = NULL, $ignore = NULL) {
-		$conn = self::getDbConnection();
-		
-    	$r = fssql_query("SELECT * FROM $table WHERE $where");
-    	while($row = mysql_fetch_assoc($r)){
-    		if (is_array($replace)) foreach ($replace as $name => $value)
-    			if (isset($row[$name])) $row[$name] = $value;
-    		if (is_array($ignore)) foreach ($ignore as $name)
-    			if (isset($row[$name])) unset($row[$name]);
-    		$query = "INSERT INTO $table (".implode(',', array_keys($row)).") VALUES ('".implode("','", array_values($row))."')";
-    		$conn->executeQuery($query);	
-    	} // while
-    	return TRUE;
-    }
-
-       
+           
     /*
     * Возвращает версию MySQL
     * 

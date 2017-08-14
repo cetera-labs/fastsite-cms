@@ -11,6 +11,7 @@
  **/
  
 function editor_linkset_user_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
+	global $application;
     if (!$field_def['len']) $field_def['len'] = $idcat;
 ?>
                     Ext.create('Cetera.field.UserSet', {
@@ -24,13 +25,13 @@ function editor_linkset_user_draw($field_def, $fieldvalue, $id = false, $idcat =
                             data: [
 <?
 if ($id) {
-	  $r = fssql_query("select A.id, A.login  from ".\Cetera\User::TABLE." A, ".$math."_".\Cetera\User::TABLE."_".$field_def['name']." B where A.id = B.dest and B.id=$id order by B.tag");
+	  $r = $application->getDbConnection()->query("select A.id, A.login  from ".\Cetera\User::TABLE." A, ".$math."_".\Cetera\User::TABLE."_".$field_def['name']." B where A.id = B.dest and B.id=$id order by B.tag");
 	  $first = 1;
-    while ($f = mysql_fetch_row($r)) {
-	  	if (!$first) print ',';
-	  	$first = 0;
-		  print "[".(int)$f[0].", '".addslashes($f[1])."']";
-  	}
+      while ($f = $r->fetch()) {
+	  	  if (!$first) print ',';
+	  	  $first = 0;
+		  print "[".(int)$f['id'].", '".addslashes($f['login'])."']";
+  	  }
 }
 ?>
                             ]

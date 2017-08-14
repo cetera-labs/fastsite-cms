@@ -704,18 +704,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	  $this->getDbConnection()->executeQuery("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
         	}
         }
-        
-        /*
-        $hlinks = array();
-        $r = fssql_query("select B.name from types A, types_fields B where A.alias='".$this->table."' and B.id=A.id and B.type=".FIELD_HLINK);
-        while($f = mysql_fetch_row($r)) $hlinks[] = $f[0];
-        if (sizeof($hlinks)) {
-          $r = fssql_query('SELECT '.implode(',', $hlinks).' FROM '.$this->table.' WHERE id='.$this->id);
-          $f = mysql_fetch_assoc($r);
-          foreach ($f as $link_id) fssql_query("delete from field_link where link_id=$link_id");
-        }
-        */
-        
+                
         // удаление самого материала
         $this->getDbConnection()->executeQuery("delete from ".$this->table." where id=".$this->id);
         

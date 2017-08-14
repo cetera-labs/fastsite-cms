@@ -452,7 +452,7 @@ class ObjectDefinition extends Base {
         	}
     
         	DbConnection::getDbConnection()->executeQuery("ALTER TABLE $oldalias RENAME $alias");
-        	DbConnection::getDbConnection()->executeQuery("update types set alias='".mysql_real_escape_string($alias)."' where id=".$this->id);
+			DbConnection::getDbConnection()->update('types', array('alias'=>$alias), array('id'=>$this->id));
 			  
 			$this->_table = $alias;
     	  } // if
@@ -463,15 +463,15 @@ class ObjectDefinition extends Base {
 			$this->_fixed = (int)$params['fixed'];
 		}
         if (isset($params['describ'])) {
-			$sql[] = 'describ="'.mysql_real_escape_string($params['describ']).'"';
+			$sql[] = 'describ='.DbConnection::getDbConnection()->quote($params['describ']);
 			$this->_description = $params['describ'];
 		}
         if (isset($params['handler'])) {
-			$sql[] = 'handler="'.mysql_real_escape_string($params['handler']).'"';
+			$sql[] = 'handler='.DbConnection::getDbConnection()->quote($params['handler']);
 			$this->_handler = $params['handler'];
 		}
         if (isset($params['plugin'])) {
-			$sql[] = 'plugin="'.mysql_real_escape_string($params['plugin']).'"';
+			$sql[] = 'plugin='.DbConnection::getDbConnection()->quote($params['plugin']);
 			$this->_plugin = $params['plugin'];
 		}
         

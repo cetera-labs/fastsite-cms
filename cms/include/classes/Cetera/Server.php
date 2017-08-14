@@ -50,8 +50,7 @@ class Server extends Catalog {
 	 */  
 	public static function count()
     {
-        $r = fssql_query("SELECT COUNT(*) FROM dir_data WHERE is_server<>0");
-        if ($r) return (int)mysql_result($r,0);
+		return self::getDbConnection()->fetchColumn("SELECT COUNT(*) FROM dir_data WHERE is_server<>0");
     } 
 	
 	/**
@@ -62,10 +61,8 @@ class Server extends Catalog {
 	public static function enum()
     {
       $result = array();
-
       $r = self::getDbConnection()->executeQuery('SELECT * FROM dir_data A WHERE is_server<>0 ORDER BY tag');
-      while($fields = $r->fetch())
-      {
+      while($fields = $r->fetch()) {
           $result[] = self::fetch($fields);
       }      
 
@@ -161,7 +158,7 @@ class Server extends Catalog {
     public function update($props)
     {
         if (isset($props['server_aliases']) || isset($props['alias'])) {
-    	    fssql_query("DELETE FROM server_aliases WHERE id=".$this->id);
+    	    self::getDbConnection()->executeQuery("DELETE FROM server_aliases WHERE id=".$this->id);
     	    if (isset($props['server_aliases'])){
                 $alias = json_decode($props['server_aliases']);
                 unset($props['server_aliases']);
@@ -170,13 +167,16 @@ class Server extends Catalog {
             }
     	    if (isset($props['alias'])) $alias[] = $props['alias'];
     	    foreach($alias as $al) if ($al) {
-    	       fssql_query("INSERT INTO server_aliases (id,name) values (".$this->id.",'".mysql_escape_string($al)."')");
+			   self::getDbConnection()->insert('server_aliases', array(
+			       'id'   => $this->id,
+				   'name' => $al
+			   ));
         	   $slot = new Cache\Slot\ServerByDomain($al);
         	   $slot->remove();
     	    }
         }
         
-        self::getDbConnection()->executeQuery('UPDATE dir_data SET templateDir="'.mysql_escape_string($props['templateDir']).'" where id='.$this->id);
+        self::getDbConnection()->update('dir_data', array('templateDir' => $props['templateDir']), array('id'=>$this->id));
     
         parent::update($props);
     }
