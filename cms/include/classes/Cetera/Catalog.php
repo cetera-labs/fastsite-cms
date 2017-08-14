@@ -470,12 +470,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     public function getSubs()
     {
         
-        $r = fssql_query('
+        $r = self::getDbConnection()->query('
         	SELECT A.*, B.level 
         	FROM dir_data A, dir_structure B, dir_structure C
         	WHERE A.id=B.data_id and C.data_id='.$this->id.' and B.lft BETWEEN C.lft and C.rght');
         	
-        while ($f = mysql_fetch_assoc($r)) {
+        while ($f = $r->fetch()) {
             $c = Catalog::fetch($f);
             $result[] = $c->prototype->id;
         }
@@ -569,10 +569,9 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      */     
     public function findChildByAlias($alias)
     {
-        $alias = mysql_real_escape_string($alias);
-        $r = fssql_query("select A.id from dir_data A, dir_structure B, dir_structure C where C.data_id=".$this->id." and B.data_id=A.id and B.lft BETWEEN C.lft and C.rght and A.tablename='$alias'");
-        if (mysql_num_rows($r)) {
-            return Catalog::getById(mysql_result($r,0));
+		$id = self::getDbConnection()->fetchColumn("select A.id from dir_data A, dir_structure B, dir_structure C where C.data_id=? and B.data_id=A.id and B.lft BETWEEN C.lft and C.rght and A.tablename=?", array($this->id, $alias));
+        if ($id) {
+            return Catalog::getById($id);
         } else return FALSE;
     }    
      
@@ -585,25 +584,10 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      */     
     public function getChildByAlias($alias)
     {
-        $alias = mysql_real_escape_string($alias);
-		
-        //$slot = new Cache\Slot\CatalogByAlias($this->id, $alias);
-        //if (false === ($f = $slot->load()) || !Application::getInstance()->isFrontOffice()) {
-            $r = fssql_query("select A.* from dir_data A, dir_structure B, dir_structure C where C.data_id=".$this->id." and B.data_id=A.id and B.level=C.level+1 and B.lft BETWEEN C.lft and C.rght and A.tablename='$alias'");
-            if (mysql_num_rows($r)) {
-                $f = mysql_fetch_assoc($r);
-                //$slot->addTag(new Cache\Tag\CatalogID($f['id']));
-            } else {
-				$f = null;
-			}
-            //$slot->addTag(new Cache\Tag\CatalogID($this->id));
-            //$slot->save($cat);    
-        //}
+		$f = self::getDbConnection()->fetchAssoc("select A.* from dir_data A, dir_structure B, dir_structure C where C.data_id=? and B.data_id=A.id and B.level=C.level+1 and B.lft BETWEEN C.lft and C.rght and A.tablename=?", array($this->id, $alias));
         if (!$f) throw new Exception\CMS(Exception\CMS::CAT_NOT_FOUND);
-		
         $f['parent'] = $this;
-        $cat = Catalog::fetch($f);		
-		
+        $cat = Catalog::fetch($f);
         return $cat;
     }
     
@@ -758,17 +742,17 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
           unset($fields['autoalias']);
       }
     	
-      $r = fssql_query("SELECT MAX(A.tag)+1 
-            	          FROM dir_data A, dir_structure B, dir_structure C
-                        WHERE A.id=B.data_id and C.data_id=".$this->id." and B.lft BETWEEN C.lft and C.rght and B.level=C.level+1");
-      $tag = 0;
-      if (mysql_num_rows($r)) $tag = (int)mysql_result($r,0);
+	  $conn = self::getDbConnection();	
+	
+      $tag = $conn->fetchColumn("SELECT MAX(A.tag)+1 
+            	        FROM dir_data A, dir_structure B, dir_structure C
+                        WHERE A.id=B.data_id and C.data_id=? and B.lft BETWEEN C.lft and C.rght and B.level=C.level+1", array($this->id));
       if (!$tag) $tag = 1;
       
       $sql="INSERT INTO dir_data 
 			SET tag=$tag,
-				name='".mysql_escape_string($fields['name'])."',
-				tablename='".mysql_escape_string($fields['alias'])."',
+				name=".$conn->quote($fields['name']).",
+				tablename=".$conn->quote($fields['alias']).",
 				type=$type,
 				typ=".(int)$fields['typ'].",
 				dat=NOW(),
@@ -779,24 +763,24 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
           unset($fields['id']);
       }	  
 				
-      fssql_query($sql);
-      $id = mysql_insert_id();
+      $conn->executeQuery($sql);
+      $id = $conn->lastInsertId();
     	
     	$p = array();
     	foreach ($fields as $name => $value)
     		if ($name!='alias'&&$name!='server'&&$name!='name'&&$name!='typ'&&$name!='link')
     			$p[] = "$name='".addslashes($value)."'";
     	if (sizeof($p) && $id)
-    		fssql_query('UPDATE dir_data SET '.implode(',', $p).' WHERE id='.$id);
+    		$conn->executeQuery('UPDATE dir_data SET '.implode(',', $p).' WHERE id='.$id);
     
         $tree = new CDBTree('dir_structure');
         $r = fssql_query('select id from dir_structure where data_id='.$this->id);
-        $prnt = mysql_result($r,0);
+        $prnt = $conn->fetchColumn('select id from dir_structure where data_id=?', array($this->id));
         $tree->insert($prnt, array('data_id'=>$id));
         	   
         if ($fields['server']) {
-        		fssql_query("delete from server_aliases where id=$id");
-        		fssql_query("insert into server_aliases (id,name) values ($id,'".$fields['alias']."')");
+        		$conn->executeQuery("delete from server_aliases where id=$id");
+        		$conn->executeQuery("insert into server_aliases (id,name) values ($id,'".$fields['alias']."')");
         		$slot = new Cache\Slot\ServerByDomain($fields['alias']);
         		$slot->remove();
         }
@@ -829,15 +813,14 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 		
 		if (!$this->isLink()) {
     
-			$r = fssql_query('SELECT A.data_id, A.level, C.tablename, D.alias 
+			$r = self::getDbConnection()->query('SELECT A.data_id, A.level, C.tablename, D.alias 
 							  FROM dir_structure A, dir_structure B, dir_data C, types D 
 							  WHERE C.id=A.data_id and B.data_id='.$this->id.' and A.lft BETWEEN B.lft and B.rght and D.id=C.typ');
 			
-			while ($f = mysql_fetch_assoc($r))
-			{
+			while ($f = $r->fetch()) {
 				try {
-					$r1 = fssql_query('SELECT id FROM '.$f['alias'].' WHERE idcat='.$f['data_id']);
-					while ($f1 = mysql_fetch_array($r1)) {
+					$r1 = self::getDbConnection()->query('SELECT id FROM '.$f['alias'].' WHERE idcat='.$f['data_id']);
+					while ($f1 = $r1->fetch()) {
 					   $m = Material::getById($f1[0], 0, $f['alias']);
 					   $m->delete();
 					}
@@ -848,13 +831,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 		}
     
     	$parent = array();
-    	$r = fssql_query('SELECT A.id, B.data_id 
+    	$r = self::getDbConnection()->query('SELECT A.id, B.data_id 
                           FROM dir_structure A, dir_structure B 
                           WHERE A.data_id='.$this->id.' and B.lft<A.lft and B.rght>A.rght and B.level=A.level-1
             			  ORDER BY A.lft DESC');
     	$res = TRUE;
-    	while($f = mysql_fetch_assoc($r))
-		{
+    	while ($f = $r->fetch()) {
     		$parent[] = $f['data_id'];
     		if (!$tree->deleteAll($f['id'])) $res = FALSE;
     	} // while
@@ -863,28 +845,27 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 		{
     		$ids = implode(',',$ids_arr);
         
-			fssql_query("DELETE FROM dir_data WHERE id IN ($ids)");
-			fssql_query("DELETE FROM types_fields_catalogs WHERE catalog_id IN ($ids)");
+			self::getDbConnection()->executeQuery("DELETE FROM dir_data WHERE id IN ($ids)");
+			self::getDbConnection()->executeQuery("DELETE FROM types_fields_catalogs WHERE catalog_id IN ($ids)");
         
-    		$r = fssql_query("SELECT name FROM server_aliases WHERE id IN ($ids)");
-    		while($f = mysql_fetch_assoc($r))
-			{
+    		$r = self::getDbConnection()->query("SELECT name FROM server_aliases WHERE id IN ($ids)");
+    		while ($f = $r->fetch()) {
         		$slot = new Cache\Slot\ServerByDomain($f['name']);
         		$slot->remove();	
     		}
         
-    		fssql_query("DELETE FROM server_aliases where id IN ($ids)");
-			fssql_query("DELETE FROM theme_config where server_id IN ($ids)");
+    		self::getDbConnection()->executeQuery("DELETE FROM server_aliases where id IN ($ids)");
+			self::getDbConnection()->executeQuery("DELETE FROM theme_config where server_id IN ($ids)");
         
     		foreach ($ids_arr as $id1) {
-        		fssql_query("DELETE FROM users_groups_allow_cat where catalog_id=$id1");
+        		self::getDbConnection()->executeQuery("DELETE FROM users_groups_allow_cat where catalog_id=$id1");
                 $tpl = new Cache\Tag\CatalogID($id1);
                 $tpl->clean();
     		}
 			
 			// удаляем разделы-ссылки, ссылающиеся на раздел
-			$r = fssql_query('SELECT id FROM dir_data WHERE type&'.Catalog::LINKED.'>0 and typ IN ('.$ids.')'); 
-			while ($f = mysql_fetch_assoc($r)) {
+			$r = self::getDbConnection()->query('SELECT id FROM dir_data WHERE type&'.Catalog::LINKED.'>0 and typ IN ('.$ids.')'); 
+			while ($f = $r->fetch()) {
 				$c = Catalog::getById($f['id']);
 				$c->delete();
 			}			
@@ -900,13 +881,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      * @return void
      */         
     public function fixMaterialTags() {
-    	$r = fssql_query('SELECT count(tag) as cnt from '.$this->materialsTable.' where idcat='.$this->prototype->id.' group by tag having cnt>1');
-    	if (!mysql_num_rows($r)) return;
+    	$r = self::getDbConnection()->fetchAll('SELECT count(tag) as cnt from '.$this->materialsTable.' where idcat='.$this->prototype->id.' group by tag having cnt>1');
+    	if (!count($r)) return;
     	$i = 100;
-    	$r = fssql_query('SELECT id FROM '.$this->materialsTable.' WHERE idcat='.$this->prototype->id.' ORDER BY tag');
-    	while($f = mysql_fetch_assoc($r)) 
-		{
-            fssql_query('UPDATE '.$this->materialsTable.' SET tag='.$i.' WHERE id='.$f['id']);
+    	$r = self::getDbConnection()->query('SELECT id FROM '.$this->materialsTable.' WHERE idcat='.$this->prototype->id.' ORDER BY tag');
+    	while ($f = $r->fetch()) {
+            self::getDbConnection()->executeQuery('UPDATE '.$this->materialsTable.' SET tag='.$i.' WHERE id='.$f['id']);
 			$i = $i + 100;
 		}
     }
@@ -929,8 +909,8 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
                     $groups = $groups->groups;
                     else $groups = array($groups);
             }
-            $r = fssql_query('SELECT COUNT(*) FROM users_groups_allow_cat WHERE permission='.(int)$permission.' and catalog_id='.(int)$this->id.' and group_id IN ('.implode(',',$groups).')');
-            if ($r && mysql_num_rows($r) && mysql_result($r,0)>0) return TRUE;
+            $r = self::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM users_groups_allow_cat WHERE permission='.(int)$permission.' and catalog_id='.(int)$this->id.' and group_id IN ('.implode(',',$groups).')');
+            if ($r > 0) return TRUE;
             return FALSE;
         }
     }
@@ -966,12 +946,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
         }
         
     
-    	$r = fssql_query("SELECT MAX(A.tag)+1, C.id 
+    	$r = self::getDbConnection()->fetchArray("SELECT MAX(A.tag)+1, C.id 
     	          FROM dir_structure C LEFT JOIN dir_structure B ON (B.lft BETWEEN C.lft and C.rght and B.level=C.level+1) LEFT JOIN dir_data A ON (A.id=B.data_id)
                   WHERE C.data_id=$dest
     			  GROUP BY C.id");
-    	if (!mysql_num_rows($r)) throw new Exception\CMS('Dest catalog is not found');
-    	list($tag, $sid) = mysql_fetch_row($r);
+    	if (!$r) throw new Exception\CMS('Dest catalog is not found');
+    	list($tag, $sid) = $r;
 
         $fields = array(
             'tag' => $tag, 
@@ -988,13 +968,14 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     	$tree = new CDBTree('dir_structure');
     	$new_sid = $tree->insert($sid, array('data_id'=>$new_id));
     	if (!$new_sid) {
-    	    fssql_query("DELETE FROM dir_data WHERE id=$new_id");
+    	    self::getDbConnection()->executeQuery("DELETE FROM dir_data WHERE id=$new_id");
     		throw new Exception\CMS('Error while creating new tree entry');
     	}
     	
-    	$r = fssql_query('SELECT * FROM users_groups_allow_cat WHERE catalog_id='.$this->id);
-    	while ($f = mysql_fetch_assoc($r))
-    		fssql_query('INSERT INTO users_groups_allow_cat (catalog_id,group_id,permission) VALUES ('.$new_sid.','.$f['group_id'].','.$f['permission'].')');
+    	$r = self::getDbConnection()->query('SELECT * FROM users_groups_allow_cat WHERE catalog_id='.$this->id);
+    	while ($f = $r->fetch()) {
+    		self::getDbConnection()->executeQuery('INSERT INTO users_groups_allow_cat (catalog_id,group_id,permission) VALUES ('.$new_sid.','.$f['group_id'].','.$f['permission'].')');
+		}
 
     	// Копирование материалов
         if ($materials) {
@@ -1024,10 +1005,8 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     public function move($dest)
     { 
 		$tree = new CDBTree('dir_structure');
-		$r = fssql_query('select id from dir_structure where data_id='.$dest);
-        $prntid = mysql_result($r,0);
-        $r = fssql_query('select id from dir_structure where data_id='.$this->id);
-        $strid = mysql_result($r,0);
+        $prntid = self::getDbConnection()->fetchColumn('select id from dir_structure where data_id=?', array($dest));
+        $strid = self::getDbConnection()->fetchColumn('select id from dir_structure where data_id=?', array($this->id));
 		$tree->moveAll($strid, $prntid); 
 		
         $this->_url = false;
@@ -1065,11 +1044,11 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     {
         if ($this->isLink()) return;
         
-        fssql_query('DELETE FROM users_groups_allow_cat WHERE catalog_id='.$this->id);
+        self::getDbConnection()->executeQuery('DELETE FROM users_groups_allow_cat WHERE catalog_id='.$this->id);
         if (is_array($permissions)) 
             foreach ($permissions as $pid => $groups)
                 foreach($groups as $gid) if ($gid && $gid != GROUP_ADMIN)
-                    fssql_query('INSERT INTO users_groups_allow_cat SET permission='.(int)$pid.', group_id='.(int)$gid.', catalog_id='.(int)$this->id);
+                    self::getDbConnection()->executeQuery('INSERT INTO users_groups_allow_cat SET permission='.(int)$pid.', group_id='.(int)$gid.', catalog_id='.(int)$this->id);
 
     }
     
@@ -1084,11 +1063,11 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     {
         if ($this->isLink()) return;
         
-        fssql_query('DELETE FROM types_fields_catalogs WHERE catalog_id='.$this->id);
+        self::getDbConnection()->executeQuery('DELETE FROM types_fields_catalogs WHERE catalog_id='.$this->id);
         if (is_array($fields)) 
             foreach ($fields as $fid => $data) {
                 if ($data['force_show'] || $data['force_hide']) 
-					fssql_query('INSERT INTO types_fields_catalogs SET catalog_id='.$this->id.', type_id='.$this->materialsType.', field_id='.$fid.', force_show='.(int)$data['force_show'].', force_hide='.(int)$data['force_hide']);
+					self::getDbConnection()->executeQuery('INSERT INTO types_fields_catalogs SET catalog_id='.$this->id.', type_id='.$this->materialsType.', field_id='.$fid.', force_show='.(int)$data['force_show'].', force_hide='.(int)$data['force_hide']);
             }
     }    
        
@@ -1099,7 +1078,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 	{
 		$i = 1;
 		foreach($this->children as $child)
-			fssql_query('UPDATE dir_data SET tag='.$i++.' WHERE id='.$child->id);	
+			self::getDbConnection()->executeQuery('UPDATE dir_data SET tag='.$i++.' WHERE id='.$child->id);	
 	}
 
     /**
@@ -1115,16 +1094,15 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     	$sign = $up?'<':'>';
     	$order = $up?'desc':'asc';
     
-    	$r = fssql_query("select D.data_id as parentid, A.tag
+    	list($parent, $tag) = self::getDbConnection()->fetchArray("select D.data_id as parentid, A.tag
                  FROM dir_data A, dir_structure B, dir_structure D
                  WHERE (A.id=".$this->id.") and B.data_id=A.id and D.lft<B.lft and D.rght>B.rght and D.level=B.level-1");
-    	list($parent, $tag) = mysql_fetch_array($r);
     	
-    	$r = fssql_query("SELECT A.tag, A.id FROM dir_data A, dir_structure B, dir_structure C
+    	$r = self::getDbConnection()->query("SELECT A.tag, A.id FROM dir_data A, dir_structure B, dir_structure C
     	        WHERE A.id=B.data_id and C.data_id=$parent and B.lft BETWEEN C.lft and C.rght and B.level=C.level+1 and A.tag $sign $tag and A.id <> '.$this->id.' ORDER BY A.tag $order LIMIT 1");
-    	if ($f = mysql_fetch_row($r)) {
-    		fssql_query("update dir_data set tag=$f[0] where id=".$this->id);
-    		fssql_query("update dir_data set tag=$tag where id=$f[1]");
+    	if ($f = $r->fetch()) {
+    		self::getDbConnection()->executeQuery("update dir_data set tag=$f[0] where id=".$this->id);
+    		self::getDbConnection()->executeQuery("update dir_data set tag=$tag where id=$f[1]");
     	}
     	
         $tpl = new Cache\Tag\CatalogID(0);
@@ -1215,11 +1193,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
                 throw new Exception\CMS(Exception\CMS::CAT_PHYSICAL_EXISTS, $this->fields['alias']);
         }
         
-        
+        $conn = self::getDbConnection();
+		
         $set = '';
-        if (isset($this->fields['name'])) $set .= ', name="'.mysql_escape_string($this->fields['name']).'"';
-        if (isset($this->fields['alias'])) $set .= ', tablename="'.mysql_escape_string($this->fields['alias']).'"';
-        if (isset($this->fields['template'])) $set .= ', template="'.mysql_escape_string($this->fields['template']).'"';
+        if (isset($this->fields['name'])) $set .= ', name='.$conn->quote($this->fields['name']);
+        if (isset($this->fields['alias'])) $set .= ', tablename='.$conn->quote($this->fields['alias']);
+        if (isset($this->fields['template'])) $set .= ', template='.$conn->quote($this->fields['template']);
         if (isset($this->fields['typ'])) $set .= ', typ='.(int)$this->fields['typ']; 
         if (isset($this->fields['hidden'])) $set .= ', hidden='.(int)$this->fields['hidden'];  
 
@@ -1251,43 +1230,20 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
             }	 
             
             if (isset($this->fields['typ']) && $this->materialsType != $this->fields['typ']) {
-        		$r = fssql_query("SELECT alias from types where id=".$this->fields['typ']);
-        		if (mysql_num_rows($r)) {
-        		    $newtable = mysql_result($r,0);
-        		    $r = fssql_query("select B.alias,A.name from types_fields A, types B where B.id=A.id and A.type=".FIELD_LINKSET." and A.pseudo_type<>".PSEUDO_FIELD_CATOLOGS." and A.len=".$this->id);
-        		    while ($f = mysql_fetch_row($r))
-        		        fssql_query("alter table ".$f[0]."_".$this->materialsTable."_".$f[1]." rename ".$f[0]."_".$newtable."_".$f[1]);   
+				$newtable = $conn->fetchColumn("SELECT alias from types where id=".$this->fields['typ']);
+        		if ($newtable) {
+        		    $r = $conn->query("select B.alias,A.name from types_fields A, types B where B.id=A.id and A.type=".FIELD_LINKSET." and A.pseudo_type<>".PSEUDO_FIELD_CATOLOGS." and A.len=".$this->id);
+        		    while ($f = $r->fetch())
+        		        $conn->executeQuery("alter table ".$f[0]."_".$this->materialsTable."_".$f[1]." rename ".$f[0]."_".$newtable."_".$f[1]);   
         		}
             }
         }
 
-        fssql_query("UPDATE dir_data SET type=$type $set where id=".$this->id);
+        $conn->executeQuery("UPDATE dir_data SET type=$type $set where id=".$this->id);
 
         $this->updateCache();
 
     }
-    
-    /**
-     * @internal	    
-     */ 	
-    protected function _getMaterials($args)
-    {
-        
-        $fields= isset($args[0])?$args[0]:'*';
-        $where = isset($args[1])?$args[1]:'';
-        $order = isset($args[2])?$args[2]:'dat DESC';
-        $group = isset($args[3])?$args[3]:'';
-        $limit = isset($args[4])?$args[4]:'';
-        $subs  = isset($args[5])?$args[5]:false;
-        $link_fields = isset($args[6])?$args[6]:false;
-    
-       $res = new Iterator\Object();
-       if ($fields != '*') $fields = 'id,idcat,alias,'.$fields;
-       $r = $this->select($fields, $where,$order,$group,$limit,$subs, $link_fields);
-	     while ($f = mysql_fetch_assoc($r))
-            $res->append(Material::fetch($f, $this->materialsType, $this->materialsTable));
-       return $res;
-    }  
     
     /**
      * Возвращает количество опубликованных материалов в разделе
@@ -1298,78 +1254,11 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      * @param bool $subs искать материалы в подразделах   
      * @return int
      */
-    public function getMaterialsCount($where = '', $link_fields = false, $subs = false)
+    public function getMaterialsCount()
     {
         if (!$this->materialsType) return 0;
-        try {
-            $r = $this->select('COUNT(*)', $where,'','','',$subs,$link_fields);
-            return (int)mysql_result($r,0);
-        } catch (\Exception $e) {
-            return 0;
-        }
-    }  
-    
-    /**
-     * Формирует и выполняет запрос к БД на получение материалов раздела     
-     *     
-	 * @deprecated используйте getMaterials()
-     * @param string $fields список простых полей материала
-     * @param string $where параметр WHERE формируемого запроса     
-     * @param string $order параметр ORDER BY формируемого запроса    
-     * @param string $group параметр GROUP BY формируемого запроса    
-     * @param string $limit параметр LIMIT формируемого запроса 
-     * @param bool $subs искать материалы в подразделах       
-     * @return resource результат SQL запроса 
-     */    
-    public function select($fields='*',$where='',$order='',$group='',$limit='',$subs = false, $link_field = false) {
-                          
-        if ($subs) {
-            $wherecat = ' and (idcat IN ('.implode(',',$this->getSubs()).'))';
-        } else {
-            $wherecat = ' and idcat='.$this->prototype->id;
-        }
-        
-        
-        $app = Application::getInstance();
-        if ($app->previewMode())
-            $pub = '1=1';
-            else $pub = PUBLISHED;
-          
-        $sql = 'SELECT '.$fields.' FROM '.$this->materialsTable;
-        
-        if ($link_field) {
-
-            preg_match_all("|`(\w+)`|U", $link_field, $matches);
-            if ($matches[1]) {
-
-                $fields = array_unique($matches[1]);
-                
-                $flds = $this->materialsObjectDefinition->getFields();
-                foreach ($fields as $f) {
-                    if ($flds[$f]['type'] != FIELD_LINKSET && $flds[$f]['type'] != FIELD_MATSET) continue;
-                    $tableto = ObjectDefinition::get_table($flds[$f]['type'], $flds[$f]['len'], $this->materialsType, $flds[$f]['pseudo_type']);     
-                    $sql .= ' LEFT JOIN '.$this->materialsTable.'_'.$tableto.'_'.$f.' '.$f.' USING (id)';
-                    $link_field = str_replace("`$f`", "`$f`.dest", $link_field);            
-                }
-            } else {
-            
-                $link_field = '';
-            
-            }
-
-        }
-        
-        $sql .= ' WHERE '.$pub.$wherecat;
-        if ($where) $sql .= ' and ('.$where.')';
-        if ($link_field) $sql .= ' and ('.$link_field.')';
-        if ($group) $sql .= ' GROUP BY '.$group;
-        if ($order) $sql .= ' ORDER BY '.$order;
-        if ($limit) $sql .= ' LIMIT '.$limit;
-
-        $r = fssql_query($sql);
-        // print $sql;
-        return $r;
-    }    
+		return $this->getMaterials()->getCountAll();
+    }   
 	
 	public function boArray()
 	{
@@ -1392,8 +1281,8 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 		foreach($lang_res_perm as $pid => $value)
 		{
 			$gr = array();
-			$r = fssql_query('SELECT group_id FROM users_groups_allow_cat WHERE permission='.$pid.' and catalog_id='.$cat->id);
-			while ($perm = mysql_fetch_assoc($r)) $gr[] = (int)$perm['group_id'];
+			$r = self::getDbConnection()->query('SELECT group_id FROM users_groups_allow_cat WHERE permission='.$pid.' and catalog_id='.$cat->id);
+			while ($perm = $r->fetch()) $gr[] = (int)$perm['group_id'];
 			$permissions[$pid] = array(
 				'name' => $value,
 				'groups' => $gr

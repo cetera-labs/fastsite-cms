@@ -52,7 +52,7 @@ if ($node == 'root') {
         {                            
             $where = 'id<>'.$exclude_mat;
             if ($_GET['query'])
-                $where .= ' and name LIKE "%'.mysql_real_escape_string($_GET['query']).'%"';
+                $where .= ' and name LIKE '.$application->getConn()->quote('%'.$_GET['query'].'%');
             $m = $c->getMaterials('name', $where, $matsort, '', 500, 0);
             foreach ($m as $material)
             {

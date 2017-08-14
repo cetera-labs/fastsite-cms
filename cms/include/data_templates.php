@@ -15,9 +15,9 @@ include('common_bo.php');
 
 $data = array();
  
-$r = fssql_query('SELECT * FROM widgets WHERE widgetName="Container" ORDER BY widgetAlias');
+$r = $application->getConn()->fetchAll('SELECT * FROM widgets WHERE widgetName="Container" ORDER BY widgetAlias');
 
-while ($f = mysql_fetch_assoc($r)) {
+foreach($r as $f) {
     $data[] = array(
         'name'     => $f['widgetAlias'].'.widget'
     );

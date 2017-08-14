@@ -16,14 +16,8 @@ include('common_bo.php');
 $data = array();
 
 if (isset($_GET['mode']) && $_GET['mode'] == 'pages') {
-	
 	if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
-
-    $r = fssql_query('SELECT page FROM types_fields group by page order by page ');
-    while ($f = mysql_fetch_assoc($r)) {
-        $data[] = $f;
-    }
-    
+	$data = $application->getConn()->fetchAll('SELECT page FROM types_fields group by page order by page');    
 } 
 elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
 	
@@ -32,18 +26,16 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
 	$fields_over = array();	
 	if (isset($_GET['catalog']))
 	{
-		$r = fssql_query('SELECT field_id, force_show, force_hide FROM types_fields_catalogs WHERE catalog_id='.(int)$_GET['catalog'].' and type_id='.(int)$_REQUEST['type_id']);
-		while($f = mysql_fetch_assoc($r)) $fields_over[$f['field_id']] = $f;
+		$r = $application->getConn()->fetchAll('SELECT field_id, force_show, force_hide FROM types_fields_catalogs WHERE catalog_id=? and type_id=?', array((int)$_GET['catalog'],(int)$_REQUEST['type_id']));
+		foreach($r as $f) $fields_over[$f['field_id']] = $f;
 	}	
 
-    $r = fssql_query('
+    $r = $application->getConn()->query('
 		SELECT field_id as id, name, describ, fixed, shw, required, type, default_value, editor_user, editor, pseudo_type, len, page, tag 
 		FROM types_fields
-		WHERE id='.(int)$_REQUEST['type_id'].' 
-		ORDER by tag');
+		WHERE id='.(int)$_REQUEST['type_id'].' ORDER by tag');
    
-   while ($f = mysql_fetch_assoc($r))
-	{
+   while ($f = $r->fetch()) {
 		$f['id'] = (int)$f['id'];
 		
         if (($f['type']==FIELD_LINK || $f['type']==FIELD_LINKSET) && $f['len'] > 0) {
@@ -58,10 +50,8 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
         $f['shw'] = (int)$f['shw'];
         $f['required'] = (int)$f['required'];
         if ($f['type'] == FIELD_ENUM) {
-            $r1 = fssql_query("select alias from types where id=".(int)$_REQUEST['type_id']);
-            $alias = mysql_result($r1,0);
-            $r1 = fssql_query("SHOW COLUMNS FROM $alias LIKE '".$f['name']."'");
-            $g = mysql_fetch_row($r1);
+            $alias = $application->getConn()->fetchColumn('select alias from types where id=?', array((int)$_REQUEST['type_id']));
+            $g = $application->getConn()->fetchRow("SHOW COLUMNS FROM $alias LIKE '".$f['name']."'");
             $f['len'] = substr($g[1],5,strlen($g[1])-6);
         }
 		
@@ -94,8 +84,8 @@ else {
     if ($_REQUEST['linkable']) $query .= ' and id not in ('.User::TYPE.','.Catalog::TYPE.')'; 
 
     $query .= ' ORDER by fixed desc, alias';
-    $r = fssql_query($query);
-    while ($f = mysql_fetch_assoc($r)) {
+    $r = $application->getConn()->query($query);
+    while ($f = $r->fetch()) {
         $f['id'] = (int)$f['id'];
         $f['fixed'] = (int)$f['fixed'];
         if (!$f['describ']) $f['describ'] = $f['alias'];
@@ -104,7 +94,6 @@ else {
     }
     
 }
-
 
 echo json_encode(array(
     'success' => true,

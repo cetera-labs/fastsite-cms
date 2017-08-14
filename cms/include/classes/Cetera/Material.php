@@ -180,109 +180,97 @@ class Material extends DynamicFieldsObject implements SiteItem {
         
         $table = $this->table;
         
-    	$r = fssql_query('SELECT name, type, len, pseudo_type FROM types_fields WHERE id='.$this->type);
+    	$r = $this->getDbConnection()->query('SELECT name, type, len, pseudo_type FROM types_fields WHERE id='.$this->type);
     	$fields = array();
     	$flds = array();
     	$hlinks = array();
     	$fld_types = array();
-    	while($f = mysql_fetch_assoc($r)){
+    	while($f = $r->fetch()) {
     	    $fld_types[$f['name']] = $f['type'];
-    		if (($f['type'] != FIELD_LINKSET)&&($f['type'] != FIELD_MATSET))
-			{
+    		if (($f['type'] != FIELD_LINKSET)&&($f['type'] != FIELD_MATSET)) {
     		    $flds[] = $f['name'];
     			if ($f['type'] == FIELD_HLINK) $hlinks[] = $f['name'];
     		} 
-			else
-			{
+			else {
     			$fields[] = $f;
     		}
     	} // while
     	
-    	$r = fssql_query('SELECT '.implode(',', $flds).' FROM '.$table.' WHERE id='.$this->id);
-    	if (mysql_num_rows($r)) $values = mysql_fetch_assoc($r);
-    	else return FALSE;
+    	$values = $this->getDbConnection()->fetchAssoc('SELECT '.implode(',', $flds).' FROM '.$table.' WHERE id='.$this->id);
+    	if (!$values) return FALSE;
     	
     	$values['idcat'] = $dst;
-    	$r = fssql_query("SELECT MAX(tag) FROM $table WHERE idcat=".$dst);
-    	$tt = mysql_result($r,0) + 1;	
-    	$values['tag'] = $tt;
+    	$values['tag'] = $this->getDbConnection()->fetchColumn("SELECT MAX(tag) FROM $table WHERE idcat=".$dst) + 1;
     	
     	if ($dst >= 0) {
-            $r = fssql_query('SELECT COUNT(*) FROM '.$table.' WHERE idcat='.$dst.' and alias="'.mysql_escape_string($values['alias']).'"');
-            if ($r && mysql_num_rows($r) && mysql_result($r,0)) {
+            $r = $this->getDbConnection()->fetchColumn('SELECT COUNT(*) FROM '.$table.' WHERE idcat=? and alias=?', array($dst, $values['alias']));
+            if ($r) {
                 $values['alias'] .= '_copy';
                 $alias = $values['alias'];
                 $alias_exists = 1;
                 $i = 1;
                 while($alias_exists) {
                     if ($i > 1) $values['alias'] = $alias.'_'.$i;
-                    $r = fssql_query('SELECT COUNT(*) FROM '.$table.' WHERE idcat='.$dst.' and alias="'.mysql_escape_string($values['alias']).'"');
-                    $alias_exists = $r && mysql_num_rows($r) && mysql_result($r,0);
+                    $alias_exists = $this->getDbConnection()->fetchColumn('SELECT COUNT(*) FROM '.$table.' WHERE idcat=? and alias=?', array($dst, $values['alias']));
                     $i++;
                 }
             }
         }
     	
     	foreach ($hlinks as $hlink) {
-    		$r = fssql_query('SELECT * FROM field_link WHERE link_id='.(int)$values[$hlink]);
-    		if (mysql_num_rows($r)) {
-    		    $f = mysql_fetch_assoc($r);
+    		$f = $this->getDbConnection()->fetchAssoc('SELECT * FROM field_link WHERE link_id='.(int)$values[$hlink]);
+    		if ($f) {
     			unset($f['link_id']);
-    			fssql_query('INSERT INTO field_link ('.implode(',', array_keys($f)).') VALUES ("'.implode('","', array_values($f)).'")');
-    			$values[$hlink] = mysql_insert_id();
+    			$this->getDbConnection()->executeQuery('INSERT INTO field_link ('.implode(',', array_keys($f)).') VALUES ("'.implode('","', array_values($f)).'")');
+    			$values[$hlink] = $this->getDbConnection()->lastInsertId();
     		}
     	}
     	
     	foreach($values as $no => $value) {
     	   if ($fld_types[$no] == FIELD_DATETIME && !$value) $values[$no] = "'0000-00-00 00:00:00'";
-             else $values[$no] = "'".mysql_real_escape_string($value)."'";
+             else $values[$no] = $this->getDbConnection()->quote($value);
         }
     	reset($values);
     	
-    	fssql_query('INSERT INTO '.$table.' ('.implode(',', $flds).') VALUES ('.implode(',', $values).')');
-    	$newid = mysql_insert_id();
+    	$this->getDbConnection()->executeQuery('INSERT INTO '.$table.' ('.implode(',', $flds).') VALUES ('.implode(',', $values).')');
+    	$newid = $this->getDbConnection()->lastInsertId();
     	
     	foreach ($fields as $field)
 		{			
-    		if ($field['type'] == FIELD_LINKSET)
-			{
+    		if ($field['type'] == FIELD_LINKSET) {
 				
-				if ($field['len'] == CATALOG_VIRTUAL_USERS)
-				{
+				if ($field['len'] == CATALOG_VIRTUAL_USERS) {
 					$tablel = User::TABLE;
 				}
-				elseif ($field['pseudo_type'] == PSEUDO_FIELD_CATOLOGS)
-				{
+				elseif ($field['pseudo_type'] == PSEUDO_FIELD_CATOLOGS) {
 					$tablel = Catalog::TABLE;        
 			    } 
-				elseif (!$field['len'])
-				{
+				elseif (!$field['len']) {
 					$tablel = $this->table;
 				}
-				else
-				{
+				else {
 				    $c = Catalog::getById($field['len']);
 				    if (!$c) continue;
 				    $tablel = $c->materialsTable;
 			    }								
 				
-    			$r = fssql_query('SELECT dest, tag FROM '.$table.'_'.$tablel.'_'.$field['name'].' WHERE id='.$this->id);
-    			while($f = mysql_fetch_assoc($r)){
-    				fssql_query('INSERT INTO '.$table.'_'.$tablel.'_'.$field['name'].' (id, dest, tag) VALUES ('.$newid.','.$f['dest'].','.$f['tag'].')');
+    			$r = $this->getDbConnection()->query('SELECT dest, tag FROM '.$table.'_'.$tablel.'_'.$field['name'].' WHERE id='.$this->id);
+    			while($f = $r->fetch()){
+    				$this->getDbConnection()->executeQuery('INSERT INTO '.$table.'_'.$tablel.'_'.$field['name'].' (id, dest, tag) VALUES ('.$newid.','.$f['dest'].','.$f['tag'].')');
     			} // while
     		} 
 			else
 			{
-    			$r = fssql_query('SELECT alias FROM types WHERE id='.(int)$field['len']);
-    			if (mysql_num_rows($r)) $tablel = mysql_result($r,0);
-    			else continue;	
-    			$r = fssql_query('SELECT dest, tag FROM '.$table.'_'.$tablel.'_'.$field['name'].' WHERE id='.$this->id);
-    			while($f = mysql_fetch_assoc($r)) {
+    			$tablel = $this->getDbConnection()->fetchColumn('SELECT alias FROM types WHERE id='.(int)$field['len']);
+    			if (!$tablel) continue;	
+    			$r = $this->getDbConnection()->query('SELECT dest, tag FROM '.$table.'_'.$tablel.'_'.$field['name'].' WHERE id='.$this->id);
+    			while($f = $r->fetch()) {
     			    $m = Material::getById($f['dest'], $field['len'], $tablel);
     			    if ($m) {
         				$newdest = $m->copy(-1);
-        				if ($newdest)
-        					fssql_query('INSERT INTO '.$table.'_'.$tablel.'_'.$field['name'].' (id, dest, tag) VALUES ('.$newid.','.$newdest.','.$f['tag'].')');
+        				if ($newdest) {
+        					$this->getDbConnection()->executeQuery('INSERT INTO '.$table.'_'.$tablel.'_'.$field['name'].' (id, dest, tag) VALUES ('.$newid.','.$newdest.','.$f['tag'].')');
+						}
     			    }
     			} // while
     		}

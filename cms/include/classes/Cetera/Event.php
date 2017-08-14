@@ -15,9 +15,27 @@ namespace Cetera;
 class Event {
 	
 	private static $listeners = array();
+	
+	private static $events = array();
+	
+	public static function register($id,$name = null,$parameters = null)
+	{
+		if (isset(self::$events[$id])) throw new \Exception('Событие "'.$id.'" уже зарегистрировано');
+		self::$events[$id] = array(
+			'id'         => $id,
+			'name'       => $name,
+			'parameters' => $parameters,
+		);
+	}
+
+	public static function enum()
+	{
+		$res = array();
+		foreach (self::$events as $id => $value) $res[] = $value;
+		return $res;
+	}	
    
-    protected function __construct() 
-    {}
+    protected function __construct() {}
 
 	public static function attach($event, $hook)
 	{

@@ -280,7 +280,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */ 	
     public static function clearLocks()
     {
-        fssql_query('DELETE FROM `lock` WHERE dat < NOW() - INTERVAL 11 SECOND');
+        self::getDbConnection()->query('DELETE FROM `lock` WHERE dat < NOW() - INTERVAL 11 SECOND');
     }    
     
     /**    
@@ -289,7 +289,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     public function lock($uid)
     {   
         $this->clearLocks();
-        fssql_query('REPLACE INTO `lock` SET material_id='.$this->id.', type_id='.$this->objectDefinition->id.', user_id='.$uid.', dat=NOW()');    
+        $this->getDbConnection()->query('REPLACE INTO `lock` SET material_id='.$this->id.', type_id='.$this->objectDefinition->id.', user_id='.$uid.', dat=NOW()');    
     }
     
     /**    
@@ -297,7 +297,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */ 	
     public function unlock()
     {   
-        fssql_query('DELETE FROM `lock` WHERE material_id='.$this->id.' and type_id='.$this->objectDefinition->id);    
+        $this->getDbConnection()->query('DELETE FROM `lock` WHERE material_id='.$this->id.' and type_id='.$this->objectDefinition->id);    
     }
     
     /**
@@ -400,14 +400,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */   
     private function getPlainField($field)
     {
-        if (isset($this->fields[$field['name']]))
-            return $this->fields[$field['name']];
-                       
-        $r = fssql_query('SELECT `'.$field['name'].'` FROM '.$this->table.' WHERE id='.(int)$this->fields['id']);
-        if (mysql_num_rows($r)) {
-            $this->fields[$field['name']] = mysql_result($r,0);
-            return $this->fields[$field['name']];
-        }
+        if (!isset($this->fields[$field['name']])) {                     
+			$this->fields[$field['name']] = $this->getDbConnection()->fetchColumn('SELECT `'.$field['name'].'` FROM '.$this->table.' WHERE id='.(int)$this->fields['id']);
+		}
+        return $this->fields[$field['name']];
     }
 
     /**
@@ -504,8 +500,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             if (!isset($this->fields[$field['name']]))
                 $this->fields[$field['name']] = $this->get_plain_field($field);
                         
-        	$r = fssql_query('SELECT * FROM field_link WHERE link_id='.(int)$this->fields[$field['name']]);
-        	$a = mysql_fetch_assoc($r);
+        	$a = $this->getDbConnection()->fetchAssoc('SELECT * FROM field_link WHERE link_id='.(int)$this->fields[$field['name']]);
             if ($a['structure_id']) {
                 if ($a['structure_type'] == 'main') {
                     $c = Catalog::getById($a['structure_id']);
@@ -514,9 +509,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             			$a['name'] = $c->name;
         			}
                 } else {
-        			$r = fssql_query('SELECT idcat, alias, name FROM '.$a['structure_type'].' WHERE id='.$a['structure_id']);
-        			if (mysql_num_rows($r)) {
-        			    $b = mysql_fetch_assoc($r);
+        			$b = $this->getDbConnection()->fetchAssoc('SELECT idcat, alias, name FROM '.$a['structure_type'].' WHERE id='.$a['structure_id']);
+        			if ($b) {
         			    $c = Catalog::getById($b['idcat']);
         			    if ($c) $path = $c->url;
         				$a['link_value'] = $path.$b['alias'].'.html';
@@ -605,9 +599,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         if ($order) $sql .= ' ORDER BY '.$order;
         if ($limit) $sql .= ' LIMIT '.$limit;
   
-        $r   = fssql_query($sql);
   	    $res = new Iterator\Object();
-  	    while ($f = mysql_fetch_assoc($r)) {
+		$r = $this->getDbConnection()->query($sql);
+  	    while ($f = $r->fetch()) {
             $res->append(DynamicFieldsObject::fetch($f, $dtype, $tableto));
         }
         return $res;
@@ -642,11 +636,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
         if ($fields != '*') $fields = 'A.id,'.$fields;
         
-        $r = fssql_query("select A.len, A.type from types_fields A, types B where B.id=A.id and B.id=$type and A.name='$field'");
-        if (!mysql_num_rows($r))
+        $f = $this->getDbConnection()->fetchArray("select A.len, A.type from types_fields A, types B where B.id=A.id and B.id=$type and A.name='$field'");
+        if (!$f)
             throw new Exception\CMS('Field '.$field.' is not found for type '.$type);
 
-        $f = mysql_fetch_row($r);
         if ($f[1] == FIELD_LINKSET) {
             if ($f[0]) {
             	$c = Catalog::getById($f[0]);
@@ -665,9 +658,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         if ($order) $sql .= ' order by '.$order;
         if ($limit) $sql .= ' limit '.$limit;
 
-        $r = fssql_query($sql);
-	    $res = new Iterator\Object();
-	    while ($f = mysql_fetch_assoc($r)) $res->append(self::fetch($f, $type, $tablefrom));
+   	    $res = new Iterator\Object();
+		$r = $this->getDbConnection()->query($sql);
+	    while ($f = $r->fetch()) {
+			$res->append(self::fetch($f, $type, $tablefrom));
+		}
         return $res;
         
     }
@@ -680,33 +675,33 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     public function delete()
     {
         // удаление ссылок с удаляемого материала
-        $r = fssql_query("select B.name, B.len, B.type, B.pseudo_type from types A, types_fields B where A.alias='".$this->table."' and B.id=A.id and (B.type=".FIELD_LINKSET." or B.type=".FIELD_MATSET.")");
-        while ($f = mysql_fetch_row($r)) {
+        $r = $this->getDbConnection()->query("select B.name, B.len, B.type, B.pseudo_type from types A, types_fields B where A.alias='".$this->table."' and B.id=A.id and (B.type=".FIELD_LINKSET." or B.type=".FIELD_MATSET.")");
+        while ($f = $r->fetch()) {
             $tbl = ObjectDefinition::get_table($f[2], $f[1], $this->objectDefinition->id, $f[3]);
             if ($f[2] != FIELD_LINKSET && $f[3] != PSEUDO_FIELD_TAGS) {
-            	$r1 = fssql_query("select dest from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
-            	while ($f1 = mysql_fetch_row($r1)) {
+            	$r1 = $this->getDbConnection()->query("select dest from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
+            	while ($f1 = $r1->fetch()) {
             	   $m = Material::getById($f1[0], $f[1], $tbl);
             	   $m->delete();
             	}
             }
-            fssql_query("delete from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
+            $this->getDbConnection()->executeQuery("delete from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
         }
         
         // удаление ссылок на этот материал
         if (property_exists($this, 'idcat') && $this->idcat >= 0) {
-        	$r = fssql_query("select A.alias, B.name, B.type from types A, types_fields B where B.id=A.id and B.len=".$this->idcat." and (B.type=".FIELD_LINK." or B.type=".FIELD_LINKSET.")");
-        	while ($f = mysql_fetch_row($r)) {
+        	$r = $this->getDbConnection()->query("select A.alias, B.name, B.type from types A, types_fields B where B.id=A.id and B.len=".$this->idcat." and (B.type=".FIELD_LINK." or B.type=".FIELD_LINKSET.")");
+        	while ($f = $r->fetch()) {
               if ($f[2] == FIELD_LINK) {
-        	    fssql_query("update $f[0] set $f[1]=0 where $f[1]=".$this->id);
+        	    $this->getDbConnection()->executeQuery("update $f[0] set $f[1]=0 where $f[1]=".$this->id);
         	  } else {
-        	    fssql_query("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
+        	    $this->getDbConnection()->executeQuery("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
         	  }
         	}
         } else {
-        	$r = fssql_query("select A.alias, B.name from types A, types_fields B where B.id=A.id and B.len = ".$this->objectDefinition->id." and B.type=".FIELD_MATSET);
-            while ($f = mysql_fetch_row($r)) {
-        	  fssql_query("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
+        	$r = $this->getDbConnection()->query("select A.alias, B.name from types A, types_fields B where B.id=A.id and B.len = ".$this->objectDefinition->id." and B.type=".FIELD_MATSET);
+            while ($f = $r->fetch()) {
+        	  $this->getDbConnection()->executeQuery("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
         	}
         }
         
@@ -722,7 +717,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         */
         
         // удаление самого материала
-        fssql_query("delete from ".$this->table." where id=".$this->id);
+        $this->getDbConnection()->executeQuery("delete from ".$this->table." where id=".$this->id);
         
     } 
     
@@ -772,12 +767,12 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 			{
                 if ($field['pseudo_type'] == PSEUDO_FIELD_TAGS)
 				{
-                      process_tags($this->fields[$name], $this->table, $tbl, $name, $this->id, $type);
+                      $this->process_tags($this->fields[$name], $this->table, $tbl, $name, $this->id, $type);
             	} 
 				elseif (($type == FIELD_LINKSET)||($type==FIELD_MATSET))
 				{
-            	  	 insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
-					 if ($type==FIELD_MATSET) confirm_added($tbl, Application::getInstance()->getUser()->id);
+            	  	 $this->insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
+					 if ($type==FIELD_MATSET) $this->confirm_added($tbl, Application::getInstance()->getUser()->id);
                 }
             }
         } 
@@ -828,7 +823,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
                 if ($type == FIELD_MATSET || $type==FIELD_MATERIAL)
 				{
-					confirm_added($tbl, Application::getInstance()->getUser()->id);
+					$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
 				}
         
 				if ( $type==FIELD_MATERIAL ) {
@@ -840,7 +835,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					}
 					
 					if (!(int)$this->fields[$name]) {					
-						$data = $this->getDbConnection()->fetchAssoc('SELECT `'.$name.'` as fld FROM '.$this->table.' WHERE idcat < 0 and id='.$this->id);
+						$data = $this->getDbConnection()->fetchAll('SELECT `'.$name.'` as fld FROM '.$this->table.' WHERE idcat < 0 and id='.$this->id);
 						foreach ($data as $f1) { 
 							 if ($f1['fld']) {
 								 $m = Material::getById($f1['fld'], 0, $tbl);
@@ -853,8 +848,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
                 if ($type == FIELD_LONGTEXT) 
 				{
             
-        			  $this->fields[$name] = process_longtext($this->fields[$name]);
-        			  $values .= ',`'.$name.'`="'.mysql_escape_string($this->fields[$name]).'"';
+        			  $this->fields[$name] = $this->process_longtext($this->fields[$name]);
+        			  $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]);
         	       		  
                 } 
 				elseif ($type==FIELD_INTEGER || $type==FIELD_LINK || $type==FIELD_FORM || $type==FIELD_MATERIAL)
@@ -870,7 +865,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	          			
         	    }
 				elseif ($type == FIELD_HLINK) {
-        	        $values .= ",`".$name."`='".(int)process_hlink($this->fields[$name])."'";         
+        	        $values .= ",`".$name."`='".(int)$this->process_hlink($this->fields[$name])."'";         
         	    } 
 				elseif ($type == FIELD_DATETIME) {
         	        if (!$this->fields[$name])
@@ -879,130 +874,128 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         		
         	    } 
 				else { 
-        	        $values .= ',`'.$name.'`="'.mysql_escape_string($this->fields[$name]).'"'; 
+        	        $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]); 
         	    }
            }
         }
         return $values;
     }
-
-}
-
-/**
- * @internal
-*/
-function process_hlink($value) {
-	$hl = explode('||', $value);
-	if ($hl[0]) {
-		$sql = 'UPDATE field_link SET link_type='.(int)$hl[1].', link_value="'.$hl[2].'", structure_type="'.$hl[3].'", structure_id='.(int)$hl[4].' WHERE link_id='.(int)$hl[0];
-		fssql_query($sql);	    
-	} else {
-		$sql = 'INSERT INTO field_link (link_type,link_value,structure_type,structure_id) VALUES ('.(int)$hl[1].',"'.$hl[2].'","'.$hl[3].'",'.(int)$hl[4].')';
-		fssql_query($sql);
-		$hl[0] = mysql_insert_id();
-	}
-	return $hl[0];
-}
-
-/**
- * @internal
- * @ignore
-*/
-function confirm_added($tbl, $user_id) {
-	$not_added = ~ MATH_ADDED;
-	$r1 = fssql_query("select id from $tbl where autor=".(int)$user_id." and type & ".MATH_DELETED." > 0");
-	while ($f1 = mysql_fetch_row($r1))
-	{ 
-	     $m = Material::getById($f1[0], 0, $tbl);
-         $m->delete();
-    }
-    fssql_query("update $tbl set type = type&$not_added|".MATH_PUBLISHED." where autor=".(int)$user_id." and type & ".MATH_ADDED." > 0");
-}
-
-/**
- * @internal
-*/
-function insert_links($values, $math, $tbl, $name, $id2, $type, $type2) {
-		
-	if ($type == FIELD_MATSET) {
-		$r = fssql_query("SELECT dest FROM ".$math."_".$tbl."_".$name." WHERE id=$id2");
-		$old = array();
-		while ($f = mysql_fetch_assoc($r)) {
-			$old[ $f['dest'] ] = $f['dest'];
+	
+	/**
+	 * @internal
+	 * @ignore
+	*/
+	private function confirm_added($tbl, $user_id) {		
+		$not_added = ~ MATH_ADDED;
+		$r1 = $this->getDbConnection()->query("select id from $tbl where autor=".(int)$user_id." and type & ".MATH_DELETED." > 0");
+		while ($f1 = $r1->fetch())
+		{ 
+			 $m = Material::getById($f1[0], 0, $tbl);
+			 $m->delete();
 		}
+		$this->getDbConnection()->executeQuery("update $tbl set type = type&$not_added|".MATH_PUBLISHED." where autor=".(int)$user_id." and type & ".MATH_ADDED." > 0");
 	}
-	
-	fssql_query("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
-	$link_list = json_decode($values);
-	if (is_array($link_list)) {
-        while (list ($no, $link) = each ($link_list)) {
-      
-          if (is_object($link)) {
-              if ($type == FIELD_LINKSET) {
-                  $link = $link->id;             
-              }
-              else {
-				  $link = (array)$link;
-                  $link['catalog_id'] = -1;
-                  $link['alias'] = 'hidden';
-                  if ($link['id']) {
-                      $m = DynamicFieldsObject::getByIdType($link['id'], $type2);
-                      $m->fields = $link;
-                  } else {
-                      $m = DynamicFieldsObject::fetch($link, $type2, $tbl);
-                  }
-                  $m->save();
-                  $link = $m->id;
-              }
-          }
-          
-          if ((int)$link) { 
-			  if (isset($old[ $link ])) unset($old[ $link ]);
-      		  fssql_query("insert into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");
-      		  if ($type == FIELD_MATSET) fssql_query("update $tbl set tag=$no where id=$link"); 
-      	  }
-          
-        }
-	}
-	
-	if ($type == FIELD_MATSET) {
-		foreach ($old as $o) try {			
-			$m = DynamicFieldsObject::getByIdType($o, $type2);
-			$m->delete();
-		} catch (\Exception $e) {}
-	}
-}
 
-/**
- * @internal
-*/
-function process_longtext($value) {
-	$value = str_replace('quote;','"',$value);
-	$value = str_replace('src="http://'.getenv('HTTP_HOST'),'src="',$value);
-	$value = str_replace('lowsrc=http://'.getenv('HTTP_HOST'),'lowsrc=',$value);
-	$value = str_replace('lowsrc=""','',$value);
-	return $value;
-}
+	/**
+	 * @internal
+	*/
+	private function process_hlink($value) {
+		$hl = explode('||', $value);
+		if ($hl[0]) {
+			$sql = 'UPDATE field_link SET link_type='.(int)$hl[1].', link_value="'.$hl[2].'", structure_type="'.$hl[3].'", structure_id='.(int)$hl[4].' WHERE link_id='.(int)$hl[0];
+			$this->getDbConnection()->executeQuery($sql);	    
+		} else {
+			$sql = 'INSERT INTO field_link (link_type,link_value,structure_type,structure_id) VALUES ('.(int)$hl[1].',"'.$hl[2].'","'.$hl[3].'",'.(int)$hl[4].')';
+			$this->getDbConnection()->executeQuery($sql);
+			$hl[0] = $this->getDbConnection()->lastInsertId();
+		}
+		return $hl[0];
+	}	
+	
+	/**
+	 * @internal
+	*/
+	private function insert_links($values, $math, $tbl, $name, $id2, $type, $type2) {
+			
+		if ($type == FIELD_MATSET) {
+			$r = $this->getDbConnection()->query("SELECT dest FROM ".$math."_".$tbl."_".$name." WHERE id=$id2");
+			$old = array();
+			while ($f = $r->fetch()) {
+				$old[ $f['dest'] ] = $f['dest'];
+			}
+		}
+		
+		$this->getDbConnection()->executeQuery("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
+		$link_list = json_decode($values);
+		if (is_array($link_list)) {
+			while (list ($no, $link) = each ($link_list)) {
+		  
+			  if (is_object($link)) {
+				  if ($type == FIELD_LINKSET) {
+					  $link = $link->id;             
+				  }
+				  else {
+					  $link = (array)$link;
+					  $link['catalog_id'] = -1;
+					  $link['alias'] = 'hidden';
+					  if ($link['id']) {
+						  $m = DynamicFieldsObject::getByIdType($link['id'], $type2);
+						  $m->fields = $link;
+					  } else {
+						  $m = DynamicFieldsObject::fetch($link, $type2, $tbl);
+					  }
+					  $m->save();
+					  $link = $m->id;
+				  }
+			  }
+			  
+			  if ((int)$link) { 
+				  if (isset($old[ $link ])) unset($old[ $link ]);
+				  $this->getDbConnection()->executeQuery("insert into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");
+				  if ($type == FIELD_MATSET) $this->getDbConnection()->executeQuery("update $tbl set tag=$no where id=$link"); 
+			  }
+			  
+			}
+		}
+		
+		if ($type == FIELD_MATSET) {
+			foreach ($old as $o) try {			
+				$m = DynamicFieldsObject::getByIdType($o, $type2);
+				$m->delete();
+			} catch (\Exception $e) {}
+		}
+	}	
+	
+	/**
+	 * @internal
+	*/
+	private function process_longtext($value) {
+		$value = str_replace('quote;','"',$value);
+		$value = str_replace('src="http://'.getenv('HTTP_HOST'),'src="',$value);
+		$value = str_replace('lowsrc=http://'.getenv('HTTP_HOST'),'lowsrc=',$value);
+		$value = str_replace('lowsrc=""','',$value);
+		return $value;
+	}
 
-/**
- * @internal
-*/
-function process_tags($value, $math, $tbl, $name, $id2, $type) {
-    $ltable = $math."_".$tbl."_".$name;
-    fssql_query("delete from ".$ltable." where id=".(int)$id2); 
-    $tags = explode(",",$value);
-    $i = 1;
-    foreach ($tags as $tag) {
-        $tag = trim($tag);
-        if ($tag) {
-            $r = fssql_query('SELECT id FROM '.$tbl.' WHERE name="'.mysql_escape_string($tag).'"');
-            if (mysql_num_rows($r)) {
-                $id = mysql_result($r,0);
-            } else {
-                fssql_query('INSERT INTO '.$tbl.' SET name="'.mysql_escape_string($tag).'", alias="tag", type=3, autor=1, tag=0, dat=NOW(), dat_update=NOW(), idcat='.CATALOG_VIRTUAL_HIDDEN);
-                $id = mysql_insert_id();
-            }
-            fssql_query('INSERT INTO '.$ltable.' (id,dest,tag) values ('.(int)$id2.','.(int)$id.','.$i++.')');
-        }
-    }
+	/**
+	 * @internal
+	*/
+	private function process_tags($value, $math, $tbl, $name, $id2, $type) {
+		$ltable = $math."_".$tbl."_".$name;
+		$this->getDbConnection()->executeQuery("delete from ".$ltable." where id=".(int)$id2); 
+		$tags = explode(",",$value);
+		$i = 1;
+		foreach ($tags as $tag) {
+			$tag = trim($tag);
+			if ($tag) {
+				$id = $this->getDbConnection()->fetchColumn('SELECT id FROM '.$tbl.' WHERE name=?', array($tag));
+				if (!$id) {
+					$this->getDbConnection()->executeQuery('INSERT INTO '.$tbl.' SET name='.$this->getDbConnection()->quote($tag).', alias="tag", type=3, autor=1, tag=0, dat=NOW(), dat_update=NOW(), idcat='.CATALOG_VIRTUAL_HIDDEN);
+					$id = $this->getDbConnection()->lastInsertId();
+				}
+				$this->getDbConnection()->executeQuery('INSERT INTO '.$ltable.' (id,dest,tag) values ('.(int)$id2.','.(int)$id.','.$i++.')');
+			}
+		}
+	}	
+
 }

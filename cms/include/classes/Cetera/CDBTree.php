@@ -17,6 +17,9 @@ namespace Cetera;
  * @internal
  **/
 class CDBTree {
+	
+	use DbConnection;
+	
     /** Table with Nested Sets implemented */
 	private $table;
 	/** Name of the ID-auto_increment-field in the table */
@@ -68,8 +71,8 @@ class CDBTree {
      */
 	function getNodeInfo($ID) {
 		$this->sql = 'SELECT '.$this->left.','.$this->right.','.$this->level.' FROM '.$this->table.' WHERE '.$this->id.'=\''.$ID.'\'';
-        $r = fssql_query($this->sql);
-		if ($Data = mysql_fetch_array($r))
+        $Data = $this->getDbConnection()->fetchArray($this->sql);
+		if ($Data)
 			return array((int)$Data[$this->left], (int)$Data[$this->right], (int)$Data[$this->level]);
 		else
         	return FALSE;
@@ -100,16 +103,14 @@ class CDBTree {
 				. $this->left.'=IF('.$this->left.'>'.$rightId.','.$this->left.'+2,'.$this->left.'),'
 				. $this->right.'=IF('.$this->right.'>='.$rightId.','.$this->right.'+2,'.$this->right.')'
 				. 'WHERE '.$this->right.'>='.$rightId;
-			if(!(fssql_query($this->sql)))
-            	return FALSE;
+			$this->getDbConnection()->executeQuery($this->sql);
 		}
 
 		// inserting new record
 		$this->sql = 'INSERT INTO '.$this->table.'('.$fld_names.') VALUES('.$fld_values.')';
-        if(!(fssql_query($this->sql)))
-            return FALSE;
+        $this->getDbConnection()->executeQuery($this->sql);
 
-		return mysql_insert_id();
+		return $this->getDbConnection()->lastInsertId();
 	}
 
     /**  
@@ -162,7 +163,8 @@ class CDBTree {
          ;
       }
 
-		return fssql_query($this->sql) or FALSE;
+		$this->getDbConnection()->executeQuery($this->sql);
+		return true;
 	}
 
     /**  
@@ -176,7 +178,7 @@ class CDBTree {
 
 		// Deleting record
 		$this->sql = 'DELETE FROM '.$this->table.' WHERE '.$this->id.'=\''.$ID.'\'';
-		if(!fssql_query($this->sql)) return FALSE;
+		$this->getDbConnection()->executeQuery($this->sql);
 
 		// Clearing blank spaces in a tree
 		$this->sql = 'UPDATE '.$this->table.' SET '
@@ -187,7 +189,7 @@ class CDBTree {
 			. $this->right.'=IF('.$this->right.'>'.$rightId.','.$this->right.'-2,'.$this->right.') '
 			. 'WHERE '.$this->right.'>'.$leftId
 		;
-		if(!fssql_query($this->sql)) return FALSE;
+		$this->getDbConnection()->executeQuery($this->sql);
 
 		return true;
 	}
@@ -203,7 +205,7 @@ class CDBTree {
 
 		// Deleteing record(s)
 		$this->sql = 'DELETE FROM '.$this->table.' WHERE '.$this->left.' BETWEEN '.$leftId.' AND '.$rightId;
-		if(!fssql_query($this->sql)) return FALSE;
+		$this->getDbConnection()->executeQuery($this->sql);
 
 		// Clearing blank spaces in a tree
 		$deltaId = ($rightId - $leftId)+1;
@@ -212,10 +214,9 @@ class CDBTree {
 			. $this->right.'=IF('.$this->right.'>'.$leftId.','.$this->right.'-'.$deltaId.','.$this->right.') '
 			. 'WHERE '.$this->right.'>'.$rightId
 		;
-		if(!fssql_query($this->sql)) return FALSE;
+		$this->getDbConnection()->executeQuery($this->sql);
 
 		return TRUE;
 	}
 
 }
-?>

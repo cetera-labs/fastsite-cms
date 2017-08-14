@@ -84,10 +84,8 @@ if ($action == 'permissions') {
     if ($right[3]) $right[3] = trim($right[3],'/').'/';
     $right[3] = $catalog->url.$right[3];
 
-    if ($r) {
-        $res['success'] = true;
-        $res['right']   = $right;
-    }
+	$res['success'] = true;
+	$res['right']   = $right;
 }
 
 if ($action == 'mark_del' && is_array($sel)) {

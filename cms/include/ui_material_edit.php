@@ -65,21 +65,20 @@ try {
         else $page_height = -1;
       
     
-    if ($id) 
-	{
+    if ($id) {
       
       // новый материал по шаблону
       if ($duplicate) {
       
-          $r = fssql_query("SELECT * from $math WHERE id=$id");
-          $fields = mysql_fetch_assoc($r);      
+          $fields = $application->getConn()->fetchAssoc("SELECT * from $math WHERE id=?", array($id));
           $id = null;
       	  $fields['alias'] = '';
           $fields['idcat'] = $idcat;
           
           $material = DynamicFieldsObject::fetch($fields, $type);
           
-      } else {
+      } 
+	  else {
       
           $material = DynamicFieldsObject::getByIdType($id, $type);
           if ($idcat != CATALOG_VIRTUAL_USERS) $idcat  = $material->idcat;
@@ -107,8 +106,7 @@ try {
     }
     
     if ($idcat > 0) {
-    	  $r	  = fssql_query("select type from dir_data where id=$idcat");
-    	  $cat_type = mysql_result($r,0);
+    	$cat_type = $application->getConn()->fetchColumn("select type from dir_data where id=?", array($idcat));
     } else {
         $cat_type = 0;
     }

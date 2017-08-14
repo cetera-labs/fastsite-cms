@@ -89,24 +89,6 @@ function check_upload_file($name) {
 } 
 
 /*
-* Делает mysql_query() c контролем ошибок
-* 
-* @param string $query SQL query
-* @return resource mysql result ID
-*/
-function fssql_query($query) {	
-	if (isset($GLOBALS['_queries'])) 
-		$GLOBALS['_queries']++;
-		else $GLOBALS['_queries'] = 1;
-		
-	//$bt = debug_backtrace();
-	//Application::getInstance()->debug(DEBUG_SQL, $query.' (Line: '.$bt[0]['line'].' File: '.$bt[0]['file'].')');
-	$r = mysql_query($query);   
-	if (mysql_error()) throw new \Cetera\Exception\SQL($query);
-	return $r;
-}   
-
-/*
 * cached_fopen_url 
 * 
 * Xbnftn данные из HTTP url

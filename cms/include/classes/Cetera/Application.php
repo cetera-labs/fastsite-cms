@@ -525,16 +525,6 @@ class Application {
     {     
         if ($this->_connected) return;
         
-		if (function_exists('mysql_connect')) {
-			try {
-				mysql_connect($this->getVar('dbhost'),$this->getVar('dbuser'),$this->getVar('dbpass'));
-				mysql_select_db($this->getVar('dbname'));
-			} catch (\Exception $e) {
-				throw new \Exception($e->getMessage());
-			}
-			mysql_query('SET NAMES utf8');
-		}
-
         $connectionParams = array(
             'dbname'   => $this->getVar('dbname'),
             'user'     => $this->getVar('dbuser'),
@@ -1083,7 +1073,16 @@ class Application {
     public function eventLog($event_code, $text = FALSE)
     {
         if (!$this->_connected) return;
-        mysql_query('INSERT INTO event_log SET user_id='.(int)$this->getUser()->id.', code='.(int)$event_code.', text="'.mysql_escape_string($text).'", dat=NOW()');
+		$this->getConn()->insert(
+			'event_log',
+			array(
+				'dat'     => new \DateTime(),
+				'user_id' => (int)$this->getUser()->id,
+				'code'    => (int)$event_code,
+				'text'    => $text,
+			),
+			array('datetime')
+		);
     }
     	
     /**

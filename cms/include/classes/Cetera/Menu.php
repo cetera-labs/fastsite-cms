@@ -7,6 +7,8 @@ namespace Cetera;
  * @package CeteraCMS
  */ 
 class Menu extends Base {
+	
+	use DbConnection;
 
     protected $_name;
     protected $_alias;
@@ -27,21 +29,12 @@ class Menu extends Base {
     public static function enum()
     {
         $res = array();
-        $r = fssql_query('SELECT * FROM menus ORDER BY name');
-        while ($f = mysql_fetch_assoc($r)) {
+        $r = self::getDbConnection()->query('SELECT * FROM menus ORDER BY name');
+        while ($f = $r->fetch()) {
              $res[] = new self($f);
         }
         return $res;
     }
-    
-  	public static function getByResult($r) 
-    {
-    		if (!$r || !mysql_num_rows($r)) throw new Exception\CMS('Меню не найдено');
-    		$f = mysql_fetch_assoc($r);
-    		if (!$f) throw new Exception\CMS('Меню не найдено');
-           
-    		return new self($f);
-  	}
   	
   	/**
   	 * Возвращает меню по его идентификатору.	
@@ -52,8 +45,9 @@ class Menu extends Base {
   	 */     	
   	public static function getById($id) 
     {
-        $r = fssql_query('SELECT * FROM menus WHERE id='.$id);
-  			return self::getByResult($r);
+		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE id=?',array($id));
+		if (!$f) new Exception\CMS('Меню ID='.$id.' не найдено');
+		return new self($f);
   	}
     
   	/**
@@ -65,12 +59,9 @@ class Menu extends Base {
   	 */     	
   	public static function getByAlias($alias) 
     {
-        try {
-            $r = fssql_query('SELECT * FROM menus WHERE alias="'.mysql_real_escape_string($alias).'"');
-      			return self::getByResult($r);
-        } catch (Exception $e) {
-            throw new Exception\CMS('Меню '.$alias.' не найдено');
-        }
+		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE alias=?',array($alias));
+		if (!$f) new Exception\CMS('Меню alias='.$id.' не найдено');
+		return new self($f);
   	}
     
   	/**
@@ -82,8 +73,9 @@ class Menu extends Base {
   	 */     	
   	public static function getByName($name) 
     {
-        $r = fssql_query('SELECT * FROM menus WHERE name="'.mysql_real_escape_string($name).'"');
-  			return self::getByResult($r);
+		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE name=?',array($name));
+		if (!$f) new Exception\CMS('Меню name='.$id.' не найдено');
+		return new self($f);
   	}
     
   	/**
@@ -102,8 +94,11 @@ class Menu extends Base {
         
         if ($m) throw new Exception\CMS('Меню c таким алиасом уже существует.');
         
-        fssql_query('INSERT INTO menus SET alias="'.mysql_real_escape_string($alias).'", name="'.mysql_real_escape_string($name).'"');
-  			return self::getById(mysql_insert_id());
+        self::getDbConnection()->insert('menus', array(
+			'alias' => $alias,
+			'name'  => $name
+		));
+  		return self::getById( self::getDbConnection()->lastInsertId() );
   	}
    
   	/**
@@ -112,7 +107,7 @@ class Menu extends Base {
   	 */   
     public function delete()
     {
-        fssql_query('DELETE FROM menus WHERE id='.$this->id);
+        self::getDbConnection()->executeQuery('DELETE FROM menus WHERE id='.$this->id);
     }
         
   	/**
@@ -128,7 +123,14 @@ class Menu extends Base {
         
         if ($m && $m->id != $this->id) throw new Exception\CMS('Меню c таким алиасом уже существует.');
         
-        fssql_query('UPDATE menus SET alias="'.mysql_real_escape_string($this->alias).'", name="'.mysql_real_escape_string($this->name).'", data="'.mysql_real_escape_string(serialize($this->data)).'" WHERE id='.$this->id);
+		self::getDbConnection()->update('menus',
+			array(
+				'alias' => $this->alias,
+				'name'  => $this->name,
+				'data'  => serialize($this->data),
+			),
+			array('id' => $this->id)
+		);
   	}  
     
     public function getChildren()
