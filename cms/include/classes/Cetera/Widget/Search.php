@@ -81,7 +81,13 @@ class Search extends Templateable {
 						
 			if ($where2)
 			{
-				$this->results = new \Cetera\Iterator\DynamicObjectMultiple( $this->getObjectDefinitions(), $this->getSearchFields() );
+				$fields = $this->getSearchFields();
+				$fields[] = $this->buildRelevance().' AS relevance';
+				
+				$this->results = new \Cetera\Iterator\DynamicObjectMultiple( $this->getObjectDefinitions(), $fields );
+				
+				//print $this->results->getQuery();
+				
 				$this->results
 					->orderBy( $this->getSortField(), $this->getSortDirection() )
 					->where( $where )
@@ -185,7 +191,40 @@ class Search extends Templateable {
 		foreach (explode(',', $f) as $field) {
 			$fields[] = trim($field);
 		}
+		
 		return $fields;
+	}		
+	
+	protected function buildRelevance()
+	{
+		$fields = $this->getSearchFields();
+		$words = $this->splitQueryToWords();
+
+		$res = '';
+		$i = 0;
+		foreach ($fields as $f) {
+			$f = '`'.$f.'`';
+			if ($res) $res .= ' + ';
+			$res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(1000-$i*10).',0)';
+			
+			foreach ($words as $key => $word) {
+				
+				if (is_array($word)) {
+					foreach ($word as $w) {						
+						if (strlen($w) < $this->getParam('min_length')) continue;
+						$res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.(100-$i).',0)';
+					}
+				} else {
+					if (strlen($key) < $this->getParam('min_length')) continue;
+					$res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(300-$i).',0)';
+				}				
+				
+			}
+			
+			$i++;
+		}
+		
+		return $res;
 	}		
 	
 	protected function buildWhere()

@@ -139,6 +139,9 @@ class DynamicObjectMultiple extends DbObject {
 					$f[] = 'main.'.$field;
 					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);
 				}
+				elseif (substr_count(strtoupper($field),' AS ')) {
+					$f[] = $field;
+				}
 				else {
 					try {
 						$parts = explode('.', $field);
