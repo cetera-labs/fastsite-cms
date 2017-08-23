@@ -38,7 +38,7 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
 	/** 
 	 * @internal
 	 */
-    public static function fetch($data)
+    public static function fetch($data, $a = 0, $b = null)
     {
         return parent::fetch($data, static::TYPE, static::TABLE);
     }
@@ -64,7 +64,7 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
   	}  
     
 	/** @internal */
-    public static function factory()
+    public static function factory($type=0, $table = null, $fields = null)
     {       
         return self::create();
     }      

@@ -261,7 +261,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 	/** 
 	 * @internal
 	 */
-    public static function fetch($data, $i_am_server = false)
+    public static function fetch($data, $i_am_server = false, $b = null)
     {
         if ($i_am_server) return parent::fetch($data);
         

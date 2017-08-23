@@ -194,8 +194,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      * @param ObjectDefinition $od "Тип материалов" объекта      
      * @return void        
      */          
-    protected static function create(ObjectDefinition $od) 
+    protected static function create() 
     {
+		$od = func_get_arg(0);
+		
         $o = parent::create();
 		$o->objectDefinition = $od;
 		return $o;

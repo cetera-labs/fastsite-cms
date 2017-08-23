@@ -68,7 +68,12 @@ abstract class DbObject {
   	} 
 
   	public function save()
-  	{ 		
+  	{ 
+		foreach($this->fields as $k => $v) {
+			if (is_bool($v)) {
+				$this->fields[$k] = (int)$v;
+			}
+		}
         if ($this->id)
     		    self::getDbConnection()->update(static::getTable(), $this->fields, array('id' => $this->id));
             else {

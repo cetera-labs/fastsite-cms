@@ -38,7 +38,7 @@ class Server extends Catalog {
 	protected $_theme;
     
     /** @internal */
-    public static function fetch($data)
+    public static function fetch($data, $a = null, $b = null)
     {
         return parent::fetch($data, true);
     }     
