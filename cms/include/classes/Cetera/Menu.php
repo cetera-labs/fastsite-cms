@@ -86,8 +86,11 @@ class Menu extends Base {
   	 * @return Menu
   	 * @throws Exception\CMS	 
   	 */     	
-  	public static function create($alias, $name) 
+  	public static function create() 
     {
+		$alias = func_get_arg(0);
+		$name = func_get_arg(1);
+		
         try {
             $m = self::getByAlias($alias);
         } catch (\Exception $e) {}

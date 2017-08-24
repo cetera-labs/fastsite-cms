@@ -47,7 +47,9 @@ class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
      */
     public function read($id)
     { 
-		return $this->getDbConnection()->fetchColumn('SELECT value FROM session_data WHERE id=?',[$id],0);
+		$res = $this->getDbConnection()->fetchColumn('SELECT value FROM session_data WHERE id=?',[$id],0);
+		if (!$res) $res = '';
+		return $res;
     }
 
     /**
