@@ -26,6 +26,7 @@ class Search extends Templateable {
 			'sections'             => null,
 			'search_subsections'   => true,
 			'morphology'           => false,
+			'translit'             => false,
 			'fields'               => 'name, text, short',
 			'query_param'          => 'query',
 			'query_placeholder'    => $this->t->_('Введите строку для поиска'),
@@ -174,12 +175,23 @@ class Search extends Templateable {
 		foreach ($www as $w) {
 			if (strlen(trim($w)) >= $this->getParam('min_length')) $words[$w] = $w;
 		}	
+		
 		if ($this->getParam('morphology')) {
 			$morphy = new \phpMorphy(DOCROOT.LIBRARY_PATH.'/phpmorphy/dicts/', 'ru_RU', array('storage' => PHPMORPHY_STORAGE_FILE));
 			$res = $morphy->getAllForms($words, \phpMorphy::IGNORE_PREDICT);
-			if (count($res)) $words = $res;
-		}
-		
+			foreach ($words as $w) {
+				if (isset($res[$w])) {
+					$words[$w] = $res[$w];
+				}
+			}
+		}	
+
+		if ($this->getParam('translit')) {
+			foreach ($words as $w => $v) {
+				if (!is_array($v)) $words[$w] = [$w];
+				$words[$w][] = translit($w);
+			}
+		}	
 		return $words;
 	}
 
@@ -199,31 +211,33 @@ class Search extends Templateable {
 	{
 		$fields = $this->getSearchFields();
 		$words = $this->splitQueryToWords();
-
+		
 		$res = '';
 		$i = 0;
 		foreach ($fields as $f) {
 			$f = '`'.$f.'`';
 			if ($res) $res .= ' + ';
-			$res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(1000-$i*10).',0)';
+			$res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
 			
 			foreach ($words as $key => $word) {
 				
 				if (is_array($word)) {
+					$weight = 500;
 					foreach ($word as $w) {						
 						if (strlen($w) < $this->getParam('min_length')) continue;
-						$res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.(100-$i).',0)';
+						$res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
+						$weight = 100;
 					}
 				} else {
 					if (strlen($key) < $this->getParam('min_length')) continue;
-					$res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(300-$i).',0)';
+					$res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
 				}				
 				
 			}
 			
 			$i++;
 		}
-		
+
 		return $res;
 	}		
 	
