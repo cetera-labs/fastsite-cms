@@ -294,6 +294,8 @@ class Application {
         }
         
         $this->_widgetsTemplatesPath[] = CMSROOT.'widgets/';
+		
+		Mail\Event::attach();
     }
     
     /**

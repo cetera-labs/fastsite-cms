@@ -1,4 +1,4 @@
-Ext.define('Cetera.model.MailEvent', {
+Ext.define('Cetera.model.Event', {
     extend: 'Ext.data.Model',
 
     fields: [
@@ -10,7 +10,7 @@ Ext.define('Cetera.model.MailEvent', {
     proxy: {
 		type: 'ajax',
 		simpleSortMode: true,
-        url : 'include/data_mail_events.php',		
+        url : 'include/data_events.php',		
         reader: {
 			type: 'json',
             root: 'rows'

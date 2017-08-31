@@ -1,7 +1,7 @@
-Ext.require('Cetera.model.MailEvent');
+Ext.require('Cetera.model.Event');
 Ext.create('Ext.data.Store',{
 	storeId: 'mail_events',
-	model: 'Cetera.model.MailEvent'		
+	model: 'Cetera.model.Event'		
 });
 		
 Ext.define('Cetera.grid.MailTemplates', {

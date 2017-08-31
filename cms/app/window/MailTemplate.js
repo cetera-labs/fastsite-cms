@@ -1,4 +1,3 @@
-_('Почтовый шаблон');
 Ext.define('Cetera.window.MailTemplate', {
     extend:'Ext.Window',
 

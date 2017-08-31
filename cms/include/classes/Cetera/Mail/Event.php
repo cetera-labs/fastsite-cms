@@ -9,28 +9,18 @@ namespace Cetera\Mail;
 class Event {
 	
 	use \Cetera\DbConnection;
-
-	private static $events = array();
 	
-	public static function register($id,$name,$parameters = null)
+	public static function attach()
 	{
-		if (isset(self::$events[$id])) throw new \Exception('Почтовое событие "'.$id.'" уже зарегистрировано');
-		self::$events[$id] = array(
-			'id'         => $id,
-			'name'       => $name,
-			'parameters' => $parameters,
-		);
-	}
-	
-	public static function enum()
-	{
-		$res = array();
-		foreach (self::$events as $id => $value)
-		{
-			$res[] = $value;
-		}
-		return $res;
+		\Cetera\Event::attach('*', array('\Cetera\Mail\Event','trigger'));
 	}	
+	
+	/* 
+	* DEPRECATED. Backward  compatibility.
+	*/
+	public static function register()
+	{
+	}		
 
 	public static function trigger($id, $params)
 	{
