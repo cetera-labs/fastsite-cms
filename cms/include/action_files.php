@@ -161,6 +161,10 @@ if ($_REQUEST['action'] == 'upload') {
 
     } else {
 
+		if (!isset($_REQUEST['path'])) {
+			$_REQUEST['path'] = USER_UPLOAD_PATH . date('Ymd') . '/';
+		}
+	
         $path = trim($_REQUEST['path'], '/') . '/';
 
         if (!file_exists(DOCROOT . $path)) mkdir(DOCROOT . $path, 0777);
