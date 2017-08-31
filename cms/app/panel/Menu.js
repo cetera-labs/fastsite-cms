@@ -246,7 +246,7 @@ Ext.define('Cetera.panel.Menu', {
                     fieldLabel: alias_title,
                     name: 'alias',
                     allowBlank: false,
-                    regex: /^[\:\/\.\-\_A-Z0-9]+$/i,
+                    regex: /^[\:\/\.\-\_A-Z0-9#]+$/i,
                     value: alias
                 }
             ],
