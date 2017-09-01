@@ -295,7 +295,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
     }
     
     public function save($hidden = true, $unique_alias = false)
-    {        
+    {     
+		Event::trigger(EVENT_CORE_MATERIAL_BEFORE_SAVE, ['material' => $this]);
+		
         $this->getFieldsDef();
         
 		$type = $this->raw_fields['type'];
@@ -398,7 +400,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
       
         $this->saveDynimicLinks();
         $this->updateCache();
-   
+		
+		Event::trigger(EVENT_CORE_MATERIAL_AFTER_SAVE, ['material' => $this]);
+		
     }
     
     public function __set($name, $value)
