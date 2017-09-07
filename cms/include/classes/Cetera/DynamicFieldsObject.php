@@ -678,11 +678,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     {
         // удаление ссылок с удаляемого материала
         $r = $this->getDbConnection()->query("select B.name, B.len, B.type, B.pseudo_type from types A, types_fields B where A.alias='".$this->table."' and B.id=A.id and (B.type=".FIELD_LINKSET." or B.type=".FIELD_MATSET.")");
-        while ($f = $r->fetch()) {
+        while ($f = $r->fetch(\PDO::FETCH_NUM)) {
             $tbl = ObjectDefinition::get_table($f[2], $f[1], $this->objectDefinition->id, $f[3]);
             if ($f[2] != FIELD_LINKSET && $f[3] != PSEUDO_FIELD_TAGS) {
-            	$r1 = $this->getDbConnection()->query("select dest from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
-            	while ($f1 = $r1->fetch()) {
+            	$r1 = $this->getDbConnection()->query("select dest from ".$this->table."_".$tbl."_".$f[0]." where id=".$this->id);
+            	while ($f1 = $r1->fetch(\PDO::FETCH_NUM)) {
             	   $m = Material::getById($f1[0], $f[1], $tbl);
             	   $m->delete();
             	}

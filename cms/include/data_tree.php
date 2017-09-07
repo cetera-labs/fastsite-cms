@@ -53,9 +53,10 @@ if ($node == 'root') {
             $where = 'id<>'.$exclude_mat;
             if ($_GET['query'])
                 $where .= ' and name LIKE '.$application->getConn()->quote('%'.$_GET['query'].'%');
-            $m = $c->getMaterials('name', $where, $matsort, '', 500, 0);
-            foreach ($m as $material)
-            {
+            //$m = $c->getMaterials('name', $where, $matsort, '', 500, 0);
+			$m = $c->getMaterials()->where($where)->setItemsCountPerPage(500);
+			
+            foreach ($m as $material) {
       			$name = htmlspecialchars($material->name);
       			$name = str_replace("\n",'',$name);
       			$name = str_replace("\r",'',$name);
