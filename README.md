@@ -10,4 +10,5 @@ https://ceteralabs.com/cetera-cms/create/
 * Developers Guide - https://cetera.ru/forclients/cetera-cms-developer-guide/
 * Install Guide and requirements - https://cetera.ru/forclients/cetera-cms-admin-guide/
 ## Support
-support@ceteralabs.com
+Email — support@ceteralabs.com
+Forum — http://community.fastsite.ru/
