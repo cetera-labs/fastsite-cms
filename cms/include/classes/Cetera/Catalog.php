@@ -1099,7 +1099,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     	
     	$r = self::getDbConnection()->query("SELECT A.tag, A.id FROM dir_data A, dir_structure B, dir_structure C
     	        WHERE A.id=B.data_id and C.data_id=$parent and B.lft BETWEEN C.lft and C.rght and B.level=C.level+1 and A.tag $sign $tag and A.id <> '.$this->id.' ORDER BY A.tag $order LIMIT 1");
-    	if ($f = $r->fetch()) {
+    	if ($f = $r->fetch(\PDO::FETCH_NUM)) {
     		self::getDbConnection()->executeQuery("update dir_data set tag=$f[0] where id=".$this->id);
     		self::getDbConnection()->executeQuery("update dir_data set tag=$tag where id=$f[1]");
     	}
