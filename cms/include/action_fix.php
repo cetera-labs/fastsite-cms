@@ -147,9 +147,9 @@ if ($_REQUEST['cat_structure']) {
 		$prevlevel = $structure[$id]['level'];
 	}
 	
-	fssql_query('TRUNCATE TABLE dir_structure');
+	$application->getConn()->executeQuery('TRUNCATE TABLE dir_structure');
 	foreach($structure as $id => $item) 
-		fssql_query('INSERT INTO dir_structure (data_id, lft, rght, level) VALUES ('.$item['data_id'].','.$item['lft'].','.$item['rght'].','.$item['level'].')');
+		$application->getConn()->executeQuery('INSERT INTO dir_structure (data_id, lft, rght, level) VALUES ('.$item['data_id'].','.$item['lft'].','.$item['rght'].','.$item['level'].')');
 	
 	
 	$res['text'] .= '<b class="ok">'.$t->_('Структура разделов').' ОК</b></div><br clear="all" /><div class="note">Backup saved in table '.STRUCTURE_BACKUP.'</div>';

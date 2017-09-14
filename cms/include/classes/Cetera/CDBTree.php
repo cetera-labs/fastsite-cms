@@ -71,7 +71,7 @@ class CDBTree {
      */
 	function getNodeInfo($ID) {
 		$this->sql = 'SELECT '.$this->left.','.$this->right.','.$this->level.' FROM '.$this->table.' WHERE '.$this->id.'=\''.$ID.'\'';
-        $Data = $this->getDbConnection()->fetchArray($this->sql);
+        $Data = $this->getDbConnection()->fetchAssoc($this->sql);
 		if ($Data)
 			return array((int)$Data[$this->left], (int)$Data[$this->right], (int)$Data[$this->level]);
 		else

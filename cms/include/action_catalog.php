@@ -85,7 +85,7 @@ if ($_POST['action'] == 'cat_save') {
 	$catalog->update($_POST);
     
     if ($catalog->isRoot()) {
-        fssql_query('TRUNCATE TABLE vars');
+        $application->getConn()->executeQuery('TRUNCATE TABLE vars');
         if (isset($_POST['vars']))
             foreach ($_POST['vars'] as $var) {
 				$application->getConn()->insert('vars', $var);

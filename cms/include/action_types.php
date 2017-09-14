@@ -227,7 +227,7 @@ try {
 
                 // УДАЛЕНИЕ ПОЛЯ
                 if (($f['type']!=FIELD_LINKSET)&&($f['type']!=FIELD_MATSET)) {
-              	  fssql_query("alter table `".$od->table."` drop `".trim($f['name'])."`");
+              	  $application->getConn()->executeQuery("alter table `".$od->table."` drop `".trim($f['name'])."`");
               	} else {
               	  ObjectDefinition::drop_link_table($od->table, $f['name'], $f['type'], $f['len'], $f['id'], $f['pseudo_type']);
               	}

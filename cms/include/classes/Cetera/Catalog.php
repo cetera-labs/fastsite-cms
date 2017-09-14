@@ -774,7 +774,6 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     		$conn->executeQuery('UPDATE dir_data SET '.implode(',', $p).' WHERE id='.$id);
     
         $tree = new CDBTree('dir_structure');
-        $r = fssql_query('select id from dir_structure where data_id='.$this->id);
         $prnt = $conn->fetchColumn('select id from dir_structure where data_id=?', array($this->id));
         $tree->insert($prnt, array('data_id'=>$id));
         	   

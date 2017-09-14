@@ -24,9 +24,8 @@ $res = array(
 $action = $_POST['action'];
 
 if ($action == 'clean') {
-    fssql_query('TRUNCATE TABLE event_log');
+    $application->getConn()->executeQuery('TRUNCATE TABLE event_log');
     $application->eventLog(EVENT_CLEAR);
 } 
 
 echo json_encode($res);
-?>

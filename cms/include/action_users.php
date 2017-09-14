@@ -33,11 +33,11 @@ if ($action == 'delete') {
 } 
 
 elseif ($action == 'enable') {
-    fssql_query('UPDATE users SET disabled=0 WHERE id<>0 and id IN ('.implode(',',$sel).')');
+    $application->getConn()->executeQuery('UPDATE users SET disabled=0 WHERE id<>0 and id IN ('.implode(',',$sel).')');
 }
 
 elseif ($action == 'disable') {
-    fssql_query('UPDATE users SET disabled=1 WHERE id<>1 and id<>'.(int)$user->id.' and id IN ('.implode(',',$sel).')');
+    $application->getConn()->executeQuery('UPDATE users SET disabled=1 WHERE id<>1 and id<>'.(int)$user->id.' and id IN ('.implode(',',$sel).')');
 }
 
 echo json_encode($res);

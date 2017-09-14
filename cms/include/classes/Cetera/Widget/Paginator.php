@@ -24,7 +24,7 @@ class Paginator extends Templateable {
     public function hasPages()
     {	
 		$iterator = $this->getIterator();
-		if (!is_subclass_of ( $iterator , '\Cetera\Iterator\DbObject' )) return false;
+		if (!($iterator instanceof \Cetera\Iterator\Object)) return false;
 		if ($iterator->getPageCount() <= 1) return false;
 		
 		return true;
