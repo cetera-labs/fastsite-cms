@@ -36,8 +36,9 @@ $application->route('/'.PREVIEW_PREFIX,  function() {
 
 $application->route('/robots.txt',  function() {
 	
+	header('HTTP/1.0 200 OK');
 	header('Content-type: text/plain');
-	\Cetera\Application::getInstance()->getServer()->getRobots();
+	echo \Cetera\Application::getInstance()->getServer()->getRobots();
 	return true;
 	
 } );

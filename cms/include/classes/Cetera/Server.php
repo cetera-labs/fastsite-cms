@@ -242,7 +242,7 @@ class Server extends Catalog {
 	public function boArray()
 	{
 		$array = parent::boArray();
-		$array['robots'] = str_replace("\r",'\r',str_replace("\n",'\n',addslashes($this->getRobots())));
+		$array['robots'] = $this->getRobots();
 		return $array;
 	}
 	

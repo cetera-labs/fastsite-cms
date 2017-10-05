@@ -19,7 +19,7 @@ if (isset($_REQUEST['locale'])) {
 $res = array();
 
 if ($step == 9) {
-	set_time_limit(999999);
+	if (function_exists('set_time_limit')) set_time_limit(999999);
 
     $res['success'] = true;    
     $res['error'] = false;
