@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.38.4');
+define('VERSION', '3.38.5');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -62,6 +62,7 @@ define('PREFS_FILE',   DOCROOT.'.prefs');
 
 define ('DB_SCHEMA', CMSROOT.'.dbschema/core.xml');
 define ('DB_DATA', CMSROOT.'.dbschema/core.sql');
+define ('DEFAULT_THEME', CMSROOT.'.dbschema/.templates.zip');
 define ('TEMPLATES_DIR', DOCROOT.'.templates');
 define ('TWIG_TEMPLATES_PATH', 'design');
 
@@ -78,6 +79,7 @@ define('PLUGIN_DB_SCHEMA','schema.xml');
 define('PLUGIN_INSTALL',  'install.php');
 
 define('THEME_DIR',    'themes');
+define('THEME_DEFAULT_DIR', 'default');
 define('THEME_INFO',   'info.json');
 define('THEME_DB_SCHEMA', 'schema.xml');
 define('THEME_DB_DATA','data.sql');

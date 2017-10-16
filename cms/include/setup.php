@@ -24,8 +24,7 @@ if ($step == 9) {
     $res['success'] = true;    
     $res['error'] = false;
 	
-	if ($_POST['create'])
-	{
+	if ($_POST['create']) {
 	
 		$theme = 'corp';
 		if ($_POST['theme']) $theme = $_POST['theme'];
@@ -55,7 +54,42 @@ if ($step == 9) {
 		$str .= '</table></div>';
 		$res['text'] = $str;
     
-	}	
+	}
+	else {
+		$str = '<div class="scroll" style="width: 475px;"><table class="setup" cellspacing="0" cellpadding="0" width="100%" border="0">';
+		
+		ob_start();
+		
+		if (check_dir(DOCROOT.THEME_DIR.'/'.THEME_DEFAULT_DIR, 1, FALSE)) {
+			$res['error'] = true;
+		}
+		else try {
+			$zip = new \ZipArchive;
+			if($zip->open(DEFAULT_THEME)===TRUE) { 
+
+				if(!$zip->extractTo(DOCROOT.THEME_DIR.'/'.THEME_DEFAULT_DIR)) {
+				    throw new Exception($translator->_('Не удалось распаковать архив'));   
+				}
+				else {
+					$str .= '<tr><td class="left">'.$translator->_('Установлена стандартная тема').'</td></tr>';
+				}
+			
+			} 
+			else {
+				throw new Exception($translator->_('Не удалось открыть архив'));   
+			}
+		} catch (\Exception $e) {
+			$res['error'] = true;
+			$res['success'] = false;
+			$str .= status(1, $e->getMessage()).'</td></tr>';
+		} 		
+		
+		$str .= ob_get_contents();
+		ob_end_clean(); 		
+		
+		$str .= '</table></div>';
+		$res['text'] = $str;
+	}
     
     if (!$res['error']) finish_setup(); 
         
@@ -215,12 +249,12 @@ elseif ($step == 2) {
     
     if (check_file(PREFS_FILE, 1)) $res['error'] = true;
     if (check_dir(TEMPLATES_DIR, 1, FALSE)) $res['error'] = true;
+	if (check_dir(DOCROOT.THEME_DIR, 1, FALSE)) $res['error'] = true;
     if (check_dir(CACHE_DIR, 2)) $res['warning'] = true;
     if (check_dir(IMAGECACHE_DIR, 2)) $res['warning'] = true;
     if (check_dir(FILECACHE_DIR, 2)) $res['warning'] = true;
     check_dir(USER_UPLOADS_DIR, 2);
     check_dir(DOCROOT.PLUGIN_DIR, 2);
-    check_dir(DOCROOT.THEME_DIR, 2);
     $str .= ob_get_contents();
     ob_end_clean(); 
     

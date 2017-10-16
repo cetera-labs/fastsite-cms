@@ -692,6 +692,7 @@ class ObjectDefinition extends Base {
         if (!isset($params['describ']) && isset($params['description'])) $params['describ'] = $params['description']; 
         if (!isset($params['alias']) && isset($params['name'])) $params['alias'] = $params['name']; 
         if (!isset($params['alias']) && isset($params['table'])) $params['alias'] = $params['table']; 
+		$params['alias'] = str_replace(' ','_',$params['alias']);
         return $params;    
     }   
     
