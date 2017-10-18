@@ -88,6 +88,18 @@ function check_upload_file($name) {
     }
 } 
 
+* DEPRECATED
+* Делает mysql_query() c контролем ошибок
+* 
+* @param string $query SQL query
+* @return resource mysql result ID
+*/
+function fssql_query($query) {	
+	$r = mysql_query($query);   
+	if (mysql_error()) throw new \Cetera\Exception\SQL($query);
+	return $r;
+}  
+
 /*
 * cached_fopen_url 
 * 

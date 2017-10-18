@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.38.5');
+define('VERSION', '3.38.6');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -55,7 +55,15 @@ define('CMSROOT', str_replace('include','',__DIR__) );
 
 /** Абсолютный путь DOCUMENT ROOT */
 //define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/');
-define('DOCROOT', substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], CMS_DIR.'/', 1 )) );
+if (!defined('DOCROOT')) {
+	if (isset($_SERVER['DOCUMENT_ROOT'])) {
+		$dr = $_SERVER['DOCUMENT_ROOT'].'/';
+	}
+	else {
+		$dr = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'.CMS_DIR.'/', 1 )).'/';
+	}	
+	define('DOCROOT', $dr );
+}
 define('WWWROOT', DOCROOT );
 
 define('PREFS_FILE',   DOCROOT.'.prefs');

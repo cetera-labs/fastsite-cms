@@ -526,6 +526,16 @@ class Application {
     public function connectDb()
     {     
         if ($this->_connected) return;
+		
+		if (function_exists('mysql_connect')) {
+			try {
+				mysql_connect($this->getVar('dbhost'),$this->getVar('dbuser'),$this->getVar('dbpass'));
+				mysql_select_db($this->getVar('dbname'));
+				mysql_query('SET NAMES utf8');
+			} catch (\Exception $e) {
+				throw new \Exception($e->getMessage());
+			}
+		}		
         
         $connectionParams = array(
             'dbname'   => $this->getVar('dbname'),
