@@ -54,7 +54,7 @@ if ($node == 'root') {
             if ($_GET['query'])
                 $where .= ' and name LIKE '.$application->getConn()->quote('%'.$_GET['query'].'%');
             //$m = $c->getMaterials('name', $where, $matsort, '', 500, 0);
-			$m = $c->getMaterials()->where($where)->setItemsCountPerPage(500);
+			$m = $c->getMaterials()->where($where)->setItemCountPerPage(500);
 			
             foreach ($m as $material) {
       			$name = htmlspecialchars($material->name);

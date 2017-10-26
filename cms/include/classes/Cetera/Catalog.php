@@ -819,7 +819,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 			while ($f = $r->fetch()) {
 				try {
 					$r1 = self::getDbConnection()->query('SELECT id FROM '.$f['alias'].' WHERE idcat='.$f['data_id']);
-					while ($f1 = $r1->fetch()) {
+					while ($f1 = $r1->fetch(\PDO::FETCH_NUM)) {
 					   $m = Material::getById($f1[0], 0, $f['alias']);
 					   $m->delete();
 					}
@@ -1232,7 +1232,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 				$newtable = $conn->fetchColumn("SELECT alias from types where id=".$this->fields['typ']);
         		if ($newtable) {
         		    $r = $conn->query("select B.alias,A.name from types_fields A, types B where B.id=A.id and A.type=".FIELD_LINKSET." and A.pseudo_type<>".PSEUDO_FIELD_CATOLOGS." and A.len=".$this->id);
-        		    while ($f = $r->fetch())
+        		    while ($f = $r->fetch(\PDO::FETCH_NUM))
         		        $conn->executeQuery("alter table ".$f[0]."_".$this->materialsTable."_".$f[1]." rename ".$f[0]."_".$newtable."_".$f[1]);   
         		}
             }

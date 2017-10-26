@@ -88,7 +88,7 @@ function check_upload_file($name) {
     }
 } 
 
-* DEPRECATED
+/* DEPRECATED
 * Делает mysql_query() c контролем ошибок
 * 
 * @param string $query SQL query

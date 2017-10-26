@@ -201,8 +201,9 @@ if ($_REQUEST['action'] == 'upload') {
 }
 
 if ($_REQUEST['action'] == 'upload_path') {
+	$s = $application->getSession();
     $res['success'] = true;
-    $res['path'] = USER_UPLOAD_PATH . date('Ymd') . '/';
+    $res['path'] = isset($s->last_upload_path)?$s->last_upload_path:USER_UPLOAD_PATH.date('Ymd').'/';
 }
 
 if ($_REQUEST['action'] == 'delete') {

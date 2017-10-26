@@ -71,7 +71,7 @@ Ext.define('Cetera.window.ImageCrop', {
 			formData.append('file', blob, baseName);
 			me.setLoading(true);
 			Cetera.Ajax.request({
-				url: 'include/action_files.php?action=upload&overwrite=1&path='+path,
+				url: '/cms/include/action_files.php?action=upload&overwrite=1&path='+path,
                                 timeout: 1000000,
 				method: 'POST',
 				rawData: formData,

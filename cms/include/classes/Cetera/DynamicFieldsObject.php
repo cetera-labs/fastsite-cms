@@ -693,7 +693,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         // удаление ссылок на этот материал
         if (property_exists($this, 'idcat') && $this->idcat >= 0) {
         	$r = $this->getDbConnection()->query("select A.alias, B.name, B.type from types A, types_fields B where B.id=A.id and B.len=".$this->idcat." and (B.type=".FIELD_LINK." or B.type=".FIELD_LINKSET.")");
-        	while ($f = $r->fetch()) {
+        	while ($f = $r->fetch(\PDO::FETCH_NUM)) {
               if ($f[2] == FIELD_LINK) {
         	    $this->getDbConnection()->executeQuery("update $f[0] set $f[1]=0 where $f[1]=".$this->id);
         	  } else {
@@ -702,7 +702,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	}
         } else {
         	$r = $this->getDbConnection()->query("select A.alias, B.name from types A, types_fields B where B.id=A.id and B.len = ".$this->objectDefinition->id." and B.type=".FIELD_MATSET);
-            while ($f = $r->fetch()) {
+            while ($f = $r->fetch(\PDO::FETCH_NUM)) {
         	  $this->getDbConnection()->executeQuery("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
         	}
         }

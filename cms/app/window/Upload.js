@@ -87,7 +87,7 @@ Ext.define('Cetera.window.Upload', {
 			var prefix = _('Загрузка')+': '+file.name;
 			
 			Cetera.Ajax.request({
-				url: 'include/action_files.php?action=upload&path='+this.pathField.getValue(),
+				url: '/cms/include/action_files.php?action=upload&path='+this.pathField.getValue(),
                                 timeout: 1000000,
 				method: 'POST',
 				rawData: formData,

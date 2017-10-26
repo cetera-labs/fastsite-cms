@@ -647,7 +647,7 @@ Ext.define('Cetera.fileselect.Panel', {
 		me.centerPanel.insert(0,progress);
 
 		Cetera.Ajax.request({
-			url: 'include/action_files.php?action=upload&path='+path,
+			url: '/cms/include/action_files.php?action=upload&path='+path,
 			timeout: 1000000,
 			method: 'POST',
 			rawData: formData,
