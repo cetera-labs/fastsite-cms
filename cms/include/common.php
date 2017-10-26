@@ -27,7 +27,8 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 
 if (!file_exists(DOCROOT.LIBRARY_PATH)) {
 	
-	echo 'Download and unpack <a href="http://cetera.ru/cetera_cms/library.zip">http://cetera.ru/cetera_cms/library.zip</a> at your webserver home folder.';
+	echo 'Download and unpack <a href="http://cetera.ru/cetera_cms/library.zip">http://cetera.ru/cetera_cms/library.zip</a> at your webserver home folder. ';
+	echo '<a href="/cms/library_install.php">Click to automatic install</a>';
 	die();
 	
 }
