@@ -9,9 +9,11 @@
 		<form method="post">
 			<input type="hidden" name="UserRegister" value="1" />
 			
+			{% if not widget.getParam('email_is_login') %}
 			<label>{{ _('Логин') }}</label>
 			<input name="login" required type="text" value="{% if widget.post %}{{ widget.post.login }}{% endif %}" class="{% if widget.login_error %} is-invalid-input{% endif %}">
 			{% if widget.login_error %}<span class="form-error is-visible">{{ widget.login_error }}</span>{% endif %}	
+			{% endif %}
 
 			<label>{{ _('Email') }}</label>
 			<input name="email" required type="email" value="{% if widget.post %}{{ widget.post.email }}{% endif %}" class="{% if widget.email_error %} is-invalid-input{% endif %}">

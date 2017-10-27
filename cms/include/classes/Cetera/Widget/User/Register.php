@@ -22,10 +22,11 @@ class Register extends \Cetera\Widget\Templateable {
 	public $password2_error = null;
 		
     protected $_params = array(
-		'unique_email' => false,
-	    'template'     => 'default.twig',
+		'unique_email'   => false,
+		'email_is_login' => false,
+	    'template'       => 'default.twig',
 		
-		'success_auth' => true,
+		'success_auth'     => true,
 		'success_redirect' => '/',
 		
 		'recaptcha'		       => false,
@@ -43,7 +44,11 @@ class Register extends \Cetera\Widget\Templateable {
 			$this->post = $_POST;
 			try {
 				
-				$this->checkRecaptcha();				
+				$this->checkRecaptcha();	
+
+				if ($this->getParam('email_is_login')) {
+					$_POST['login'] = $_POST['email'];
+				}				
 				
 				$u = \Cetera\User::register($_POST, $this->getParam('unique_email'));
 				
@@ -62,7 +67,13 @@ class Register extends \Cetera\Widget\Templateable {
 				}
 			}
 			catch (\Cetera\Exception\Form $e) {
+
 				$field = $e->field.'_error';
+				
+				if ($field == 'login_error' && $this->getParam('email_is_login')) {
+					$field == 'email_error';
+				}
+				
 				$this->$field = $e->getMessage();
 				$this->error = true;
 				return;
