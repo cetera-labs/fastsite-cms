@@ -46,7 +46,7 @@ class Menu extends Base {
   	public static function getById($id) 
     {
 		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE id=?',array($id));
-		if (!$f) new Exception\CMS('Меню ID='.$id.' не найдено');
+		if (!$f) throw new Exception\CMS('Меню ID='.$id.' не найдено');
 		return new self($f);
   	}
     
@@ -60,7 +60,7 @@ class Menu extends Base {
   	public static function getByAlias($alias) 
     {
 		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE alias=?',array($alias));
-		if (!$f) new Exception\CMS('Меню alias='.$id.' не найдено');
+		if (!$f) throw new Exception\CMS('Меню alias='.$id.' не найдено');
 		return new self($f);
   	}
     
