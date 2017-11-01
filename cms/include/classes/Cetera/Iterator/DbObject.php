@@ -246,17 +246,21 @@ abstract class DbObject extends Object {
     
     public function where($where, $combination = 'AND')
     {   
-        if ($combination == 'OR')
-            $this->query->orWhere($where);
-            else $this->query->andWhere($where);
-        $this->sync = false;
+		if (self::isSafe($where)) {
+			if ($combination == 'OR')
+				$this->query->orWhere($where);
+				else $this->query->andWhere($where);
+			$this->sync = false;
+		}
         return $this;
     }   
     
     public function orderBy($order, $sort = null, $add = false)
     {
-        $this->query->add('orderBy', $order . ' ' . (!$sort ? 'ASC' : $sort), $add);
-        $this->sync = false;
+		if (self::isSafe($order) && self::isSafe($sort)) {
+			$this->query->add('orderBy', $order . ' ' . (!$sort ? 'ASC' : $sort), $add);
+			$this->sync = false;
+		}
         return $this;        
     } 
     
@@ -270,5 +274,10 @@ abstract class DbObject extends Object {
         $this->sync = false;
         return $this; 
     } 
+	
+	private static function isSafe($sql)
+	{
+		return !preg_match("#(select|update|insert into|drop table|alter table|delete from|create table)+\s#is", $sql);
+	}
 
 }
