@@ -507,7 +507,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
         // Элементы формы редактирования поля
         this.field_props = {
             describ:   new Ext.form.TextField({ fieldLabel: Config.Lang.name , name: 'describ', allowBlank: false }),
-            name:      new Ext.form.TextField({ fieldLabel: 'Alias', name: 'name', allowBlank: false }),
+            name:      new Ext.form.TextField({ fieldLabel: 'Alias', name: 'name', regex: /^[\_A-Z0-9]+$/i, allowBlank: false }),
             required:  new Ext.form.Checkbox({boxLabel: Config.Lang.requiredField, name: 'required', inputValue: 1}),
             hidden:    new Ext.form.Checkbox({boxLabel: Config.Lang.hiddenField, name: 'hidden', inputValue: 1}),
             size:      new Ext.form.TextField({fieldLabel: Config.Lang.size, name: 'len', vtype: 'len', value: 1000}),

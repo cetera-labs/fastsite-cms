@@ -311,14 +311,14 @@ class ObjectRenderer {
 		}
 				
 		ob_start();
-		foreach ($fields as $f) {			
+		foreach ($fields as $f) try {			
 			$od = ObjectDefinition::findById($f['id']);		
 			$f['describ'] = $od->getDescriptionDisplay();
 			$f['editor_str'] = 'editor_linkset_link';
 			if ( file_exists('editors/'.$f['editor_str'].'.php') ) 
 				include_once('editors/'.$f['editor_str'].'.php');
 			$this->fields_def[] = $f;
-		}
+		} catch (\Exception $e) {}
 		$this->initData .= ob_get_contents();
 		ob_end_clean();					
 	}

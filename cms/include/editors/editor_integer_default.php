@@ -20,4 +20,3 @@ function editor_integer_default_draw($field_def, $fieldvalue) {
 <?
     return 25;
 }
-</script>
