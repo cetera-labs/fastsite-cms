@@ -550,12 +550,12 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		$u = self::create();
 		$u->setFields($params);		
 		$u->save();
-		
-		\Cetera\Mail\Event::trigger( 'USER_REGISTER', array(
+				
+		Event::trigger(EVENT_CORE_USER_REGISTER, [
 			'user'     => $u, 
 			'server'   => $a->getServer(), 
 			'password' => $params['password'] 
-		));
+		]);
 		
 		return $u;
 	}

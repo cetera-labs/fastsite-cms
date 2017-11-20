@@ -128,7 +128,7 @@ Ext.define('Cetera.widget.ContainerMain', {
         var widget = this.addWidget({
              widgetName: item.widgetName,  
              widgetId: 0
-        });
+        }, false);
         if (!widget) return false;
         widget.load( true );
 

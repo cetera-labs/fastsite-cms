@@ -1377,8 +1377,8 @@ class Application {
 				case 'widget':
 					$params = false;
 					parse_str ( htmlspecialchars_decode( $attrs['widgetparams'] ), $params );   
-					$widget = $this->getWidget(array('name' => $attrs['widgetname'] ));					
-					$widget->setParams($params);
+					$params['name'] = $attrs['widgetname'];
+					$widget = $this->getWidget($params);
 					$result = str_replace($str, $widget->getHtml(), $result);									
 					break;
 					
