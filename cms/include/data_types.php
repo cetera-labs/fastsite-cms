@@ -51,7 +51,7 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
         $f['required'] = (int)$f['required'];
         if ($f['type'] == FIELD_ENUM) {
             $alias = $application->getConn()->fetchColumn('select alias from types where id=?', array((int)$_REQUEST['type_id']));
-            $g = $application->getConn()->fetchRow("SHOW COLUMNS FROM $alias LIKE '".$f['name']."'");
+            $g = $application->getConn()->fetchArray("SHOW COLUMNS FROM $alias LIKE '".$f['name']."'");
             $f['len'] = substr($g[1],5,strlen($g[1])-6);
         }
 		
