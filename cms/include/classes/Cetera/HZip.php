@@ -5,6 +5,7 @@ class HZip
 {
   /**
    * Add files and sub-directories in a folder to zip file.
+   *
    * @param string $folder
    * @param \ZipArchive $zipFile
    * @param int $exclusiveLength Number of text to be exclusived from the file path.

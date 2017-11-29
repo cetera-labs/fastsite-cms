@@ -10,7 +10,7 @@ namespace Cetera;
  **/
  
 /**
- * Плагин
+ * Класс для работы с подключаемыми модулями
  *
  * @package CeteraCMS
  **/ 
@@ -18,11 +18,15 @@ class Plugin implements \ArrayAccess  {
 
     private $_info = null;
     
-    
     private static $disabled = null;
     
     public $name;
     
+	/**
+	* Возвращает все установленные модули
+	*
+	* @return array
+	*/	
     public static function enum()
     {
         $plugins = array();
@@ -40,6 +44,11 @@ class Plugin implements \ArrayAccess  {
         return $plugins;
     }
     
+	/**
+	* Возвращает модуль с указанным именем
+	*
+	* @return Plugin
+	*/	
     public static function find($name)
     {
         if (!is_dir(DOCROOT.PLUGIN_DIR.'/'.$name)) return false;
@@ -47,11 +56,16 @@ class Plugin implements \ArrayAccess  {
         return new self($name);
     }    
     
-    function __construct($name)
+    private function __construct($name)
     {
         $this->name = $name;
     }
     
+	/**
+	* Включен ли модуль
+	*
+	* @return boolean
+	*/		
     public function isEnabled ()
     {     
         if (self::$disabled === null)
@@ -62,6 +76,12 @@ class Plugin implements \ArrayAccess  {
         return !(boolean)(self::$disabled && self::$disabled[$this->name]);
     }
     
+	/**
+	* Удаляет модуль
+	*
+	* @param boolean $data удалить из БД все данные модуля
+	* @return void
+	*/		
     public function delete($data = false)
     {    
 		if ($this->name == 'partner') return;
@@ -72,6 +92,11 @@ class Plugin implements \ArrayAccess  {
         Util::delTree(WWWROOT.PLUGIN_DIR.'/'.$this->name);
     }  
     
+	/**
+	* Включить модуль
+	*
+	* @return boolean
+	*/		
     public function enable()
     {     
 		$a = Application::getInstance();
@@ -79,7 +104,12 @@ class Plugin implements \ArrayAccess  {
 		unset($md[$this->name]);
 		$a->setVar('module_disable', $md);
     }   
-    
+        
+	/**
+	* Отключить модуль
+	*
+	* @return boolean
+	*/	
     public function disable()
     {     
 		$a = Application::getInstance();
@@ -88,28 +118,37 @@ class Plugin implements \ArrayAccess  {
 		$a->setVar('module_disable', $md);
     }             
     
-    public function offsetExists ( $offset )
-    {
-     
+	/**
+	* @ignore
+	*/
+    public function offsetExists($offset)
+    {     
         $this->grabInfo();
-        return array_key_exists ( $offset , $this->_info );
-    
+        return array_key_exists ( $offset , $this->_info );    
     }
     
+	/**
+	* @ignore
+	*/	
     public function offsetGet ( $offset )
-    {
-    
+    {    
         $this->grabInfo();
-        return $this->_info[ $offset ];
-    
+        return $this->_info[ $offset ];    
     }
     
+	/**
+	* @ignore
+	*/	
     public function offsetSet ( $offset , $value ) {
         $this->_info[ $offset ] = $value;
     }
     
+	/** @internal */	
     public function offsetUnset ( $offset ) {} 
     
+	/**
+	* @ignore
+	*/	
     public function __get($name)
     {
     
@@ -156,6 +195,9 @@ class Plugin implements \ArrayAccess  {
         }  		
     }   
 	
+	/**
+	* Установить модуль из Marketplace
+	*/	
     public static function install($plugin, $status = null, $translator = null)
     {
 		
@@ -232,7 +274,7 @@ class Plugin implements \ArrayAccess  {
 		
 	}
 	
-    public static function installRequirements($req, $status = null, $translator = null)
+    private static function installRequirements($req, $status = null, $translator = null)
     {
 		if (!is_array($req)) return;
 		if ($status) $status($translator->_('Проверка зависимостей:'), true, true); 				

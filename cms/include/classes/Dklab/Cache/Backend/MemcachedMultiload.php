@@ -1,17 +1,10 @@
 <?php
 /**
- * Cetera CMS 3 
- *
- * @package  Dklab/Cache
- * @version $Id$
- * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
- * @author 
- * @access private
- **/
- 
-/**
+ * klab_Cache_Backend_MemcachedMultiload
+ * 
  * @package Dklab/Cache
  * @access private
+ * @ignore
  */ 
 class Dklab_Cache_Backend_MemcachedMultiload extends \Zend_Cache_Backend_Memcached
 {
