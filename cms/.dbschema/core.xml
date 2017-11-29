@@ -68,7 +68,7 @@
     <field name="tag" type="int(11)" null="0" default="0" />
     <field name="pseudo_type" type="mediumint(8) unsigned" null="0" default="0" />
     <field name="default_value" type="varchar(255)" null="1" />
-    <field name="editor" type="tinyint(4)" null="0" default="0" />
+    <field name="editor" type="int(11)" null="0" default="0" />
     <field name="editor_user" type="varchar(255)" null="1" />
     <field name="page" type="varchar(20)" null="1" />
     <key name="PRIMARY" unique="1">

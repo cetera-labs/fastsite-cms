@@ -879,7 +879,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	private function confirm_added($tbl, $user_id) {		
 		$not_added = ~ MATH_ADDED;
 		$r1 = $this->getDbConnection()->query("select id from $tbl where autor=".(int)$user_id." and type & ".MATH_DELETED." > 0");
-		while ($f1 = $r1->fetch())
+		while ($f1 = $r1->fetch(\PDO::FETCH_NUM))
 		{ 
 			 $m = Material::getById($f1[0], 0, $tbl);
 			 $m->delete();

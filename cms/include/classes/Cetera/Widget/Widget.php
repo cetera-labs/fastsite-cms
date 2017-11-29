@@ -122,8 +122,12 @@ class Widget {
     {
 		$res = null;
 		
-        if (property_exists($this, $name)) $res = $this->$name;
-		elseif (isset($this->_params[$name])) $res = $this->_params[$name];
+        if (property_exists($this, $name)) {
+			$res = $this->$name;
+		}
+		elseif (isset($this->_params[$name])) {
+			$res = $this->_params[$name];
+		}
 		
 		if (!$res && $default) $res = $default;
 		

@@ -467,12 +467,10 @@ class Schema {
     {
         $res = array();
         
-        try
-		{
+        try {
             $od = ObjectDefinition::findByTable($type['name']);
         } 
-		catch (\Exception $e)
-		{
+		catch (\Exception $e) {
       		  $res[] = array(
       				'error'  => self::TYPE_NOT_EXISTS,
       				'table'  => $type['name'],
@@ -488,8 +486,10 @@ class Schema {
           		foreach ($field as $prop => $value) 
 				{
 						if ($prop == 'description') continue;
-						if ($prop == 'editor') continue;
 						if ($prop == 'editor_user') continue;
+						if (!$f['fixed']) {
+						    if ($prop == 'editor') continue;
+						}
 						
 						if ( $prop == 'length' && !(int)$value )
 						{

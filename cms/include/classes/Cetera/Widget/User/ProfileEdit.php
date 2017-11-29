@@ -164,7 +164,11 @@ class ProfileEdit extends \Cetera\Widget\Templateable {
 	public function getFields()
 	{
 		if (!$this->user) return null;	
-		return $this->fields;
-		
+		return $this->fields;		
 	}
+	
+	public function getUser()
+	{
+		return $this->user;		
+	}	
 }
