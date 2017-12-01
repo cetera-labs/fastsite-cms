@@ -53,13 +53,11 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		}
 		
 		$data = self::getDbConnection()->fetchAssoc( 'SELECT A.* FROM '.User::TABLE.' A LEFT JOIN users_external B ON (A.id = B.user_id) WHERE B.external_id = ? and B.external_type = ?', array( $id, $network ) );
-		if (!$data) 
-		{
+		if (!$data) {
 			// пробуем найти по старой схеме
 			try {
 				$data = self::getDbConnection()->fetchAssoc( 'SELECT * FROM '.User::TABLE.' WHERE external_id=? and external=?', array( $id, $network ) );
-				if ($data) 
-				{
+				if ($data) {
 					$u = User::fetch($data); 
 					$u->addExternal( $network, $id );	
 				} else {
