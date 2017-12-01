@@ -538,11 +538,12 @@ class Application {
 		}		
         
         $connectionParams = array(
-            'dbname'   => $this->getVar('dbname'),
-            'user'     => $this->getVar('dbuser'),
-            'password' => $this->getVar('dbpass'),
-            'host'     => $this->getVar('dbhost'),
-            'driver'   => $this->getVar('dbdriver')?$this->getVar('dbdriver'):'pdo_mysql',
+            'dbname'       => $this->getVar('dbname'),
+            'user'         => $this->getVar('dbuser'),
+            'password'     => $this->getVar('dbpass'),
+            'host'         => $this->getVar('dbhost'),
+            'driver'       => $this->getVar('dbdriver')?$this->getVar('dbdriver'):'pdo_mysql',
+			'wrapperClass' => 'Cetera\Database\Connection',
         );
  
         $this->_dbConnection = \Doctrine\DBAL\DriverManager::getConnection( 
