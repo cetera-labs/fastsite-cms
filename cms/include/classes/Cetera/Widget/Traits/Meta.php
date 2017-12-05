@@ -6,10 +6,7 @@ trait Meta {
     public function setMetaTitle($name)
     {
 		$a = $this->application;
-		$t = $a->getPageProperty('title');
-		if ($t) $t = ' &mdash; '.$t;
-		$a->setPageProperty('title', $name.$t);
-		
+		$a->setPageProperty('title', $name);		
 		$a->addHeadString('<meta itemprop="name" content="'.htmlspecialchars($name).'"/>');
 		$a->addHeadString('<meta name="twitter:title" content="'.htmlspecialchars($name).'">');
 		$a->addHeadString('<meta property="og:title" content="'.htmlspecialchars($name).'"/>', 'og:title');
