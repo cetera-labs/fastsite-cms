@@ -1492,6 +1492,11 @@ class Application {
 		} catch (\Exception $e) {}
 	}
 	
+	/**
+	* Создает и возвращает шаблонизатор Twig
+	*
+	* @return Twig_Environment
+	*/		
 	public function getTwig()
 	{
 		
@@ -1545,6 +1550,11 @@ class Application {
 		
 	}
 	
+	/**
+	* Выводит на странице фронтофиса админ-панель
+	*
+	* @return void
+	*/		
 	public function showAdminPanel()
 	{
 		$u = $this->getUser();
@@ -1558,11 +1568,23 @@ class Application {
 		}
 	}	
 		
+	/**
+	* Выводит в поток вывода значение свойства, заданного с помощью Cetera\Application::setPageProperty('name', 'value')
+	*
+	* @param  string $name Имя свойства
+	* @return void
+	*/			
 	public function showPageProperty($name)
 	{
 		echo '<cms action="param" value="'.$name.'"></cms>';
 	}
 	
+	/**
+	* Выводит в поток вывода тег <meta> со значением свойства, заданного с помощью Cetera\Application::setPageProperty('name', 'value')
+	*
+	* @param  string $name Имя свойства
+	* @return void
+	*/	
 	public function showMeta($name)
 	{
 		echo '<meta name="'.$name.'" content="';
@@ -1570,6 +1592,12 @@ class Application {
 		echo '" />';
 	}
 	
+	/**
+	* Выводит в поток вывода тег <title>
+	* Содержание задается с помощью Cetera\Application::setPageProperty('title', 'value')
+	*
+	* @return void
+	*/		
 	public function showTitle()
 	{
 		echo '<title>';
@@ -1577,26 +1605,56 @@ class Application {
 		echo '</title>';
 	}
 
+	/**
+	* Выводит в поток вывода строки, добавленные методом Cetera\Application::addHeadString()
+	*
+	* @return void
+	*/	
 	public function showHeadStrings()
 	{
 		$this->showPageProperty("headStrings");
 	}	
 	
+	/**
+	* Выводит в поток вывода стили, добавленные методом Cetera\Application::addCSS()
+	*
+	* @return void
+	*/		
 	public function showCSS()
 	{
 		$this->showPageProperty("css");
 	}		
 	
+	/**
+	* Выводит в поток вывода скрипты, добавленные методом Cetera\Application::addScript()
+	*
+	* @return void
+	*/	
 	public function showScripts()
 	{
 		$this->showPageProperty("scripts");
 	}			
 	
+	/**
+	* Возвращает текущее значение свойства страницы фронтофиса
+	*
+	* @param  string $name Имя свойства
+	* @return mixed Значение свойства
+	*/	
 	public function getPageProperty($name)
 	{
 		return $this->params[$name];
 	}	
 	
+	/**
+	* Устанавливает определенное свойство страницы фронтофиса
+	*
+	* @param  string $name Имя свойства
+	* @param  string $value Значение свойства
+	* @param  boolean $array Используется ли свойство как массив значений. Если true, то новое значение добавляется в массив
+	* @param  boolean $unique Проверять значение на уникальность. Если значение уже есть в массиве, то новое добавлено не будет
+	* @return Cetera\Application Экземпляр приложения
+	*/
 	public function setPageProperty($name, $value, $array = false, $unique = true)
 	{
 		if (!$array)
@@ -1622,21 +1680,48 @@ class Application {
 		return $this;
 	}	
 	
+	/**
+	* Добавляет строку в блок <head> страницы фронтофиса
+	*
+	* @param  string $value Строка для добавления
+	* @param  boolean $unique Проверять строку на уникальность.
+	* @return Cetera\Application Экземпляр приложения
+	*/	
 	public function addHeadString($value, $unique = true)
 	{
 		return $this->setPageProperty('headStrings', $value, true, $unique);
 	}
 	
+	/**
+	* Добавляет подключает css файл к странице фронтофиса
+	*
+	* @param  string $file Ссылка на файл
+	* @return Cetera\Application Экземпляр приложения
+	*/		
 	public function addCSS($file)
 	{
 		return $this->setPageProperty('css', '<link rel="stylesheet" href="'.$file.'">', true, true);
 	}	
 	
+	/**
+	* Добавляет подключает js скрипт к странице фронтофиса
+	*
+	* @param  string $file Ссылка на файл
+	* @return Cetera\Application Экземпляр приложения
+	*/		
 	public function addScript($file)
 	{
 		return $this->setPageProperty('scripts', '<script src="'.$file.'" type="text/javascript"></script>', true, true);
 	}		
 	
+	/**
+	* Переключает приложение в режим cron-работы.
+	* При этом весь выходной поток, включая сообщения об ошибках направляются в лог-файл
+	* По окончании работы скрипта в лог записывается текущее время
+	*
+	* @param  string $logFile Имя лог-файла
+	* @return void
+	*/	
 	public function cronJob($logFile = false)
 	{
 		$this->cronMode = true;
@@ -1649,6 +1734,12 @@ class Application {
 		}		
 	}
 	
+	/**
+	* Возвращает значение из переменной $_REQUEST по заданному ключу
+	*
+	* @param  string $key
+	* @return mixed Значение
+	*/		
 	public function getRequest($key) 
 	{
 		return $_REQUEST[$key];
