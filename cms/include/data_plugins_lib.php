@@ -56,4 +56,15 @@ try {
     
 }
 
+ usort ( $plugins , function($a, $b){
+	 
+	 if ($a['installed'] == $b['installed']) {
+		 return strcasecmp ( $a['id'], $b['id'] );
+	 }
+	 else {
+		 return ($a['installed'] < $b['installed'])?1:-1;
+	 }
+	 
+ } );
+
 print json_encode($plugins);
