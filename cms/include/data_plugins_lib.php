@@ -9,7 +9,10 @@ header('Content-Type: application/json');
 try {
 
 	$client = new \GuzzleHttp\Client();
-    $res = $client->get(PLUGINS_INFO, ['verify'=>false]);
+    $res = $client->get(PLUGINS_INFO, [
+		'verify' => false,
+		'query'  => $_GET
+	]);
     $data = $res->getBody();   
 
     $plugins = json_decode( $res->getBody(), true);

@@ -143,7 +143,14 @@ Ext.define('Cetera.plugin.Add', {
                         iconCls: 'icon-reload',
                         handler: function() { this.store.load(); },
                         scope:   this
-                    }
+                    },
+					'-',
+					_('Искать') + ': ', 
+					Ext.create('Cetera.field.Search', {
+						store: this.store,
+						paramName: 'query',
+						width:200
+					})					
                 ]
             }]
 
