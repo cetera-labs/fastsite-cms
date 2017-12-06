@@ -16,8 +16,6 @@ namespace Cetera;
  * @property-read string $alias алиас типа материалов === таблице
  * @property-read string $description описание типа материалов
  * @property-read boolean $fixed cистемный тип материалов (нельзя удалить из админки)
- * @property-read string $plugin плагин, подключаемый в окне редактирования материалов данного типа
- * @property-read string $handler перехватчик, подключаемый при сорхранении материалов данного типа
  **/
 class ObjectDefinition extends Base {
 	
@@ -28,6 +26,8 @@ class ObjectDefinition extends Base {
 	 * @internal
 	 */  
     public static $userClasses = array();
+	
+	public static $plugins = array();
 
 	/**
 	 * @internal
@@ -43,11 +43,6 @@ class ObjectDefinition extends Base {
 	 * @internal
 	 */	
     protected $_fixed = null;
-	
-	/**
-	 * @internal
-	 */ 	
-    protected $_plugin = null;
 	
 	/**
 	 * @internal
@@ -153,8 +148,6 @@ class ObjectDefinition extends Base {
 	 * @param array $params параметры типа материалов:<br>
 	 * alias - alias типа, он же название создаваемой таблицы БД под этот тип материалов<br>
 	 * fixed - системный тип (невозможно удалить из админки)<br>
-	 * plugin - плагин, подключаемый в окне редактирования материалов данного типа<br>
-	 * handler - перехватчик, подключаемый при сорхранении материалов данного типа<br>
 	 * @return ObjectDefinition
 	 * @throws Exception\CMS если тип с таким alias уже существует
 	 * @throws Exception\CMS если alias зарезервирован
@@ -183,8 +176,8 @@ class ObjectDefinition extends Base {
         )"); 
 
         $conn->executeQuery(
-			"INSERT INTO types (alias,describ, fixed, handler, plugin) values (?,?,?,?,?)",
-			array($params['alias'], $params['describ'], (int)$params['fixed'], $params['handler'], $params['plugin'])
+			"INSERT INTO types (alias,describ, fixed) values (?,?,?,?,?)",
+			array($params['alias'], $params['describ'], (int)$params['fixed'])
 		);
         
 		$id = $conn->lastInsertId();
@@ -261,9 +254,7 @@ class ObjectDefinition extends Base {
         $this->_id          = $f['id']; 
         $this->_table       = $f['alias'];  
         $this->_description = $f['describ'];  
-        $this->_fixed       = $f['fixed'];
-        $this->_plugin      = $f['plugin']; 
-        $this->_handler     = $f['handler'];      
+        $this->_fixed       = $f['fixed'];   
     }
     
 	/**
@@ -302,23 +293,23 @@ class ObjectDefinition extends Base {
         return $this->_fixed;    
     } 
     
-	/**
-	 * @internal
-	 */	
-    public function getPlugin()
+
+	
+    public function setPlugin($file)
     {
-        if (null === $this->_plugin) $this->fetchData();
-        return $this->_plugin;    
-    } 
-    
-	/**
-	 * @internal
-	 */	
-    public function getHandler()
+        if (!isset(self::$plugins[$this->getId()])) {
+			self::$plugins[$this->getId()] = [];
+		}
+		self::$plugins[$this->getId()][] = $file;
+    } 	
+	
+    public function getPlugins()
     {
-        if (null === $this->_handler) $this->fetchData();
-        return $this->_handler;    
-    }                 
+        if (!isset(self::$plugins[$this->getId()])) {
+			return [];
+		}
+		return self::$plugins[$this->getId()];
+    } 	              
     
 	/**
 	 * Возвращает все поля данного типа материалов
@@ -411,8 +402,6 @@ class ObjectDefinition extends Base {
 	 * @param array $params параметры типа материалов:<br>
 	 * alias - alias типа, он же название создаваемой таблицы БД под этот тип материалов<br>
 	 * fixed - системный тип (невозможно удалить из админки)<br>
-	 * plugin - плагин, подключаемый в окне редактирования материалов данного типа<br>
-	 * handler - перехватчик, подключаемый при сорхранении материалов данного типа<br>
 	 * @return ObjectDefinition	 
 	 */		
     public function update($params) {
@@ -465,14 +454,6 @@ class ObjectDefinition extends Base {
         if (isset($params['describ'])) {
 			$sql[] = 'describ='.DbConnection::getDbConnection()->quote($params['describ']);
 			$this->_description = $params['describ'];
-		}
-        if (isset($params['handler'])) {
-			$sql[] = 'handler='.DbConnection::getDbConnection()->quote($params['handler']);
-			$this->_handler = $params['handler'];
-		}
-        if (isset($params['plugin'])) {
-			$sql[] = 'plugin='.DbConnection::getDbConnection()->quote($params['plugin']);
-			$this->_plugin = $params['plugin'];
 		}
         
         if (count($sql)) DbConnection::getDbConnection()->executeQuery('update types set '.implode(',',$sql).' where id='.$this->id);
@@ -761,9 +742,7 @@ class ObjectDefinition extends Base {
             'alias'   => $this->alias,
             'describ' => $this->description,
 			'describDisplay' => $this->descriptionDisplay,
-            'fixed'   => (int)$this->fixed,
-            'plugin'  => $this->handler,
-            'handler' => $this->plugin
+            'fixed'   => (int)$this->fixed
         );		
 	}
 

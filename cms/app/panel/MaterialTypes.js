@@ -312,20 +312,6 @@ Ext.define('Cetera.panel.MaterialTypes', {
 						return rec.get('describDisplay');
 					},
                     editor: this.compact ? false : {}
-                },{
-                    header: 'Plugin', 
-                    width: 150, 
-                    sortable: true, 
-                    dataIndex: 'plugin',
-                    editor: {regex: /([\.\-\_a-zA-Z0123456789]+)/i},
-                    hidden: this.compact
-                },{
-                    header: 'Handler', 
-                    width: 150, 
-                    sortable: true, 
-                    dataIndex: 'handler',
-                    editor: {regex: /([\.\-\_a-zA-Z0123456789]+)/i},
-                    hidden: this.compact
                 }
             ],
             hideHeaders: this.compact,

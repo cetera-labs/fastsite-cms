@@ -12,9 +12,7 @@ Ext.define('Cetera.model.MaterialType', {
         }, 
         'alias', 
         'describ', 
-		'describDisplay', 
-        'plugin',
-        'handler'
+		'describDisplay'
     ],
     validations: [
         {type: 'length',    field: 'alias', min: 1}

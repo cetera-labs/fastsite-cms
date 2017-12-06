@@ -553,6 +553,10 @@ Ext.DomQuery.pseudos.scrollable = function(c, t) {
         if (file_exists((PLUGIN_MATH_DIR.'/'.$plugin)))
             include(PLUGIN_MATH_DIR.'/'.$plugin);
     }
+	
+	foreach ($objectDefinition->getPlugins() as $p) {
+        if (file_exists($p)) include($p);		
+	}	
        
 } catch (\Exception $e) {
 

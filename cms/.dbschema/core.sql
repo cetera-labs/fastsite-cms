@@ -4,11 +4,11 @@ INSERT INTO dir_structure VALUES (2,1,2,3,1);
 
 TRUNCATE TABLE types;
 INSERT INTO `types` 
-(`id`, `alias`, `describ`, `fixed`, `plugin`, `handler`)
+(`id`, `alias`, `describ`, `fixed`)
 VALUES
-(1,'materials', 'Materials[ru=Материалы]',1,'',''),
-(2,'users',     'Users[ru=Пользователи]',1,'',''),
-(4,'dir_data',  'Sections[ru=Разделы]',1,'','');
+(1,'materials', 'Materials[ru=Материалы]',1),
+(2,'users',     'Users[ru=Пользователи]',1),
+(4,'dir_data',  'Sections[ru=Разделы]',1);
 
 # --------------------------------------------------------
 

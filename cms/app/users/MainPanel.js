@@ -14,7 +14,7 @@ Ext.define('Cetera.users.MainPanel', {
 		this.columns = [
 			{
 				tooltip: "CMS", 
-				hideable: false, menuDisabled: true,
+				hideable: false, menuDisabled: true, draggable: false,
 				width: 25, 
 				sortable: false, 
 				dataIndex: 'bo', 
@@ -24,7 +24,7 @@ Ext.define('Cetera.users.MainPanel', {
 			},
 			{
 				tooltip: _('Заблокирован'),
-				hideable: false, menuDisabled: true,
+				hideable: false, menuDisabled: true, draggable: false,
 				width: 25, sortable: false, dataIndex: 'disabled', 
 				renderer: function (value, metaData){
 					if (value)
@@ -34,7 +34,7 @@ Ext.define('Cetera.users.MainPanel', {
 			},
 			{
 				tooltip: _('Соцсети'), 
-				hideable: false, menuDisabled: true,
+				hideable: false, menuDisabled: true, draggable: false,
 				width: 25, sortable: false, 
 				dataIndex: 'external', 
 				renderer: function (value, metaData){
