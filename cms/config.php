@@ -100,22 +100,35 @@ Config = {
             }
             ?>	
         ],
+		
+		userObjectGridFields: [
+		<?php foreach(\Cetera\User::getObjectDefinition()->getFields() as $field) : ?>
+			<?php if (in_array($field['name'],['disabled', 'password'])) continue; ?>
+			<?php if (is_subclass_of($field, 'Cetera\ObjectFieldLinkAbstract')) continue; ?>
+			{
+				name: '<?php echo $field['name']; ?>',
+				describ: '<?php echo $field['describ']; ?>',
+				type: <?php echo (int)$field['type']; ?>,
+				fixed: <?php echo (int)$field['fixed']; ?>
+			},
+		<?php endforeach; ?>
+		],
         
         widgets: [
-<?php
-$f = true;
-foreach ($application->getRegisteredWidgets() as $item) {
-    if ($item['not_placeable']) continue;
-    if (!$f) print ',';
-    print "{\n";
-    print '    icon:    "'.$item['icon']."\",\n";
-    print '    name:    "'.$item['name']."\",\n";
-    print '    describ: "'.$item['describ']."\",\n";   
-    print '    ui:      "'.$item['ui']."\"\n";     
-    print "}";
-    $f = false;
-}
-?>        
+			<?php
+			$f = true;
+			foreach ($application->getRegisteredWidgets() as $item) {
+				if ($item['not_placeable']) continue;
+				if (!$f) print ',';
+				print "{\n";
+				print '    icon:    "'.$item['icon']."\",\n";
+				print '    name:    "'.$item['name']."\",\n";
+				print '    describ: "'.$item['describ']."\",\n";   
+				print '    ui:      "'.$item['ui']."\"\n";     
+				print "}";
+				$f = false;
+			}
+			?>        
         ],
 		
 		Lang: {},

@@ -1,65 +1,78 @@
-<?php
-namespace Cetera;
-header('Content-Type: application/javascript; charset=UTF-8');
-/*****************************************
- *  Cetera CMS 3                         *
- *  Интерфейс работы с пользователями    *
- *****************************************/ 
-  
-include_once('common_bo.php');
-
-if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
-
-?>
-Ext.define('UsersPanel', {
+Ext.define('Cetera.users.MainPanel', {
 
     extend:'Ext.grid.GridPanel',
 
     border: false,
     loadMask: true,
     stripeRows: true,
+	
+    stateful: true,
+    stateId: 'stateMainUsersGrid',
     
-    columns: [
-        {
-            header: "", width: 25, sortable: false, dataIndex: 'bo', 
-            renderer: function (value, metaData){
-                if (value) metaData.css = 'icon-cms';
-            }
-        },
-        {
-            header: "", width: 25, sortable: false, dataIndex: 'disabled', 
-            renderer: function (value, metaData){
-                if (value)
-                    metaData.css = 'icon-user-disabled';
-                    else metaData.css = 'icon-user';
-            }
-        },
-        {
-            header: "", width: 25, sortable: false, dataIndex: 'external', 
-            renderer: function (value, metaData){
-                if (value == <?=USER_FACEBOOK?>) metaData.css = 'icon-fb';
-                if (value == <?=USER_TWITTER?>) metaData.css = 'icon-tw';
-                if (value == <?=USER_VK?>) metaData.css = 'icon-vk';
-                if (value == <?=USER_ODNOKLASSNIKI?>) metaData.css = 'icon-odno';
-				if (value == <?=USER_GOOGLE?>) metaData.css = 'icon-google';
-            }
-        },
-        {header: "<?=$translator->_('Псевдоним')?>", width: 200, dataIndex: 'login'},
-        {header: "E-mail", width: 200, dataIndex: 'email'},
-        {header: "<?=$translator->_('Имя')?>", flex: 1, dataIndex: 'name'},
-        {header: "<?=$translator->_('Дата регистрации')?>", width: 105, dataIndex: 'date_reg', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
-        {header: "<?=$translator->_('Дата последнего входа')?>", width: 105, dataIndex: 'last_login', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')}
-    ],
-
     initComponent : function(){
-    
-        this.store = new Ext.data.JsonStore({
+		
+		this.columns = [
+			{
+				tooltip: "CMS", 
+				hideable: false, menuDisabled: true,
+				width: 25, 
+				sortable: false, 
+				dataIndex: 'bo', 
+				renderer: function (value, metaData){
+					if (value) metaData.css = 'icon-cms';
+				}
+			},
+			{
+				tooltip: _('Заблокирован'),
+				hideable: false, menuDisabled: true,
+				width: 25, sortable: false, dataIndex: 'disabled', 
+				renderer: function (value, metaData){
+					if (value)
+						metaData.css = 'icon-user-disabled';
+						else metaData.css = 'icon-user';
+				}
+			},
+			{
+				tooltip: _('Соцсети'), 
+				hideable: false, menuDisabled: true,
+				width: 25, sortable: false, 
+				dataIndex: 'external', 
+				renderer: function (value, metaData){
+					if (value == -6) metaData.css = 'icon-fb';
+					if (value == -7) metaData.css = 'icon-tw';
+					if (value == -8) metaData.css = 'icon-vk';
+					if (value == -10) metaData.css = 'icon-odno';
+					if (value == -9) metaData.css = 'icon-google';
+				}
+			}
+		];	
+		
+		var userFields = ['id','disabled', 'bo', 'external'];
+		
+		Ext.Array.each(Config.userObjectGridFields, function(item, index) {
+			var c = {
+				dataIndex: item.name,
+				text: item.describ,
+				hidden: !item.fixed
+			};
+			if (item.type == Config.fields.FIELD_DATETIME) {
+				c.width = 105;
+				c.xtype = 'datecolumn';
+				c.format = 'd.m.Y H:i';
+			}
+			else {
+				c.flex = 1;
+			}
+			Ext.Array.push(this.columns, c);			
+			Ext.Array.push(userFields, item.name);
+		}, this);	
+		
+		//console.log(this.columns);
+			
+        this.store = Ext.create('Ext.data.JsonStore', {
             autoDestroy: true,
             remoteSort: true,
-            fields: ['id','login','name','email','disabled', 'bo', 'external',
-                {name: 'last_login', type: 'date', dateFormat: 'Y-m-d H:i:s'},
-                {name: 'date_reg', type: 'date', dateFormat: 'Y-m-d H:i:s'}
-            ],
+            fields: userFields,
             sorters: [{property: "login", direction: "ASC"}],
             totalProperty: 'total',  
             pageSize: Cetera.defaultPageSize,         
@@ -82,44 +95,44 @@ Ext.define('UsersPanel', {
         this.tbar = [
             {
                 iconCls:'icon-reload',
-                tooltip:'<b><?=$translator->_('Обновить')?></b>',
+                tooltip: _('Обновить'),
                 handler: function () { this.reload(); },
                 scope: this
             },{
                 id: 'tb_user_new',
                 iconCls:'icon-new-user',
-                tooltip:'<b><?=$translator->_('Новый пользователь')?></b>',
+                tooltip: _('Новый пользователь'),
                 handler: function () { this.edit(0); },
                 scope: this
             },{
                 id: 'tb_user_delete',
-                iconCls:'icon-user-delete',
-                tooltip:'<b><?=$translator->_('Удалить')?></b>',
+                iconCls:'icon-delete',
+                tooltip: _('Удалить'),
                 handler: this.deleteUsers,
                 scope: this
             },'-',{
                 id: 'tb_user_disable',
                 iconCls:'icon-user-disabled',
-                tooltip:'<b><?=$translator->_('Запретить доступ')?></b>',
+                tooltip: _('Запретить доступ'),
                 handler: function () { this.call('disable'); },
                 scope: this
             },{
                 id: 'tb_user_enable',
                 iconCls:'icon-user',
-                tooltip:'<b><?=$translator->_('Разрешить доступ')?></b>',
+                tooltip:_('Разрешить доступ'),
                 handler: function () { this.call('enable'); },
                 scope: this
             },'-',{
                 id: 'tb_user_props',
                 iconCls:'icon-props',
-                tooltip:'<b><?=$translator->_('Свойства')?></b>',
+                tooltip: _('Свойства'),
                 handler: function () { this.edit(this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },'-',{
                 id: 'tb_user_bo',
                 iconCls:'icon-cms',
                 enableToggle: true,
-                tooltip:'<b><?=$translator->_('Показывать только пользователей BackOffice')?></b>',
+                tooltip: _('Показывать только пользователей BackOffice'),
                 handler: function (b) { 
                     this.store.proxy.extraParams.bo = b.pressed;
                     this.reload();
@@ -138,7 +151,7 @@ Ext.define('UsersPanel', {
                
         this.bbar = new Ext.PagingToolbar({
             store: this.store,
-            items: ['<?=$translator->_('Фильтр')?>: ', this.filter, '->', this.info]
+            items: [_('Фильтр')+': ', this.filter, '->', this.info]
         });
                                    
         this.callParent();
@@ -162,7 +175,7 @@ Ext.define('UsersPanel', {
         });
         
         this.store.on('load', function(s, records, options ) {
-            var text = '<?=$translator->_('Всего')?>: '+this.store.proxy.reader.rawData.total;
+            var text = _('Всего')+': '+this.store.proxy.reader.rawData.total;
             this.info.setText(text);
         }, this);
         
@@ -197,7 +210,7 @@ Ext.define('UsersPanel', {
     },
     
     deleteUsers: function() {
-        Ext.MessageBox.confirm('<?=$translator->_('Удаление пользователя')?>', '<?=$translator->_('Вы уверены')?>?', function(btn) {
+        Ext.MessageBox.confirm(_('Удаление пользователя'), _('Вы уверены'), function(btn) {
             if (btn == 'yes') this.call('delete');
         }, this);
     },
@@ -206,7 +219,7 @@ Ext.define('UsersPanel', {
         if (this.editWindow) this.editWindow.destroy();
         
         this.editWindow = Ext.create('Cetera.window.MaterialEdit', { 
-            title: '<?=$translator->_('Пользователь')?>',
+            title: _('Пользователь'),
             listeners: {
                 close: {
                     fn: function(win){
@@ -221,9 +234,9 @@ Ext.define('UsersPanel', {
 		win.show();
         
         Ext.Loader.loadScript({
-            url: 'include/ui_material_edit.php?idcat=<?=CATALOG_VIRTUAL_USERS?>&id='+id+'&height='+this.editWindow.height,
+            url: 'include/ui_material_edit.php?idcat=-2&id='+id+'&height='+this.editWindow.height,
             onLoad: function() { 
-                var cc = Ext.create('MaterialEditor<?=User::TYPE?>', {win: win});
+                var cc = Ext.create('MaterialEditor2', {win: win});
                 if (cc) cc.show();
             }
         });

@@ -2,8 +2,6 @@ Ext.Loader.setPath('Ext.ux', './app/ux');
 
 var tabs = null;
 var mainTree = null;
-var treeContainer = null;
-var navigation = null;
     
 Ext.Ajax.on('requestexception', function(conn, resp, opt) {
 
@@ -48,11 +46,11 @@ Ext.application({
           
         Ext.require('Cetera.window.Error');
 		Ext.require('Cetera.main.Tree');
-		Ext.require('Cetera.main.Navigation');
 		Ext.require('Cetera.main.Header');
 		//Ext.require('Cetera.Viewport');
 		Ext.require('Cetera.field.RichMatsetMaterialAbstract');
-
+		
+		Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
     }, 
     
     msg : function(title, format, delay){
@@ -138,13 +136,7 @@ Ext.application({
                 document.styleSheets[0].insertRule('.tab-'+key+' { background-image:url('+value.icon+')!important;}',document.styleSheets[0].cssRules.length);
             }
         }, this);    
-    
-        mainTree = Ext.create('Cetera.main.Tree', {
-			title: _('Структура'),
-            border: false,
-            anchor:'100% 100%'
-        });    
-    
+        
         tabs = Ext.create('Ext.TabPanel', {
             region:'center',
             deferredRender:false,
@@ -166,32 +158,12 @@ Ext.application({
             }
         }); 
                
-        treeContainer = Ext.create('Ext.Panel', {
-            region:'center',
-            layout:'fit',
-            items:  Ext.create('Ext.TabPanel',{  
-                border: false,
-                activeTab: 0,
-                deferredRender:false,                           
-                items: [
-                    mainTree
-                ]
-            })
-        }); 
-
-		navigation = Ext.create('Cetera.main.Navigation', {
-			title: _('Навигация'), 
-            split: true,           
-            border:true,
-            region:'north',
-			height: 300
-        });
-        
         tabs.on('beforetabchange', function(tp, newTab, currentTab) { 
             if (currentTab && currentTab.content) currentTab.content.fireEvent('deactivate');
             if (newTab && newTab.content) newTab.content.fireEvent('activate');
         });           
     
+		mainTree = Ext.create('Cetera.main.Tree');
         this.viewport = Ext.create('Cetera.Viewport');
         
         if (window.location.hash)

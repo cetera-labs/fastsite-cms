@@ -143,11 +143,10 @@ class BackOffice {
                 
                 $this->_modules['users'] = array(
                 			'position' => MENU_SERVICE,
-                      'name' 	   => $translator->_('Пользователи'),
-                      'url'      => 'include/ui_users.php',
+                            'name' 	   => $translator->_('Пользователи'),
                 			'icon'     => 'images/user.gif',
 							'iconCls'  => 'x-fa fa-user',
-                			'class'    => 'UsersPanel'
+                			'class'    => 'Cetera.users.MainPanel'
                 );
                 
                 $this->_modules['groups'] = array(

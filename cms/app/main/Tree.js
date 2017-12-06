@@ -3,6 +3,10 @@ Ext.define('Cetera.main.Tree', {
     extend: 'Ext.tree.TreePanel',
     requires: 'Cetera.model.SiteTree',
     
+	title: _('Структура'),
+	border: false,
+	anchor:'100% 100%',	
+	
     id:'main_tree',
     rootVisible:false,
     lines:false,
