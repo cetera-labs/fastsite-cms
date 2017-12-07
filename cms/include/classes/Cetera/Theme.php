@@ -231,31 +231,38 @@ class Theme implements \ArrayAccess  {
         return $this;
     }               
     
-    public function offsetExists ( $offset )
-    {
-     
+	/**
+	* @ignore
+	*/	
+    public function offsetExists ( $offset ) {     
         $this->grabInfo();
-        return array_key_exists ( $offset , $this->_info );
-    
+        return array_key_exists ( $offset , $this->_info );    
     }
     
-    public function offsetGet ( $offset )
-    {
-    
+	/**
+	* @ignore
+	*/	
+    public function offsetGet ( $offset ) {    
         $this->grabInfo();
-        return isset($this->_info[ $offset ])?$this->_info[ $offset ]:null;
-    
+        return isset($this->_info[ $offset ])?$this->_info[ $offset ]:null;    
     }
     
+	/**
+	* @ignore
+	*/	
     public function offsetSet ( $offset , $value ) {
         $this->_info[ $offset ] = $value;
     }
     
+	/**
+	* @ignore
+	*/	
     public function offsetUnset ( $offset ) {} 
     
-    public function __get($name)
-    {
-    
+	/**
+	* @ignore
+	*/	
+    public function __get($name) {    
         $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) return $this->$method();
         

@@ -61,16 +61,16 @@ Ext.define('EventlogPanel', {
         this.tbar = [
             {
                 iconCls:'icon-reload',
-                tooltip:'<b><?=$translator->_('Обновить')?></b>',
+                tooltip:_('Обновить'),
                 handler: function () { this.reload(); },
                 scope: this
             },'-',{
                 iconCls:'icon-clean',
-                tooltip:'<b><?=$translator->_('Очистить журнал')?></b>',
+                tooltip:_('Очистить журнал'),
                 handler: function () { this.clean(); },
                 scope: this
             },'-',{
-                text: '<?=$translator->_('Фильтр событий')?>',
+                text: _('Фильтр событий'),
                 menu: this.filterMenu 
             }
         ];
@@ -89,7 +89,7 @@ Ext.define('EventlogPanel', {
         this.callParent();
         
         this.store.on('load', function(s, records, options ) {
-            var text = '<?=$translator->_('Всего')?>: '+this.store.proxy.reader.rawData.total;
+            var text = _('Всего')+ ': '+this.store.proxy.reader.rawData.total;
             this.info.setText(text);
         }, this);
         
@@ -97,17 +97,17 @@ Ext.define('EventlogPanel', {
     },
     
     columns: [
-        {header: "<?=$translator->_('Событие')?>", width: 200, dataIndex: 'name'},
+        {header: _('Событие'), width: 200, dataIndex: 'name'},
         {
-			header: "<?=$translator->_('Пользователь')?>", 
+			header: _('Пользователь'), 
 			width: 150, 
 			dataIndex: 'login', 
             renderer: function (value, p, record) {
                 return '<a href="javascript:Cetera.getApplication().openBoLink(\'user:' + record.get('user_id') + '\')">'+value+'</a>';
             }
 		},
-        {header: "<?=$translator->_('Дата')?>", width: 105, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
-        {header: "<?=$translator->_('Дополнительно')?>", width: 275, dataIndex: 'text', flex: 1}
+        {header: _('Дата'), width: 105, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
+        {header: _('Дополнительно'), width: 275, dataIndex: 'text', flex: 1}
     ],
 
     reload: function() {
@@ -138,14 +138,9 @@ Ext.define('EventlogPanel', {
     },
     
     clean: function() {
-        Ext.MessageBox.confirm('<?=$translator->_('Очистить журнал')?>', '<?=$translator->_('Вы уверены')?>?', function(btn) {
+        Ext.MessageBox.confirm(_('Очистить журнал'), _('Вы уверены'), function(btn) {
             if (btn == 'yes') this.call('clean');
         }, this);
     }
     
 });
-
-function ShowUser(id)
-{
-	alert(id);
-}
