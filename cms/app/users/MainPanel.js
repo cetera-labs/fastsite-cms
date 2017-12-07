@@ -60,6 +60,14 @@ Ext.define('Cetera.users.MainPanel', {
 				c.xtype = 'datecolumn';
 				c.format = 'd.m.Y H:i';
 			}
+			else if (item.type == Config.fields.FIELD_BOOLEAN) {
+				c.width = 100;
+				c.align = 'center';
+				c.renderer = function (value) {
+					if (parseInt(value)) return _('Да');
+					return _('Нет');
+				}
+			}			
 			else {
 				c.flex = 1;
 			}

@@ -50,7 +50,6 @@ try {
     }	
 	
 	$math = $objectDefinition->table;
-	$plugin = $objectDefinition->plugin;
     
     include_once('editors/editor_datetime_pubdate.php');
     include_once('editors/editor_text_default.php');
@@ -135,56 +134,10 @@ try {
     
     $objectRenderer->setObject($material);  
   
-    
-    ?>
-Ext.form.Basic.prototype.findInvalid = function() {
-    var me = this,
-        invalid;
-    Ext.suspendLayouts();
-    invalid = me.getFields().filterBy(function(field) {
-        var preventMark = field.preventMark, isValid;
-        field.preventMark = true;
-        isValid = field.isValid() && !field.hasActiveError();
-        field.preventMark = preventMark;
-        return !isValid;
-    });
-	
-    Ext.resumeLayouts(true);
-    return invalid;
-};
-
-Ext.override(Ext.Component, {
-    ensureVisible: function(stopAt) {
-        var p;
-        this.ownerCt.bubble(function(c) {
-            if (p = c.ownerCt) {
-                if (p instanceof Ext.TabPanel) {
-                    p.setActiveTab(c);
-                } else if (p.layout.setActiveItem) {
-                    p.layout.setActiveItem(c);
-                }
-            }
-            return (c !== stopAt);
-        });
-        this.el.scrollIntoView(this.el.up(':scrollable'));
-        return this;
-    }
-});
-
-Ext.DomQuery.pseudos.scrollable = function(c, t) {
-    var r = [], ri = -1;
-    for(var i = 0, ci; ci = c[i]; i++){
-        var o = ci.style.overflow;
-        if(o=='auto'||o=='scroll') {
-            //if (ci.scrollHeight < Ext.fly(ci).getHeight(true)) 
-				r[++ri] = ci;
-        }
-    }
-    return r;
-};
-	
-    Ext.define('MaterialEditorBase<?=$type?>', {
+    ?>	
+    Ext.define('MaterialEditor<?=ucfirst($objectDefinition->alias)?>', {
         extend: 'Ext.FormPanel',
+		alternateClassName: ['MaterialEditor<?=$objectDefinition->id?>'],
     
         layout: 'fit',
         
@@ -543,17 +496,8 @@ Ext.DomQuery.pseudos.scrollable = function(c, t) {
         }
         
     });
-    
-    MaterialEditor<?=$objectDefinition->id?> = MaterialEditorBase<?=$type?>;
-	MaterialEditor<?=ucfirst($objectDefinition->alias)?> = MaterialEditorBase<?=$type?>;
-    
-    <?
-    if ($plugin) {
-        if (substr($plugin, -4) != '.php') $plugin .= '.php';
-        if (file_exists((PLUGIN_MATH_DIR.'/'.$plugin)))
-            include(PLUGIN_MATH_DIR.'/'.$plugin);
-    }
-	
+       
+    <?	
 	foreach ($objectDefinition->getPlugins() as $p) {
         if (file_exists($p)) include($p);		
 	}	

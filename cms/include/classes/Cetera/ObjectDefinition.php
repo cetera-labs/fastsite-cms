@@ -176,7 +176,7 @@ class ObjectDefinition extends Base {
         )"); 
 
         $conn->executeQuery(
-			"INSERT INTO types (alias,describ, fixed) values (?,?,?,?,?)",
+			"INSERT INTO types (alias,describ, fixed) values (?,?,?)",
 			array($params['alias'], $params['describ'], (int)$params['fixed'])
 		);
         

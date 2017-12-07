@@ -29,6 +29,52 @@ Ext.Ajax.on('requestexception', function(conn, resp, opt) {
     }
 });
 
+Ext.form.Basic.prototype.findInvalid = function() {
+    var me = this,
+        invalid;
+    Ext.suspendLayouts();
+    invalid = me.getFields().filterBy(function(field) {
+        var preventMark = field.preventMark, isValid;
+        field.preventMark = true;
+        isValid = field.isValid() && !field.hasActiveError();
+        field.preventMark = preventMark;
+        return !isValid;
+    });
+	
+    Ext.resumeLayouts(true);
+    return invalid;
+};
+
+Ext.override(Ext.Component, {
+    ensureVisible: function(stopAt) {
+        var p;
+        this.ownerCt.bubble(function(c) {
+            if (p = c.ownerCt) {
+                if (p instanceof Ext.TabPanel) {
+                    p.setActiveTab(c);
+                } else if (p.layout.setActiveItem) {
+                    p.layout.setActiveItem(c);
+                }
+            }
+            return (c !== stopAt);
+        });
+        this.el.scrollIntoView(this.el.up(':scrollable'));
+        return this;
+    }
+});
+
+Ext.DomQuery.pseudos.scrollable = function(c, t) {
+    var r = [], ri = -1;
+    for(var i = 0, ci; ci = c[i]; i++){
+        var o = ci.style.overflow;
+        if(o=='auto'||o=='scroll') {
+            //if (ci.scrollHeight < Ext.fly(ci).getHeight(true)) 
+				r[++ri] = ci;
+        }
+    }
+    return r;
+};
+
 Ext.application({
 
     name: 'Cetera',
@@ -38,6 +84,8 @@ Ext.application({
 	msgCt: null,
     
     views: ['ModalLoadingAnimation'],
+	
+	scriptsLoading: 0,
         
     init: function() {
     
@@ -117,14 +165,27 @@ Ext.application({
                 Config.modules = res.modules;
                 Config.menu = res.menu;
                 
+				this.scriptsLoading = 0;
                 Ext.Array.each(res.scripts, function(script) {
-                    Ext.Loader.loadScript(script);  
-                });                
+					var me = this;
+					this.scriptsLoading++;
+                    Ext.Loader.loadScript({
+						url: script,
+						onLoad: me.scriptLoaded,
+						onError: me.scriptLoaded,
+						scope: me
+					});  
+                }, this);                
                 
-                this.buildUI();
+				if (!this.scriptsLoading) this.buildUI();
             }
         });  
-    },    
+    }, 
+	
+	scriptLoaded: function() {	
+		this.scriptsLoading--;
+		if (this.scriptsLoading == 0) this.buildUI();
+	},
     
     buildUI: function() {
     
