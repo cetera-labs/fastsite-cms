@@ -25,9 +25,9 @@ abstract class Base {
 	 * Плагины
 	 * @internal
 	 */  
-    public static $plugins = array();  
+    private static $plugins = array();  
 	private $pluginInstances = array(); 
-	public static $extensions = array(); 
+	private static $extensions = array(); 
    
     /**
      * Конструктор    
@@ -125,7 +125,6 @@ abstract class Base {
      * Если в классе существует поле $свойство, то полю присваивается значение свойства
      * В противном случает бросается исключение   
      *     
-     * @internal	 
      * @param string $name свойство класса   
      * @param mixed $value значение свойства           
      * @return void
@@ -146,20 +145,38 @@ abstract class Base {
     }
      
     /**
-     * Disallow cloning 
-     *         
-     * @ignore
+     * Disallow cloning          
      */         
     final private function __clone(){}
 	
     /**
      * Расширяет функциональность класса с помощью методов другого класса.
+	 *
+	 * Например, необходимо добавить в клас \Cetera\User метод, возвращающий кол-во дней, которые прошли с момента регистрации пользователя.
+	 * Создадим класс-плагин:
+	 * <pre>
+	 * class MyUser extends \Cetera\ObjectPlugin {
+	 *     public function getRegisteredDays() {
+     *         // экземпляр класса, к каторому будет добавлен плагин находится в свойстве object
+	 *         $date_reg = new DateTime($this->object->date_reg);
+	 *         $date_now = new DateTime('now');
+	 *         $diff = $date_now->getTimestamp() - $date_reg->getTimestamp();
+	 *         return ceil($diff / (60*60*24));
+	 *     }
+	 * }
+	 * </pre>
+	 * Добавим плагин к классу \Cetera\User:
+	 * <pre>
+	 * \Cetera\User::addPlugin( 'MyUser' );
+	 * </pre>
+	 * Теперь можем использовать метод \Cetera\User::getRegisteredDays():
+	 * <pre>
+	 * $user = \Cetera\Application::getInstance()->getUser();
+	 * echo 'Я с вами '.$user->getRegisteredDays().' дней!';
+	 * </pre>	 
      *     
-     * @internal	 
-     * @param string $name свойство класса   
-     * @param mixed $value значение свойства           
-     * @return void
-     * @throws LogicException          
+     * @param \Cetera\ObjectPlugin $class класс, методы которого добавить к данному   
+     * @return void        
      */ 	
 	public static function addPlugin( $class )
 	{
