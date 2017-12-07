@@ -18,6 +18,9 @@ abstract class ObjectPlugin
 	
 	protected $object;
 	
+	/**
+	* @ignore
+	*/
 	final public function __construct( $object ) {		
 		$this->object = $object;		
 	}

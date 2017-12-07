@@ -37,7 +37,7 @@ if ($step == 9) {
 					if ($start) 
 						$str .= '<tr><td class="left">'.$text.'</td><td>'; 
 						else $str .= status(0).'</td></tr>';
-				}, $translator, null, true);  
+				}, $translator, true);  
 				
 				$f = fopen(PREFS_FILE,'a');
 				fwrite($f,"setup_theme=1\n");

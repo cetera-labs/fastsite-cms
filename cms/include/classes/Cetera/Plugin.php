@@ -94,8 +94,6 @@ class Plugin implements \ArrayAccess  {
     
 	/**
 	* Включить модуль
-	*
-	* @return boolean
 	*/		
     public function enable()
     {     
@@ -107,8 +105,6 @@ class Plugin implements \ArrayAccess  {
         
 	/**
 	* Отключить модуль
-	*
-	* @return boolean
 	*/	
     public function disable()
     {     
@@ -143,7 +139,9 @@ class Plugin implements \ArrayAccess  {
         $this->_info[ $offset ] = $value;
     }
     
-	/** @internal */	
+	/** 
+	* @ignore
+	*/	
     public function offsetUnset ( $offset ) {} 
     
 	/**
@@ -205,7 +203,7 @@ class Plugin implements \ArrayAccess  {
     public static function install($plugin, $status = null, $translator = null)
     {
 		
-        if (!$translator) $translator = new TranslateDummy();	
+        if (!$translator) $translator = Application::getInstance()->getTranslator();
 		    
 		$pluginPath = WWWROOT . PLUGIN_DIR . '/' . $plugin;
 		$archiveFile = WWWROOT . PLUGIN_DIR . '/' . $plugin . '.zip';	
@@ -225,7 +223,7 @@ class Plugin implements \ArrayAccess  {
 			$res = $client->request('GET', PLUGINS_INFO . '?download=' . $plugin, ['verify'=>false]);
             $d = $res->getBody();
 
-            if (!$d) throw new \Exception('Не удалось скачать плагин');
+            if (!$d) throw new \Exception($translator->_('Не удалось скачать плагин'));
         } 
 		catch (\Exception $e)
 		{
@@ -254,12 +252,12 @@ class Plugin implements \ArrayAccess  {
             $zip = new \ZipArchive;
             if ($zip->open($archiveFile) === TRUE)
 			{
-                if (!$zip->extractTo(WWWROOT . PLUGIN_DIR)) throw new Exception('Не удалось распаковать архив ' . $archiveFile);
+                if (!$zip->extractTo(WWWROOT . PLUGIN_DIR)) throw new Exception($translator->_('Не удалось распаковать архив'). ' ' . $archiveFile);
                 $zip->close();
                 unlink($archiveFile);
 
             } 
-			else throw new \Exception('Не удалось открыть архив ' . $archiveFile);
+			else throw new \Exception($translator->_('Не удалось открыть архив'). ' ' . $archiveFile);
 
             if ($status) $status('OK', false);  
         }
@@ -288,28 +286,29 @@ class Plugin implements \ArrayAccess  {
     public static function installRequirements($req, $status = null, $translator = null)
     {
 		if (!is_array($req)) return;
+		if (!$translator) $translator = Application::getInstance()->getTranslator();
 		if ($status) $status($translator->_('Проверка зависимостей:'), true, true); 				
 		foreach ($req as $r)
 		{
 			$instal = false;
-			if ($status) $status('Плагин "'.$r['plugin'].'" ('.$r['version'].')', true);
+			if ($status) $status($translator->_('Плагин').' "'.$r['plugin'].'" ('.$r['version'].')', true);
 			$pl = self::find( $r['plugin'] );
 			if (!$pl)
 			{
 				$instal = true;
-				if ($status) $status('отсутствует', false);  
+				if ($status) $status($translator->_('отсутствует'), false);  
 			}
 			else
 			{
 				 if (version_compare($r['version'], $pl['version']) > 0)
 				 {
 					 $instal = true;
-					 if ($status) $status('установлен '.$pl['version'], false);  
+					 if ($status) $status($translator->_('установлен').' '.$pl['version'], false);  
 				 }
 			}
 			if ($instal)
 			{
-				if ($status) $status('Установка/обновление "'.$r['plugin'].'"', true, true); 
+				if ($status) $status($translator->_('Установка/обновление').' "'.$r['plugin'].'"', true, true); 
 				self::install($r['plugin'], $status, $translator);
 			}
 			else

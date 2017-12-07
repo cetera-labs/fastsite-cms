@@ -36,9 +36,17 @@ class Theme implements \ArrayAccess  {
         return $data;
     }
     
-    public static function install($theme, $status = null, $translator = null, $schema = null, $extract_initial_data = false)
+	/**
+	* Установить тему из Marketplace
+	*
+	* @param string $theme название темы
+	* @param Callable $status метод или функция для приема сообщений
+	* @param Zend_Translate $translator класс-переводчик	
+	* @param boolean $extract_initial_data распаковать данные БД: тексты, разделы и т.д.
+	*/		
+    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false)
     {
-        if (!$translator) $translator = new TranslateDummy();
+        if (!$translator) $translator = Application::getInstance()->getTranslator();
 		
 		// предыдущая версия темы
 		$previousTheme = self::find($theme);
@@ -62,7 +70,7 @@ class Theme implements \ArrayAccess  {
     	$res = $client->get(THEMES_INFO.'?download='.$theme, ['verify' => false]);
     	$d = $res->getBody();   		
 		
-        if (!$d) throw new \Exception('Не удалось скачать тему');
+        if (!$d) throw new \Exception($translator->_('Не удалось скачать тему'));
         file_put_contents($archiveFile, $d);  
         
         if ($status) $status('OK', false);                
@@ -81,7 +89,7 @@ class Theme implements \ArrayAccess  {
         $zip = new \ZipArchive;
         if($zip->open($archiveFile) === TRUE)
 		{ 
-        	if(!$zip->extractTo(WWWROOT.THEME_DIR)) throw new Exception('Не удалось распаковать архив '.$archiveFile);                     
+        	if(!$zip->extractTo(WWWROOT.THEME_DIR)) throw new Exception($translator->_('Не удалось распаковать архив').' '.$archiveFile);                     
         	$zip->close(); 
             unlink($archiveFile); 
 			
@@ -131,6 +139,11 @@ class Theme implements \ArrayAccess  {
 		}
     }    
     
+	/**
+	* Возвращает тему с указанным именем
+	*
+	* @return Cetera\Theme
+	*/	
     public static function find($name)
     {
         if (!is_dir(DOCROOT.THEME_DIR.'/'.$name)) return false;
@@ -138,28 +151,49 @@ class Theme implements \ArrayAccess  {
         return new self($name);
     }    
     
-    function __construct($name)
+    private function __construct($name)
     {
         $this->name = $name;
     }
 	
+	/**
+	* Возвращает каталог на сервере, где находятся файлы темы
+	*
+	* @return string
+	*/	
     public function getPath()
     {   
 		return WWWROOT.THEME_DIR.'/'.$this->name;
 	}
 	
+	/**
+	* Возвращает базовый url для ссылок на файлы темы
+	*
+	* @return string
+	*/		
     public function getUrl()
     {   
 		return '/'.THEME_DIR.'/'.$this->name;
 	}	
 	
+	/**
+	* Добавлаяет переведенные ресурсы темы в переводчик
+	*
+	* @param Zend_Translate $translator переводчик
+	* @return void
+	*/	
 	public function addTranslation($translator)
 	{
 		if (!file_exists( $this->getPath().'/'.TRANSLATIONS )) return;
 		$translator->addTranslation( $this->getPath().'/'.TRANSLATIONS );
 	}
     
-    public function delete($data = false)
+	/**
+	* Удаляет установленную тему
+	*
+	* @return void
+	*/	
+    public function delete()
     {     
         Util::delTree( $this->getPath() );
         foreach (Server::enum() as $s) {
