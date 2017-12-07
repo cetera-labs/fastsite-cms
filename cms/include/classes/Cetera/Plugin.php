@@ -197,6 +197,10 @@ class Plugin implements \ArrayAccess  {
 	
 	/**
 	* Установить модуль из Marketplace
+	*
+	* @param string $plugin название модуля
+	* @param Callable $status метод или функция для приема сообщений
+	* @param Zend_Translate $translator класс-переводчик	
 	*/	
     public static function install($plugin, $status = null, $translator = null)
     {
@@ -274,7 +278,14 @@ class Plugin implements \ArrayAccess  {
 		
 	}
 	
-    private static function installRequirements($req, $status = null, $translator = null)
+	/**
+	* Устанавливает модули, требующиеся для работы модуля или темы
+	*
+	* @param array $req список модулей
+	* @param Callable $status метод или функция для приема сообщений
+	* @param Zend_Translate $translator класс-переводчик
+	*/	
+    public static function installRequirements($req, $status = null, $translator = null)
     {
 		if (!is_array($req)) return;
 		if ($status) $status($translator->_('Проверка зависимостей:'), true, true); 				
