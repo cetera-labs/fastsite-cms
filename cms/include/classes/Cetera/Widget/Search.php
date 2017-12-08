@@ -61,7 +61,17 @@ class Search extends Templateable {
 			$this->query = preg_replace("/[^\w\x7F-\xFF\s]/", " ", $this->query);
 		}
 		return $this->query;
-	}	
+	}
+
+	private function getSubsections($section)	
+	{
+		$result = [$section->id];
+		foreach ($section->children as $c) {
+			if ($c->isHidden()) continue;
+			$result = array_merge($result, $this->getSubsections($c));
+		}
+		return $result;
+	}
 	
 	public function getResults()
 	{
@@ -71,9 +81,11 @@ class Search extends Templateable {
 			$sections = array();
 			foreach ($this->getSections() as $c)
 			{
+				if ($c->isHidden()) continue;
+				
 				if ($where) $where .= ' or ';
 				if ($this->getParam('search_subsections'))
-					$sections =  array_merge($sections, $c->getSubs());
+					$sections =  array_merge($sections, $this->getSubsections($c));
 					else $sections[] = $c->id;
 			}
 			$where = '`idcat` IN ('.implode(',', array_unique($sections)) .')';
