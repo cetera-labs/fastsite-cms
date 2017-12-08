@@ -25,7 +25,7 @@ abstract class Base {
 	 * Плагины
 	 * @internal
 	 */  
-    private static $plugins = array();  
+    public static $plugins = array();  
 	private $pluginInstances = array(); 
 	private static $extensions = array(); 
    

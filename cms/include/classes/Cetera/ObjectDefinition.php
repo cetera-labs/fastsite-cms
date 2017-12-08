@@ -654,7 +654,8 @@ class ObjectDefinition extends Base {
      **/
     private function _get_fields() {
     
-        if (!$this->fields_def) {				
+        if (!$this->fields_def) {	
+			$this->fields_def = [];
 			$r = DbConnection::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE id=? ORDER BY tag', [$this->id]);
 			foreach($r as $f) {
 				$key = $f['name'];

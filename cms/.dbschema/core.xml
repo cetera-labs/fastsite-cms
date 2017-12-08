@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <schema>
 
-<table name="dir_structure" engine="MyISAM">
+<table name="dir_structure">
     <field name="id" type="mediumint(8) unsigned" null="0" auto_increment="1" />
     <field name="data_id" type="mediumint(8) unsigned" null="0" default="1" />
     <field name="lft" type="mediumint(8) unsigned" null="0" default="1" />
@@ -20,7 +20,7 @@
     </key>
 </table>
 
-<table name="field_link" engine="MyISAM">
+<table name="field_link">
     <field name="link_id" type="int(3) unsigned" null="0" auto_increment="1" />
     <field name="link_type" type="tinyint(3) unsigned" null="0" default="0" />
     <field name="structure_id" type="int(3) unsigned" null="1" default="0" />
@@ -31,7 +31,7 @@
     </key>
 </table>
 
-<table name="server_aliases" engine="MyISAM">
+<table name="server_aliases">
     <field name="id" type="int(10) unsigned" null="0" default="0" />
     <field name="name" type="varchar(64)" null="0" />
     <key name="NewIndex" unique="0">
@@ -39,7 +39,7 @@
     </key>
 </table>
 
-<table name="types" engine="MyISAM">
+<table name="types">
     <field name="id" type="int(10)" null="0" auto_increment="1" />
     <field name="alias" type="varchar(100)" null="0" />
     <field name="describ" type="varchar(1000)" null="1" />
@@ -53,7 +53,7 @@
     </key>
 </table>
 
-<table name="types_fields" engine="MyISAM">
+<table name="types_fields">
     <field name="field_id" type="mediumint(9)" null="0" auto_increment="1" />
     <field name="id" type="int(10)" null="0" default="0" />
     <field name="name" type="varchar(64)" null="0" />
@@ -125,7 +125,7 @@
     </key>
 </table>
 
-<table name="users_groups_membership" engine="MyISAM">
+<table name="users_groups_membership">
     <field name="user_id" type="int(10) unsigned" null="0" />
     <field name="group_id" type="int(10)" null="0" />
     <key name="PRIMARY" unique="1">
@@ -134,7 +134,7 @@
     </key>
 </table>
 
-<table name="users_groups_allow_cat" engine="MyISAM">
+<table name="users_groups_allow_cat">
     <field name="group_id" type="int(11)" null="0" />
     <field name="catalog_id" type="int(10) unsigned" null="0" />
     <field name="permission" type="tinyint(3) unsigned" null="0" />
@@ -145,7 +145,7 @@
     </key>
 </table>
 
-<table name="users_groups_deny_filesystem" engine="MyISAM">
+<table name="users_groups_deny_filesystem">
     <field name="group_id" type="int(11)" null="0" />
     <field name="path" type="varchar(255)" null="0" />
     <key name="PRIMARY" unique="1">
@@ -154,7 +154,7 @@
     </key>
 </table>
 
-<table name="session_data" engine="MyISAM">
+<table name="session_data">
     <field name="id" type="char(32)" null="0" />
     <field name="value" type="text" null="1" />
     <field name="timestamp" type="int(11)" null="0" />
@@ -166,7 +166,7 @@
     </key>
 </table>
 
-<table name="event_log" engine="MyISAM">
+<table name="event_log">
     <field name="id" type="int(11) unsigned" null="0" auto_increment="1" />
     <field name="user_id" type="int(11) unsigned" null="1" />
     <field name="code" type="varchar(32)" null="0" />
@@ -186,7 +186,7 @@
     </key>
 </table>
 
-<table name="vars" engine="MyISAM">
+<table name="vars">
     <field name="id" type="int(10) unsigned" null="0" auto_increment="1" />
     <field name="name" type="varchar(255)" null="0" />
     <field name="value" type="varchar(255)" null="1" />
@@ -199,7 +199,7 @@
     </key>
 </table>
 
-<table name="vars_servers" engine="MyISAM">
+<table name="vars_servers">
     <field name="var_id" type="int(3) unsigned" null="0" />
     <field name="server_id" type="int(3) unsigned" null="0" />
     <field name="value" type="varchar(255)" null="1" />
@@ -209,7 +209,7 @@
     </key>
 </table>
 
-<table name="lock" engine="MyISAM">
+<table name="lock">
     <field name="type_id" type="int(10) unsigned" null="0" />
     <field name="material_id" type="int(10) unsigned" null="0" />
     <field name="user_id" type="int(10) unsigned" null="0" />
