@@ -101,7 +101,7 @@ if ($action == 'delete' && is_array($sel)) {
 	foreach ($sel as $val)
 	{
 	   $m = Material::getById($val, $objectDefinition);
-	   $application->eventLog(EVENT_MATH_DELETE, $m->getBoUrl());
+	   Event::trigger(EVENT_CORE_MATH_DELETE, ['message' => $m->getBoUrl()]);
        $m->delete();
     }
 	$res['success'] = true;
@@ -146,7 +146,7 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
           $m = Material::getById($val, $objectDefinition);
           $mid = $m->copy($_POST['cat']);
           $new = Material::getById($mid, $objectDefinition);
-          $application->eventLog(EVENT_MATH_CREATE, $new->getBoUrl());
+          Event::trigger(EVENT_CORE_MATH_CREATE, ['message' => $new->getBoUrl()]);
       }
 
 	  if ($where == '') 
@@ -198,13 +198,13 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
     
     if ($action == 'move' || $action == 'unpub' || $action == 'pub') {
     
-        if ($action == 'move') $code = EVENT_MATH_EDIT;
-          elseif ($action == 'pub') $code = EVENT_MATH_PUB;
-            elseif ($action == 'unpub') $code = EVENT_MATH_UNPUB;
+        if ($action == 'move') $code = EVENT_CORE_MATH_EDIT;
+          elseif ($action == 'pub') $code = EVENT_CORE_MATH_PUB;
+            elseif ($action == 'unpub') $code = EVENT_CORE_MATH_UNPUB;
         
     	  foreach ($sel as $val) {
     	      $m = Material::getById((int)$val, $objectDefinition);
-    	      $application->eventLog($code, $m->getBoUrl());
+    	      Event::trigger($code, ['message' => $m->getBoUrl()]);
         	  if ($action == 'pub' && function_exists('on_publish')) on_publish();
         	  if ($action == 'unpub' && function_exists('on_unpublish')) on_unpublish();
         }

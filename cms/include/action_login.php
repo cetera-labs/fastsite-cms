@@ -43,18 +43,18 @@ if (isset($_POST['login']))
 	{
         case \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
             $res['errors']['login'] = $translator->_('Пользователь не найден');
-            $application->eventLog(EVENT_LOGIN_FAIL, 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']);
+            Event::trigger(EVENT_CORE_LOGIN_FAIL, ['message' => 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']]);
             break;
     
         case \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
             $res['errors']['pass'] = $translator->_('Неправильный пароль');
-            $application->eventLog(EVENT_LOGIN_FAIL, 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']);
+            Event::trigger(EVENT_CORE_LOGIN_FAIL, ['message' => 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']]);
             break;
     
         case \Zend_Auth_Result::SUCCESS:
             $res['success'] = true;
             $res['user'] = $application->getUser()->boArray();
-            $application->eventLog(EVENT_LOGIN_OK, 'IP: '.$_SERVER['REMOTE_ADDR']);
+            Event::trigger(EVENT_CORE_LOGIN_OK, ['message' => 'IP: '.$_SERVER['REMOTE_ADDR']]);
             break;
     }
 	

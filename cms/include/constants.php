@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.39.2');
+define('VERSION', '3.39.3');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -251,19 +251,19 @@ define('PAGE_HEIGHT', 580);
 define('LABEL_WIDTH', 180);
 define('FIELD_WIDTH', 619);
 
-define('EVENT_LOGIN_OK', 1);
-define('EVENT_LOGIN_FAIL', 2);
-define('EVENT_CLEAR', 3);
-define('EVENT_DIR_CREATE', 4);
-define('EVENT_DIR_EDIT', 5);
-define('EVENT_DIR_DELETE', 6);
-define('EVENT_MATH_CREATE', 7);
-define('EVENT_MATH_EDIT', 8);
-define('EVENT_MATH_DELETE', 9);
-define('EVENT_MATH_PUB', 10);
-define('EVENT_MATH_UNPUB', 11);
-define('EVENT_USER_PROP', 12);
-
 define('EVENT_CORE_MATERIAL_BEFORE_SAVE', 'CORE_MATERIAL_BEFORE_SAVE');
 define('EVENT_CORE_MATERIAL_AFTER_SAVE', 'CORE_MATERIAL_AFTER_SAVE');
 define('EVENT_CORE_USER_REGISTER', 'CORE_USER_REGISTER');
+define('EVENT_CORE_USER_RECOVER', 'CORE_USER_RECOVER');
+define('EVENT_CORE_BO_LOGIN_OK', 1);
+define('EVENT_CORE_BO_LOGIN_FAIL', 2);
+define('EVENT_CORE_LOG_CLEAR', 3);
+define('EVENT_CORE_DIR_CREATE', 4);
+define('EVENT_CORE_DIR_EDIT', 5);
+define('EVENT_CORE_DIR_DELETE', 6);
+define('EVENT_CORE_MATH_CREATE', 7);
+define('EVENT_CORE_MATH_EDIT', 8);
+define('EVENT_CORE_MATH_DELETE', 9);
+define('EVENT_CORE_MATH_PUB', 10);
+define('EVENT_CORE_MATH_UNPUB', 11);
+define('EVENT_CORE_USER_PROP', 12);

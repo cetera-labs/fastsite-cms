@@ -16,7 +16,6 @@ include_once('common.php');
 $application->connectDb();
 $application->initSession();
 $application->initBo();
-$application->initMailEvents();
 
 $translator = $application->getTranslator();  
 include_once('field_editors.php');

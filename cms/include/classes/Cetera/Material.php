@@ -390,12 +390,11 @@ class Material extends DynamicFieldsObject implements SiteItem {
         if ($this->idcat > 0) {
             $application = Application::getInstance();
             if (!$this->id) {
-                $application->eventLog(EVENT_MATH_CREATE, $this->getBoUrl());
+                Event::trigger(EVENT_CORE_MATH_CREATE, ['message' => $this->getBoUrl()]);
             } else {
-                $application->eventLog(EVENT_MATH_EDIT, $this->getBoUrl());
-              
+                Event::trigger(EVENT_CORE_MATH_EDIT, ['message' => $this->getBoUrl()]);              
             }
-            if ($this->fields['publish']) $application->eventLog(EVENT_MATH_PUB, $this->getBoUrl());
+            if ($this->fields['publish']) Event::trigger(EVENT_CORE_MATH_PUB, ['message' => $this->getBoUrl()]);
         }
       
         $this->saveDynimicLinks();

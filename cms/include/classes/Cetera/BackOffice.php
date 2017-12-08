@@ -24,12 +24,78 @@ class BackOffice {
     private $_scripts = array();
 	/** @internal */
     private $application = null;
+	
+	private $events = [];
     
 	/** @internal */
     public function __construct($a)
     {
         $this->application = $a;
+		
+		$t = $this->application->getTranslator();
+		
+		$this->registerEvent(
+			EVENT_CORE_USER_REGISTER,
+			$t->_('Зарегистрирован пользователь'),
+			[
+				'user.id' => $t->_('ID пользователя'),
+				'user.login' => $t->_('Логин пользователя'),
+				'user.email' => $t->_('E-mail пользователя'),
+				'user.name' => $t->_('Имя пользователя'),
+				'password' => $t->_('Пароль'),
+				'server.fullUrl' => $t->_('Адрес сайта'),
+				'server.name'    => $t->_('Имя сайта')					
+			]
+		);
+		
+		$this->registerEvent(
+			EVENT_CORE_USER_RECOVER,
+			$t->_('Сброс пароля пользователя'),
+			[
+				'user.id' => $t->_('ID пользователя'),
+				'user.login' => $t->_('Логин пользователя'),
+				'user.email' => $t->_('E-mail пользователя'),
+				'user.name' => $t->_('Имя пользователя'),
+				'password' => $t->_('Пароль'),
+				'server.fullUrl' => $t->_('Адрес сайта'),
+				'server.name'    => $t->_('Имя сайта')					
+			]
+		);	
+
+		$this->registerEvent(EVENT_CORE_BO_LOGIN_OK,   $t->_('Вход в систему'));
+		$this->registerEvent(EVENT_CORE_BO_LOGIN_FAIL, $t->_('Попытка входа в систему'));
+		$this->registerEvent(EVENT_CORE_LOG_CLEAR,     $t->_('Очищен журнал аудита'));
+		$this->registerEvent(EVENT_CORE_DIR_CREATE    , $t->_('Создан раздел'));
+		$this->registerEvent(EVENT_CORE_DIR_EDIT      , $t->_('Изменен раздел'));
+		$this->registerEvent(EVENT_CORE_DIR_DELETE    , $t->_('Удален раздел'));
+		$this->registerEvent(EVENT_CORE_MATH_CREATE   , $t->_('Создан материал'));
+		$this->registerEvent(EVENT_CORE_MATH_EDIT     , $t->_('Изменен материал'));
+		$this->registerEvent(EVENT_CORE_MATH_DELETE   , $t->_('Удален материал'));
+		$this->registerEvent(EVENT_CORE_MATH_PUB      , $t->_('Опубликован материал'));
+		$this->registerEvent(EVENT_CORE_MATH_UNPUB    , $t->_('Раcпубликован материал'));
+		$this->registerEvent(EVENT_CORE_USER_PROP     , $t->_('Изменен пользователь'));		
+			
     }
+	
+	public function registerEvent($id,$name = null,$parameters = null)
+	{
+		if (isset($this->events[$id])) throw new \Exception('Событие "'.$id.'" уже зарегистрировано');
+		$this->events[$id] = array(
+			'id'         => $id,
+			'name'       => $name,
+			'parameters' => $parameters,
+		);
+	}
+	
+	public function getEventById($id)
+	{
+		return $this->events[$id];
+	}	
+
+	public function getRegisteredEvents()
+	{
+		return array_values($this->events);
+	}	
 
     public function addModule($menu)
     {
@@ -150,21 +216,21 @@ class BackOffice {
                 );
                 
                 $this->_modules['groups'] = array(
-                			'position' => MENU_SERVICE,
+                	  'position' => MENU_SERVICE,
                       'name' 	   => $translator->_('Группы пользователей'),
                       'url'      => 'include/ui_groups.php',
-                			'icon'     => 'images/users.gif',
-							'iconCls'  => 'x-fa fa-users',
-                			'class'    => 'GroupsPanel'
+                	  'icon'     => 'images/users.gif',
+					  'iconCls'  => 'x-fa fa-users',
+                	  'class'    => 'GroupsPanel'
                 );
                 
                 $this->_modules['eventlog'] = array(
 					'position' => MENU_SERVICE,
 					'name' 	   => $translator->_('Журнал'),
-					'url'      => 'include/ui_eventlog.php',
 					'icon'     => 'images/audit1.gif',
 					'class'    => 'EventlogPanel',
 					'iconCls'  => 'x-fa fa-file-text-o',
+					'class'    => 'Cetera.panel.EventLog',
                 ); 
                 
                 $this->_modules['dbrepair'] = array(

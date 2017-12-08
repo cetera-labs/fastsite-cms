@@ -40,7 +40,7 @@ if ($_POST['action'] == 'cat_copy') {
     $new = $c->copy($_POST['dest'], $_POST['subs'], $_POST['math']);
     $nc = Catalog::getById($new);
     $res['path'] = $nc->getTreePath();
-    $application->eventLog(EVENT_DIR_CREATE, $nc->getBoUrl());
+    Event::trigger(EVENT_CORE_DIR_CREATE, ['message' => $nc->getBoUrl()]);
 }
 
 if ($_POST['action'] == 'cat_prefs') {
@@ -109,7 +109,7 @@ if ($_POST['action'] == 'cat_save') {
     $tpl = new Cache\Tag\Variable();
     $tpl->clean();
     
-    $application->eventLog(EVENT_DIR_EDIT, $catalog->getBoUrl());
+    Event::trigger(EVENT_CORE_DIR_EDIT, ['message' => $catalog->getBoUrl()]);
    
     $res['success'] = true;
     $res['path'] = $catalog->getTreePath();
@@ -134,7 +134,7 @@ if ($_POST['action'] == 'cat_delete') {
         throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
 
     $c = Catalog::getById($_POST['id']);
-    $application->eventLog(EVENT_DIR_DELETE, $c->getBoUrl());
+    Event::trigger(EVENT_CORE_DIR_DELETE, ['message' => $c->getBoUrl()]);
     $c->delete();
 }
 
@@ -154,7 +154,7 @@ if ($_POST['action'] == 'cat_create') {
     ));
     
     $nc = Catalog::getById($res['id']);
-    $application->eventLog(EVENT_DIR_CREATE, $nc->getBoUrl());
+    Event::trigger(EVENT_CORE_DIR_CREATE, ['message'=>$nc->getBoUrl()]);
    
 }
 

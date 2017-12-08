@@ -418,13 +418,12 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     {
         if ($this->id == 0 || $this->id == ADMIN_ID) return FALSE;
 		$conn = self::getDbConnection();
-		$str .= 'DELETE [LOGIN='.$this->login.'][ID='.$this->id.']';
+		$str = 'DELETE [LOGIN='.$this->login.'][ID='.$this->id.']';
         $conn->executeQuery('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
         $conn->executeQuery('DELETE FROM users_auth WHERE user_id='.$this->id);
         parent::delete();
-		
-       $application = Application::getInstance();
-       $application->eventLog(EVENT_USER_PROP, $str);		
+			
+	    Event::trigger(EVENT_CORE_USER_PROP,['message' => $str]);
     }
 	
     public function setFields($fields)
@@ -500,11 +499,9 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
                 self::getDbConnection()->executeQuery('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
         }
        
-       $application = Application::getInstance();
        $str .= ' [LOGIN='.$login.'][ID='.$this->id.']';
        if (is_array($this->fields['groups'])) $str .= '[GROUPS='.implode(',',$this->fields['groups']).']';
-       $application->eventLog(EVENT_USER_PROP, $str);
-
+	   Event::trigger(EVENT_CORE_USER_PROP,['message' => $str]);
     }
     
     public function boArray()
@@ -571,7 +568,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		$this->password = $pass;
 		$this->save();
 		
-		$res = \Cetera\Mail\Event::trigger( 'USER_RECOVER', array('user' => $this, 'server' => $a->getServer(), 'password' => $pass ));
+		$res = Event::trigger( EVENT_CORE_USER_RECOVER, array('user' => $this, 'server' => $a->getServer(), 'password' => $pass ));
 		
 		if (!$res) {
 			// если не было отправлено писем по событию, то принудительно сообщим о смене пароля

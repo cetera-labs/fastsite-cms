@@ -22,7 +22,6 @@ $_init = Cetera\Util::utime();
 $application->connectDb();
 $application->initSession();
 $application->initPlugins();
-$application->initMailEvents();
 $application->ping();
 
 $application->route('/imagetransform',  array('\Cetera\ImageTransform', 'transformFromURI') );

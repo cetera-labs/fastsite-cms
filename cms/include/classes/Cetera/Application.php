@@ -295,7 +295,7 @@ class Application {
         
         $this->_widgetsTemplatesPath[] = CMSROOT.'widgets/';
 		
-		Mail\Event::attach();
+		Event::attach('*', array($this,'eventHandler'));
     }
     
     /**
@@ -1091,12 +1091,84 @@ class Application {
 			array(
 				'dat'     => new \DateTime(),
 				'user_id' => (int)$this->getUser()->id,
-				'code'    => (int)$event_code,
+				'code'    => $event_code,
 				'text'    => $text,
 			),
 			array('datetime')
 		);
     }
+	
+    /**
+     * Возвращает список событий, сохраняемых в журнал аудита
+     *       
+     * @return array
+    */	
+	public function getLoggableEvents() {
+		return array(
+			EVENT_CORE_BO_LOGIN_OK,
+			EVENT_CORE_BO_LOGIN_FAIL,
+			EVENT_CORE_LOG_CLEAR,
+			EVENT_CORE_DIR_CREATE,
+			EVENT_CORE_DIR_EDIT,
+			EVENT_CORE_DIR_DELETE,
+			EVENT_CORE_MATH_CREATE,
+			EVENT_CORE_MATH_EDIT,
+			EVENT_CORE_MATH_DELETE,
+			EVENT_CORE_MATH_PUB,
+			EVENT_CORE_MATH_UNPUB,
+			EVENT_CORE_USER_PROP,
+		);		
+	}
+	
+    /**
+     * Глобальный обработчик событий. Записывает события в журнал аудита. Рассылает почтовые уведомления.
+     *       
+     * @return void
+    */	
+	public function eventHandler($event, $params) {
+		
+		if (in_array($event, $this->getLoggableEvents())) {
+			$text = false;
+			if (isset($params['message'])) {
+				$text = $params['message'];
+			}			
+			$this->eventLog($event, $text);
+		}		
+		
+		$data = self::getDbConnection()->fetchAll('SELECT * FROM mail_templates WHERE active=1 and event = ?', array($id));		
+		foreach ($data as $template) {
+			$twig = new \Twig_Environment(
+				new \Twig_Loader_Array( $template ),
+				array(
+					'autoescape' => false,
+				)
+			);	
+			$twig->addFunction(new \Twig_SimpleFunction('_', function($text) {
+				return \Cetera\Application::getInstance()->getTranslator()->_($text);
+			}));
+		
+			$mail = new \PHPMailer(true);
+			
+			$emailStr = $twig->render('mail_to', $params);
+			if (!$emailStr) continue;
+			$toEmails = preg_split("/[,;]/", $emailStr );
+			if(!empty($toEmails)) {
+				foreach($toEmails as $address) $mail->AddAddress($address);	
+			}
+			else {
+				continue;
+			}
+			
+			$mail->CharSet = 'utf-8';
+			$mail->ContentType = $template['content_type'];
+			$mail->From = $twig->render('mail_from_email', $params);
+			$mail->FromName = $twig->render('mail_from_name', $params);
+			$mail->Subject = $twig->render('mail_subject', $params);
+			$mail->Body = $twig->render('mail_body', $params);
+			$mail->Send();
+		}		
+		
+	}
     	
     /**
      * Возвращает виджет
@@ -1341,23 +1413,6 @@ class Application {
 					
 			
 		);		
-	}
-	
-	public function initMailEvents()
-	{
-		$t = $this->getTranslator();
-		
-		$params = array(		
-			'user.id'       => $t->_('ID пользователя'),
-			'user.email'    => $t->_('E-mail пользователя'),
-			'user.name'     => $t->_('Имя пользователя'),
-			'password' => $t->_('Пароль пользователя'),
-			'server.name'   => $t->_('Имя сайта'),
-			'server.url'    => $t->_('Адрес сайта'),
-		);
-
-		\Cetera\Mail\Event::register('USER_REGISTER', $t->_('Регистрация пользователя'), $params);
-		\Cetera\Mail\Event::register('USER_RECOVER', $t->_('Восстановление пароля пользователя'), $params);		
 	}
 	
 	public function parseParams(& $result)

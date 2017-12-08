@@ -169,7 +169,7 @@
 <table name="event_log" engine="MyISAM">
     <field name="id" type="int(11) unsigned" null="0" auto_increment="1" />
     <field name="user_id" type="int(11) unsigned" null="1" />
-    <field name="code" type="smallint(11) unsigned" null="0" default="0" />
+    <field name="code" type="varchar(32)" null="0" />
     <field name="dat" type="datetime" null="0" />
     <field name="text" type="text" null="1" />
     <key name="PRIMARY" unique="1">

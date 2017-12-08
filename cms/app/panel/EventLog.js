@@ -1,20 +1,7 @@
-<?php
-namespace Cetera;
-header('Content-Type: application/javascript; charset=UTF-8');
-/*****************************************
- *  Cetera CMS 3                         *
- *  Интерфейс журнала событий            *
- *****************************************/ 
-  
-include('common_bo.php');
-include('common_eventlog.php');
-
-if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
-
-?>
-Ext.define('EventlogPanel', {
+Ext.define('Cetera.panel.EventLog', {
 
     extend: 'Ext.grid.GridPanel',
+	requires: 'Cetera.model.Event',
 
     initComponent : function(){
     
@@ -42,21 +29,28 @@ Ext.define('EventlogPanel', {
                 }
             }
         });
-        
-        this.filterMenu = new Ext.menu.Menu({
-            items: [
-<? $first = 1; foreach ($event_name_code as $code => $name) : ?>
-<? if (!$first) echo ','; $first = 0;?>
-                {
-                    id: 'event_item_<?=$code?>',
-                    text: '<?=$name?>',
-                    checked: true, 
-                    scope: this,
-                    checkHandler: this.reload
-                }
-<? endforeach; ?>
-            ]
-        });
+		
+		this.eventsStore = Ext.create('Ext.data.Store',{
+			model: 'Cetera.model.Event'		
+		});	
+
+		this.filterMenu = new Ext.menu.Menu();		
+		
+		this.eventsStore.load({
+			scope: this,
+			callback: function(records) {
+				Ext.Array.each(records, function(rec){
+					this.filterMenu.add({
+						id: 'event_item_'+rec.getId(),
+						text: rec.get('name'),
+						checked: true, 
+						scope: this,
+						checkHandler: this.reload
+					});
+				}, this);
+				this.reload();
+			}
+		});
     
         this.tbar = [
             {
@@ -92,8 +86,7 @@ Ext.define('EventlogPanel', {
             var text = _('Всего')+ ': '+this.store.proxy.reader.rawData.total;
             this.info.setText(text);
         }, this);
-        
-        this.reload();
+
     },
     
     columns: [
@@ -112,10 +105,11 @@ Ext.define('EventlogPanel', {
 
     reload: function() {
         filter = [];
-<? foreach ($event_name_code as $code => $name) : ?>
-        if (this.filterMenu.getComponent('event_item_<?=$code?>').checked)
-            filter[filter.length] = <?=$code?>; 
-<? endforeach; ?>
+		
+		this.eventsStore.each(function(rec){
+			if (this.filterMenu.getComponent('event_item_'+rec.getId()).checked)
+				filter[filter.length] = rec.getId(); 			
+		},this);
 
         this.store.proxy.extraParams['filter[]'] = filter;
     
