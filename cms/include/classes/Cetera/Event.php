@@ -21,7 +21,7 @@ class Event {
 	*/
 	public static function register($id,$name = null,$parameters = null)
 	{
-		$bo = Application::getInstance()->getBo()->getEvents();
+		$bo = Application::getInstance()->getBo();
 		if ($bo) return $bo->registerEvent($id, $name ,$parameters);
 	}
 
@@ -30,7 +30,7 @@ class Event {
 	*/	
 	public static function enum()
 	{
-		return Application::getInstance()->getBo()->getEvents();
+		return Application::getInstance()->getBo()->getRegisteredEvents();
 	}	
    
     protected function __construct() {}
