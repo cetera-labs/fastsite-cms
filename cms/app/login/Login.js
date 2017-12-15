@@ -3,8 +3,10 @@ Ext.define('Cetera.login.Login', {
     
     title: Config.appName + ' v' + Config.appVersion + ' - Login',
     width: 500,
-    height:310,
-    layout: 'border',
+    layout: {
+        type: 'vbox',
+        align: 'stretch'
+    },
     plain:true,
     buttonAlign:'center',
     autoShow: true,
@@ -14,10 +16,10 @@ Ext.define('Cetera.login.Login', {
     initComponent : function(config) {
             
         this.form = Ext.create('Ext.form.FormPanel', {
+			flex: 1,
             baseCls: 'x-plain',
             defaultType: 'textfield',
             method: 'POST',
-            region: 'center',
             padding: 10,
             url: 'include/action_login.php',
             defaults   : { 
@@ -30,6 +32,7 @@ Ext.define('Cetera.login.Login', {
             waitMsgTarget: true,
             
             items: [
+	
                 Ext.create('Ext.form.field.Trigger',{
                     fieldLabel: Config.Lang.username,
                     allowBlank: false,
@@ -62,13 +65,14 @@ Ext.define('Cetera.login.Login', {
                         );              
                     },
                     name: 'login' 
-                }),
+                }),				
                 {
                     fieldLabel: Config.Lang.password,
                     name: 'pass',
                     allowBlank: false,
                     inputType: 'password'
                 },
+	
                 Ext.create('Ext.form.ComboBox', {
                     fieldLabel: Config.Lang.lang,
                     name:'locale',
@@ -80,8 +84,8 @@ Ext.define('Cetera.login.Login', {
                             type: 'ajax',
                             url: 'include/data_lang.php',
                             reader: {
-                                type: 'json',
-                                root: 'rows'
+                                type: 'json',								
+								root: 'rows'
                             }
                         }                   
                     }),
@@ -91,12 +95,14 @@ Ext.define('Cetera.login.Login', {
                     triggerAction: 'all',
                     editable: false,
                     value: Config.locale
-                }),{
+                }),
+				
+				{
                     xtype: 'checkbox',
                     boxLabel: Config.Lang.remember,
                     name: 'remember',
                     inputValue: '1'
-                }
+                }				
             ]
         });
     
@@ -105,15 +111,13 @@ Ext.define('Cetera.login.Login', {
             items: [
                 Ext.create('Ext.Panel',{
                     height: 63,
-                    region: 'north',
                     border: false,
                     html: '<div style="text-align: center; padding-top: 10px"><img src="images/brand_small.gif" width="323" height="40" /></div>',
                     bodyStyle: 'border-bottom: 3px solid #b13330'
                 }),
                 this.form,
                 Ext.create('Ext.Panel',{
-                    height: 70,
-                    region: 'south',
+                    height: 50,
                     border: false,
                     html: '<div id="uLogin" style="text-align: center; padding-top: 10px" data-ulogin="display=panel;fields=nickname,email,first_name,last_name;providers=vkontakte,facebook,twitter,google;hidden=;redirect_uri=http%3A%2F%2F' + Config.serverName + Config.cmsPath + 'index.php"></div><p style="color:red; text-align: center; margin: 0">' + userMessage + '</p>',
                     bodyStyle: 'background: none;'

@@ -26,11 +26,10 @@ if (isset($_POST['token'])) {
 	
 	<?php if (isset($_GET['ext6'])) : ?>
 	
-    <link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/extjs6/modern/theme-triton/resources/theme-triton-all.css"> 
-	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/ext-modern-all.js"></script>
-    <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/modern/theme-triton/theme-triton.js"></script>	
-
-    <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/packages/ux/modern/ux.js"></script>		
+    <link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/extjs6/classic/theme-triton/resources/theme-triton-all.css"> 
+	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/ext-all-debug.js"></script>
+    <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/classic/theme-triton/theme-triton.js"></script>	
+    <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs6/packages/ux/classic/ux.js"></script>		
 	
 	<?php elseif (isset($_GET['ext5'])) : ?>
 	
@@ -53,8 +52,6 @@ if (isset($_POST['token'])) {
 	
 	<?php endif; ?>
 	
-    <!-- script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs4/compatibility/ext3-core-compat.js"></script>
-    <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs4/compatibility/ext3-compat.js"></script -->	
 	
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify-css.js"></script>
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify-html.js"></script>
@@ -66,13 +63,8 @@ if (isset($_POST['token'])) {
     
 <?php if ($application->getVar('setup_done')) : ?>    
     
-    <script type="text/javascript" src="config.php"></script>
-	
-	<?php if (isset($_GET['ext6'])) : ?>
-		<script type="text/javascript" src="new/app.js"></script>
-	<?php else : ?>
-		<script type="text/javascript" src="app.js"></script>
-	<?php endif; ?>
+    <script type="text/javascript" src="config.php"></script>	
+	<script type="text/javascript" src="app.js"></script>
 	
     <script type="text/javascript">
 	

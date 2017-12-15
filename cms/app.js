@@ -29,21 +29,23 @@ Ext.Ajax.on('requestexception', function(conn, resp, opt) {
     }
 });
 
-Ext.form.Basic.prototype.findInvalid = function() {
-    var me = this,
-        invalid;
-    Ext.suspendLayouts();
-    invalid = me.getFields().filterBy(function(field) {
-        var preventMark = field.preventMark, isValid;
-        field.preventMark = true;
-        isValid = field.isValid() && !field.hasActiveError();
-        field.preventMark = preventMark;
-        return !isValid;
-    });
-	
-    Ext.resumeLayouts(true);
-    return invalid;
-};
+Ext.override(Ext.form.Basic, {
+	findInvalid: function() {
+		var me = this,
+			invalid;
+		Ext.suspendLayouts();
+		invalid = me.getFields().filterBy(function(field) {
+			var preventMark = field.preventMark, isValid;
+			field.preventMark = true;
+			isValid = field.isValid() && !field.hasActiveError();
+			field.preventMark = preventMark;
+			return !isValid;
+		});
+		
+		Ext.resumeLayouts(true);
+		return invalid;
+	}
+});
 
 Ext.override(Ext.Component, {
     ensureVisible: function(stopAt) {

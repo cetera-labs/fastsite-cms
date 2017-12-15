@@ -11,8 +11,7 @@
 	line-height: 60px;
 }
 
-body .main-navigation,
-body .x-tab-bar-default
+body .main-navigation
 {
 	background-color: #32404e;
 }
