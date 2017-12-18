@@ -16,6 +16,8 @@ Ext.define('Cetera.catalog.Create', {
     defaultType: 'textfield',
     border: false,
     monitorValid: true,
+	
+	tree: false,
     
     initComponent: function() {
     
@@ -49,21 +51,22 @@ Ext.define('Cetera.catalog.Create', {
                     text: Config.Lang.ok,
                     formBind: true,
                     disabled:true,  
+					scope: this,
                     handler: function() {
-                        var form = this.up('form').getForm();
-                        var tree = Ext.getCmp('main_tree');
+                        var form = this.getForm();
+                        if (!this.tree) this.tree = Ext.getCmp('main_tree');
                         form.submit({
                             url:'include/action_catalog.php', 
                             params: {
                                 action: 'cat_create', 
                                 server:0, 
-                                parent: tree.getSelectedId()
+                                parent: this.tree.getSelectedId()
                             },
                             waitMsg: Config.Lang.wait,
                             scope: this,
                             success: function(form, action) {
-                                tree.reloadNode(tree.getSelectionModel().getLastSelected());
-                                this.up('form').win.hide();
+                                this.tree.reloadNode(this.tree.getSelectionModel().getLastSelected());
+                                this.win.hide();
                             }
                         });
                     }

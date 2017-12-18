@@ -27,10 +27,18 @@ Ext.define('Cetera.Viewport', {
             margins:'0 0 0 5',
             layout: 'border',
             items: [ 
-				Ext.create('Cetera.main.Navigation'),
+				Ext.create('Cetera.main.Navigation',{
+					region: 'center'
+				}),
 				Ext.create('Ext.Panel', {
-					region:'center',
+					region:'south',
+					height: '50%',
 					layout:'fit',
+					split: true,
+					stateId: 'stateMainStructure',
+					stateful: true,		
+					collapsible: true,					
+					
 					items:  Ext.create('Ext.TabPanel',{  
 						border: false,
 						activeTab: 0,

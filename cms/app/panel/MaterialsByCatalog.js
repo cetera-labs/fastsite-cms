@@ -1,12 +1,15 @@
 Ext.define('Cetera.panel.MaterialsByCatalog', {
 
     extend:'Cetera.panel.Materials',
+	alias : 'widget.structurematerials',
 
     catalogId: 0,       // текущий раздел
     allow_own: false,   // право работать со своими материалами
     allow_all: false,   // право работать со всеми материалами
     allow_pub: false,   // право на публикацию материалов
     preview: '', 
+	
+	structureTree: mainTree,
                    
     reload: function() {
         this.store.proxy.extraParams.id = this.catalogId;
@@ -17,7 +20,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
        
     catalogChanged: function() {
         this.store.removeAll();  
-        this.catalogId = mainTree.getSelectedId();   
+        this.catalogId = this.structureTree.getSelectedId();   
         if (this.catalogId > 0) {
             Ext.Ajax.request({
                 url: 'include/action_materials.php',
@@ -27,14 +30,14 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 success: function(resp) {
                     var obj = Ext.decode(resp.responseText);
                     if (obj.link) {
-                        this.hide(); 
+                        this.disable();
                         Ext.MessageBox.confirm(Config.Lang.attention, Config.Lang.msgCatLink, function(btn) {
-                            if (btn == 'yes') mainTree.selectPath(obj.link, 'id');
+                            if (btn == 'yes') this.structureTree.selectPath(obj.link, 'id');
                         }, this);
                     } else if (obj.right[4] == 0) {
-                        this.hide(); 
+                        this.disable();
                     } else {  
-                        this.show();                
+                        this.enable();                
                         this.allow_own = obj.right[0];
                         this.allow_all = obj.right[1];
                         this.allow_pub = obj.right[2];
@@ -49,7 +52,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 }
             });
         } else {
-            this.hide();
+            this.disable();
         }
     }, 
     
@@ -248,7 +251,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
          
         this.on({
             'beforedestroy': function() {
-                mainTree.getSelectionModel().removeListener('selectionchange', this.catalogChanged, this);
+                this.structureTree.getSelectionModel().removeListener('selectionchange', this.catalogChanged, this);
             },
 			'celldblclick' : function() {
                 this.edit(0,this.getSelectionModel().getSelection()[0].getId());
@@ -275,7 +278,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
             scope:this
         });
         
-        mainTree.getSelectionModel().addListener('selectionchange', this.catalogChanged, this);
+        this.structureTree.getSelectionModel().addListener('selectionchange', this.catalogChanged, this);
         
         this.catalogChanged();               
         

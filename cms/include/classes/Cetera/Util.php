@@ -120,8 +120,7 @@ class Util {
     	foreach ($replace as $name => $value)
     		if (isset($row[$name])) $row[$name] = $value;
     	unset($row[$id_row]);
-    	foreach($row as $_id => $_value) $row[$_id] = $conn->quote($_value);
-    	$conn->executeQuery("INSERT INTO $table (".implode(',', array_keys($row)).") VALUES (".implode(",", array_values($row))."'");
+		$conn->insert($table, $row);
     	return $conn->lastInsertId();
     }
            

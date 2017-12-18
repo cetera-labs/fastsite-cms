@@ -37,17 +37,22 @@ try {
         $type = $catalog->materialsType;
         
     }
-	elseif (isset($_REQUEST['type']) && $_REQUEST['type'])
-	{    
+	elseif (isset($_REQUEST['type']) && $_REQUEST['type']) {    
         $od = new ObjectDefinition($_REQUEST['type']);   		
         $math = $od->table;
         $type = $od->id;        
         $where = '';   
 		$right = [1,1];		
     }
-	else
-	{
-        throw new Exception\CMS(Exception\CMS::INVALID_PARAMS);
+	else {
+
+		echo json_encode(array(
+			'success' => true,
+			'total'   => 0,
+			'rows'    => []
+		));	
+		die();
+	
     }
 	
 	if (isset($_REQUEST['filter'])) {

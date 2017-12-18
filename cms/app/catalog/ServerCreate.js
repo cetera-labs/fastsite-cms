@@ -12,7 +12,8 @@ Ext.define('Cetera.catalog.ServerCreate', {
     defaults   : { anchor: '0' },
     defaultType: 'textfield',
     border: false,
-    monitorValid: true,   
+    monitorValid: true,  
+	tree: false,	
    
     items: [
         {
@@ -50,37 +51,45 @@ Ext.define('Cetera.catalog.ServerCreate', {
             allowBlank: false             
         }
     ], 
-    
-    buttons: [
-        {
-            xtype: 'button',
-            text: Config.Lang.ok,
-            formBind: true,
-            disabled:true,  
-            handler: function() {
-                var form = this.up('form').getForm();
-                var tree = Ext.getCmp('main_tree');
-                form.submit({
-                    url:'include/action_catalog.php', 
-                    params: {
-                        action: 'cat_create', 
-                        server:1, 
-                        parent: tree.getSelectedId()
-                    },
-                    waitMsg: Config.Lang.wait,
-                    scope: this,
-                    success: function(form, action) {
-                        tree.reloadNode(tree.getSelectionModel().getLastSelected());
-                        this.up('form').win.hide();
-                    }
-                });
-            }
-        },{
-            xtype: 'button',
-            text: Config.Lang.cancel,
-            handler: function() { this.up('form').win.hide(); }
-        }
-    ],
+	
+	initComponent: function() {
+		
+		Ext.apply(this, {
+			buttons: [
+				{
+					xtype: 'button',
+					text: Config.Lang.ok,
+					formBind: true,
+					disabled:true,  
+					scope: this,
+					handler: function() {
+						var form = this.getForm();
+						if (!this.tree) this.tree = Ext.getCmp('main_tree');
+						form.submit({
+							url:'include/action_catalog.php', 
+							params: {
+								action: 'cat_create', 
+								server:1, 
+								parent: this.tree.getSelectedId()
+							},
+							waitMsg: Config.Lang.wait,
+							scope: this,
+							success: function(form, action) {
+								this.tree.reloadNode(this.tree.getSelectionModel().getLastSelected());
+								this.win.hide();
+							}
+						});
+					}
+				},{
+					xtype: 'button',
+					text: Config.Lang.cancel,
+					handler: function() { this.up('form').win.hide(); }
+				}
+			]			
+		});
+		
+		this.callParent();
+	},	
     
     show : function() {
 

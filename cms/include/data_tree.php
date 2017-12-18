@@ -19,7 +19,7 @@ $node = $_REQUEST['node'];
 
 if ($only)
 {
-	$od = new ObjectDefinition($only); 
+	$od = ObjectDefinition::findById($only); 
 	$only = $od->id;	
 }
 
@@ -27,6 +27,7 @@ if ($node == 'root') {
 
     $nodes[] = array(
         'text' => 'root',
+		'name' => 'root',
         'id'   => 'item-0',
         'iconCls'  => 'tree-folder-visible',
         'qtip' => '',
@@ -100,8 +101,23 @@ function process_child($child, $rule, $only, $nolink, $exclude, $nocatselect) {
     if ($child instanceof Server) $cls = 'tree-server';
     if ($child->isLink()) $cls = 'tree-folder-link';
     if ($child->hidden) $cls = 'tree-folder-hidden';
+	
+	try {
+		if ($child->materialsType) {
+			$od = ObjectDefinition::findById($child->materialsType);
+			$mtype_name = $od->getDescriptionDisplay();
+		}
+		else {
+			$mtype_name = '';
+		}
+	}
+	catch (\Exception $e) {
+		$mtype_name = '';
+	}
+	
     return array(
         'text'  => '<span class="tree-alias">'.$child->alias.'</span>'.$child->name,
+		'name'  => $child->name, 
         'alias' => $child->alias,
         'id'    => 'item-'.$child->id,
         'iconCls'=> $cls,
@@ -109,6 +125,8 @@ function process_child($child, $rule, $only, $nolink, $exclude, $nocatselect) {
         'leaf'  => FALSE,
         'link'  => $child->isLink(),
         'mtype' => $child->materialsType,
-        'disabled' => ($right && !$nocatselect)?FALSE:TRUE
+        'disabled' => ($right && !$nocatselect)?FALSE:TRUE,
+		'date'  => $child->dat,
+		'mtype_name' => $mtype_name,
     );
 }

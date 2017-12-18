@@ -224,7 +224,24 @@ Ext.application({
         tabs.on('beforetabchange', function(tp, newTab, currentTab) { 
             if (currentTab && currentTab.content) currentTab.content.fireEvent('deactivate');
             if (newTab && newTab.content) newTab.content.fireEvent('activate');
-        });           
+        }); 
+
+		Ext.create('Ext.data.TreeStore', {
+			model: 'Cetera.model.SiteTree',
+			storeId: 'structureMain',
+			rootProperty: {
+				text: 'root',
+				id: 'root',
+				expanded: true,
+				iconCls: 'tree-folder-visible'
+			},
+			root: {
+				text: 'root',
+				id: 'root',
+				expanded: true,
+				iconCls: 'tree-folder-visible'
+			}			
+		});		
     
 		mainTree = Ext.create('Cetera.main.Tree');
         this.viewport = Ext.create('Cetera.Viewport');
@@ -318,7 +335,7 @@ Ext.application({
                 id: tab_id,
                 layout: 'fit',
                 title: Config.modules[module]['name'],
-                iconCls: 'tab-'+module 
+                iconCls: Config.modules[module]['icon']?'tab-'+module:Config.modules[module]['iconCls']
             });
             tabs.setActiveTab(tab_id);
     

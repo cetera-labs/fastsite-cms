@@ -1,152 +1,149 @@
-Ext.define('Cetera.main.Tree', {
-
-    extend: 'Ext.tree.TreePanel',
-    requires: 'Cetera.model.SiteTree',
-    
-	title: _('Структура'),
-	border: false,
-	anchor:'100% 100%',	
+Ext.define('Cetera.panel.StructureTree', {
 	
-    id:'main_tree',
-    rootVisible:false,
-    lines:false,
-    autoScroll:true,
+	extend: 'Ext.tree.Panel',
+	alias : 'widget.structuretree',
+	
+	rootVisible:false,
+	useArrows: true,
 	
 	store: 'structureMain',
-    
-    initComponent : function() {
-		        
-        this.tbar = [
+	
+	initComponent : function() {
+		
+        var tbar = [
             {
                 iconCls:'icon-reload',
-                tooltip:'<b>'+Config.Lang.reload+'</b>',
+                tooltip: _('Обновить'),
                 handler: function () { this.reload(this.getSelectedPath()); },
                 scope: this
             },
             '-'
-        ];
-        
+        ];	
+
         if (Config.user.permissions.adminRootCat)
-            Ext.Array.push(this.tbar, {
-                id:'tb_new_s',
+            Ext.Array.push(tbar, {
+                itemId:'tb_new_s',
                 iconCls:'icon-server',
                 tooltip: Config.Lang.createServer,
                 handler: this.create_new_server,
                 scope: this
             });
         
-        Ext.Array.push(this.tbar, 
+        Ext.Array.push(tbar, 
             {
-                id:'tb_new_f',
+                itemId:'tb_new_f',
                 iconCls:'icon-new_folder',
                 tooltip: Config.Lang.newCatalog,
                 handler: this.create_new,
                 scope: this
             },{
-                id:'tb_new_l',
+                itemId:'tb_new_l',
                 iconCls:'icon-new_folder_linked',
                 tooltip: Config.Lang.newLink,
                 handler: this.create_link,
                 scope: this
             },{
-                id:'tb_prop',
+                itemId:'tb_prop',
                 iconCls:'icon-props',
                 tooltip: Config.Lang.catProps,
                 handler: this.edit,
                 scope: this
             },{
-                id:'tb_up',
+                itemId:'tb_up',
                 iconCls:'icon-up',
                 tooltip: Config.Lang.upper,
                 handler: this.move_up,
                 scope: this
             },{
-                id:'tb_down',
+                itemId:'tb_down',
                 iconCls:'icon-down',
                 tooltip: Config.Lang.downer,
                 handler: this.move_down,
                 scope: this
             },{
-                id:'tb_copy',
+                itemId:'tb_copy',
                 iconCls:'icon-copy',
                 tooltip: Config.Lang.copy,
                 handler: this.copy,
                 scope: this
             },{
-                id:'tb_delete',
+                itemId:'tb_delete',
                 iconCls:'icon-delete',
                 tooltip: Config.Lang.remove,
                 handler: this.delete_cat,
                 scope: this
             }
-        );
-        
-        this.callParent();  
-        
+        );	
+
+		this.tbar = Ext.create('Ext.toolbar.Toolbar', {
+			items: tbar
+		});
+		this.toolbar = this.tbar;
+		
+		Ext.apply(this, {
+			
+			columns: [{
+                xtype: 'treecolumn', 
+                text: _('Раздел'),
+                flex: 2,
+                sortable: true,
+                dataIndex: 'name'
+            },{
+				header: "Alias", 
+				flex: 1, 
+				dataIndex: 'alias'
+			},{
+				header: _('Тип материалов'), 
+				width: 200, 
+				dataIndex: 'mtype_name'
+			},{
+				header: _('Дата создания'), 
+				width: 150, 
+				dataIndex: 'date',
+				xtype: 'datecolumn',   
+				format:'Y-m-d H:i:s' 
+			}]
+			
+		});
+		
+		this.callParent();
+		
         this.getSelectionModel().on({
             'selectionchange' : function(sm, node){
-                if(!this.menu) this.createContextMenu();
                 
                 node = node[0];
                            
                 if (node && node.get('link')) {
-                    Ext.getCmp('tb_new_f').disable();
-                    Ext.getCmp('tb_new_l').disable();  
-                    if (this.menu) {
-                        Ext.getCmp('m_new_f').disable();
-                        Ext.getCmp('m_new_l').disable();       
-                    }   
+                    this.toolbar.getComponent('tb_new_f').disable();
+                    this.toolbar.getComponent('tb_new_l').disable();  
                 } else {
-                    Ext.getCmp('tb_new_f').enable();
-                    Ext.getCmp('tb_new_l').enable();  
-                    if (this.menu) {
-                        Ext.getCmp('m_new_f').enable();
-                        Ext.getCmp('m_new_l').enable();       
-                    }        
+                    this.toolbar.getComponent('tb_new_f').enable();
+                    this.toolbar.getComponent('tb_new_l').enable();         
                 }
                 
                 if(node && node.getId() != 'item-0'){
-                    Ext.getCmp('tb_up').enable();
-                    Ext.getCmp('tb_down').enable();
-                    Ext.getCmp('tb_copy').enable();
-                    Ext.getCmp('tb_delete').enable();
-                    Ext.getCmp('tb_prop').enable();
-                    if (this.menu) {
-                        Ext.getCmp('m_up').enable();
-                        Ext.getCmp('m_down').enable();
-                        Ext.getCmp('m_copy').enable();
-                        Ext.getCmp('m_delete').enable();
-                        Ext.getCmp('m_prop').enable();           
-                    }
+                    this.toolbar.getComponent('tb_up').enable();
+                    this.toolbar.getComponent('tb_down').enable();
+                    this.toolbar.getComponent('tb_copy').enable();
+                    this.toolbar.getComponent('tb_delete').enable();
+                    this.toolbar.getComponent('tb_prop').enable();
                 } else {
-                    Ext.getCmp('tb_up').disable();
-                    Ext.getCmp('tb_down').disable();
-                    Ext.getCmp('tb_copy').disable();
-                    Ext.getCmp('tb_delete').disable();
+                    this.toolbar.getComponent('tb_up').disable();
+                    this.toolbar.getComponent('tb_down').disable();
+                    this.toolbar.getComponent('tb_copy').disable();
+                    this.toolbar.getComponent('tb_delete').disable();
 
                     if(Config.user.permissions.admin && node && node.getId() == 'item-0')
-                        Ext.getCmp('tb_prop').enable();
-                        else Ext.getCmp('tb_prop').disable();
-                        
-                    if (this.menu) {
-                        Ext.getCmp('m_up').disable();
-                        Ext.getCmp('m_down').disable();
-                        Ext.getCmp('m_copy').disable();
-                        Ext.getCmp('m_delete').disable(); 
-                        if(Config.user.permissions.admin && node && node.getId() == 'item-0')
-                            Ext.getCmp('m_prop').enable();
-                            else Ext.getCmp('m_prop').disable();                 
-                    }
+                        this.toolbar.getComponent('tb_prop').enable();
+                        else this.toolbar.getComponent('tb_prop').disable();
                 }
                 
                 if (Config.user.permissions.adminRootCat) {
                 
                     if (node && node.getDepth() == 1) {
-                        Ext.getCmp('tb_new_s').enable();
-                        if (this.menu) Ext.getCmp('m_new_s').enable();
+                        this.toolbar.getComponent('tb_new_s').enable();
                     } else {
-                        Ext.getCmp('tb_new_s').disable();
-                        if (this.menu) Ext.getCmp('m_new_s').disable();
+                        this.toolbar.getComponent('tb_new_s').disable();
                     }
                     
                 }
@@ -154,19 +151,9 @@ Ext.define('Cetera.main.Tree', {
                 Cetera.getApplication().buildBoLink();
             },
             scope:this
-        });
-        
-        this.on('dblclick', this.edit, this);		
-		
-        this.getView().on('itemcontextmenu', function(view, rec, node, index, e){
-            e.stopEvent();
-            if(!this.menu) this.createContextMenu();
-            this.menu.showAt(e.getXY());
-            return false;
-        }, this);
-
-    },
-
+        });		
+	},
+	
     reload: function(path, callback) {
         this.getSelectionModel().deselectAll();
         if (!path) path = '/root/item-0';
@@ -208,7 +195,7 @@ Ext.define('Cetera.main.Tree', {
         var a = sn.getId().split('-');
         return a[1];
     },
-    
+	
     edit: function(btn) {
         if (this.getSelectedId() < 0) return;
         
@@ -223,6 +210,7 @@ Ext.define('Cetera.main.Tree', {
         if (this.getSelectedId() < 0) return;
         
         var cc = Ext.create('Cetera.catalog.ServerCreate', {
+			tree: this,
             win: this.getPropertyWindow()
         });
         cc.show();
@@ -233,6 +221,7 @@ Ext.define('Cetera.main.Tree', {
         
         var cc = Ext.create('Cetera.catalog.Create', {
             win: this.getPropertyWindow(),
+			tree: this,
             materialsType: this.getSelectionModel().getLastSelected().get('mtype')
         });
         cc.show();
@@ -242,6 +231,7 @@ Ext.define('Cetera.main.Tree', {
         if (this.getSelectedId() < 0) return;
         
         var cc = Ext.create('Cetera.catalog.LinkCreate', {
+			tree: this,
             win: this.getPropertyWindow()
         });
         cc.show();
@@ -400,80 +390,6 @@ Ext.define('Cetera.main.Tree', {
             }});
         }
         return this.propertyWindow;
-    },
-    
-    createContextMenu: function() {
-    
-        var items = [
-                {
-                    id:'m_prop',
-                    disabled: true,
-                    iconCls:'icon-props',
-                    text: Config.Lang.catProps,
-                    handler: this.edit,
-                    scope: this
-                }, '-'        
-        ];
-        
-        if (Config.user.permissions.adminRootCat)
-            Ext.Array.push(items, {
-                    id:'m_new_s',
-                    disabled: true,
-                    iconCls:'icon-server',
-                    text: Config.Lang.createServer,
-                    handler: this.create_new_server,
-                    scope: this            
-            }); 
-            
-        Ext.Array.push(items, 
-                {
-                    id:'m_new_f',
-                    iconCls:'icon-new_folder',
-                    text: Config.Lang.newCatalog,
-                    handler: this.create_new,
-                    scope: this
-                }
-                ,{
-                    id:'m_new_l',
-                    iconCls:'icon-new_folder_linked',
-                    text: Config.Lang.newLink,
-                    handler: this.create_link,
-                    scope: this
-                }
-                ,{
-                    id:'m_up',
-                    iconCls:'icon-up',
-                    text: Config.Lang.upper,
-                    handler: this.move_up,
-                    scope: this
-                }
-                ,{
-                    id:'m_down',
-                    iconCls:'icon-down',
-                    text: Config.Lang.downer,
-                    handler: this.move_down,
-                    scope: this
-                }
-                ,{
-                    id:'m_copy',
-                    iconCls:'icon-copy',
-                    text: Config.Lang.copy,
-                    handler: this.copy,
-                    scope: this
-                }
-                ,{
-                    id:'m_delete',
-                    iconCls:'icon-delete',
-                    text: Config.Lang.remove,
-                    handler: this.delete_cat,
-                    scope: this
-                }        
-        );                   
-    
-        this.menu = Ext.create('Ext.menu.Menu', {
-            id:'feeds-ctx',
-            items: items
-        });
-
-    }
+    }	
+	
 });

@@ -8,13 +8,8 @@ Ext.define('Cetera.main.Navigation', {
     autoScroll:true,
     cls: 'navigation-tree',
 	
-	title: _('Навигация'), 
-	split: true,           
+	title: _('Навигация'),          
 	border:true,
-	region:'north',
-	height: 300,
-	stateId: 'stateMainNavigation',
-    stateful: true,			
        
     initComponent : function() {
     
