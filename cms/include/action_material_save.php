@@ -21,14 +21,6 @@ $res = array(
 
 $math = $_REQUEST['table'];
 
-$handler = $application->getConn()->fetchColumn("SELECT handler FROM types WHERE alias = ?", array($math), 0);
-
-if ($handler) {
-    if (substr($handler, -4) != '.php') $handler .= '.php';
-    if ($handler && file_exists(PLUGIN_MATH_DIR.'/'.$handler)) 
-        include(PLUGIN_MATH_DIR.'/'.$handler);
-}
-
 $od = ObjectDefinition::findByTable($_REQUEST['table']);
 if (!$_POST['id'])
 {
@@ -40,14 +32,9 @@ else
 	$m->setFields($_POST);
 }
 
-if (function_exists('on_before_save')) on_before_save();
-
 $m->save(false);
 $m->lock($user->id);
 
-if (function_exists('on_after_save')) on_after_save();
-if ((int)$_REQUEST['publish'] && function_exists('on_publish')) on_publish();
-        
 $res['success'] = TRUE; 
 $res['id'] = $m->id;
 if ((int)$_REQUEST['catalog_id'] >= 0) $res['alias'] = $m->alias;

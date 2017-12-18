@@ -266,8 +266,6 @@ try {
             'alias'   => $rows->alias, 
             'describ' => $rows->describ, 
             'fixed'   => 0, 
-            'handler' => $rows->handler, 
-            'plugin'  => $rows->plugin
         ));        
         $res['success'] = true;
         $res['rows'] = $od->toArray();
@@ -279,8 +277,6 @@ try {
         $od->update(array(
             'alias'   => $rows->alias, 
             'describ' => $rows->describ, 
-            'handler' => $rows->handler, 
-            'plugin'  => $rows->plugin
         ));
         $res['success'] = true;
 		$res['rows'] = $od->toArray();

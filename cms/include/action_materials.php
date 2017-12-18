@@ -128,13 +128,6 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
 		while($f = $r->fetch()) $sel[] = $f['id'];
 	}
 	
-    $handler = $application->getConn()->fetchColumn("select handler from types where alias = ?",array($objectDefinition->table));
-    if ($handler) {
-        if (substr($handler, -4) != '.php') $handler .= '.php';
-        if ($handler && file_exists(PLUGIN_MATH_DIR.'/'.$handler)) 
-            include(PLUGIN_MATH_DIR.'/'.$handler);
-    }
-    
     // backward compability
     $math = $objectDefinition->table;
 	
@@ -205,8 +198,6 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
     	  foreach ($sel as $val) {
     	      $m = Material::getById((int)$val, $objectDefinition);
     	      Event::trigger($code, ['message' => $m->getBoUrl()]);
-        	  if ($action == 'pub' && function_exists('on_publish')) on_publish();
-        	  if ($action == 'unpub' && function_exists('on_unpublish')) on_unpublish();
         }
         
     }
