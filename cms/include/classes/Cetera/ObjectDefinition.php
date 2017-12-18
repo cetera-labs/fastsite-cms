@@ -82,6 +82,18 @@ class ObjectDefinition extends Base {
         FIELD_ENUM     => "ENUM(%)",
         FIELD_MATERIAL => 'int(11)',
     );
+	
+  	public static function enum()
+    {   
+		$res = [];
+		$r = DbConnection::getDbConnection()->query('SELECT * FROM types');
+		while ($f = $r->fetch()) {
+			$t = self::findById($f['id']);
+			$t->setData($f);
+			$res[] = $t;
+		}
+		return $res;
+  	}	
     
 	/**
 	 * Найти тип материалов по имени таблицы в БД

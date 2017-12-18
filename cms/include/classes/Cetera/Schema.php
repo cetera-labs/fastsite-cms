@@ -843,6 +843,56 @@ class Schema {
     		}
         
     	}
+		
+		if ($module == 'core') {
+			foreach (ObjectDefinition::enum() as $od) {
+				foreach ($od->getFields() as $f) {
+					if (is_subclass_of($f, '\\Cetera\\ObjectFieldLinkSetAbstract')) {
+						
+						$res['tables'][$f->getLinkTable()] = [
+							'name'   => $f->getLinkTable(),
+							'fields' => [
+								'id' => [
+									'name' => 'id',
+									'type' => 'int(11)',
+									'null' => 0
+								],
+								'dest' => [
+									'name' => 'dest',
+									'type' => 'int(11)',
+									'null' => 0
+								],
+								'tag' => [
+									'name' => 'tag',
+									'type' => 'int(11)',
+									'default' => 0,
+									'null' => 0
+								],
+							],
+							'keys' => [
+								'PRIMARY' => [
+									'name' => 'PRIMARY',
+									'unique' => 1,
+									'columns' => [
+										['name' => 'id'],
+										['name' => 'dest'],
+									]
+								],
+								'dest' => [
+									'name' => 'dest',
+									'unique' => 0,
+									'columns' => [
+										['name' => 'dest'],
+									]
+								],
+							]
+						];
+						
+					}
+				}
+			}
+			
+		}		
       
     	return $res;
     }
