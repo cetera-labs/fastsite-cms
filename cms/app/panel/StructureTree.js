@@ -10,79 +10,96 @@ Ext.define('Cetera.panel.StructureTree', {
 	
 	initComponent : function() {
 		
+        this.reloadAction = Ext.create('Ext.Action', {
+            iconCls: 'icon-reload', 
+            tooltip: _('Обновить'),
+            scope: this,
+            handler: function () { this.reload(this.getSelectedPath()); },
+        });		
+		
+		
         var tbar = [
-            {
-                iconCls:'icon-reload',
-                tooltip: _('Обновить'),
-                handler: function () { this.reload(this.getSelectedPath()); },
-                scope: this
-            },
+            this.reloadAction,
             '-'
         ];	
 
-        if (Config.user.permissions.adminRootCat)
-            Ext.Array.push(tbar, {
-                itemId:'tb_new_s',
+        if (Config.user.permissions.adminRootCat) {
+			
+			this.newServerAction = Ext.create('Ext.Action', {
                 iconCls:'icon-server',
-                tooltip: Config.Lang.createServer,
+                text: Config.Lang.createServer,
                 handler: this.create_new_server,
                 scope: this
-            });
-        
-        Ext.Array.push(tbar, 
-            {
-                itemId:'tb_new_f',
+			});			
+		
+            Ext.Array.push(tbar, this.newServerAction);
+		}
+		
+		this.newFolderAction = Ext.create('Ext.Action', {
                 iconCls:'icon-new_folder',
-                tooltip: Config.Lang.newCatalog,
+                text: Config.Lang.newCatalog,
                 handler: this.create_new,
                 scope: this
-            },{
-                itemId:'tb_new_l',
+		});	
+		this.newLinkAction = Ext.create('Ext.Action', {
                 iconCls:'icon-new_folder_linked',
-                tooltip: Config.Lang.newLink,
+                text: Config.Lang.newLink,
                 handler: this.create_link,
                 scope: this
-            },{
-                itemId:'tb_prop',
+		});	
+		this.propAction = Ext.create('Ext.Action', {
                 iconCls:'icon-props',
-                tooltip: Config.Lang.catProps,
+                text: Config.Lang.catProps,
                 handler: this.edit,
                 scope: this
-            },{
-                itemId:'tb_up',
+		});	
+		this.upAction = Ext.create('Ext.Action', {
                 iconCls:'icon-up',
-                tooltip: Config.Lang.upper,
+                text: Config.Lang.upper,
                 handler: this.move_up,
                 scope: this
-            },{
-                itemId:'tb_down',
+		});	
+		this.downAction = Ext.create('Ext.Action', {
                 iconCls:'icon-down',
-                tooltip: Config.Lang.downer,
+                text: Config.Lang.downer,
                 handler: this.move_down,
                 scope: this
-            },{
-                itemId:'tb_copy',
+		});	
+		this.copyAction = Ext.create('Ext.Action', {
                 iconCls:'icon-copy',
-                tooltip: Config.Lang.copy,
+                text: Config.Lang.copy,
                 handler: this.copy,
                 scope: this
-            },{
-                itemId:'tb_delete',
+		});	
+		this.deleteAction = Ext.create('Ext.Action', {
                 iconCls:'icon-delete',
-                tooltip: Config.Lang.remove,
+                text: Config.Lang.remove,
                 handler: this.delete_cat,
                 scope: this
-            }
+		});	
+        
+        Ext.Array.push(tbar, 
+            this.newFolderAction,
+			this.newLinkAction,
+			this.propAction,
+			this.upAction,
+			this.downAction,
+			this.copyAction,
+			this.deleteAction
         );	
 
 		this.tbar = Ext.create('Ext.toolbar.Toolbar', {
 			items: tbar
 		});
-		this.toolbar = this.tbar;
 		
 		Ext.apply(this, {
 			
 			columns: [{
+				header: "ID", 
+				width: 50, 
+				align: 'right',
+				dataIndex: 'item_id'
+			},{
                 xtype: 'treecolumn', 
                 text: _('Раздел'),
                 flex: 2,
@@ -106,6 +123,17 @@ Ext.define('Cetera.panel.StructureTree', {
 			
 		});
 		
+        this.menu = Ext.create('Ext.menu.Menu', {
+            items: [
+				this.upAction,
+				this.downAction,
+				this.copyAction,
+				this.deleteAction,	
+				'-',
+				this.propAction
+			]
+        });		
+		
 		this.callParent();
 		
         this.getSelectionModel().on({
@@ -114,36 +142,35 @@ Ext.define('Cetera.panel.StructureTree', {
                 node = node[0];
                            
                 if (node && node.get('link')) {
-                    this.toolbar.getComponent('tb_new_f').disable();
-                    this.toolbar.getComponent('tb_new_l').disable();  
+                    this.newFolderAction.disable();
+                    this.newLinkAction.disable();  
                 } else {
-                    this.toolbar.getComponent('tb_new_f').enable();
-                    this.toolbar.getComponent('tb_new_l').enable();         
+                    this.newFolderAction.enable();
+                    this.newLinkAction.enable();         
                 }
                 
                 if(node && node.getId() != 'item-0'){
-                    this.toolbar.getComponent('tb_up').enable();
-                    this.toolbar.getComponent('tb_down').enable();
-                    this.toolbar.getComponent('tb_copy').enable();
-                    this.toolbar.getComponent('tb_delete').enable();
-                    this.toolbar.getComponent('tb_prop').enable();
+                    this.upAction.enable();
+                    this.downAction.enable();
+                    this.copyAction.enable();
+                    this.deleteAction.enable();
                 } else {
-                    this.toolbar.getComponent('tb_up').disable();
-                    this.toolbar.getComponent('tb_down').disable();
-                    this.toolbar.getComponent('tb_copy').disable();
-                    this.toolbar.getComponent('tb_delete').disable();
+                    this.upAction.disable();
+                    this.downAction.disable();
+                    this.copyAction.disable();
+                    this.deleteAction.disable();
 
                     if(Config.user.permissions.admin && node && node.getId() == 'item-0')
-                        this.toolbar.getComponent('tb_prop').enable();
-                        else this.toolbar.getComponent('tb_prop').disable();
+                        this.propAction.enable();
+                        else this.propAction.disable();
                 }
                 
                 if (Config.user.permissions.adminRootCat) {
                 
                     if (node && node.getDepth() == 1) {
-                        this.toolbar.getComponent('tb_new_s').enable();
+                        this.newServerAction.enable();
                     } else {
-                        this.toolbar.getComponent('tb_new_s').disable();
+                        this.newServerAction.disable();
                     }
                     
                 }
@@ -151,7 +178,14 @@ Ext.define('Cetera.panel.StructureTree', {
                 Cetera.getApplication().buildBoLink();
             },
             scope:this
-        });		
+        });
+
+        this.getView().on('itemcontextmenu', function(view, rec, node, index, e){
+            e.stopEvent();
+            this.menu.showAt(e.getXY());
+            return false;
+        }, this);
+		
 	},
 	
     reload: function(path, callback) {

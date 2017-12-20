@@ -8,7 +8,8 @@ Ext.define('Cetera.window.CatalogEdit', {
 		'Cetera.field.Aliases',
 		'Cetera.field.Folder',
 		'Cetera.field.MaterialType',
-		'Cetera.field.SectionController'
+		'Cetera.field.SectionController',
+		'Cetera.model.Theme'
 	],
 
 	closable:true,
@@ -146,11 +147,26 @@ Ext.define('Cetera.window.CatalogEdit', {
 				});
 				
 				Ext.Array.push(fields,{
-					fieldLabel: _('Каталог'),
+					fieldLabel: _('Тема'),
 					name: 'templateDir',
-					value: this.catalog.aliases,
-					regex: /^[\/\.\-\_A-Z0-9]+$/i,
-					value: this.catalog.templateDir 				
+					xtype: 'combobox',
+					value: this.catalog.templateDir,
+					displayField: 'title',
+					valueField: 'url',
+					editable: false,
+					store: Ext.create('Ext.data.Store', {
+						model: 'Cetera.model.Theme',
+						autoLoad: true
+					}),
+					trigger2Cls: 'icon-setup',
+					onTrigger2Click: function() {
+						var rec = this.findRecordByValue(this.getValue());
+						if (!rec) return;
+						Ext.create('Cetera.theme.Activate',{
+							theme: rec,
+							serverId: this.up('window').catalog.id
+						});
+					}
 				});			
 			}
 			

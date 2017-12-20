@@ -58,6 +58,7 @@ if (sizeof($themes)) {
             'version'     => $p['version'],
             'title'       => $p['title'],
 			'author'      => $p['author'],
+			'url'         => trim($p->getUrl(),'/'),
 			'disableUpgrade' => $p->isDisableUpgrade(),
 			'developerMode'  => $p->isDeveloperMode(),
 			'repository'  => isset($themes_lib[$id])?$themes_lib[$id]['version']:false,

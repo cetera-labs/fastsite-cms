@@ -4,8 +4,15 @@ Ext.define('Cetera.theme.Activate', {
 	
 	isDirty: false,
 	closeAfterSave: false,
+	
+	theme: null,
+	serverId: null,
               
     initComponent: function(){
+		
+		var wait = Ext.Msg.wait(_('Загрузка ...'),_('Подождите'),{
+			modal: true
+		});
     	
         this.serversPanel = Ext.create('Ext.grid.GridPanel', {
             enableHdMenu     : false,
@@ -45,7 +52,12 @@ Ext.define('Cetera.theme.Activate', {
 						if (this.closeAfterSave) this.close();
 					},
 					'load': function() {
-						this.serversPanel.getSelectionModel().select(0);
+						var sel = 0;
+						if (this.serverId) {
+							var rec = this.serversPanel.getStore().getById(this.serverId);
+							if (rec) sel = [rec];
+						}
+						this.serversPanel.getSelectionModel().select(sel);
 					}
 				}
             }),
@@ -74,10 +86,7 @@ Ext.define('Cetera.theme.Activate', {
                 rec.set( 'config', this.configPanel.getForm().getValues() );
             },            
             scope:this
-        });                   
-    
-        var items = [this.serversPanel];
-        this.configPanel = null;
+        });                   	
         
 		this.configPanel = Ext.create('Theme.'+this.theme.get('id')+'.Config', {
 			disabled: true,
@@ -94,7 +103,6 @@ Ext.define('Cetera.theme.Activate', {
 				 }               
 			} 
 		});
-		items.push(this.configPanel);
         
         this.applyButton = Ext.create('Ext.Button', {
             text : Config.Lang.apply,
@@ -135,14 +143,15 @@ Ext.define('Cetera.theme.Activate', {
             height:500,
             resizable: false,
             layout: 'border',
-            items: items,
+            items: [this.serversPanel, this.configPanel],
             buttons: [this.applyButton],
             bodyPadding: 5                      
         });
         
         this.callParent(arguments);
+		wait.close();
     },
-	
+		
 	saveChanges: function() {
 		
 				this.setLoading( true );
