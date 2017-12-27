@@ -604,6 +604,12 @@ tr.highlight .x-grid-cell-inner {
 
 .x-field td, .x-panel-body td {
 	padding: 0;
+	border: none;
+}
+
+.x-field tr, .x-panel-body tr {
+	border: none;
+	background: none;
 }
 
 .x-field textarea, .x-field input, .x-field table {
