@@ -576,8 +576,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			$mail->AddAddress($this->email);					
 			$mail->CharSet = 'utf-8';
 			$mail->ContentType = 'text/plain';
-			$mail->From = $mailFrom;
-			$mail->FromName = $fromName;
+                        $mail->setFrom($mailFrom, $fromName);
 			$mail->Subject = $t->_('Ваш пароль на сайт ').$a->getServer()->name;
 			$mail->Body = $t->_('Ваш новый пароль: ').$pass;
 			$mail->Send();				

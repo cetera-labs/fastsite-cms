@@ -1161,8 +1161,7 @@ class Application {
 			
 			$mail->CharSet = 'utf-8';
 			$mail->ContentType = $template['content_type'];
-			$mail->From = $twig->render('mail_from_email', $params);
-			$mail->FromName = $twig->render('mail_from_name', $params);
+                        $mail->setFrom($twig->render('mail_from_email', $params), $twig->render('mail_from_name', $params));
 			$mail->Subject = $twig->render('mail_subject', $params);
 			$mail->Body = $twig->render('mail_body', $params);
 			$mail->Send();
