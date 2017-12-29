@@ -1257,7 +1257,14 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     {
         if (!$this->materialsType) return 0;
 		return $this->getMaterials()->getCountAll();
-    }   
+    } 
+
+	public function getPermissions()
+	{	
+		$cat = $this;
+		while ($cat->isInheritsPermissions()) $cat = $cat->parent; 	
+		return self::getDbConnection()->fetchAll('SELECT group_id, permission FROM users_groups_allow_cat WHERE catalog_id=?', [$cat->id]);	
+	}
 	
 	public function boArray()
 	{
