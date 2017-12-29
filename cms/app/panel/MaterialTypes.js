@@ -203,7 +203,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
         fp.editor_u.setValue(f.get('editor_user'));
         fp.page.setValue(f.get('page'));
 		
-        fp.type.setValue(parseInt(fp.type.getStore().getAt(0).get('id')));
+        fp.type.setValue(parseInt(fp.datatype.getStore().getAt(0).get('id')));
 		fp.type.setDisabled(fixed);
         
         fp.datatype.setValue(parseInt(type));
@@ -248,6 +248,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
     fieldSubmit: function() {
         this.form.getForm().submit({
             url:'include/action_types.php', 
+			timeout: 600,
             params: { 
                 action:   this.field_action, 
                 type_id:  this.typesGrid.getSelectionModel().getSelection()[0].getId(),
@@ -257,14 +258,17 @@ Ext.define('Cetera.panel.MaterialTypes', {
             scope: this,
             success: function(form, action) {
                 this.editWin.hide();
-                this.fieldsStore.load();
-                
-                this.fieldsGrid.getSelectionModel().clearSelections();
-                
+                this.fieldsStore.load();                
+                this.fieldsGrid.getSelectionModel().clearSelections();                
             },
-            failure: function(form, action) {
-                Ext.Msg.alert(Config.Lang.error, action.result ? action.result.message : 'No response');
-            }            
+			failure: function(form, action) {
+                var obj = Ext.decode(action.response.responseText);			
+				var win = Ext.create('Cetera.window.Error', {
+					msg: obj.message,
+					ext_msg: obj.ext_message
+				});
+				win.show();				
+			}			
         });
     },
     
@@ -658,9 +662,9 @@ Ext.define('Cetera.panel.MaterialTypes', {
         
         this.form = new Ext.form.FormPanel({
             baseCls: 'x-plain',
-        fieldDefaults : {
-            labelWidth: 145
-        },
+			fieldDefaults : {
+				labelWidth: 145
+			},
 
             defaultType: 'textfield',
             bodyStyle:'padding:5px 5px 0;',

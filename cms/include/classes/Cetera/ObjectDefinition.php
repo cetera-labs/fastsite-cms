@@ -494,7 +494,7 @@ class ObjectDefinition extends Base {
 			{					
                 $params['len'] = stripslashes($params['len']);
                 $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
-                $sql = "ALTER TABLE $alias ADD ".$params['name']." $def";
+                $sql = "ALTER TABLE $alias ADD `".$params['name']."` $def";
                 $params['len'] = (integer) $params['len'];
                 DbConnection::getDbConnection()->executeQuery($sql);
             } 
