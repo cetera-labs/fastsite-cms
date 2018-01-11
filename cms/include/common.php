@@ -97,7 +97,7 @@ function check_upload_file($name) {
 */
 function fssql_query($query) {	
 	$r = mysql_query($query);   
-	if (mysql_error()) throw new \Cetera\Exception\SQL($query);
+	if (mysql_error()) throw new \Exception($query);
 	return $r;
 }  
 
