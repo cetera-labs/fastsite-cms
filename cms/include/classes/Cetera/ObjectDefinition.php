@@ -201,9 +201,9 @@ class ObjectDefinition extends Base {
     	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'alias',      1,'Alias',     255, 1, 1, 1, 3)");
     	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat',        5,'Date create[ru=Дата создания]', 1, 1, 1, 0, 5)");
     	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'dat_update', 5,'Edit date[ru=Дата изменения]', 1, 1, 1, 0, 6)");
-    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'Author[ru=Автор]',      -2, 1, 1, 0, 4,1003)");
-    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]',               1, 1, 1, 0, 7)");
-        $conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'idcat',      3,'Section[ru=Раздел]',         1, 1, 1, 0, 8)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'autor', 6,'Author[ru=Автор]', -2, 1, 1, 0, 4,1003)");
+    	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]', 1, 1, 1, 0, 7)");
+        $conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'idcat',      6,'Section[ru=Раздел]', 0, 1, 1, 0, 8, 1008)");
 
         return new self($id, $params['alias']);
       

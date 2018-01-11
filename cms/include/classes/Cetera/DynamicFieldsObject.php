@@ -444,12 +444,14 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
                 $this->fields[$field['name']] = $this->getPlainField($field);
 
             if ($this->fields[$field['name']]) {
-                          
-                if ($field['pseudo_type'] == PSEUDO_FIELD_LINK_USER) {
-                
-                     $this->fields[$field['name']] = User::getById($this->fields[$field['name']]);
-                
-                } else {
+				
+				if ($field['pseudo_type'] == PSEUDO_FIELD_LINK_CATALOG) {
+                     $this->fields[$field['name']] = Catalog::getById($this->fields[$field['name']]);
+                }
+				elseif ($field['pseudo_type'] == PSEUDO_FIELD_LINK_USER) {                
+                     $this->fields[$field['name']] = User::getById($this->fields[$field['name']]);                
+                } 
+				else {
                                 
                     if ($field['type'] == FIELD_LINK) {
                         if ($field['len']) {

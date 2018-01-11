@@ -21,7 +21,7 @@ INSERT INTO `types_fields`
 (7, 1, 'autor', 6,             'Author[ru=Автор]',            -1,   1, 1, 0, 4,  1003, NULL, 0, NULL, NULL),
 (4, 1, 'dat_update', 5,        'Edit date[ru=Дата редактирования]',1,    1, 1, 0, 5,  0, NULL, 0, NULL, NULL),
 (3, 1, 'dat', 5,               'Creation date[ru=Дата создания]',    1,    1, 1, 0, 6,  0, NULL, 0, NULL, NULL),
-(2, 1, 'idcat', 3,             'Section[ru=Раздел]',           1,    1, 1, 0, 7,  0, NULL, 0, NULL, NULL),
+(2, 1, 'idcat', 6,             'Section[ru=Раздел]',           0,    1, 1, 0, 7,  1008, NULL, 0, NULL, NULL),
 (5, 1, 'tag', 3,               'Sort[ru=Сортировка]',       1,    1, 0, 1, 1,  0, 100, 0, NULL, NULL),
 (6, 1, 'type', 3,              '',                 1,    1, 1, 0, 8,  0, NULL, 0, NULL, NULL),
 (9, 1, 'meta_title', 1,        'Meta title',       1000, 0, 0, 1, 13, 0, '', 1, '', 'SEO'),

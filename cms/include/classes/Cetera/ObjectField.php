@@ -33,8 +33,12 @@ class ObjectField implements \ArrayAccess {
                 return new ObjectFieldMaterial($data, $od);
             case FIELD_MATSET:
                 return new ObjectFieldMaterialSet($data, $od);
+			case FIELD_TEXT:
+			case FIELD_LONGTEXT:
+			case FIELD_HUGETEXT:
+				return new ObjectFieldText($data, $od);
             default:
-                return new ObjectField($data, $od);
+                return new ObjectFieldScalar($data, $od);
         }
     
     }
@@ -81,6 +85,21 @@ class ObjectField implements \ArrayAccess {
 }
 
 /**
+ * Скалярное поле
+ * @internal
+*/
+class ObjectFieldScalar extends ObjectField {
+}
+
+/**
+ * Текстовое поле
+ * @internal
+*/
+class ObjectFieldText extends ObjectFieldScalar {
+}
+
+
+/**
  * Поля-ссылки на другие объекты
  * @internal
 */
@@ -120,6 +139,65 @@ abstract class ObjectFieldLinkSetAbstract extends ObjectFieldLinkAbstract {
         return $this->parentObjectDefinition->table.'_'.$this->getTable().'_'.$this->name;
     }
 
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLink extends ObjectFieldLinkAbstract {
+
+    use ObjectFieldLinkTrait;
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldMaterial extends ObjectFieldLinkAbstract {
+
+    use ObjectFieldMaterialTrait;
+    
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLinkUser extends ObjectFieldLinkAbstract {
+
+    use ObjectFieldUserTrait;
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLinkSet extends ObjectFieldLinkSetAbstract {
+
+    use ObjectFieldLinkTrait;
+
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldMaterialSet extends ObjectFieldLinkSetAbstract {
+
+    use ObjectFieldMaterialTrait;
+
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLinkSetCatalog extends ObjectFieldLinkSetAbstract {
+
+    use ObjectFieldCatalogTrait;
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLinkSetUser extends ObjectFieldLinkSetAbstract {
+
+    use ObjectFieldUserTrait;
 }
 
 /**
@@ -195,63 +273,4 @@ trait ObjectFieldLinkTrait {
 	{
 		return $this->getCatalog()->getMaterials();
 	}	
-}
-
-/**
- * @internal
-*/
-class ObjectFieldLink extends ObjectFieldLinkAbstract {
-
-    use ObjectFieldLinkTrait;
-}
-
-/**
- * @internal
-*/
-class ObjectFieldMaterial extends ObjectFieldLinkAbstract {
-
-    use ObjectFieldMaterialTrait;
-    
-}
-
-/**
- * @internal
-*/
-class ObjectFieldLinkUser extends ObjectFieldLinkAbstract {
-
-    use ObjectFieldUserTrait;
-}
-
-/**
- * @internal
-*/
-class ObjectFieldLinkSet extends ObjectFieldLinkSetAbstract {
-
-    use ObjectFieldLinkTrait;
-
-}
-
-/**
- * @internal
-*/
-class ObjectFieldMaterialSet extends ObjectFieldLinkSetAbstract {
-
-    use ObjectFieldMaterialTrait;
-
-}
-
-/**
- * @internal
-*/
-class ObjectFieldLinkSetCatalog extends ObjectFieldLinkSetAbstract {
-
-    use ObjectFieldCatalogTrait;
-}
-
-/**
- * @internal
-*/
-class ObjectFieldLinkSetUser extends ObjectFieldLinkSetAbstract {
-
-    use ObjectFieldUserTrait;
 }
