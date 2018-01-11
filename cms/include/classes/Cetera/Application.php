@@ -1135,7 +1135,7 @@ class Application {
 			$this->eventLog($event, $text);
 		}		
 		
-		$data = self::getDbConnection()->fetchAll('SELECT * FROM mail_templates WHERE active=1 and event = ?', array($id));		
+		$data = self::getDbConnection()->fetchAll('SELECT * FROM mail_templates WHERE active=1 and event = ?', array($event));		
 		foreach ($data as $template) {
 			$twig = new \Twig_Environment(
 				new \Twig_Loader_Array( $template ),
@@ -1161,7 +1161,7 @@ class Application {
 			
 			$mail->CharSet = 'utf-8';
 			$mail->ContentType = $template['content_type'];
-                        $mail->setFrom($twig->render('mail_from_email', $params), $twig->render('mail_from_name', $params));
+            $mail->setFrom($twig->render('mail_from_email', $params), $twig->render('mail_from_name', $params));
 			$mail->Subject = $twig->render('mail_subject', $params);
 			$mail->Body = $twig->render('mail_body', $params);
 			$mail->Send();
