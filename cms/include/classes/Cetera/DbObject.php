@@ -27,7 +27,9 @@ abstract class DbObject {
      */  
     public $fields = array();
    
-    abstract public static function getTable();
+    public static function getTable() {
+		 throw new \Exception('Method getTable() must be overriden');
+	}
     
     public static function enum()
     {
