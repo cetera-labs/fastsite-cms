@@ -24,7 +24,56 @@ class Util {
      */         
     private function __construct() {}
     
-	
+    /*
+    * Вычисляет размер каталога
+    * 
+    * @param string $path путь
+    * @return int
+    * 
+    */	
+	public static function directorySize($path){
+		$bytestotal = 0;
+		$path = realpath($path);
+		if($path!==false && $path!='' && file_exists($path)){
+			foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS)) as $object){
+				$bytestotal += $object->getSize();
+			}
+		}
+		return $bytestotal;
+	}
+
+	/**
+	* Форматирует число байт в кб, мб и т.д.
+	*
+	* @param int       bytes   is the size
+	* @param bool      base10  enable base 10 representation, otherwise
+	*                  default base 2  is used
+	* @param int       round   number of fractional digits
+	* @param array     labels  strings associated to each 2^10 or
+	*                  10^3(base10==true) multiple of base units
+	*/
+	public static function hbytes($bytes, $base10=false, $round=2, $labels=array('', ' Kb', ' Mb', ' Gb')) {
+
+	   if ((! is_array($labels)) ||
+		   (count($labels) <= 0))
+		   return null;
+	   
+	   $step = $base10 ? 3 : 10 ;
+	   $base = $base10 ? 10 : 2;
+	   
+	   $log = (int)(log10($bytes)/log10($base));
+	   
+	   krsort($labels);
+	   
+	   foreach ($labels as $p=>$lab) {
+		   $pow = $p * $step;
+		   if ($log < $pow) continue;
+		   $text = round($bytes/pow($base,$pow),$round) . $lab;
+		   break;
+	   }
+
+	   return $text;
+	}	
 	
     /**
     * Send a GET requst using cURL
@@ -50,14 +99,35 @@ class Util {
         }
         curl_close($ch);
         return $result;
-    }     
+    }
+	
+	public static function clearAllCache($period = 60*60*24*14) {
+		self::clearCache(WWWROOT.ImageTransform::PREFIX, $period);
+		self::clearCache(IMAGECACHE_DIR, $period);
+		self::clearCache(FILECACHE_DIR, $period);
+		self::clearCache(TWIG_CACHE_DIR, $period);		
+	}
+
+	public static function clearCache($path, $period = 60*60*24*14) {
+		$path = realpath($path);
+		if($path!==false && $path!='' && file_exists($path)){
+			foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS)) as $object){
+				$stat = stat ( $object->getPathname() );
+				
+				if (time() - $stat['atime'] >= $period) {
+					unlink($object->getPathname());
+				}			
+			}
+		}	
+	}	
     	
-    public static function delTree($dir) {
+    public static function delTree($dir, $self = true) {
        $files = array_diff(scandir($dir), array('.','..'));
         foreach ($files as $file) {
           (is_dir("$dir/$file") && !is_link("$dir/$file")) ? self::delTree("$dir/$file") : unlink("$dir/$file");
         }
-        return rmdir($dir);
+        if ($self) return rmdir($dir);
+		return;
     }     
     
     /*

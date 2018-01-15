@@ -16,7 +16,7 @@ namespace Cetera;
  */ 
 class ImageTransform {
 	
-	const PREFIX = 'imagetransform';
+	const PREFIX = '/imagetransform';
 	
 	const FIT_NONE = 0;
 	const FIT_CROP = 1;

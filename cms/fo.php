@@ -24,7 +24,7 @@ $application->initSession();
 $application->initPlugins();
 $application->ping();
 
-$application->route('/imagetransform',  array('\Cetera\ImageTransform', 'transformFromURI') );
+$application->route(\Cetera\ImageTransform::PREFIX,  array('\Cetera\ImageTransform', 'transformFromURI') );
 
 $application->route('/'.PREVIEW_PREFIX,  function() {
 	

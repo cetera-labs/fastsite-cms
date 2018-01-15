@@ -296,6 +296,10 @@ class Application {
         $this->_widgetsTemplatesPath[] = CMSROOT.'widgets/';
 		
 		Event::attach('*', array($this,'eventHandler'));
+		
+		$this->registerCronJob(function(){
+			Util::clearAllCache();
+		});
     }
     
     /**
@@ -1568,7 +1572,7 @@ class Application {
 			$loader->addPath( CMSROOT.'/widgets' ,'widget_distrib' );			
 			
 			$options = array(
-				'cache'       => CACHE_DIR.'/twig',
+				'cache'       => TWIG_CACHE_DIR,
 				'auto_reload' => true,
 				'strict_variables' => true,
 			);

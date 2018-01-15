@@ -203,7 +203,15 @@ class BackOffice {
                 	  'icon'     => 'images/icon_menu.png',
 					  'iconCls'  => 'x-fa fa-bars',
                 	  'class'    => 'Cetera.panel.Menu'
-                );            
+                );   
+
+                $this->_modules['setup'] = array(
+                			'position' => MENU_SERVICE,
+                            'name' 	   => $translator->_('Настройки'),
+                			'icon'     => 'images/setup_small.gif',
+							'iconCls'  => 'x-fa fa-cogs',
+                			'class'    => 'Cetera.panel.Setup'
+                );				
             
                 $this->_modules['types'] = array(
                 			'position' => MENU_SERVICE,

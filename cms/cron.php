@@ -15,7 +15,11 @@ $application->cronJob(DOCROOT.'../logs/cron.log');
 
 foreach ($application->getCronJobs() as $file) {
 
-    if (file_exists($file)) 
+	if (is_callable($file)) {
+		$file();
+	}
+	elseif (is_string($file) && file_exists($file)) {
         include_once($file);
+	}
 
 }

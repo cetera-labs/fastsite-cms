@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.41.1');
+define('VERSION', '3.42.0');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -98,6 +98,7 @@ define('PLUGIN_MATH_DIR', DOCROOT.PLUGIN_DIR);
 define('CACHE_DIR', DOCROOT.'.cache');
 define('FILECACHE_DIR', CACHE_DIR.'/filecache');
 define('IMAGECACHE_DIR', CACHE_DIR.'/images');
+define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
 
