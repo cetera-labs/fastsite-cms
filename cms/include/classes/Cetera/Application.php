@@ -1191,7 +1191,7 @@ class Application {
         if (is_array($name))
 		{        
 			$params = $name;
-            if (!isset($params['name'])) throw new Exception('Не задан параметр "name"');
+            if (!isset($params['name'])) throw new \Exception('Не задан параметр "name"');
             $widgetName = $params['name'];
         }
 		elseif (is_int($name))

@@ -84,8 +84,10 @@ Ext.define('Cetera.window.SiteTree', {
             var a = sn.getId().split('-');
             var res = '';
             var n = '';
+			var url = '/';
             while (sn.parentNode) {
                 if (sn.text == 'root') break;
+				if (sn.get('item_id') && !sn.get('isServer')) url = '/' + sn.get('alias') + url;
                 var b = sn.get('text').split('</span>');
                 n = b[1]?b[1]:b[0];
                 if (res) res = n + ' / ' + res; else res = n;
@@ -96,6 +98,7 @@ Ext.define('Cetera.window.SiteTree', {
                 path:       this.path,
                 name:       name,
                 name_to:    res,
+				url:        url,
                 table:      a[2]?a[2]:'main',
 				type:       a[3]?a[3]:4,
             });

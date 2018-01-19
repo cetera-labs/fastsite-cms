@@ -17,6 +17,9 @@ Ext.define('Cetera.model.SiteTree', {
 			name: 'link',
 			type: 'integer'
 		}, {
+			name: 'isServer',
+			type: 'integer'
+		}, {
 			name: 'mtype',
 			type: 'integer'
 		},

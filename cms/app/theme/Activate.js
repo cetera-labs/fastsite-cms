@@ -18,7 +18,8 @@ Ext.define('Cetera.theme.Activate', {
             enableHdMenu     : false,
             enableColumnMove : false,
             enableColumnResize: false,
-            region: 'center',             
+            region: 'west',
+			width: 300,
             
             store: new Ext.data.JsonStore({
                 autoDestroy: true,
@@ -90,9 +91,8 @@ Ext.define('Cetera.theme.Activate', {
         
 		this.configPanel = Ext.create('Theme.'+this.theme.get('id')+'.Config', {
 			disabled: true,
-			region: 'east',
+			region: 'center',
 			margin: '0 0 0 5',
-			width: 550,
 			theme: this.theme,
 			listeners: {
 				 scope: this,
@@ -139,8 +139,8 @@ Ext.define('Cetera.theme.Activate', {
             autoHeight: true,
             autoShow: true,
             modal: true,
-            width:800,
-            height:500,
+            width:'80%',
+            height: '80%',
             resizable: false,
             layout: 'border',
             items: [this.serversPanel, this.configPanel],

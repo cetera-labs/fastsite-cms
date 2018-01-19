@@ -34,7 +34,8 @@ Ext.define('Cetera.widget.Panel', {
 				 widgetTitle:  params.widgetTitle,
 				 widgetDisabled:params.widgetDisabled,
 				 icon:         info.icon,
-				 collapsed:    collapsed
+				 collapsed:    collapsed,
+				 saveButton:   params.hideSaveButton?false:true,
 			});
 			
 			if (params.params)

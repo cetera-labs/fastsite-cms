@@ -14,6 +14,7 @@ Ext.define('Cetera.widget.Widget', {
     containerId: 0,
     inWindow: false,
     collapsible: true,
+	saveButton: true,
        
     initComponent : function() {
     
@@ -55,8 +56,8 @@ Ext.define('Cetera.widget.Widget', {
                     scope: this
                 });
             }
-            
-            if (this.widgetName != 'Container') {      
+			
+            if (this.widgetName != 'Container' && this.saveButton) {      
                 
                 this.dockedItems = [{
                     xtype: 'toolbar',
@@ -152,7 +153,9 @@ Ext.define('Cetera.widget.Widget', {
             t = t + '<b>'+ this.widgetDescrib + '</b>';
         }
 
-        t = t + ' [ID:' + this.widgetId + ']';
+		if (this.widgetId) {
+			t = t + ' [ID:' + this.widgetId + ']';
+		}
         
         if (this.widgetDisabled) 
             t = t + ' <span style="color:red">'+_('отключен') +'</span>';
@@ -168,26 +171,36 @@ Ext.define('Cetera.widget.Widget', {
     },
     
     deleteWidget : function() {
+		
+		if (this.saveButton) {
     
-        this.setLoading(true);
-        
-        Ext.Ajax.request({
-            url: '/cms/include/action_del_widget.php',
-            params: {
-                widgetName: this.widgetName,
-                widgetId: this.widgetId,
-                containerId: this.containerId
-            },
-            success: function(response){
-                this.setLoading(false);
-                this.fireEvent('delete');
-                this.destroy();
-            },
-            failure: function(response){
-                this.setLoading(false);
-            },
-            scope: this
-        });
+			this.setLoading(true);
+			
+			Ext.Ajax.request({
+				url: '/cms/include/action_del_widget.php',
+				params: {
+					widgetName: this.widgetName,
+					widgetId: this.widgetId,
+					containerId: this.containerId
+				},
+				success: function(response){
+					this.setLoading(false);
+					this.fireEvent('delete');
+					this.destroy();
+				},
+				failure: function(response){
+					this.setLoading(false);
+				},
+				scope: this
+			});
+			
+		}
+		else {
+			
+			this.fireEvent('delete');
+			this.destroy();
+			
+		}
     
     },
     

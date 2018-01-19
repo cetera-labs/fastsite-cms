@@ -19,6 +19,7 @@ Ext.define('Cetera.field.Panel', {
         
     initComponent : function(){
         this.panel = this.getPanel();
+		this.initField();
         this.callParent(arguments);			
     },
     

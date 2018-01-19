@@ -21,7 +21,7 @@ class Container extends Templateable {
 	/**
 	 * Виджеты, хранящиеся в контейнере
 	 */
-    protected $widgets = array();
+    protected $widgets = [];
 	
 	public static $name = 'Container';
 	
@@ -46,8 +46,7 @@ class Container extends Templateable {
 	 */	
     public function __construct($id = 0, $params = null)
     {
-		if ($params['alias'])
-		{
+		if ($params['alias']) {
             $f = self::getDbConnection()->fetchAssoc('SELECT * FROM widgets WHERE widgetAlias=? ORDER BY id DESC', array( $params['alias'] ));
             if ($f) {
                 $id = $f['id']; 
@@ -57,12 +56,19 @@ class Container extends Templateable {
 		
         parent::__construct($id, $params);
 		
-        if ($this->getId())
-		{
+        if ($this->getId()) {
 			$r = self::getDbConnection()->fetchAll('SELECT widget_id FROM widgets_containers WHERE container_id=? ORDER BY position', array( $this->getId() ));
-            foreach ($r as $f)
-                $this->widgets[] = (int)$f['widget_id'];
+            foreach ($r as $f) try {
+				$this->widgets[] = $this->application->getWidget( (int)$f['widget_id'] );
+            } catch (\Exception $e) {}				
         }
+		
+		if ($params['data']) {
+			$data = json_decode($params['data'], true);
+			foreach ($data as $params) try {
+				$this->widgets[] = $this->application->getWidget( $params );
+			} catch (\Exception $e) {}	
+		}
     }
 
 	/**
@@ -73,10 +79,7 @@ class Container extends Templateable {
     public function addWidget($id)
     {
         if (!(int)$id) return $this;
-                    
-        if (!in_array($id, $this->widgets)) 
-            $this->widgets[] = $id;
-        
+        $this->widgets[] = $this->application->getWidget( (int)$id );
         return $this;  
     }
     
@@ -89,9 +92,12 @@ class Container extends Templateable {
     {
         if (!(int)$id) return $this;
                     
-        $i = array_search($id, $this->widgets);
-        if ($i !== false) unset($this->widgets[$i]);
-        
+		foreach($this->widgets as $key => $w) {
+			if ($w->getId() == $id) {
+				unset($this->widgets[$key]);
+				return $this;  
+			}
+		}        
         return $this;  
     }
     
@@ -107,10 +113,10 @@ class Container extends Templateable {
         parent::save();
 		
         $this->getDbConnection()->delete('widgets_containers', array( 'container_id' => $this->getId() ));
-        foreach($this->widgets as $i => $wid)
+        foreach($this->widgets as $i => $w)
             $this->getDbConnection()->insert('widgets_containers', array(
                 'container_id' => $this->getId(),
-                'widget_id'    => $wid,
+                'widget_id'    => $w->getId(),
                 'position'     => $i
             ));       
     }
@@ -119,14 +125,8 @@ class Container extends Templateable {
 	 * Возвращает содержимое контейнера
 	 */	
     public function getChildren()
-    {
-        $res = array();
-        if (is_array($this->widgets))
-            foreach ($this->widgets as $w) try {
-                $res[] = $this->application->getWidget((int)$w);
-            } catch (\Exception $e) {}
-                
-        return $res;
+    {      
+        return $this->widgets;
     }
 	
 	/**
