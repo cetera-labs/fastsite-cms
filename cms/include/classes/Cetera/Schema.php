@@ -40,7 +40,9 @@ class Schema {
     /** Поля различаются */
     const TYPE_FIELD_DONT_MATCH = 102;  
     /** Виджет не найден */
-    const WIDGET_NOT_EXISTS     = 200;     
+    const WIDGET_NOT_EXISTS     = 200;   
+
+	const MENU_NOT_EXISTS       = 300;
     
     /**
      * Список файлов со структурой таблиц и данными для модулей системы    
@@ -169,7 +171,12 @@ class Schema {
     		if ($a['widgets']) foreach ($a['widgets'] as $widget) {
 				$r = $this->compareWidget($id, $widget);
 				$res = array_merge($res, $r);
-    		}        
+    		}
+			
+    		if ($a['menus']) foreach ($a['menus'] as $m) {
+				$r = $this->compareMenu($id, $m);
+				$res = array_merge($res, $r);
+    		}			
         
     	}
     	return $res;
@@ -194,6 +201,7 @@ class Schema {
         
         $this->fixTypes($res['types']);
 		$this->fixWidgets($res['widgets']);
+		$this->fixMenus($res['menus']);
      
     }
     
@@ -210,9 +218,9 @@ class Schema {
             $this->dbConnection->executeQuery( $this->get_fix_query($a['tables'], $error) );
         }
         
-        $this->fixTypes($a['types']);
-        
+        $this->fixTypes($a['types']);        
         $this->fixWidgets($a['widgets']);
+		$this->fixMenus($a['menus']);
     } 
     
     /*
@@ -233,20 +241,29 @@ class Schema {
             } catch (\Exception $e) {}
     		}        
     }  
+	
+	public function fixMenus($menus) { 
+		if (is_array($menus)) foreach ($menus as $m) {
+			try {
+				Menu::getByAlias( $m['alias'] );
+			} 
+			catch (\Exception $e) {				
+				$menu = Menu::create($m['alias'], $m['name']);	
+				$menu->_data = $m['data'];
+				$menu->save();
+			}			
+		}
+	}
 
-    public function fixWidgets($widgets)
-    {       
+    public function fixWidgets($widgets) {       
         $a = Application::getInstance();
 		
-    	if (is_array($widgets)) foreach ($widgets as $widget_info)
-		{   
+    	if (is_array($widgets)) foreach ($widgets as $widget_info) {   
 	
-			try
-			{
+			try {
 				$w = Application::getInstance()->getWidget( $widget_info['widgetAlias'] );
 			} 
-			catch (\Exception $e)
-			{
+			catch (\Exception $e) {
 				
 				$widget = $a->getWidget( 'Container' );
 				$widget->widgetAlias = $widget_info['widgetAlias'];
@@ -455,6 +472,23 @@ class Schema {
         
         return $res;  
     }
+	
+    private function compareMenu($module, $menu)
+    {
+        $res = array();
+        
+        try {
+            Menu::getByAlias( $menu['alias'] );
+        } catch (\Exception $e) {
+      		  $res[] = array(
+      				'error'  => self::MENU_NOT_EXISTS,
+      				'menu' => $menu['alias'],
+      				'module' => $module
+      			);
+        }
+        
+        return $res;  
+    }	
     
     /*
      * Проверяет существует ли тип материалов в БД, соответствует ли он схеме.
@@ -790,13 +824,26 @@ class Schema {
     	xml_parse_into_struct($parser,$data,$values,$tags);
     	xml_parser_free($parser);
     	
-    	$res = array(
-          'tables' => array(),
-          'types'  => array(),
-          'widgets'=> array()
-      );
+    	$res = [
+          'tables'  => [],
+          'types'   => [],
+          'widgets' => [],
+		  'menus'   => [],
+        ];
       
     	foreach ($values as $value) {
+			
+    		if ($value['tag'] == 'menu') {
+    		    if ($value['type'] == 'open') {
+					$value['attributes']['data'] = [];
+					$res['menus'][] = $value['attributes'];
+				}
+    		}	
+			if ($value['tag'] == 'menuitem') {
+				if ($value['type'] != 'close') {
+					$res['menus'][count($res['menus'])-1]['data'][] = $value['attributes'];
+				}
+			}
       
     		if ($value['tag'] == 'table') {
     		    if ($value['type'] == 'open') $table = $value['attributes'];
@@ -814,10 +861,10 @@ class Schema {
     		    if ($value['type'] == 'close') $res['widgets'][$widget['widgetAlias']] = $widget;
     		}
         
-        if ($value['tag'] == 'widget') {
-            $value['attributes']['params'] = trim($value['value']);
-            $widget['widgets'][] = $value['attributes'];
-        }  
+			if ($value['tag'] == 'widget') {
+				$value['attributes']['params'] = trim($value['value']);
+				$widget['widgets'][] = $value['attributes'];
+			}  
         
     		if ($value['tag'] == 'object') {
     		    if ($value['type'] == 'open') $table = $value['attributes'];

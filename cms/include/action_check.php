@@ -17,6 +17,7 @@ $l_schema_errors = array(
     Schema::TYPE_FIELD_NOT_FOUND  => $t->_('не найдено поле'),
     Schema::TYPE_FIELD_DONT_MATCH => $t->_('неверное поле'),
 	Schema::WIDGET_NOT_EXISTS     => $t->_('Не найден виджет'),
+	Schema::MENU_NOT_EXISTS     => $t->_('Не найдено меню'),
 );
 
 $res = array(
@@ -28,6 +29,8 @@ if ($_REQUEST['db_structure']) {
     $schema = new Schema();   
     
     $result = $schema->compare_schemas($_REQUEST['ignore_fields'], $_REQUEST['ignore_keys']);
+	
+	
     
   	if (sizeof($result)) {
   	 	$res['success'] = false;
@@ -35,10 +38,16 @@ if ($_REQUEST['db_structure']) {
   		$module = '';
   		$table = '';
   		foreach ($result as $error) {
-  			if ($module != $error['module']) $msg .= '<b><u>'.$t->_('Модуль').' '.$error['module'].'</u></b><br />';
-  			if ($table != $error['table']) $msg .= '<div class="hdr">'.$t->_('Таблица').' <b>'.$error['table'].'</b><div/>';
-  			$msg .= '&nbsp;&nbsp;&nbsp;&nbsp;'.$l_schema_errors[$error['error']];
-        if (isset($error['widget'])) $msg .= ' <b>"'.$error['widget'].'"</b>';
+  			if ($module != $error['module']) $msg .= '<br><b><u>'.$t->_('Модуль').' '.$error['module'].'</u></b><br />';
+			
+			if (isset($error['table'])) {
+				if ($table != $error['table']) $msg .= '<div class="hdr">'.$t->_('Таблица').' <b>'.$error['table'].'</b><div/>';
+				$msg .= '&nbsp;&nbsp;&nbsp;&nbsp;';
+		    }
+  			$msg .= $l_schema_errors[$error['error']];
+			
+			if (isset($error['menu'])) $msg .= ' <b>"'.$error['menu'].'"</b>';
+			if (isset($error['widget'])) $msg .= ' <b>"'.$error['widget'].'"</b>';
   			if (isset($error['field'])) $msg .= ' <b>"'.$error['field'].'"</b>';
   			if (isset($error['expected'])) $msg .= ': <i>'.$error['found'].'</i> '.$t->_('ожилалось').': <i>'.$error['expected'].'</i>';
   			$msg .= '<br />';

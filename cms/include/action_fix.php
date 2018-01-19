@@ -28,10 +28,18 @@ if ($_REQUEST['db_structure']) {
     		if ($table != $error['table']) {
       			if (!$terror && $table) $msg .= ' <b class="ok">ОК</b>';
       			if ($table) $msg .= '<br />';
-      			if ($module != $error['module']) $msg .= '<div class="hdr"><b><u>Модуль '.$error['module'].'</u></b></div>';
-      			$msg .= '&nbsp;&nbsp;&nbsp;&nbsp;<span>'.$t->_('Таблица').' '.$error['table'].'</span>';
+      			if ($module != $error['module']) $msg .= '<div class="hdr"><br><b><u>Модуль '.$error['module'].'</u></b></div>';
+      			if (isset($error['table'])) $msg .= '<span>'.$t->_('Таблица').' '.$error['table'].'</span>';
       			$terror = false;
     		}
+			
+		if ( $error['error'] === Schema::MENU_NOT_EXISTS ) {
+			$msg .= $t->_('Меню');
+			$res = $schema->parseSchema($error['module']);
+			$schema->fixMenus($res['menus']);
+			$msg .= ' <b class="ok">OK</b>';
+			$terror = true;
+		}
     		        
         if ( $error['error'] < Schema::TYPE_NOT_EXISTS ) {
     		
@@ -59,16 +67,16 @@ if ($_REQUEST['db_structure']) {
         
     		    if (!isset($types[$error['table']])) {
         		    $res = $schema->parseSchema($error['module']);
-                $types = array_merge($types, $res['types']);
-                $schema->fixTypes($res['types']);
+					$types = array_merge($types, $res['types']);
+					$schema->fixTypes($res['types']);
         		}          
         
         } else {
         
     		    if (!isset($widgets[$error['widget']])) {
         		    $res = $schema->parseSchema($error['module']);
-                $widgets = array_merge($widgets, $res['widgets']);
-                $schema->fixWidgets($res['widgets']);
+					$widgets = array_merge($widgets, $res['widgets']);
+					$schema->fixWidgets($res['widgets']);
         		}   
         
         }
