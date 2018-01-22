@@ -691,9 +691,24 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     public function getDefaultTemplate() {
         if ($this->_defaultTemplate) return $this->_defaultTemplate;
  
-        if (!$this->template)
-            $this->_defaultTemplate = $this->parent->getDefaultTemplate();
-            else $this->_defaultTemplate = $this->template;
+		if ($this->template) {
+			$path_parts = pathinfo($this->template);
+			if ($path_parts['extension'] == 'php') {
+				$app = Application::getInstance();
+				if (file_exists( $app->getTemplatePath($this->template))) {
+					$this->_defaultTemplate = $this->template;
+				}
+				else {
+					$this->_defaultTemplate = $this->parent->getDefaultTemplate();
+				}
+			}
+			else {
+				$this->_defaultTemplate = $this->template;
+			}
+		}
+		else {
+			$this->_defaultTemplate = $this->parent->getDefaultTemplate();
+		}
 
         return $this->_defaultTemplate;
     }
