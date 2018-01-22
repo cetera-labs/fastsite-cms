@@ -28,6 +28,8 @@ class DynamicObjectMultiple extends DbObject {
 	
 	protected $where = '';
 	protected $order = '';
+	
+	protected $unpublished = false;		
     
     /**
      * Конструктор              
@@ -55,12 +57,10 @@ class DynamicObjectMultiple extends DbObject {
             
     public function where($where, $combination = 'AND')
     {
-		if ($this->where)
-		{
+		if ($this->where) {
 			$this->where .= ' '.$combination.' ('.$where.')';
 		}
-		else
-		{
+		else {
 			$this->where .= ' WHERE ('.$where.')';
 		}
 		
@@ -123,13 +123,19 @@ class DynamicObjectMultiple extends DbObject {
 		
         $this->sync = false;
         return $this;       
-    }  	
+    }  
+
+    public function unpublished($unpublished = true)
+    {
+         $this->unpublished = $unpublished;         
+         return $this;
+    }	
 	
     public function getQuery()
     {   
 		$q = array();
 		foreach ($this->objectDefinitionArray as $od)
-		{
+		{		
 			$from = '`'.$od->table.'` main';
 			$group = '';
 			$where = $this->where;
@@ -139,6 +145,14 @@ class DynamicObjectMultiple extends DbObject {
 					$f[] = 'main.'.$field;
 					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);
 				}
+				elseif ($field == 'idcat' && $od->alias == \Cetera\Catalog::TABLE) {
+					$f[] = 'main.id';
+					$where = str_replace('`idcat`', 'main.`id`', $where);					
+				}
+				elseif ($field == 'name' && $od->alias == \Cetera\Catalog::TABLE) {
+					$f[] = 'main.'.$field;
+					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);				
+				}				
 				elseif (substr_count(strtoupper($field),' AS ')) {
 					$f[] = $field;
 				}
@@ -182,6 +196,20 @@ class DynamicObjectMultiple extends DbObject {
 						$f[] = 'NULL as `'.$field.'`';
 						$where = str_replace('`'.$field.'`', 'NULL', $where);
 					}
+				}
+			}
+			if (!$this->unpublished) {
+				if ($where) {
+					$where .= ' AND ';
+				}
+				else {
+					$where .= 'WHERE ';
+				}
+				if ($od->alias == \Cetera\Catalog::TABLE) {
+					$where .= 'main.hidden < 1';
+				}
+				else {
+					$where .= 'main.type&'.MATH_PUBLISHED.'='.MATH_PUBLISHED.' and (main.dat<=NOW() or main.dat IS NULL or main.type&'.MATH_SHOW_FUTURE.'='.MATH_SHOW_FUTURE.')';
 				}
 			}
 			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $f).' FROM '.$from.' '.$where.' GROUP BY main.id';

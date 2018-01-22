@@ -99,15 +99,14 @@ class Search extends Templateable {
 				
 				$this->results = new \Cetera\Iterator\DynamicObjectMultiple( $this->getObjectDefinitions(), $fields );
 				
-				//print $this->results->getQuery();
-				
 				$this->results
 					->orderBy( $this->getSortField(), $this->getSortDirection() )
 					->where( $where )
 					->where( $where2 )
-					->where('main.type&'.MATH_PUBLISHED.'='.MATH_PUBLISHED.' and (main.dat<=NOW() or main.dat IS NULL or main.type&'.MATH_SHOW_FUTURE.'='.MATH_SHOW_FUTURE.')')
 					->setItemCountPerPage( $this->getItemCountPerPage() )
 					->setCurrentPageNumber( $this->getPage() );
+				
+				//print $this->results->getQuery();
 			}
 		}
 		return $this->results;
