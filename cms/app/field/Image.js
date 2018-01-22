@@ -29,7 +29,7 @@ Ext.define('Cetera.field.Image', {
 		return '/cms/include/image.php?dontenlarge=1&width=1000&height='+this.height+'&src='+this.getRealValue(value)+'&r='+( new Date() * 1 );
 	},
     
-    setValue : function(value, keepBackup) {
+    setValue : function(value, keepBackup, saveBackup) {
     
 		if (!this.backupValue) this.backupValue = this.getValue();
 	
@@ -58,6 +58,7 @@ Ext.define('Cetera.field.Image', {
         } else {
 			
 			if (!keepBackup && !this.backupValue) this.backupValue = this.getValue();
+			if (!saveBackup) this.backupValue = false;
 			
             if (this.backupValue) {
                 this.preview.update('<img src="'+this.getPreviewSrc(this.backupValue)+'"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(255,255,255,0.8); line-height: '+this.height+'px">'+Config.Lang.picToBeDeleted+'</div>');
@@ -217,7 +218,7 @@ Ext.define('Cetera.field.Image', {
             scope   : this,
             width   : '100%',
             handler : function() {
-                this.setValue('');
+                this.setValue('', false, true);
             }
         });
 
