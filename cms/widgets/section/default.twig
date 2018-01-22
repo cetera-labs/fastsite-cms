@@ -21,8 +21,6 @@
 
 {% else %}
 
-	<h1>{{ widget.catalog.name }}</h1>
-
 	{% widget 'List' with { 
 		catalog:    widget.catalog.id, 
 		template:   widget.getParam('list_template'), 
