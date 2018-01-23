@@ -149,7 +149,7 @@ class DynamicObjectMultiple extends DbObject {
 					$f[] = 'main.id';
 					$where = str_replace('`idcat`', 'main.`id`', $where);					
 				}
-				elseif ($field == 'name' && $od->alias == \Cetera\Catalog::TABLE) {
+				elseif (in_array($field, ['name','dat','tag']) && $od->alias == \Cetera\Catalog::TABLE) {
 					$f[] = 'main.'.$field;
 					$where = str_replace('`'.$field.'`', 'main.`'.$field.'`', $where);				
 				}				

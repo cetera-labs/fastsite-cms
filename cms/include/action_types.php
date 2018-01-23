@@ -234,6 +234,7 @@ try {
             }
             
 			$application->getConn()->executeQuery('delete from types_fields where field_id=?', array($_REQUEST['id']));
+			$application->getConn()->executeQuery('delete from types_fields_catalogs where field_id=?', array($_REQUEST['id']));
         	$res['success'] = true;
         }
     }
