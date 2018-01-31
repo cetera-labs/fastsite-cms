@@ -1,0 +1,33 @@
+{% if widget.widgetTitle %}
+<div class="padding-top-12 padding-bottom-6">
+  <div class="grid-container">
+	<div class="grid-x grid-padding-x">
+	  <div class="small-24 medium-16 cell">
+		<h2>{{ widget.widgetTitle }}</h2>
+	  </div>
+		{% if widget.getParam('catalog_link') %}
+		<div class="small-24 medium-8 cell medium-text-right"><a class="button" href="{{ widget.catalog.url }}">{{ widget.getParam('catalog_link')|raw }}</a></div>
+		{% endif %}
+	</div>
+  </div>
+{% endif %}  
+
+  <div class="grid-container">
+	<div class="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3" data-equalizer="{{ widget.uniqueId }}-eq" data-equalize-by-row="true">
+	{% for m in widget.children %}
+	  <div class="cell margin-bottom-6 text-left" data-equalizer-watch="{{ widget.uniqueId }}-eq">
+		<div class="grid-x">
+		  <div class="cell small-5 medium-24"><a href="#" title=""><img class="margin-bottom-3 background-main" src="{{ m.pic }}" alt="{{ m.name }}"></a></div>
+		  <div class="cell small-18 medium-24 small-offset-1 medium-offset-0">
+			<h5 class="margin-bottom-3"><a href="{{ m.url }}" title="">{{ m.name }}</a></h5>
+		  </div>
+		</div>
+		<div class="show-for-medium">{{ m.short|raw }}</div>
+	  </div>
+	{% endfor %}
+	</div>
+  </div>
+  
+{% if widget.widgetTitle %}  
+</div>
+{% endif %} 

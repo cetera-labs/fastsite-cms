@@ -1,0 +1,14 @@
+{% if widget.children|length > 0 or widget.getMaterials()|length > 0 %}
+<div class="padding-top-12 padding-bottom-6">
+  <div class="grid-container">
+	<div class="grid-x grid-padding-x {{ widget.getParam('css_class') }} text-center">
+	  {% for c in widget.children %}
+	  <div class="cell">
+		<div class="margin-bottom-6"><a href="{{ c.url }}"><img src="{{ c.pic }}" alt="{{ c.name }}" style="width: 100%;"></a></div>
+		<h5><a href="{{ c.url }}">{{ c.name }}</a></h5>
+	  </div>
+	  {% endfor %}
+	</div>
+  </div>
+</div>
+{% endif %}

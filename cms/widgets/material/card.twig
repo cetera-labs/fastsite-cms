@@ -1,0 +1,15 @@
+{% if widget.material %}
+<div class="background-primary padding-vertical-20">
+  <div class="grid-container">
+	<div class="grid-x grid-padding-x">
+	  <div class="cell medium-14 align-self-middle">
+		<h2 class="text-white">{{ widget.material.name|raw }}</h2>
+		<div class="text-white">
+			{{ widget.material.text|raw }}
+		</div>
+	  </div>
+	  <div class="cell medium-8 medium-offset-2 show-for-medium"><img src="{{ widget.material.pic }}" style="width: 100%;"></div>
+	</div>
+  </div>
+</div>
+{% endif %}
