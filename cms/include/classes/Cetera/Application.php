@@ -1391,6 +1391,7 @@ class Application {
 				'class'   => '\\Cetera\\Widget\\User\\Auth',
 				'describ' => $t->_('Форма входа'),
 				'icon'    => '/cms/images/user.gif',
+				'not_placeable' => true
 			),
 			
 			'User.Register' => array(
@@ -1398,6 +1399,7 @@ class Application {
 				'class'   => '\\Cetera\\Widget\\User\\Register',
 				'describ' => $t->_('Форма регистрации'),
 				'icon'    => '/cms/images/user.gif',
+				'not_placeable' => true
 			),
 			
 			'User.Profile.Edit' => array(
@@ -1405,6 +1407,7 @@ class Application {
 				'class'   => '\\Cetera\\Widget\\User\\ProfileEdit',
 				'describ' => $t->_('Персональные данные'),
 				'icon'    => '/cms/images/user.gif',
+				'not_placeable' => true
 			),
 
 			'User.Recover' => array(
@@ -1412,6 +1415,7 @@ class Application {
 				'class'   => '\\Cetera\\Widget\\User\\Recover',
 				'describ' => $t->_('Форма восстановления пароля'),
 				'icon'    => '/cms/images/user.gif',
+				'not_placeable' => true
 			),
 					
 			
