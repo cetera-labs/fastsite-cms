@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 10:00+0300\n"
-"PO-Revision-Date: 2017-05-17 10:05+0300\n"
+"POT-Creation-Date: 2018-01-29 09:17+0300\n"
+"PO-Revision-Date: 2018-01-29 09:23+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -13,31 +13,23 @@ msgstr ""
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: app.js:143 include/setup.php:110
-msgid "Структура"
-msgstr "Structure"
-
-#: app.js:183
-msgid "Навигация"
-msgstr "Navigation"
-
-#: app/catalog/Create.js:37 app/window/CatalogEdit.js:182
-#: include/ui_cat_props.php:538 lang/data.php:95
+#: app/catalog/Create.js:39 app/panel/StructureTree.js:113
+#: app/window/CatalogEdit.js:198 lang/data.php:99
 msgid "Тип материалов"
 msgstr "Materials type"
 
-#: app/field/Image.js:164 app/fileselect/Panel.js:69
+#: app/field/Image.js:226 app/fileselect/Panel.js:69
 msgid "Кадрировать"
 msgstr "Crop"
 
-#: app/field/Image.js:174
+#: app/field/Image.js:237
 msgid "Восстановить"
 msgstr "Recover"
 
-#: app/field/SectionController.js:7 include/ui_cat_props.php:511
+#: app/field/SectionController.js:7
 msgid "Контроллер"
 msgstr "Controller"
 
@@ -49,30 +41,31 @@ msgstr "Widget is not found"
 msgid "Создать виджет?"
 msgstr "Create a widget?"
 
-#: app/field/SectionController.js:145 app/widget/Panel.js:168 lang/data.php:54
+#: app/field/SectionController.js:145 app/widget/Panel.js:169 lang/data.php:58
 msgid "Область"
 msgstr "Area"
 
-#: app/fileselect/Panel.js:25 lang/data.php:162
+#: app/fileselect/Panel.js:25 lang/data.php:166
 msgid "Загрузить файл"
 msgstr "Upload file..."
 
-#: app/fileselect/Panel.js:45 lang/data.php:166
+#: app/fileselect/Panel.js:45 lang/data.php:170
 msgid "Создать каталог"
 msgstr "Create folder"
 
-#: app/fileselect/Panel.js:53 lang/data.php:167
+#: app/fileselect/Panel.js:53 lang/data.php:171
 msgid "Удалить каталог"
 msgstr "Delete folder"
 
-#: app/fileselect/Panel.js:61 lang/data.php:168
+#: app/fileselect/Panel.js:61 lang/data.php:172
 msgid "Удалить файл"
 msgstr "Delete file"
 
-#: app/fileselect/Panel.js:78 app/window/CatalogEdit.js:489
-#: include/ui_cat_props.php:146 include/ui_eventlog.php:64
-#: include/ui_groups.php:23 include/ui_users.php:85 include/welcome_new.php:255
-#: include/welcome_new.php:277 lang/data.php:142 lang/data.php:190
+#: app/fileselect/Panel.js:78 app/panel/Cache.js:42 app/panel/EventLog.js:58
+#: app/panel/StructureTree.js:15 app/users/MainPanel.js:106
+#: app/window/CatalogEdit.js:505 include/ui_groups.php:23
+#: include/welcome_new.php:255 include/welcome_new.php:277 lang/data.php:146
+#: lang/data.php:194
 msgid "Обновить"
 msgstr "Update"
 
@@ -105,12 +98,10 @@ msgid "Ok"
 msgstr "Ok"
 
 #: app/fileselect/Panel.js:414 app/panel/Menu.js:266 app/theme/Settings.js:75
-#: app/window/CatalogEdit.js:627 app/window/CatalogPrefs.js:24
-#: app/window/ImageCrop.js:27 app/window/MailTemplate.js:134
+#: app/window/CatalogEdit.js:643 app/window/CatalogPrefs.js:24
+#: app/window/ImageCrop.js:27 app/window/MailTemplate.js:133
 #: include/editors/ckeditor/plugins/widgets/plugin.php:82
-#: include/ui_cat_props.php:280 include/ui_cat_props.php:785
-#: include/ui_cat_props.php:823 include/ui_groups.php:97
-#: include/ui_material_edit.php:415 lang/data.php:145
+#: include/ui_groups.php:97 include/ui_material_edit.php:366 lang/data.php:149
 msgid "Отмена"
 msgstr "Cancel"
 
@@ -122,28 +113,29 @@ msgstr "Upload"
 msgid "ожидание"
 msgstr "ready"
 
-#: app/fileselect/Panel.js:670 app/window/Upload.js:102 include/setup.php:294
+#: app/fileselect/Panel.js:671 app/window/Upload.js:103 include/setup.php:352
 msgid "Ошибка!"
 msgstr "Error!"
 
-#: app/grid/MailTemplates.js:18 lang/data.php:47
+#: app/grid/MailTemplates.js:18 lang/data.php:51
 msgid "Акт."
 msgstr "Act."
 
-#: app/grid/MailTemplates.js:18
+#: app/grid/MailTemplates.js:18 app/users/MainPanel.js:67
 msgid "Да"
 msgstr "Yes"
 
-#: app/grid/MailTemplates.js:18
+#: app/grid/MailTemplates.js:18 app/users/MainPanel.js:68
 msgid "Нет"
 msgstr "No"
 
-#: app/grid/MailTemplates.js:20 app/window/MailTemplate.js:37
-#: include/ui_eventlog.php:100
+#: app/grid/MailTemplates.js:20 app/panel/EventLog.js:93
+#: app/window/MailTemplate.js:36
 msgid "Событие"
 msgstr "Event"
 
-#: app/grid/MailTemplates.js:30 app/window/MailTemplate.js:100 lang/data.php:48
+#: app/grid/MailTemplates.js:30 app/window/CatalogEdit.js:150
+#: app/window/MailTemplate.js:99 lang/data.php:52
 msgid "Тема"
 msgstr "Theme"
 
@@ -166,6 +158,69 @@ msgstr "Developer guide"
 #: app/main/Header.js:44
 msgid "Вопросы и ответы"
 msgstr "FAQ"
+
+#: app/main/Navigation.js:11
+msgid "Навигация"
+msgstr "Navigation"
+
+#: app/main/Tree.js:6 include/setup.php:143
+msgid "Структура"
+msgstr "Structure"
+
+#: app/panel/Cache.js:9
+msgid "Кэширование"
+msgstr "Cache"
+
+#: app/panel/Cache.js:13
+msgid "Кэш"
+msgstr "Cache"
+
+#: app/panel/Cache.js:18 lang/data.php:179
+msgid "Размер"
+msgstr "Size"
+
+#: app/panel/Cache.js:50
+msgid "Очистить устаревшее"
+msgstr "Clear expired"
+
+#: app/panel/Cache.js:61
+msgid "Очистить кэш Twig"
+msgstr "Clear Twig cache"
+
+#: app/panel/Cache.js:73
+msgid "Удалить все"
+msgstr "Clear all"
+
+#: app/panel/EventLog.js:63 app/panel/EventLog.js:135
+msgid "Очистить журнал"
+msgstr "Clear log"
+
+#: app/panel/EventLog.js:67
+msgid "Фильтр событий"
+msgstr "Event filter"
+
+#: app/panel/EventLog.js:86 app/users/MainPanel.js:186
+#: include/data_cache.php:27 lang/data.php:121
+msgid "Всего"
+msgstr "Total"
+
+#: app/panel/EventLog.js:95 app/users/MainPanel.js:230
+#: include/field_editors.php:168 lang/data.php:136 setup.php:158
+msgid "Пользователь"
+msgstr "User"
+
+#: app/panel/EventLog.js:102 lang/data.php:178
+msgid "Дата"
+msgstr "Date"
+
+#: app/panel/EventLog.js:103
+msgid "Дополнительно"
+msgstr "Additionally"
+
+#: app/panel/EventLog.js:135 app/users/MainPanel.js:221
+#: include/ui_groups.php:196
+msgid "Вы уверены"
+msgstr "Are you sure"
 
 #: app/panel/Menu.js:22 app/panel/Menu.js:289
 msgid "Добавить меню"
@@ -195,8 +250,8 @@ msgstr "Delete item"
 msgid "Добавить внешнюю ссылку"
 msgstr "Add URL"
 
-#: app/panel/Menu.js:316 app/panel/Menu.js:331 include/ui_material_edit.php:135
-#: lang/data.php:98
+#: app/panel/Menu.js:316 app/panel/Menu.js:331 include/ui_material_edit.php:132
+#: lang/data.php:102
 msgid "Заголовок"
 msgstr "Title"
 
@@ -208,7 +263,7 @@ msgstr "Edit URL"
 msgid "Переименовать меню"
 msgstr "Rename menu"
 
-#: app/panel/Menu.js:376 lang/data.php:191
+#: app/panel/Menu.js:376 lang/data.php:195
 msgid "Вы уверены?"
 msgstr "Are you sure?"
 
@@ -232,16 +287,29 @@ msgstr "Analyze"
 msgid "Исправить обнаруженные ошибки"
 msgstr "Correct the errors found"
 
-#: app/panel/Repair.js:89 app/panel/Repair.js:105 app/window/CatalogEdit.js:700
-#: include/ui_cat_props.php:734 include/ui_groups.php:239
-#: include/ui_material_edit.php:501 lang/data.php:143 lang/data.php:208
-#: widgets/list/default.twig:42
+#: app/panel/Repair.js:89 app/panel/Repair.js:105 app/window/CatalogEdit.js:716
+#: include/ui_groups.php:239 include/ui_material_edit.php:452 lang/data.php:147
+#: lang/data.php:212 widgets/_common/ajax-paginator.twig:1
+#: widgets/calendar/default.twig:70 widgets/list/default.twig:42
+#: widgets/user.auth/default.twig:65
 msgid "Подождите ..."
 msgstr "Wait..."
 
 #: app/panel/Repair.js:92
 msgid "Ошибок не обнаружено."
 msgstr "No errors found."
+
+#: app/panel/Structure.js:26 include/classes/Cetera/BackOffice.php:174
+msgid "Материалы"
+msgstr "Materials"
+
+#: app/panel/StructureTree.js:104 lang/data.php:64
+msgid "Раздел"
+msgstr "Section"
+
+#: app/panel/StructureTree.js:117 include/ui_material_edit.php:131
+msgid "Дата создания"
+msgstr "Date of creation"
 
 #: app/plugin/Add.js:27
 msgid "Открыть счет в банке \"Точка\""
@@ -250,6 +318,18 @@ msgstr "Open a Bank \"Tochka\" account"
 #: app/plugin/Add.js:32
 msgid "Заказать модуль"
 msgstr "Order personal module"
+
+#: app/plugin/Add.js:148 include/classes/Cetera/Widget/Search.php:33
+msgid "Искать"
+msgstr "Search"
+
+#: app/theme/Activate.js:13 lang/data.php:210
+msgid "Загрузка ..."
+msgstr "Loading ..."
+
+#: app/theme/Activate.js:13
+msgid "Подождите"
+msgstr "Wait ..."
 
 #: app/theme/Add.js:27
 msgid "Заказ индивидуального дизайна"
@@ -287,8 +367,8 @@ msgstr "Identifier"
 msgid "Название"
 msgstr "Name"
 
-#: app/theme/Settings.js:38 include/ui_material_edit.php:133 lang/data.php:99
-#: lang/data.php:197
+#: app/theme/Settings.js:38 include/ui_material_edit.php:130 lang/data.php:103
+#: lang/data.php:201
 msgid "Автор"
 msgstr "Author"
 
@@ -296,9 +376,8 @@ msgstr "Author"
 msgid "Версия темы"
 msgstr "Theme version"
 
-#: app/theme/Settings.js:51 app/window/CatalogEdit.js:589
-#: include/ui_cat_props.php:242 include/ui_groups.php:74
-#: include/ui_groups.php:127 lang/data.php:76
+#: app/theme/Settings.js:51 app/window/CatalogEdit.js:605
+#: include/ui_groups.php:74 include/ui_groups.php:127 lang/data.php:80
 msgid "Описание"
 msgstr "Description"
 
@@ -311,13 +390,56 @@ msgid "режим разработчика"
 msgstr "developer mode"
 
 #: app/theme/Settings.js:69 app/window/CatalogPrefs.js:18
-#: app/window/MailTemplate.js:125 include/ui_cat_props.php:779
-#: include/ui_cat_props.php:817 include/ui_material_edit.php:405
-#: lang/data.php:144
+#: app/window/MailTemplate.js:124 include/ui_material_edit.php:356
+#: lang/data.php:148
 msgid "OK"
 msgstr "OK"
 
-#: app/widget/ContainerMain.js:172 lang/data.php:56
+#: app/users/MainPanel.js:26
+msgid "Заблокирован"
+msgstr "Blocked"
+
+#: app/users/MainPanel.js:36
+msgid "Соцсети"
+msgstr "Social networks"
+
+#: app/users/MainPanel.js:112
+msgid "Новый пользователь"
+msgstr "New user"
+
+#: app/users/MainPanel.js:118 app/window/CatalogEdit.js:536
+#: include/ui_groups.php:36 lang/data.php:111 lang/data.php:156
+msgid "Удалить"
+msgstr "Delete"
+
+#: app/users/MainPanel.js:124
+msgid "Запретить доступ"
+msgstr "Deny access "
+
+#: app/users/MainPanel.js:130
+msgid "Разрешить доступ"
+msgstr "Grant access"
+
+#: app/users/MainPanel.js:136 include/classes/Cetera/Catalog.php:1322
+#: include/ui_groups.php:43 include/ui_groups.php:204
+#: include/ui_material_edit.php:90 lang/data.php:75
+msgid "Свойства"
+msgstr "Properties"
+
+#: app/users/MainPanel.js:143 lang/data.php:118
+msgid "Показывать только пользователей BackOffice"
+msgstr "Availible only for BackOffice users"
+
+#: app/users/MainPanel.js:162 include/classes/Cetera/Application.php:1329
+#: lang/data.php:119 widgets/filter/default.twig:6
+msgid "Фильтр"
+msgstr "Filter"
+
+#: app/users/MainPanel.js:221
+msgid "Удаление пользователя"
+msgstr "Delete user"
+
+#: app/widget/ContainerMain.js:172 lang/data.php:60
 msgid "Шаблон"
 msgstr "Template"
 
@@ -329,7 +451,7 @@ msgstr "Ascending"
 msgid "Убыванию"
 msgstr "Descending"
 
-#: app/widget/List.js:59
+#: app/widget/List.js:59 include/field_editors.php:172
 msgid "Ссылка на раздел"
 msgstr "Section link"
 
@@ -379,163 +501,147 @@ msgstr "Set depth=0 to show all sections"
 msgid "Виджет"
 msgstr "Widget"
 
-#: app/widget/Widget.js:158 lang/data.php:187
+#: app/widget/Widget.js:161 lang/data.php:191
 msgid "отключен"
 msgstr "off"
 
-#: app/window/CatalogEdit.js:86 lang/data.php:50
+#: app/window/CatalogEdit.js:87 lang/data.php:54
+#: widgets/filter/default.twig:100
 msgid "Применить"
 msgstr "Apply"
 
-#: app/window/CatalogEdit.js:149 include/classes/Cetera/Plugin.php:172
-#: include/classes/Cetera/Theme.php:56 include/classes/Cetera/Theme.php:59
-#: include/setup.php:283 include/ui_cat_props.php:494
-msgid "Каталог"
-msgstr "Folder"
-
-#: app/window/CatalogEdit.js:168 include/ui_cat_props.php:525
+#: app/window/CatalogEdit.js:184
 msgid "Размещение"
 msgstr "Folder location"
 
-#: app/window/CatalogEdit.js:193 include/ui_cat_props.php:548
+#: app/window/CatalogEdit.js:209
 msgid "автоматически заполнять alias материалов"
 msgstr "To fill materials aliases automatically"
 
-#: app/window/CatalogEdit.js:211 include/ui_cat_props.php:565
+#: app/window/CatalogEdit.js:227
 msgid "на основании даты"
 msgstr "based on the date"
 
-#: app/window/CatalogEdit.js:222 include/ui_cat_props.php:575
+#: app/window/CatalogEdit.js:238
 msgid "транслит заголовка"
 msgstr "Header transliteration"
 
-#: app/window/CatalogEdit.js:233
+#: app/window/CatalogEdit.js:249
 msgid "ID материала"
 msgstr "Material ID"
 
-#: app/window/CatalogEdit.js:243 include/ui_cat_props.php:584
+#: app/window/CatalogEdit.js:259
 msgid "скрытый"
 msgstr "hidden"
 
-#: app/window/CatalogEdit.js:257 include/ui_cat_props.php:596
+#: app/window/CatalogEdit.js:273
 msgid "Связан с"
 msgstr "Linked to"
 
-#: app/window/CatalogEdit.js:317 app/window/CatalogEdit.js:404
-#: include/ui_cat_props.php:320 include/ui_cat_props.php:632
+#: app/window/CatalogEdit.js:333 app/window/CatalogEdit.js:420
 msgid "Разрешения"
 msgstr "Permissions"
 
-#: app/window/CatalogEdit.js:322 include/ui_cat_props.php:325
+#: app/window/CatalogEdit.js:338
 msgid "Разрешить"
 msgstr "Permit"
 
-#: app/window/CatalogEdit.js:411 include/ui_cat_props.php:639
+#: app/window/CatalogEdit.js:427
 msgid "наследовать разрешения родительского раздела"
 msgstr "inherit the permissions of the parent section"
 
-#: app/window/CatalogEdit.js:429 include/ui_cat_props.php:657
-#: include/ui_material_edit.php:293
+#: app/window/CatalogEdit.js:445 include/ui_material_edit.php:244
 msgid "Группы"
 msgstr "Groups"
 
-#: app/window/CatalogEdit.js:474 app/window/CatalogEdit.js:587
-#: include/ui_cat_props.php:130 include/ui_cat_props.php:240
-#: include/ui_cat_props.php:457 include/ui_groups.php:126
-#: include/ui_users.php:49 lang/data.php:173
+#: app/window/CatalogEdit.js:490 app/window/CatalogEdit.js:603
+#: include/ui_groups.php:126 lang/data.php:177
 msgid "Имя"
 msgstr "Name"
 
-#: app/window/CatalogEdit.js:479 app/window/CatalogEdit.js:588
-#: include/ui_cat_props.php:135 include/ui_cat_props.php:241
+#: app/window/CatalogEdit.js:495 app/window/CatalogEdit.js:604
 msgid "Значение"
 msgstr "Value"
 
-#: app/window/CatalogEdit.js:494 include/ui_cat_props.php:151
+#: app/window/CatalogEdit.js:510
 msgid "Новая переменная"
 msgstr "New variable"
 
-#: app/window/CatalogEdit.js:506 include/ui_cat_props.php:162
+#: app/window/CatalogEdit.js:522
 msgid "Редактировать"
 msgstr "Edit"
 
-#: app/window/CatalogEdit.js:520 include/ui_cat_props.php:175
-#: include/ui_groups.php:36 include/ui_users.php:97 lang/data.php:107
-#: lang/data.php:152
-msgid "Удалить"
-msgstr "Delete"
-
-#: app/window/CatalogEdit.js:530 include/ui_cat_props.php:184
+#: app/window/CatalogEdit.js:546
 msgid "Переопределить"
 msgstr "Redefine"
 
-#: app/window/CatalogEdit.js:544 include/ui_cat_props.php:197
+#: app/window/CatalogEdit.js:560
 msgid "Удалить переопределение"
 msgstr "Remove redefinition"
 
-#: app/window/CatalogEdit.js:606
+#: app/window/CatalogEdit.js:622
 #: include/editors/ckeditor/plugins/widgets/plugin.php:42
-#: include/ui_cat_props.php:259 include/ui_groups.php:93
+#: include/ui_groups.php:93
 msgid "ОК"
 msgstr "OK"
 
-#: app/window/CatalogEdit.js:638 include/ui_cat_props.php:669
+#: app/window/CatalogEdit.js:654
 msgid "Переменные"
 msgstr "Variables"
 
-#: app/window/CatalogPrefs.js:6 include/ui_cat_props.php:807
+#: app/window/CatalogPrefs.js:6
 msgid "Настройки раздела"
 msgstr "Section settings"
 
-#: app/window/CatalogPrefs.js:57 include/ui_cat_props.php:871
+#: app/window/CatalogPrefs.js:57
 msgid "Поле"
 msgstr "Field"
 
-#: app/window/CatalogPrefs.js:63 include/ui_cat_props.php:876
+#: app/window/CatalogPrefs.js:63
 msgid "Показать"
 msgstr "Show"
 
-#: app/window/CatalogPrefs.js:72 include/ui_cat_props.php:885
+#: app/window/CatalogPrefs.js:72
 msgid "Скрыть"
 msgstr "Hide"
 
-#: app/window/CatalogPrefs.js:95 include/ui_cat_props.php:908
+#: app/window/CatalogPrefs.js:95
 msgid "Видимость полей"
 msgstr "Fields visibility"
 
-#: app/window/CatalogPrefs.js:104 include/ui_cat_props.php:917
+#: app/window/CatalogPrefs.js:104
 msgid "наследовать настройки родительского раздела"
 msgstr "inherit settings of parental section"
 
-#: app/window/MailTemplate.js:1 app/window/MailTemplate.js:15
+#: app/window/MailTemplate.js:14
 msgid "Почтовый шаблон"
 msgstr "Mail template"
 
-#: app/window/MailTemplate.js:57
+#: app/window/MailTemplate.js:56
 msgid "Активен"
 msgstr "Active"
 
-#: app/window/MailTemplate.js:62
+#: app/window/MailTemplate.js:61
 msgid "Тип письма"
 msgstr "Content type"
 
-#: app/window/MailTemplate.js:72
+#: app/window/MailTemplate.js:71
 msgid "Текст"
 msgstr "Text"
 
-#: app/window/MailTemplate.js:81
+#: app/window/MailTemplate.js:80
 msgid "От кого"
 msgstr "From"
 
-#: app/window/MailTemplate.js:90
+#: app/window/MailTemplate.js:89
 msgid "Кому"
 msgstr "To"
 
-#: app/window/MailTemplate.js:110 include/welcome_new.php:226
+#: app/window/MailTemplate.js:109 include/welcome_new.php:226
 msgid "Сообщение"
 msgstr "Message"
 
-#: app/window/MailTemplate.js:142
+#: app/window/MailTemplate.js:141
 msgid "Параметры"
 msgstr "Parameters"
 
@@ -579,53 +685,57 @@ msgstr "Materials type is not found"
 msgid "Не найден виджет"
 msgstr "Widget is not found"
 
-#: include/action_check.php:38
+#: include/action_check.php:20
+msgid "Не найдено меню"
+msgstr "The menu is not found"
+
+#: include/action_check.php:41
 msgid "Модуль"
 msgstr "Module"
 
-#: include/action_check.php:39 include/action_fix.php:32
+#: include/action_check.php:44 include/action_fix.php:32
 msgid "Таблица"
 msgstr "Table"
 
-#: include/action_check.php:43
+#: include/action_check.php:52
 msgid "ожилалось"
 msgstr "expected"
 
-#: include/action_check.php:48
+#: include/action_check.php:57
 msgid "Обнаружены ошибки в структуре БД"
 msgstr "There is errors in the database"
 
-#: include/action_check.php:56
+#: include/action_check.php:65
 msgid "Нарушено правило"
 msgstr ""
 
-#: include/action_check.php:57
+#: include/action_check.php:66
 msgid "Левый ключ ВСЕГДА меньше правого"
 msgstr ""
 
-#: include/action_check.php:58
+#: include/action_check.php:67
 msgid "Наименьший левый ключ ВСЕГДА равен 1"
 msgstr ""
 
-#: include/action_check.php:59
+#: include/action_check.php:68
 msgid "Наибольший правый ключ ВСЕГДА равен двойному числу узлов"
 msgstr ""
 
-#: include/action_check.php:60
+#: include/action_check.php:69
 msgid "Разница между правым и левым ключом ВСЕГДА нечетное число"
 msgstr ""
 
-#: include/action_check.php:61
+#: include/action_check.php:70
 msgid ""
 "Если уровень узла нечетное число то тогда левый ключ ВСЕГДА нечетное число, "
 "то же самое и для четных чисел"
 msgstr ""
 
-#: include/action_check.php:62
+#: include/action_check.php:71
 msgid "Ключи ВСЕГДА уникальны, вне зависимости от того правый он или левый"
 msgstr ""
 
-#: include/action_check.php:95
+#: include/action_check.php:99
 msgid "Обнаружены ошибки в структуре разделов"
 msgstr ""
 
@@ -633,56 +743,61 @@ msgstr ""
 msgid "Виджет защищен."
 msgstr "Widget protected."
 
-#: include/action_files.php:71
+#: include/action_files.php:64
 msgid "Невозможно сохранить файл"
 msgstr "Can not save file"
 
-#: include/action_files.php:143
+#: include/action_files.php:135
 msgid "Нет файла"
 msgstr "No file"
 
-#: include/action_files.php:150 include/ck_file_uploader.php:10
+#: include/action_files.php:141 include/ck_file_uploader.php:10
 msgid "Слишком большой размер файла"
 msgstr "The file is too big"
 
-#: include/action_files.php:153 include/ck_file_uploader.php:13
+#: include/action_files.php:144 include/ck_file_uploader.php:13
 msgid "Ошибка. Загружена лишь часть файла"
 msgstr "Error. Only part of the file has been uploaded"
 
-#: include/action_files.php:156 include/ck_file_uploader.php:16
+#: include/action_files.php:147 include/ck_file_uploader.php:16
 msgid "Ошибка. Нет файла"
 msgstr "Error. No file"
 
-#: include/action_files.php:159 include/ck_file_uploader.php:19
+#: include/action_files.php:150 include/ck_file_uploader.php:19
 msgid "Не найден временный каталог для сохранения загруженного файла"
 msgstr "Temporary folder for saving the downloaded file hasn't been found"
 
-#: include/action_files.php:162 include/ck_file_uploader.php:22
+#: include/action_files.php:153 include/ck_file_uploader.php:22
 msgid "Ошибка при сохранении загруженного файла"
 msgstr "Error while saving uploaded file"
 
-#: include/action_files.php:165 include/ck_file_uploader.php:25
+#: include/action_files.php:156 include/ck_file_uploader.php:25
 msgid "Невозможно загрузить данный тип файла"
 msgstr "Unable to upload this type of file"
 
-#: include/action_files.php:180 include/ck_file_uploader.php:36
+#: include/action_files.php:174 include/ck_file_uploader.php:36
 #, php-format
 msgid "Каталог \"%s\" недоступен для записи"
 msgstr "Directory \"% s\" is not accessible for writing"
 
-#: include/action_files.php:215
+#: include/action_files.php:210
 msgid "Не удалось удалить файл."
 msgstr "File delete failed."
 
-#: include/action_fix.php:50 include/action_upgrade.php:51 lang/data.php:179
+#: include/action_fix.php:37 include/classes/Cetera/BackOffice.php:202
+#: lang/data.php:61
+msgid "Меню"
+msgstr "Menu"
+
+#: include/action_fix.php:59 include/action_upgrade.php:51 lang/data.php:183
 msgid "Ошибка"
 msgstr "Error"
 
-#: include/action_fix.php:155
+#: include/action_fix.php:163
 msgid "Структура разделов"
 msgstr "Section structure"
 
-#: include/action_groups.php:43
+#: include/action_groups.php:44
 msgid "Группа с таким именем уже существует."
 msgstr "User group already exists."
 
@@ -712,7 +827,7 @@ msgstr "Unknown error"
 msgid "Файлы"
 msgstr "Files"
 
-#: include/action_types.php:148 include/field_editors.php:176
+#: include/action_types.php:146 include/field_editors.php:170
 msgid "Ключевые слова"
 msgstr "Keywords"
 
@@ -720,210 +835,267 @@ msgstr "Keywords"
 msgid "Проверка совместимости"
 msgstr "Chicking compability"
 
-#: include/action_upgrade.php:71 upgrade.php:95 upgrade.php:198
+#: include/action_upgrade.php:71 include/classes/Cetera/Plugin.php:255
+#: include/classes/Cetera/Theme.php:92 include/setup.php:71 upgrade.php:95
+#: upgrade.php:198
 msgid "Не удалось распаковать архив"
 msgstr "Can't open archive"
 
-#: include/action_upgrade.php:76 upgrade.php:104 upgrade.php:205
+#: include/action_upgrade.php:76 include/classes/Cetera/Plugin.php:260
+#: include/setup.php:79 upgrade.php:104 upgrade.php:205
 msgid "Не удалось открыть архив"
 msgstr "Can't extract archive"
 
-#: include/classes/Cetera/Application.php:914
+#: include/classes/Cetera/Application.php:923
 msgid "Все"
 msgstr "All"
 
-#: include/classes/Cetera/Application.php:920
+#: include/classes/Cetera/Application.php:929
 msgid "Пользователи BackOffice"
 msgstr "BackOffice users"
 
-#: include/classes/Cetera/Application.php:921
+#: include/classes/Cetera/Application.php:930
 msgid "Имеют право входа в систему управления сайтом"
 msgstr "Access to the content management system is available for"
 
-#: include/classes/Cetera/Application.php:926
+#: include/classes/Cetera/Application.php:935
 msgid "Администраторы"
 msgstr "Administrators"
 
-#: include/classes/Cetera/Application.php:927
+#: include/classes/Cetera/Application.php:936
 msgid "Администраторы имеют полные, ничем неограниченные права доступа"
 msgstr "Administrators have complete and unrestricted access rights"
 
-#: include/classes/Cetera/Application.php:1140
+#: include/classes/Cetera/Application.php:1229
 #, php-format
 msgid "Виджет \"%s\" не зарегистрирован"
 msgstr "Widget \"% s\" is not registered"
 
-#: include/classes/Cetera/Application.php:1211
+#: include/classes/Cetera/Application.php:1300
 msgid "Контейнер"
 msgstr "Container"
 
-#: include/classes/Cetera/Application.php:1219
+#: include/classes/Cetera/Application.php:1308
 msgid "Меню раздела"
 msgstr "Section menu"
 
-#: include/classes/Cetera/Application.php:1226
+#: include/classes/Cetera/Application.php:1315
 msgid "Пользовательское меню"
 msgstr "Custom menu"
 
-#: include/classes/Cetera/Application.php:1233
+#: include/classes/Cetera/Application.php:1322
 msgid "Список материалов"
 msgstr "Material list"
 
-#: include/classes/Cetera/Application.php:1247 include/field_editors.php:164
-#: include/setup.php:244 lang/data.php:159
+#: include/classes/Cetera/Application.php:1343 include/field_editors.php:158
+#: include/setup.php:244 include/setup.php:302 lang/data.php:163
 msgid "Файл"
 msgstr "File"
 
-#: include/classes/Cetera/Application.php:1254
+#: include/classes/Cetera/Application.php:1350
 msgid "Страничная навигация"
 msgstr "Pagination"
 
-#: include/classes/Cetera/Application.php:1261
+#: include/classes/Cetera/Application.php:1357
 msgid "\"Хлебные крошки\""
 msgstr "\"Breadcrumbs\""
 
-#: include/classes/Cetera/Application.php:1268
+#: include/classes/Cetera/Application.php:1364
 msgid "Поиск по сайту"
 msgstr "Site search"
 
-#: include/classes/Cetera/Application.php:1275 include/field_editors.php:171
-#: lang/data.php:181
+#: include/classes/Cetera/Application.php:1371 include/field_editors.php:165
+#: lang/data.php:185
 msgid "Материал"
 msgstr "Material"
 
-#: include/classes/Cetera/Application.php:1289
+#: include/classes/Cetera/Application.php:1385
 msgid "Календарь"
 msgstr "Calendar"
 
-#: include/classes/Cetera/Application.php:1296
+#: include/classes/Cetera/Application.php:1392
 msgid "Форма входа"
 msgstr "Login form"
 
-#: include/classes/Cetera/Application.php:1303
+#: include/classes/Cetera/Application.php:1400
 msgid "Форма регистрации"
 msgstr "Registration form"
 
-#: include/classes/Cetera/Application.php:1310
+#: include/classes/Cetera/Application.php:1408
 msgid "Персональные данные"
 msgstr "Personal data"
 
-#: include/classes/Cetera/Application.php:1317
+#: include/classes/Cetera/Application.php:1416
 msgid "Форма восстановления пароля"
 msgstr "Password recovery form"
 
-#: include/classes/Cetera/Application.php:1330
+#: include/classes/Cetera/BackOffice.php:39
+msgid "Зарегистрирован пользователь"
+msgstr "User was registered"
+
+#: include/classes/Cetera/BackOffice.php:41
+#: include/classes/Cetera/BackOffice.php:55
 msgid "ID пользователя"
 msgstr "User ID"
 
-#: include/classes/Cetera/Application.php:1331
+#: include/classes/Cetera/BackOffice.php:42
+#: include/classes/Cetera/BackOffice.php:56
+msgid "Логин пользователя"
+msgstr "User login"
+
+#: include/classes/Cetera/BackOffice.php:43
+#: include/classes/Cetera/BackOffice.php:57
 msgid "E-mail пользователя"
 msgstr "User Email"
 
-#: include/classes/Cetera/Application.php:1332
+#: include/classes/Cetera/BackOffice.php:44
+#: include/classes/Cetera/BackOffice.php:58
 msgid "Имя пользователя"
 msgstr "User name"
 
-#: include/classes/Cetera/Application.php:1333
-msgid "Пароль пользователя"
-msgstr "User Password"
+#: include/classes/Cetera/BackOffice.php:45
+#: include/classes/Cetera/BackOffice.php:59 include/field_editors.php:198
+#: lang/data.php:137 setup.php:160 widgets/user.auth/default.twig:19
+msgid "Пароль"
+msgstr "Password"
 
-#: include/classes/Cetera/Application.php:1334
-msgid "Имя сайта"
-msgstr "Site name"
-
-#: include/classes/Cetera/Application.php:1335
+#: include/classes/Cetera/BackOffice.php:46
+#: include/classes/Cetera/BackOffice.php:60
 msgid "Адрес сайта"
 msgstr "Site url"
 
-#: include/classes/Cetera/Application.php:1338
-msgid "Регистрация пользователя"
-msgstr "Registration"
+#: include/classes/Cetera/BackOffice.php:47
+#: include/classes/Cetera/BackOffice.php:61
+msgid "Имя сайта"
+msgstr "Site name"
 
-#: include/classes/Cetera/Application.php:1339
-msgid "Восстановление пароля пользователя"
-msgstr "Recover password"
+#: include/classes/Cetera/BackOffice.php:53
+msgid "Сброс пароля пользователя"
+msgstr "Reset user password"
 
-#: include/classes/Cetera/BackOffice.php:102
-msgid "Материалы"
-msgstr "Materials"
+#: include/classes/Cetera/BackOffice.php:65
+msgid "Вход в систему"
+msgstr "Login"
 
-#: include/classes/Cetera/BackOffice.php:113
+#: include/classes/Cetera/BackOffice.php:66
+msgid "Попытка входа в систему"
+msgstr "Login attempt"
+
+#: include/classes/Cetera/BackOffice.php:67
+msgid "Очищен журнал аудита"
+msgstr "Log cleared"
+
+#: include/classes/Cetera/BackOffice.php:68
+msgid "Создан раздел"
+msgstr "Section has been created"
+
+#: include/classes/Cetera/BackOffice.php:69
+msgid "Изменен раздел"
+msgstr "Section has been changed"
+
+#: include/classes/Cetera/BackOffice.php:70
+msgid "Удален раздел"
+msgstr "Section has been deleted"
+
+#: include/classes/Cetera/BackOffice.php:71
+msgid "Создан материал"
+msgstr "Material has been created"
+
+#: include/classes/Cetera/BackOffice.php:72
+msgid "Изменен материал"
+msgstr "Material has been changed"
+
+#: include/classes/Cetera/BackOffice.php:73
+msgid "Удален материал"
+msgstr "Material has been deleted"
+
+#: include/classes/Cetera/BackOffice.php:74
+msgid "Опубликован материал"
+msgstr "Material has been published"
+
+#: include/classes/Cetera/BackOffice.php:75
+msgid "Раcпубликован материал"
+msgstr "Material has been unpublished"
+
+#: include/classes/Cetera/BackOffice.php:76
+msgid "Изменен пользователь"
+msgstr "User has been changed"
+
+#: include/classes/Cetera/BackOffice.php:168
+msgid "Структура и материалы"
+msgstr "Structure & content"
+
+#: include/classes/Cetera/BackOffice.php:185
 msgid "Шаблоны виджетов"
 msgstr "Widget templates"
 
-#: include/classes/Cetera/BackOffice.php:122
+#: include/classes/Cetera/BackOffice.php:194
 msgid "Области"
 msgstr "Areas"
 
-#: include/classes/Cetera/BackOffice.php:130 lang/data.php:57
-msgid "Меню"
-msgstr "Menu"
+#: include/classes/Cetera/BackOffice.php:210
+msgid "Настройки"
+msgstr "Settings"
 
-#: include/classes/Cetera/BackOffice.php:138
+#: include/classes/Cetera/BackOffice.php:218
 msgid "Типы материалов"
 msgstr "Materials types"
 
-#: include/classes/Cetera/BackOffice.php:146 lang/data.php:118
+#: include/classes/Cetera/BackOffice.php:226 lang/data.php:122
 msgid "Пользователи"
 msgstr "Users"
 
-#: include/classes/Cetera/BackOffice.php:155
+#: include/classes/Cetera/BackOffice.php:234
 msgid "Группы пользователей"
 msgstr "User groups"
 
-#: include/classes/Cetera/BackOffice.php:164
+#: include/classes/Cetera/BackOffice.php:243
 msgid "Журнал"
 msgstr "Log"
 
-#: include/classes/Cetera/BackOffice.php:173
+#: include/classes/Cetera/BackOffice.php:252
 msgid "Проверка и ремонт БД"
 msgstr "Database check and repair"
 
-#: include/classes/Cetera/BackOffice.php:182
+#: include/classes/Cetera/BackOffice.php:261
 msgid "Почтовые шаблоны"
 msgstr "Email templates"
 
-#: include/classes/Cetera/BackOffice.php:190 include/data_ui.php:35
+#: include/classes/Cetera/BackOffice.php:269 include/data_ui.php:35
 msgid "Плагины"
 msgstr "Plug-ins"
 
-#: include/classes/Cetera/BackOffice.php:196 lang/data.php:193
+#: include/classes/Cetera/BackOffice.php:275 lang/data.php:197
 msgid "Добавить плагин"
 msgstr "Add plug-in"
 
-#: include/classes/Cetera/BackOffice.php:205
+#: include/classes/Cetera/BackOffice.php:284
 msgid "Темы"
 msgstr "Themes"
 
-#: include/classes/Cetera/BackOffice.php:211 lang/data.php:44
+#: include/classes/Cetera/BackOffice.php:290 lang/data.php:48
 msgid "Установить тему"
 msgstr "Install theme"
 
-#: include/classes/Cetera/Catalog.php:1369 include/ui_cat_props.php:24
+#: include/classes/Cetera/Catalog.php:1289
 msgid "Работа со своими материалами"
 msgstr "Work with your materials"
 
-#: include/classes/Cetera/Catalog.php:1370 include/ui_cat_props.php:25
+#: include/classes/Cetera/Catalog.php:1290
 msgid "Работа с материалами других авторов"
 msgstr "Work with materials of other authors"
 
-#: include/classes/Cetera/Catalog.php:1371 include/ui_cat_props.php:26
+#: include/classes/Cetera/Catalog.php:1291
 msgid "Администрирование раздела"
 msgstr "Section management"
 
-#: include/classes/Cetera/Catalog.php:1372 include/ui_cat_props.php:27
+#: include/classes/Cetera/Catalog.php:1292
 msgid "Возможность видеть раздел в структуре"
 msgstr "The ability to see section in the structure"
 
-#: include/classes/Cetera/Catalog.php:1373 include/ui_cat_props.php:28
+#: include/classes/Cetera/Catalog.php:1293
 msgid "Публикация материалов"
 msgstr "Material publication"
-
-#: include/classes/Cetera/Catalog.php:1402 include/ui_cat_props.php:69
-#: include/ui_groups.php:43 include/ui_groups.php:204
-#: include/ui_material_edit.php:92 include/ui_users.php:115 lang/data.php:71
-msgid "Свойства"
-msgstr "Properties"
 
 #: include/classes/Cetera/Exception/CMS.php:107
 msgid "Исчерпан лимит на количество серверов в системе"
@@ -988,7 +1160,7 @@ msgstr "Can't create discussion topic"
 msgid "Сообщение уже существует"
 msgstr "Message already exists"
 
-#: include/classes/Cetera/Exception/CMS.php:124 include/ui_cat_props.php:36
+#: include/classes/Cetera/Exception/CMS.php:124
 msgid "Недостаточно полномочий для совершения этого действия"
 msgstr "You have insufficient privileges to commit this action"
 
@@ -1023,70 +1195,107 @@ msgstr "Materials limit exceeded"
 msgid "Неизвестная ошибка (%s)"
 msgstr "Unknown error (%s)"
 
-#: include/classes/Cetera/Plugin.php:166
+#: include/classes/Cetera/Filter.php:113 lang/data.php:97 setup.php:111
+msgid "да"
+msgstr "yes"
+
+#: include/classes/Cetera/Filter.php:114 lang/data.php:98
+msgid "нет"
+msgstr "no"
+
+#: include/classes/Cetera/Plugin.php:211
 msgid "Загрузка плагина"
 msgstr "Plug-in download"
 
-#: include/classes/Cetera/Plugin.php:172 include/classes/Cetera/Theme.php:59
+#: include/classes/Cetera/Plugin.php:217 include/classes/Cetera/Theme.php:64
+#: include/classes/Cetera/Theme.php:67 include/setup.php:341
+msgid "Каталог"
+msgstr "Folder"
+
+#: include/classes/Cetera/Plugin.php:217 include/classes/Cetera/Theme.php:67
 msgid "недоступен для записи"
 msgstr "Unavailable for record"
 
-#: include/classes/Cetera/Plugin.php:187
+#: include/classes/Cetera/Plugin.php:226
+msgid "Не удалось скачать плагин"
+msgstr "Failed to download plug-in"
+
+#: include/classes/Cetera/Plugin.php:232
 msgid "Не удалось скачать плагин."
 msgstr "Failed to download plug-in."
 
-#: include/classes/Cetera/Plugin.php:188
+#: include/classes/Cetera/Plugin.php:233
 msgid "Переустановка ранее загруженного плагина"
 msgstr "Reinstalling downloaded plug-in"
 
-#: include/classes/Cetera/Plugin.php:200
+#: include/classes/Cetera/Plugin.php:245
 msgid "Удаление предыдущей версии"
 msgstr "Delete previous version"
 
-#: include/classes/Cetera/Plugin.php:205 include/classes/Cetera/Theme.php:80
+#: include/classes/Cetera/Plugin.php:250 include/classes/Cetera/Theme.php:88
 msgid "Распаковка архива"
 msgstr "Unpack archive"
 
-#: include/classes/Cetera/Plugin.php:220 include/classes/Cetera/Theme.php:95
+#: include/classes/Cetera/Plugin.php:265 include/classes/Cetera/Theme.php:103
 msgid "Модификация БД"
 msgstr "Database modifying"
 
-#: include/classes/Cetera/Plugin.php:237
+#: include/classes/Cetera/Plugin.php:290
 msgid "Проверка зависимостей:"
 msgstr "Dependency checking:"
 
-#: include/classes/Cetera/Theme.php:51
+#: include/classes/Cetera/Plugin.php:294
+msgid "Плагин"
+msgstr "Plugin"
+
+#: include/classes/Cetera/Plugin.php:299 include/field_editors.php:188
+msgid "отсутствует"
+msgstr "none"
+
+#: include/classes/Cetera/Plugin.php:306 lang/data.php:198
+msgid "установлен"
+msgstr "installed"
+
+#: include/classes/Cetera/Plugin.php:311 lang/data.php:208
+msgid "Установка/обновление"
+msgstr "Install /Update"
+
+#: include/classes/Cetera/Theme.php:59
 msgid "Загрузка темы"
 msgstr "Theme download"
 
-#: include/classes/Cetera/Theme.php:56
+#: include/classes/Cetera/Theme.php:64
 msgid "не существует"
 msgstr "does not exist"
 
-#: include/classes/Cetera/Theme.php:105
+#: include/classes/Cetera/Theme.php:73
+msgid "Не удалось скачать тему"
+msgstr "Failed to download theme"
+
+#: include/classes/Cetera/Theme.php:112
 msgid "Начальная структура сайта"
 msgstr "Initial site structure"
 
-#: include/classes/Cetera/User.php:551
+#: include/classes/Cetera/User.php:536
 #: include/classes/Cetera/Widget/User/ProfileEdit.php:73
 msgid "Пользователь с таким e-mail уже зарегистрирован"
 msgstr "Another user with same email has been registered already"
 
-#: include/classes/Cetera/User.php:557
-#: include/classes/Cetera/Widget/User/ProfileEdit.php:45 include/setup.php:73
-#: include/setup.php:74
+#: include/classes/Cetera/User.php:542
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:45 include/setup.php:106
+#: include/setup.php:107
 msgid "Пароли не совпадают"
 msgstr "Passwords don't match"
 
-#: include/classes/Cetera/User.php:579
+#: include/classes/Cetera/User.php:564
 msgid "У пользователя не указан e-mail"
 msgstr "The user has unknown e-mail"
 
-#: include/classes/Cetera/User.php:596
+#: include/classes/Cetera/User.php:580
 msgid "Ваш пароль на сайт "
 msgstr "Your password on site"
 
-#: include/classes/Cetera/User.php:597
+#: include/classes/Cetera/User.php:581
 msgid "Ваш новый пароль: "
 msgstr "Your new password is:"
 
@@ -1142,15 +1351,11 @@ msgstr "November"
 msgid "Декабрь"
 msgstr "December"
 
-#: include/classes/Cetera/Widget/Search.php:31
+#: include/classes/Cetera/Widget/Search.php:32
 msgid "Введите строку для поиска"
 msgstr "Enter search text"
 
-#: include/classes/Cetera/Widget/Search.php:32
-msgid "Искать"
-msgstr "Search"
-
-#: include/classes/Cetera/Widget/Section.php:45
+#: include/classes/Cetera/Widget/Section.php:46
 msgid "Страница не найдена"
 msgstr "Page is not found"
 
@@ -1178,8 +1383,8 @@ msgstr "Old password"
 msgid "Новый пароль"
 msgstr "New password"
 
-#: include/classes/Cetera/Widget/User/ProfileEdit.php:151 setup.php:160
-#: widgets/user.register/default.twig:27
+#: include/classes/Cetera/Widget/User/ProfileEdit.php:151 setup.php:161
+#: widgets/user.register/default.twig:29
 msgid "Повторите пароль"
 msgstr "Confirm password"
 
@@ -1187,65 +1392,29 @@ msgstr "Confirm password"
 msgid "Новый пароль выслан вам по электронной почте"
 msgstr "The new password has been sent to you"
 
-#: include/common_eventlog.php:3
-msgid "Вход в систему"
-msgstr "Login"
+#: include/data_cache.php:31
+msgid "Резайз картинок"
+msgstr "Resized images"
 
-#: include/common_eventlog.php:4
-msgid "Попытка входа в систему"
-msgstr "Login attempt"
+#: include/data_cache.php:35
+msgid "Файловый кэш объектов"
+msgstr "Objects cache"
 
-#: include/common_eventlog.php:5
-msgid "Очищен журнал"
-msgstr "Log cleared"
+#: include/data_cache.php:39
+msgid "Twig"
+msgstr "Twig"
 
-#: include/common_eventlog.php:6
-msgid "Создан раздел"
-msgstr "Section has been created"
-
-#: include/common_eventlog.php:7
-msgid "Изменен раздел"
-msgstr "Section has been changed"
-
-#: include/common_eventlog.php:8
-msgid "Удален раздел"
-msgstr "Section has been deleted"
-
-#: include/common_eventlog.php:9
-msgid "Создан материал"
-msgstr "Material has been created"
-
-#: include/common_eventlog.php:10
-msgid "Изменен материал"
-msgstr "Material has been changed"
-
-#: include/common_eventlog.php:11
-msgid "Удален материал"
-msgstr "Material has been deleted"
-
-#: include/common_eventlog.php:12
-msgid "Опубликован материал"
-msgstr "Material has been published"
-
-#: include/common_eventlog.php:13
-msgid "Разпубликован материал"
-msgstr "Material has been unpublished"
-
-#: include/common_eventlog.php:14
-msgid "Изменен пользователь"
-msgstr "User has been changed"
-
-#: include/data_plugins_lib.php:40 include/data_themes_lib.php:33
+#: include/data_plugins_lib.php:43 include/data_themes_lib.php:33
 #, php-format
 msgid "Не подходящая версия Cetera CMS. Требуется %s или выше"
 msgstr "Incompatible version of Cetera CMS. %s or higher is required."
 
-#: include/data_plugins_lib.php:45 include/data_themes_lib.php:38
+#: include/data_plugins_lib.php:48 include/data_themes_lib.php:38
 #, php-format
 msgid "Не подходящая версия Cetera CMS. Требуется не выше %s"
 msgstr "Incompatible version of Cetera CMS. %s or lower is required."
 
-#: include/data_types.php:88
+#: include/data_types.php:78 include/data_types.php:79
 msgid "Без материалов"
 msgstr "Without materials"
 
@@ -1261,215 +1430,214 @@ msgstr "Service"
 msgid "Сайт"
 msgstr "Site"
 
-#: include/field_editors.php:159
+#: include/field_editors.php:153
 msgid "Текстовый (1-65535 байт)"
 msgstr "Text (1-65535 bytes)"
 
-#: include/field_editors.php:160
+#: include/field_editors.php:154
 msgid "Большой текст (до 16 Мб)"
 msgstr "Large text (up to 16 Mb)"
 
-#: include/field_editors.php:161
+#: include/field_editors.php:155
 msgid "Огромный текст (до 4 Гб)"
 msgstr "Huge text (up to 4GB)"
 
-#: include/field_editors.php:162
+#: include/field_editors.php:156
 msgid "Целочисленный"
 msgstr "Integer"
 
-#: include/field_editors.php:163
+#: include/field_editors.php:157
 msgid "Действительное число"
 msgstr "Real"
 
-#: include/field_editors.php:165
+#: include/field_editors.php:159
 msgid "Дата/Время"
 msgstr "Date/Time"
 
-#: include/field_editors.php:166
+#: include/field_editors.php:160
 msgid "Ссылка на другой материал"
 msgstr "Link to other material"
 
-#: include/field_editors.php:167
+#: include/field_editors.php:161
 msgid "Ссылка на группу материалов"
 msgstr "Link to group of materials"
 
-#: include/field_editors.php:168 include/field_editors.php:187
+#: include/field_editors.php:162 include/field_editors.php:181
 msgid "Группа материалов"
 msgstr "Materials group"
 
-#: include/field_editors.php:169
+#: include/field_editors.php:163
 msgid "Логическое"
 msgstr "Boolean"
 
-#: include/field_editors.php:170
+#: include/field_editors.php:164
 msgid "Выбор"
 msgstr "Choice"
 
-#: include/field_editors.php:173
+#: include/field_editors.php:167
 msgid "Набор файлов"
 msgstr "Fileset"
 
-#: include/field_editors.php:174 include/ui_eventlog.php:102
-#: include/ui_users.php:209 lang/data.php:132 setup.php:157
-msgid "Пользователь"
-msgstr "User"
-
-#: include/field_editors.php:175
+#: include/field_editors.php:169
 msgid "Набор пользователей"
 msgstr "Users"
 
-#: include/field_editors.php:177
+#: include/field_editors.php:171
 msgid "Ссылка на разделы"
 msgstr "Links to sections"
 
-#: include/field_editors.php:181
+#: include/field_editors.php:175
 msgid "Однострочный редактор текста"
 msgstr "A single-line text editor"
 
-#: include/field_editors.php:182
+#: include/field_editors.php:176
 msgid "Ввод числовых значений"
 msgstr "Numeric input"
 
-#: include/field_editors.php:183 lang/data.php:164
+#: include/field_editors.php:177 lang/data.php:168
 msgid "Выбор файла"
 msgstr "Select file"
 
-#: include/field_editors.php:184
+#: include/field_editors.php:178
 msgid "Выбор даты/времени"
 msgstr "Select Date/Time"
 
-#: include/field_editors.php:185
+#: include/field_editors.php:179
 msgid "Выбор материала из структуры"
 msgstr "Choose material from structure"
 
-#: include/field_editors.php:186
+#: include/field_editors.php:180
 msgid "Выбор группы материалов"
 msgstr "Choose materials group"
 
-#: include/field_editors.php:188
+#: include/field_editors.php:182
 msgid "Флажок (Checkbox)"
 msgstr "Checkbox"
 
-#: include/field_editors.php:189
+#: include/field_editors.php:183
 msgid "Выбор да/нет (Radio)"
 msgstr "Yes/No (Radio)"
 
-#: include/field_editors.php:190
+#: include/field_editors.php:184
 msgid "Выпадающий список"
 msgstr "Dropdown list"
 
-#: include/field_editors.php:191
+#: include/field_editors.php:185
 msgid "Выбор формы (выпадающий список)"
 msgstr "Choose the form (Dropdown list)"
 
-#: include/field_editors.php:192
+#: include/field_editors.php:186
 msgid "Однострочный редактор текста (только лат. и цифр. символы)"
 msgstr "A single-line text editor (only latin symbols and numeric)"
 
-#: include/field_editors.php:193
+#: include/field_editors.php:187
 msgid "Многострочный редактор текста"
 msgstr "Multiline text editor"
 
-#: include/field_editors.php:194
-msgid "отсутствует"
-msgstr "none"
-
-#: include/field_editors.php:195
+#: include/field_editors.php:189
 msgid "Специальный редактор"
 msgstr "Special editor"
 
-#: include/field_editors.php:196
+#: include/field_editors.php:190
 msgid "Загрузка/редактирование группы файлов"
 msgstr "Download/editing group of files"
 
-#: include/field_editors.php:197
+#: include/field_editors.php:191
 msgid "Выбор группы материалов флажками"
 msgstr "Selection of materials group by flags"
 
-#: include/field_editors.php:198
+#: include/field_editors.php:192
 msgid "Загрузка/редактирование изображений"
 msgstr "Download/editing images"
 
-#: include/field_editors.php:199
+#: include/field_editors.php:193
 msgid "Выбор пользователя"
 msgstr "Choose the user "
 
-#: include/field_editors.php:200
+#: include/field_editors.php:194
 msgid "Выбор пользователей"
 msgstr "Choose the users"
 
-#: include/field_editors.php:201
+#: include/field_editors.php:195
 msgid "Редактирование материала"
 msgstr "Materials editing"
 
-#: include/field_editors.php:202
+#: include/field_editors.php:196
 msgid "Редактирование действительных чисел"
 msgstr "Editing reals"
 
-#: include/field_editors.php:203
+#: include/field_editors.php:197
 msgid "Редактирование ключевых слов"
 msgstr "Keywords editing"
 
-#: include/field_editors.php:204 lang/data.php:133 setup.php:159
-#: widgets/user.auth/default.twig:19
-msgid "Пароль"
-msgstr "Password"
-
-#: include/field_editors.php:205
+#: include/field_editors.php:199
 msgid "CKEditor"
 msgstr "CKEditor"
 
-#: include/field_editors.php:206
+#: include/field_editors.php:200
 msgid "Выбор разделов"
+msgstr "Select sections"
+
+#: include/field_editors.php:201
+msgid "Выбор раздела"
 msgstr "Select section"
 
-#: include/field_editors.php:207
+#: include/field_editors.php:202
 msgid "CKEditor малый"
 msgstr "CKEditor portable"
 
-#: include/field_editors.php:208
+#: include/field_editors.php:203
 msgid "Выбор рисунка"
 msgstr "Select picture"
 
-#: include/field_editors.php:209
+#: include/field_editors.php:204
 msgid "Редактируемая группа материалов"
 msgstr "Editable group of materials"
 
-#: include/setup.php:95
+#: include/setup.php:74
+msgid "Установлена стандартная тема"
+msgstr "Default theme installed"
+
+#: include/setup.php:128
 msgid "Установка кодировки БД"
 msgstr "Defining database character encoding"
 
-#: include/setup.php:122
+#: include/setup.php:155
 msgid "Данные"
 msgstr "Data"
 
-#: include/setup.php:144
+#: include/setup.php:202
 msgid "Ошибка при выборе базы данных"
 msgstr "Database select error"
 
-#: include/setup.php:152
+#: include/setup.php:210
 #, php-format
 msgid "Требуется версия MySQL не ниже %s<br />Обнаружена версия &mdash; %s"
 msgstr ""
 "MySQL version not below% s  is required<br /> detected version & mdash; % s"
 
-#: include/setup.php:168
+#: include/setup.php:226
 msgid "Проверка окружения"
 msgstr "Environment check"
 
-#: include/setup.php:169
+#: include/setup.php:227
 msgid "требуется"
 msgstr "required"
 
-#: include/setup.php:169
+#: include/setup.php:227
 msgid "обнаружено"
 msgstr "found"
 
-#: include/setup.php:180
+#: include/setup.php:238
 msgid "Файловая система"
 msgstr "File system"
 
-#: include/setup.php:205
+#: include/setup.php:246 include/setup.php:297
+#, php-format
+msgid "Невозможно создать файл %s"
+msgstr "Can't create file \"%s\""
+
+#: include/setup.php:263
 msgid ""
 "В процессе проверки конфигурации сервера были обнаружены критические ошибки."
 "<br /><b>Установка невозможна.</b>"
@@ -1477,7 +1645,7 @@ msgstr ""
 "Critical errors were found in the process of checking the server "
 "configuration. <br /> <b> Installation is impossible . </ b>"
 
-#: include/setup.php:207
+#: include/setup.php:265
 msgid ""
 "В процессе проверки конфигурации сервера были обнаружены некоторые проблемы. "
 "Рекомендуется устранить их перед продолжением установки."
@@ -1485,82 +1653,28 @@ msgstr ""
 "In the process of server configuration checks some problems were detected. "
 "It is recommended to fix them before continuing the installation."
 
-#: include/setup.php:208
+#: include/setup.php:266
 msgid "Проверка закончена"
 msgstr "Check is done"
 
-#: include/setup.php:231
+#: include/setup.php:289
 #, php-format
 msgid "Файл %s недоступен для записи"
 msgstr "File \"%s\" is not writeable"
 
-#: include/setup.php:239
-#, php-format
-msgid "Невозможно создать файл %s"
-msgstr "Can't create file \"%s\""
-
-#: include/setup.php:259
+#: include/setup.php:317
 #, php-format
 msgid "Каталог %s недоступен для записи"
 msgstr "Directory \"%s\" is not writeable"
 
-#: include/setup.php:274
+#: include/setup.php:332
 #, php-format
 msgid "Невозможно создать каталог %s"
 msgstr "Can't create directory \"%s\""
 
-#: include/setup.php:293 lang/data.php:102
+#: include/setup.php:351 lang/data.php:106
 msgid "Внимание!"
 msgstr "Warning!"
-
-#: include/ui_cat_props.php:53 lang/data.php:123
-msgid "Свойства раздела"
-msgstr "Section properties"
-
-#: include/ui_cat_props.php:449 lang/data.php:23
-msgid "Основные"
-msgstr "Main"
-
-#: include/ui_cat_props.php:463
-msgid "Домен"
-msgstr "Domain"
-
-#: include/ui_cat_props.php:463 include/ui_material_edit.php:132
-msgid "Alias"
-msgstr "Alias"
-
-#: include/ui_cat_props.php:473 lang/data.php:24
-msgid "Синонимы"
-msgstr "Synonyms"
-
-#: include/ui_cat_props.php:760 lang/data.php:68
-msgid "Настроить"
-msgstr "Preferencies"
-
-#: include/ui_eventlog.php:69 include/ui_eventlog.php:141
-msgid "Очистить журнал"
-msgstr "Clear log"
-
-#: include/ui_eventlog.php:73
-msgid "Фильтр событий"
-msgstr "Event filter"
-
-#: include/ui_eventlog.php:92 include/ui_users.php:165 lang/data.php:117
-msgid "Всего"
-msgstr "Total"
-
-#: include/ui_eventlog.php:109 lang/data.php:174
-msgid "Дата"
-msgstr "Date"
-
-#: include/ui_eventlog.php:110
-msgid "Дополнительно"
-msgstr "Additionally"
-
-#: include/ui_eventlog.php:141 include/ui_groups.php:196
-#: include/ui_users.php:200
-msgid "Вы уверены"
-msgstr "Are you sure"
 
 #: include/ui_groups.php:29 include/ui_groups.php:215
 msgid "Новая группа"
@@ -1594,66 +1708,30 @@ msgstr "Delete a group"
 msgid "Материал заблокирован другим пользователем."
 msgstr "The material is blocked by another user."
 
-#: include/ui_material_edit.php:134
-msgid "Дата создания"
-msgstr "Date of creation"
+#: include/ui_material_edit.php:129
+msgid "Alias"
+msgstr "Alias"
 
-#: include/ui_material_edit.php:253
+#: include/ui_material_edit.php:204
 msgid "Состоит в"
 msgstr "Member of"
 
-#: include/ui_material_edit.php:359
+#: include/ui_material_edit.php:310
 msgid "Членство в группах"
 msgstr "Membership in groups"
 
-#: include/ui_material_edit.php:377 lang/data.php:69
+#: include/ui_material_edit.php:328 lang/data.php:73
 #: widgets/user.profile.edit/default.twig:24
 msgid "Сохранить"
 msgstr "Save"
 
-#: include/ui_material_edit.php:386
+#: include/ui_material_edit.php:337
 msgid "Сохранить и опубликовать"
 msgstr "Save and publish"
 
-#: include/ui_material_edit.php:395
+#: include/ui_material_edit.php:346
 msgid "Предпросмотр"
 msgstr "Preview"
-
-#: include/ui_users.php:47 lang/data.php:116
-msgid "Псевдоним"
-msgstr "Nickname"
-
-#: include/ui_users.php:50
-msgid "Дата регистрации"
-msgstr "Registration date"
-
-#: include/ui_users.php:51
-msgid "Дата последнего входа"
-msgstr "Last login date"
-
-#: include/ui_users.php:91
-msgid "Новый пользователь"
-msgstr "New user"
-
-#: include/ui_users.php:103
-msgid "Запретить доступ"
-msgstr "Deny access "
-
-#: include/ui_users.php:109
-msgid "Разрешить доступ"
-msgstr "Grant access"
-
-#: include/ui_users.php:122 lang/data.php:114
-msgid "Показывать только пользователей BackOffice"
-msgstr "Availible only for BackOffice users"
-
-#: include/ui_users.php:141 lang/data.php:115
-msgid "Фильтр"
-msgstr "Filter"
-
-#: include/ui_users.php:200
-msgid "Удаление пользователя"
-msgstr "Delete user"
 
 #: include/welcome_new.php:182
 msgid "Как опубликовать материал?"
@@ -1722,151 +1800,159 @@ msgstr "You are using the latest version"
 msgid "Обнаружена новая beta-версия "
 msgstr "A new beta-version is detected"
 
-#: index.php:80
+#: index.php:72
 msgid "Недостаточно полномочий"
 msgstr "Not enough permissons"
 
-#: lang/data.php:16
+#: lang/data.php:20
 msgid "Такой шаблон уже существует. Перезаписать?"
 msgstr "Template already exists. Overwrite?"
 
-#: lang/data.php:17
+#: lang/data.php:21
 msgid "материал редактируется пользователем <{0}>"
 msgstr "the material is edited by the user <{0}>"
 
-#: lang/data.php:18
+#: lang/data.php:22
 msgid "Сбросить к первоначальному значению"
 msgstr "Reset to the original value"
 
-#: lang/data.php:20 setup.php:33
+#: lang/data.php:24 setup.php:33
 msgid "Назад"
 msgstr "Back"
 
-#: lang/data.php:21 setup.php:48
+#: lang/data.php:25 setup.php:48
 msgid "Дальше"
 msgstr "Next"
 
-#: lang/data.php:26
+#: lang/data.php:27
+msgid "Основные"
+msgstr "Main"
+
+#: lang/data.php:28
+msgid "Синонимы"
+msgstr "Synonyms"
+
+#: lang/data.php:30
 msgid "Материал не сохранен"
 msgstr "Material has not been saved"
 
-#: lang/data.php:27
+#: lang/data.php:31
 msgid "Материал сохранен"
 msgstr "Material has been saved"
 
-#: lang/data.php:28
+#: lang/data.php:32
 msgid "Исправьте неправильно заполненные поля"
 msgstr "Correct wrong filled fields"
 
-#: lang/data.php:30
+#: lang/data.php:34
 msgid "3 или 6 знаков"
 msgstr "3 or 6 symbols"
 
-#: lang/data.php:31
+#: lang/data.php:35
 msgid "Неправильный формат"
 msgstr "Wrong format"
 
-#: lang/data.php:33
+#: lang/data.php:37
 msgid "Только целые положительные числа или 0"
 msgstr "Only Integers or 0"
 
-#: lang/data.php:34
+#: lang/data.php:38
 msgid "Страница"
 msgstr "Page"
 
-#: lang/data.php:35
+#: lang/data.php:39
 msgid "Файл не существует"
 msgstr "File doesn't exist"
 
-#: lang/data.php:36
+#: lang/data.php:40
 msgid "Создать файл?"
 msgstr "Create file?"
 
-#: lang/data.php:37
+#: lang/data.php:41
 msgid "Доступ запрещен"
 msgstr "Access denied"
 
-#: lang/data.php:38
+#: lang/data.php:42
 msgid "Файл изменен"
 msgstr "File is modified"
 
-#: lang/data.php:39
+#: lang/data.php:43
 msgid "Сохранить изменения?"
 msgstr "Save changes?"
 
-#: lang/data.php:41
+#: lang/data.php:45
 msgid "Развернуть все"
 msgstr "Expand all"
 
-#: lang/data.php:42
+#: lang/data.php:46
 msgid "Ошибка соединения с сервером."
 msgstr "Error connecting to the server."
 
-#: lang/data.php:45
+#: lang/data.php:49
 msgid "Активировать"
 msgstr "Activate"
 
-#: lang/data.php:46
+#: lang/data.php:50
 msgid "Активность"
 msgstr "Activity"
 
-#: lang/data.php:49
+#: lang/data.php:53
 msgid "Используется"
 msgstr "Using"
 
-#: lang/data.php:51
+#: lang/data.php:55
 msgid "Настройки темы"
 msgstr "Theme settings"
 
-#: lang/data.php:53
+#: lang/data.php:57
 msgid "Добавить область"
 msgstr "Add area"
 
-#: lang/data.php:55
+#: lang/data.php:59
 msgid "Создать виджет"
 msgstr "Create widget"
 
-#: lang/data.php:58
+#: lang/data.php:62
 msgid "Глубина"
 msgstr "Depth"
 
-#: lang/data.php:59
+#: lang/data.php:63
 msgid "Корневой раздел"
 msgstr "Root section"
 
-#: lang/data.php:60
-msgid "Раздел"
-msgstr "Section"
-
-#: lang/data.php:61
+#: lang/data.php:65
 msgid "Порядок"
 msgstr "Order"
 
-#: lang/data.php:62
+#: lang/data.php:66
 msgid "Сортировка"
 msgstr "Sort"
 
-#: lang/data.php:63
+#: lang/data.php:67
 msgid "Сорт."
 msgstr "Sort."
 
-#: lang/data.php:64
+#: lang/data.php:68
 msgid "Кол-во материалов"
 msgstr "Number of materials"
 
-#: lang/data.php:66
+#: lang/data.php:70
 msgid "Доменное имя"
 msgstr "Domain name"
 
-#: lang/data.php:67
+#: lang/data.php:71
 msgid "Ссылка на"
 msgstr "Link to"
 
-#: lang/data.php:70
+#: lang/data.php:72
+msgid "Настроить"
+msgstr "Preferencies"
+
+#: lang/data.php:74
 msgid "Сохранить как"
 msgstr "Save as"
 
-#: lang/data.php:73
+#: lang/data.php:77
 msgid ""
 "Внимание!<br>Вы удаляете тип {0}. Вместе с этим будут удалены все разделы "
 "этого типа,<br>а также все материалы из этих разделов.\\n\\nПродолжить?"
@@ -1875,358 +1961,342 @@ msgstr ""
 "type will be removed also, <br> as well as all the materials in these "
 "sections. \\n\\nContinue?"
 
-#: lang/data.php:74
+#: lang/data.php:78
 msgid "Добавить поле"
 msgstr "Add field"
 
-#: lang/data.php:75
+#: lang/data.php:79
 msgid "Изменить поле"
 msgstr "Edit field"
 
-#: lang/data.php:77
+#: lang/data.php:81
 msgid "Новый тип материалов"
 msgstr "New type of material"
 
-#: lang/data.php:78
+#: lang/data.php:82
 msgid "Встроенные типы"
 msgstr "Built-in types"
 
-#: lang/data.php:79
+#: lang/data.php:83
 msgid "Пользовательские типы"
 msgstr "User types"
 
-#: lang/data.php:80
+#: lang/data.php:84
 msgid "Тип данных"
 msgstr "Data type"
 
-#: lang/data.php:81
+#: lang/data.php:85
 msgid "Поля"
 msgstr "Fields"
 
-#: lang/data.php:82
+#: lang/data.php:86
 msgid "Неправильный размер"
 msgstr "Wrong size"
 
-#: lang/data.php:83
+#: lang/data.php:87
 msgid "Обязательное поле"
 msgstr "Required field"
 
-#: lang/data.php:84
+#: lang/data.php:88
 msgid "Скрытое поле"
 msgstr "Hidden field"
 
-#: lang/data.php:85
+#: lang/data.php:89
 msgid "Видимое"
 msgstr "Visible"
 
-#: lang/data.php:86
+#: lang/data.php:90
 msgid "Варианты значений"
 msgstr "Possible values"
 
-#: lang/data.php:87
+#: lang/data.php:91
 msgid "Значение по умолчанию"
 msgstr "Default value"
 
-#: lang/data.php:88
+#: lang/data.php:92
 msgid "Редактор"
 msgstr "Editor"
 
-#: lang/data.php:89
+#: lang/data.php:93
 msgid "Из раздела"
 msgstr "From section"
 
-#: lang/data.php:90
+#: lang/data.php:94
 msgid "Из текущего раздела"
 msgstr "From current section"
 
-#: lang/data.php:91
+#: lang/data.php:95
 msgid "От раздела"
 msgstr "From this section"
 
-#: lang/data.php:92
+#: lang/data.php:96
 msgid "типа"
 msgstr "type"
 
-#: lang/data.php:93 setup.php:111
-msgid "да"
-msgstr "yes"
-
-#: lang/data.php:94
-msgid "нет"
-msgstr "no"
-
-#: lang/data.php:97
+#: lang/data.php:101
 msgid "№"
 msgstr "#"
 
-#: lang/data.php:100
+#: lang/data.php:104
 msgid "Опубликован"
 msgstr "Published"
 
-#: lang/data.php:101
+#: lang/data.php:105
 msgid "Не опубликован"
 msgstr "Not published"
 
-#: lang/data.php:103
+#: lang/data.php:107
 msgid ""
 "Этот раздел является ссылкой. Перейти в исходный раздел для просмотра "
 "материалов?"
 msgstr ""
 "This section is a link. Go to the source section to view the materials?"
 
-#: lang/data.php:104
+#: lang/data.php:108
 msgid "Удалить материал"
 msgstr "Delete material"
 
-#: lang/data.php:105
+#: lang/data.php:109
 msgid "Создать"
 msgstr "Create"
 
-#: lang/data.php:106
+#: lang/data.php:110
 msgid "Создать по образцу"
 msgstr "Create by template"
 
-#: lang/data.php:108
+#: lang/data.php:112
 msgid "Опубликовать"
 msgstr "Publish"
 
-#: lang/data.php:109
+#: lang/data.php:113
 msgid "Распубликовать"
 msgstr "Unpublish"
 
-#: lang/data.php:110
+#: lang/data.php:114
 msgid "Посмотреть на сервере"
 msgstr "Preview on server"
 
-#: lang/data.php:111
+#: lang/data.php:115
 msgid "Переместить"
 msgstr "Move"
 
-#: lang/data.php:112
+#: lang/data.php:116
 msgid "Показать материалы из подразделов"
 msgstr "Show materials from subsections"
 
 #: lang/data.php:120
+msgid "Псевдоним"
+msgstr "Nickname"
+
+#: lang/data.php:124
 msgid "Создать сервер"
 msgstr "Create server"
 
-#: lang/data.php:121
+#: lang/data.php:125
 msgid "Новый раздел"
 msgstr "New section"
 
-#: lang/data.php:122
+#: lang/data.php:126
 msgid "Создать ссылку на раздел"
 msgstr "Create link to section"
 
-#: lang/data.php:124
+#: lang/data.php:127
+msgid "Свойства раздела"
+msgstr "Section properties"
+
+#: lang/data.php:128
 msgid "Копировать"
 msgstr "Copy"
 
-#: lang/data.php:125
+#: lang/data.php:129
 msgid "Копировать подразделы"
 msgstr "Copy subsections"
 
-#: lang/data.php:126
+#: lang/data.php:130
 msgid "Копировать материалы"
 msgstr "Copy materials"
 
-#: lang/data.php:127
+#: lang/data.php:131
 msgid "Копировать в"
 msgstr "Copy to"
 
-#: lang/data.php:128
+#: lang/data.php:132
 msgid "Подтверждение"
 msgstr "Confirmation"
 
-#: lang/data.php:130
+#: lang/data.php:134
 msgid "Вход"
 msgstr "Login"
 
-#: lang/data.php:131 widgets/user.auth/default.twig:5
+#: lang/data.php:135 widgets/user.auth/default.twig:5
 msgid "Выход"
 msgstr "Logout"
 
-#: lang/data.php:134 setup.php:205
+#: lang/data.php:138 setup.php:206
 msgid "Язык"
 msgstr "Language"
 
-#: lang/data.php:135
+#: lang/data.php:139
 msgid "запомнить"
 msgstr "remember me"
 
-#: lang/data.php:136
+#: lang/data.php:140
 msgid "Забыли пароль"
 msgstr "Forgot your password?"
 
-#: lang/data.php:137
+#: lang/data.php:141
 msgid "Создать новый пароль и отправить его на e-mail?"
 msgstr "Create new password and send it to the e-mail?"
 
-#: lang/data.php:138
+#: lang/data.php:142
 msgid "Введите имя пользователя"
 msgstr "Enter user name"
 
-#: lang/data.php:140 lang/data.php:150
+#: lang/data.php:144 lang/data.php:154
 msgid "Добавить"
 msgstr "Add"
 
-#: lang/data.php:141
+#: lang/data.php:145
 msgid "Закрыть"
 msgstr "Close"
 
-#: lang/data.php:147
+#: lang/data.php:151
 msgid "Выше"
 msgstr "Up"
 
-#: lang/data.php:148
+#: lang/data.php:152
 msgid "Ниже"
 msgstr "Down"
 
-#: lang/data.php:151
+#: lang/data.php:155
 msgid "Изменить"
 msgstr "Edit"
 
-#: lang/data.php:153
+#: lang/data.php:157
 msgid "Удаление"
 msgstr "Delete"
 
-#: lang/data.php:155
+#: lang/data.php:159
 msgid "Загрузка файла"
 msgstr "Loading file..."
 
-#: lang/data.php:156
+#: lang/data.php:160
 msgid "Загрузить с компьютера"
 msgstr "Load from computer"
 
-#: lang/data.php:157
+#: lang/data.php:161
 msgid "Загрузка файлов"
 msgstr "Loading files..."
 
-#: lang/data.php:158
+#: lang/data.php:162
 msgid "Каталог на сервере"
 msgstr "Server folder"
 
-#: lang/data.php:160
+#: lang/data.php:164
 msgid "Выберите файл"
 msgstr "Select file"
 
-#: lang/data.php:161
+#: lang/data.php:165
 msgid "Загрузить"
 msgstr "Load"
 
-#: lang/data.php:163
+#: lang/data.php:167
 msgid "Загрузить несколько файлов"
 msgstr "Upload multiple files"
 
-#: lang/data.php:165
+#: lang/data.php:169
 msgid "Выбрать из структуры"
 msgstr "Select from the structure"
 
-#: lang/data.php:169
+#: lang/data.php:173
 msgid "В виде таблицы"
 msgstr "Table"
 
-#: lang/data.php:170
+#: lang/data.php:174
 msgid "Эскизы"
 msgstr "Sketches"
 
-#: lang/data.php:171
+#: lang/data.php:175
 msgid "Каталоги"
 msgstr "Folders"
 
-#: lang/data.php:172
+#: lang/data.php:176
 msgid "нет файлов"
 msgstr "no files"
 
-#: lang/data.php:175
-msgid "Размер"
-msgstr "Size"
-
-#: lang/data.php:176
+#: lang/data.php:180
 msgid "Недавние"
 msgstr "Recent"
 
-#: lang/data.php:178
+#: lang/data.php:182
 msgid "Сервер"
 msgstr "Server"
 
-#: lang/data.php:180
+#: lang/data.php:184
 msgid "Подробнее"
 msgstr "More information"
 
-#: lang/data.php:182
+#: lang/data.php:186
 msgid "Отменить удаление"
 msgstr "Undo delete"
 
-#: lang/data.php:183
+#: lang/data.php:187
 msgid "- без заголовка -"
 msgstr "- no title -"
 
-#: lang/data.php:185
+#: lang/data.php:189
 msgid "Изображение будет удалено"
 msgstr "Image will be deleted"
 
-#: lang/data.php:188
+#: lang/data.php:192
 msgid "Отключить"
 msgstr "Disable"
 
-#: lang/data.php:189
+#: lang/data.php:193
 msgid "Включить"
 msgstr "Shut on"
 
-#: lang/data.php:194
-msgid "установлен"
-msgstr "installed"
-
-#: lang/data.php:195
+#: lang/data.php:199
 msgid "установлена"
 msgstr "installed"
 
-#: lang/data.php:196
+#: lang/data.php:200
 msgid "Версия"
 msgstr "Version"
 
-#: lang/data.php:198
+#: lang/data.php:202
 msgid "CMS"
 msgstr "CMS"
 
-#: lang/data.php:199
+#: lang/data.php:203
 msgid "любая"
 msgstr "any"
 
-#: lang/data.php:200
+#: lang/data.php:204
 msgid "от"
 msgstr "from"
 
-#: lang/data.php:201
+#: lang/data.php:205
 msgid "до"
 msgstr "till"
 
-#: lang/data.php:202
+#: lang/data.php:206
 msgid "Установить"
 msgstr "Install"
 
-#: lang/data.php:203
+#: lang/data.php:207
 msgid "Обновить/Переустановить"
 msgstr "Update / Reinstall"
 
-#: lang/data.php:204
-msgid "Установка/обновление"
-msgstr "Install /Update"
-
-#: lang/data.php:205
+#: lang/data.php:209
 msgid "доступна свежая версия"
 msgstr "New version is available"
 
-#: lang/data.php:206
-msgid "Загрузка ..."
-msgstr "Loading ..."
-
-#: lang/data.php:207
+#: lang/data.php:211
 msgid "Перезагрузка ..."
 msgstr "Reloading ..."
 
-#: lang/data.php:209
+#: lang/data.php:213
 msgid "Перейти на сайт"
 msgstr "Visit website"
 
@@ -2253,23 +2323,23 @@ msgstr "no, make clean install"
 msgid "Выберите тему:"
 msgstr "Select theme:"
 
-#: setup.php:156
+#: setup.php:157
 msgid "Введите данные администратора системы"
 msgstr "Enter the system administrator information"
 
-#: setup.php:158
+#: setup.php:159
 msgid "E-mail"
 msgstr "E-mail"
 
-#: setup.php:179
+#: setup.php:180
 msgid "Настройка доступа к БД MySQL"
 msgstr "MySQL connection setup"
 
-#: setup.php:238
+#: setup.php:239
 msgid "Добро пожаловать в программу установки"
 msgstr "Welcome to the installation wizard"
 
-#: setup.php:334
+#: setup.php:341
 msgid "Подождите..."
 msgstr "Wait ..."
 
@@ -2327,35 +2397,35 @@ msgstr "Downloading libraries"
 msgid "Не требуется."
 msgstr "Correct."
 
-#: widgets/_common/page404.twig:2
+#: widgets/_common/page404.twig:1
 msgid "Ошибка 404: страница не найдена"
 msgstr "Error 404: Page Not Found"
 
-#: widgets/_common/page404.twig:7
+#: widgets/_common/page404.twig:3
 msgid "К сожалению, запрашиваемый Вами документ не найден на этом сервере."
 msgstr "Unfortunately, the requested document was not found on this server."
 
-#: widgets/_common/page404.twig:8
+#: widgets/_common/page404.twig:4
 msgid "Наиболее частые причины, приводящие к данной ошибке, следующие:"
 msgstr "Most common causes of Error:"
 
-#: widgets/_common/page404.twig:10
+#: widgets/_common/page404.twig:6
 msgid "переход по ошибочной ссылке;"
 msgstr "failed link;"
 
-#: widgets/_common/page404.twig:11
+#: widgets/_common/page404.twig:7
 msgid "неправильный ввод адреса."
 msgstr "wrong adress"
 
-#: widgets/_common/page404.twig:13
+#: widgets/_common/page404.twig:9
 msgid "Решения:"
 msgstr "Solutions:"
 
-#: widgets/_common/page404.twig:15
+#: widgets/_common/page404.twig:11
 msgid "исправьте адрес, ошибочно набранный в адресной строке браузера;"
 msgstr "correct address, mistakenly typed in the browser address bar;"
 
-#: widgets/_common/page404.twig:16
+#: widgets/_common/page404.twig:12
 msgid ""
 "попробуйте начать поиск необходимого материала с <a href=\"/\">главной "
 "страницы нашего сайта</a>."
@@ -2389,6 +2459,14 @@ msgstr "Sa"
 #: widgets/calendar/default.twig:18
 msgid "Вс"
 msgstr "Su"
+
+#: widgets/filter/default.twig:24
+msgid "Сбросить этот фильтр"
+msgstr "Clear this filter"
+
+#: widgets/filter/default.twig:101
+msgid "Сбросить фильтр"
+msgstr "Clear filter"
 
 #: widgets/material/default.twig:20
 msgid "Поделиться в соц. сетях"
@@ -2447,29 +2525,45 @@ msgstr "Login"
 msgid "Восстановить пароль"
 msgstr "Recover the password "
 
-#: widgets/user.register/default.twig:12
+#: widgets/user.recover/default.twig:63
+msgid "Отправка"
+msgstr "Sending"
+
+#: widgets/user.register/default.twig:13
 msgid "Логин"
 msgstr "Login"
 
-#: widgets/user.register/default.twig:16
+#: widgets/user.register/default.twig:18
 msgid "Email"
 msgstr "Email"
 
-#: widgets/user.register/default.twig:20
+#: widgets/user.register/default.twig:22
 msgid "Ваше имя"
 msgstr "Your name"
 
-#: widgets/user.register/default.twig:23
+#: widgets/user.register/default.twig:25
 msgid "Придумайте пароль"
 msgstr "Create password"
 
-#: widgets/user.register/default.twig:35
+#: widgets/user.register/default.twig:37
 msgid "Зарегистрироваться"
 msgstr "Register"
 
-#: widgets/user.register/default.twig:43
+#: widgets/user.register/default.twig:45
 msgid "Вы были успешно зарегистрированы!"
 msgstr "You have been successfully registered!"
+
+#~ msgid "Восстановление пароля пользователя"
+#~ msgstr "Recover password"
+
+#~ msgid "Домен"
+#~ msgstr "Domain"
+
+#~ msgid "Дата регистрации"
+#~ msgstr "Registration date"
+
+#~ msgid "Дата последнего входа"
+#~ msgstr "Last login date"
 
 #~ msgid ""
 #~ "Данный программный продукт защищен законами об авторских правах и "
@@ -3150,10 +3244,6 @@ msgstr "You have been successfully registered!"
 #, fuzzy
 #~ msgid "Статус"
 #~ msgstr "Structure"
-
-#, fuzzy
-#~ msgid "Очистить историю"
-#~ msgstr "Disable"
 
 #, fuzzy
 #~ msgid "Очистка истории"
