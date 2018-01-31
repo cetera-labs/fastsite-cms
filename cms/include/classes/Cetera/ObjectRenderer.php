@@ -80,7 +80,7 @@ class ObjectRenderer {
     
     private function getObjectValue($name) {
         if ($this->object)
-            return $this->object->$name;
+            return $this->object->getDynamicField($name);
             else return null;
                 
     }
