@@ -39,6 +39,13 @@ class Templateable extends Widget {
 			
 					$twig = $this->application->getTwig();
 					
+					if ($tpl == 'default.twig') {
+						$default = '@widget_distrib/'.strtolower($this->widgetName).'/default.twig';
+					}
+					else {
+						$default = '@widget/'.strtolower($this->widgetName).'/default.twig';
+					}
+					
 					if (substr_count( WWWROOT.ltrim($tpl,'/'), $this->application->getTemplateDir() ) > 0)
 					{
 						$tpl = str_replace($this->application->getTemplateDir().'/design', '', WWWROOT.ltrim($tpl,'/'));					
@@ -48,8 +55,10 @@ class Templateable extends Widget {
 						$tpl = '@widget/'.strtolower($this->widgetName).'/'.$tpl;
 					}
 					
+
 					return $twig->render( $tpl , array(
-						'widget' => $this 
+						'widget' => $this,
+						'default' => $default
 					));   
 				
 				} else {
