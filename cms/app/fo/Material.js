@@ -2,6 +2,10 @@ Ext.define('Cetera.fo.Material', {
     extend: 'Ext.Toolbar',
 	
 	border: false,
+	
+	style: {
+		position: 'absolute'
+	},	
 
 	items: [
 		{
