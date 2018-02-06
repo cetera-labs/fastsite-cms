@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cetera CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-29 09:17+0300\n"
-"PO-Revision-Date: 2018-01-29 09:23+0300\n"
+"POT-Creation-Date: 2018-02-06 10:11+0300\n"
+"PO-Revision-Date: 2018-02-06 10:12+0300\n"
 "Last-Translator: Roman Romanov <nicodim@mail.ru>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -64,7 +64,7 @@ msgstr "Delete file"
 #: app/fileselect/Panel.js:78 app/panel/Cache.js:42 app/panel/EventLog.js:58
 #: app/panel/StructureTree.js:15 app/users/MainPanel.js:106
 #: app/window/CatalogEdit.js:505 include/ui_groups.php:23
-#: include/welcome_new.php:255 include/welcome_new.php:277 lang/data.php:146
+#: include/welcome_new.php:266 include/welcome_new.php:288 lang/data.php:146
 #: lang/data.php:194
 msgid "Обновить"
 msgstr "Update"
@@ -637,7 +637,7 @@ msgstr "From"
 msgid "Кому"
 msgstr "To"
 
-#: app/window/MailTemplate.js:109 include/welcome_new.php:226
+#: app/window/MailTemplate.js:109 include/welcome_new.php:237
 msgid "Сообщение"
 msgstr "Message"
 
@@ -1733,51 +1733,63 @@ msgstr "Save and publish"
 msgid "Предпросмотр"
 msgstr "Preview"
 
-#: include/welcome_new.php:182
+#: include/welcome_new.php:193
 msgid "Как опубликовать материал?"
 msgstr "How to publish a material?"
 
-#: include/welcome_new.php:195
+#: include/welcome_new.php:206
 msgid "Настроить тему оформления"
 msgstr "Design theme properties "
 
-#: include/welcome_new.php:220
+#: include/welcome_new.php:231
 msgid "Скрыть подсказки"
 msgstr "Hide tips"
 
-#: include/welcome_new.php:227
+#: include/welcome_new.php:238
 msgid "Вы можете настроить тему в любое время в модуле \"Темы\""
 msgstr "You can customize the theme at any time in the module \"Themes\""
 
-#: include/welcome_new.php:255 include/welcome_new.php:277
+#: include/welcome_new.php:266 include/welcome_new.php:288
 msgid "прямо сейчас"
 msgstr "right now"
 
-#: include/welcome_new.php:266
+#: include/welcome_new.php:277
 msgid "Вернуть "
 msgstr "Undo"
 
-#: include/welcome_new.php:288
+#: include/welcome_new.php:299
 msgid "Запрос к серверу обновлений"
 msgstr "The request to the update server"
 
-#: include/welcome_new.php:336
+#: include/welcome_new.php:347
 msgid "Поздравляем с успешной установкой Cetera CMS"
 msgstr "Congratulations! Cetera CMS is successfully installed"
 
-#: include/welcome_new.php:349
+#: include/welcome_new.php:360
 msgid "Система контент-менеджмента веб-сайтов"
 msgstr "Website content management system"
 
-#: include/welcome_new.php:356
+#: include/welcome_new.php:368
+msgid "Наши партнеры"
+msgstr "Partners list"
+
+#: include/welcome_new.php:369
+msgid "Партнерская программа"
+msgstr "Partner programm"
+
+#: include/welcome_new.php:370
+msgid "Стать партнером"
+msgstr "Become a partner"
+
+#: include/welcome_new.php:379
 msgid "Компания"
 msgstr "Company"
 
-#: include/welcome_new.php:363
+#: include/welcome_new.php:386
 msgid "Обнаружена новая версия"
 msgstr "The new version detected"
 
-#: include/welcome_new.php:368
+#: include/welcome_new.php:391
 msgid ""
 "Автоматическое обновление невозможно. Обратитесь в компанию Cetera labs для "
 "обновления системы."
@@ -1785,18 +1797,18 @@ msgstr ""
 "Automatic update is impossible. Contact Cetera labs support to upgrade the "
 "system."
 
-#: include/welcome_new.php:375
+#: include/welcome_new.php:398
 msgid ""
 "Вы используйте beta-версию. Возможен откат для последнюю стабильную версию "
 msgstr ""
 "You're using a beta-version. Rollback to the latest stable version is "
 "possible."
 
-#: include/welcome_new.php:381
+#: include/welcome_new.php:404
 msgid "Вы используете самую свежую версию"
 msgstr "You are using the latest version"
 
-#: include/welcome_new.php:387
+#: include/welcome_new.php:410
 msgid "Обнаружена новая beta-версия "
 msgstr "A new beta-version is detected"
 
