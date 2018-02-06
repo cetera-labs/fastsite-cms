@@ -67,14 +67,37 @@ class Plugin implements \ArrayAccess  {
 	* @return boolean
 	*/		
     public function isEnabled ()
-    {     
-        if (self::$disabled === null)
-		{
+    {   
+		try {
+			$this->checkRequirements();
+		}
+		catch(\Exception $e) {
+			return false;
+		}
+		
+        if (self::$disabled === null) {
 			self::$disabled = Application::getInstance()->getVar('module_disable');
 			if (!is_array(self::$disabled)) self::$disabled = array();
 		}
         return !(boolean)(self::$disabled && self::$disabled[$this->name]);
     }
+	
+	public function checkRequirements() {  
+	
+		$translator = Application::getInstance()->getTranslator();
+	
+		if (is_array($this->requires)) {			
+			foreach ($this->requires as $r) {				
+				$pl = self::find( $r['plugin'] );
+				if (!$pl) {
+					throw new \Exception(sprintf($translator->_('Отсутствует модуль %s'), $r['plugin']));
+				}
+				elseif (version_compare($r['version'], $pl['version']) > 0) {
+					throw new \Exception(sprintf($translator->_('Установлен модуль %s v%s, требуется v%s'), $r['plugin'], $pl['version'], $r['version'] ));
+				}								
+			}			
+		}	
+	}	
     
 	/**
 	* Удаляет модуль
@@ -96,7 +119,15 @@ class Plugin implements \ArrayAccess  {
 	* Включить модуль
 	*/		
     public function enable()
-    {     
+    {   
+		try {
+			$this->checkRequirements();
+		}
+		catch(\Exception $e) {
+			$translator = Application::getInstance()->getTranslator();
+			throw new \Exception($translator->_('Невозможно включить модуль:').' '.$e->getMessage());
+		}
+	
 		$a = Application::getInstance();
 		$md = $a->getVar('module_disable');
 		unset($md[$this->name]);
