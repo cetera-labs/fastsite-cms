@@ -10,33 +10,45 @@
 			<input type="hidden" name="UserRegister" value="1" />
 			
 			{% if not widget.getParam('email_is_login') %}
-			<label>{{ _('Логин') }}</label>
+			<label>{{ _('Логин') }}*</label>
 			<input name="login" required type="text" value="{% if widget.post %}{{ widget.post.login }}{% endif %}" class="{% if widget.login_error %} is-invalid-input{% endif %}">
 			{% if widget.login_error %}<span class="form-error is-visible">{{ widget.login_error }}</span>{% endif %}	
 			{% endif %}
 
-			<label>{{ _('Email') }}</label>
+			<label>{{ _('Email') }}*</label>
 			<input name="email" required type="email" value="{% if widget.post %}{{ widget.post.email }}{% endif %}" class="{% if widget.email_error %} is-invalid-input{% endif %}">
 			{% if widget.email_error %}<span class="form-error is-visible">{{ widget.email_error }}</span>{% endif %}	
 
-			<label>{{ _('Ваше имя') }}</label>
+			<label>{{ _('Ваше имя') }}*</label>
 			<input name="name" required type="text" value="{% if widget.post %}{{ widget.post.name }}{% endif %}">		
 			
-			<label>{{ _('Придумайте пароль') }}</label>
+			<label>{{ _('Придумайте пароль') }}*</label>
 			<input type="password" required name="password" class="{% if widget.password_error %} is-invalid-input{% endif %}">
 			{% if widget.password_error %}<span class="form-error is-visible">{{ widget.password_error }}</span>{% endif %}
 
-			<label>{{ _('Повторите пароль') }}</label>
+			<label>{{ _('Повторите пароль') }}*</label>
 			<input type="password" required name="password2">	
 
 			{% if widget.showRecaptcha %}
 			<div class="g-recaptcha" data-sitekey="{{ widget.getParam('recaptcha_site_key') }}"></div>
 			{% if widget.recaptcha_error %}<span class="form-error is-visible">{{ widget.recaptcha_error }}</span>{% endif %}
-			{% endif %}		
+			{% endif %}
+
+			{% if widget.getParam('agreement') %}
+              <div class="grid-x grid-padding-x">
+                <div class="cell shrink padding-top-1">
+                  <input id="agreement" name="agreement" required type="checkbox">
+                </div>
+                <div class="cell auto">
+                  <label for="agreement">{{ widget.getParam('agreement')|raw }}</label>
+                </div>
+              </div><br>			
+			{% endif %}
 			
-			<button type="submit" class="button small-expanded">{{ _('Зарегистрироваться') }}</button>
+			<button type="submit" class="button small-expanded">{{ _('Зарегистрироваться') }}&nbsp;<i class="fa fa-user-plus fa-lg"></i></button>
 		</form> 
 		{% endblock %}
+		<p>* - {{ _('Обязательные поля') }}</p>
 		
 	{% else %}
 

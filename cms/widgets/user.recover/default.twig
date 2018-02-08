@@ -16,7 +16,7 @@
 		
 		<label>{{ _('Логин или Email') }}</label>
 		<input type="text" required name="value" value="{% if widget.post.value is defined %}{{ widget.post.value }}{% endif %}">
-		<button type="submit" class="button small-expanded x-submit">{{ _('Восстановить пароль') }}</button>
+		<button type="submit" class="button small-expanded x-submit">{{ _('Восстановить пароль') }}&nbsp;<i class="fa fa-envelope-o fa-lg"></i></button>
     </form>
 {% endblock %}	
 

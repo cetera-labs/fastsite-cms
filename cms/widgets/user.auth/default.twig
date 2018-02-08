@@ -21,23 +21,28 @@
 				{% if widget.password_error %}
 				<span class="form-error is-visible">{{ widget.password_error }}</span>
 				{% endif %}
+				
+                <input name="remember" value="1" id="{{ widget.getUniqueId() }}_r" type="checkbox">
+                <label for="{{ widget.getUniqueId() }}_r">Запомнить меня на этом компьютере</label><br>	
+				
+				<button type="submit" class="button small-expanded">{{ _('Войти') }}&nbsp;<i class="fa fa-sign-in fa-lg"></i></button>				
+				
 				{% if widget.param('recover_password_url') %}
 					<p><a title="" href="{{ widget.param('recover_password_url') }}">{{ _('Забыли пароль?') }}</a></p>
 				{% endif %}
 				{% if widget.param('register_url') %}
-					<p><a title="" href="{{ widget.param('register_url') }}">{{ _('Регистрация') }}</a></p>
+					<p><a title="" href="{{ widget.param('register_url') }}">{{ _('Регистрация') }}</a><br><em>{{ _('Если вы впервые на сайте, заполните, пожалуйста, регистрационную форму.') }}</em></p>
 				{% endif %}
-				<button type="submit" class="button small-expanded">{{ _('Войти') }}</button>
 					
 			</form>
 			
 			{% if widget.param('social') %}
-			  <p class="text-center social">Войти через: 
-				  <span data-ulogin="display=buttons;fields=email;optional=nickname,first_name,last_name,photo;redirect_uri={{ widget.redirect }}" id="uLogin">
-					  &nbsp;<a data-uloginbutton="vkontakte" class="fa-stack fa-lg text-vk" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="twitter" class="fa-stack fa-lg text-twi" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="facebook" class="fa-stack fa-lg text-fb" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="google" class="fa-stack fa-lg text-gp" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></a>  
+			  <p class="social">Войти через: 
+				  <span data-ulogin="display=buttons;fields=email;optional=nickname,first_name,last_name,photo;redirect_uri={{ widget.redirect }}" id="uLogin">				  
+					  &nbsp;<a data-uloginbutton="vkontakte" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="twitter" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="facebook" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a>
+					  <a data-uloginbutton="google" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></a>  
 				  </span>
 			  </p>
 			{% endif %}
