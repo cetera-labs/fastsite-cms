@@ -31,8 +31,10 @@ class Backend {
         
             $app = \Cetera\Application::getInstance();
         
-            if ($app->getVar('cache_memcache') && self::isMemcachedAvailable()) {
-                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached());
+            if ($app->getVar('cache_memcache') && self::isMemcacheAvailable()) {
+                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Memcached());
+            if ($app->getVar('cache_memcached') && self::isMemcachedAvailable()) {
+                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached());				
             } elseif ($app->getVar('cache_file') && self::isFilecacheAvailable()) {
                 $backend = new \Zend_Cache_Backend_File(array('cache_dir'=>FILECACHE_DIR, 'hashed_directory_level'=>1));
             } else {
@@ -52,7 +54,8 @@ class Backend {
 	/**
 	 * Проверяет доступность memcache
 	 **/ 	
-    private static function isMemcachedAvailable() {
+    private static function isMemcacheAvailable() {
+		
         if (!extension_loaded('memcache')) return FALSE;
         $memcache = new \Memcache;
         try {
@@ -63,6 +66,15 @@ class Backend {
         if (!$res) return FALSE;
         return $memcache;
     }
+	
+	/**
+	 * Проверяет доступность memcached
+	 **/ 	
+    private static function isMemcachedAvailable() {
+		
+        if (!extension_loaded('memcached')) return FALSE;
+        return true;
+    }	
     
 	/**
 	 * Проверяет доступность файлового хранилища
