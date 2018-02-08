@@ -33,6 +33,7 @@ class Backend {
         
             if ($app->getVar('cache_memcache') && self::isMemcacheAvailable()) {
                 $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Memcached());
+			}
             if ($app->getVar('cache_memcached') && self::isMemcachedAvailable()) {
                 $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached());				
             } elseif ($app->getVar('cache_file') && self::isFilecacheAvailable()) {
