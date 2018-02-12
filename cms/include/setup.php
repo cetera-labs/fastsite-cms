@@ -26,7 +26,7 @@ if ($step == 9) {
 	
 	if ($_POST['create']) {
 	
-		$theme = 'corp';
+		$theme = 'corp-2018';
 		if ($_POST['theme']) $theme = $_POST['theme'];
 		
 		$str = '<div class="scroll" style="width: 475px;"><table class="setup" cellspacing="0" cellpadding="0" width="100%" border="0">';

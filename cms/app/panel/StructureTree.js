@@ -154,6 +154,7 @@ Ext.define('Cetera.panel.StructureTree', {
                     this.downAction.enable();
                     this.copyAction.enable();
                     this.deleteAction.enable();
+					this.propAction.enable();
                 } else {
                     this.upAction.disable();
                     this.downAction.disable();
@@ -166,14 +167,11 @@ Ext.define('Cetera.panel.StructureTree', {
                 }
                 
                 if (Config.user.permissions.adminRootCat) {
-                
-                    if (node && node.getDepth() == 1) {
-                        this.newServerAction.enable();
-                    } else {
-                        this.newServerAction.disable();
-                    }
-                    
+					this.newServerAction.enable();
                 }
+				else {
+					this.newServerAction.disable();
+				}
     
                 Cetera.getApplication().buildBoLink();
             },
@@ -240,9 +238,7 @@ Ext.define('Cetera.panel.StructureTree', {
 
     },
     
-    create_new_server: function() {
-        if (this.getSelectedId() < 0) return;
-        
+    create_new_server: function() {       
         var cc = Ext.create('Cetera.catalog.ServerCreate', {
 			tree: this,
             win: this.getPropertyWindow()
