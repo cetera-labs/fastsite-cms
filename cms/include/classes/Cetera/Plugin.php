@@ -68,12 +68,16 @@ class Plugin implements \ArrayAccess  {
 	*/		
     public function isEnabled ()
     {   
+		
 		try {
+			// Если не хватает требуемых модулей, то отключаем
 			$this->checkRequirements();
+			// Проверяем соответствует ли версия CMS
+			$this->checkVersion();
 		}
 		catch(\Exception $e) {
 			return false;
-		}
+		}		
 		
         if (self::$disabled === null) {
 			self::$disabled = Application::getInstance()->getVar('module_disable');
@@ -81,6 +85,22 @@ class Plugin implements \ArrayAccess  {
 		}
         return !(boolean)(self::$disabled && self::$disabled[$this->name]);
     }
+	
+	public function checkVersion() {
+		
+		$application = Application::getInstance();
+		$translator  = $application->getTranslator();
+		
+		// требуется более свежая CMS
+		if ($this->cms_version_min && version_compare($this->cms_version_min, $application->getVersion()) > 0 ) {
+			throw new \Exception(sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется %s или выше'), $this->cms_version_min));
+		}
+		// CMS слишком новая
+		if ($this->cms_version_max && version_compare($this->cms_version_max, $application->getVersion()) <= 0 ) {
+			throw new \Exception(sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется не выше %s'), $this->cms_version_max));
+		}		
+		
+	}		
 	
 	public function checkRequirements() {  
 	
@@ -122,6 +142,7 @@ class Plugin implements \ArrayAccess  {
     {   
 		try {
 			$this->checkRequirements();
+			$this->checkVersion();
 		}
 		catch(\Exception $e) {
 			$translator = Application::getInstance()->getTranslator();

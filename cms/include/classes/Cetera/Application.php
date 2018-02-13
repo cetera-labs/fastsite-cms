@@ -965,12 +965,10 @@ class Application {
 
         $translator = $this->getTranslator();
                 
-        foreach (Plugin::enum() as $plugin)
-		{
+        foreach (Plugin::enum() as $plugin) {
             if (!$plugin->isEnabled()) continue;
            
-            if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES))
-			{
+            if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES)) {
                 $loader = new \Composer\Autoload\ClassLoader();
 				
 				$parts = explode('_',$plugin->name);
@@ -981,8 +979,7 @@ class Application {
                 $loader->register();
             }            
             
-			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets') && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets'))
-			{
+			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets') && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets')) {
 				$this->_widgetPaths[] = DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets';
 			}
                 
@@ -994,8 +991,7 @@ class Application {
 				include(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG); 
 		}
 		
-		foreach (Theme::enum() as $theme)
-		{
+		foreach (Theme::enum() as $theme) {
 			
             if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes') && is_dir(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes'))
 			{
@@ -1020,6 +1016,11 @@ class Application {
 	{
 		$this->initPlugins();
 		return $this->_plugins_loaded;
+	}
+	
+	public function getVersion()
+	{
+		return VERSION;
 	}
         
     /**

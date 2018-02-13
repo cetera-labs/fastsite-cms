@@ -38,12 +38,12 @@ try {
                 
             $plugins[$id]['compatible'] = true;
             // требуется более свежая CMS
-            if ($p['cms_version_min'] && version_compare($p['cms_version_min'], VERSION) > 0 ) {
+            if ($p['cms_version_min'] && version_compare($p['cms_version_min'], $application->getVersion()) > 0 ) {
 				$plugins[$id]['compatible'] = false;
 				$plugins[$id]['compatible_message'] = sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется %s или выше'), $p['cms_version_min']);
 			}
             // CMS слишком новая
-            if ($p['cms_version_max'] && version_compare($p['cms_version_max'], VERSION) <= 0 ) {
+            if ($p['cms_version_max'] && version_compare($p['cms_version_max'], $application->getVersion()) <= 0 ) {
 				$plugins[$id]['compatible'] = false; 
 				$plugins[$id]['compatible_message'] = sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется не выше %s'), $p['cms_version_max']);				
 			}
