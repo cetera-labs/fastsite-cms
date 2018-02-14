@@ -1,6 +1,11 @@
 Ext.define('Cetera.theme.Add', {
 
-    extend: 'Ext.Panel',
+    extend: 'Ext.window.Window',
+	modal: true,
+	width: '80%',
+	height: '80%',
+	title: _('Установить тему'),
+	
     requires: 'Cetera.model.Theme',
 
     initComponent: function() {

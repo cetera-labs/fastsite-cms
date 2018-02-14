@@ -127,7 +127,9 @@ Ext.define('Cetera.plugin.List', {
                     {
                         text: Config.Lang.addPlugin,
                         icon: 'images/16X16/pack.gif',
-                        handler: function() { Cetera.getApplication().activateModule('plugins_0'); },
+                        handler: function() { 
+							Ext.create('Cetera.plugin.Add').show();
+						},
                         scope: this
                     }
                 ]

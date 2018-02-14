@@ -269,29 +269,15 @@ class BackOffice {
 					'name' 	   => $translator->_('Плагины'),
 					'icon'     => 'images/plugin.png',
 					'class'    => 'Cetera.plugin.List',
-					'iconCls'  => 'x-fa fa-plug',
-					'submenu'  => array(
-						array(
-							'name'  => $translator->_('Добавить плагин'),
-							'icon'  => 'images/16X16/pack.gif',
-							'class' => 'Cetera.plugin.Add'
-						)
-					) 
+					'iconCls'  => 'x-fa fa-plug'
                 );
                 
                 $this->_modules['themes'] = array(
-                      		'position' => MENU_SERVICE,
-                          	'name' 	   => $translator->_('Темы'),
-                          	'icon'     => 'images/16X16/gallery.gif',
-							'iconCls'  => 'x-fa fa-picture-o',
-                            'class'    => 'Cetera.theme.List',
-                            'submenu'  => array(
-                                array(
-                                    'name'  => $translator->_('Установить тему'),
-                                    'icon'  => 'images/image_add.png',
-                                    'class' => 'Cetera.theme.Add'
-                                )
-                            ) 
+					'position' => MENU_SERVICE,
+					'name' 	   => $translator->_('Темы'),
+					'icon'     => 'images/16X16/gallery.gif',
+					'iconCls'  => 'x-fa fa-picture-o',
+					'class'    => 'Cetera.theme.List',
                 );                
                  
             }           

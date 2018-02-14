@@ -1,6 +1,11 @@
 Ext.define('Cetera.plugin.Add', {
 
-    extend: 'Ext.Panel',
+    extend: 'Ext.window.Window',
+	modal: true,
+	width: '80%',
+	height: '80%',
+	title: _('Добавить плагин'),
+	
     requires: 'Cetera.model.Plugin',
 
     initComponent: function() {

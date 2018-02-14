@@ -113,7 +113,7 @@ Ext.define('Cetera.theme.List', {
                     {
                         text: Config.Lang.addTheme,
                         icon: 'images/image_add.png',
-                        handler: function() { Cetera.getApplication().activateModule('themes_0'); },
+                        handler: function() { Ext.create('Cetera.theme.Add').show(); },
                         scope: this
                     }
                 ]
