@@ -34,6 +34,12 @@ Ext.define('Cetera.theme.Settings', {
 				allowBlank: false
 			},
 			{
+				fieldLabel: _('Языковая доступность'),
+				xtype: 'combo',
+				name: 'locale',
+				store: ['','ru','en']
+			},
+			{
 				xtype: 'textfield',
 				fieldLabel: _('Автор'),
 				name: 'author',

@@ -21,39 +21,33 @@ try {
 
 if ($user->allowAdmin()) {
   
-    if (!$application->getVar('no_update_check'))
-    {
+    if (!$application->getVar('no_update_check')) {
         try {
     		
-    		    $client = new \GuzzleHttp\Client();
-    		    $res = $client->get(DISTRIB_INFO, ['verify'=>false]);
+    		$client = new \GuzzleHttp\Client();
+    		$res = $client->get(DISTRIB_INFO, ['verify'=>false]);
             $info = json_decode( $res->getBody(), true);
     		
             $can_auto = is_writable(CMSROOT) && is_writable(WWWROOT);
         
             if (is_array($info)) {
             
-                if (version_compare($info['version'], VERSION) > 0) {
-                
+                if (version_compare($info['version'], $application->getVersion()) > 0) {
                     $new_version = true;
-        
-                } elseif ($can_auto && substr_count(VERSION, 'beta') > 0) {
-                
+                } 
+				elseif ($can_auto && substr_count($application->getVersion(), 'beta') > 0) {
                     $rollback = true;
-                
                 }
                 
                 if (
                       $application->getVar('beta_versions') &&
                       $can_auto && 
                       is_array($info['beta']) && 
-                      version_compare($info['beta']['version'], VERSION) > 0 &&
+                      version_compare($info['beta']['version'], $application->getVersion()) > 0 &&
                       version_compare($info['beta']['version'], $info['version']) > 0
                    )
                 {
-                
                     $new_version_beta = true;
-                    
                 }
                 
             }
@@ -310,7 +304,8 @@ Ext.create('Ext.Button', {
                               url: url,
                               params: {
                                   action: action,
-                                  beta: beta
+                                  beta: beta,
+								  log: log
                               },
                               success: function(resp){
                                   var obj = Ext.decode(resp.responseText);
@@ -380,7 +375,7 @@ Ext.create('Ext.Button', {
                 <a href="https://github.com/cetera-labs/cetera-cms/blob/master/LICENSE">MIT License</a><br>
 
                 </div>
-                <?php if ($new_version) {?>
+                <?php if ($new_version) :?>
                 
                 <div class="new_version">
                     <p><?=$translator->_('Обнаружена новая версия');?> <?=APP_NAME?> <b>v<?=$info['version']?></b></p>
@@ -392,18 +387,18 @@ Ext.create('Ext.Button', {
                     <?}?>
                 </div>
                 
-                <?} elseif ($rollback) {?>
+                <? elseif ($rollback) :?>
                 
                 <div class="new_version">
                     <p><?=$translator->_('Вы используйте beta-версию. Возможен откат для последнюю стабильную версию ');?><?=APP_NAME?> <b>v<?=$info['version']?></b></p>
                     <div id="upgrade"></div><div id="log"></div>
                 </div>                
                 
-                <?} else {?>
+                <? else :?>
                 
                 <div class="latest"><?=$translator->_('Вы используете самую свежую версию')?> <?=APP_NAME?></div>  
                               
-                <?}?>
+                <? endif; ?>
                 
                 <?php if ($new_version_beta) : ?>
                 <div class="new_version">
