@@ -8,6 +8,7 @@ Ext.define('Cetera.model.Theme', {
         'developerMode',
 		'disableUpgrade',
 		'version',
+		'locale',
 		{name:'url', persist: false},
 		{name:'cms_version_min', persist: false},
 		{name:'cms_version_min', persist: false},

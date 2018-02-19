@@ -58,6 +58,7 @@ if (sizeof($themes)) {
             'version'     => $p['version'],
             'title'       => $p['title'],
 			'author'      => $p['author'],
+			'locale'      => $p['locale'],
 			'url'         => trim($p->getUrl(),'/'),
 			'disableUpgrade' => $p->isDisableUpgrade(),
 			'developerMode'  => $p->isDeveloperMode(),

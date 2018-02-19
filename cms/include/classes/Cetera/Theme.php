@@ -285,6 +285,11 @@ class Theme implements \ArrayAccess  {
                   'description' => ''
             );
         } 
+		
+		$info = array_merge([
+			'locale' => ''
+		], $info);
+		
 		return $info;
 	}
 	
@@ -344,6 +349,7 @@ class Theme implements \ArrayAccess  {
 		// записываем зависимости плагинов
 		$requires = array();
 		foreach (Plugin::enum() as $p) {
+			if ($p->name == 'partner') continue;
 			if ($p->isEnabled()) {
 				$requires[] = array(
 					'plugin'  => $p->name,
