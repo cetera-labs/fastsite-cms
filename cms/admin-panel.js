@@ -60,6 +60,10 @@ Ext.onReady(function(){
 	b.setStyle('margin-top',tb.getHeight()+'px');
 	b.removeCls('x-body');
 	
+	Ext.EventManager.onWindowResize(function(w, h){
+		tb.updateLayout();
+	});	
+		
 	var widgets = Ext.select(".x-cetera-widget");
 	
 	widgets.on('mouseleave', function(e,t) {
