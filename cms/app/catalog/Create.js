@@ -30,7 +30,7 @@ Ext.define('Cetera.catalog.Create', {
                 }, 
                 {
                     fieldLabel: 'Alias',
-                    name: 'tablename',
+                    name: 'alias',
                     allowBlank:false,
                     regex: /^[\.\-\_A-Z0-9]+$/i,
                 },

@@ -723,9 +723,9 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      */  
     public function createChild($fields)
     {
-    	if (!isset($fields['alias'])) throw new Exception\CMS(Exception\CMS::INVALID_PARAMS, 'alias');
-    	if (!isset($fields['name'])) throw new Exception\CMS(Exception\CMS::INVALID_PARAMS, 'name');
-    	if (!isset($fields['typ'])) throw new Exception\CMS(Exception\CMS::INVALID_PARAMS, 'typ'); //  тип материалов
+    	if (!isset($fields['alias'])) throw new Exception\Form(Exception\CMS::INVALID_PARAMS, 'alias');
+    	if (!isset($fields['name'])) throw new Exception\Form(Exception\CMS::INVALID_PARAMS, 'name');
+    	if (!isset($fields['typ'])) throw new Exception\Form(Exception\CMS::INVALID_PARAMS, 'typ'); //  тип материалов
     	
     	if (!isset($fields['server'])) $fields['server'] = 0;
     	
@@ -734,10 +734,10 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
         } catch (\Exception $e) {
             $c = false;
         }
-    	if ($c) throw new Exception\CMS(Exception\CMS::CAT_EXISTS, $fields['alias']);
+    	if ($c) throw new Exception\Form(Exception\CMS::CAT_EXISTS, 'alias',$fields['alias']);
     	
     	if ($this->id == 0 && file_exists(DOCROOT.$fields['alias'])) 
-            throw new Exception\CMS(Exception\CMS::CAT_PHYSICAL_EXISTS, $fields['alias']);
+            throw new Exception\Form(Exception\CMS::CAT_PHYSICAL_EXISTS, 'alias', $fields['alias']);
     	   	
       $type = 0;
     	
@@ -1201,10 +1201,10 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
             } catch (\Exception $e) {
                 $c = false;
             }
-            if ($c && $c->id != $this->id) throw new Exception\CMS(Exception\CMS::CAT_EXISTS);
+            if ($c && $c->id != $this->id) throw new Exception\Form(Exception\CMS::CAT_EXISTS, 'alias', $this->fields['alias']);
             
             if ($this->parent->isRoot() && file_exists(DOCROOT.$this->fields['alias'])) 
-                throw new Exception\CMS(Exception\CMS::CAT_PHYSICAL_EXISTS, $this->fields['alias']);
+                throw new Exception\Form(Exception\CMS::CAT_PHYSICAL_EXISTS, 'alias', $this->fields['alias']);
         }
         
         $conn = self::getDbConnection();

@@ -146,11 +146,11 @@ if ($_POST['action'] == 'cat_create') {
     $c = Catalog::getById($_POST['parent']); 
     $res['id'] = $c->createChild(array(
     	'name'		  => $_POST['name'],
-    	'alias'		  => $_POST['tablename'],
+    	'alias'		  => $_POST['alias'],
     	'typ'	  	  => $_POST['typ'],
     	'link'		  => $_POST['link'],
     	'server'    => $_POST['server'],
-      'autoalias' => Catalog::AUTOALIAS_TRANSLIT
+        'autoalias' => Catalog::AUTOALIAS_TRANSLIT
     ));
     
     $nc = Catalog::getById($res['id']);
