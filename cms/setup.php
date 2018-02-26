@@ -104,42 +104,49 @@ function step8() {
 	
     build_form(480, 400, [
         { xtype: 'label', html:  '<h1><?=$translator->_('Установить стандартную тему?')?></h1>' },
-        {
-            xtype: 'radiogroup',
-            items: [
-                {
-                    boxLabel: '<?=$translator->_('да')?>', 
-                    name: 'create', 
-                    inputValue: 1,
-                    checked: true
-                },
-                {
-                    boxLabel: '<?=$translator->_('нет, нужна чистая установка')?>', 
-                    name: 'create',
-                    inputValue: 0
-                }
-            ]
-        },
 		{
-			xtype: 'combo',
-            fieldLabel: '<?=$translator->_('Выберите тему:')?>',
-            valueField: 'id',
-            displayField: 'title',
-            name: 'theme',
-            store: new Ext.data.JsonStore({
-				fields: ['id', 'title','locale'],
-                root: 'rows',
-                autoLoad: true,
-				filters: [{property: 'locale', value: '<?=$application->getLocale()?>'}],
-                proxy: {
-					type: 'ajax',
-                    url: 'include/data_themes_avail.php'
-                }
-            }),
-			value: 'corp<?=($application->getLocale()=='en')?'-en':''?>',
-            triggerAction: 'all',
-            editable: false,
-            allowBlank: true     
+			xtype: 'fieldcontainer',
+			layout: 'hbox',
+			defaults: {
+				hideLabel: true
+			},
+			items: [
+				{
+					boxLabel: '<?=$translator->_('да, установить тему:')?>', 
+					name: 'create', 
+					inputValue: 1,
+					checked: true,
+					xtype: 'radio',
+					padding: '0 5 0 0'
+				},
+				{
+					flex: 1,
+					xtype: 'combo',
+					valueField: 'id',
+					displayField: 'title',
+					name: 'theme',
+					store: new Ext.data.JsonStore({
+						fields: ['id', 'title','locale'],
+						root: 'rows',
+						autoLoad: true,
+						filters: [{property: 'locale', value: '<?=$application->getLocale()?>'}],
+						proxy: {
+							type: 'ajax',
+							url: 'include/data_themes_avail.php'
+						}
+					}),
+					value: '<?=($application->getLocale()=='en')?'corp-en':'corp-2018'?>',
+					triggerAction: 'all',
+					editable: false,
+					allowBlank: true     
+				}
+			]
+		},		
+		{
+			boxLabel: '<?=$translator->_('нет, нужна чистая установка')?>', 
+			name: 'create',
+			inputValue: 0,
+			xtype: 'radio'
 		}
     ]);
 

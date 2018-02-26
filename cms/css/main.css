@@ -612,7 +612,7 @@ tr.highlight .x-grid-cell-inner {
 	background: none;
 }
 
-.x-field textarea, .x-field input, .x-field table {
+.x-field textarea, .x-field input[type="text"], .x-field table {
 	margin: 0;
 }
 
