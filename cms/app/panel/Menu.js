@@ -310,7 +310,7 @@ Ext.define('Cetera.panel.Menu', {
             });
 						
 			var n = this.getSelectedMenuNode();
-			n.insertChild(0, c);
+			n.appendChild(c);
 			this.saveMenu(n);
 			
         },this,_('Заголовок'),'URL');
