@@ -419,6 +419,7 @@ Ext.define('Cetera.panel.StructureTree', {
                 win.removeAll(true);
             }});
         }
+		this.propertyWindow.center();
         return this.propertyWindow;
     }	
 	

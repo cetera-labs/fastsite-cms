@@ -399,6 +399,7 @@ Ext.define('Cetera.main.Tree', {
                 win.removeAll(true);
             }});
         }
+		this.propertyWindow.center();
         return this.propertyWindow;
     },
     
