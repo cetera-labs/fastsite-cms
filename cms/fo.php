@@ -126,28 +126,36 @@ $_start = Cetera\Util::utime();
 if (file_exists($td.'/'.BOOTSTRAP_SCRIPT))
     include_once($td.'/'.BOOTSTRAP_SCRIPT);
 
-$path_parts = pathinfo($template);
-if ($path_parts['extension'] == 'php')
-{
-
-    $template_file = $application->getTemplatePath($template);
-    if (!file_exists($template_file))
-        throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
-    ob_start();
-    include($template_file);
-    $result = ob_get_contents();
-    ob_end_clean();
-    
+if (parse_url($template,  PHP_URL_HOST)) {
+	
+	header("HTTP/1.1 301 Moved Permanently");
+	header('Location: '.$template);
+	
 }
-elseif ($path_parts['extension'] == 'widget')
-{
+else {
+	$path_parts = pathinfo($template);
 
-    $result = $application->getWidget($path_parts['filename'])->getHtml();
-    
-}
-elseif ($path_parts['extension'] == 'twig')
-{
-	$result = $application->getTwig()->render($template);
+	if ($path_parts['extension'] == 'php')
+	{
+		$template_file = $application->getTemplatePath($template);
+		if (!file_exists($template_file))
+			throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
+		ob_start();
+		include($template_file);
+		$result = ob_get_contents();
+		ob_end_clean();
+		
+	}
+	elseif ($path_parts['extension'] == 'widget')
+	{
+
+		$result = $application->getWidget($path_parts['filename'])->getHtml();
+		
+	}
+	elseif ($path_parts['extension'] == 'twig')
+	{
+		$result = $application->getTwig()->render($template);
+	}
 }
 
 $_time_template = Cetera\Util::utime()-$_start;
