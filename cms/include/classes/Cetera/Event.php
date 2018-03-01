@@ -33,6 +33,9 @@ class Event {
 		return Application::getInstance()->getBo()->getRegisteredEvents();
 	}	
    
+	/**
+	* Повесить свой обработчик на событие
+	*/	   
     protected function __construct() {}
 
 	public static function attach($event, $hook)
@@ -42,6 +45,9 @@ class Event {
 		}			
 	}
 	
+	/**
+	* Сообщить о наступлении события
+	*/		
 	public static function trigger($event, $params = [])
 	{
 		if ( is_array(self::$listeners[$event]) ) {			

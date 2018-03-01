@@ -92,10 +92,9 @@ class BackOffice {
 		return $this->events[$id];
 	}	
 
-	public function getRegisteredEvents()
-	{
+	public function getRegisteredEvents() {
 		return array_values($this->events);
-	}	
+	}
 
     public function addModule($menu)
     {
