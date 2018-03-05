@@ -14,6 +14,7 @@ class MenuUser extends Templateable {
         'name'  => '',
         'menu'  => 0,
 		'alias' => null,
+		'depth' => 1,
 		'css_class' => 'menu',
 		'template'  => 'default.twig',
     ); 
@@ -37,5 +38,6 @@ class MenuUser extends Templateable {
 		$menu = $this->getMenu();
 		if ($menu) return $this->getMenu()->children;
 		return array();
-    }     
+    }  
+
 }

@@ -149,6 +149,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
      */  
     public function delete()
     {
+		
+		Event::trigger(EVENT_CORE_MATH_DELETE, ['material' => $this , 'message' => $this->getBoUrl()]);
+		
         parent::delete();
         
         $tpl = new Cache\Tag\Material($this->table, $this->id);
@@ -275,6 +278,8 @@ class Material extends DynamicFieldsObject implements SiteItem {
     			} // while
     		}
     	}
+		
+		Event::trigger(EVENT_CORE_MATERIAL_COPY, ['src' => $this, 'dst' => self::getById($newid, $this->objectDefinition)]);
     				
     	return $newid;
 

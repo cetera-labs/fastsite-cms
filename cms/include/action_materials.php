@@ -101,7 +101,6 @@ if ($action == 'delete' && is_array($sel)) {
 	foreach ($sel as $val)
 	{
 	   $m = Material::getById($val, $objectDefinition);
-	   Event::trigger(EVENT_CORE_MATH_DELETE, ['message' => $m->getBoUrl()]);
        $m->delete();
     }
 	$res['success'] = true;

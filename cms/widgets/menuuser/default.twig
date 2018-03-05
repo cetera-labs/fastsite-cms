@@ -3,7 +3,7 @@
 	{% for c in widget.children %}
     
     <li{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}__item"{% endif %}>    
-        <a href="{{ c.url }}"{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}__link"{% endif %}>{{ c.name|raw }}</a>        
+        <a href="{{ c.url }}"{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}__link"{% endif %}>{{ c.name|raw }}</a> 
     </li>
     
     {% endfor %}

@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.44.2');
+define('VERSION', '3.44.3');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -256,6 +256,7 @@ define('PAGE_HEIGHT', 580);
 define('LABEL_WIDTH', 180);
 define('FIELD_WIDTH', 619);
 
+define('EVENT_CORE_MATERIAL_COPY', 'CORE_MATERIAL_COPY');
 define('EVENT_CORE_MATERIAL_BEFORE_SAVE', 'CORE_MATERIAL_BEFORE_SAVE');
 define('EVENT_CORE_MATERIAL_AFTER_SAVE', 'CORE_MATERIAL_AFTER_SAVE');
 define('EVENT_CORE_USER_REGISTER', 'CORE_USER_REGISTER');
