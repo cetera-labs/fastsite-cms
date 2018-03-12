@@ -419,7 +419,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	{					
         if (!isset($this->fields[$field['name']])) {
 			$this->fields[$field['name']] =  new Iterator\Linkset( $this, $field );
-			$this->fields[$field['name']]->orderBy('tag','ASC');
+			$this->fields[$field['name']]->orderBy('b.tag','ASC');
 		}
         
 		return $this->fields[$field['name']];   

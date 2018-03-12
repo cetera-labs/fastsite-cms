@@ -199,7 +199,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
     		}
     	} // while
     	
-    	$values = $this->getDbConnection()->fetchAssoc('SELECT '.implode(',', $flds).' FROM '.$table.' WHERE id='.$this->id);
+    	$values = $this->getDbConnection()->fetchAssoc('SELECT `'.implode('`,`', $flds).'` FROM '.$table.' WHERE id='.$this->id);
     	if (!$values) return FALSE;
     	
     	$values['idcat'] = $dst;
@@ -235,7 +235,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
         }
     	reset($values);
     	
-    	$this->getDbConnection()->executeQuery('INSERT INTO '.$table.' ('.implode(',', $flds).') VALUES ('.implode(',', $values).')');
+    	$this->getDbConnection()->executeQuery('INSERT INTO '.$table.' (`'.implode('`,`', $flds).'`) VALUES ('.implode(',', $values).')');
     	$newid = $this->getDbConnection()->lastInsertId();
     	
     	foreach ($fields as $field)
