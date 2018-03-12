@@ -1442,8 +1442,13 @@ class Application {
 					$params = false;
 					parse_str ( htmlspecialchars_decode( $attrs['widgetparams'] ), $params );   
 					$params['name'] = $attrs['widgetname'];
-					$widget = $this->getWidget($params);
-					$result = str_replace($str, $widget->getHtml(), $result);									
+					try {
+						$widget = $this->getWidget($params);
+						$result = str_replace($str, $widget->getHtml(), $result);	
+					} 
+					catch (\Exception $e) {
+						$result = str_replace($str,'<!-- '.$e->getMessage().' -->', $result);	
+					}
 					break;
 					
 				case 'param':
