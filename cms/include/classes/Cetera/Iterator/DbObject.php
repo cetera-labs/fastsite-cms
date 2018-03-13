@@ -15,7 +15,7 @@ namespace Cetera\Iterator;
  *
  * @package CeteraCMS
  **/
-abstract class DbObject extends Object {
+abstract class DbObject extends Base {
 	
 	use \Cetera\DbConnection;
 	   

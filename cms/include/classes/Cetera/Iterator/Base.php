@@ -15,7 +15,7 @@ namespace Cetera\Iterator;
  *
  * @package CeteraCMS
  **/
-class Object implements \Countable, \Iterator, \ArrayAccess {
+class Base implements \Countable, \Iterator, \ArrayAccess {
 
     /** Текущая позиция */
     protected $position = 0;
