@@ -192,7 +192,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
     	    $fld_types[$f['name']] = $f['type'];
     		if (($f['type'] != FIELD_LINKSET)&&($f['type'] != FIELD_MATSET)) {
     		    $flds[] = $f['name'];
-    			if ($f['type'] == FIELD_HLINK) $hlinks[] = $f['name'];
+    			//if ($f['type'] == FIELD_HLINK) $hlinks[] = $f['name'];
     		} 
 			else {
     			$fields[] = $f;

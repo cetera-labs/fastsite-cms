@@ -966,6 +966,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
     			  GROUP BY C.id");
     	if (!$r) throw new Exception\CMS('Dest catalog is not found');
     	list($tag, $sid) = $r;
+		if (!$tag) $tag = 1;
 
         $fields = array(
             'tag' => $tag, 

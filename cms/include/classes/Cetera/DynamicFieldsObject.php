@@ -857,9 +857,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				{
         	          			
         	    }
-				elseif ($type == FIELD_HLINK) {
-        	        $values .= ",`".$name."`='".(int)$this->process_hlink($this->fields[$name])."'";         
-        	    } 
+		    //elseif ($type == FIELD_HLINK) {
+        	    //     $values .= ",`".$name."`='".(int)$this->process_hlink($this->fields[$name])."'";         
+        	    //} 
 				elseif ($type == FIELD_DATETIME) {
         	        if (!$this->fields[$name])
         		        $values .= ",`".$name."`=NULL";

@@ -184,7 +184,6 @@ class Util {
     **/ 
     public static function copyRecord($table, $id_row, $id, $replace) {
 		$conn = self::getDbConnection();
-		
     	$row = $conn->fetchAssoc("SELECT * FROM $table WHERE $id_row='$id'");
     	if (!$row) throw new Exception\CMS('Source record id not found');
     	foreach ($replace as $name => $value)

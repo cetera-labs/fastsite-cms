@@ -352,7 +352,17 @@ Ext.define('Cetera.panel.StructureTree', {
                     success: function(form, action) {
                         tree.reload(action.result.path);
                         wnd.close();
-                    }
+                    },
+					failure: function(form, action) {
+						var obj = Ext.decode(action.response.responseText);	
+						if (obj.message) {
+							var win = Ext.create('Cetera.window.Error', {
+								msg: obj.message,
+								ext_msg: obj.ext_message
+							});
+							win.show();	
+						}
+					}					
                 });
             }
         });
