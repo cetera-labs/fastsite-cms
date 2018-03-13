@@ -54,12 +54,14 @@ class Menu extends Templateable {
     }	
         
     public function getChildren()
-    {
+    {		
 		if ($this->getMenu()) 
 			return $this->getMenu();		
 		
 		if ($this->getCatalog()) 
 			return $this->getCatalog()->children->where('hidden<>1');
+		
+		return [];
     }  
 
     public function setCatalog($c)
@@ -89,10 +91,8 @@ class Menu extends Templateable {
 		$this->setCatalog($c);
 		$this->level++;
 		$html = null;
-		if ($this->hasSubmenu()) 
-		{
-			if ($this->getParam('css_class_submenu') === false)
-			{
+		if ($this->hasSubmenu()) {
+			if ($this->getParam('css_class_submenu') === false) {
 				$this->setParam('css_class_submenu', 'nested '.$this->getParam('css_class') );
 			}
 			$this->setParam('css_class', $this->getParam('css_class_submenu') );
@@ -106,7 +106,7 @@ class Menu extends Templateable {
 	
 	public function getMaterials()
 	{
-		if (!$this->getParam('materials_show')) return null;
+		if (!$this->getParam('materials_show')) return [];
 		$list = $this->getCatalog()->getMaterials()->orderBy('tag', 'ASC');		
 		if ($this->getParam('materials_hide_index')) $list->where('alias <> "index"');
 		return $list;
