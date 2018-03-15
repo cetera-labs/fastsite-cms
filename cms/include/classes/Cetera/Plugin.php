@@ -112,6 +112,9 @@ class Plugin implements \ArrayAccess  {
 				if (!$pl) {
 					throw new \Exception(sprintf($translator->_('Отсутствует модуль %s'), $r['plugin']));
 				}
+				if (!$pl->isEnabled()) {
+					throw new \Exception(sprintf($translator->_('Требуемый модуль %s отключен'), $r['plugin']));
+				}
 				elseif (version_compare($r['version'], $pl['version']) > 0) {
 					throw new \Exception(sprintf($translator->_('Установлен модуль %s v%s, требуется v%s'), $r['plugin'], $pl['version'], $r['version'] ));
 				}								

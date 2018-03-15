@@ -101,14 +101,14 @@ class Util {
         return $result;
     }
 	
-	public static function clearAllCache($period = 60*60*24*14) {
+	public static function clearAllCache($period = 1209600) {
 		self::clearCache(WWWROOT.ImageTransform::PREFIX, $period);
 		self::clearCache(IMAGECACHE_DIR, $period);
 		self::clearCache(FILECACHE_DIR, $period);
 		self::clearCache(TWIG_CACHE_DIR, $period);		
 	}
 
-	public static function clearCache($path, $period = 60*60*24*14) {
+	public static function clearCache($path, $period = 1209600) {
 		$path = realpath($path);
 		if($path!==false && $path!='' && file_exists($path)){
 			foreach(new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path, \FilesystemIterator::SKIP_DOTS)) as $object){

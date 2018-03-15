@@ -967,7 +967,6 @@ class Application {
                 
         foreach (Plugin::enum() as $plugin) {
             if (!$plugin->isEnabled()) continue;
-           
             if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES)) {
                 $loader = new \Composer\Autoload\ClassLoader();
 				
@@ -985,7 +984,6 @@ class Application {
                 
             $this->_plugins_loaded[] = $plugin;      
         }
-		
 		foreach ($this->_plugins_loaded as $plugin) {
 			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG))
 				include(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG); 
