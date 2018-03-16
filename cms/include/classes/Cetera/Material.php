@@ -118,7 +118,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
     {
         if ($this->idcat < 0) return false;
         if (!$this->getCatalog()) return false;
-        return $this->getCatalog()->getFullUrl($prefix).'/'.$this->_alias;
+        return $this->getCatalog()->getFullUrl($prefix).$this->_alias;
 	}
 	
     public function getBoUrl( $short = false )

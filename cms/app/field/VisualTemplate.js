@@ -95,6 +95,9 @@ Ext.define('Cetera.field.VisualTemplate', {
 
 Ext.define('Cetera.field.VisualTemplatePanel', {
 	extend:'Ext.Panel',
+	
+	bodyStyle: 'overflow-y:auto;',
+	
 	initComponent : function(){
 						
 		this.callParent();
