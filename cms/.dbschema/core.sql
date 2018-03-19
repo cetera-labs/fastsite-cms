@@ -103,7 +103,6 @@ CREATE TABLE IF NOT EXISTS `dir_data` (
   `template` varchar(250) DEFAULT NULL,
   `typ` int(11) NOT NULL DEFAULT '0',
   `dat` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `preview` varchar(32) DEFAULT NULL,
   `hidden` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `is_server` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `templateDir` varchar(100) DEFAULT NULL,

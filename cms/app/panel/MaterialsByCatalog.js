@@ -184,7 +184,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 iconCls:'icon-preview',
                 tooltip: Config.Lang.preview,
                 handler: function () {
-                    window.open('/_preview_' + this.preview + '/' + this.getSelectionModel().getSelection()[0].get('alias'));
+                    window.open(this.preview + this.getSelectionModel().getSelection()[0].get('alias'));
                 },
                 scope: this
             },

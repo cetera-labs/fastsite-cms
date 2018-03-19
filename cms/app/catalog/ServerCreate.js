@@ -23,7 +23,7 @@ Ext.define('Cetera.catalog.ServerCreate', {
         }, 
         {
             fieldLabel: Config.Lang.domainName,
-            name: 'tablename',
+            name: 'alias',
             allowBlank:false,
             regex: /(([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*)/i
         },
@@ -70,12 +70,12 @@ Ext.define('Cetera.catalog.ServerCreate', {
 							params: {
 								action: 'cat_create', 
 								server:1, 
-								parent: this.tree.getSelectedId()
+								parent: 0
 							},
 							waitMsg: Config.Lang.wait,
 							scope: this,
 							success: function(form, action) {
-								this.tree.reloadNode(this.tree.getSelectionModel().getLastSelected());
+								this.tree.reloadNode(this.tree.getStore().getNodeById('item-0'));
 								this.win.hide();
 							}
 						});

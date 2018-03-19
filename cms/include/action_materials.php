@@ -75,14 +75,9 @@ if ($action == 'permissions') {
     $right[1] = $user->allowCat(PERM_CAT_ALL_MAT, $id); // Работа с материалами других авторов
     $right[2] = $user->allowCat(PERM_CAT_MAT_PUB, $id); // Публикация материалов
 
-    $right[3] = '';
+    $right[3] = $catalog->getParentServer()->getFullUrl().PREVIEW_PREFIX.$catalog->getUrl();
 	
-	$f = $application->getConn()->fetchArray('SELECT preview, typ FROM dir_data WHERE id=?',array((int)$id));
-    if ($f)
-        list($right[3], $right[4]) = $f;
-    
-    if ($right[3]) $right[3] = trim($right[3],'/').'/';
-    $right[3] = $catalog->url.$right[3];
+	$right[4] = $application->getConn()->fetchColumn('SELECT typ FROM dir_data WHERE id=?',array((int)$id));
 
 	$res['success'] = true;
 	$res['right']   = $right;
