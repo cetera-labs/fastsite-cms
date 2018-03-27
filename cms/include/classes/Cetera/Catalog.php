@@ -341,7 +341,7 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      * Возвращает путь от корня до раздела
      *  
      * @api	 
-     * @return Iterator\Catalog
+     * @return Iterator\Catalog\Path
      */    
     public function getPath()
     {      	

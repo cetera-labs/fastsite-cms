@@ -75,7 +75,13 @@ if ($action == 'permissions') {
     $right[1] = $user->allowCat(PERM_CAT_ALL_MAT, $id); // Работа с материалами других авторов
     $right[2] = $user->allowCat(PERM_CAT_MAT_PUB, $id); // Публикация материалов
 
-    $right[3] = $catalog->getParentServer()->getFullUrl().PREVIEW_PREFIX.$catalog->getUrl();
+	$s = $catalog->getParentServer();
+	if ($s) {
+		$right[3] = $catalog->getParentServer()->getFullUrl().PREVIEW_PREFIX.$catalog->getUrl();
+	}
+	else {
+		$right[3] = false;
+	}
 	
 	$right[4] = $application->getConn()->fetchColumn('SELECT typ FROM dir_data WHERE id=?',array((int)$id));
 
