@@ -4,8 +4,10 @@ include('common_bo.php');
 
 if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
 
+$t = $application->getTranslator();
+
 $theme = Theme::find($_REQUEST['theme']);
-if (!$theme)  throw new Exception\CMS('Тема не найдена');
+if (!$theme)  throw new Exception\CMS($t->_('Тема не найдена'));
 
 $conn = $application->getDbConnection();
 

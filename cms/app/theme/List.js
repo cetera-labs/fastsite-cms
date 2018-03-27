@@ -4,6 +4,7 @@ Ext.define('Cetera.theme.List', {
     requires: 'Cetera.model.Theme',
 	
 	settingsWindow: null,
+	contentSettingsWindow: null,
 
     initComponent: function(){
     
@@ -68,20 +69,14 @@ Ext.define('Cetera.theme.List', {
 
         this.uploadAction = Ext.create('Ext.Action', {
             iconCls: 'icon-upload', 
-            tooltip: _('Выгрузить в MarketPlace'),
+            tooltip: _('Выгрузить контент в MarketPlace'),
             hidden: !Config.developerKey,
 			disabled: true,
             scope: this,
             handler: function(widget, event) {
 				
-                Ext.MessageBox.confirm(_('Выгрузить в MarketPlace'), Config.Lang.r_u_sure, function(btn) {
-                    if (btn == 'yes') this.call('upload', function(){
-						
-						Ext.MessageBox.alert(_('Успешное завершение'), _('Тема выгружена в MarketPlace'));
-						
-					});
-                }, this);				
-				
+				this.getContentSettingsWindow().show();
+
             }
         });			
     
@@ -254,6 +249,24 @@ Ext.define('Cetera.theme.List', {
 		}
 		return this.settingsWindow;
 	},
+
+	getContentSettingsWindow: function() {
+		
+        var rec = this.getSelectionModel().getSelection()[0];
+		
+		if (!this.contentSettingsWindow) {
+			this.contentSettingsWindow = Ext.create('Cetera.theme.ContentSettings',{
+				theme: rec,
+				listeners: {
+					'content_update': function() {
+						this.reload();
+					},
+					scope: this
+				}				
+			});
+		}
+		return this.contentSettingsWindow;
+	},	
 	
 	reload: function() {
 		this.getSelectionModel().deselectAll();

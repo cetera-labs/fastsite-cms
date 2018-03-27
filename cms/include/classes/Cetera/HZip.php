@@ -10,7 +10,8 @@ class HZip
    * @param \ZipArchive $zipFile
    * @param int $exclusiveLength Number of text to be exclusived from the file path.
    */
-  private static function folderToZip($folder, &$zipFile, $exclusiveLength, $exclude) {
+  public static function folderToZip($folder, &$zipFile, $exclusiveLength, $exclude = array('.git'), $prefix = '') {
+	if (!file_exists($folder)) return;
     $handle = opendir($folder);
     while (false !== $f = readdir($handle)) {
       if ($f != '.' && $f != '..') {
@@ -19,13 +20,13 @@ class HZip
 		  
         $filePath = "$folder/$f";
         // Remove prefix from file path before add to zip.
-        $localPath = substr($filePath, $exclusiveLength);
+        $localPath = $prefix.substr($filePath, $exclusiveLength);
         if (is_file($filePath)) {
           $zipFile->addFile($filePath, $localPath);
         } elseif (is_dir($filePath)) {
           // Add sub-directory.
           $zipFile->addEmptyDir($localPath);
-          self::folderToZip($filePath, $zipFile, $exclusiveLength, $exclude);
+          self::folderToZip($filePath, $zipFile, $exclusiveLength, $exclude, $prefix);
         }
       }
     }

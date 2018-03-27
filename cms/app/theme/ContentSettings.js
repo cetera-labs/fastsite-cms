@@ -1,8 +1,8 @@
-Ext.define('Cetera.theme.Settings', {
+Ext.define('Cetera.theme.ContentSettings', {
 
     extend:'Ext.Window',    
           
-	title: _('Конфигурация'),
+	title: _('Контент'),
 	autoHeight: true,
 	autoShow: false,
 	modal: true,
@@ -23,7 +23,7 @@ Ext.define('Cetera.theme.Settings', {
 			{
 				xtype: 'textfield',
 				fieldLabel: _('Идентификатор'),
-				name: 'name',
+				name: 'id',
 				regex: /^[\-\_a-z0-9]+$/i,
 				allowBlank: false
 			},
@@ -33,14 +33,13 @@ Ext.define('Cetera.theme.Settings', {
 				name: 'title',
 				allowBlank: false
 			},
-			/*
 			{
-				fieldLabel: _('Языковая доступность'),
+				fieldLabel: _('Язык'),
 				xtype: 'combo',
 				name: 'locale',
-				store: ['','ru','en']
+				store: ['ru','en'],
+				allowBlank: false
 			},
-			*/
 			{
 				xtype: 'textfield',
 				fieldLabel: _('Автор'),
@@ -49,7 +48,7 @@ Ext.define('Cetera.theme.Settings', {
 			},		
 			{
 				xtype: 'textfield',
-				fieldLabel: _('Версия темы'),
+				fieldLabel: _('Версия'),
 				regex: /^[0-9]+[\.0-9]+[a-z]*$/i,
 				name: 'version',
 				allowBlank: false
@@ -58,29 +57,25 @@ Ext.define('Cetera.theme.Settings', {
 				xtype: 'textarea',
 				fieldLabel: _('Описание'),
 				name: 'description'
-			},
-			{
-				xtype: 'checkbox',
-				boxLabel: _('запретить обновление темы'),
-				name: 'disableUpgrade'
-			},
-			{
-				xtype: 'checkbox',
-				boxLabel: _('режим разработчика'),
-				name: 'developerMode'
 			}
 		]
 	},
 	
 	buttons: [
 		{
-			text: _('OK'),
+			text: _('Выгрузить контент'),
 			handler: function() {
-				this.up('window').save();
+				this.up('window').save(true);
+			}			
+		},	
+		{
+			text: _('Сохранить'),
+			handler: function() {
+				this.up('window').save(false);
 			}			
 		},
 		{
-			text: _('Отмена'),
+			text: _('Закрыть'),
 			handler: function() {
 				this.up('window').close();
 			}
@@ -89,27 +84,48 @@ Ext.define('Cetera.theme.Settings', {
 		  
     initComponent: function(){       
         this.callParent(arguments);
-		this.getComponent('form').loadRecord( this.theme );
+		this.getComponent('form').loadRecord( this.theme.getContent() );
     },
 	
-	save: function(){  
+	save: function(upload){  
+	
 		var f = this.getComponent('form');
 		if (!f.isValid()) return;
-		f.getForm().updateRecord( this.theme );
 		this.setLoading(true);
-		this.theme.save({
+		f.getForm().updateRecord();
+		f.getForm().getRecord().save({
 			scope: this,
 			callback: function(r,o) {
 				this.setLoading(false);
 				if (o.success) {
-					if (this.theme.get('name') == this.theme.get('id')) {
-						this.fireEvent('theme_update');
-						this.close();
-					} else {
-						Cetera.getApplication().reload();
+					this.fireEvent('content_update');
+					if (upload) {
+						this.upload();
 					}
 				}
 			}
 		});
+	},
+	
+	upload: function(){ 
+	
+		this.setLoading(true);
+    
+        Ext.Ajax.request({
+            url: 'include/action_themes.php',
+            params: { 
+                action: 'upload_content', 
+                'theme': this.theme.get('id')
+            },
+            scope: this,
+            success: function(resp) {
+				Ext.MessageBox.alert(_('Успешное завершение'), _('Контент выгружен в MarketPlace'));			
+            },
+            callback: function(response){
+                this.setLoading(false);
+            },
+			
+        });	
+	
 	}
 });

@@ -29,7 +29,7 @@ class Theme implements \ArrayAccess  {
           {
           		if($__item=="." or $__item==".." or !is_dir(DOCROOT.THEME_DIR.'/'.$__item)) continue;
         	    if (!file_exists(DOCROOT.THEME_DIR.'/'.$__item.'/'.THEME_INFO)) continue;
-              $data[$__item] = new self($__item);
+                $data[$__item] = new self($__item);
         	}  
         	closedir($__dir);
         }    
@@ -44,7 +44,7 @@ class Theme implements \ArrayAccess  {
 	* @param Zend_Translate $translator класс-переводчик	
 	* @param boolean $extract_initial_data распаковать данные БД: тексты, разделы и т.д.
 	*/		
-    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false)
+    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false, $content = null)
     {
         if (!$translator) $translator = Application::getInstance()->getTranslator();
 		
@@ -67,7 +67,8 @@ class Theme implements \ArrayAccess  {
             throw new \Exception($translator->_('Каталог').' '.DOCROOT.THEME_DIR.' '.$translator->_('недоступен для записи'));
 
     	$client = new \GuzzleHttp\Client();
-    	$res = $client->get(THEMES_INFO.'?download='.$theme, ['verify' => false]);
+		if (!$content) $content = $theme;
+    	$res = $client->get(THEMES_INFO.'?download='.$content, ['verify' => false]);
     	$d = $res->getBody();   		
 		
         if (!$d) throw new \Exception($translator->_('Не удалось скачать тему'));
@@ -106,12 +107,17 @@ class Theme implements \ArrayAccess  {
         if ($status) $status('OK', false);  
 		
 		$t = new self($theme);
-		Plugin::installRequirements($t->requires, $status, $translator);		
+		Plugin::installRequirements($t->requires, $status, $translator);	
 		
-		if ($extract_initial_data && file_exists($themePath.'/'.THEME_DB_DATA)) {
-			if ($status) $status($translator->_('Начальная структура сайта'), true);      
-			$schema->readDumpFile($themePath.'/'.THEME_DB_DATA, true);
-			if ($status) $status('OK', false);  	
+		if ($extract_initial_data) {
+			
+			$dbData = $themePath.'/'.THEME_DB_DATA;
+		
+			if (file_exists($dbData)) {
+				if ($status) $status($translator->_('Начальная структура сайта'), true);      
+				$schema->readDumpFile($dbData, true);
+				if ($status) $status('OK', false);  	
+			}
 		}
 		
 		// В файле config.json конфингурация темы "по умолчанию". Устанавливаем её для всех серверов
@@ -285,17 +291,30 @@ class Theme implements \ArrayAccess  {
                   'description' => ''
             );
         } 
-		
-		$info = array_merge([
-			'locale' => ''
-		], $info);
-		
+				
 		return $info;
 	}
 	
 	private function saveInfo($info)
 	{
 		file_put_contents(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_INFO, json_encode($info));
+	}
+	
+	public function getContentInfo()
+	{
+		if (file_exists(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_CONTENT_INFO)) {
+			$info = json_decode(implode('',file(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_CONTENT_INFO)), true);
+			$info['theme'] = $this->name;
+			return $info;
+		}
+		else {
+			return null;
+		}
+	}	
+
+	public function saveContentInfo($info)
+	{
+		file_put_contents(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_CONTENT_INFO, json_encode($info));
 	}	
     
     private function grabInfo()
@@ -532,12 +551,10 @@ class Theme implements \ArrayAccess  {
 		if (!$d['success']) {
 			throw new \Exception( $d['message'] );
 		}
-		
-		$this->dumpData();
-		
+			
 		$zipFile = CACHE_DIR.'/'.$this->name.'.zip';
 		if (file_exists($zipFile)) unlink($zipFile);
-		HZip::zipDir($this->getPath(), $zipFile , array('.git','.disable_upgrade','.developer_mode') );
+		HZip::zipDir($this->getPath(), $zipFile , ['.git','.disable_upgrade','.developer_mode','images','content',THEME_CONTENT_INFO,THEME_DB_DATA] );
 		
 		$f = fopen($zipFile, 'r');
     	$res = $client->request('POST',THEMES_INFO.'?upload=1&theme='.$this->name.'&developer_key='.$key.'&version='.$this->version, ['verify'=>false, 'body' => $f]);
@@ -549,6 +566,43 @@ class Theme implements \ArrayAccess  {
 		
 		return $this;
 			
+	}
+	
+	public function uploadContentToMarket($key)
+	{
+		$client = new \GuzzleHttp\Client();
+		
+		$content = $this->getContentInfo();
+		
+    	$res = $client->get(THEMES_INFO.'?upload_content_request=1&theme='.$this->name.'&content='.$content['id'].'&developer_key='.$key.'&version='.$content['version'], ['verify'=>false]);
+    	$d = json_decode($res->getBody(), true); 
+		if (!$d['success']) {
+			throw new \Exception( $d['message'] );
+		}
+		
+		$this->dumpData();
+		
+		$zipFile = CACHE_DIR.'/content.zip';
+		if (file_exists($zipFile)) unlink($zipFile);
+		
+		$z = new \ZipArchive();
+		$z->open($zipFile, \ZipArchive::CREATE);
+		$z->addFile(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_CONTENT_INFO, $content['id'].'/'.THEME_CONTENT_INFO);
+		$z->addFile(DOCROOT.THEME_DIR.'/'.$this->name.'/'.THEME_DB_DATA, $content['id'].'/'.THEME_DB_DATA);
+		$z->addFile(DOCROOT.THEME_DIR.'/'.$this->name.'/config.json', $content['id'].'/config.json');
+		HZip::folderToZip(DOCROOT.THEME_DIR.'/'.$this->name.'/images', $z, strlen(DOCROOT.THEME_DIR.'/'.$this->name.'/'), [], $content['id'].'/');
+		HZip::folderToZip(DOCROOT.THEME_DIR.'/'.$this->name.'/content', $z, strlen(DOCROOT.THEME_DIR.'/'.$this->name.'/'), [], $content['id'].'/');
+		$z->close();
+		
+		$f = fopen($zipFile, 'r');
+    	$res = $client->request('POST',THEMES_INFO.'?upload_content=1&theme='.$this->name.'&content='.$content['id'].'&developer_key='.$key.'&version='.$content['version'], ['verify'=>false, 'body' => $f]);
+		unlink($zipFile);
+    	$d = json_decode($res->getBody(), true); 
+		if (!$d['success']) {
+			throw new \Exception( $d['message'] );
+		}	
+		
+		return $this;
 	}
 
 }

@@ -89,6 +89,7 @@ define('PLUGIN_INSTALL',  'install.php');
 define('THEME_DIR',    'themes');
 define('THEME_DEFAULT_DIR', 'default');
 define('THEME_INFO',   'info.json');
+define('THEME_CONTENT_INFO', 'content_info.json');
 define('THEME_DB_SCHEMA', 'schema.xml');
 define('THEME_DB_DATA','data.sql');
 define('THEME_INSTALL',  'install.php');

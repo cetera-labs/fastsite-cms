@@ -33,7 +33,7 @@ if (sizeof($themes)) {
     } catch (\Exception $e) {}        
     
     foreach ($themes as $id => $p) {
-    
+		    
         if (isset($themes_lib[$id])) {
         		
             // есть более новая версия
@@ -58,7 +58,7 @@ if (sizeof($themes)) {
             'version'     => $p['version'],
             'title'       => $p['title'],
 			'author'      => $p['author'],
-			'locale'      => $p['locale'],
+			'content'     => $p->getContentInfo(),
 			'url'         => trim($p->getUrl(),'/'),
 			'disableUpgrade' => $p->isDisableUpgrade(),
 			'developerMode'  => $p->isDeveloperMode(),
