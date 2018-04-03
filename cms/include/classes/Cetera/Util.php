@@ -122,7 +122,8 @@ class Util {
 	}	
     	
     public static function delTree($dir, $self = true) {
-       $files = array_diff(scandir($dir), array('.','..'));
+		if (!file_exists($dir)) return;
+        $files = array_diff(scandir($dir), array('.','..'));
         foreach ($files as $file) {
           (is_dir("$dir/$file") && !is_link("$dir/$file")) ? self::delTree("$dir/$file") : unlink("$dir/$file");
         }
