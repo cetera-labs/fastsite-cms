@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Cetera CMS 3 
  * 

@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.44.8');
+define('VERSION', '3.44.9');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');

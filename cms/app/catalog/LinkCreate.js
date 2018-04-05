@@ -33,7 +33,7 @@ Ext.define('Cetera.catalog.LinkCreate', {
             allowBlank: false
         },{
             fieldLabel: 'Alias',
-            name: 'tablename',
+            name: 'alias',
             allowBlank: false,
             regex: /([\-\_a-zA-Z0123456789]+)/i
         }     
