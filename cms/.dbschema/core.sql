@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `dir_data` (
   PRIMARY KEY (`id`)
 );
 
-INSERT INTO dir_data VALUES ( 1, 1, 'default', 'default', 7, '', 1, NOW(), '', 0, 1, 'themes/default', 1, '', '', '', '');
+INSERT INTO dir_data VALUES ( 1, 1, 'default', 'default', 7, '', 1, NOW(), 0, 1, 'themes/default', 1, '', '', '', '');
 
 INSERT INTO `mail_templates` (`event`, `active`, `content_type`, `mail_subject`, `mail_body`, `mail_from_name`, `mail_from_email`, `mail_to`) VALUES
 ('USER_RECOVER', 1, 'text/plain', "{{ _('Ваш пароль на сайт') }} {{server.name}}", "{{ _('Ваш новый пароль: ') }} {{password}}", '', 'no-reply@cetera.ru', '{{user.email}}');
