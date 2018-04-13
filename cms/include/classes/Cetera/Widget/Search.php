@@ -43,6 +43,7 @@ class Search extends Templateable {
 			'date_format'          => 'd.m.Y',
 			'show_date'            => true,
 			'show_path'            => true,
+			'where'                => null,
 			'template'			   => 'default.twig',
 		);  		
 	}		
@@ -105,6 +106,10 @@ class Search extends Templateable {
 					->where( $where2 )
 					->setItemCountPerPage( $this->getItemCountPerPage() )
 					->setCurrentPageNumber( $this->getPage() );
+					
+				if ($this->getParam('where')) {
+					$this->results->where( $this->getParam('where') );
+				}	
 				
 				//print $this->results->getQuery();
 			}
