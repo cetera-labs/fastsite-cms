@@ -19,6 +19,7 @@ $_ext = substr($url,-3);
 
 $_init = Cetera\Util::utime();
 
+$application->setFrontOffice();
 $application->connectDb();
 $application->initSession();
 $application->initPlugins();
@@ -179,7 +180,7 @@ echo $result;
 
 function fo_exception_handler($exception) {
 
-    if ($exception instanceof Exception\CMS) {
+    if ($exception instanceof \Cetera\Exception\CMS) {
         $ext_message = $exception->getExtMessage();
     } else {
         $ext_message = 'In file <b>'.$exception->getFile().'</b> on line: '.$exception->getLine()."<br /><br /><b>Stack trace:</b><br />".nl2br($exception->getTraceAsString());
@@ -190,7 +191,7 @@ function fo_exception_handler($exception) {
     
     header('Content-type: text/html; charset=UTF-8');
     
-    if ($exception instanceof Exception\HTTP) {
+    if ($exception instanceof \Cetera\Exception\HTTP) {
         header("HTTP/1.0 ".$exception->getStatus());
     } else {
         header("HTTP/1.0 500");
