@@ -72,7 +72,7 @@ if ($application->getVar('fo_close')) {
 	
 	if (!$proceed) {
    		header('WWW-Authenticate: Basic realm="'.APP_NAME.'"');
-        throw new Exception_HTTP(401, $message);
+        throw new \Cetera\Exception\HTTP(401, $message);
     }
 }
 $_time_init = Cetera\Util::utime() - $_init;
@@ -190,7 +190,7 @@ function fo_exception_handler($exception) {
     
     header('Content-type: text/html; charset=UTF-8');
     
-    if ($exception instanceof Exception_HTTP) {
+    if ($exception instanceof Exception\HTTP) {
         header("HTTP/1.0 ".$exception->getStatus());
     } else {
         header("HTTP/1.0 500");
