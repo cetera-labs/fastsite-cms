@@ -28,6 +28,7 @@ if ($step == 9) {
 	
 		$theme = 'corp-2018';
 		if ($_POST['theme']) $theme = $_POST['theme'];
+		list($theme,$content) = explode('|',$theme);
 		
 		$str = '<div class="scroll" style="width: 475px;"><table class="setup" cellspacing="0" cellpadding="0" width="100%" border="0">';
 			  
@@ -37,7 +38,7 @@ if ($step == 9) {
 					if ($start) 
 						$str .= '<tr><td class="left">'.$text.'</td><td>'; 
 						else $str .= status(0).'</td></tr>';
-				}, $translator, true);  
+				}, $translator, true, $content);  
 				
 				$f = fopen(PREFS_FILE,'a');
 				fwrite($f,"setup_theme=1\n");

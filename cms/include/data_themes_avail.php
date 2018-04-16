@@ -3,6 +3,8 @@ namespace Cetera;
 include('common.php');
 header('Content-Type: application/json');
 
+$data = [];
+
 try {
 
 	$client = new \GuzzleHttp\Client();
@@ -12,21 +14,24 @@ try {
         
         foreach ($themes as $id => $p) {
                            
-            $themes[$id]['compatible'] = true;
             // требуется более свежая CMS
-            if ($p['cms_version_min'] && version_compare($p['cms_version_min'], VERSION) > 0 ) $themes[$id]['compatible'] = false;
+            if ($p['cms_version_min'] && version_compare($p['cms_version_min'], VERSION) > 0 ) continue;
             // CMS слишком новая
-            if ($p['cms_version_max'] && version_compare($p['cms_version_max'], VERSION) <= 0 ) $themes[$id]['compatible'] = false;    
+            if ($p['cms_version_max'] && version_compare($p['cms_version_max'], VERSION) <= 0 ) continue;
+			
+			foreach($p['content'] as $c) {
+				
+				$c['id'] = $c['theme'].'|'.$c['id'];
+ 				$data[] = $c;
+				
+			}
+			
         }
         
     } else {
         throw new Exception('NO DATA');
     }
 
-} catch (\Exception $e) {
+} catch (\Exception $e) { }
 
-    //$themes = array();
-    
-}
-
-print json_encode($themes);
+print json_encode($data);

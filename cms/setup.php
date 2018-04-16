@@ -135,7 +135,7 @@ function step8() {
 							url: 'include/data_themes_avail.php'
 						}
 					}),
-					value: '<?=($application->getLocale()=='en')?'corp-en':'corp-2018'?>',
+					value: '<?=($application->getLocale()=='en')?'corp-2018|corp-2018_en':'corp-2018|corp-2018'?>',
 					triggerAction: 'all',
 					editable: false,
 					allowBlank: true     
