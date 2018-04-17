@@ -35,9 +35,14 @@ class MenuUser extends Templateable {
         
     public function getChildren()
     {
-		$menu = $this->getMenu();
-		if ($menu) return $this->getMenu()->children;
-		return array();
+		try {
+			$menu = $this->getMenu();
+			if ($menu) return $this->getMenu()->children;
+			return [];
+		}
+		catch (\Exception $e) {
+			return [];
+		}		
     }  
 
 }

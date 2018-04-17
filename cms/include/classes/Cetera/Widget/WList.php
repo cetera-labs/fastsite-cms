@@ -67,10 +67,15 @@ class WList extends Templateable {
 				$this->_children = $this->getParam('iterator');
 			}
 			else {
-				$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'));				
-				if ($this->getParam('subfolders') || $this->getParam('subsections')) {
-					$this->_children->subfolders();
+				try {
+					$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'));				
+					if ($this->getParam('subfolders') || $this->getParam('subsections')) {
+						$this->_children->subfolders();
+					}
 				}
+				catch (\Exception $e) {
+					return [];
+				}					
 			}
 			if ($this->getParam('limit')) $this->_children->setItemCountPerPage($this->getParam('limit')); 
 			if ($this->getParam('where')) $this->_children->where($this->getParam('where')); 

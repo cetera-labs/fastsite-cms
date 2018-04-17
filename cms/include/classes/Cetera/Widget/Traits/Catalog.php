@@ -16,11 +16,16 @@ trait Catalog {
 				$this->_cat = $c;
 			} 
 			elseif ($c) {
-				if (intval($c)) {
-					$this->_cat = \Cetera\Catalog::getById($c);
+				try {
+					if (intval($c)) {
+						$this->_cat = \Cetera\Catalog::getById($c);
+					}
+					else {
+						$this->_cat = $this->application->getServer()->getChildByPath($c);
+					}
 				}
-				else {
-					$this->_cat = $this->application->getServer()->getChildByPath($c);
+				catch (\Exception $e) {
+					
 				}
 			}
 			

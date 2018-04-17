@@ -55,13 +55,18 @@ class Menu extends Templateable {
         
     public function getChildren()
     {		
-		if ($this->getMenu()) 
-			return $this->getMenu();		
-		
-		if ($this->getCatalog()) 
-			return $this->getCatalog()->children->where('hidden<>1');
-		
-		return [];
+		try {
+			if ($this->getMenu()) 
+				return $this->getMenu();		
+			
+			if ($this->getCatalog()) 
+				return $this->getCatalog()->children->where('hidden<>1');
+			
+			return [];
+		}
+		catch (\Exception $e) {
+			return [];
+		}		
     }  
 
     public function setCatalog($c)
