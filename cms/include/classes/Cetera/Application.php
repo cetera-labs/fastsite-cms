@@ -1568,7 +1568,7 @@ class Application {
 		
 		if (!$this->twig)
 		{
-			$loader = new \Twig_Loader_Filesystem( $this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH);
+			$loader = new \Twig_Loader_Filesystem( $this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH, getcwd() );
 			
 			if (file_exists($this->getTemplateDir().'/widgets'))
 				$loader->addPath( $this->getTemplateDir().'/widgets' ,'widget' );
@@ -1809,6 +1809,24 @@ class Application {
 	public function getRequest($key) 
 	{
 		return $_REQUEST[$key];
+	}
+	
+	/**
+	* Определеет, опубликован ли пользовательский контент
+	*
+	* @return boolean
+	*/		
+	public function contentExists() {
+		$r = Catalog::getRoot();
+		if (count($r->children) > 1) return true;
+		if (count($r->children) < 1) return false;
+		
+		$s = $r->children[0];
+		
+		if (count($s->children)) return true;
+		if (count($s->getMaterials()->unpublished())) return true;
+		
+		return false;
 	}
 	
 	public static function error_handler($errno, $errstr, $errfile, $errline ) {
