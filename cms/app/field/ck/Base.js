@@ -34,6 +34,7 @@ Ext.define('Cetera.field.ck.Base', {
     },
 
     initEditor: function() { 
+
         var editorConfig = {
               customConfig : '/cms/include/editors/ckeditor/config.php?' + ( new Date() * 1 )
         };
@@ -46,7 +47,7 @@ Ext.define('Cetera.field.ck.Base', {
         var me = this;
         this.editor.on('instanceReady', function(e) {  
             me.editorReady = true;        
-            e.editor.resize('100%', ta.getHeight());
+            e.editor.resize('100%', ta.getComputedHeight());
         });
         
         this.editor.on('contentDom', function(e) {

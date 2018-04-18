@@ -368,7 +368,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
         $author = json_decode( $this->fields['autor'] );
         if ( is_object($author) ) $this->fields['autor'] = $author->id;
         
-        $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->fields['name']).',idcat='.$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
+        $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->name).',idcat='.$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
         
         $values .= $this->saveDynamicFields(array('name', 'alias', 'idcat', 'autor'), $hidden);
              
