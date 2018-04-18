@@ -31,12 +31,19 @@ elseif ($action == 'install') {
     ob_start();
     
     try {
+		
+		$extract_content = false;
+		$content = false;
+		if (isset($_REQUEST['content'])) {
+			$extract_content = true;
+			$content = $_REQUEST['content'];
+		}
             
         Theme::install($theme, function($text, $start) { 
             if ($start) echo '<b>';
             echo $text; 
             if ($start) echo '</b> ... '; else echo '<br>';
-        }, $translator);      
+        }, $translator, $extract_content, $content);      
     
     } catch (\Exception $e) {
     

@@ -77,11 +77,40 @@ Ext.define('Cetera.theme.Add', {
                 return data;
             },				
 
-            install: function(name) {
-                Ext.create('Cetera.theme.Install',{
+            install: function(name, title) {
+				
+				if (Config.contentExists) {
+				
+					Ext.MessageBox.confirm(
+						Config.Lang.install, 
+						Config.Lang.install+' "'+title+'"<br>'+Config.Lang.r_u_sure, 
+						function(btn) {
+							if (btn == 'yes') {
+								
+								Ext.create('Cetera.theme.Upgrade',{
+									themeName: name
+								});							
+								
+							}
+						}, 
+						this
+					);	
+
+				}
+				else {
+				
+					Ext.create('Cetera.theme.Install',{
+						themeName: name
+					});
+					
+				}
+            },
+			
+			upgrade: function(name) {
+                Ext.create('Cetera.theme.Upgrade',{
                     themeName: name
                 });               
-            }
+            }			
         });	
 
 		this.dataview.on('refresh',function(){
@@ -115,16 +144,9 @@ Ext.define('Cetera.theme.Add', {
 								}								
 
                                 if (button.action == 'install') {
-                                    Ext.MessageBox.confirm(
-                                        Config.Lang.install, 
-                                        Config.Lang.install+' "'+button.themeTitle+'"<br>'+Config.Lang.r_u_sure, 
-                                        function(btn) {
-                                            if (btn == 'yes') this.install(button.theme);
-                                        }, 
-                                        this
-                                    );
+                                    this.install(button.theme, button.themeTitle);
                                 } else {
-                                    this.install(button.theme);
+                                    this.upgrade(button.theme);
                                 }
                                 
                             }

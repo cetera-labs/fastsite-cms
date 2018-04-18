@@ -19,9 +19,11 @@ try {
             // CMS слишком новая
             if ($p['cms_version_max'] && version_compare($p['cms_version_max'], VERSION) <= 0 ) continue;
 			
+			if (isset($_REQUEST['theme']) && $_REQUEST['theme'] != $id) continue;
+			
 			foreach($p['content'] as $c) {
 				
-				$c['id'] = $c['theme'].'|'.$c['id'];
+				$c['full_id'] = $c['theme'].'|'.$c['id'];
  				$data[] = $c;
 				
 			}

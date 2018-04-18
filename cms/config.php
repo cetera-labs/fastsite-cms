@@ -54,7 +54,9 @@ Config = {
         modules: null,
         
         locale: '<?php echo $application->getLocale(); ?>',
-        
+		
+        contentExists: <?php echo $application->contentExists()?1:0; ?>,
+		
         fields: {
             FIELD_TEXT: <?php echo FIELD_TEXT; ?>,
             FIELD_LONGTEXT: <?php echo FIELD_LONGTEXT; ?>,

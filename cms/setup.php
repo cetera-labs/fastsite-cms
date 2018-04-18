@@ -122,11 +122,11 @@ function step8() {
 				{
 					flex: 1,
 					xtype: 'combo',
-					valueField: 'id',
+					valueField: 'full_id',
 					displayField: 'title',
 					name: 'theme',
 					store: new Ext.data.JsonStore({
-						fields: ['id', 'title','locale'],
+						fields: ['id', 'full_id', 'title','locale'],
 						root: 'rows',
 						autoLoad: true,
 						filters: [{property: 'locale', value: '<?=$application->getLocale()?>'}],

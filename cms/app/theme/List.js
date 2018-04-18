@@ -35,7 +35,7 @@ Ext.define('Cetera.theme.List', {
 
                 Ext.MessageBox.confirm(Config.Lang.upgrade, Config.Lang.r_u_sure, function(btn) {
                     if (btn == 'yes') {
-						Ext.create('Cetera.theme.Install',{
+						Ext.create('Cetera.theme.Upgrade',{
 							themeName: rec.get('id')
 						});						
 					}
