@@ -31,13 +31,13 @@ class Linkset extends DynamicObject {
 			throw new \Cetera\Exception\CMS('Illegal type of field '.$field['name'].' - '.$field['type']);
 
         if ($field['type'] == FIELD_LINKSET) {
-        
+        		
 			if ($field['len'] == CATALOG_VIRTUAL_USERS) {
 			    $od = User::getObjectDefinition();
 			} elseif ($field['pseudo_type'] == PSEUDO_FIELD_CATOLOGS) {
 			    $od = \Cetera\Catalog::getObjectDefinition();
 			} elseif (!$field['len']) {
-				$od = $object->getObjectDefinition();
+				$od = $object->objectDefinition;		
 			} else {
 			    $c = \Cetera\Catalog::getById($field['len']);
 			    if (!$c) throw new \CeteraException\CMS('Catalog '.$field['len'].' is not found.');
