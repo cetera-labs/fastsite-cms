@@ -2,8 +2,8 @@ Ext.define('Cetera.theme.Upgrade', {
 
     extend:'Ext.Window',  
 
-	content: false,
-	themeName: false,
+	content: '',
+	themeName: '',
           
     initComponent: function(){
     

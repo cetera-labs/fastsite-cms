@@ -357,5 +357,15 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
         }
         return $ret;
     }
+	
+    /**
+     * Создает новый фильтр для этого итератора
+     *             
+     * @param string $name имя фильтра
+     * @return \Cetera\Filter
+     */	
+	public function createFilter($name) {
+		return new \Cetera\Filter($name, $this);
+	}
 
 }
