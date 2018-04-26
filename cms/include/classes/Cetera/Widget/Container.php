@@ -70,6 +70,19 @@ class Container extends Templateable {
 			} catch (\Exception $e) {}	
 		}
     }
+	
+	/**
+	 * Устанавливает в контейнер виджеты
+	 * 
+	 * @param array $widgets массив виджетов
+	 */		
+    protected function setWidgets($widgets) {
+		$this->widgets = [];
+		foreach ($widgets as $w)  {
+			if (is_subclass_of($w, 'Cetera\Widget\Widget')) $this->widgets[] = $w;
+			elseif ($w) $this->widgets[] = $this->application->getWidget( (int)$w );
+		}	
+    }	
 
 	/**
 	 * Добавляет в контейнер виджет
