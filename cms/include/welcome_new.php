@@ -55,7 +55,7 @@ if ($user->allowAdmin()) {
         } catch (\Exception $e) {}
     }
 	
-	  if ($application->getVar('setup_theme'))
+	  if ($application->getVar('setup_theme') && \Cetera\Server::getDefault())
 		    $setup_theme = \Cetera\Server::getDefault()->getTheme()->name;
     
 }
