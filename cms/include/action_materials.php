@@ -24,19 +24,15 @@ $sel = $_REQUEST['sel'];
 $id = (int)$_REQUEST['id'];
 $type = $_REQUEST['type'];
 
-if ($id) 
-{
+if ($id) {
 	$catalog = Catalog::getById($id);
 	$objectDefinition = $catalog->materialsObjectDefinition;
 } 
-elseif ($type)
-{
-	if ($type && !(int)$type)
-	{
+elseif ($type) {
+	if ($type && !(int)$type) {
 		$objectDefinition = ObjectDefinition::findByAlias($type);
 	}
-	else
-	{
+	else {
 		$objectDefinition = ObjectDefinition::findById($type);
 	}	
 }
@@ -99,10 +95,20 @@ if ($action == 'mark_del' && is_array($sel)) {
 
 if ($action == 'delete' && is_array($sel)) {
   
-	foreach ($sel as $val)
-	{
+	foreach ($sel as $val) {
 	   $m = Material::getById($val, $objectDefinition);
        $m->delete();
+    }
+	$res['success'] = true;
+
+}
+
+if ($action == 'delete_link' && is_array($sel)) {
+  
+	foreach ($sel as $val) {
+	   $m = Material::getById($val, $objectDefinition);
+       $m->{$_REQUEST['field']} = 0;
+	   $m->save();
     }
 	$res['success'] = true;
 

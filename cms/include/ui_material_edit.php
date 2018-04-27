@@ -333,7 +333,6 @@ try {
             	  <?if ($right_publish) {?>
             	
                 this.publishbut = Ext.create('Ext.Button', {
-					id: 'publish_button',
                     text: '<?=$translator->_('Сохранить и опубликовать')?>',
                     handler: function() { 
 						this.save_publish(0);

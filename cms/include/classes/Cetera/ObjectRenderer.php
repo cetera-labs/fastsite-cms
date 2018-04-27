@@ -309,7 +309,7 @@ class ObjectRenderer {
 				}				
 			}			
 		}
-				
+		
 		ob_start();
 		foreach ($fields as $f) try {			
 			$od = ObjectDefinition::findById($f['id']);		

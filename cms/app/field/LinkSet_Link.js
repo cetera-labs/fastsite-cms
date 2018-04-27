@@ -54,11 +54,20 @@ Ext.define('Cetera.field.LinkSet_Link', {
 			scope: this,
 			handler: function () { this.deleteMat(); },
 			iconCls:'icon-delete',
+		});	
+		
+		this.deleteLinkAction = new Ext.Action({
+			tooltip: _('Удалить связь материалов'),
+			disabled: true,
+			scope: this,
+			handler: function () { this.deleteLink(); },
+			iconCls:'icon-delete2',
 		});			
-			 
-        this.grid = Ext.create('Ext.grid.GridPanel', {
 
-			tbar: [
+		var tbarConfig = [this.editAction,this.deleteLinkAction];
+		
+		if (this.field_type == Config.fields.FIELD_MATERIAL) {
+			tbarConfig = [
 				{
 					itemId:  'tb_mat_new',
 					iconCls: 'icon-new',
@@ -68,7 +77,13 @@ Ext.define('Cetera.field.LinkSet_Link', {
 				},
 				this.editAction,
 				this.deleteAction			
-			],
+			];	
+		}
+		
+			 
+        this.grid = Ext.create('Ext.grid.GridPanel', {
+
+			tbar: tbarConfig,
 		
 			bbar: Ext.create('Ext.PagingToolbar', {
 				store: this.store,
@@ -122,7 +137,8 @@ Ext.define('Cetera.field.LinkSet_Link', {
             'selectionchange' : function(sm){
                 var hs = sm.hasSelection();               
                 this.editAction.setDisabled(!hs);
-                this.deleteAction.setDisabled(!hs);				
+                this.deleteAction.setDisabled(!hs);	
+				this.deleteLinkAction.setDisabled(!hs);	
             },
             'beforeselect' : function(t , record, index, eOpts) {
                 if (record.get('disabled')) return false;
@@ -168,6 +184,26 @@ Ext.define('Cetera.field.LinkSet_Link', {
             if (btn == 'yes') this.call('delete');
         }, this);
     },
+	
+    deleteLink: function() {
+        Ext.MessageBox.confirm(_('Удалить связь материалов'), Config.Lang.r_u_sure, function(btn) {
+            if (btn == 'yes') {
+				Ext.Ajax.request({
+					url: 'include/action_materials.php',
+					params: { 
+						action: 'delete_link', 
+						type: this.mat_type, 
+						'sel[]': this.getSelected(),
+						field: this.field_name
+					},
+					scope: this,
+					success: function(resp) {
+						this.store.load();
+					}
+				});				
+			}
+        }, this);
+    },	
 	
     call: function(action, cat) {
         Ext.Ajax.request({

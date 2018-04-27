@@ -381,6 +381,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
             $sql = "INSERT INTO ".$this->table." SET ".$values;
             
         }
+
         $this->getDbConnection()->executeQuery($sql);
         
 		if (!$this->id) {

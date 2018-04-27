@@ -12,12 +12,14 @@
 
 function editor_linkset_link_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
 	$od = \Cetera\ObjectDefinition::findById($field_def['id']);
+	
 ?>
                     Ext.create('Cetera.field.LinkSet_Link', {
                         name: '<?=$od->getAlias()?>_<?=$field_def['name']?>',
 						mat_type: <?=$field_def['id']?>,
 						field_name: '<?=$field_def['name']?>',
-						parent_id: <?=(int)$id?>
+						field_type: <?=(int)$field_def['type']?>,
+						parent_id: <?=(int)$id?>						
                     })
 <?
     return -1;
