@@ -132,7 +132,7 @@ class Filter {
 						
 						$f = $this->generateField($d['field']);
 						$list = clone $this->iterator;
-						$list->select($f.' AS '.$d['name'])->orderBy($f)->groupBy($f, false);
+						$list->select($f.' AS '.$d['name'])->orderBy($f)->groupBy($f, false)->setItemCountPerPage(0);
 
 						if (!$list->getCountAll()) continue;
 						foreach($list as $m) {
@@ -181,9 +181,9 @@ class Filter {
 					break;
 				case self::TYPE_RADIO:
 				case self::TYPE_DROPDOWN:
-					if ($this->submittedValue($f['name']) !== null)
-					{
-						$this->iterator->where( $this->generateField($f['field']).' = "'.$this->submittedValue($f['name']).'"' );
+					if ($this->submittedValue($f['name']) !== null) {
+						$this->iterator->where( $this->generateField($f['field']).' = :'.$f['name'] )
+									   ->setParameter($f['name'], $this->submittedValue($f['name']));
 					}				
 					break;
 				case self::TYPE_CHECKBOX:
