@@ -262,7 +262,7 @@
 <table name="theme_config">
     <field name="theme_name" type="varchar(150)" null="0" />
     <field name="server_id" type="int(10) unsigned" null="0" />
-    <field name="config" type="text" null="1" />
+    <field name="config" type="mediumtext" null="1" />
     <key name="PRIMARY" unique="1">
         <column name="theme_name" />
         <column name="server_id" />
