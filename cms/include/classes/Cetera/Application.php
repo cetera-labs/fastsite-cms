@@ -1082,7 +1082,7 @@ class Application {
     /**
      * Делает запись в журнал аудита
      *      
-     * @param int $event_code код события      
+     * @param int $event_code код события
      * @param string $text дополнительное описание      
      * @return void
     */    
@@ -1107,7 +1107,8 @@ class Application {
      * @return array
     */	
 	public function getLoggableEvents() {
-		return array(
+		$list = [
+			EVENT_CORE_USER_REGISTER,
 			EVENT_CORE_BO_LOGIN_OK,
 			EVENT_CORE_BO_LOGIN_FAIL,
 			EVENT_CORE_LOG_CLEAR,
@@ -1120,8 +1121,53 @@ class Application {
 			EVENT_CORE_MATH_PUB,
 			EVENT_CORE_MATH_UNPUB,
 			EVENT_CORE_USER_PROP,
-		);		
+		];	
+		
+		return  array_diff(
+			array_merge ( $list, (array)$this->configGet('events_log_enabled') ),
+			(array)$this->configGet('events_log_disabled')
+		);
 	}
+	
+    /**
+     * Разрешает сохранение события в журнал аудита
+     *      
+	 * @param int $event_code код события	 
+     * @return void
+    */		
+	public function addLoggableEvent($event_code) {
+		$disabled = (array)$this->configGet('events_log_disabled');
+		$key = array_search($event_code, $disabled);
+		if ($key !== false) {
+			unset($disabled[$key]);
+			$this->configSet('events_log_disabled', $disabled);
+		}
+		if (!in_array($event_code, $this->getLoggableEvents())) {
+			$enabled = (array)$this->configGet('events_log_enabled');
+			$enabled[] = $event_code;
+			$this->configSet('events_log_enabled', $enabled);
+		}
+	}
+	
+    /**
+     * Запрещает сохранение события в журнал аудита
+     *      
+	 * @param int $event_code код события	 
+     * @return void
+    */		
+	public function removeLoggableEvent($event_code) {
+		$enabled = (array)$this->configGet('events_log_enabled');
+		$key = array_search($event_code, $enabled);
+		if ($key !== false) {
+			unset($disabled[$key]);
+			$this->configSet('events_log_disabled', $disabled);
+		}
+		if (in_array($event_code, $this->getLoggableEvents())) {
+			$disabled = (array)$this->configGet('events_log_disabled');
+			$disabled[] = $event_code;
+			$this->configSet('events_log_disabled', $disabled);
+		}		
+	}	
 	
     /**
      * Глобальный обработчик событий. Записывает события в журнал аудита. Рассылает почтовые уведомления.

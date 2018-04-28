@@ -243,7 +243,7 @@ class BackOffice {
 					'icon'     => 'images/audit1.gif',
 					'class'    => 'EventlogPanel',
 					'iconCls'  => 'x-fa fa-file-text-o',
-					'class'    => 'Cetera.panel.EventLog',
+					'class'    => 'Cetera.eventlog.Panel',
                 ); 
                 
                 $this->_modules['dbrepair'] = array(

@@ -1,4 +1,4 @@
-Ext.define('Cetera.panel.EventLog', {
+Ext.define('Cetera.eventlog.Panel', {
 
     extend: 'Ext.grid.GridPanel',
 	requires: 'Cetera.model.Event',
@@ -66,6 +66,12 @@ Ext.define('Cetera.panel.EventLog', {
             },'-',{
                 text: _('Фильтр событий'),
                 menu: this.filterMenu 
+            },'-',{
+				iconCls:'icon-settings',
+                text: _('Настройка'),
+                handler: function () { 
+					Ext.create('Cetera.eventlog.Setup');
+				}
             }
         ];
         
