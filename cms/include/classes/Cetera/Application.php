@@ -270,14 +270,7 @@ class Application {
 		set_error_handler('\Cetera\Application::error_handler');		
 		
         $this->_locale = new \Zend_Locale('ru');
-  
-		$check = '/cms/fo.php';  
-		
-        if (substr( $_SERVER['SCRIPT_NAME'], 0 - strlen( $check ) ) == $check)
-		{
-			$this->setFrontOffice();
-		}
-		
+  	
         $this->initDebug();
         
         if (php_sapi_name() != 'cli') {
