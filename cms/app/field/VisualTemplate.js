@@ -79,6 +79,7 @@ Ext.define('Cetera.field.VisualTemplate', {
 	setValue: function(value, internal) {	
 		this.callParent(arguments);
 		if (value && !internal) {
+			this.panel.removeAll();
 			var data = Ext.JSON.decode(value);
 			Ext.Array.each(data, function(val) {
 				this.addWidget({
