@@ -1,0 +1,51 @@
+{% extends '@widget/list/default.twig' %}
+
+{% block html %}
+
+	{% if not widget.getParam('ajaxCall') %}
+	<div class="{{ widget.getParam('css_class') }}">
+
+		{% if widget.widgetTitle or widget.getParam('catalog_link') %}
+		  <div class="row">
+			<div class="small-12 medium-8 columns">
+			  {% if widget.widgetTitle %}<h2>{{ widget.widgetTitle }}</h2>{% endif %}
+			</div>
+			<div class="small-12 medium-4 columns medium-text-right">
+				{% if widget.getParam('catalog_link') %}
+				<a href="{{ widget.catalog.url }}" class="button">{{ widget.getParam('catalog_link') }}&nbsp;<i class="fa fa-long-arrow-right"></i></a>
+				{% endif %}
+			</div>
+		  </div>
+		 {% endif %}
+
+		<div id="{{ widget.uniqueId }}-wrapper">
+	{% endif %}	 
+
+		  <div data-equalizer="{{ widget.uniqueId }}-eq" data-equalize-by-row="true" class="row {% if not widget.getParam('css_row') %}small-up-1 medium-up-3 large-up-3{% else %}{{ widget.getParam('css_row') }}{% endif %}">
+		  {% for m in widget.children %}
+			<div class="column">
+				<div class="callout text-left" data-equalizer-watch="{{ widget.uniqueId }}-eq">
+					{% if m.pic %}
+					<p class="text-center"><a href="{{ m.url }}"><img style="width:100%" src="/imagetransform/width_600_height_338_fit_3{{ m.pic }}" alt="{{ m.name }}"></a></p>
+					{% endif %}
+					<h4><a href="{{ m.url }}">{{ m.name }}</a></h4>
+					{{ m.short|raw }}
+				</div>
+			</div>
+		  {% endfor %}
+		  </div>
+		  
+		  {% if widget.getParam('paginator') %}
+		  <div class="row column x-pages">
+			{{ widget.getPaginator()|raw }}
+		  </div>
+		  {% endif %}
+		  
+	{% if not widget.getParam('ajaxCall') %}	  		  
+		</div>
+		 
+	</div>
+	 
+	{% endif %}	 
+
+{% endblock %}

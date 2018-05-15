@@ -1,0 +1,9 @@
+<ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
+{% for m in widget.children %} 
+  <li class="accordion-item" data-accordion-item><a class="accordion-title" href="#"><strong>{{ m.name }}</strong></a>
+	<div class="accordion-content" data-tab-content>
+	  {{ m.text|raw }}
+	</div>
+  </li>
+{% endfor %}
+</ul>

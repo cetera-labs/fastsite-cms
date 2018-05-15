@@ -1361,6 +1361,13 @@ class Application {
 				'icon'    => '/cms/images/icon_list.png'
 			),
 			
+			'List.Sections' => array(
+				'name'    => 'List.Sections',
+				'class'   => '\\Cetera\\Widget\\ListSections',
+				'describ' => $t->_('Список разделов'),
+				'icon'    => '/cms/images/icon_list.png'
+			),			
+			
 			'Filter' => array(
 				'name'    => 'Filter',
 				'class'   => '\\Cetera\\Widget\\Filter',

@@ -1,0 +1,44 @@
+{% block html %}
+
+	{% if not widget.getParam('ajaxCall') %}
+	<div class="{{ widget.getParam('css_class') }}">
+	
+		{{ widget.widgetTitle|raw }}
+
+		<div id="{{ widget.getUniqueId() }}-wrapper">
+	{% endif %}	 
+
+	{% for m in widget.children %}    
+		<div class="{{ widget.getParam('css_class') }}__item {{ widget.getParam('css_row') }}">
+			<a class="{{ widget.getParam('css_class') }}__link" href="{{ m.url }}">
+				{{ m.name }}
+			</a>
+		</div>    
+	{% endfor %}
+
+		{% if widget.getParam('paginator') %}
+		<div class="x-pages">
+			{{ widget.getPaginator()|raw }}
+		</div>
+		{% endif %}	
+
+	{% if not widget.getParam('ajaxCall') %}
+
+		</div>{# wrapper #}		
+		
+		{% if widget.getParam('catalog_link') %}
+		<div>
+			<a class="button hollow expanded" href="{{ widget.catalog.url }}">{{ widget.getParam('catalog_link') }}</a>
+		</div>
+		{% endif %}	
+		
+	</div>
+		
+	{% endif %}		
+
+{% endblock %}
+
+{% block script %}
+	{% set loading %}{% block loading %}{{ _('Подождите ...') }}{% endblock %}{% endset %}
+	{% include "@widget/_common/ajax-paginator.twig" with { loading: loading } %}
+{% endblock %}

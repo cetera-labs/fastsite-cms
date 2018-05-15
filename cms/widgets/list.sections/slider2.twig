@@ -1,0 +1,40 @@
+<div class="{{ widget.uniqueId }} carousel-main background-main">
+{% for m in widget.getChildren %}
+
+      <div class="carousel-main__item" style="background-image: url({{ m.pic }}); background-size: cover;">
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x align-center carousel-main__content">
+            <div class="cell medium-14 align-self-middle text-left medium-text-center">
+              <h2>{{ m.name }}</h2>
+              {{ m.short|raw }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endfor %}	  
+</div>
+
+{% set script %}
+<script>
+    "use strict";
+    document.addEventListener('DOMContentLoaded', function () {
+        jQuery(".{{ widget.uniqueId }}").slick({
+            infinite: true,
+            dots: false,
+            arrows: true,
+            slidesPerRow: 1,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            autoplayHoverPause: true,
+            fade: true,
+            swipeToSlide: true,
+            prevArrow: '<i class="slick-prev fa fa-angle-left fa-3x"> </i>',
+            nextArrow: '<i class="slick-next fa fa-angle-right fa-3x"> </i>'
+        });
+	});
+</script>
+{% endset %}
+{% do widget.application.addHeadString( script ) %}

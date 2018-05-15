@@ -1,0 +1,47 @@
+<div class="{{ widget.uniqueId }} carousel-main background-main">
+{% for m in widget.getChildren %}
+      <div class="carousel-main__item">
+        <div class="grid-container">
+          <div class="grid-x grid-padding-x carousel-main__content">
+		  {% if loop.index is odd %}
+            <div class="cell medium-8 show-for-medium align-self-middle"><img src="{{ m.pic }}" style="width: 100%;"></div>
+            <div class="cell medium-14 medium-offset-2 align-self-middle text-left">
+              <h2>{{ m.name }}</h2>
+			  {{ m.short|raw }}
+            </div>
+		  {% else %}
+            <div class="cell medium-14 align-self-middle text-left">
+              <h2>{{ m.name }}</h2>
+              {{ m.short|raw }}
+            </div>
+            <div class="cell medium-8 medium-offset-2 show-for-medium align-self-middle"><img src="{{ m.pic }}" style="width: 100%;"></div>		  
+		  {% endif %}
+          </div>
+        </div>
+      </div>
+{% endfor %}	  
+</div>
+
+{% set script %}
+<script>
+    "use strict";
+    document.addEventListener('DOMContentLoaded', function () {
+        jQuery(".{{ widget.uniqueId }}").slick({
+            infinite: true,
+            dots: false,
+            arrows: true,
+            slidesPerRow: 1,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            autoplayHoverPause: true,
+            fade: true,
+            swipeToSlide: true,
+            prevArrow: '<i class="slick-prev fa fa-angle-left fa-3x"> </i>',
+            nextArrow: '<i class="slick-next fa fa-angle-right fa-3x"> </i>'
+        });
+	});
+</script>
+{% endset %}
+{% do widget.application.addHeadString( script ) %}

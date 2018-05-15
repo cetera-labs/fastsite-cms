@@ -1,0 +1,35 @@
+<div class="{{ widget.uniqueId }} carousel-services padding-top-12 background-main">
+{% for m in widget.children %}
+  <div class="carousel-services__item">
+	<div class="grid-container">
+	  <div class="grid-x grid-padding-x">
+		<div class="medium-10 cell show-for-medium"><img src="{{ m.pic }}" alt="1"></div>
+		<div class="medium-12 medium-offset-2 cell align-self-middle">
+		  <h2>{{ m.name }}</h2>
+		  {{ m.short|raw }}
+		</div>
+	  </div>
+	</div>
+  </div>
+{% endfor %}	  
+</div>
+
+{% set script %}
+<script>
+    "use strict";
+    document.addEventListener('DOMContentLoaded', function () {
+        $(".{{ widget.uniqueId }}").slick({
+            infinite: true,
+            dots: true,
+            arrows: false,
+            slidesPerRow: 1,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            autoplayHoverPause: true		
+        });
+	});
+</script>
+{% endset %}
+{% do widget.application.addHeadString( script ) %}
