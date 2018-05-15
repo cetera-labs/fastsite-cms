@@ -54,7 +54,7 @@ Ext.define('Cetera.eventlog.Setup', {
         }); 
 
         this.applyButton = Ext.create('Ext.Button', {
-            text: Config.Lang.apply,
+            text: _('Применить'),
             scope: this,
             handler: function(){
 				this.setLoading( true );

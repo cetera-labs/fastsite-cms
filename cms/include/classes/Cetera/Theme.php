@@ -386,9 +386,16 @@ class Theme implements \ArrayAccess  {
 		$info['requires'] = $requires;
 		$this->saveInfo($info);		
 		
-		// сохраняем таблицы БД
-		$types = $a->getDbConnection()->fetchAll('SELECT * FROM types WHERE alias NOT IN ("users","dir_data")');
-		foreach ($types as $t) $tables[] = $t['alias'];
+		// сохраняем таблицы БД		
+		foreach (ObjectDefinition::enum() as $od) {
+			if (in_array($od->alias, ["users","dir_data"])) continue;
+			$tables[] = $od->alias;
+			foreach ($od->getFields() as $f) {				
+				if (is_subclass_of($f, 'Cetera\ObjectFieldLinkSetAbstract')) {
+					$tables[] = $f->getLinkTable();
+				}				
+			}
+		}
 		
 		$settings = array(
 			'include-tables'     => array_unique($tables),
