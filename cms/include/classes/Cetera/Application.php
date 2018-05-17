@@ -1364,7 +1364,7 @@ class Application {
 			'List.Sections' => array(
 				'name'    => 'List.Sections',
 				'class'   => '\\Cetera\\Widget\\ListSections',
-				'describ' => $t->_('Список разделов'),
+				'describ' => $t->_('Список подразделов'),
 				'icon'    => '/cms/images/icon_list.png'
 			),			
 			

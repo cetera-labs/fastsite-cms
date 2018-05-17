@@ -1,4 +1,4 @@
-// Панелька виджета 
+// РџР°РЅРµР»СЊРєР° РІРёРґР¶РµС‚Р° 
 Ext.require('Cetera.field.Folder');
 Ext.require('Cetera.field.FileEditable');
 Ext.require('Cetera.field.WidgetTemplate');
@@ -15,7 +15,7 @@ Ext.define('Cetera.widget.List.Sections', {
         },{
             xtype: 'numberfield',
             name: 'limit',
-            fieldLabel: _('Кол-во подразделов'),
+            fieldLabel: _('РљРѕР»-РІРѕ РїРѕРґСЂР°Р·РґРµР»РѕРІ'),
             maxValue: 999,
             minValue: 1,
             allowBlank: false
@@ -41,8 +41,8 @@ Ext.define('Cetera.widget.List.Sections', {
 				store: new Ext.data.SimpleStore({
 					fields: ['name', 'value'],
 					data : [
-						[_('Возрастанию'), 'ASC'],
-						[_('Убыванию'), 'DESC']              
+						[_('Р’РѕР·СЂР°СЃС‚Р°РЅРёСЋ'), 'ASC'],
+						[_('РЈР±С‹РІР°РЅРёСЋ'), 'DESC']              
 					]
 				}),
 				valueField:'value',
@@ -56,13 +56,13 @@ Ext.define('Cetera.widget.List.Sections', {
 		
 		{
             name: 'catalog_link',
-            fieldLabel: _('Ссылка на раздел'),
+            fieldLabel: _('РЎСЃС‹Р»РєР° РЅР° СЂР°Р·РґРµР»'),
         },
 		
 		{
 			xtype: 'fieldcontainer',
 			cls: 'x-field',
-			fieldLabel: _('Страницы'),
+			fieldLabel: _('РЎС‚СЂР°РЅРёС†С‹'),
 			layout: 'hbox',
 			defaults: {
 				inputValue:     1,
@@ -71,16 +71,16 @@ Ext.define('Cetera.widget.List.Sections', {
 			},			
 			items: [{
 				xtype:          'checkbox',
-				boxLabel:       _('показать навигацию'),
+				boxLabel:       _('РїРѕРєР°Р·Р°С‚СЊ РЅР°РІРёРіР°С†РёСЋ'),
 				name:           'paginator'
 			}, {
 				xtype:          'checkbox',
-				boxLabel:       _('AJAX навигация'),
+				boxLabel:       _('AJAX РЅР°РІРёРіР°С†РёСЏ'),
 				name:           'ajax'
 			}, {
 				flex:1,
 				xtype:          'checkbox',
-				boxLabel:       _('бесконечная лента'),
+				boxLabel:       _('Р±РµСЃРєРѕРЅРµС‡РЅР°СЏ Р»РµРЅС‚Р°'),
 				name:           'infinite'
 			}]
 		},
@@ -95,12 +95,12 @@ Ext.define('Cetera.widget.List.Sections', {
 				xtype: 'textfield',
 				name: 'page_param',
 				labelWidth: 150,
-				fieldLabel: _('query параметр'),
+				fieldLabel: _('query РїР°СЂР°РјРµС‚СЂ'),
 				margin: '0 5 0 0'
 			}, {
 				xtype: 'textfield',
 				name: 'paginator_url',
-				fieldLabel: _('ссылка на страницу')
+				fieldLabel: _('СЃСЃС‹Р»РєР° РЅР° СЃС‚СЂР°РЅРёС†Сѓ')
 			}]
 		},			
 		{
