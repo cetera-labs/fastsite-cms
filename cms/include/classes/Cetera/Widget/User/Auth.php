@@ -71,7 +71,7 @@ class Auth extends \Cetera\Widget\Templateable {
 			}
 		}
 		
-		if ($this->application->getUser() && $this->getParam('authorized_redirect') && !$this->getParam('ajaxCall') && isset($_POST['UserAuth']) && $_POST['UserAuth'] == $this->getUniqueId())
+		if ($this->application->getUser() && $this->getParam('authorized_redirect') && !$this->getParam('ajaxCall'))
 		{
 			header('Location: '.$this->getParam('authorized_redirect'));
 			die();				
