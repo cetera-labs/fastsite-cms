@@ -267,7 +267,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             
         } catch (\LogicException $e) {
     
-            if (isset($this->fields[$name]))
+			$fields = $this->getFieldsDef();
+	
+            if (isset($fields[$name]))
                 $this->fields[$name] = $value;
                 else {
                     if (!in_array($name,array_keys($this->fields)))
@@ -919,12 +921,20 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		}
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
-		$link_list = json_decode($values);
-		if (is_array($link_list)) {
-			while (list ($no, $link) = each ($link_list)) {
+			
+		if (!is_a($values,'Cetera\Iterator\Linkset')) {
+			$link_list = json_decode($values);
+		}
+		else {
+			$link_list = $values;
+		}
+				
+		if (is_array($link_list) || $link_list instanceof \Traversable) {
+			
+			foreach ($link_list as $no => $link) {
 		  
 			  if (is_object($link)) {
-				  if ($type == FIELD_LINKSET) {
+				  if ($type == FIELD_LINKSET || is_a($link,'Cetera\DynamicFieldsObject')) {
 					  $link = $link->id;             
 				  }
 				  else {
@@ -938,13 +948,13 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 						  $m = DynamicFieldsObject::fetch($link, $type2, $tbl);
 					  }
 					  $m->save();
-					  $link = $m->id;
+					  $link = $m->id;					  
 				  }
 			  }
 			  
 			  if ((int)$link) { 
 				  if (isset($old[ $link ])) unset($old[ $link ]);
-				  $this->getDbConnection()->executeQuery("insert into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");
+				  $this->getDbConnection()->executeQuery("insert ignore into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");
 				  if ($type == FIELD_MATSET) $this->getDbConnection()->executeQuery("update $tbl set tag=$no where id=$link"); 
 			  }
 			  
@@ -957,7 +967,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				$m->delete();
 			} catch (\Exception $e) {}
 		}
-	}	
+		
+	}		
 	
 	/**
 	 * @internal

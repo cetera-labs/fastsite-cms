@@ -56,5 +56,20 @@ class Linkset extends DynamicObject {
 		$this->query->innerJoin('main', $linktable, 'b', 'main.id = b.dest and b.id='.$object->id);		
         
     } 	
+	
+    /**
+     * Добавляет произвольный материал в итератор
+     *  
+     * @param \Cetera\DynamicFieldsObject $material
+     * @return void  
+     */ 	
+	public function add(\Cetera\DynamicFieldsObject $material) {
+		if ($material->objectDefinition->id != $this->objectDefinition->id) {
+			throw new \Exception('Illegal type of material '.$material->objectDefinition->id.'. Must be '.$this->objectDefinition->id);
+		}
+		$this->fetchElements();
+		$this->elements[] = $material;
+		return $this;
+	}	
 
 }

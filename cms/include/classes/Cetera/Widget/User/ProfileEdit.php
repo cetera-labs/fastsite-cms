@@ -15,6 +15,7 @@ class ProfileEdit extends \Cetera\Widget\Templateable {
 		'unique_email'    => false,
 		'change_login'    => false,
 		'change_password' => false,
+		'hide_fields'     => ''
     ); 
 	
 	protected $user;
@@ -28,10 +29,13 @@ class ProfileEdit extends \Cetera\Widget\Templateable {
 	
 	public function init()
 	{
-		if (!$this->getParam('change_login'))
-		{
+		if (!$this->getParam('change_login')) {
 			$this->not_editable[] = 'login';
 		}
+		
+		foreach ( explode(',',$this->getParam('hide_fields')) as $f) {
+			$this->not_editable[] = trim($f);
+		}		
 		
 		$this->user = $this->application->getUser();
 		if (!$this->user) return;
