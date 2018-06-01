@@ -1,7 +1,7 @@
 <div class="{{ widget.uniqueId }} carousel-main background-main">
 {% for m in widget.getChildren %}
 
-      <div class="carousel-main__item" style="background-image: url({{ m.pic }}); background-size: cover;">
+      <div class="carousel-main__item" style="{% if m.pic %}background-image: url({{ m.pic }}); {% endif %}background-size: cover;">
         <div class="grid-container">
           <div class="grid-x grid-padding-x align-center carousel-main__content">
             <div class="cell medium-14 align-self-middle text-left medium-text-center">

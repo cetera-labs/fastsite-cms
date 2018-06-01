@@ -619,7 +619,9 @@ class ImageTransform {
 				continue;
 			}
 			$method = 'set'.ucfirst($params[$i]);
-			$img->$method($params[$i+1]);
+			if (method_exists($img, $method)) {
+				$img->$method($params[$i+1]);
+			}
 		}
 	
 		if ($nostore) {
