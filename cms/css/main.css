@@ -587,6 +587,10 @@ tr.highlight .x-grid-cell-inner {
     };
 }
 
+.x-cetera-widget {
+	min-height: 50px;
+}
+
 .x-cetera-widget-active {
 	border: 1px solid #99bce8;
 	margin: -1px;

@@ -34,7 +34,7 @@ elseif ($action == 'install') {
 		
 		$extract_content = false;
 		$content = false;
-		if (isset($_REQUEST['content'])) {
+		if (isset($_REQUEST['content']) && $_REQUEST['content']) {
 			$extract_content = true;
 			$content = $_REQUEST['content'];
 		}

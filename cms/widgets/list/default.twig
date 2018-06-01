@@ -1,3 +1,4 @@
+<div class="x-cetera-widget" data-class="Cetera.fo.Section" data-id="{{ widget.catalog.id }}" data-type="{{ widget.catalog.getMaterialsObjectDefinition().alias }}">
 {% block html %}
 
 	{% if not widget.getParam('ajaxCall') %}
@@ -37,6 +38,7 @@
 	{% endif %}		
 
 {% endblock %}
+</div>
 
 {% block script %}
 	{% set loading %}{% block loading %}{{ _('Подождите ...') }}{% endblock %}{% endset %}
