@@ -42,6 +42,13 @@ Ext.define('Cetera.catalog.Create', {
 					linkable: 1,
 					allowBlank: false,
 					value: this.materialsType  
+				},
+				{
+					xtype: 'checkbox',
+					boxLabel: _('создать индексный материал'),
+					name: 'create_index',
+					hideEmptyLabel: false,
+					checked: Ext.state.Manager.get('catalogCreateIndex')
 				}
             ],
             
@@ -55,6 +62,10 @@ Ext.define('Cetera.catalog.Create', {
                     handler: function() {
                         var form = this.getForm();
                         if (!this.tree) this.tree = Ext.getCmp('main_tree');
+						
+						Ext.state.Manager.set('catalogCreateIndex', form.getValues().create_index == 'on')
+						
+						
                         form.submit({
                             url:'include/action_catalog.php', 
                             params: {
@@ -85,7 +96,7 @@ Ext.define('Cetera.catalog.Create', {
     show : function() {
 
         this.win.setWidth(365);
-        this.win.setHeight(160);
+        this.win.setHeight(170);
         this.win.add(this);
         this.win.setTitle(Config.Lang.newCatalog);
         this.win.doLayout();

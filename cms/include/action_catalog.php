@@ -154,7 +154,22 @@ if ($_POST['action'] == 'cat_create') {
     ));
     
     $nc = Catalog::getById($res['id']);
-    Event::trigger(EVENT_CORE_DIR_CREATE, ['message'=>$nc->getBoUrl()]);
+    Event::trigger(EVENT_CORE_DIR_CREATE, [
+		'message'=>$nc->getBoUrl()
+	]);
+	
+	// https://pm.cetera.ru/browse/CCD-1166
+	// Создает материал с тем же названием и alias=index в созданной папке одновременно. 
+	if ($_POST['create_index']) {
+		$m = Material::fetch([
+			'idcat'   => $nc->id,
+			'alias'   => 'index',
+			'publish' => true,
+			'autor'   => $user->id,
+			'name'    => $_POST['name']
+		], $_POST['typ']);
+		$m->save();
+	}
    
 }
 

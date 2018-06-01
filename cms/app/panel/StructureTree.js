@@ -418,7 +418,6 @@ Ext.define('Cetera.panel.StructureTree', {
             this.propertyWindow = new Ext.Window({
                 closable:true,
                 width:500,
-                height:350,
                 closeAction: 'hide',
                 plain:true,
                 layout: 'fit',

@@ -398,7 +398,6 @@ Ext.define('Cetera.main.Tree', {
             this.propertyWindow = new Ext.Window({
                 closable:true,
                 width:500,
-                height:350,
                 closeAction: 'hide',
                 plain:true,
                 layout: 'fit',
