@@ -857,7 +857,9 @@ class Application {
             
                 if ( is_object($handler[0]) )
                     $handler[0]->$handler[1]($result); 
-                    else $handler[0]::$handler[1]($result);
+                    else {
+						$handler[0]::{$handler[1]}($result); 
+					}
             
             } elseif (function_exists($handler)) {
             
