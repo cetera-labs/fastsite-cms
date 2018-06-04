@@ -63,9 +63,15 @@ class Material extends DynamicFieldsObject implements SiteItem {
             $this->_alias = $fields['alias'];
             unset($fields['alias']);
         }  
-		if (isset($fields['type'])) {		
+		if (isset($fields['type'])) {
+					
 			$this->_published = $fields['type'] & MATH_PUBLISHED ? true : false;
 			$this->_show_future = $fields['type'] & MATH_SHOW_FUTURE ? true : false;
+
+			$fields['publish'] = $fields['type'] & MATH_PUBLISHED ? true : false;
+			$fields['show_future'] = $fields['type'] & MATH_SHOW_FUTURE ? true : false;
+			
+			unset($fields['type']);
 		}
         return parent::setFields($fields);    
     }    

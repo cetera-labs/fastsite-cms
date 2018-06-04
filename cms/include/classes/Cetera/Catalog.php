@@ -475,6 +475,8 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
         	FROM dir_data A, dir_structure B, dir_structure C
         	WHERE A.id=B.data_id and C.data_id='.$this->id.' and B.lft BETWEEN C.lft and C.rght');
         	
+		$result = [];
+			
         while ($f = $r->fetch()) {
             $c = Catalog::fetch($f);
             $result[] = $c->prototype->id;
@@ -753,9 +755,9 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
       }
          
       if ($fields['autoalias']) {
-          $type = $type | Catalog::AUTOALIAS | $fields['autoalias'];
-          unset($fields['autoalias']);
+          $type = $type | Catalog::AUTOALIAS | $fields['autoalias'];          
       }
+	  if (isset($fields['autoalias'])) unset($fields['autoalias']);
     	
 	  $conn = self::getDbConnection();	
 	
