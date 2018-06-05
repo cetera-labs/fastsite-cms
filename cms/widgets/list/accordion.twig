@@ -1,3 +1,6 @@
+{% extends default %}
+
+{% block html %}
 <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true">
 {% for m in widget.children %} 
   <li class="accordion-item" data-accordion-item><a class="accordion-title" href="#"><strong>{{ m.name }}</strong></a>
@@ -7,3 +10,6 @@
   </li>
 {% endfor %}
 </ul>
+{% endblock %}
+
+{% block script %}{% endblock %}

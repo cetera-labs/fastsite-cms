@@ -1,4 +1,5 @@
 {% if widget.getParam('ajax') %}<div id="{{ widget.uniqueId }}-wrapper">{% endif %}
+{% block html %}
 <table class="text-center" id="{{ widget.uniqueId }}">
             <tbody>
               <tr>
@@ -50,6 +51,7 @@
 			  
             </tbody>
 </table>
+{% endblock %}
 {% if widget.getParam('ajax') %}</div>{% endif %}
 
 {% if widget.getParam('ajax') %}

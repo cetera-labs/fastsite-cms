@@ -1,9 +1,11 @@
-<ul class="breadcrumbs">
-{% for c in widget.items %}
+{% block html %}
+	<ul class="breadcrumbs">
+	{% for c in widget.items %}
 
-	<li{% if loop.last %} class="current"{% endif %}>
-		<a href="{% if c.url is defined %}{{ c.url }}{% endif %}">{{ c.name|striptags }}</a>
-	</li>
+		<li{% if loop.last %} class="current"{% endif %}>
+			<a href="{% if c.url is defined %}{{ c.url }}{% endif %}">{{ c.name|striptags }}</a>
+		</li>
 
-{% endfor %}	
-</ul>
+	{% endfor %}	
+	</ul>
+{% endblock %}

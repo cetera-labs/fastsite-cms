@@ -1,3 +1,4 @@
+{% block html %}
 <ul{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}"{% endif %}>
 
 	{% for c in widget.children %}
@@ -9,3 +10,4 @@
     {% endfor %}
     
 </ul>
+{% endblock %}
