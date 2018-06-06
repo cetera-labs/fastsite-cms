@@ -89,7 +89,7 @@ Ext.define('Cetera.theme.Activate', {
             scope:this
         });                   	
         
-		this.configPanel = Ext.create('Theme.'+this.theme.get('id')+'.Config', {
+		var data = {
 			disabled: true,
 			region: 'center',
 			margin: '0 0 0 5',
@@ -102,7 +102,13 @@ Ext.define('Cetera.theme.Activate', {
 					 }
 				 }               
 			} 
-		});
+		}
+		
+		try{
+			this.configPanel = Ext.create('Theme.'+this.theme.get('id')+'.Config', data);
+		} catch(e) {
+			this.configPanel = Ext.create('Cetera.theme.ConfigEmpty', data);
+		}
         
         this.applyButton = Ext.create('Ext.Button', {
             text : Config.Lang.apply,
