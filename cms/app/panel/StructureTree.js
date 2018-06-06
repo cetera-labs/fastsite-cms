@@ -2,6 +2,7 @@ Ext.define('Cetera.panel.StructureTree', {
 	
 	extend: 'Ext.tree.Panel',
 	alias : 'widget.structuretree',
+	requires: 'Cetera.field.File',
 	
 	rootVisible:false,
 	useArrows: true,
@@ -87,6 +88,25 @@ Ext.define('Cetera.panel.StructureTree', {
 			this.copyAction,
 			this.deleteAction
         );	
+		
+        if (Config.user.permissions.adminRootCat) {
+			
+			this.exportAction = Ext.create('Ext.Action', {
+                iconCls:'icon-export',
+                text: _('Экспорт'),
+                handler: this.doExport,
+                scope: this
+			});		
+
+			this.importAction = Ext.create('Ext.Action', {
+                iconCls:'icon-import',
+                text: _('Импорт'),
+                handler: this.doImport,
+                scope: this
+			});				
+		
+            Ext.Array.push(tbar, '-', this.exportAction, this.importAction);
+		}		
 
 		this.tbar = Ext.create('Ext.toolbar.Toolbar', {
 			items: tbar
@@ -422,7 +442,8 @@ Ext.define('Cetera.panel.StructureTree', {
                 plain:true,
                 layout: 'fit',
                 resizable: true,
-                modal: true 
+                modal: true,
+				tree: this
             });
             this.propertyWindow.on({ hide: function(win){
                 win.removeAll(true);
@@ -430,6 +451,98 @@ Ext.define('Cetera.panel.StructureTree', {
         }
 		this.propertyWindow.center();
         return this.propertyWindow;
-    }	
+    },
+
+	doExport: function() {
+		var win = this.getPropertyWindow();
+		win.setHeight(100);	
+		win.setTitle(_('Экспорт'));			
+		win.show();
+		win.setLoading(true);
+		Ext.Ajax.request({
+		   url: 'include/action_backup.php',
+		   params: { 
+				action: 'backup', 
+				section: this.getSelectedId()
+		   },
+		   scope: this,
+		   failure: function(o, success, response) {
+			   win.setLoading(false);
+			   win.hide();
+		   },
+		   success: function(response) {
+			   win.setLoading(false);
+			   var obj = Ext.decode(response.responseText);
+			   win.update('<p align="center">'+_('Экспорт завершен.')+'<br><a target="_blank" href="/cms/include/action_backup.php?action=download&file='+obj.file+'">'+_('Скачать файл.')+'</a></p>')
+		   }
+		});
+	},
+	
+	doImport: function() {
+		
+		var frm = Ext.create('Ext.form.Panel', {
+			layout: 'anchor',
+			defaults: {
+				anchor: '100%'
+			},
+			border: false,
+			bodyStyle:'background: none',
+			padding: 10,
+			items: [
+				{
+					xtype: 'fileselectfield',
+					name: 'file',
+					fieldLabel: _('Файл'),
+					allowBlank: false
+				}
+			],
+			buttons: [
+				{
+					text: _('OK'),
+					handler: function() {
+						var win = this.up('window');
+						var form = this.up('form').getForm();
+						if (!form.isValid()) return;
+						form.submit({
+							url: 'include/action_backup.php',
+							waitMsg: Config.Lang.wait,
+						    params: { 
+								action: 'restore',
+								section: win.tree.getSelectedId()
+						    },
+							success: function(form, action) {
+								win.hide();
+							    Ext.Msg.alert('Success', action.result.message);								
+								win.tree.reload(win.tree.getSelectedPath());
+							},
+							failure: function(form, action) {
+								var obj = Ext.decode(action.response.responseText);			
+								var win = Ext.create('Cetera.window.Error', {
+									msg: obj.message,
+									ext_msg: obj.ext_message
+								});
+								win.show();				
+							}										
+						});
+						
+					}
+				},
+				{
+					text: _('Отмена'),
+					handler: function() {
+						this.up('window').hide();
+					}
+				}
+			]
+			
+		});
+		
+		var win = this.getPropertyWindow();
+		
+		win.add(frm);
+		win.setHeight(120);	
+		win.setTitle(_('Импорт'));	
+		win.show();		
+	}
 	
 });
