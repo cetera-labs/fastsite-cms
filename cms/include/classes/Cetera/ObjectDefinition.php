@@ -239,7 +239,7 @@ class ObjectDefinition extends Base {
             $r = DbConnection::getDbConnection()->fetchAssoc('select * from types where alias=?',[$this->table]);
     		if ($r) 
           		$this->setData($r);   	
-                else throw new Exception\CMS('Type for table "'.$this->table.'" is not found.');        
+                else throw new Exception\CMS('Type "'.$this->table.'" is not found.');        
         }
         return $this->_id;
     }

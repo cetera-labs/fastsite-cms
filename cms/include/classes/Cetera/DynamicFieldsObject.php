@@ -226,7 +226,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      * @throws LogicException          
      */ 
     public function __get($name)
-    {
+    {		
         try {
         
             return parent::__get($name);
@@ -921,8 +921,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		}
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
-			
-		if (!is_a($values,'Cetera\Iterator\Linkset')) {
+		
+		if (!is_array($values) && !is_a($values,'Cetera\Iterator\Linkset')) {
 			$link_list = json_decode($values);
 		}
 		else {

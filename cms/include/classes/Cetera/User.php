@@ -30,6 +30,8 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     private $_groups = FALSE;
 	
 	private $_external = FALSE;
+	
+	private $pwd = null;
     
   	public static function enum()
     {   
@@ -452,6 +454,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     public function setPassword($value)
     {   
 		$this->fields['password'] = md5($value);
+		$this->pwd = $value;
 		return $this;
 	}	
 	
@@ -503,7 +506,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			Event::trigger(EVENT_CORE_USER_REGISTER, [
 				'user'     => $this, 
 				'server'   => Application::getInstance()->getServer(), 
-				'password' => $this->fields['password'] 
+				'password' => $this->pwd 
 			]);	 
 	   }	   
 	   

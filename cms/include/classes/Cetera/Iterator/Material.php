@@ -51,7 +51,7 @@ class Material extends DynamicObject {
         
             $this->catalog = $object; 
             $this->objectDefinition = $this->catalog->materialsObjectDefinition;
-			      parent::__construct($this->catalog->materialsObjectDefinition);
+			parent::__construct($this->catalog->materialsObjectDefinition);
             
         } elseif ($object instanceof \Cetera\ObjectDefinition) {
         

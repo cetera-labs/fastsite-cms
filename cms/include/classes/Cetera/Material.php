@@ -377,6 +377,13 @@ class Material extends DynamicFieldsObject implements SiteItem {
         $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->name).',idcat='.$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
         
         $values .= $this->saveDynamicFields(array('name', 'alias', 'idcat', 'autor'), $hidden);
+		
+		if (isset($this->fields['DESIRABLE_ID'])) {
+			$res = self::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM '.$this->table.' WHERE id=?',[$this->fields['DESIRABLE_ID']],0);
+			if (!$res) {
+				$values .= ',id='.(int)$this->fields['DESIRABLE_ID'];
+			}
+		}
              
         if ($this->id) {
         
@@ -388,6 +395,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
             
         }
 
+		//print $sql.'<br>';
         $this->getDbConnection()->executeQuery($sql);
         
 		if (!$this->id) {
