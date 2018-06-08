@@ -447,31 +447,34 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 
             if ($this->fields[$field['name']]) {
 				
-				if ($field['pseudo_type'] == PSEUDO_FIELD_LINK_CATALOG) {
-                     $this->fields[$field['name']] = Catalog::getById($this->fields[$field['name']]);
-                }
-				elseif ($field['pseudo_type'] == PSEUDO_FIELD_LINK_USER) {                
-                     $this->fields[$field['name']] = User::getById($this->fields[$field['name']]);                
-                } 
-				else {
-                                
-                    if ($field['type'] == FIELD_LINK) {
-                        if ($field['len']) {
-                            $c = Catalog::getById($field['len']);
-                            if (!$c) throw new Exception\CMS('Catalog '.$field['len'].' is not found.');
-                            $type = $c->materialsType;
-                        } else $type = $this->objectDefinition->id;
-                    } else {
-                        $type = $field['len'];
-                    }
-                    
-					try {
-						$this->fields[$field['name']] = self::getByIdType( $this->fields[$field['name']], $type );
-					} catch (\Exception $e) {
-						$this->fields[$field['name']] = null;
+				try {
+				
+					if ($field['pseudo_type'] == PSEUDO_FIELD_LINK_CATALOG) {
+						 $this->fields[$field['name']] = Catalog::getById($this->fields[$field['name']]);
 					}
-                
-                }
+					elseif ($field['pseudo_type'] == PSEUDO_FIELD_LINK_USER) {   
+						   $this->fields[$field['name']] = User::getById($this->fields[$field['name']]);  
+					} 
+					else {
+									
+						if ($field['type'] == FIELD_LINK) {
+							if ($field['len']) {
+								$c = Catalog::getById($field['len']);
+								if (!$c) throw new Exception\CMS('Catalog '.$field['len'].' is not found.');
+								$type = $c->materialsType;
+							} else $type = $this->objectDefinition->id;
+						} else {
+							$type = $field['len'];
+						}
+						
+						$this->fields[$field['name']] = self::getByIdType( $this->fields[$field['name']], $type );
+					
+					}
+					
+				}
+				catch (\Exception $e) {
+					$this->fields[$field['name']] = null;
+				}
             
             } else {
                 
