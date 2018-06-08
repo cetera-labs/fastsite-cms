@@ -33,7 +33,7 @@ class Linkset extends DynamicObject {
         if ($field['type'] == FIELD_LINKSET) {
         		
 			if ($field['len'] == CATALOG_VIRTUAL_USERS) {
-			    $od = User::getObjectDefinition();
+			    $od = \Cetera\User::getObjectDefinition();
 			} elseif ($field['pseudo_type'] == PSEUDO_FIELD_CATOLOGS) {
 			    $od = \Cetera\Catalog::getObjectDefinition();
 			} elseif (!$field['len']) {
