@@ -779,6 +779,13 @@ class Application {
     {
 		foreach ($this->routes['general'] as $p => $callable)
 		{
+			if (preg_match('|^'.$p.'|', $_SERVER['REQUEST_URI'], $matches)) {
+				list($url) = explode('?',$_SERVER['REQUEST_URI']);
+				$this->_unparsedUrl = trim(str_replace($matches[0], '', $url),'/');
+				$res = $callable($matches);
+				if ($res) die();
+			}
+			/*
 			if (substr($_SERVER['REQUEST_URI'],0,strlen($p)) == $p )
 			{
 				list($url) = explode('?',$_SERVER['REQUEST_URI']);
@@ -786,6 +793,7 @@ class Application {
 				$res = $callable();
 				if ($res) die();
 			}
+			*/
 		}		
 		
 		$this->_unparsedUrl = null;
