@@ -20,7 +20,7 @@ if ($_REQUEST['action'] == 'backup') {
 	if (!file_exists(CACHE_DIR.'/backup')) {
 		mkdir(CACHE_DIR.'/backup');
 	}
-	$file = 'backup_'.$section->id.'_'.time().'.xml';
+	$file = 'backup_sect'.$section->id.'_time'.date('Ymd_His').'.xml';
 	\Cetera\Backup\Content::backup( CACHE_DIR.'/backup/'.$file, $section );
 	$res['file'] = $file;
 }

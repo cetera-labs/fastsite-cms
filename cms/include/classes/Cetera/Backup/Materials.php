@@ -17,10 +17,13 @@ class Materials implements XmlInterface {
 	public function restore(\XMLReader $xml, $parentSection = null) {
 		$res = [];
 		
+		if ($xml->isEmptyElement) return $res;
+		
 		if ($xml->getAttribute('section') !== NULL) {
 			$sid = Sections::realId( $xml->getAttribute('section') );	
 			$section = \Cetera\Catalog::getById( $sid );
 			$od = false;
+			
 		}
 		elseif ($xml->getAttribute('objectDefinition') !== NULL) {
 			$section = false;
@@ -44,10 +47,11 @@ class Materials implements XmlInterface {
 			
 			if ($xml->name == 'field' && $xml->nodeType == \XMLReader::ELEMENT) {
 				$field = $xml->getAttribute('name');
-			}
+			}		
 			if ($xml->name == 'material' && $xml->nodeType == \XMLReader::END_ELEMENT) {
-				
+								
 				if ($section) {
+										
 					$list = $section->getMaterials()->unpublished()->where('alias=:alias')->setParameter('alias', $fields['alias']);
 
 					if (!$list->getCountAll()) {
@@ -167,13 +171,21 @@ class Materials implements XmlInterface {
 						$this->xml->endElement();	
 					}					
 				}
-				elseif ($f instanceof \Cetera\ObjectFieldMaterialSet) {
-					$this->xml->startElement( 'materials' );
-					$this->xml->writeAttribute('objectDefinition', $m->{$f['name']}->getObjectDefinition()->alias);
-					foreach ($m->{$f['name']} as $link) {						
-						$this->backupMaterial($link);						
+				elseif ($f instanceof \Cetera\ObjectFieldMaterialSet && $m->{$f['name']}->getCountAll()) {
+					if ($f['pseudo_type'] == PSEUDO_FIELD_TAGS) {
+						$this->xml->writeCdata( $m->{$f['name']}->implode('name',function($item, $index, $first, $last, $total){							
+							if ($first) return $item;
+							return ','.$item;							
+						}) );
+					} 
+					else {
+						$this->xml->startElement( 'materials' );
+						$this->xml->writeAttribute('objectDefinition', $m->{$f['name']}->getObjectDefinition()->alias);
+						foreach ($m->{$f['name']} as $link) {						
+							$this->backupMaterial($link);						
+						}
+						$this->xml->endElement();	
 					}
-					$this->xml->endElement();	
 				}
 				$this->xml->endElement();				
 			}	

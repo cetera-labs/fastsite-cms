@@ -6,7 +6,7 @@ $t = $application->getTranslator();
 
 define('STRUCTURE_BACKUP', 'dir_data_backup');
 
-$res = array(
+$r = array(
   	'success' => true, 
   	'text' => false
 ); 
@@ -89,7 +89,7 @@ if ($_REQUEST['db_structure']) {
   	
   	$msg .= '</div>';
     
-    $res['text'] = $msg;
+    $r['text'] = $msg;
 }
 
 if ($_REQUEST['cat_structure']) {
@@ -160,9 +160,9 @@ if ($_REQUEST['cat_structure']) {
 		$application->getConn()->executeQuery('INSERT INTO dir_structure (data_id, lft, rght, level) VALUES ('.$item['data_id'].','.$item['lft'].','.$item['rght'].','.$item['level'].')');
 	
 	
-	$res['text'] .= '<b class="ok">'.$t->_('Структура разделов').' ОК</b></div><br clear="all" /><div class="note">Backup saved in table '.STRUCTURE_BACKUP.'</div>';
+	$r['text'] .= '<b class="ok">'.$t->_('Структура разделов').' ОК</b></div><br clear="all" /><div class="note">Backup saved in table '.STRUCTURE_BACKUP.'</div>';
   
   
 }
 
-echo json_encode($res); 
+echo json_encode($r); 

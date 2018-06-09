@@ -521,6 +521,7 @@ class Schema {
 				{
 						if ($prop == 'description') continue;
 						if ($prop == 'editor_user') continue;
+						if ($prop == 'fixed') continue;
 						if (!$f['fixed']) {
 						    if ($prop == 'editor') continue;
 						}

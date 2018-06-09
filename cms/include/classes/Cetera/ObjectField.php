@@ -73,6 +73,10 @@ class ObjectField implements \ArrayAccess {
 		if ($offset == 'describ') {
 			return Application::getInstance()->decodeLocaleString( $this->container[$offset] );
 		}
+		if ($offset == 'len' && $this->container['type'] == FIELD_ENUM) {
+            $g = Application::getInstance()->getConn()->fetchArray("SHOW COLUMNS FROM ".$this->parentObjectDefinition->alias." LIKE '".$this->container['name']."'");
+            return substr($g[1],5,strlen($g[1])-6);			
+		}
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
     }
     

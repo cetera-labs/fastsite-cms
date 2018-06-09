@@ -988,6 +988,13 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	 * @internal
 	*/
 	private function process_tags($value, $math, $tbl, $name, $id2, $type) {
+		
+		if (is_array($value)) {			
+            $this->insert_links($value, $math, $tbl, $name, $id2, $type, ObjectDefinition::findByAlias($tbl)->id);
+			$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
+			return;					 
+		}
+		
 		$ltable = $math."_".$tbl."_".$name;
 		$this->getDbConnection()->executeQuery("delete from ".$ltable." where id=".(int)$id2); 
 		$tags = explode(",",$value);

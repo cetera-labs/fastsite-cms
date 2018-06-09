@@ -108,7 +108,8 @@ Ext.define('Cetera.panel.Repair', {
                 this.panel.update(action.result.text);
             },
             failure: function(form, action) {
-                this.panel.update(action.result.text);
+				var obj = Ext.decode(action.response.responseText);
+                this.panel.update(obj.message + '<hr>' + obj.ext_message);
             }
         });        
     }    

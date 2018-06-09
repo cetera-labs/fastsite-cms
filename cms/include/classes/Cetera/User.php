@@ -386,9 +386,9 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
      *                     
      * @return void     
      */ 
-    public static function logout()
+    public static function logout($id = null)
     {
-        $id = \Zend_Auth::getInstance()->getIdentity();
+        if (!$id) $id = \Zend_Auth::getInstance()->getIdentity();
         if (!$id) return;
         self::getDbConnection()->executeQuery("DELETE FROM users_auth WHERE user_id=".$id['user_id']." and uniq='".$id['uniq']."'");
         \Zend_Auth::getInstance()->clearIdentity();

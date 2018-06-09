@@ -14,10 +14,32 @@ class ObjectDefinitions implements XmlInterface {
 	public function backup(\XMLWriter $xml, $rootSection = null) {
 		$this->xml = $xml;
 		$this->xml->startElement( $this->getNodeName() );
+		
+		$od_array = [];
+		
 		foreach (ObjectDefinition::enum() as $od) {
 			if ($od->alias == 'users') continue;
+			
+			foreach($od->getFields() as $f) {
+				if ( is_a($f, 'Cetera\ObjectFieldMaterial') || is_a($f, 'Cetera\ObjectFieldMaterialSet') ) {
+					array_unshift($od_array, $f->getObjectDefinition());
+				}				
+			}
+			
+			array_push($od_array, $od);
+		}
+		
+		$od_array2 = [];
+		
+		foreach ($od_array as $od) {
+			if (isset($od_array2[$od->alias])) continue;
+			$od_array2[$od->alias] = $od;
+		}
+		
+		foreach ($od_array2 as $od) {
 			$this->backupObjectDefinition($od);
 		}
+		
 		$this->xml->endElement();
 	}	
 	
@@ -72,9 +94,38 @@ class ObjectDefinitions implements XmlInterface {
 					
 					if (in_array($field['name'],['name','tag','alias','autor','dat','dat_update','idcat','type'])) continue;
 					
-					if ($field['type'] != $f['type'] ||	$field['length'] != $f['length']) {
-						$t = \Cetera\Application::getInstance()->getTranslator();
-						throw new \Exception(sprintf($t->_('Несовпадение поля %s у типа материалов %s. Продолжение невозможно.'),$field['name'],$od_data['alias']));
+					$t = \Cetera\Application::getInstance()->getTranslator();
+					
+					if ($field['type'] != $f['type']) {
+						if (is_a($field, 'Cetera\ObjectFieldText') && in_array($f['type'],[FIELD_TEXT,FIELD_LONGTEXT,FIELD_HUGETEXT])) {
+							 if ($f['type'] > $field['type']) {
+								 // изменить тип поля на более ёмкий
+								 $od->updateField( $f );
+								 continue;
+							 }
+						}
+						else {
+							throw new \Exception(sprintf($t->_('Несовпадение поля %s у типа материалов %s. Продолжение невозможно.'),$field['name'],$od_data['alias']));
+						}
+					}
+					else {
+						if ($field['length'] != $f['length']) {
+							if ( is_a($field, 'Cetera\ObjectFieldMaterial') || is_a($field, 'Cetera\ObjectFieldMaterialSet') ) {
+								if ( $field->getObjectDefinition()->alias != $f['length'] ) {
+									throw new \Exception(sprintf($t->_('Несовпадение поля %s у типа материалов %s. Продолжение невозможно.'),$field['name'],$od_data['alias']));
+								}
+							}
+							elseif (is_a($field, 'Cetera\ObjectFieldLinkAbstract')) {
+								throw new \Exception(sprintf($t->_('Несовпадение поля %s у типа материалов %s. Продолжение невозможно.'),$field['name'],$od_data['alias']));
+							}
+							elseif ($field['type'] == FIELD_TEXT) {
+								if ($field['length'] < $f['length']) {
+									// увеличить размер текстового поля
+									$od->updateField( $f );
+									continue;
+								}
+							}
+						}
 					}
 					
 				}
@@ -101,7 +152,11 @@ class ObjectDefinitions implements XmlInterface {
 			$this->xml->writeAttribute('type', $f['type']);
 			$this->xml->writeAttribute('pseudo_type', $f['pseudo_type']);
 			$this->xml->writeAttribute('description', $f['description']);
-			$this->xml->writeAttribute('length', $f['length']);
+			$len = $f['length'];	
+			if ( is_a($f, 'Cetera\ObjectFieldMaterial') || is_a($f, 'Cetera\ObjectFieldMaterialSet') ) {
+				$len = $f->getObjectDefinition()->alias;
+			}
+			$this->xml->writeAttribute('length', $len);
 			$this->xml->writeAttribute('show', $f['show']);
 			$this->xml->writeAttribute('required', $f['required']);
 			$this->xml->writeAttribute('fixed', $f['fixed']);
