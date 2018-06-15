@@ -14,7 +14,7 @@
               <h2>{{ m.name }}</h2>
               {{ m.short|raw }}
             </div>
-            <div class="cell medium-8 medium-offset-2 show-for-medium align-self-middle{% if m.pic %}<img src="{{ m.pic }}" style="width: 100%;">{% endif %}div>		  
+            <div class="cell medium-8 medium-offset-2 show-for-medium align-self-middle">{% if m.pic %}<img src="{{ m.pic }}" style="width: 100%;">{% endif %}</div>		  
 		  {% endif %}
           </div>
         </div>
@@ -38,8 +38,8 @@
             autoplayHoverPause: true,
             fade: true,
             swipeToSlide: true,
-            prevArrow: '<i class="slick-prev fa fa-angle-left fa-3x"> </i>',
-            nextArrow: '<i class="slick-next fa fa-angle-right fa-3x"> </i>'
+            prevArrow: '<span><i class="slick-prev fas fa-angle-left fa-4x"> </i></span>',
+            nextArrow: '<span><i class="slick-next fas fa-angle-right fa-4x"> </i></span>'
         });
 	});
 </script>
