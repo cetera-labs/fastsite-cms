@@ -490,7 +490,7 @@ class ObjectDefinition extends Base {
             if ( $r>0 ) throw new Exception\CMS(Exception\CMS::FIELD_EXISTS);
         
             $alias = $this->table;
-            if ( $params['type'] != FIELD_LINKSET && $params['type'] != FIELD_MATSET )
+            if ( $params['type'] != FIELD_LINKSET && $params['type'] != FIELD_LINKSET2 && $params['type'] != FIELD_MATSET )
 			{					
                 $params['len'] = stripslashes($params['len']);
                 $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
@@ -533,21 +533,19 @@ class ObjectDefinition extends Base {
         $len_old  = $f[1];
         $name_old = $f[2];
           
-		if (isset($params['type']) && $params['type'])
-		{
-			if ($type_old != $params['type'])
-			{
+		if (isset($params['type']) && $params['type']) {
+			
+			if ($type_old != $params['type']) {
 					
 						  // изменился тип поля
 						
-						  if ($params['type'] != FIELD_LINKSET && $params['type'] != FIELD_MATSET) 
-						  {
+						  if ($params['type'] != FIELD_LINKSET && $params['type'] != FIELD_LINKSET2 && $params['type'] != FIELD_MATSET) {
 						
-							$params['len'] = stripslashes($params['len']);
-							$def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
+							  $params['len'] = stripslashes($params['len']);
+							  $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
 							  $params['len'] = (integer) $params['len'];
 							
-								if ($type_old == FIELD_LINKSET || $type_old == FIELD_MATSET) {
+								if ($type_old == FIELD_LINKSET || $type_old == FIELD_LINKSET2 || $type_old == FIELD_MATSET) {
 								  
 								if ($params['type'] >= 0) 
 									$action = 'ADD';
@@ -555,7 +553,8 @@ class ObjectDefinition extends Base {
 								  
 									self::drop_link_table($alias, $name_old, $type_old, $len_old, $this->id, $params['pseudo_type']);
 								
-							} else {
+							} 
+							else {
 							
 								if ($type_old >= 0) { 
 							
@@ -583,27 +582,28 @@ class ObjectDefinition extends Base {
 						  } else {
 						
 							if ($type_old >= 0) {
-								if ($type_old != FIELD_LINKSET && $type_old != FIELD_MATSET ) {
+								if ($type_old != FIELD_LINKSET && $type_old != FIELD_LINKSET2 && $type_old != FIELD_MATSET ) {
 									  DbConnection::getDbConnection()->executeQuery("alter table `$alias` drop `".$name_old."`");
-									} else {
+								} 
+								else {
 									  self::drop_link_table($alias, $name_old, $type_old, $len_old, $this->id, $params['pseudo_type']);
-									}
+								}
 							}
-								self::create_link_table($alias, $params['name'], $params['type'], $params['len'], $this->id, $params['pseudo_type']);
+							self::create_link_table($alias, $params['name'], $params['type'], $params['len'], $this->id, $params['pseudo_type']);
 							
 						  }
 					
 			} 
-			elseif ($type_old >= 0 && ($params['name'] != $name_old || $params['len'] != $len_old))
-			{
+			elseif ($type_old >= 0 && ($params['name'] != $name_old || $params['len'] != $len_old)) {
 					
-						  if ($params['type']!=FIELD_LINKSET && $params['type']!=FIELD_MATSET) {
-							$params['len'] = stripslashes($params['len']);
-							$def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
-							$sql = "alter table `$alias` change `".trim($f[2])."` `".$params['name']."` $def";
+						  if ($params['type']!=FIELD_LINKSET && $params['type']!=FIELD_LINKSET2 && $params['type']!=FIELD_MATSET) {
+							  $params['len'] = stripslashes($params['len']);
+							  $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
+							  $sql = "alter table `$alias` change `".trim($f[2])."` `".$params['name']."` $def";
 							  $params['len'] = (integer) $params['len'];
-						  } else {
-							$tbl = self::get_table($params['type'], $params['len'], $this->id,$params['pseudo_type']);
+						  } 
+						  else {
+							  $tbl = self::get_table($params['type'], $params['len'], $this->id,$params['pseudo_type']);
 							  $tbl1 = self::get_table($f[0],$f[1], $this->id,$params['pseudo_type']);
 							  $sql = "alter table ".$alias."_".$tbl1."_".$f[2]." rename ".$alias."_".$tbl."_".$params['name'];
 						  }
@@ -712,16 +712,26 @@ class ObjectDefinition extends Base {
      * @internal
      **/	
     public static function create_link_table($fieldtable, $fieldname, $type, $len, $id, $pseudo_type = 0) {
-        $tbl = self::get_table($type,$len, $id,$pseudo_type);
-    	DbConnection::getDbConnection()->executeQuery("CREATE TABLE IF NOT EXISTS ".$fieldtable."_".$tbl."_".$fieldname." (id int(11) not null, dest int(11) not null, tag int(11) DEFAULT '0' NOT NULL, PRIMARY KEY (id, dest), key dest (dest))");
+		if ($type == FIELD_LINKSET2) {
+			DbConnection::getDbConnection()->executeQuery("CREATE TABLE IF NOT EXISTS ".$fieldtable."_".$fieldname." (id int(11) not null, dest_type int(11) not null, dest_id int(11) not null, tag int(11) DEFAULT '0' NOT NULL, PRIMARY KEY (id, dest_type, dest_id), key dest (dest_type, dest_id))");
+		}
+		else {
+			$tbl = self::get_table($type,$len, $id,$pseudo_type);
+			DbConnection::getDbConnection()->executeQuery("CREATE TABLE IF NOT EXISTS ".$fieldtable."_".$tbl."_".$fieldname." (id int(11) not null, dest int(11) not null, tag int(11) DEFAULT '0' NOT NULL, PRIMARY KEY (id, dest), key dest (dest))");
+		}
     }
     
     /**
      * @internal
      **/	
     public static function drop_link_table($fieldtable, $fieldname, $type, $len, $id, $pseudo_type = 0) {
-    	$tbl = self::get_table($type,$len, $id, $pseudo_type);
-    	DbConnection::getDbConnection()->executeQuery("DROP TABLE IF EXISTS ".$fieldtable."_".$tbl."_".$fieldname);
+		if ($type == FIELD_LINKSET2) {
+			DbConnection::getDbConnection()->executeQuery("DROP TABLE IF EXISTS ".$fieldtable."_".$fieldname);
+		}
+		else {
+			$tbl = self::get_table($type,$len, $id, $pseudo_type);
+			DbConnection::getDbConnection()->executeQuery("DROP TABLE IF EXISTS ".$fieldtable."_".$tbl."_".$fieldname);
+		}
     }
     
     /**

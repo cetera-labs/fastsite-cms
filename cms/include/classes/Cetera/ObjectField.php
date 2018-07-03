@@ -29,6 +29,8 @@ class ObjectField implements \ArrayAccess {
                 if ($data['pseudo_type'] == PSEUDO_FIELD_LINKSET_USER) return new ObjectFieldLinkSetUser($data, $od);
                 if ($data['pseudo_type'] == PSEUDO_FIELD_CATOLOGS) return new ObjectFieldLinkSetCatalog($data, $od);
                 return new ObjectFieldLinkSet($data, $od);
+            case FIELD_LINKSET2:
+                return new ObjectFieldLinkSet2($data, $od);				
             case FIELD_MATERIAL:
                 return new ObjectFieldMaterial($data, $od);
             case FIELD_MATSET:
@@ -100,6 +102,15 @@ class ObjectFieldScalar extends ObjectField {
  * @internal
 */
 class ObjectFieldText extends ObjectFieldScalar {
+}
+
+class ObjectFieldLinkSet2 extends ObjectField {
+
+    public function getLinkTable() 
+    {
+        return $this->parentObjectDefinition->table.'_'.$this->name;
+    }
+
 }
 
 

@@ -528,7 +528,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
                 fieldLabel: Config.Lang.tipa,
                 name:'types',
                 store: new Ext.data.JsonStore({
-                    fields: ['id', 'describ'],
+                    fields: ['id', 'describDisplay'],
                     autoSync: true,  
                     autoLoad: true,                  
                     proxy: {
@@ -541,7 +541,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
                     }
                 }),
                 valueField:'id',
-                displayField:'describ',
+                displayField:'describDisplay',
                 triggerAction: 'all',
                 editable: false
             }),

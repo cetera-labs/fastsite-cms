@@ -368,6 +368,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	case FIELD_MATSET: 
                 return $this->getLinksetField($fields[$name]);
         		    break;
+        	case FIELD_LINKSET2: 
+                return $this->getLinkset2Field($fields[$name]);
+        		    break;					
         	default: 
                 return $this->getPlainField($fields[$name]); 
         }
@@ -426,6 +429,22 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
 		return $this->fields[$field['name']];   
     }
+	
+    /**
+     * Чтение из БД группы материалов, связанных с полем
+     * 
+	 * @internal
+     * @param string $name имя поля             
+     * @return Iterator\Object    
+     */    
+	private function getLinkset2Field($field)
+	{					
+        if (!isset($this->fields[$field['name']])) {
+			$this->fields[$field['name']] =  new Iterator\Linkset2( $this, $field );
+		}
+        
+		return $this->fields[$field['name']];   
+    }	
     	 
     /**
      * Чтение из БД группы материала, связанных с полем
@@ -755,23 +774,24 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     protected function saveDynimicLinks()
     {
         $fields = $this->getFieldsDef();
-        if (is_array($fields)) foreach ($fields as $name => $field)
-		{
+        if (is_array($fields)) foreach ($fields as $name => $field) {
             $type = $field['type'];
             
-            if ($type==FIELD_LINKSET || $type==FIELD_MATSET) $tbl = ObjectDefinition::get_table($type, $field['len'], $this->objectDefinition->id, $field['pseudo_type']);
+            if ($type==FIELD_LINKSET || $type==FIELD_MATSET) {
+				$tbl = ObjectDefinition::get_table($type, $field['len'], $this->objectDefinition->id, $field['pseudo_type']);
+			}
             
-            if (isset($this->fields[$name]))
-			{
-                if ($field['pseudo_type'] == PSEUDO_FIELD_TAGS)
-				{
+            if (isset($this->fields[$name])) {
+                if ($field['pseudo_type'] == PSEUDO_FIELD_TAGS) {
                       $this->process_tags($this->fields[$name], $this->table, $tbl, $name, $this->id, $type);
             	} 
-				elseif (($type == FIELD_LINKSET)||($type==FIELD_MATSET))
-				{
+				elseif ( $type == FIELD_LINKSET || $type==FIELD_MATSET ) {
             	  	 $this->insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
 					 if ($type==FIELD_MATSET) $this->confirm_added($tbl, Application::getInstance()->getUser()->id);
                 }
+				elseif ( $type == FIELD_LINKSET2 ) {
+            	  	 $this->insert_links2($this->fields[$name], $this->table, $tbl, $name, $this->id);
+                }				
             }
         } 
     }
@@ -790,14 +810,12 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
             $type = $field['type'];
 			
-			if ($name == 'dat_update')
-			{
+			if ($name == 'dat_update') {
 				$values .= ',dat_update=NOW()';
 				continue;
 			}
 			
-			if ($name == 'dat' || $name == 'date_reg')
-			{
+			if ($name == 'dat' || $name == 'date_reg') {
         	    if ($this->fields[$name]) {
         		      $values .= ",`".$name."`='".$this->fields[$name]."'";
         		} else {
@@ -806,21 +824,17 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				continue;
 			}			
           
-        	if ($field['shw'] || $hidden)
-			{
+        	if ($field['shw'] || $hidden) {
         	
-				if ($type != FIELD_LINKSET && $type != FIELD_MATSET) 
-				{
-						if (!isset($this->fields[$name])) continue;
+				if ($type != FIELD_LINKSET && $type != FIELD_LINKSET2 && $type != FIELD_MATSET) {
+					if (!isset($this->fields[$name])) continue;
 				}
         
-                if (/*$type==FIELD_LINKSET || */$type==FIELD_MATSET || $type==FIELD_MATERIAL)
-				{
+                if (/*$type==FIELD_LINKSET || */$type==FIELD_MATSET || $type==FIELD_MATERIAL) {
 					$tbl = ObjectDefinition::get_table($type, $fields[$name]['len'], $this->objectDefinition->id);
 				}
         
-                if ($type == FIELD_MATSET || $type==FIELD_MATERIAL)
-				{
+                if ($type == FIELD_MATSET || $type==FIELD_MATERIAL) {
 					$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
 				}
         
@@ -843,26 +857,22 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					}
 				}
 		
-                if ($type == FIELD_LONGTEXT) 
-				{
+                if ($type == FIELD_LONGTEXT)  {
             
         			  $this->fields[$name] = $this->process_longtext($this->fields[$name]);
         			  $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]);
         	       		  
                 } 
-				elseif ($type==FIELD_INTEGER || $type==FIELD_LINK || $type==FIELD_FORM || $type==FIELD_MATERIAL)
-				{ 
+				elseif ($type==FIELD_INTEGER || $type==FIELD_LINK || $type==FIELD_FORM || $type==FIELD_MATERIAL) { 
         		    $values .= ",`".$name."`='".(int)$this->fields[$name]."'";         
         	    } 
-				elseif ($type==FIELD_DOUBLE)
-				{ 
+				elseif ($type==FIELD_DOUBLE) { 
         		    $values .= ",`".$name."`=".(double)$this->fields[$name];                 			
         	    } 
-				elseif (($type == FIELD_LINKSET)||($type==FIELD_MATSET))
-				{
+				elseif ($type == FIELD_LINKSET || $type == FIELD_LINKSET2 || $type==FIELD_MATSET) {
         	          			
         	    }
-		    //elseif ($type == FIELD_HLINK) {
+		        //elseif ($type == FIELD_HLINK) {
         	    //     $values .= ",`".$name."`='".(int)$this->process_hlink($this->fields[$name])."'";         
         	    //} 
 				elseif ($type == FIELD_DATETIME) {
@@ -909,6 +919,51 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		}
 		return $hl[0];
 	}	
+	
+	/**
+	 * @internal
+	*/
+	private function insert_links2($values, $math, $tbl, $name, $id2) {
+		
+		$this->getDbConnection()->executeQuery("delete from ".$math."_".$name." where id=$id2"); 
+		
+		if (!is_array($values) && !is_a($values,'Cetera\Iterator\Linkset')) {
+			$link_list = json_decode($values);
+		}
+		else {
+			$link_list = $values;
+		}	
+
+		if (is_array($link_list) || $link_list instanceof \Traversable) {
+			
+			foreach ($link_list as $no => $link) {
+		  
+			  if (is_object($link)) {
+				  if (is_a($link,'Cetera\DynamicFieldsObject')) {
+					  $id = $link->id; 
+					  $type = $link->objectDefinition->id;
+				  }
+				  else {
+					  continue;				  
+				  }
+			  }
+			  else {
+				  list($type,$id) = explode('_', $link);
+			  }
+			  
+			  if ((int)$id && (int)$type) { 
+				  $this->getDbConnection()->insert($math."_".$name,[
+					'id'        => $id2,
+					'dest_type' => (int)$type,
+					'dest_id'   => (int)$id,
+					'tag'       => $no,
+				  ]);
+			  }
+			  
+			}
+		}		
+		
+	}
 	
 	/**
 	 * @internal

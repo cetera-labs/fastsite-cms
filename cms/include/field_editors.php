@@ -36,6 +36,7 @@ $editors = array(
 	EDITOR_LINKSET_DEFAULT 	=> 'editor_linkset_default',
 	EDITOR_LINKSET_CHECKBOX => 'editor_linkset_checkbox',
 	EDITOR_LINKSET_USER 	=> 'editor_linkset_user',
+	EDITOR_LINKSET2_DEFAULT => 'editor_linkset2_default',
     EDITOR_LINKSET_CATALOG 	=> 'editor_linkset_catalog',  
 	EDITOR_MATERIAL_DEFAULT => 'editor_material_default',
 	EDITOR_DOUBLE_DEFAULT   => 'editor_double_default',
@@ -97,6 +98,9 @@ $field_editors = array(
 						EDITOR_LINKSET_CHECKBOX,
 						EDITOR_USER,
 	),  
+	FIELD_LINKSET2	=> array(
+						EDITOR_LINKSET2_DEFAULT,
+	), 	
 	FIELD_MATSET	=> array(
 						EDITOR_MATSET_DEFAULT,
                         EDITOR_MATSET_RICH,
@@ -159,6 +163,7 @@ $l_field_types[FIELD_FILE]  	 	= $translator->_('Файл');
 $l_field_types[FIELD_DATETIME]  	= $translator->_('Дата/Время');
 $l_field_types[FIELD_LINK]  		= $translator->_('Ссылка на другой материал');
 $l_field_types[FIELD_LINKSET]  		= $translator->_('Ссылка на группу материалов');
+$l_field_types[FIELD_LINKSET2]      = $translator->_('Ссылка на группу материалов 2');
 $l_field_types[FIELD_MATSET]  		= $translator->_('Группа материалов');
 $l_field_types[FIELD_BOOLEAN]  		= $translator->_('Логическое');
 $l_field_types[FIELD_ENUM] 			= $translator->_('Выбор');
@@ -178,6 +183,7 @@ $l_editors = array(
 	EDITOR_DATETIME_DEFAULT => $translator->_('Выбор даты/времени'),
 	EDITOR_LINK_DEFAULT 	=> $translator->_('Выбор материала из структуры'),
 	EDITOR_LINKSET_DEFAULT 	=> $translator->_('Выбор группы материалов'),
+	EDITOR_LINKSET2_DEFAULT => $translator->_('Выбор группы материалов'),
 	EDITOR_MATSET_DEFAULT 	=> $translator->_('Группа материалов'),
 	EDITOR_BOOLEAN_DEFAULT 	=> $translator->_('Флажок (Checkbox)'),
 	EDITOR_BOOLEAN_RADIO 	=> $translator->_('Выбор да/нет (Radio)'),

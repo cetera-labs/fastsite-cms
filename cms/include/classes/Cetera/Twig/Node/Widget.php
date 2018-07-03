@@ -36,7 +36,8 @@ class Widget extends \Twig_Node implements \Twig_NodeOutputInterface
                 ->outdent()
                 ->write("} catch (\\Exception \$e) {\n")
                 ->indent()
-                ->write("echo '<div class=\"callout alert\">'.\$e->getMessage().'</div>';\n")
+                //->write("echo '<div class=\"callout alert\">'.\$e->getMessage().'</div>';\n")
+				->write("echo '<!-- '.\$e->getMessage().' -->';\n")
                 ->outdent()
                 ->write("}\n\n")
         ;		 

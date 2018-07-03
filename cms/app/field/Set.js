@@ -5,7 +5,7 @@ Ext.define('Cetera.field.Set', {
     prepareValue: function() {
         var val = [];
         this.store.each(function(rec) {
-            val.push(parseInt(rec.get('id')));
+            val.push( rec.get('id') );
         }, this);
         this.setValue(Ext.JSON.encode(val), true);
     },
