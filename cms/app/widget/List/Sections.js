@@ -19,9 +19,7 @@ Ext.define('Cetera.widget.List.Sections', {
             maxValue: 999,
             minValue: 1,
             allowBlank: false
-        },
-		
-		{
+        },{
 			xtype: 'fieldcontainer',
 			cls: 'x-field',
 			layout: 'hbox',
@@ -52,14 +50,10 @@ Ext.define('Cetera.widget.List.Sections', {
 				editable: false,
 			})]
 			
-		},		
-		
-		{
+		},{
             name: 'catalog_link',
             fieldLabel: _('Ссылка на раздел'),
-        },
-		
-		{
+        },{
 			xtype: 'fieldcontainer',
 			cls: 'x-field',
 			fieldLabel: _('Страницы'),
@@ -83,8 +77,7 @@ Ext.define('Cetera.widget.List.Sections', {
 				boxLabel:       _('бесконечная лента'),
 				name:           'infinite'
 			}]
-		},
-		{
+		},{
 			xtype: 'fieldcontainer',
 			cls: 'x-field',
 			layout: 'hbox',
@@ -102,11 +95,14 @@ Ext.define('Cetera.widget.List.Sections', {
 				name: 'paginator_url',
 				fieldLabel: _('ссылка на страницу')
 			}]
-		},			
-		{
+		},{
 			xtype: 'widgettemplate',
 			widget: 'List'
-        }];
+        },{
+            name: 'filter',
+            fieldLabel: _('Доп. фильтр'),
+        }
+		];
         this.callParent();
     }
 

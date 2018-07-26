@@ -106,7 +106,12 @@ Ext.define('Cetera.widget.List', {
 		{
 			xtype: 'widgettemplate',
 			widget: 'List'
-        }];
+        },
+		{
+            name: 'filter',
+            fieldLabel: _('Доп. фильтр'),
+        }		
+		];
         this.callParent();
     }
 

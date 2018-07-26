@@ -45,6 +45,7 @@ class WList extends Templateable {
 			'css_class'          => 'content',
 			'css_row'            => '',
 			'template'		     => 'default.twig',
+			'filter'			 => false,
 		); 
 		
 	}
@@ -71,6 +72,10 @@ class WList extends Templateable {
 					$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'));				
 					if ($this->getParam('subfolders') || $this->getParam('subsections')) {
 						$this->_children->subfolders();
+					}
+					if ($this->getParam('filter')) {
+						list($filter) = explode(';',$this->getParam('filter'));
+						eval('$this->_children->'.$filter.';');
 					}
 				}
 				catch (\Exception $e) {
