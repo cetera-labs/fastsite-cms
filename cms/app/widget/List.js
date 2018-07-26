@@ -8,11 +8,33 @@ Ext.define('Cetera.widget.List', {
     extend: 'Cetera.widget.Widget',
     
     initComponent : function() {
-        this.formfields = [{
-            fieldLabel: Config.Lang.catalog,
-            name: 'catalog',
-            xtype: 'folderfield'
-        },{
+        this.formfields = [
+		
+		{
+			xtype: 'fieldcontainer',
+			cls: 'x-field',
+			layout: 'hbox',
+			hideLabel: true,
+			items: [
+				{
+					fieldLabel: Config.Lang.catalog,
+					name: 'catalog',
+					xtype: 'folderfield',
+					flex: 1
+				},	
+				{
+					xtype:          'checkbox',
+					boxLabel:       _('подразделы'),
+					name:           'subfolders',
+					inputValue:     1,
+					uncheckedValue: 0,
+					margin: '0 5'						
+				}				
+			]
+			
+		},		
+		
+		{
             xtype: 'numberfield',
             name: 'limit',
             fieldLabel: Config.Lang.matCount,
