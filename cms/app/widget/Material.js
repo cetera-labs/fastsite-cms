@@ -58,7 +58,7 @@ Ext.define('Cetera.widget.Material', {
 		if (params.material_id && params.material_type)
 		{			
             Ext.Ajax.request({
-                url: 'include/action_materials.php?action=get_path_info&mat_id='+params.material_id+'&type='+params.material_type,
+                url: '/cms/include/action_materials.php?action=get_path_info&mat_id='+params.material_id+'&type='+params.material_type,
                 success: function(response){
                     var obj = Ext.decode( response.responseText );
                     this.form.getForm().findField( 'material_id' ).setDisplayValue( obj.displayPath );

@@ -11,6 +11,8 @@
  
 function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
 
+	try {
+
 	if ($field_def['type'] == FIELD_LINK) {
 		if (!$field_def['len']) $field_def['len'] = $idcat;    
 		$from_section = $field_def['len'];
@@ -54,6 +56,18 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
                         matsort: 'dat DESC'
                     })
 <?
+	}
+	catch (\Exception $e) {
+?>
+                    Ext.create('Ext.form.field.Display', {
+                        fieldLabel: '<?=$field_def['describ']?>',
+                        name: '<?=$field_def['name']?>',
+                        value: '<?=addslashes($fieldvalue)?>'
+                    })
+<?		
+	}
+	
+	
     return 25;
 }
 

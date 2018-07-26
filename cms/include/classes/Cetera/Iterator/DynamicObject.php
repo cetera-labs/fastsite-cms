@@ -65,19 +65,42 @@ class DynamicObject extends DbObject {
 		parent::fixQuery($query);
     }	
     
-    public function join($fieldName)
+    public function join($fieldName, $direct = 0)
     {
         if (in_array($fieldName, $this->joinedFields)) return $this;
         
         $field = $this->objectDefinition->getField($fieldName); 
         
         if ($field instanceof \Cetera\ObjectFieldLinkSetAbstract) {
-            $this->query->leftJoin('main', $field->getLinkTable(), $field->name, 'main.id = '.$field->name.'.id');
+			if ($direct) {
+				$link = $field->name.'_link';
+			}
+			else {
+				$link = $field->name;
+			}
+            $this->query->leftJoin('main', $field->getLinkTable(), $link, 'main.id = '.$link.'.id');
             $this->joinedFields[] = $fieldName;
+			if ($direct) {
+				$this->query->leftJoin($link, $field->getObjectDefinition()->table, $field->name, $link.'.dest = '.$field->name.'.id');
+			}
         }
 
         return $this;
     }
+	
+	public function filterInclude($fieldName, $condition, $combination = 'AND') {
+		
+		$field = $this->objectDefinition->getField($fieldName); 		
+		return parent::where('main.id IN (SELECT l.id FROM '.$field->getLinkTable().' l LEFT JOIN '.$field->getObjectDefinition()->table.' t ON (l.dest=t.id) WHERE '.$condition.')', $combination);		
+		
+	}
+	
+	public function filterExclude($fieldName, $condition) {
+		
+		$field = $this->objectDefinition->getField($fieldName); 		
+		return parent::where('main.id NOT IN (SELECT l.id FROM '.$field->getLinkTable().' l LEFT JOIN '.$field->getObjectDefinition()->table.' t ON (l.dest=t.id) WHERE '.$condition.')', $combination);		
+		
+	}	
             
     public function where($where, $combination = 'AND')
     {

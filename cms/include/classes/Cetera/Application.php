@@ -1236,14 +1236,12 @@ class Application {
         $f = null;
         $widgetName = null;
         
-        if (is_array($name))
-		{        
+        if (is_array($name)) {        
 			$params = $name;
             if (!isset($params['name'])) throw new \Exception('Не задан параметр "name"');
             $widgetName = $params['name'];
         }
-		elseif (is_int($name))
-		{          
+		elseif (is_int($name)) {          
 			$id = (int)$name;  
             $f = $this->getConn()->fetchAssoc('SELECT * FROM widgets WHERE id=?', array($id));
             if (!$f) throw new \Exception('Не удалось загрузить виджет id='.$name);
@@ -1252,8 +1250,7 @@ class Application {
             $params = unserialize($f['params']); 
                 
         }
-		elseif(!$params)
-		{        
+		elseif(!$params) {        
             $f = $this->getConn()->fetchAssoc('SELECT * FROM widgets WHERE widgetAlias=? ORDER BY id DESC', array($name));
             if ($f) {
                 $id = $f['id']; 
@@ -1264,8 +1261,7 @@ class Application {
             }
             
         } 
-		else
-		{
+		else {
 			$widgetName = $name;
 		}
 		
@@ -1685,6 +1681,7 @@ class Application {
 			$this->addCSS('/'.LIBRARY_PATH.'/extjs4/resources/css/ext-all.css');
 			$this->addCSS('/cms/css/main.css');
 			$this->addScript('/'.LIBRARY_PATH.'/extjs4/ext-all.js');
+			$this->addScript('/'.LIBRARY_PATH.'/ace/ace.js');
 			$this->addScript('/cms/config.php');
 			$this->addScript('/cms/admin-panel.js');
 		}
