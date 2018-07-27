@@ -678,8 +678,9 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      */       
     public function getMaterials()
     {
-        // Для обратной совместимости
-        if (func_num_args() > 0) return $this->_getMaterials(func_get_args());
+        if (func_num_args() > 0) {
+			throw new \Exception('getMaterials() must be called without arguments. Now all modifications must be allpied to the returned iterator.');
+		}
     
         return new Iterator\Material($this);
     }

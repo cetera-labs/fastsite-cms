@@ -133,10 +133,7 @@ function image($src = '', $width = 0, $height = 0, $quality = 100, $dontenlarge 
             $new_w = $width;
             $new_h = $height;
         }
-		
-        $res_w = $new_w;
-        $res_h = $new_h;
-		
+			
         if ($new_w==$info[0] && $new_h==$info[1]) {
              return array(
                  'mime' => $info['mime'],
@@ -181,6 +178,9 @@ function image($src = '', $width = 0, $height = 0, $quality = 100, $dontenlarge 
         $new_h = $height;
 		
     }
+	
+    $res_w = $new_w;
+    $res_h = $new_h;	
     
     $function    = 'imagecreatefrom'.$suf;
   

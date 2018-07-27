@@ -26,7 +26,11 @@ Ext.define('Cetera.widget.Widget', {
             this.header = false;
             this.inWindow = true;
             
-            var formfields = [];               
+            var formfields = [{
+                name: 'widgetTitle',
+                fieldLabel: Config.Lang.name,
+                allowBlank: true
+            }];               
         
         } else {
         
