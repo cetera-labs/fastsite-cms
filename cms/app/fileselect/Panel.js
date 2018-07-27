@@ -239,7 +239,7 @@ Ext.define('Cetera.fileselect.Panel', {
                 '<div class="x-clear"></div>'
         	  ),
             prepareData: function(data){
-                if (data.type == 13) {
+                if (data.type == 13) { // swf
                     data.dim = data.width+'x'+data.height+'px';
                 	data.html = '';
                 	data.html += '<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="170" height="145">\n';
@@ -248,7 +248,10 @@ Ext.define('Cetera.fileselect.Panel', {
                 	data.html += '  <param name="wmode" value="opaque">\n';
                 	data.html += '  <embed src="'+this.comp.path+data.name+'" wmode="opaque" quality="high" width="170" height="145" type="application/x-shockwave-flash" pluginspace="http://www.macromedia.com/go/getflashplayer"></embed>\n';
                 	data.html += '</object>';
-                } else if (data.type > 0) {
+                } else if (data.type == 99) { // svg
+					data.url = this.comp.path+data.name;
+					data.html = '<img src="'+data.url+'" title="'+data.name+'" height="145" width="170">';
+				} else if (data.type > 0) { // bitmap
                     data.url = '/imagetransform/width_170_height_145_enlarge_0'+this.comp.path+data.name;
                     data.dim = data.width+'x'+data.height+'px';
                     data.html = '<img src="'+data.url+'" title="'+data.name+'">';

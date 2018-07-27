@@ -48,7 +48,10 @@ foreach ($iterator as $fileinfo) {
     );
     
     $path_parts['extension'] = strtolower($path_parts['extension']);
-    if ($path_parts['extension'] == 'jpg' || $path_parts['extension'] == 'gif' || $path_parts['extension'] == 'png') {
+	if ($path_parts['extension'] == 'svg') {
+		$info['type'] = 99;
+	}
+    elseif ($path_parts['extension'] == 'jpg' || $path_parts['extension'] == 'gif' || $path_parts['extension'] == 'png') {
         $size = getimagesize($fileinfo->getPathname());
         if ($size) {
             $info['width'] = $size[0];
@@ -59,7 +62,7 @@ foreach ($iterator as $fileinfo) {
     
     try {
         json_encode($info);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
         continue;
     }
     
