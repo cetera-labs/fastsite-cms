@@ -803,8 +803,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
                
         $values = '';
         
-        if (is_array($fields)) foreach ($fields as $name => $field) 
-        {
+        if (is_array($fields)) foreach ($fields as $name => $field) {
         
             if (is_array($exclude) && in_array($name, $exclude)) continue;
         
@@ -836,6 +835,14 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
                 if ($type == FIELD_MATSET || $type==FIELD_MATERIAL) {
 					$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
+				}
+				
+				if ( $type==FIELD_LINK ) {
+					
+					if (is_object($this->fields[$name])) {
+						$this->fields[$name] = $this->fields[$name]->id;
+					}
+					
 				}
         
 				if ( $type==FIELD_MATERIAL ) {

@@ -1602,10 +1602,7 @@ class Application {
 				)
 			));
 			
-			if ($res->getStatusCode() == 200 /*&& $res->getBody() == 'OK'*/)
-			{		
-				self::configSet('last_ping', time() );
-			}
+			self::configSet('last_ping', time() );
 		
 		} catch (\Exception $e) {}
 	}
