@@ -1676,9 +1676,11 @@ class Application {
 		if ($u && $u->allowBackOffice())
 		{
 			$this->addCSS('/'.LIBRARY_PATH.'/extjs4/resources/css/ext-all.css');
+			$this->addCSS('/'.LIBRARY_PATH.'/cropper/cropper.min.css');
 			$this->addCSS('/cms/css/main.css');
 			$this->addScript('/'.LIBRARY_PATH.'/extjs4/ext-all.js');
 			$this->addScript('/'.LIBRARY_PATH.'/ace/ace.js');
+			$this->addScript('/'.LIBRARY_PATH.'/cropper/cropper.min.js');
 			$this->addScript('/cms/config.php');
 			$this->addScript('/cms/admin-panel.js');
 		}
