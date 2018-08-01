@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.51.4');
+define('VERSION', '3.51.5');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -23,7 +23,7 @@ define('PHP_VER', '5.5.0');
 define('MYSQL_VER', '5.0.3');
 define('LIBRARY_VERSION_REQ', 10);
 
-define("DISTRIB_HOST", 'https://cetera.ru/cetera_cms/');
+define("DISTRIB_HOST", 'https://cms.cetera.ru/');
 define("DISTRIB_INFO", DISTRIB_HOST.'info.json'); 
 define("PLUGINS_INFO", DISTRIB_HOST.'plugins/plugins.php'); 
 define("THEMES_INFO",  DISTRIB_HOST.'themes/themes.php'); 
