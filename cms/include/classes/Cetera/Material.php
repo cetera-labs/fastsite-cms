@@ -73,6 +73,11 @@ class Material extends DynamicFieldsObject implements SiteItem {
 			
 			unset($fields['type']);
 		}
+
+		if (isset($fields['publish'])) {
+			$this->_published = (boolean)$fields['publish'];
+		}
+
         return parent::setFields($fields);    
     }    
     
@@ -313,14 +318,13 @@ class Material extends DynamicFieldsObject implements SiteItem {
         
 		$type = $this->raw_fields['type'];
 
-        if ($this->fields['publish']) $type = $type | MATH_PUBLISHED;
+        if ($this->published) $type = $type | MATH_PUBLISHED;
 		if ($this->fields['show_future']) $type = $type | MATH_SHOW_FUTURE; else $type = $type & ~MATH_SHOW_FUTURE;
         
         if (isset($this->fieldsDef['tag']) && !$this->fields['tag'])
 		{
 			$sql = 'SELECT MAX(tag) FROM '.$this->table;
-			if ($this->idcat >= 0)
-			{
+			if ($this->idcat >= 0) {
 				$sql .= ' WHERE idcat='.$this->idcat;
 			}
 			$tag = $this->getDbConnection()->fetchColumn($sql);

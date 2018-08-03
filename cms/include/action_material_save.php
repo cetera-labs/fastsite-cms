@@ -22,12 +22,14 @@ $res = array(
 $math = $_REQUEST['table'];
 
 $od = ObjectDefinition::findByTable($_REQUEST['table']);
-if (!$_POST['id'])
-{
+if (!$_POST['id']) {
 	$m = DynamicFieldsObject::fetch($_POST, $od);
 }
-else
-{
+else {
+	if (isset($_POST['publish']) && !$_POST['publish']) {
+		unset($_POST['publish']);
+	}
+	
 	$m = DynamicFieldsObject::getByIdType($_POST['id'], $od);
 	$m->setFields($_POST);
 }
