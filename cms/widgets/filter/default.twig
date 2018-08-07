@@ -88,6 +88,25 @@
 								</select>						
 							{% endblock %}
 						{% endif %}	
+						
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_DATE') %}
+							<input type="date" name="{{ widget.filter.name }}[{{ f.name }}]" value="{{ f.value }}">
+						{% endif %}
+						
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_DATE_INTERVAL') %}
+						  <div class="input-group">
+							<div class="input-group-label">{{ _('c') }}</div>
+							<input class="input-group-field" type="date" name="{{ widget.filter.name }}[{{ f.name }}_min]" value="{{ f.value_min }}">
+						  </div>
+						  <div class="input-group">
+							<div class="input-group-label">{{ _('по') }}</div>
+							<input class="input-group-field" type="date" name="{{ widget.filter.name }}[{{ f.name }}_max]" value="{{ f.value_max }}">
+						  </div>
+						{% endif %}		
+
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_TEXT') %}
+							<input type="text" name="{{ widget.filter.name }}[{{ f.name }}]" value="{{ f.value }}">
+						{% endif %}						
 				
 					</div>
 				</li>
