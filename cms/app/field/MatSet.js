@@ -5,6 +5,12 @@ Ext.define('Cetera.field.MatSet', {
     onAddItem: function() {
         this.openWindow();
     },
+	
+    onAddCopyItem: function() {
+        var sel = this.list.getSelectionModel().getSelection();
+        if (sel.length < 1) return;
+        this.openWindow(sel[0].get('id'),1);
+    },	
     
     onEditItem: function() {
         var sel = this.list.getSelectionModel().getSelection();
@@ -24,9 +30,12 @@ Ext.define('Cetera.field.MatSet', {
         this.removeItem();
     }, 
     
-    openWindow: function(id) {
+    openWindow: function(id,duplicate) {
         if (!id) id = 0;
-        this.edit_id = id;
+		if (!duplicate) {
+			duplicate = 0;
+			this.edit_id = id;
+		}
         if (this.window) this.window.destroy();
         this.window = Ext.create('Cetera.window.MaterialEdit', { 
             listeners: {
@@ -50,7 +59,7 @@ Ext.define('Cetera.field.MatSet', {
         var mat_type = this.mat_type;
         
         Ext.Loader.loadScript({
-            url: 'include/ui_material_edit.php?type='+this.mat_type+'&idcat=-1&id='+id,
+            url: 'include/ui_material_edit.php?type='+this.mat_type+'&idcat=-1&id='+id+'&duplicate='+duplicate,
             onLoad: function() { 
                 var cc = Ext.create('MaterialEditor'+mat_type, {win: win});
                 if (cc) cc.show();
@@ -66,25 +75,36 @@ Ext.define('Cetera.field.MatSet', {
     
     initComponent : function(){
        
-        this.buttons = [{
-            xtype  : 'button',
-            iconCls: 'icon-new',
-            tooltip: Config.Lang.add,
-            handler: this.onAddItem,
-            scope  : this
-        },{
-            xtype  :'button',
-            iconCls: 'icon-edit',
-            tooltip: Config.Lang.edit,
-            handler: this.onEditItem,
-            scope  : this
-        },{
-            xtype  : 'button',
-            iconCls: 'icon-delete',
-            tooltip: Config.Lang.remove,
-            handler: this.onRemoveItem,
-            scope  : this
-        }];
+        this.buttons = [
+			{
+				xtype  : 'button',
+				iconCls: 'icon-new',
+				tooltip: Config.Lang.add,
+				handler: this.onAddItem,
+				scope  : this
+			},
+            {
+                xtype  : 'button',
+                iconCls:'icon-new1',
+                tooltip: Config.Lang.newMaterialAs,
+                handler: this.onAddCopyItem,
+                scope: this
+            },			
+			{
+				xtype  :'button',
+				iconCls: 'icon-edit',
+				tooltip: Config.Lang.edit,
+				handler: this.onEditItem,
+				scope  : this
+			},
+			{
+				xtype  : 'button',
+				iconCls: 'icon-delete',
+				tooltip: Config.Lang.remove,
+				handler: this.onRemoveItem,
+				scope  : this
+			}
+		];
     
         this.callParent();  
     }

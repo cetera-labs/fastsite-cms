@@ -16,7 +16,7 @@ function editor_matset_default_draw($field_def, $fieldvalue, $id = false, $idcat
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
-                        height: 125,
+                        height: 145,
                         mat_type: '<?=$field_def['len']?>',
                         store: new Ext.data.ArrayStore({
                             autoDestroy: true,
