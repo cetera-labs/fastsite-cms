@@ -1,6 +1,7 @@
 // Панелька виджета
 Ext.require('Cetera.field.Folder');
 Ext.require('Cetera.field.FileEditable');
+Ext.require('Cetera.field.WidgetTemplate');
 
 Ext.define('Cetera.widget.Menu', {
     extend: 'Cetera.widget.Widget',
@@ -22,11 +23,12 @@ Ext.define('Cetera.widget.Menu', {
         name: 'css_class',
         fieldLabel: 'CSS класс',
         allowBlank: true
-    },{
-        name: 'template',
-        fieldLabel: Config.Lang.template,
-        allowBlank: true
-    },{
+    },
+	{
+		xtype: 'widgettemplate',
+		widget: 'Menu'
+	},	
+	{
         xtype: 'panel',
         bodyStyle:'background: none',
         border: false,

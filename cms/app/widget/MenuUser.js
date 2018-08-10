@@ -1,3 +1,5 @@
+Ext.require('Cetera.field.WidgetTemplate');
+
 // Панелька виджета
 Ext.define('Cetera.widget.MenuUser', {
     extend: 'Cetera.widget.Widget',
@@ -26,11 +28,10 @@ Ext.define('Cetera.widget.MenuUser', {
             name: 'css_class',
             fieldLabel: 'CSS класс',
             allowBlank: true
-        },{
-            name: 'template',
-            fieldLabel: Config.Lang.template,
-            allowBlank: true
-        }
+        },	{
+			xtype: 'widgettemplate',
+			widget: 'MenuUser'
+		},
     ]
 
 });

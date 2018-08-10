@@ -1,6 +1,7 @@
 // Панелька виджета 
 Ext.require('Cetera.field.Folder');
 Ext.require('Cetera.field.FileEditable');
+Ext.require('Cetera.field.WidgetTemplate');
 
 Ext.define('Cetera.widget.Material', {
 
@@ -45,10 +46,9 @@ Ext.define('Cetera.widget.Material', {
 				uncheckedValue: 0
 			},
 			{
-				name: 'template',
-				fieldLabel: Config.Lang.template,
-				allowBlank: true
-			}		
+				xtype: 'widgettemplate',
+				widget: 'Material'
+			}	
 		];
         this.callParent();
     },

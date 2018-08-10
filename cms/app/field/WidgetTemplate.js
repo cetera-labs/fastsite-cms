@@ -7,7 +7,22 @@ Ext.define('Cetera.field.WidgetTemplate', {
 	fieldLabel: Config.Lang.template,
 	name: 'template',
     valueField: 'name',
-    displayField: 'display',	
+
+	// Template for the dropdown menu.
+    // Note the use of "x-boundlist-item" class,
+    // this is required to make the items selectable.
+    tpl: Ext.create('Ext.XTemplate',
+        '<tpl for=".">',
+            '<div class="x-boundlist-item"><b>{name}</b>{display}</div>',
+        '</tpl>'
+    ),
+    // template for the content inside text field
+    displayTpl: Ext.create('Ext.XTemplate',
+        '<tpl for=".">',
+            '{name}',
+        '</tpl>'
+    ),
+	
 	
     initComponent : function() {
 

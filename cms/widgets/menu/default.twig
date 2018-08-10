@@ -1,3 +1,4 @@
+{# стандартное меню на UL/LI #}
 {% block html %}
 {% if widget.children|length > 0 or widget.getMaterials()|length > 0 %}
 <ul{% if widget.getParam('css_class') %} class="{{  widget.getParam('css_class') }}"{% endif %}>

@@ -13,7 +13,7 @@ namespace Cetera;
        //TEMPLATES_DIR
 include('common_bo.php');
 $widget = strtolower( $_REQUEST['widget'] );
-$data = array();
+$data = [];
 
 parse_dir( CMSROOT.'/widgets/'.$widget );
 parse_dir( TEMPLATES_DIR.'/widgets/'.$widget , 'в шаблонах пользователя' );
@@ -24,17 +24,13 @@ foreach (Theme::enum() as $theme)
 
 //print_r($data);
 
-foreach ($data as $key => $value)
-{
-	if (count($value['redefined']))
-	{
-		if ($value['main'])
-		{
-			$data[$key]['display'] .= ' (переопределен '.implode(', ',$value['redefined']).')';
+foreach ($data as $key => $value) {
+	if (count($value['redefined'])) {
+		if ($value['main']) {
+			$data[$key]['display'] .= ' <span style="font-size:85%">[переопределен '.implode(', ',$value['redefined']).']</span>';
 		}
-		else 
-		{
-			$data[$key]['display'] .= ' (доступен только '.implode(', ',$value['redefined']).')';
+		else {
+			$data[$key]['display'] .= ' <span style="font-size:85%">[доступен только '.implode(', ',$value['redefined']).']</span>';
 		}
 	}
 	unset($data[$key]['redefined']);
@@ -55,21 +51,26 @@ function parse_dir($dir, $place = null)
 			
 			$fn = $fileinfo->getFilename();
 			
-			if (!isset($data[$fn]))
-			{
+			$desc = '';
+			
+			$content = file( $fileinfo->getPath() . '/' . $fileinfo->getFilename() ); 
+			$str = trim($content[0]);
+			if (preg_match('/^\{\# (.+) \#\}$/U',$str,$m)) {
+				$desc .= ' - '.$m[1];
+			}
+			
+			if (!isset($data[$fn])) {
 				$data[$fn] = array(
 					'name'      => $fn,
-					'display'   => $fn,
+					'display'   => $desc,
 					'main'      => $place == null,
-					'redefined' => array()
+					'redefined' => []
 				);	
-				if ($place)
-				{
+				if ($place) {
 					$data[$fn]['redefined'][] = $place;
 				}
 			}
-			else 
-			{
+			else {
 				$data[$fn]['redefined'][] = $place;
 			}
 
