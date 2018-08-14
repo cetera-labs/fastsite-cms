@@ -63,7 +63,7 @@ elseif ($action == 'upload') {
 } 
 elseif ($action == 'upload_content') { 
 	if (!$application->getVar('developer_key')) throw new \Exception($translator->_('Не указан ключ разработчика'));
-	Theme::find($theme)->uploadContentToMarket($application->getVar('developer_key'));
+	Theme::find($theme)->uploadContentToMarket($application->getVar('developer_key'), $_REQUEST['text']);
 	$res['success'] = true;
 }  
 

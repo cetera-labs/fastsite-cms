@@ -575,7 +575,7 @@ class Theme implements \ArrayAccess  {
 			
 	}
 	
-	public function uploadContentToMarket($key)
+	public function uploadContentToMarket($key, $text)
 	{
 		$client = new \GuzzleHttp\Client();
 		
@@ -608,6 +608,15 @@ class Theme implements \ArrayAccess  {
 		if (!$d['success']) {
 			throw new \Exception( $d['message'] );
 		}	
+		
+		$mail = new \PHPMailer(true);
+		$mail->AddAddress('5@cetera.ru');					
+		$mail->CharSet = 'utf-8';
+		$mail->ContentType = 'text/plain';
+		$mail->setFrom('no-reply@cetera.ru');
+		$mail->Subject = 'Внесены изменения в отраслевое решение fastsite: '.$content['id'];
+		$mail->Body = "Отраслевое решение: ".$content['title']."\n"."Версия: ".$content['version']."\n"."Комментарий: ".$text."\n\nМенеджеру или старшему группы выяснить кто внес изменения, в чем они заключаются, поставить задачу на публикацию текста изменений здесь http://www.fastsite.ru/about/updates/";
+		$mail->Send();						
 		
 		return $this;
 	}

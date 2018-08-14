@@ -100,14 +100,20 @@ Ext.define('Cetera.theme.ContentSettings', {
 				if (o.success) {
 					this.fireEvent('content_update');
 					if (upload) {
-						this.upload();
+						
+						Ext.Msg.prompt('Запрос', 'Описание изменений:', function(btn, text){
+							if (btn == 'ok'){
+								this.upload(text);
+							}
+						}, this, true);
+						
 					}
 				}
 			}
 		});
 	},
 	
-	upload: function(){ 
+	upload: function(uploadText){ 
 	
 		this.setLoading(true);
     
@@ -115,6 +121,7 @@ Ext.define('Cetera.theme.ContentSettings', {
             url: 'include/action_themes.php',
             params: { 
                 action: 'upload_content', 
+				text: uploadText,
                 'theme': this.theme.get('id')
             },
             scope: this,
