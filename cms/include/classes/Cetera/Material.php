@@ -79,7 +79,11 @@ class Material extends DynamicFieldsObject implements SiteItem {
 		}
 
         return parent::setFields($fields);    
-    }    
+    } 
+
+	public function setPublished($value) {
+		$this->_published = $value;
+	}
     
     /**
      * Возвращает раздел, которому принадлежит материал 
