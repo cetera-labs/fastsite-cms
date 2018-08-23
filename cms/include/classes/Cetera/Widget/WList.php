@@ -52,9 +52,13 @@ class WList extends Templateable {
 
 	protected function init()
 	{
-		if ($this->_params['ajax'] && $this->_params['infinite'] && !$this->_params['paginator_template']) {
-			$this->_params['paginator_template'] = 'infinite.twig';
+		if ($this->_params['ajax'] && $this->_params['infinite']) {
+			$this->_params['paginator'] = true;
+			if (!$this->_params['paginator_template']) {
+				$this->_params['paginator_template'] = 'infinite.twig';
+			}
 		}
+		$this->setParam('catalog', $this->getCatalog()->id);
 	}
     
 	/**
@@ -69,7 +73,7 @@ class WList extends Templateable {
 			}
 			else {
 				try {
-					$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'));				
+					$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'))->orderBy('id', 'ASC', true);
 					if ($this->getParam('subfolders') || $this->getParam('subsections')) {
 						$this->_children->subfolders();
 					}
