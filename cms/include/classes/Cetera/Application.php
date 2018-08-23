@@ -428,11 +428,16 @@ class Application {
 	protected function loadVars()
 	{
         if (!$this->_config) {
+			
+			$this->_config = [];
+						
             if (file_exists(PREFS_FILE)) {
-                $this->_config = parse_ini_file(PREFS_FILE, true);
-            } else {
-                $this->_config = array();
+                $this->_config = array_merge($this->_config, parse_ini_file(PREFS_FILE, true));
             }
+			if (getenv('RUN_MODE', true) == 'development' && file_exists(PREFS_FILE_LOCAL)) {
+				$this->_config = array_merge($this->_config, parse_ini_file(PREFS_FILE_LOCAL, true));
+			}
+			
         }		
 	}
     

@@ -121,7 +121,7 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
         );
 		if ($this->_remember)
 			\Zend_Session::rememberMe(REMEMBER_ME_SECONDS);		
-			else \Zend_Session::regenerateId();
+			//else \Zend_Session::regenerateId();
         return $this->_authenticateCreateAuthResult();
     }
     

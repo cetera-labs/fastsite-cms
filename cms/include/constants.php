@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.54.2');
+define('VERSION', '3.54.3');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -66,7 +66,8 @@ if (!defined('DOCROOT')) {
 }
 define('WWWROOT', DOCROOT );
 
-define('PREFS_FILE',   DOCROOT.'.prefs');
+define('PREFS_FILE',       DOCROOT.'.prefs');
+define('PREFS_FILE_LOCAL', DOCROOT.'.prefs.local');
 
 define ('DB_SCHEMA', CMSROOT.'.dbschema/core.xml');
 define ('DB_DATA', CMSROOT.'.dbschema/core.sql');

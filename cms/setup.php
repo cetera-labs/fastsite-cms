@@ -1,4 +1,4 @@
-<?
+<?php
 if (!$application) {
    header('Location: /cms/index.php');
    die();
@@ -30,7 +30,7 @@ Ext.onReady(function(){
     Ext.QuickTips.init();
 
     prev = Ext.create('Ext.Button', {
-            text: '<< <?=$translator->_('Назад')?>',
+            text: '<< <?php echo $translator->_('Назад')?>',
             handler: function(){
                 current_step--;
                 step();
@@ -38,14 +38,14 @@ Ext.onReady(function(){
     });
     
     retry = Ext.create('Ext.Button', {
-            text: '<?=$translator->_('Повторить')?>',
+            text: '<?php echo $translator->_('Повторить')?>',
             handler: function(){
                 step();
             }
     });
     
     next = Ext.create('Ext.Button', {
-            text: '<?=$translator->_('Дальше')?> >>',
+            text: '<?php echo $translator->_('Дальше')?> >>',
             handler: function(){
                 current_step++;
                 step();
@@ -53,7 +53,7 @@ Ext.onReady(function(){
     });
 
     win = Ext.create('Ext.Window', {
-        title: '<?=(APP_NAME.' v'.VERSION.' - Setup')?>',
+        title: '<?php echo (APP_NAME.' v'.VERSION.' - Setup')?>',
         width: 450,
         autoShow: true, 
         autoHeight: true,        
@@ -82,7 +82,7 @@ function step10() {
     buttons_ok();
     prev.hide();
     win.removeAll(true);
-    win.add(textPanel('<div class="welcome"><?=sprintf($translator->_('установка системы %s прошла успешно'),APP_NAME)?></div>'));
+    win.add(textPanel('<div class="welcome"><?php echo sprintf($translator->_('установка системы %s прошла успешно'),APP_NAME)?></div>'));
     win.setWidth(405);
     win.doLayout();
 }
@@ -103,7 +103,7 @@ function step8() {
     win.removeAll(true);
 	
     build_form(480, 400, [
-        { xtype: 'label', html:  '<h1><?=$translator->_('Установить стандартную тему?')?></h1>' },
+        { xtype: 'label', html:  '<h1><?php echo $translator->_('Установить стандартную тему?')?></h1>' },
 		{
 			xtype: 'fieldcontainer',
 			layout: 'hbox',
@@ -112,7 +112,7 @@ function step8() {
 			},
 			items: [
 				{
-					boxLabel: '<?=$translator->_('да, установить тему:')?>', 
+					boxLabel: '<?php echo $translator->_('да, установить тему:')?>', 
 					name: 'create', 
 					inputValue: 1,
 					checked: true,
@@ -129,13 +129,13 @@ function step8() {
 						fields: ['id', 'full_id', 'title','locale'],
 						root: 'rows',
 						autoLoad: true,
-						filters: [{property: 'locale', value: '<?=$application->getLocale()?>'}],
+						filters: [{property: 'locale', value: '<?php echo $application->getLocale()?>'}],
 						proxy: {
 							type: 'ajax',
 							url: 'include/data_themes_avail.php'
 						}
 					}),
-					value: '<?=($application->getLocale()=='en')?'corp-2018|corp-2018_en':'corp-2018|corp-2018'?>',
+					value: '<?php echo ($application->getLocale()=='en')?'corp-2018|corp-2018_en':'corp-2018|corp-2018'?>',
 					triggerAction: 'all',
 					editable: false,
 					allowBlank: true     
@@ -143,7 +143,7 @@ function step8() {
 			]
 		},		
 		{
-			boxLabel: '<?=$translator->_('нет, нужна чистая установка')?>', 
+			boxLabel: '<?php echo $translator->_('нет, нужна чистая установка')?>', 
 			name: 'create',
 			inputValue: 0,
 			xtype: 'radio'
@@ -161,11 +161,11 @@ function step7() {
 function step6() {
 
     build_form(400, 245,[
-        { xtype: 'label', html:  '<h1><?=$translator->_('Введите данные администратора системы')?></h1>' },
-        { name: 'login', fieldLabel: '<?=$translator->_('Пользователь')?>', allowBlank: false, value: 'admin' },
-        { name: 'email', fieldLabel: '<?=$translator->_('E-mail')?>' },
-        { name: 'password', fieldLabel: '<?=$translator->_('Пароль')?>', inputType: 'password', allowBlank: false },
-        { name: 'password2', fieldLabel: '<?=$translator->_('Повторите пароль')?>', inputType: 'password', allowBlank: false }
+        { xtype: 'label', html:  '<h1><?php echo $translator->_('Введите данные администратора системы')?></h1>' },
+        { name: 'login', fieldLabel: '<?php echo $translator->_('Пользователь')?>', allowBlank: false, value: 'admin' },
+        { name: 'email', fieldLabel: '<?php echo $translator->_('E-mail')?>' },
+        { name: 'password', fieldLabel: '<?php echo $translator->_('Пароль')?>', inputType: 'password', allowBlank: false },
+        { name: 'password2', fieldLabel: '<?php echo $translator->_('Повторите пароль')?>', inputType: 'password', allowBlank: false }
     ]);
 
 }
@@ -184,18 +184,18 @@ function step4() {
 function step3() {
 
     build_form(400, 225, [
-        { xtype: 'label', html: '<h1><?=$translator->_('Настройка доступа к БД MySQL')?></h1>' },
-        { name: 'dbhost', fieldLabel: 'Host', allowBlank: false, value: '<?=$application->getVar('dbhost')?>' },
-        { name: 'dbname', fieldLabel: 'Database name', allowBlank: false, value: '<?=$application->getVar('dbname')?>' },
-        { name: 'dbuser', fieldLabel: 'Username', allowBlank: false, value: '<?=$application->getVar('dbuser')?>' },
-        { name: 'dbpass', fieldLabel: 'Password', inputType: 'password', value: '<?=$application->getVar('dbpass')?>' }
+        { xtype: 'label', html: '<h1><?php echo $translator->_('Настройка доступа к БД MySQL')?></h1>' },
+        { name: 'dbhost', fieldLabel: 'Host', allowBlank: false, value: '<?php echo $application->getVar('dbhost')?>' },
+        { name: 'dbname', fieldLabel: 'Database name', allowBlank: false, value: '<?php echo $application->getVar('dbname')?>' },
+        { name: 'dbuser', fieldLabel: 'Username', allowBlank: false, value: '<?php echo $application->getVar('dbuser')?>' },
+        { name: 'dbpass', fieldLabel: 'Password', inputType: 'password', value: '<?php echo $application->getVar('dbpass')?>' }
     ]);
 
 }
 
 // Проверка окружения
 function step2() {
-    if ('<?=$application->getLocale()->toString()?>' != locale.getValue()) {
+    if ('<?php echo $application->getLocale()->toString()?>' != locale.getValue()) {
         location = 'index.php?locale=' + locale.getValue();
     } else {
         request_action();
@@ -210,12 +210,12 @@ function step1() {
     win.removeAll(true);
     
     locale = Ext.create('Ext.form.ComboBox', {
-        fieldLabel: '<?=$translator->_('Язык')?>',
+        fieldLabel: '<?php echo $translator->_('Язык')?>',
         name: 'locale',
         store: Ext.create('Ext.data.SimpleStore', {
             fields: ['abbr', 'state'],
             data : [
-                <?
+                <?php
                 $locales = \Zend_Locale::getLocaleList();
                 $l = $application->getLocale();
                 $i = 0;
@@ -238,12 +238,12 @@ function step1() {
         triggerAction: 'all',
         editable: false,
         width: 260,
-        value: '<?=$selected?>'
+        value: '<?php echo $selected?>'
     });
     
     var form = Ext.create('Ext.form.FormPanel', {
         items: [
-            textPanel('<div class="welcome"><img src="images/brand_small.gif" width="323" height="40" /><br /><br /><?=$translator->_('Добро пожаловать в программу установки')?><br /><strong><?=APP_NAME?> <?=VERSION?></strong></div>'),
+            textPanel('<div class="welcome"><img src="images/brand_small.gif" width="323" height="40" /><br /><br /><?php echo $translator->_('Добро пожаловать в программу установки')?><br /><strong><?php echo APP_NAME?> <?php echo VERSION?></strong></div>'),
             locale
         ],
         waitMsgTarget: true,
@@ -267,7 +267,7 @@ function build_form(w, h, items) {
     form = Ext.create('Ext.form.FormPanel', {
         items: items,
         waitMsgTarget: true,
-        url: 'include/setup.php?locale=<?=$application->getLocale()?>',
+        url: 'include/setup.php?locale=<?php echo $application->getLocale()?>',
         baseParams: {step: current_step},
         fieldDefaults : { 
             labelWidth: 105
@@ -301,7 +301,7 @@ function request_action(params) {
     win.setLoading(true);  
     //win.center();
     Ext.Ajax.request({
-        url: 'include/setup.php?locale=<?=$application->getLocale()?>',
+        url: 'include/setup.php?locale=<?php echo $application->getLocale()?>',
         params: params,
         scope: this,
 		timeout: 600000,
@@ -345,7 +345,7 @@ function submit_form() {
     }
     
     form.getForm().submit({
-        waitMsg:'<?=$translator->_('Подождите...')?>',
+        waitMsg:'<?php echo $translator->_('Подождите...')?>',
         success: function(form, action) {
             current_step++;
             step();
