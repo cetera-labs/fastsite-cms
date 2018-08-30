@@ -551,10 +551,13 @@ class Application {
         $this->_dbConnection = \Doctrine\DBAL\DriverManager::getConnection( 
             $connectionParams, 
             new \Doctrine\DBAL\Configuration()
-        );           
+        );        
+
+		$charset = $this->getVar('dbcharset');
+		if (!$charset) $charset = 'utf8';
             
-        $this->_dbConnection->executeQuery('SET CHARACTER SET utf8'); 
-        $this->_dbConnection->executeQuery('SET names utf8');            
+        $this->_dbConnection->executeQuery('SET CHARACTER SET '.$charset);
+        $this->_dbConnection->executeQuery('SET names '.$charset);
             
         $this->_connected = true; 
             

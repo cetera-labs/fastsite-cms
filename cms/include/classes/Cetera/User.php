@@ -406,7 +406,9 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         $uniq = md5 (uniqid (rand()));
 		$conn = self::getDbConnection();
         $conn->executeQuery('UPDATE '.User::TABLE.' SET last_login=NOW() WHERE id='.$this->id);
-		$conn->executeQuery('DELETE FROM users_auth WHERE remember = 0 and time < ?', array(time()-AUTH_INACTIVITY_SECONDS));
+		$s = Application::getInstance()->getVar('auth_inactivity_seconds');
+		if (!$s) $s = AUTH_INACTIVITY_SECONDS;
+		$conn->executeQuery('DELETE FROM users_auth WHERE remember = 0 and time < ?', [time()-$s]);
         $conn->executeQuery('INSERT INTO users_auth SET user_id='.$this->id.', remember='.(int)$remember.',uniq="'.$uniq.'", ip="'.$_SERVER['REMOTE_ADDR'].'", time='.time());
         return $uniq;
     }

@@ -22,6 +22,7 @@ try {
 if ($user->allowAdmin()) {
   
     if (!$application->getVar('no_update_check')) {
+		$no_updates = false;
         try {
     		
     		$client = new \GuzzleHttp\Client();
@@ -54,6 +55,9 @@ if ($user->allowAdmin()) {
         
         } catch (\Exception $e) {}
     }
+	else {
+		$no_updates = true;
+	}
 	
 	  if ($application->getVar('setup_theme') && \Cetera\Server::getDefault())
 		    $setup_theme = \Cetera\Server::getDefault()->getTheme()->name;
@@ -392,7 +396,11 @@ Ext.create('Ext.Button', {
                 <div class="new_version">
                     <p><?=$translator->_('Вы используйте beta-версию. Возможен откат для последнюю стабильную версию ');?><?=APP_NAME?> <b>v<?=$info['version']?></b></p>
                     <div id="upgrade"></div><div id="log"></div>
-                </div>                
+                </div>    
+
+				<? elseif ($no_updates) :?>			
+
+				<div class="latest"><?=$translator->_('Проверка обновлений запрещена в настройках.')?></div>  
                 
                 <? else :?>
                 
