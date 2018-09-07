@@ -83,6 +83,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 
 	public function setPublished($value) {
 		$this->_published = $value;
+		return $this;
 	}
     
     /**

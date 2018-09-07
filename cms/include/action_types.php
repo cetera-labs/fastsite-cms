@@ -139,8 +139,8 @@ try {
                     
               	case PSEUDO_FIELD_TAGS: 
 
-						$len = $application->getConn()->fetchColumn('SELECT id FROM types WHERE alias="material_tags"', array(), 0);
-              			if ($len) {	  
+                                $len = $application->getConn()->fetchColumn('SELECT id FROM types WHERE alias="material_tags"', [], 0);
+              			if (!$len) {	  
               				  $od = ObjectDefinition::create(array(
 								  'alias'   => 'material_tags', 
 								  'describ' => $translator->_('Ключевые слова'), 

@@ -1652,6 +1652,7 @@ class Application {
 			$this->twig->addTokenParser( new Twig\TokenParser\Widget() );
 			$this->twig->addExtension( new \Twig_Extensions_Extension_Text() );	
 			$this->twig->addExtension(new \Twig_Extensions_Extension_I18n());
+			$this->twig->addExtension(new \Twig_Extensions_Extension_Debug());
 
 			$this->twig->addFunction(new \Twig_SimpleFunction('_', function($text) {
 				return Application::getInstance()->getTranslator()->_($text);

@@ -53,7 +53,7 @@ class Linkset extends DynamicObject {
 
 		$linktable = $object->table.'_'.$od->table.'_'.$field['name'];
 		
-		$this->query->innerJoin('main', $linktable, 'b', 'main.id = b.dest and b.id='.$object->id);		
+		$this->query->innerJoin('main', $linktable, 'b', 'main.id = b.dest and b.id='.(int)$object->id);		
         
     } 	
 	
