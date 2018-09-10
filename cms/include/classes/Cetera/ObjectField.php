@@ -138,7 +138,7 @@ abstract class ObjectFieldLinkAbstract extends ObjectField {
 	
 	public function getIterator()
 	{
-		return $this->getObjectDefinition()->getMaterials();
+		return $this->getObjectDefinition()->getMaterials()->subFolders();
 	}
 
 }
@@ -286,6 +286,6 @@ trait ObjectFieldLinkTrait {
 	
 	public function getIterator()
 	{
-		return $this->getCatalog()->getMaterials();
+		return $this->getCatalog()->getMaterials()->subFolders();
 	}	
 }

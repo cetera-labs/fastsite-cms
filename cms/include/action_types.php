@@ -226,9 +226,10 @@ try {
                 $od = new ObjectDefinition($f['id']);             
 
                 // УДАЛЕНИЕ ПОЛЯ
-                if (($f['type']!=FIELD_LINKSET)&&($f['type']!=FIELD_MATSET)) {
+                if (($f['type']!=FIELD_LINKSET)&&($f['type']!=FIELD_LINKSET2)&&($f['type']!=FIELD_MATSET)) {
               	  $application->getConn()->executeQuery("alter table `".$od->table."` drop `".trim($f['name'])."`");
-              	} else {
+              	} 
+				else {
               	  ObjectDefinition::drop_link_table($od->table, $f['name'], $f['type'], $f['len'], $f['id'], $f['pseudo_type']);
               	}
             }
