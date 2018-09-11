@@ -151,7 +151,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
 		fp.hidden.setDisabled(0);
         fp.size.setValue('100');
 		fp.size.setDisabled(0);
-        fp.variants.setValue('');
+        fp.variants.setValue('\'Value1\',\'Value2\',\'Value3\'');
 		fp.variants.setDisabled(0);
         fp.folder.setValue(0);
         fp.from_cat_l.setValue(0);
@@ -192,7 +192,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
         fp.size.setValue('1000');
 		fp.size.setDisabled(fixed);
 		
-        fp.variants.setValue('');
+        fp.variants.setValue('\'Value1\',\'Value2\',\'Value3\'');
 		fp.variants.setDisabled(fixed);
 		
         fp.folder.folderId = 0;
@@ -227,12 +227,14 @@ Ext.define('Cetera.panel.MaterialTypes', {
       		        fp.cur_cat.setValue(true); 
       		  }
      
-        } else if (type==Config.fields.PSEUDO_FIELD_CATOLOGS) {
+        } 
+		else if (type==Config.fields.PSEUDO_FIELD_CATOLOGS) {
         
                 fp.from_cat_l.setValue(f.get('len'));
                 fp.from_cat_l.setDisplayValue(f.get('path'));
             
-        } else if (type==Config.fields.FIELD_ENUM) fp.variants.setValue(f.get('len'))   
+        } 
+		else if (type==Config.fields.FIELD_ENUM) fp.variants.setValue(f.get('len'))   
         else if (type==Config.fields.FIELD_TEXT) fp.size.setValue(f.get('len'));
               
         this.editWin.show();
@@ -503,7 +505,12 @@ Ext.define('Cetera.panel.MaterialTypes', {
             size:      new Ext.form.TextField({fieldLabel: Config.Lang.size, name: 'len', vtype: 'len', value: 1000}),
             page:      new Ext.form.TextField({ fieldLabel: Config.Lang.page, name: 'page' }),
             folder:    Ext.create('Cetera.field.Folder', { name: 'catid', value: 0, nolink: 1 }),
-            variants:  new Ext.form.TextField({fieldLabel: Config.Lang.variants, name: 'variants'}),
+            variants:  new Ext.form.TextField({
+				fieldLabel: Config.Lang.variants, 
+				name: 'variants', 
+				allowBlank: false,
+				regex: /^(\'.+\',{0,1})+$/i
+			}),
             def_value: new Ext.form.TextField({fieldLabel: Config.Lang.defaultValue, name: 'default_value'}),
             editor_u:  new Ext.form.TextField({fieldLabel: Config.Lang.editor, name: 'editor_user'}),
             from_cat:  new Ext.form.Radio({ boxLabel: Config.Lang.fromCatalog, name: 'cat', inputValue: 1, checked: true }),
@@ -603,7 +610,6 @@ Ext.define('Cetera.panel.MaterialTypes', {
         });
         
         this.type3 = this.field_props.type;
-        this.type4 = this.field_props.variants;
         this.type5 = this.field_props.editor_u;
         this.type6 = this.field_props.from_cat_l;
         this.def_v = this.field_props.def_value;
@@ -621,7 +627,8 @@ Ext.define('Cetera.panel.MaterialTypes', {
             this.type1.hide();
             this.type2.hide();
             this.type3.hide();
-            this.type4.hide();
+            this.field_props.variants.hide();
+			this.field_props.variants.disable();
             this.type6.hide();
             this.def_v.hide();
             switch (combo.value) {
@@ -637,7 +644,8 @@ Ext.define('Cetera.panel.MaterialTypes', {
                     this.type1.show();       
                     break;
                 case Config.fields.FIELD_ENUM:
-                    this.type4.show();       
+                    this.field_props.variants.show();  
+					this.field_props.variants.enable();					
                     break;
                 case Config.fields.PSEUDO_FIELD_CATOLOGS:
                     this.type6.show();      
@@ -674,7 +682,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
                 this.type1,
                 this.type2,
                 this.type3,
-                this.type4,
+                this.field_props.variants,
                 this.type6,
                 this.def_v,
                 this.type5

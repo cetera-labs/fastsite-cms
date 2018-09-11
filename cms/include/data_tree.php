@@ -59,7 +59,7 @@ if ($node == 'root') {
 			$m = $c->getMaterials()->where($where)->setItemCountPerPage(500);
 			
             foreach ($m as $material) {
-      			$name = htmlspecialchars($material->name);
+      			$name = htmlspecialchars('['.$material->id.'] '.$material->name);
       			$name = str_replace("\n",'',$name);
       			$name = str_replace("\r",'',$name);
                 $nodes[] = array(
