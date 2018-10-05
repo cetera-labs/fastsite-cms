@@ -186,13 +186,9 @@ class ImageTransform {
 		
 		$this->src_exists = $this->src && file_exists($this->src) && is_file($this->src);
 				
-		if ($this->src_exists)
-		{
+		if ($this->src_exists) {
 			$this->src_info = getimagesize($this->src);
 			if (!$this->src_info) throw new \Exception('Invalid image '.$this->src);
-		}		
-		
-		if ($this->src_exists) {
 			
 			if (!$this->width && !$this->height) {
 				$this->width = $this->src_info[0];
@@ -243,12 +239,21 @@ class ImageTransform {
 						}						
 					}
 					else {
-						if ($w < $h) {
+						
+						if ($this->width < $this->src_info[0] || $this->height < $this->src_info[1]) {
+						
+							if ($w < $h) {
+								$this->width =  $this->src_info[0];
+								$this->height = $this->width/$wh;
+							} else {
+								$this->height = $this->src_info[1];
+								$this->width = $this->height*$wh;
+							}
+						
+						}
+						else {
 							$this->width =  $this->src_info[0];
-							$this->height = $this->width/$wh;
-						} else {
 							$this->height = $this->src_info[1];
-							$this->width = $this->height*$wh;
 						}
 					}					
 				}
@@ -287,27 +292,22 @@ class ImageTransform {
 			{
 				if ($this->fit == 3)
 				{
-					if ($w > $h)
-					{			
+					if ($w > $h) {			
 						$dy = round(($this->height - $this->src_info[1]/$w)/2);
 						$new_h = round ($this->src_info[1] / ($this->src_info[0] / $this->width) );
 					} 
-					else
-					{	  
+					else {	  
 						$dx = round(($this->width - $this->src_info[0]/$h)/2);
 						$new_w = round ($this->src_info[0] / ($this->src_info[1] / $this->height) );
 					}
 				}
-				else
-				{
-					if ($w > $h)
-					{			  
+				else {
+					if ($w > $h) {			  
 					  $new0 = intval($this->src_info[1]*$this->width/$this->height);
 					  if ($this->fit == 2) $ox = round( ($this->src_info[0] - $new0)/2 );			  
 					  $this->src_info[0] = $new0;
 					} 
-					else
-					{	  
+					else {	  
 					  $new1 = intval($this->src_info[0]*$this->height/$this->width);
 					  if ($this->fit == 2) $oy = round( ($this->src_info[1] - $new1)/2 );
 					  $this->src_info[1] = $new1;
