@@ -76,7 +76,7 @@ class DynamicObjectMultiple extends DbObject {
         return $this;
     } 	
 
-    protected function fetchElements()
+    public function fetchElements()
     {
         if ($this->sync) return;
         $this->elements = array();

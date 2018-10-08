@@ -23,7 +23,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			'vkontakte'     => USER_VK,
 			'twitter'       => USER_TWITTER,
 			'odnoklassniki' => USER_ODNOKLASSNIKI,
-			'googleplus'    => USER_GOOGLE,
+			'google'        => USER_GOOGLE,
 			'livejournal'   => USER_LJ
 	);	
     
@@ -71,6 +71,8 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			}
 		
 		}
+		
+		$data['external_id'] = $id;
 		
         switch (  $network ) {
             case USER_OPENID:        return User\OpenId::fetch($data);

@@ -44,7 +44,7 @@ abstract class DbObject extends Base {
         $this->query = clone $this->query;
     }	
     
-    protected function fetchElements()
+    public function fetchElements()
     {
         if ($this->sync) return;
         $this->elements = array();
@@ -140,6 +140,11 @@ abstract class DbObject extends Base {
         
         return $this->countAll;  
     }
+	
+    public function idArray() {
+        $this->fetchElements();
+        return parent::idArray();  
+    } 		
     
     public function findIndexById( $id )
     {
@@ -247,9 +252,15 @@ abstract class DbObject extends Base {
     public function where($where, $combination = 'AND')
     {   
 		if (self::isSafe($where)) {
-			if ($combination == 'OR')
+			if ($combination == 'OR') {
 				$this->query->orWhere($where);
-				else $this->query->andWhere($where);
+			}
+			elseif ($combination == 'AND') {
+				$this->query->andWhere($where);
+			}
+			else {
+				$this->query->where($where);
+			}
 			$this->sync = false;
 		}
         return $this;

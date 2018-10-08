@@ -58,10 +58,9 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *            
      * @return array 
      */ 	
-    public function idArray()
-    {
-        $data = array();
-        foreach ($this as $item) $data[] = $item->id;       
+    public function idArray() {
+        $data = [];
+        foreach ($this->elements as $item) $data[] = $item->id;       
         return $data;
     }
 	
