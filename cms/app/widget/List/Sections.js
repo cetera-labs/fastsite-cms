@@ -97,7 +97,7 @@ Ext.define('Cetera.widget.List.Sections', {
 			}]
 		},{
 			xtype: 'widgettemplate',
-			widget: 'List'
+			widget: 'List.Sections'
         },{
             name: 'filter',
             fieldLabel: _('Доп. фильтр'),

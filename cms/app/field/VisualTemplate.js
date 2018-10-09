@@ -82,12 +82,17 @@ Ext.define('Cetera.field.VisualTemplate', {
 			this.panel.removeAll();
 			var data = Ext.JSON.decode(value);
 			Ext.Array.each(data, function(val) {
-				this.addWidget({
-					widgetName: val.name,
-					widgetTitle: val.widgetTitle,
-					widgetDisabled: val.widgetDisabled,
-					params: val
-				}, true);
+				try{
+					this.addWidget({
+						widgetName: val.name,
+						widgetTitle: val.widgetTitle,
+						widgetDisabled: val.widgetDisabled,
+						params: val
+					}, true);
+				} catch(e) {
+					console.log(val.name + ' не создан');
+					console.log(val);
+				}
 			}, this);			
 		}
 	}
