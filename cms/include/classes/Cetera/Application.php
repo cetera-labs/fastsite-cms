@@ -1838,7 +1838,7 @@ class Application {
 	*/		
 	public function addScript($file)
 	{
-		return $this->setPageProperty('scripts', '<script src="'.$file.'" type="text/javascript"></script>', true, true);
+		return $this->setPageProperty('scripts', '<script src="'.$file.'"></script>', true, true);
 	}		
 	
 	/**
