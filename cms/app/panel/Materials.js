@@ -233,10 +233,9 @@ Ext.define('Cetera.panel.Materials', {
 			return record.get("locked") ? "locked" : "";
 		}
 	},	
-    
-    initComponent : function() {
-              
-		this.store = Ext.create('Ext.data.JsonStore', {   
+	
+	getStore: function() {
+		return Ext.create('Ext.data.JsonStore', {   
 	
 			autoDestroy: true,
 			remoteSort: true,
@@ -262,8 +261,10 @@ Ext.define('Cetera.panel.Materials', {
 			}		
 		
 		});
-        
-        this.bbar = Ext.create('Ext.PagingToolbar', {
+	},
+	
+	getBBar: function() {
+		return Ext.create('Ext.PagingToolbar', {
             store: this.store,
             items: [Config.Lang.filter + ': ', Ext.create('Cetera.field.Search', {
                 store: this.store,
@@ -271,37 +272,47 @@ Ext.define('Cetera.panel.Materials', {
                 width:200
             })]
         });
-        
+	},
+    
+	onSelectionChange: function(sm){
+		var hs = sm.hasSelection();
+		var sf = this.store.sorters.first().property;
+		
+		this.toolbar.getComponent('tb_mat_edit').setDisabled(!hs);
+		this.toolbar.getComponent('tb_mat_delete').setDisabled(!hs);
+		this.toolbar.getComponent('tb_mat_pub').setDisabled(!hs);
+		this.toolbar.getComponent('tb_mat_unpub').setDisabled(!hs);
+		this.toolbar.getComponent('tb_mat_move').setDisabled(!hs);
+		this.toolbar.getComponent('tb_mat_copy').setDisabled(!hs);
+	},
+	
+	onBeforeSelect: function(t , record, index, eOpts) {
+		if (record.get('disabled')) return false;
+	},
+	
+	onCellDblclick: function() {
+		this.edit(this.getSelectionModel().getSelection()[0].getId());
+	},
+	
+    initComponent : function() {
+              
+		this.store = this.getStore();        
+        this.bbar = this.getBBar();        
         this.tbar = this.getToolbar();
 		this.toolbar = this.tbar;
                                        
         this.callParent();  
 		
         this.getSelectionModel().on({
-            'selectionchange' : function(sm){
-                var hs = sm.hasSelection();
-                var sf = this.store.sorters.first().property;
-                
-                this.toolbar.getComponent('tb_mat_edit').setDisabled(!hs);
-                this.toolbar.getComponent('tb_mat_delete').setDisabled(!hs);
-                this.toolbar.getComponent('tb_mat_pub').setDisabled(!hs);
-                this.toolbar.getComponent('tb_mat_unpub').setDisabled(!hs);
-                this.toolbar.getComponent('tb_mat_move').setDisabled(!hs);
-                this.toolbar.getComponent('tb_mat_copy').setDisabled(!hs);					
-            },
-            'beforeselect' : function(t , record, index, eOpts) {
-                if (record.get('disabled')) return false;
-            },
+            'selectionchange' : this.onSelectionChange,
+            'beforeselect' : this.onBeforeSelect,
             scope:this
         });
             		
 
-		if (this.mat_type) 
-		{
+		if (this.mat_type) {
 			this.on({
-				'celldblclick' : function() {
-					this.edit(this.getSelectionModel().getSelection()[0].getId());
-				},
+				'celldblclick' : this.onCellDblclick,
 				scope: this
 			});  			
 			this.reload();
