@@ -20,20 +20,16 @@ trait Material {
 				$tid = $this->getParam('material_type');
 				$mid = (int)$this->getParam('material_id');
 								
-				if ($tid)
-				{ // указан ID типа
+				if ($tid) { // указан ID типа
 					if (!$mid) throw new \Exception('Material ID required');
 					$this->_material = \Cetera\Material::getById( $mid, new \Cetera\ObjectDefinition($tid) );
 				}
-				else
-				{
+				else {
 					$c = $this->getCatalog($useApp);
-					if ($mid)
-					{
+					if ($mid) {
 						$this->_material = $c->getMaterialByID($mid);
 					}
-					else
-					{
+					else {
 						$alias = $this->getParam('material_alias');
 						if (!$alias)
 						{
@@ -41,7 +37,7 @@ trait Material {
 							$alias = current(explode('/', $this->application->getUnparsedUrl() ));
 							if (!$alias) $alias = 'index';
 						}
-						$this->_material = $c->getMaterialByAlias($alias);
+						$this->_material = $c->getMaterialByAlias($alias, null, (boolean)$this->getParam('unpublished'));
 					}
 				}
 			}

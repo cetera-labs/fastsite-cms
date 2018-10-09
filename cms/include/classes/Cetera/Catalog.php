@@ -645,13 +645,14 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
      *   
      * @api	 
      * @param string $alias алиас материала    
-     * @param string $fields список простых полей материала, которые выбирать из БД в конструктор материала     
+     * @param string $fields список простых полей материала, которые выбирать из БД в конструктор материала  
+     * @param boolean $unpublished искать также среди неопубликованных материалов
      * @return Material  
      * @throws Exception\CMS   
      */        
-    public function getMaterialByAlias($alias, $fields = null)
+    public function getMaterialByAlias($alias, $fields = null, $unpublished = false)
     {
-        $m = $this->getMaterials()->where('alias=:alias')->setParameter('alias', $alias);
+        $m = $this->getMaterials()->where('alias=:alias')->setParameter('alias', $alias)->unpublished($unpublished);
         if ($fields) $m->select($fields);        
         if (!count($m)) throw new Exception\CMS(Exception\CMS::MATERIAL_NOT_FOUND);
         return $m->current();
