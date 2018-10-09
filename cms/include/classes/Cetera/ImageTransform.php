@@ -222,7 +222,7 @@ class ImageTransform {
 			
 			// -------------------------------------------------------
 			// корректировка размеров результата, если опция enlarge=0	
-			if  (!$this->enlarge && ($this->width > $this->src_info[0] || $this->height > $this->src_info[1])) {
+			if  (!$this->enlarge && ($this->width > $this->src_info[0] && $this->height > $this->src_info[1])) {
 
 				$w = $this->src_info[0]/$this->width;
 				$h = $this->src_info[1]/$this->height;
