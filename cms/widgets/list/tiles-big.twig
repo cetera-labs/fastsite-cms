@@ -27,7 +27,7 @@
 		  <div class="cell margin-bottom-6 text-left" data-equalizer-watch="{{ widget.uniqueId }}-eq">
 			<div class="grid-x">
 			  {% if m.pic %}<div class="cell small-5 medium-24"><a href="{{ m.url }}" title=""><img class="margin-bottom-3" src="/imagetransform/width_450_height_300_fit_3{{ m.pic }}" alt="{{ m.name }}"></a></div>{% endif %}
-			  <div class="cell small-18 medium-24 small-offset-1 medium-offset-0">
+			  <div class="cell small-18 medium-24{% if not m.pic %} small-offset-1 medium-offset-0{% endif %}">
 				<h5 class="margin-bottom-3"><a href="{{ m.url }}" title="">{{ m.name }}</a></h5>
 			  </div>
 			</div>
