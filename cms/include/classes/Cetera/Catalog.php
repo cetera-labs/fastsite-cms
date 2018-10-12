@@ -223,7 +223,6 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
   	/**
   	 * Возвращает раздел по его идентификатору.	
   	 * 	 
-	 * @api
   	 * @param int $id ID раздела 	 
   	 * @return Catalog
   	 * @throws Exception\CMS	 
@@ -237,7 +236,6 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
 	/**
 	 * Возвращает корневой раздел
 	 *  
-     * @api	 
 	 * @return Catalog
 	 */ 
     public static function getRoot()

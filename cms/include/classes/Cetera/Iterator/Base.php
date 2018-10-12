@@ -107,6 +107,13 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
         return -1;  
     }     
 
+    public function findById( $id )
+    {
+        $idx = static::findIndexById( $id );
+		if ($idx < 0) return null;
+		return $this->elements[$idx];
+    }  	
+	
     /**
      * Количество объектов в итераторе              
      *             

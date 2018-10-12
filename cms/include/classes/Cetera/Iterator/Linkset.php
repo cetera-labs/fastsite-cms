@@ -71,5 +71,26 @@ class Linkset extends DynamicObject {
 		$this->elements[] = $material;
 		return $this;
 	}	
+	
+    /**
+     * Удаляет материал из итератора
+     *  
+     * @param \Cetera\DynamicFieldsObject $material
+     * @return void  
+     */ 	
+	public function remove(\Cetera\DynamicFieldsObject $material) {
+		if ($material->objectDefinition->id != $this->objectDefinition->id) {
+			throw new \Exception('Illegal type of material '.$material->objectDefinition->id.'. Must be '.$this->objectDefinition->id);
+		}
+		$this->fetchElements();
+		foreach ($this->elements as $key => $value) {
+			if ($value->id == $material->id) {
+				unset($this->elements[$key]);
+				$this->elements = array_values($this->elements);
+				break;
+			}
+		}
+		return $this;
+	}	
 
 }

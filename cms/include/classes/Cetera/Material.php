@@ -101,6 +101,17 @@ class Material extends DynamicFieldsObject implements SiteItem {
             return false;
         }
     }
+	
+    /**
+     * Возвращает раздел, которому принадлежит материал 
+     * или false, если материал не принадлежит разделу
+     *          
+     * @return Catalog    
+     */ 	
+	public function getSection()
+	{
+		return $this->getCatalog();
+	}
     
     /**
      * Возвращает описание полей объекта

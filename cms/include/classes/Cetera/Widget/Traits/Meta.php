@@ -7,7 +7,6 @@ trait Meta {
     {
 		$a = $this->application;
 		$a->setPageProperty('title', $name);		
-		$a->addHeadString('<meta itemprop="name" content="'.htmlspecialchars($name).'"/>');
 		$a->addHeadString('<meta name="twitter:title" content="'.htmlspecialchars($name).'">');
 		$a->addHeadString('<meta property="og:title" content="'.htmlspecialchars($name).'"/>', 'og:title');
     }
@@ -18,7 +17,6 @@ trait Meta {
 		{
 			$a = $this->application;
 			$a->setPageProperty('description', $short);
-			$a->addHeadString('<meta itemprop="description" content="'.htmlspecialchars($short).'"/>');
 			$a->addHeadString('<meta name="twitter:description" content="'.htmlspecialchars($short).'">');
 			$a->addHeadString('<meta property="og:description" content="'.htmlspecialchars($short).'"/>', 'og:description');		
 		}		
