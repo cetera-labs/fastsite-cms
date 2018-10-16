@@ -414,7 +414,12 @@ class Catalog extends DynamicFieldsObjectPredefined implements SiteItem {
         if ($this->_fullUrl === FALSE) $this->fillPath();
 		
         if ($prefix) {
-			if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || (!empty($_SERVER['HTTP_HTTPS']) && $_SERVER['HTTP_HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443)
+			if (
+				(!empty($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ||
+				(!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || 
+				(!empty($_SERVER['HTTP_HTTPS']) && $_SERVER['HTTP_HTTPS'] !== 'off') || 
+				(!empty($_SERVER['SERVER_PORT']) && $_SERVER['SERVER_PORT'] == 443)
+			)		
 				$schema = 'https:/';
 				else $schema = 'http:/';
 			return $schema.$this->_fullUrl;

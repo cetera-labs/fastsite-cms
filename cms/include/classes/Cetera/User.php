@@ -506,7 +506,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
                 self::getDbConnection()->executeQuery('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
         }
        
-	   if ($str = 'CREATE') {
+	   if ($str == 'CREATE') {
 			Event::trigger(EVENT_CORE_USER_REGISTER, [
 				'user'     => $this, 
 				'server'   => Application::getInstance()->getServer(), 
