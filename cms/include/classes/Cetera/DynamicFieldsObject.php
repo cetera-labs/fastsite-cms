@@ -934,7 +934,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$name." where id=$id2"); 
 		
-		if (!is_array($values) && !is_a($values,'Cetera\Iterator\Linkset')) {
+		if (!is_array($values) && !is_a($values,'Cetera\Iterator\Linkset2')) {
 			$link_list = json_decode($values);
 		}
 		else {
@@ -984,6 +984,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				$old[ $f['dest'] ] = $f['dest'];
 			}
 		}
+		
+		if (is_a($values,'Cetera\Iterator\Linkset')) {
+			$values->fetchElements();
+		}		
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
 		
