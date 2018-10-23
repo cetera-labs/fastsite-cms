@@ -86,30 +86,6 @@ abstract class DbObject extends Base {
     {       
         return $this->query;  
     } 
-
-    /**
-     * Порядковый номер первого элемента              
-     *             
-     * @return int  
-     */	
-    public function getFirstIndex()
-    {	
-		if (!$this->itemCountPerPage) return 1;
-		return 1 + $this->itemCountPerPage * ($this->pageNumber - 1);
-	}
-	
-    /**
-     * Порядковый номер последнего элемента
-     *             
-     * @return int  
-     */	
-    public function getLastIndex()
-    {	
-		if (!$this->itemCountPerPage) return $this->getCountAll();
-		$count = $this->itemCountPerPage + $this->itemCountPerPage * ($this->pageNumber - 1);
-		if ($count > $this->getCountAll()) $count = $this->getCountAll();
-		return $count;
-	}	
 	
     /**
      * Полное количество объектов              
@@ -129,83 +105,20 @@ abstract class DbObject extends Base {
         $this->fixWhere($query);
                             
         $stmt = $query->execute();  
-        if ($stmt->rowCount() > 1)
-        {
+        if ($stmt->rowCount() > 1) {
             $this->countAll = $stmt->rowCount();
         } 
-        else
-        {
+        else {
             $this->countAll = $stmt->fetchColumn();
         }
         
         return $this->countAll;  
     }
 	
-    public function idArray() {
-        $this->fetchElements();
-        return parent::idArray();  
-    } 		
-    
-    public function findIndexById( $id )
-    {
-        $this->fetchElements();
-        return parent::findIndexById( $id );  
-    }     
-	
-    /**
-     * Количество объектов в итераторе              
-     *             
-     * @return int  
-     */ 
-    public function count()
-    {
-        $this->fetchElements();
-        return parent::count();
-    }
-    
-    /**
-     * Возвращает текущий элемент              
-     *             
-     * @return FSObject  
-     */
-    public function current()
-    {
-        $this->fetchElements();
-        return parent::current();    
-    }
-
-    /**
-     * Текущий элемент существует?              
-     *             
-     * @return bool 
-     */
-    public function valid()
-    {
-        $this->fetchElements();
-        return parent::valid();    
-    }
-        
-    /**
-     * Существует ли элемент на данной позиции            
-     *  
-     * @param int $offser позиция                  
-     * @return bool  
-     */
-    public function offsetExists($offset) {
-        $this->fetchElements();
-        return parent::offsetExists($offset);    
-    }
-        
-    /**
-     * Получить элемент на данной позиции            
-     *  
-     * @param int $offser позиция                  
-     * @return FSObject   
-     */
-    public function offsetGet($offset) {
-        $this->fetchElements();
-        return parent::offsetGet($offset);  
-    } 
+    public function getElements() {
+		$this->fetchElements();
+		return $this->elements;
+	}	
 	                
     public function setItemCountPerPage($itemCountPerPage = null)
     {

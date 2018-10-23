@@ -21,7 +21,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     protected $position = 0;
               
     /** Кэш */
-    protected $elements = array();
+    protected $elements = [];
     
     protected $pageNumber = 1; 
     protected $offset = 0; 
@@ -51,7 +51,12 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
             );            
         }
         return json_encode($data);
-    }      
+    } 
+
+    public function getElements()
+    {
+		return $this->elements;
+	}		
 	
     /**
      * Массив идентификаторов объектов             
@@ -60,7 +65,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      */ 	
     public function idArray() {
         $data = [];
-        foreach ($this->elements as $item) $data[] = $item->id;       
+        foreach ($this->getElements() as $item) $data[] = $item->id;       
         return $data;
     }
 	
@@ -103,7 +108,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     
     public function findIndexById( $id )
     {
-        foreach ($this->elements as $i => $item) if ($item->id == $id) return $i;
+        foreach ($this->getElements() as $i => $item) if ($item->id == $id) return $i;
         return -1;  
     }     
 
@@ -111,7 +116,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     {
         $idx = static::findIndexById( $id );
 		if ($idx < 0) return null;
-		return $this->elements[$idx];
+		return $this->getElements()[$idx];
     }  	
 	
     /**
@@ -121,7 +126,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      */ 
     public function count()
     {
-        return count($this->elements);
+        return count($this->getElements());
     }
 	
     /**
@@ -131,7 +136,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      */     
     public function getCountAll()
     {
-		return count($this->elements);
+		return count($this->getElements());
     } 	
 
     /**
@@ -167,7 +172,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      */
     public function current()
     {
-		return $this->elements[$this->getPosition()];
+		return $this->getElements()[$this->getPosition()];
     }
 
     /**
@@ -199,11 +204,11 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     {
 		if ($this->dontUsePaging || !$this->itemCountPerPage)
 		{		
-			return $this->position >= 0 && $this->position < count($this->elements);
+			return $this->position >= 0 && $this->position < count($this->getElements());
 		}
 		if ($this->position < 0) return false;
 		if ($this->itemCountPerPage && $this->position >= $this->itemCountPerPage) return false;
-		if ($this->getPosition() >= count($this->elements)) return false;
+		if ($this->getPosition() >= count($this->getElements())) return false;
 		return true;
     }
     
@@ -218,7 +223,31 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
         if ( $check && $this->findIndexById( $obj->id ) >= 0) return $this;
         $this->elements[] = $obj;
         return $this;
-    }  
+    } 
+
+    /**
+     * Порядковый номер первого элемента              
+     *             
+     * @return int  
+     */	
+    public function getFirstIndex()
+    {	
+		if (!$this->itemCountPerPage) return 1;
+		return 1 + $this->itemCountPerPage * ($this->pageNumber - 1);
+	}
+	
+    /**
+     * Порядковый номер последнего элемента
+     *             
+     * @return int  
+     */	
+    public function getLastIndex()
+    {	
+		if (!$this->itemCountPerPage) return $this->getCountAll();
+		$count = $this->itemCountPerPage + $this->itemCountPerPage * ($this->pageNumber - 1);
+		if ($count > $this->getCountAll()) $count = $this->getCountAll();
+		return $count;
+	}		
     
     public function setItemCountPerPage($itemCountPerPage = null)
     {
