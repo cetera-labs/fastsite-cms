@@ -1,0 +1,18 @@
+{# стандартная верстка #}
+{% block html %}
+	{% if widget.getCatalog %}
+
+		<h1>{{ widget.catalog.name|raw }}</h1>
+		
+		<div class="content">
+			{% if widget.getParam('show_pic') and widget.catalog.pic %}
+			<div class="left picture">
+				<img src="{{ widget.material.pic }}" />
+			</div>
+			{% endif %}
+			
+			{{ widget.catalog.short|raw }}			
+		</div>
+
+	{% endif %}
+{% endblock %}

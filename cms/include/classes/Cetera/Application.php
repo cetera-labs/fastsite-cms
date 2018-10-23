@@ -1358,7 +1358,8 @@ class Application {
 				'name'    => 'Menu',
 				'class'   => '\\Cetera\\Widget\\Menu',
 				'describ' => $t->_('Меню раздела'),
-				'icon'    => '/cms/images/folders.gif'
+				'icon'    => '/cms/images/folders.gif',
+				'not_placeable' => true
 			),
 			
 			'MenuUser' => array(
@@ -1430,12 +1431,21 @@ class Application {
 				'describ' => $t->_('Материал'),
 				'icon'    => '/cms/images/math1.gif',
 			),		
+			
+			'Section.Info' => array(
+				'name'    => 'Section.Info',
+				'class'   => '\\Cetera\\Widget\\SectionInfo',
+				'describ' => $t->_('Свойства раздела'),
+				'icon'    => '/cms/images/folder.gif',
+			),		
+			
 
 			'Section' => array(
 				'name'    => 'Section',
 				'class'   => '\\Cetera\\Widget\\Section',
 				'describ' => 'Раздел',
 				'icon'    => '/cms/images/math2.gif',
+				'not_placeable' => true
 			),		
 
 			'Calendar' => array(
@@ -1443,6 +1453,7 @@ class Application {
 				'class'   => '\\Cetera\\Widget\\Calendar',
 				'describ' => $t->_('Календарь'),
 				'icon'    => '/cms/images/math2.gif',
+				'not_placeable' => true
 			),
 			
 			'User.Auth' => array(

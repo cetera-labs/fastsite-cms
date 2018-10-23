@@ -30,8 +30,7 @@ class Material extends Templateable {
 		parent::init();
 		
 		$m = $this->getMaterial();
-		if ($this->getParam('show_meta') && $m)
-		{
+		if ($this->getParam('show_meta') && $m) {
 			if ($m->meta_title) 
 				$name = $m->meta_title;
 				else $name = strip_tags($m->name);
@@ -48,8 +47,7 @@ class Material extends Templateable {
 			//$a->addHeadString('<meta property="og:url" content="http://'.$_SERVER['SERVER_NAME'].$m->url.'"/>', 'og:url');	
 			//$a->addHeadString('<meta property="og:type" content="article"/>', 'og:type');
 		
-			if ($m->meta_keywords) 			
-			{
+			if ($m->meta_keywords) {
 				$a->setPageProperty('keywords', $m->meta_keywords);
 			}
 			
