@@ -30,6 +30,7 @@ class Linkset extends DynamicObject {
 		if ($field['type'] != FIELD_LINKSET && $field['type'] != FIELD_MATSET) 
 			throw new \Cetera\Exception\CMS('Illegal type of field '.$field['name'].' - '.$field['type']);
 
+		/*
         if ($field['type'] == FIELD_LINKSET) {
         		
 			if ($field['len'] == CATALOG_VIRTUAL_USERS) {
@@ -47,14 +48,15 @@ class Linkset extends DynamicObject {
         } 
 		else {            
             $od = \Cetera\ObjectDefinition::findById($field['len']);
-        }		
+        }
+*/		
 		
-		parent::__construct( $od );  
+		parent::__construct( $field->getObjectDefinition() );  
 
-		$linktable = $object->table.'_'.$od->table.'_'.$field['name'];
+		//$linktable = $object->table.'_'.$od->table.'_'.$field['name'];
 		
-		$this->query->innerJoin('main', $linktable, 'b', 'main.id = b.dest and b.id='.(int)$object->id);		
-        
+		$this->query->innerJoin('main', $field->getLinkTable(), 'b', 'main.id = b.dest and b.id='.(int)$object->id);		
+		
     } 	
 	
     /**

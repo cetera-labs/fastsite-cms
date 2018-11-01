@@ -13,7 +13,7 @@ namespace Cetera;
  **/
 class ObjectField implements \ArrayAccess {
 
-    protected $container = array(); 
+    protected $container = []; 
     
     public $name = null;
     
@@ -44,6 +44,10 @@ class ObjectField implements \ArrayAccess {
         }
     
     }
+	
+	public function isVisible() {
+		return $this->offsetGet('show') > 0;
+	}
 
     public function __construct($data, $od) {
         $this->container = $data;
@@ -88,6 +92,10 @@ class ObjectField implements \ArrayAccess {
         if ($offset == 'length') $offset = 'len';
         return $offset;
     }
+	
+	public function getParentObjectDefinition() {
+		return $this->parentObjectDefinition;
+	}
 }
 
 /**

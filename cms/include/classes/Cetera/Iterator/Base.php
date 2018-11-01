@@ -304,6 +304,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @return void   
      */
     public function offsetSet($offset, $value) {
+		$this->getElements();
         $this->elements[$this->getPosition($offset)] = $value;
     }
     
@@ -314,6 +315,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @return bool  
      */
     public function offsetExists($offset) {
+		$this->getElements();
         return isset($this->elements[$this->getPosition($offset)]);
     }
     
@@ -323,6 +325,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @return void   
      */
     public function offsetUnset($offset) {
+		$this->getElements();
         unset( $this->elements[$this->getPosition($offset)] );
     }
     
@@ -333,6 +336,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @return FSObject   
      */
     public function offsetGet($offset) {
+		$this->getElements();
         return isset($this->elements[$this->getPosition($offset)]) ? $this->elements[$this->getPosition($offset)] : null;
     }
     

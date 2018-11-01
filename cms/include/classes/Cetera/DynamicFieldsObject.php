@@ -459,7 +459,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             return $this->fields[$field['name']];
             
         $slot = new Cache\Slot\MaterialField($this->table, $this->fields['id'], $field['name']);
-        if (false === ($_tmp = $slot->load())) {        
+        if (!$this->fields['id'] || false === ($_tmp = $slot->load())) {        
     
             if (!isset($this->fields[$field['name']]))
                 $this->fields[$field['name']] = $this->getPlainField($field);
@@ -559,6 +559,27 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
         return $this->fields[$field['name']];
     } 
+	
+    /**
+	 *
+     * Чтение из БД объектов, которые связаны полем $field с данным объектом.
+     *           
+     * @param int|string|ObjectDefinition Тип материалов, в которой хранятся объекты       
+     * @param string $field имя поля по которому объекты связаны с текущим                                  
+     * @return Iterator\Object    
+     */ 	
+	public function getLinkedObjects($od, $fieldName) {
+		if (!is_a($od,'Cetera\ObjectDefinition')) {
+			if (is_int($od)) {
+				$od = ObjectDefinition::findById($od);
+			}
+			else {
+				$od = ObjectDefinition::findByAlias($od);
+			}
+		}
+		$field = $od->getField($fieldName);
+		return new Iterator\LinksetReverse($this,$field);
+	}
     
     /**
 	 * DEPRECATED
@@ -636,6 +657,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     }
     
     /**
+	 * DEPRECATED
      * Чтение из БД объектов, которые связаны полем $field с объектом.
      * 
      * При построении SQL запроса к базе данных, таблице, из которой производится чтение полей объектов   
@@ -773,6 +795,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	/** @internal */
     protected function saveDynimicLinks()
     {
+		
         $fields = $this->getFieldsDef();
         if (is_array($fields)) foreach ($fields as $name => $field) {
             $type = $field['type'];
@@ -987,7 +1010,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		
 		if (is_a($values,'Cetera\Iterator\Linkset')) {
 			$values->fetchElements();
-		}		
+		}
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$tbl."_".$name." where id=$id2"); 
 		
@@ -997,10 +1020,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		else {
 			$link_list = $values;
 		}
-				
+						
 		if (is_array($link_list) || $link_list instanceof \Traversable) {
-			
+						
 			foreach ($link_list as $no => $link) {
+				
 		  
 			  if (is_object($link)) {
 				  if ($type == FIELD_LINKSET || is_a($link,'Cetera\DynamicFieldsObject')) {
@@ -1019,15 +1043,17 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					  $m->save();
 					  $link = $m->id;					  
 				  }
-			  }
+			  }  
 			  
 			  if ((int)$link) { 
 				  if (isset($old[ $link ])) unset($old[ $link ]);
-				  $this->getDbConnection()->executeQuery("insert ignore into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");
+				  $this->getDbConnection()->executeQuery("insert ignore into ".$math."_".$tbl."_".$name." (id,dest,tag) values (".$id2.",".(int)$link.",".$no.")");				  
 				  if ($type == FIELD_MATSET) $this->getDbConnection()->executeQuery("update $tbl set tag=$no where id=$link"); 
 			  }
 			  
 			}
+			
+			
 		}
 		
 		if ($type == FIELD_MATSET) {

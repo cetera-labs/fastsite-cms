@@ -15,7 +15,7 @@ class SectionInfo extends Templateable {
 		
 	protected function initParams()
 	{
-		$this->_params = array[
+		$this->_params = [
 			'template'               => 'default.twig',
 			'catalog'                => 0,
 			'show_meta'              => true,

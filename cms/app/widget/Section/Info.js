@@ -14,6 +14,13 @@ Ext.define('Cetera.widget.Section.Info', {
 				xtype: 'folderfield',
 			},	
 			{
+				xtype:         'checkbox',
+				boxLabel:      _('выводить META-теги'),
+				name:          'show_meta',
+				inputValue:     1,
+				uncheckedValue: 0
+			},				
+			{
 				xtype: 'widgettemplate',
 				widget: 'Section.Info'
 			}	
