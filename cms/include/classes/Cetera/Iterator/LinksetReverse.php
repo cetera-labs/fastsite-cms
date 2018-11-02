@@ -27,12 +27,12 @@ class LinksetReverse extends DynamicObject {
     public function __construct($object, $field)
     {
 
-		if ($field['type'] != FIELD_LINKSET && $field['type'] != FIELD_LINK) 
+		if ($field['type'] != FIELD_MATSET && $field['type'] != FIELD_LINKSET && $field['type'] != FIELD_LINK) 
 			throw new \Cetera\Exception\CMS('Illegal type of field '.$field['name'].' - '.$field['type']);
 
 		parent::__construct( $field->getParentObjectDefinition() );
-		
-		if ($field instanceof \Cetera\ObjectFieldLinkSet) {
+				
+		if ($field instanceof \Cetera\ObjectFieldLinkSetAbstract) {
 			$this->query->innerJoin('main', $field->getLinkTable() , 'b', 'main.id = b.id and b.dest='.(int)$object->id);
 		}
 		else {

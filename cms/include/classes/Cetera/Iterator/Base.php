@@ -224,6 +224,10 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
         $this->elements[] = $obj;
         return $this;
     } 
+	
+	public function add($obj, $check = true) {
+		$this->append($obj, $check);
+	}
 
     /**
      * Порядковый номер первого элемента              

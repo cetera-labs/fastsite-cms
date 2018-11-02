@@ -244,6 +244,7 @@ define('EDITOR_TEXT_CKEDITOR_SMALL',33);
 define('EDITOR_MATSET_RICH', 	    34);
 define('EDITOR_LINK_CATALOG',    	35);
 define('EDITOR_LINKSET2_DEFAULT', 	36);
+define('EDITOR_LINKSET_EDITABLE', 	37);
 // ---------- // Field types ---------------
 
 define('DEBUG_SQL'      , 8);

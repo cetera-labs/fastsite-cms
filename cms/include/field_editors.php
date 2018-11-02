@@ -34,6 +34,7 @@ $editors = array(
 	EDITOR_LINK_USER        => 'editor_link_user',
 	EDITOR_LINK_CATALOG     => 'editor_link_catalog',
 	EDITOR_LINKSET_DEFAULT 	=> 'editor_linkset_default',
+	EDITOR_LINKSET_EDITABLE => 'editor_linkset_editable',
 	EDITOR_LINKSET_CHECKBOX => 'editor_linkset_checkbox',
 	EDITOR_LINKSET_USER 	=> 'editor_linkset_user',
 	EDITOR_LINKSET2_DEFAULT => 'editor_linkset2_default',
@@ -96,6 +97,7 @@ $field_editors = array(
 	FIELD_LINKSET	=> array(
 						EDITOR_LINKSET_DEFAULT,
 						EDITOR_LINKSET_CHECKBOX,
+						EDITOR_LINKSET_EDITABLE,
 						EDITOR_USER,
 	),  
 	FIELD_LINKSET2	=> array(
@@ -142,6 +144,7 @@ $field_editors = array(
 	PSEUDO_FIELD_TAGS => array(
 		EDITOR_TAGS_DEFAULT,
 		EDITOR_LINKSET_DEFAULT,
+		EDITOR_LINKSET_EDITABLE,
 		EDITOR_USER,
 	),
     PSEUDO_FIELD_LINKSET_CATALOG => [
@@ -183,6 +186,7 @@ $l_editors = array(
 	EDITOR_DATETIME_DEFAULT => $translator->_('Выбор даты/времени'),
 	EDITOR_LINK_DEFAULT 	=> $translator->_('Выбор материала из структуры'),
 	EDITOR_LINKSET_DEFAULT 	=> $translator->_('Выбор группы материалов'),
+	EDITOR_LINKSET_EDITABLE	=> $translator->_('Выбор группы материалов с возможностью редактирования'),
 	EDITOR_LINKSET2_DEFAULT => $translator->_('Выбор группы материалов'),
 	EDITOR_MATSET_DEFAULT 	=> $translator->_('Группа материалов'),
 	EDITOR_BOOLEAN_DEFAULT 	=> $translator->_('Флажок (Checkbox)'),

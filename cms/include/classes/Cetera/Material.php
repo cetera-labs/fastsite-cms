@@ -442,6 +442,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
 		
 		Event::trigger(EVENT_CORE_MATERIAL_AFTER_SAVE, ['material' => $this]);
 		
+        $tpl = new Cache\Tag\Material($this->table, $this->id);
+        $tpl->clean();			
+		
     }
     
     public function __set($name, $value)

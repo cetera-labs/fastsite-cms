@@ -19,10 +19,9 @@ Ext.define('Cetera.field.LinkSet', {
         this.siteTree.show(); 
 
     },
-      
-    initComponent : function(){
-       
-        this.buttons = [{
+	
+	getButtons: function() {
+		return [{
             xtype   : 'button',
             iconCls : 'icon-new',
             tooltip : Config.Lang.add,
@@ -35,7 +34,6 @@ Ext.define('Cetera.field.LinkSet', {
             handler : this.removeItem,
             scope   : this
         }];
-    
-        this.callParent();  
-    }
+	}	
+   
 });

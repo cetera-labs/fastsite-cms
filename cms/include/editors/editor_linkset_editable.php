@@ -10,21 +10,22 @@
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
 
-function editor_linkset_default_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
+function editor_linkset_editable_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
 	global $application;
     if (!$field_def['len']) $field_def['len'] = $idcat;
 ?>
-                    Ext.create('Cetera.field.LinkSet', {
+                    Ext.create('Cetera.field.LinkSetEditable', {
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
-                        height: 100,
+                        height: 130,
                         from: <?=$field_def['len']?>,
+						mat_type: <?=$field_def->getObjectDefinition()->id?>,
                         store: new Ext.data.ArrayStore({
                             autoDestroy: true,
                             fields: ['id',{name: 'name', mapping: 1}],
                             data: [
-<? 
+<?   
 	$tbl = $application->getDbConnection()->fetchColumn("select A.alias from types A, dir_data B where A.id = B.typ and B.id=".$field_def['len']);
 	
 	if ($id) {
@@ -46,5 +47,5 @@ function editor_linkset_default_draw($field_def, $fieldvalue, $id = false, $idca
                         })
                     })
 <?
-    return 100;
+    return 130;
 }

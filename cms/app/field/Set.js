@@ -89,14 +89,18 @@ Ext.define('Cetera.field.Set', {
         });
     
     },
+	
+	getButtons: function() {
+		return [];
+	},
     
     getPanel : function() {
     
         if (!this.tpl) this.tpl = '<div class="list-item-material"><tpl if="name == &quot;&quot;">-без имени-</tpl>{name}</div>';
     
         this.initListView();
-        
-        if (!this.buttons) this.buttons = [];
+        		
+		this.buttons = this.getButtons();
         
         this.buttons[this.buttons.length] = {
             xtype:'button',

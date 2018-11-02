@@ -34,13 +34,11 @@ try {
         
     $hidden = 0;
     
-	if ($type && !(int)$type)
-	{
+	if ($type && !(int)$type) {
 		$objectDefinition = ObjectDefinition::findByAlias($type);
 		$type = $objectDefinition->id;
 	}
-	else
-	{
+	else {
 		$objectDefinition = ObjectDefinition::findById($type);
 	}
 	

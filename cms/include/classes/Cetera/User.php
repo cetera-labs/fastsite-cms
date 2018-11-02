@@ -518,6 +518,9 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
        if (is_array($this->fields['groups'])) $str .= '[GROUPS='.implode(',',$this->fields['groups']).']';
 	   Event::trigger(EVENT_CORE_USER_PROP,['message' => $str]);
 	   
+       $tpl = new Cache\Tag\Material($this->table, $this->id);
+       $tpl->clean();	   
+	   
     }
     
     public function boArray()

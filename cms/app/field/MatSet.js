@@ -72,10 +72,9 @@ Ext.define('Cetera.field.MatSet', {
 		if (this.window) this.window.close();
 		this.callParent();
 	},
-    
-    initComponent : function(){
-       
-        this.buttons = [
+	
+	getButtons: function() {
+		return [
 			{
 				xtype  : 'button',
 				iconCls: 'icon-new',
@@ -105,7 +104,6 @@ Ext.define('Cetera.field.MatSet', {
 				scope  : this
 			}
 		];
+	}		
     
-        this.callParent();  
-    }
 });

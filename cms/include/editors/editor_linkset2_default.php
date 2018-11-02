@@ -31,25 +31,6 @@ function editor_linkset2_default_draw($field_def, $fieldvalue, $id = false, $idc
 		  	$first = 0;
 			print "['".$m->objectDefinition->id."_".$m->id."', '".str_replace("\n",'',addslashes($m->catalog->getPath()->implode().' / '.$m->name))."']";		
 	}
-	
-/*
-	$tbl = $application->getDbConnection()->fetchColumn("select A.alias from types A, dir_data B where A.id = B.typ and B.id=".$field_def['len']);
-	
-	if ($id) {
-		$r = $application->getDbConnection()->query("select A.id, A.name, A.idcat from ".$tbl." A, ".$math."_".$tbl."_".$field_def['name']." B where A.id = B.dest and B.id=$id order by B.tag");
-		$first = 1;
-        while ($f = $r->fetch()) {
-			while ($f['idcat'] != $field_def['len'] && $f['idcat']) {
-		    	$f1 = $application->getDbConnection()->fetchArray("select A.name, C.data_id from dir_data A, dir_structure B, dir_structure C where B.data_id=".$f['idcat']." and A.id=B.data_id and C.lft<B.lft and C.rght>B.rght and C.level=B.level-1");
-		    	$f['name'] = $f1['name'].' / '.$f['name'];
-				$f['idcat'] = $f1['data_id'];				
-		  	}
-		  	if (!$first) print ',';
-		  	$first = 0;
-			print "[".(int)$f['id'].", '".str_replace("\n",'',addslashes($f['name']))."']";
-	  	}
-	}
-*/
 ?>
                             ]
                         })
