@@ -65,12 +65,11 @@ class DynamicObject extends DbObject {
 		parent::fixQuery($query);
     }	
     
-    public function join($fieldName, $direct = 0)
-    {
+    public function join($fieldName, $direct = 0) {
         if (in_array($fieldName, $this->joinedFields)) return $this;
         
         $field = $this->objectDefinition->getField($fieldName); 
-        
+
         if ($field instanceof \Cetera\ObjectFieldLinkSetAbstract) {
 			if ($direct) {
 				$link = $field->name.'_link';
@@ -84,6 +83,10 @@ class DynamicObject extends DbObject {
 				$this->query->leftJoin($link, $field->getObjectDefinition()->table, $field->name, $link.'.dest = '.$field->name.'.id');
 			}
         }
+		elseif ($field instanceof \Cetera\ObjectFieldLinkAbstract) {
+			$this->query->leftJoin('main', $field->getTable(), $field->name, 'main.`'.$field->name.'` = '.$field->name.'.id');
+			$this->joinedFields[] = $fieldName;
+		}
 
         return $this;
     }

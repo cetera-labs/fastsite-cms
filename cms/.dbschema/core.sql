@@ -36,6 +36,7 @@ INSERT INTO `types_fields`
 (23, 4, 'meta_description', 1, 'Meta description', 1000, 0, 0, 1, 13, 0, '', 16, '', 'SEO'),
 (24, 4, 'pic', 4,              'Picture[ru=Картинка]', 1, 0, 0, 1, 14, 0, '', 4, '', NULL),
 
+(38, 2, 'tag', 3,        'Sort[ru=Сортировка]',       1,    1, 0, 1, 1,  0, 100, 0, NULL, NULL),
 (30, 2, 'login', 1,      'Login', 255, 1, 1, 1, 30, 0, NULL, 0, NULL, NULL),
 (31, 2, 'name', 1,       'Name[ru=Имя]', 255, 1, 0, 1, 31, 0, NULL, 0, NULL, NULL),
 (32, 2, 'password', 1,   'Password', 32, 1, 1, 1, 32, 0, NULL, 27, NULL, NULL),
@@ -50,6 +51,7 @@ INSERT INTO `types_fields`
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tag` int(11) NOT NULL DEFAULT '1',
   `login` varchar(255) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `password` char(32) DEFAULT NULL,

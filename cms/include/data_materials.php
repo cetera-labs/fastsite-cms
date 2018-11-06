@@ -72,23 +72,30 @@ try {
     
     $order = $_REQUEST['dir'];
     $sort = $_REQUEST['sort'];
-	if (strpos($sort, '.')===false)
-	{
+	if (strpos($sort, '.')===false) {
 		$sort = 'A.'.$sort;
+	}
+	
+	if ($math == 'users') {
+		$_fields = '0 as type, 0 as autor_id, UNIX_TIMESTAMP(A.date_reg) as dat, A.login as alias,';
+		$where = "(A.name like '$query' or A.login like '$query' or C.name like '$query' or C.login like '$query') ".$where;
+	}
+	else {
+		$_fields = 'A.type, A.autor as autor_id, UNIX_TIMESTAMP(A.dat) as dat, A.alias,';
+		$where = "(A.name like '$query' or A.alias like '$query' or C.name like '$query' or C.login like '$query') ".$where;
 	}
     
     $sql = "SELECT SQL_CALC_FOUND_ROWS 
-                   A.id, A.tag, A.type, A.autor as autor_id, UNIX_TIMESTAMP(A.dat) as dat, 
+                   A.id, A.tag, ".$_fields." 
                    IF(C.name<>'' and C.name IS NOT NULL, C.name, C.login) as autor, 
-                   A.alias, D.user_id as locked, F.login as locked_login, A.".implode(', A.', $fields).",
+                   D.user_id as locked, F.login as locked_login, A.".implode(', A.', $fields).",
 				   E.name as catalog
             FROM $math A 
 			LEFT JOIN `users` C ON (A.autor=C.id) 
 			LEFT JOIN `lock` D ON (A.id = D.material_id and D.type_id=$type AND D.dat >= NOW()-INTERVAL 10 SECOND) 
 			LEFT JOIN `dir_data` E ON (A.idcat = E.id)
 			LEFT JOIN `users` F ON (F.id = D.user_id)
-            WHERE (A.name like '$query' or A.alias like '$query' or C.name like '$query' or C.login like '$query')
-                  $where
+            WHERE $where
             ORDER BY $sort $order
             LIMIT $m_first,$math_at_once";	
     $r = $application->getConn()->fetchAll($sql);
