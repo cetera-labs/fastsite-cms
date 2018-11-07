@@ -16,6 +16,9 @@ $widget = strtolower( $_REQUEST['widget'] );
 $data = [];
 
 parse_dir( CMSROOT.'/widgets/'.$widget );
+foreach (Plugin::enum() as $plugin) {
+	parse_dir( WWWROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets/'.$widget );
+}
 parse_dir( TEMPLATES_DIR.'/widgets/'.$widget , 'в шаблонах пользователя' );
 foreach (Theme::enum() as $theme)
 {
