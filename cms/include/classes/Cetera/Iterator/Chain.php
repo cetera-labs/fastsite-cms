@@ -15,7 +15,7 @@ namespace Cetera\Iterator;
  *
  * @package CeteraCMS
  **/
-class Base extends Base {
+class Chain extends Base {
 
 	protected $iterators = [];
 
@@ -36,8 +36,8 @@ class Base extends Base {
 			$array = $arg_list;
 		}
 		foreach ($array as $i) {
-			if ($i instanceof Base)) {
-				$this->iterators[] = $;
+			if ($i instanceof Base) {
+				$this->iterators[] = $i;
 			}
 		}		
     }
@@ -46,12 +46,12 @@ class Base extends Base {
     {
 		$res = [];
 		foreach ($this->iterators as $i) {
-			$res += $i->getElements();
+			$res = array_merge($res, $i->getElements());
 		}
 		return $res;
 	}
 	
-    public function append(Base $iterator)
+    public function addIterator(Base $iterator)
     {
 		$this->iterators[] = $iterator;
 		return $this;

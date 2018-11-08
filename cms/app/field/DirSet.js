@@ -18,22 +18,19 @@ Ext.define('Cetera.field.DirSet', {
 
     },
       
-    initComponent : function(){
-       
-        this.buttons = [{
-            xtype  : 'button',
-            iconCls: 'icon-new',
-            tooltip: Config.Lang.add,
-            handler: this.onAddItem,
-            scope  : this
+	getButtons: function() {
+		return [{
+            xtype   : 'button',
+            iconCls : 'icon-new',
+            tooltip : Config.Lang.add,
+            handler : this.onAddItem,
+            scope   : this
         },{
-            xtype  : 'button',
-            iconCls: 'icon-delete',
-            tooltip: Config.Lang.remove,
-            handler: this.removeItem,
-            scope  : this
+            xtype   : 'button',
+            iconCls : 'icon-delete',
+            tooltip : Config.Lang.remove,
+            handler : this.removeItem,
+            scope   : this
         }];
-    
-        this.callParent(arguments);
-    }
+	}	
 });
