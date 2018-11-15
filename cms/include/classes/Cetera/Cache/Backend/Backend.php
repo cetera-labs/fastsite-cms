@@ -65,24 +65,15 @@ class Backend {
 	/**
 	 * Проверяет доступность memcache
 	 **/ 	
-    private static function isMemcacheAvailable() {
-		
+    private static function isMemcacheAvailable() {		
         if (!extension_loaded('memcache')) return FALSE;
-        $memcache = new \Memcache;
-        try {
-            $res = $memcache->connect('localhost');
-        } catch (Exception $e) {
-            return FALSE;
-        }
-        if (!$res) return FALSE;
-        return $memcache;
+        return true;
     }
 	
 	/**
 	 * Проверяет доступность memcached
 	 **/ 	
-    private static function isMemcachedAvailable() {
-		
+    private static function isMemcachedAvailable() {		
         if (!extension_loaded('memcached')) return FALSE;
         return true;
     }	

@@ -91,6 +91,37 @@ class DynamicObject extends DbObject {
         return $this;
     }
 	
+	public function joinReverse($od, $fieldName, $direct = 0) {
+		if (!is_a($od,'Cetera\ObjectDefinition')) {
+			if (is_int($od)) {
+				$od = ObjectDefinition::findById($od);
+			}
+			else {
+				$od = ObjectDefinition::findByAlias($od);
+			}
+		}
+		
+		if (in_array($fieldName.$od->table, $this->joinedFields)) return $this;
+		
+		$field = $od->getField($fieldName);	
+
+        if ($field instanceof \Cetera\ObjectFieldLinkSetAbstract) {
+			if ($direct) {
+				$link = $field->name.'_link';
+			}
+			else {
+				$link = $field->name;
+			}
+            $this->query->leftJoin('main', $field->getLinkTable(), $link, 'main.id = '.$link.'.dest');
+            $this->joinedFields[] = $fieldName.$od->table;
+			if ($direct) {
+				$this->query->leftJoin($link, $field->getObjectDefinition()->table, $field->name, $link.'.id = '.$field->name.'.id');
+			}
+        }
+
+        return $this;		
+	}	
+	
 	public function filterInclude($fieldName, $condition, $combination = 'AND') {
 		
 		$field = $this->objectDefinition->getField($fieldName); 		

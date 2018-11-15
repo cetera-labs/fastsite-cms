@@ -68,6 +68,7 @@ class Widget {
 			$this->init();
     }
 	
+	// заполнение _params дефолтными значениями
 	protected function initParams()
 	{
 	}	

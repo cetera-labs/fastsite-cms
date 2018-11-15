@@ -46,12 +46,10 @@ class Templateable extends Widget {
 						$default = '@widget/'.strtolower($this->widgetName).'/default.twig';
 					}
 					
-					if (substr_count( WWWROOT.ltrim($tpl,'/'), $this->application->getTemplateDir() ) > 0)
-					{
+					if (substr_count( WWWROOT.ltrim($tpl,'/'), $this->application->getTemplateDir() ) > 0) {
 						$tpl = str_replace($this->application->getTemplateDir().'/design', '', WWWROOT.ltrim($tpl,'/'));					
 					}
-					else 
-					{
+					else {
 						$tpl = '@widget/'.strtolower($this->widgetName).'/'.$tpl;
 					}
 					
