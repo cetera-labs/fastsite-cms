@@ -22,7 +22,8 @@ class Material extends Templateable {
 		'material_alias' => null,
 		'share_buttons'  => false,
 		'show_pic'       => false,
-		'show_meta'      => false
+		'show_meta'      => false,
+		'unpublished'    => false,
     );
 	
 	protected function init()

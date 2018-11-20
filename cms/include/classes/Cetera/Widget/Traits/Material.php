@@ -9,14 +9,11 @@ trait Material {
 	
 	public function getMaterial($useApp = true)
 	{
-		if (!$this->_material)
-		{
-			if ( $this->getParam('material') && $this->getParam('material') instanceof \Cetera\Material )
-			{
+		if (!$this->_material) {
+			if ( $this->getParam('material') && $this->getParam('material') instanceof \Cetera\Material ) {
 				$this->_material = $this->getParam('material');
 			}
-			else try
-			{
+			else try {
 				$tid = $this->getParam('material_type');
 				$mid = (int)$this->getParam('material_id');
 								
@@ -31,8 +28,7 @@ trait Material {
 					}
 					else {
 						$alias = $this->getParam('material_alias');
-						if (!$alias)
-						{
+						if (!$alias) {
 							if (!$useApp) throw new \Exception('Material alias required');
 							$alias = current(explode('/', $this->application->getUnparsedUrl() ));
 							if (!$alias) $alias = 'index';
@@ -41,8 +37,7 @@ trait Material {
 					}
 				}
 			}
-			catch (\Exception $e)
-			{
+			catch (\Exception $e) {
 				$this->_material = null;
 			}
 		}

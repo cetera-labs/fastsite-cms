@@ -31,6 +31,7 @@ class Section extends Templateable {
 			'material_share_buttons' => false,
 			'material_show_pic'      => false,
 			'material_template'      => null,
+			'material_unpublished'   => false,
 			
 			'list_limit'             => 10,
 			'list_where'             => null,
@@ -52,47 +53,37 @@ class Section extends Templateable {
 	{
 		if (!$this->_material)
 		{
-			try
-			{
+			try {
 				$mid = (int)$this->getParam('material_id');
 				$c = $this->getCatalog();
 				
-				if ($mid)
-				{
+				if ($mid) {
 					$this->_material = $c->getMaterialByID($id);
 				}
-				else
-				{
+				else {
 					$alias = $this->getParam('material_alias');
-					if (!$alias)
-					{
+					if (!$alias) {
 						$alias = current(explode('/', $this->application->getUnparsedUrl() ));
-						if (!$alias && $this->getParam('display_index'))
-						{
+						if (!$alias && $this->getParam('display_index')	{
 							$this->_material = $c->getMaterialByAlias('index');
 						} 
-						elseif ($alias) 
-						{
-							try
-							{
-								$this->_material = $c->getMaterialByAlias($alias);
+						elseif ($alias)  {
+							try {
+								$this->_material = $c->getMaterialByAlias($aliass, null, (boolean)$this->getParam('material_unpublished'));
 							}
-							catch (\Exception $e)
-							{
+							catch (\Exception $e) {
 								$this->error404 = true;
 								$this->_material = null;
 							}
 						}
 					}
-					else
-					{
-						$this->_material = $c->getMaterialByAlias($alias);
+					else {
+						$this->_material = $c->getMaterialByAlias($alias, null, (boolean)$this->getParam('material_unpublished'));
 					}
 				}
 
 			}
-			catch (\Exception $e)
-			{
+			catch (\Exception $e) {
 				$this->_material = null;
 			}
 		}
