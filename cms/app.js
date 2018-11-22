@@ -47,22 +47,13 @@ Ext.override(Ext.form.Basic, {
 	}
 });
 
-Ext.override(Ext.Component, {
-    ensureVisible: function(stopAt) {
-        var p;
-        this.ownerCt.bubble(function(c) {
-            if (p = c.ownerCt) {
-                if (p instanceof Ext.TabPanel) {
-                    p.setActiveTab(c);
-                } else if (p.layout.setActiveItem) {
-                    p.layout.setActiveItem(c);
-                }
-            }
-            return (c !== stopAt);
-        });
-        this.el.scrollIntoView(this.el.up(':scrollable'));
-        return this;
-    }
+Ext.override(Ext.form.field.Checkbox, {
+	stateEvents: ['change'],
+	getState: function() { return { value: this.getValue() }; },
+	applyState: function(state) { this.setValue(state.value); }
+});
+
+Ext.override(Ext.form.Basic, {
 });
 
 Ext.DomQuery.pseudos.scrollable = function(c, t) {

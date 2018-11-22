@@ -31,6 +31,56 @@ Ext.define('Cetera.window.ImageCrop', {
 		}
 	],
 	
+	tbar: [
+		{
+			xtype: 'checkbox',
+			boxLabel: _('пропорции'),
+			padding: '0 0 0 5',
+			itemId: 'aspect_check',
+			stateId: 'stateCropAspect',
+			stateful: true,		
+			listeners: {
+				change: {
+					fn: function() { if (this.up('window')) this.up('window').aspectChange(); }
+				}
+			}
+		},
+		{
+			xtype: 'numberfield',
+			fieldLabel: _('Шир.'),
+			value: 16,
+			minValue: 1,
+			padding: '0 0 0 5',
+			labelWidth: 30,
+			width: 80,
+			itemId: 'aspect_width',
+			stateId: 'stateCropWidth',
+			stateful: true,				
+			listeners: {
+				change: {
+					fn: function() { if (this.up('window')) this.up('window').aspectChange(); }
+				}
+			}
+		},	
+		{
+			xtype: 'numberfield',
+			fieldLabel: _('Выс.'),
+			value: 9,
+			minValue: 1,
+			padding: '0 0 0 5',
+			labelWidth: 30,
+			width: 80,
+			itemId: 'aspect_height',
+			stateId: 'stateCropHeight',
+			stateful: true,					
+			listeners: {
+				change: {
+					fn: function() { if (this.up('window')) this.up('window').aspectChange(); }
+				}
+			}
+		}
+	],
+	
 	html: '<img class="edit">',
 		
 	listeners: {
@@ -44,8 +94,20 @@ Ext.define('Cetera.window.ImageCrop', {
 				scalable: false,
 				viewMode: 1
 			});
-
+			
+			this.aspectChange();
+			
 			this.setValue( this.value );
+		}
+	},
+	
+	aspectChange: function() {
+		var tb = this.getDockedItems('toolbar[dock="top"]')[0];
+		if (tb.getComponent('aspect_check').getValue()) {
+			this.cropper.setAspectRatio( tb.getComponent('aspect_width').getValue() / tb.getComponent('aspect_height').getValue() );
+		}
+		else {
+			this.cropper.setAspectRatio( 0 );
 		}
 	},
 	
@@ -72,7 +134,7 @@ Ext.define('Cetera.window.ImageCrop', {
 			me.setLoading(true);
 			Cetera.Ajax.request({
 				url: '/cms/include/action_files.php?action=upload&overwrite=1&path='+path,
-                                timeout: 1000000,
+				timeout: 1000000,
 				method: 'POST',
 				rawData: formData,
 				ignoreHeaders: true,

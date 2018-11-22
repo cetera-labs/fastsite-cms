@@ -64,12 +64,12 @@ class Section extends Templateable {
 					$alias = $this->getParam('material_alias');
 					if (!$alias) {
 						$alias = current(explode('/', $this->application->getUnparsedUrl() ));
-						if (!$alias && $this->getParam('display_index')	{
+						if (!$alias && $this->getParam('display_index'))	{
 							$this->_material = $c->getMaterialByAlias('index');
 						} 
 						elseif ($alias)  {
 							try {
-								$this->_material = $c->getMaterialByAlias($aliass, null, (boolean)$this->getParam('material_unpublished'));
+								$this->_material = $c->getMaterialByAlias($alias, null, (boolean)$this->getParam('material_unpublished'));
 							}
 							catch (\Exception $e) {
 								$this->error404 = true;

