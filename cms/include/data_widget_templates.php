@@ -10,7 +10,6 @@ namespace Cetera;
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
-       //TEMPLATES_DIR
 include('common_bo.php');
 $widget = strtolower( $_REQUEST['widget'] );
 $data = [];
@@ -19,9 +18,7 @@ parse_dir( CMSROOT.'/widgets/'.$widget );
 foreach (Plugin::enum() as $plugin) {
 	parse_dir( WWWROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets/'.$widget );
 }
-parse_dir( TEMPLATES_DIR.'/widgets/'.$widget , 'в шаблонах пользователя' );
-foreach (Theme::enum() as $theme)
-{
+foreach (Theme::enum() as $theme) {
 	parse_dir( WWWROOT.THEME_DIR.'/'.$theme->name.'/widgets/'.$widget, 'в теме "'.$theme->title.'"' );
 }
 

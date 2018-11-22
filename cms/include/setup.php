@@ -249,8 +249,7 @@ elseif ($step == 2) {
     }
     
     if (check_file(PREFS_FILE, 1)) $res['error'] = true;
-    if (check_dir(TEMPLATES_DIR, 1, FALSE)) $res['error'] = true;
-	if (check_dir(DOCROOT.THEME_DIR, 1, FALSE)) $res['error'] = true;
+    if (check_dir(DOCROOT.THEME_DIR, 1, FALSE)) $res['error'] = true;
     if (check_dir(CACHE_DIR, 2)) $res['warning'] = true;
     if (check_dir(IMAGECACHE_DIR, 2)) $res['warning'] = true;
     if (check_dir(FILECACHE_DIR, 2)) $res['warning'] = true;

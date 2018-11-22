@@ -10,7 +10,6 @@ namespace Cetera;
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
-       //TEMPLATES_DIR
 include('common_bo.php');
 
 $data = array();

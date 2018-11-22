@@ -18,7 +18,7 @@ INSERT INTO `types_fields`
 (`field_id`, `id`, `name`, `type`, `describ`, `len`, `fixed`, `required`, `shw`, `tag`, `pseudo_type`, `default_value`, `editor`, `editor_user`, `page`) VALUES
 (1, 1, 'name', 1,              'Title[ru=Заголовок]',        1024, 1, 0, 1, 2,  0, NULL, 0, NULL, NULL),
 (8, 1, 'alias', 1,             'Alias',            255,  1, 1, 1, 3,  0, NULL, 0, NULL, NULL),
-(7, 1, 'autor', 6,             'Author[ru=Автор]',            -1,   1, 1, 0, 4,  1003, NULL, 0, NULL, NULL),
+(7, 1, 'autor', 6,             'Author[ru=Автор]',            -1,   1, 1, 1, 4,  1003, NULL, 0, NULL, NULL),
 (4, 1, 'dat_update', 5,        'Edit date[ru=Дата редактирования]',1,    1, 1, 0, 5,  0, NULL, 0, NULL, NULL),
 (3, 1, 'dat', 5,               'Creation date[ru=Дата создания]',    1,    1, 1, 0, 6,  0, NULL, 0, NULL, NULL),
 (2, 1, 'idcat', 6,             'Section[ru=Раздел]',           0,    1, 1, 0, 7,  1008, NULL, 0, NULL, NULL),
