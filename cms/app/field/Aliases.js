@@ -20,11 +20,8 @@ Ext.define('Cetera.field.Aliases', {
         },this);
     },
     
-    initComponent : function(){
-       
-        this.height = 100;
-        
-        this.buttons = [{
+	getButtons: function() {
+		return [{
             xtype:'button',
             iconCls:'icon-new',
             tooltip:Config.Lang.add,
@@ -37,6 +34,11 @@ Ext.define('Cetera.field.Aliases', {
             handler: this.removeItem,
             scope: this
         }];
+	},	
+	
+    initComponent : function(){
+       
+        this.height = 100;
 		
 		this.store = Ext.create('Ext.data.Store', {
 			fields: ['id','name'],
