@@ -45,12 +45,11 @@ class Linkset2 extends Base {
      * @param \Cetera\DynamicFieldsObject $material
      * @return void  
      */ 	
-	public function add(\Cetera\DynamicFieldsObject $material) {
+	public function add($material, $check = true) {
 		if ($material->objectDefinition->id != $this->objectDefinition->id) {
 			throw new \Exception('Illegal type of material '.$material->objectDefinition->id.'. Must be '.$this->objectDefinition->id);
 		}
-		$this->elements[] = $material;
-		return $this;
+		return parent::add($material, $check);
 	}	
 
 }

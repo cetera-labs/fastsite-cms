@@ -1,0 +1,2 @@
+3.58.1
+	* Bugfix https://pm.cetera.ru/browse/CCD-1301
