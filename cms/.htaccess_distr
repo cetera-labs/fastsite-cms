@@ -17,6 +17,7 @@ RewriteCond %{REQUEST_URI} ^/$
 RewriteCond %{REQUEST_URI} !^/cms
 RewriteRule  ^.*$ cms/fo.php
 RewriteCond %{REQUEST_URI} ^/plugins/(.+)\.php$
+RewriteCond %{REQUEST_URI} ^/themes/(.+)\.php$ [OR]
 RewriteRule  ^.*$ cms/include/plugin_call.php
 
 DirectoryIndex index.html index.php
