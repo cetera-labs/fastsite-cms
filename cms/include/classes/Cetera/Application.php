@@ -1005,7 +1005,12 @@ class Application {
             if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes') && is_dir(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes'))
 			{
                 $loader = new \Composer\Autoload\ClassLoader();
-                $loader->add(ucfirst($theme->name), DOCROOT.THEME_DIR.'/'.$theme->name.'/classes');
+				
+				$parts = explode('_',$theme->name);
+				$prefix = '';
+				foreach ($parts as $p) $prefix .= ucfirst($p);				
+				
+                $loader->add($prefix, DOCROOT.THEME_DIR.'/'.$theme->name.'/classes');
                 $loader->register();
             }   			
             
