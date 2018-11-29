@@ -17,6 +17,13 @@ if (!function_exists('curl_reset'))
 	}
 } 
 
+if ( !function_exists(  'is_iterable' ) )
+{
+    function is_iterable( $obj ) {
+        return is_array( $obj ) || ( is_object( $obj ) && ( $obj instanceof \Traversable ) );
+    }
+}
+
 error_reporting (E_ALL ^ E_NOTICE);
 
 require_once(__DIR__.'/constants.php');

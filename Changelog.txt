@@ -1,2 +1,7 @@
+3.58.2
+
+	* BackOffice https://pm.cetera.ru/browse/CCD-1304 в карточке радактирования материала добавлены табы со списком материалов, ссылающихся на данный полями "Ключеные слава" и "Ссылка на группу материалов"
+	* https://pm.cetera.ru/browse/CCD-1303
+
 3.58.1
 	* Bugfix https://pm.cetera.ru/browse/CCD-1301

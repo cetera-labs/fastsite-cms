@@ -998,9 +998,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	/**
 	 * @internal
 	*/
-	private function insert_links($values, $math, $tbl, $name, $id2, $type, $type2) {
+	private function insert_links($values, $math, $tbl, $name, $id2, $type, $type2, $keep_unused = false) {
 			
-		if ($type == FIELD_MATSET) {
+		if ($type == FIELD_MATSET && !$keep_unused) {
 			$r = $this->getDbConnection()->query("SELECT dest FROM ".$math."_".$tbl."_".$name." WHERE id=$id2");
 			$old = array();
 			while ($f = $r->fetch()) {
@@ -1056,12 +1056,13 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 			
 		}
 		
-		if ($type == FIELD_MATSET) {
+		if ($type == FIELD_MATSET && !$keep_unused) {			
 			foreach ($old as $o) try {			
 				$m = DynamicFieldsObject::getByIdType($o, $type2);
 				$m->delete();
 			} catch (\Exception $e) {}
 		}
+		
 		
 	}		
 	
@@ -1080,9 +1081,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	 * @internal
 	*/
 	private function process_tags($value, $math, $tbl, $name, $id2, $type) {
-		
-		if (is_array($value)) {			
-            $this->insert_links($value, $math, $tbl, $name, $id2, $type, ObjectDefinition::findByAlias($tbl)->id);
+				
+		if (is_iterable($value)) {			
+            $this->insert_links($value, $math, $tbl, $name, $id2, $type, ObjectDefinition::findByAlias($tbl)->id, true);
 			$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
 			return;					 
 		}

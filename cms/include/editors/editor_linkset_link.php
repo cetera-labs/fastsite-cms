@@ -19,7 +19,8 @@ function editor_linkset_link_draw($field_def, $fieldvalue, $id = false, $idcat =
 						mat_type: <?=$field_def['id']?>,
 						field_name: '<?=$field_def['name']?>',
 						field_type: <?=(int)$field_def['type']?>,
-						parent_id: <?=(int)$id?>						
+						parent_id: <?=(int)$id?>,
+						parent_type: '<?=$math?>',
                     })
 <?
     return -1;

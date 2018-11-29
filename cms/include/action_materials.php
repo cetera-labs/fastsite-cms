@@ -105,11 +105,20 @@ if ($action == 'delete' && is_array($sel)) {
 
 if ($action == 'delete_link' && is_array($sel)) {
   
+	$src = Material::getById((int)$_REQUEST['src_id'], 0, $_REQUEST['src_type']);
+  
 	foreach ($sel as $val) {
-	   $m = Material::getById($val, $objectDefinition);
-       $m->{$_REQUEST['field']} = 0;
-	   $m->save();
+	   $m = Material::getById($val, $objectDefinition);	   
+       if ( $m->{$_REQUEST['field']} instanceof \Cetera\Iterator\Linkset ) {
+		    $m->{$_REQUEST['field']}->remove($src);
+			$m->save();
+	   }
+	   elseif( $m->{$_REQUEST['field']}->id == $src->id ) {
+	       $m->{$_REQUEST['field']} = 0;
+		   $m->save();
+	   }
     }
+	
 	$res['success'] = true;
 
 }

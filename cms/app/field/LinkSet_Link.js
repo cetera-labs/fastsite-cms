@@ -24,17 +24,18 @@ Ext.define('Cetera.field.LinkSet_Link', {
 			sorters: [{property: "dat", direction: "DESC"}],
 			proxy: {
 				type: 'ajax',
-				url: '/cms/include/data_materials.php',
+				url: '/cms/include/data_materials_linked.php',
 				simpleSortMode: true,
 				reader: {
 					type: 'json',
 					root: 'rows'
 				},
 				extraParams: {
-					'id'   : 0, 
-					'type' : this.mat_type,
-					'filter': this.field_name+'='+this.parent_id,
-					limit  : Config.defaultPageSize
+					'mat_type'    : this.mat_type,
+					'field_name'  : this.field_name,
+					'parent_type' : this.parent_type,
+					'parent_id'   : this.parent_id,
+					'limit'       : Config.defaultPageSize
 				}
 			}		
 		
@@ -191,10 +192,12 @@ Ext.define('Cetera.field.LinkSet_Link', {
 				Ext.Ajax.request({
 					url: 'include/action_materials.php',
 					params: { 
-						action: 'delete_link', 
-						type: this.mat_type, 
-						'sel[]': this.getSelected(),
-						field: this.field_name
+						action:   'delete_link', 
+						type:     this.mat_type, 
+						'sel[]':  this.getSelected(),
+						field:    this.field_name,
+						src_id:   this.parent_id,
+						src_type: this.parent_type
 					},
 					scope: this,
 					success: function(resp) {

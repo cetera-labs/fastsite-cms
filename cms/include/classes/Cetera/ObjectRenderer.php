@@ -290,7 +290,11 @@ class ObjectRenderer {
 		// поля типа FIELD_MATERIAL
 		$fields = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_MATERIAL.' and pseudo_type=0 and len='.$this->objectDefinition->id);		
 		
-		// поля типа FIELD_LINK
+		// поля типа PSEUDO_FIELD_TAGS
+		$fields2 = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE pseudo_type='.PSEUDO_FIELD_TAGS.' and len='.$this->objectDefinition->id);		
+		$fields = array_merge($fields, $fields2);		
+		
+		// поля типа FIELD_LINK или FIELD_LINKSET
 		if ($this->catalog > 0) {		
 			$catalog = Catalog::getById($this->catalog);			
 			// итератор всех разделов имеющих тип материалов как у редактируемого материала
@@ -299,7 +303,7 @@ class ObjectRenderer {
 			if (!count($sections)) return;
 			
 			// получаем все поля, ссылающиеся на эти разделы
-			$data = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_LINK.' and pseudo_type=0 and len IN ('.implode(',',$sections->idArray()).')');
+			$data = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type IN ('.FIELD_LINK.','.FIELD_LINKSET.') and pseudo_type=0 and len IN ('.implode(',',$sections->idArray()).')');
 
 			foreach ($data as $f) {				
 				$c = Catalog::getById($f['len']);
@@ -308,7 +312,7 @@ class ObjectRenderer {
 					$fields[] = $f;
 				}				
 			}			
-		}
+		}	
 		
 		ob_start();
 		foreach ($fields as $f) try {			
