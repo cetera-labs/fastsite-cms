@@ -505,7 +505,7 @@ class ObjectDefinition extends Base {
             
         }
         
-		$tag = DbConnection::getDbConnection()->fetchColumn("select max(tag) from types_fields where id=?",[$this->id],0) + 1;
+		$tag = DbConnection::getDbConnection()->fetchColumn("select max(tag) from types_fields where id=?",[$this->id],0) + 10;
         DbConnection::getDbConnection()->executeQuery(
 			"INSERT INTO types_fields (tag,name,type,pseudo_type,len,describ,shw,required,fixed,id,editor,editor_user, default_value, page) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
 			[$tag,$params['name'],$params['type'],$params['pseudo_type'],$params['len'],$params['describ'],$params['shw'],$params['required'],$params['fixed'],$this->id,(int)$params['editor'],$params['editor_user'],$params['default_value'],$params['page']]
@@ -622,7 +622,8 @@ class ObjectDefinition extends Base {
 						default_value='".$params['default_value']."',
 						editor=".$params['editor'].",
 						editor_user='".$params['editor_user']."',
-						page='".$params['page']."'
+						page='".$params['page']."',
+						tag='".$params['tag']."'
 					WHERE field_id=".$params['field_id'];			
 		}
 		else 

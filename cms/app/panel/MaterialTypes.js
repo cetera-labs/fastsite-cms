@@ -161,6 +161,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
         fp.def_value.setValue('');
         fp.editor_u.setValue('');
         fp.page.setValue('');
+		fp.tag.setDisabled(1);
         //fp.type.setValue(fp.type.getStore().getAt(0).get('id'));
         fp.datatype.setValue(fp.datatype.getStore().getAt(0).get('id'));
         fp.datatype.fireEvent('select', fp.datatype);
@@ -201,7 +202,11 @@ Ext.define('Cetera.panel.MaterialTypes', {
 		
         fp.def_value.setValue(f.get('default_value'));
         fp.editor_u.setValue(f.get('editor_user'));
+		
         fp.page.setValue(f.get('page'));
+		
+		fp.tag.setDisabled(0);
+		fp.tag.setValue(f.get('tag'));
 		
         fp.type.setValue(parseInt(fp.datatype.getStore().getAt(0).get('id')));
 		fp.type.setDisabled(fixed);
@@ -504,6 +509,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
             hidden:    new Ext.form.Checkbox({boxLabel: Config.Lang.hiddenField, name: 'hidden', inputValue: 1}),
             size:      new Ext.form.TextField({fieldLabel: Config.Lang.size, name: 'len', vtype: 'len', value: 1000}),
             page:      new Ext.form.TextField({ fieldLabel: Config.Lang.page, name: 'page' }),
+			tag:       new Ext.form.field.Number({ fieldLabel: _('Сортировка'), name: 'tag', minValue: 1 }),
             folder:    Ext.create('Cetera.field.Folder', { name: 'catid', value: 0, nolink: 1 }),
             variants:  new Ext.form.TextField({
 				fieldLabel: Config.Lang.variants, 
@@ -579,7 +585,8 @@ Ext.define('Cetera.panel.MaterialTypes', {
                 this.field_props.name,
                 this.field_props.describ,
                 this.field_props.datatype,  
-                this.field_props.page,            
+                this.field_props.page,    
+				this.field_props.tag, 				
                 {
                     xtype: 'checkboxgroup',
                     items: [
@@ -692,7 +699,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
         var win = new Ext.Window({
             closable:true,
             width:500,
-            height:300,
+            height:320,
             closeAction: 'hide',
             plain:true,
             layout: 'fit',

@@ -26,6 +26,8 @@ try {
 		
 		$type_id       = (int)$_REQUEST['type_id'];
 		
+		$tag = 0;
+		
 		if (isset($_REQUEST['rows']))
 		{
 			$data = json_decode($_REQUEST['rows'], true);
@@ -44,7 +46,8 @@ try {
 			$default_value = $data['default_value'];
 			$editor        = (int)$data['editor'];
 			$editor_user   = $data['editor_user'];
-			$page          = $data['page'];			
+			$page          = $data['page'];
+			$tag 		   = $data['tag'];
 		}
 		else
 		{  
@@ -59,6 +62,7 @@ try {
 			$editor        = (int)$_REQUEST['editor'];
 			$editor_user   = $_REQUEST['editor_user'];
 			$page          = $_REQUEST['page'];
+			$tag           = $_REQUEST['tag'];
 			
 			if ($type==FIELD_MATSET || $type==FIELD_MATERIAL) {
 				 $len = $_REQUEST['types'];
@@ -193,6 +197,7 @@ try {
 				  'editor_user' => $editor_user, 
 				  'default_value' => $default_value,
 				  'page' => $page,
+				  'tag'  => $tag,
 			  ));                      
 		
 		}
@@ -239,6 +244,14 @@ try {
         	$res['success'] = true;
         }
     }
+	
+	if (in_array($_REQUEST['action'],['field_up','field_down'])) {
+		list($type_id) = $application->getConn()->fetchArray('select id from types_fields where field_id=?', array($_REQUEST['id']));
+		$count = $application->getConn()->fetchColumn('select count(tag) as c from types_fields where id=? group by tag having c>1', [$type_id]);
+		if ($count) {
+			$application->getConn()->executeQuery('SET @v := 10; UPDATE `types_fields` SET tag = (@v := @v + 10) WHERE id = ? ORDER BY TAG', [$type_id]);
+		}
+	}
     
     if ($_REQUEST['action'] == 'field_up') {
       list($tag, $type_id) = $application->getConn()->fetchArray('select tag, id from types_fields where field_id=?', array($_REQUEST['id']));
@@ -253,7 +266,7 @@ try {
     
     if ($_REQUEST['action'] == 'field_down') {
       list($tag, $type_id) = $application->getConn()->fetchArray('select tag, id from types_fields where field_id=?', array($_REQUEST['id']));
-	  $f = $application->getConn()->fetchArray('select field_id, tag from types_fields where id=? and tag>? order by tag desc limit 1', array($type_id, $tag));
+	  $f = $application->getConn()->fetchArray('select field_id, tag from types_fields where id=? and tag>? order by tag limit 1', array($type_id, $tag));
       if ($f[0]) {
     	  if ($f[1] == $tag) $tag--;
 		  $application->getConn()->executeQuery('update types_fields set tag=? where field_id=?', array($f[1],$_REQUEST['id']));
