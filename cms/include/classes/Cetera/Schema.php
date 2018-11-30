@@ -880,8 +880,10 @@ class Schema {
     		if ($value['tag'] == 'key') {
     		    if ($value['type'] == 'open') $key = $value['attributes'];
     			if ($value['type'] == 'close') {
-    				if (!isset($table['keys'])) $table['keys'] = array();	
-    				$table['keys'][$key['name']] = $key;
+					if ($key['name']) {
+						if (!isset($table['keys'])) $table['keys'] = array();	
+						$table['keys'][$key['name']] = $key;
+					}
     			}
     		}
         

@@ -249,7 +249,7 @@ try {
 		list($type_id) = $application->getConn()->fetchArray('select id from types_fields where field_id=?', array($_REQUEST['id']));
 		$count = $application->getConn()->fetchColumn('select count(tag) as c from types_fields where id=? group by tag having c>1', [$type_id]);
 		if ($count) {
-			$application->getConn()->executeQuery('SET @v := 10; UPDATE `types_fields` SET tag = (@v := @v + 10) WHERE id = ? ORDER BY TAG', [$type_id]);
+			$application->getConn()->executeQuery('SET @v := 0; UPDATE `types_fields` SET tag = (@v := @v + 10) WHERE id = ? ORDER BY TAG', [$type_id]);
 		}
 	}
     

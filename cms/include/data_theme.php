@@ -26,6 +26,10 @@ if (sizeof($_POST)) {
         $theme->setConfig($r->config, $s);       
     
     }
+	
+    echo json_encode(array(
+        'success' => true
+    ));		
 
 } else {
 
