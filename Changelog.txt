@@ -1,3 +1,5 @@
+	* Bugfix. https://pm.cetera.ru/browse/CCD-1306
+
 3.58.3
 
 	* Bugfix. Исправлено формирование префикса namespace для каталога themes/

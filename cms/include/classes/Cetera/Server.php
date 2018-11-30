@@ -212,6 +212,8 @@ class Server extends Catalog {
         $theme_path = null;
         if ($theme) $theme_path = THEME_DIR.'/'.$theme->name;
         self::getDbConnection()->update('dir_data',array('templateDir'=>$theme_path),array('id'=>$this->id));
+		$this->updateCache();
+		return $this;
     }    
 	
 	public function getAliases()

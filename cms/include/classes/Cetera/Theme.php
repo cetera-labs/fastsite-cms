@@ -286,10 +286,10 @@ class Theme implements \ArrayAccess  {
             
         }
 		else {
-            $info = array(
+            $info = [
                   'title'       => $this->name,
                   'description' => ''
-            );
+            ];
         } 
 				
 		return $info;
@@ -479,9 +479,11 @@ class Theme implements \ArrayAccess  {
 		rename(WWWROOT.THEME_DIR.'/'.$oldname, $this->getPath());
 		
 		// Переименование Ext компонента редактирования настроек
-		$text = file_get_contents($this->getPath().'/ext/Config.js');
-		$text = str_replace("'Theme.".$oldname.".Config'","'Theme.".$this->name.".Config'",$text);
-		file_put_contents($this->getPath().'/ext/Config.js', $text);	
+		if (file_exists( $this->getPath().'/ext/Config.js' )) {
+			$text = file_get_contents($this->getPath().'/ext/Config.js');
+			$text = str_replace("'Theme.".$oldname.".Config'","'Theme.".$this->name.".Config'",$text);
+			file_put_contents($this->getPath().'/ext/Config.js', $text);
+		}
 	}	
 
 	public function isDeveloperMode()

@@ -806,16 +806,12 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         		$slot->remove();
         }
         
-        $tpl = new Cache\Tag\CatalogID(0);
-        $tpl->clean();
-        
-        $tpl = new Cache\Tag\CatalogID($this->id);
-        $tpl->clean();
+        $this->updateCache();
         
     	return $id;
 
     }
-    
+	   
     /**
      * Удаляет раздел
      *   
@@ -1044,7 +1040,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      *          
      * @return void  
      */ 
-    protected function updateCache()
+    public function updateCache()
     {
         $tpl = new Cache\Tag\CatalogID($this->id);
         $tpl->clean();
