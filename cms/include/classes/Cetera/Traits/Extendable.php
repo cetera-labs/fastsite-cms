@@ -7,13 +7,13 @@ trait Extendable {
 	
 	final public static function extend( $class )
 	{
-		static::$extensions = $class;
+		static::$extension = $class;
 	}
 	
 	final protected static function create()
 	{
 		if ( static::$extension ) {
-			return new static::$extensions();
+			return new static::$extension();
 		}
 		return new static();
 	}	

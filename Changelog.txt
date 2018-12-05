@@ -1,3 +1,9 @@
+3.58.7
+
+	* Bugfix in \Cetera\Traits\Extendable
+
+3.58.6
+
 	* Bugfix. https://pm.cetera.ru/browse/RRCC-339
 	* BackOffice. В файловом менеджере возможна загрузка только в www/uploads https://pm.cetera.ru/browse/CCD-1314
 	* API. Трейт \Cetera\Traits\Extendable для классов, которые могут быть расширены в пользовательских темах.
