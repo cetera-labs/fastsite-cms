@@ -41,6 +41,7 @@
          "SxGeoCity"
       ]
     },
+	"minimum-stability": "dev",
     "autoload": {
         "psr-0": { "Cetera\\": "cms/include/classes/" }
     }	
