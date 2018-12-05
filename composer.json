@@ -16,7 +16,7 @@
         "forum": "http://community.fastsite.ru/"
     },
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
 		"doctrine/dbal": "2.5.1",
 		"true/punycode": "~1.1",
 		"ckeditor/ckeditor": "4.5.6",
