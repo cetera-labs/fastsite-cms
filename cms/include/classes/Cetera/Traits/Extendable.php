@@ -10,7 +10,7 @@ trait Extendable {
 		static::$extension = $class;
 	}
 	
-	final protected static function create()
+	final public static function create()
 	{
 		if ( static::$extension ) {
 			return new static::$extension();
