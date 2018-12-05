@@ -27,21 +27,24 @@
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
-		"workerman/workerman": "^3.5"
+		"cetera-labs/library":"10"
 	},
-    "scripts": {
-      "post-install-cmd": [
-          "SxGeo\\Composer::installDatabases"
-      ]
-    },
-    "extra": {
-      "sxgeo-databases": [
-         "SxGeo",
-         "SxGeoCity"
-      ]
-    },
 	"minimum-stability": "dev",
     "autoload": {
         "psr-0": { "Cetera\\": "cms/include/classes/" }
-    }	
+    },
+	
+    "repositories":[
+        {
+            "type":"package",
+            "package":{
+                "name":"cetera-labs/library",
+                "version":"10",
+                "dist":{
+                    "url":"https://cms.cetera.ru/lib.zip",
+                    "type":"zip"
+                },
+            }
+        }
+    ],	
 }
