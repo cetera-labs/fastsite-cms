@@ -64,7 +64,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             $od = $type;
         } elseif ((int)$type) {
             $type_id = (int)$type;
-            $od = null;
+            $od = new ObjectDefinition($type_id, $table);
         }
             
         switch ($type_id) {
@@ -80,15 +80,16 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
                 $o = Catalog::create();
                 break;
             default:
-                if (!$od) $od = new ObjectDefinition($type_id, $table);
 				if ( isset(ObjectDefinition::$userClasses[$type_id]) ) {
 					$uc = ObjectDefinition::$userClasses[$type_id];
-					$o = $uc::create($od);
+					$o = $uc::create();
 				} else {
-					$o = Material::create($od);
+					$o = Material::create();
 				}
                 break;
         }
+		
+		$o->objectDefinition = $od;
 
         return $o;
     }
@@ -186,23 +187,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		$o->load($id);
         return $o;
     }
-        
-    /**
-     * Конструктор  
-     * 
-	 * @internal
-     * @param ObjectDefinition $od "Тип материалов" объекта      
-     * @return void        
-     */          
-    protected static function create() 
-    {
-		$od = func_get_arg(0);
-		
-        $o = parent::create();
-		$o->objectDefinition = $od;
-		return $o;
-    }
-    
+            
     /**
      * @internal      
      */ 	

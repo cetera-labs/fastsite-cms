@@ -16,6 +16,8 @@ namespace Cetera;
  * @package CeteraCMS
  **/
 class Material extends DynamicFieldsObject implements SiteItem {
+	
+	use \Cetera\Traits\Extendable;
 
     /**
      * Раздел, в котором находится материал 

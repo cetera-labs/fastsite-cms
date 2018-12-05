@@ -27,7 +27,6 @@ abstract class Base {
 	 */  
     public static $plugins = array();  
 	private $pluginInstances = array(); 
-	private static $extensions = array(); 
    
     /**
      * Конструктор    
@@ -188,20 +187,6 @@ abstract class Base {
 		{
 		    throw new \LogicException("{$class} must extend \\Cetera\\ObjectPlugin");
 		}
-	}
-	
-	public static function extend( $class )
-	{
-		self::$extensions[ get_called_class() ] = $class;
-	}
-	
-	protected static function create()
-	{
-		if ( isset(self::$extensions[ get_called_class() ]) && self::$extensions[ get_called_class() ] )
-		{
-			return new self::$extensions[ get_called_class() ];
-		}
-		return new static();
 	}
 		
     public function __call($name, $arguments)

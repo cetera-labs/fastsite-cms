@@ -23,17 +23,6 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
      * @var array    
      */  
     public static $predefinedObjectDefinition = array();
-
-    /**
-     * Конструктор
-     *    
-	 * @internal      
-     * @return void
-     */ 
-    public static function create()
-    {
-		return parent::create( self::getObjectDefinition() );
-    }
     
 	/** 
 	 * @internal
@@ -66,7 +55,7 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
 	/** @internal */
     public static function factory($type=0, $table = null, $fields = null)
     {       
-        return self::create();
+		return parent::factory(static::TYPE, static::TABLE, $fields);
     }      
 
 }

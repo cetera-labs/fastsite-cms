@@ -21,6 +21,8 @@ namespace Cetera;
  **/ 
 class Section extends DynamicFieldsObjectPredefined implements SiteItem {
     
+	use \Cetera\Traits\Extendable;
+	
 	/** 
 	 * ID типа материалов для разделов
 	 */

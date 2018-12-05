@@ -14,6 +14,8 @@ namespace Cetera;
  * @package CeteraCMS
  **/
 class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
+	
+	use \Cetera\Traits\Extendable;
     
     const TYPE = 2;
     const TABLE = 'users';
