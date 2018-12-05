@@ -31,6 +31,21 @@
 	},
 	"minimum-stability": "dev",
     "autoload": {
-        "psr-0": { "Cetera\\": "cms/include/classes/" }
-    }
+        "psr-0": { "Cetera\\": "cms/include/classes/" },
+		"psr-0": { "Dklab\\": "cms/include/classes/" }
+    },
+	
+    "repositories":[
+        {
+            "type":"package",
+            "package":{
+                "name":"cetera-labs/library",
+                "version":"10",
+                "dist":{
+                    "url":"https://cms.cetera.ru/lib.zip",
+                    "type":"zip"
+                }
+            }
+        }
+    ]	
 }

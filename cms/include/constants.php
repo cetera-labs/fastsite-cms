@@ -104,7 +104,16 @@ define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
 
-define('LIBRARY_PATH', 'library');
+if (substr_count(__DIR__, 'vendor'.DIRECTORY_SEPARATOR.'cetera-labs'.DIRECTORY_SEPARATOR.'cetera-cms') > 0) {
+	define('COMPOSER_INSTALL', true);
+	define('LIBRARY_PATH', 'vendor/cetera-labs/library');
+	define('VENDOR_PATH', DOCROOT.'/vendor');
+}
+else {
+	define('COMPOSER_INSTALL', false);
+	define('LIBRARY_PATH', 'library');
+	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
+}
 
 if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
     include_once(DOCROOT.LIBRARY_PATH.'/library.php');

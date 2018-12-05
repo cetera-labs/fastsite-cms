@@ -241,12 +241,15 @@ elseif ($step == 2) {
     
     $mode = 2;
     print '<tr><td colspan="3" class="left">';
-    if (copy(CMSROOT.'.htaccess_distr',DOCROOT.'.htaccess')) {
-        print $translator->_('Файл').' <b>.htaccess</b></td><td>'.status(0).'</td></tr>'; 
-    } else {
-		printf($translator->_('Невозможно создать файл %s'), '.htaccess');
-        print '</td><td>'.status(2).'</td></tr>';    
-    }
+	
+	if (!file_exists(DOCROOT.'.htaccess')) {
+		if (copy(CMSROOT.'.htaccess_distr',DOCROOT.'.htaccess')) {
+			print $translator->_('Файл').' <b>.htaccess</b></td><td>'.status(0).'</td></tr>'; 
+		} else {
+			printf($translator->_('Невозможно создать файл %s'), '.htaccess');
+			print '</td><td>'.status(2).'</td></tr>';    
+		}
+	}
     
     if (check_file(PREFS_FILE, 1)) $res['error'] = true;
     if (check_dir(DOCROOT.THEME_DIR, 1, FALSE)) $res['error'] = true;

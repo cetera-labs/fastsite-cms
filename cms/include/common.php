@@ -40,18 +40,27 @@ if (!file_exists(DOCROOT.LIBRARY_PATH)) {
 	
 }
 
-include DOCROOT.LIBRARY_PATH . '/vendor/composer/autoload_real.php';
-if (class_exists('\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b')) {
-	\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b::getLoader();
+if (COMPOSER_INSTALL) {
+	
+	include VENDOR_PATH.'/autoload.php';
+	
 }
 else {
-	include DOCROOT.LIBRARY_PATH . '/vendor/autoload.php';
-}
 
-$loader = new \Composer\Autoload\ClassLoader();
-$loader->add('Cetera', __DIR__.'/classes');
-$loader->add('Dklab', __DIR__.'/classes');
-$loader->register();
+	include DOCROOT.LIBRARY_PATH . '/vendor/composer/autoload_real.php';
+	if (class_exists('\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b')) {
+		\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b::getLoader();
+	}
+	else {
+		include DOCROOT.LIBRARY_PATH . '/vendor/autoload.php';
+	}
+
+	$loader = new \Composer\Autoload\ClassLoader();
+	$loader->add('Cetera', __DIR__.'/classes');
+	$loader->add('Dklab', __DIR__.'/classes');
+	$loader->register();
+
+}
 
 $application = \Cetera\Application::getInstance();
 
