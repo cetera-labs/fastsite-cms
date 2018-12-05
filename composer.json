@@ -24,7 +24,7 @@
 		"twig/extensions": "*",
 		"zendframework/zendframework1": "1.12.11",
 		"phpmailer/phpmailer": "~5.2",
-        "zapimir/sypexgeo": "dev-master",
+        "zapimir/sypexgeo": "@dev",
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
