@@ -1,15 +1,32 @@
 {
-	"require": {
+    "name": "cetera-labs/cetera-cms",
+    "type": "library",
+    "description": "Cetera CMS — innovative Cetera Labs content management and eCommerce-product, based at 10-years experience and agile development methodologies. Cetera CMS helps to start your internet sales in 5 minutes.",
+    "keywords": ["cms","ecommerce","shop","website","website-builder","website-template","ecommerce-platform","ecommerce-framework","ecommerce-shopping-solution","ecommerce-application","ecommerce-store","ecommerce-website","webdevelopment","webdevelop"],
+    "homepage": "https://ceteralabs.com/cetera-cms/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roman Romanov",
+            "email": "nicodim@mail.ru",
+            "role": "Lead Developer"
+        }
+    ],
+    "support": {
+        "forum": "http://community.fastsite.ru/"
+    },
+    "require": {
+        "php": ">=7.0.0"
 		"doctrine/dbal": "2.5.1",
 		"true/punycode": "~1.1",
 		"ckeditor/ckeditor": "4.5.6",
-                "twig/twig": "~1.0",
+        "twig/twig": "~1.0",
 		"twig/extensions": "*",
 		"zendframework/zendframework1": "1.12.11",
 		"phpmailer/phpmailer": "~5.2",
-                "zapimir/sypexgeo": "dev-master",
-                "ua-parser/uap-php": "*",
-                "guzzlehttp/guzzle": "~6.0",
+        "zapimir/sypexgeo": "dev-master",
+        "ua-parser/uap-php": "*",
+        "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
 		"workerman/workerman": "^3.5"
 	},
