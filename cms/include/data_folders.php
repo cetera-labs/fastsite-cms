@@ -19,7 +19,10 @@ if (!$path) {
     $walk = $application->getSession()->explorer_folder;
     if (!$walk) $walk = str_replace('/','|',$_GET['defaultExpand']);
     $walk = explode('|', trim($walk,'|'));
-} else $walk =array();
+} 
+else {
+	$walk =[];
+}
 
 echo json_encode(read_dir($path, $walk));
 
@@ -41,15 +44,17 @@ function read_dir($path, $walk) {
         if ($expand == $fileinfo->getFilename()) 
             $children = read_dir($path.'/'.$fileinfo->getFilename(), $walk);
         
+		$w = $fileinfo->isWritable() && (substr( $localpath, 0, strlen(USER_UPLOAD_PATH) ) == USER_UPLOAD_PATH);
+		
         $nodes[] = array(
             'text'     => $fileinfo->getFilename(),
             'id'       => str_replace('/','|',$localpath),
-            'iconCls'  => $fileinfo->isWritable()?'tree-folder-visible':'tree-folder-locked',
+            'iconCls'  => $w?'tree-folder-visible':'tree-folder-locked',
             'qtip'     => '',
             'leaf'     => FALSE,
             'disabled' => FALSE,
             'expanded' => is_array($children),
-            'readOnly' => !$fileinfo->isWritable(),
+            'readOnly' => !$w,
             'children' => $children
         );
     }
@@ -65,4 +70,3 @@ function cmp($a, $b)
     if ($_a == $_b) return 0;
     return ($_a < $_b) ? -1 : 1;
 }
-?>

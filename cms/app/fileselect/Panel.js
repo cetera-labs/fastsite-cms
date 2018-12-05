@@ -2,7 +2,7 @@ Ext.define('Cetera.fileselect.Panel', {
 
     extend:'Ext.Panel',
 	
-	requires: 'Cetera.Ajax',
+	requires: ['Cetera.Ajax','Cetera.model.Folder'],
 
     fileData: null,
     
@@ -16,6 +16,7 @@ Ext.define('Cetera.fileselect.Panel', {
         if (!this.activePanel) this.activePanel = 0;
         
         this.btnUpload = Ext.create('Ext.form.field.File',{
+			disabled: true,
 			buttonOnly: true,
 			style: {
 				overflow: 'hidden'
@@ -122,6 +123,7 @@ Ext.define('Cetera.fileselect.Panel', {
             border: false,
             bodyBorder: false,
             store: {
+				model: 'Cetera.model.Folder',
                 proxy: {
                     type: 'ajax',
                     url:  '/cms/include/data_folders.php?defaultExpand=' + this.defaultExpand
@@ -129,7 +131,8 @@ Ext.define('Cetera.fileselect.Panel', {
                 root: {
                     text: 'root',
                     iconCls: 'tree-folder-visible',
-                    id: '|'
+                    id: '|',
+					readOnly: true
                 }
             },
             
