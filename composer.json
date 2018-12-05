@@ -43,8 +43,8 @@
                 "dist":{
                     "url":"https://cms.cetera.ru/lib.zip",
                     "type":"zip"
-                },
+                }
             }
         }
-    ],	
+    ]	
 }
