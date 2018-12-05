@@ -73,7 +73,7 @@ if ($action == 'permissions') {
 
 	$s = $catalog->getParentServer();
 	if ($s) {
-		$right[3] = $catalog->getParentServer()->getFullUrl().PREVIEW_PREFIX.$catalog->getUrl();
+		$right[3] = $catalog->getPreviewUrl();
 	}
 	else {
 		$right[3] = false;

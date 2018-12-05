@@ -103,7 +103,10 @@ try {
     }
     
     if ($idcat > 0) {
+		
+		$section = Section::getById( $idcat );		
     	$cat_type = $application->getConn()->fetchColumn("select type from dir_data where id=?", array($idcat));
+		
     } else {
         $cat_type = 0;
     }
@@ -457,7 +460,12 @@ try {
                         this.win.close();
                     <?} else {?>
                         this.getForm().findField('alias').setValue(action.result.alias);
-                        if (preview) window.open(this.win.preview + action.result.alias);
+                        if (preview) {
+							if (!this.win.preview) {
+								this.win.preview = '<?php echo $section->getPreviewUrl(); ?>';
+							}
+							window.open(this.win.preview + action.result.alias);
+						}
                         if (close) this.win.close();
                     <?}?>
                 },

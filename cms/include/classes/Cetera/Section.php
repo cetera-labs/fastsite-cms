@@ -352,6 +352,16 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         }
         return $this->_path;
     }
+	
+    /**
+     * Возвращает URL предварительного просмотра материалов раздела
+     *  
+     * @return string
+     */    
+    public function getPreviewUrl()
+    {      	
+		return $this->getParentServer()->getFullUrl().PREVIEW_PREFIX.$this->getUrl();
+    }	
        
     /**
      * Вычисляет путь до раздела
