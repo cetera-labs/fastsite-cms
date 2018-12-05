@@ -1,0 +1,27 @@
+{
+	"require": {
+		"doctrine/dbal": "2.5.1",
+		"true/punycode": "~1.1",
+		"ckeditor/ckeditor": "4.5.6",
+                "twig/twig": "~1.0",
+		"twig/extensions": "*",
+		"zendframework/zendframework1": "1.12.11",
+		"phpmailer/phpmailer": "~5.2",
+                "zapimir/sypexgeo": "dev-master",
+                "ua-parser/uap-php": "*",
+                "guzzlehttp/guzzle": "~6.0",
+		"ifsnop/mysqldump-php":"2.*",
+		"workerman/workerman": "^3.5"
+	},
+    "scripts": {
+      "post-install-cmd": [
+          "SxGeo\\Composer::installDatabases"
+      ]
+    },
+    "extra": {
+      "sxgeo-databases": [
+         "SxGeo",
+         "SxGeoCity"
+      ]
+    }
+}
