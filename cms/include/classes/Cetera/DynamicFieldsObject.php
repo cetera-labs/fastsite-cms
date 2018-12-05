@@ -39,7 +39,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      *         
      * @var array    
      */  
-    public $objectDefinition = FALSE;
+    public $_objectDefinition = FALSE;
     
     /**
      * Созданные экземпляры объектов 
@@ -1090,4 +1090,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 		}
 	}	
 
+	public function setObjectDefinition($od) {
+		$this->_objectDefinition = $od;
+	}
+	
 }

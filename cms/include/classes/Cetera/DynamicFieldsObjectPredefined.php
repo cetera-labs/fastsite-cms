@@ -56,6 +56,6 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
     public static function factory($type=0, $table = null, $fields = null)
     {       
 		return parent::factory(static::TYPE, static::TABLE, $fields);
-    }      
+    }          
 
 }
