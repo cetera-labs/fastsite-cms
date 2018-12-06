@@ -155,7 +155,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     {
         $this->fields = $fields; 
         $this->raw_fields = array_merge($this->raw_fields, $fields);   
-        parent::setFields($fields);    
+        parent::setFields($fields);  
+		return $this;
     }   
     
     /**

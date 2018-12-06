@@ -330,6 +330,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
     
     public function save($hidden = true, $unique_alias = false)
     {     
+		if (!$this->objectDefinition) {
+			throw new \Exception('No objectDefinition is set for the material');
+		}
 		Event::trigger(EVENT_CORE_MATERIAL_BEFORE_SAVE, ['material' => $this]);
 		
         $this->getFieldsDef();
@@ -447,6 +450,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
         $tpl = new Cache\Tag\Material($this->table, $this->id);
         $tpl->clean();			
 		
+		return $this;
     }
     
     public function __set($name, $value)
