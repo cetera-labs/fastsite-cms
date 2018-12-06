@@ -19,7 +19,7 @@ try {
 } catch (\Exception $e) {}
 
 
-if ($user->allowAdmin()) {
+if ($user->allowAdmin() && !COMPOSER_INSTALL) {
   
     if (!$application->getVar('no_update_check')) {
 		$no_updates = false;
@@ -401,10 +401,6 @@ Ext.create('Ext.Button', {
 				<? elseif ($no_updates) :?>			
 
 				<div class="latest"><?=$translator->_('Проверка обновлений запрещена в настройках.')?></div>  
-                
-                <? else :?>
-                
-                <div class="latest"><?=$translator->_('Вы используете самую свежую версию')?> <?=APP_NAME?></div>  
                               
                 <? endif; ?>
                 

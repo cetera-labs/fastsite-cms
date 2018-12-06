@@ -113,12 +113,12 @@ else {
 	define('COMPOSER_INSTALL', false);
 	define('LIBRARY_PATH', 'library');
 	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
-}
-
-if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
-    include_once(DOCROOT.LIBRARY_PATH.'/library.php');
-} else {
-    define('LIBRARY_VERSION', 1);
+	
+	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
+		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
+	} else {
+		define('LIBRARY_VERSION', 1);
+	}	
 }
 
 // ----------- // файлы и каталоги -----------------
