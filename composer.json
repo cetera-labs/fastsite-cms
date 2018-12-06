@@ -31,8 +31,10 @@
 	},
 	"minimum-stability": "dev",
     "autoload": {
-        "psr-0": { "Cetera\\": "cms/include/classes/" },
-		"psr-0": { "Dklab\\": "cms/include/classes/" }
+        "psr-0": { 
+			"Cetera\\": "cms/include/classes/",
+			"Dklab_": "cms/include/classes/"
+		}
     },
 	
     "repositories":[
