@@ -996,8 +996,11 @@ class Application {
             $this->_plugins_loaded[] = $plugin;      
         }
 		foreach ($this->_plugins_loaded as $plugin) {
-			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG))
+			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG)) try {
 				include(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG); 
+			} 
+			catch (\Exception $e) {
+			}
 		}
 		
 		foreach (Theme::enum() as $theme) {
@@ -1014,8 +1017,11 @@ class Application {
                 $loader->register();
             }   			
             
-            if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG))
-        		    include(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG);  
+            if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG)) try {
+				include(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG);  
+			} 
+			catch (\Exception $e) {
+			}					
 		
 		}
         
