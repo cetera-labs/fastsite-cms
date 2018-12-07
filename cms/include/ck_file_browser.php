@@ -1,20 +1,16 @@
-<?
-include_once('common_bo.php');
-$funcNum = $_GET['CKEditorFuncNum'];
-
-?>
+<?php include_once('common_bo.php'); ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>    
     <meta charset="utf-8">
     <base href="../">
-    <?\Cetera\Util::commonHead()?>
+    <?php \Cetera\Util::commonHead(); ?>
 	<link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.css">
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.js"></script>
     <script type="text/javascript" src="config.php"></script>
 <script>
 
-Ext.Loader.setPath('Ext.ux', '/<?=LIBRARY_PATH?>/extjs4/ux');
+Ext.Loader.setPath('Ext.ux', '/<?php echoLIBRARY_PATH?>/extjs4/ux');
 Ext.Loader.setPath('Cetera', 'app');
 
 Ext.require([
@@ -30,7 +26,7 @@ Ext.onReady(function(){
    
     var selectedHandler = function(url) {
         if (!url) return;
-        window.opener.CKEDITOR.tools.callFunction(<?=$funcNum?>, url);
+        window.opener.CKEDITOR.tools.callFunction(<?php echo $_GET['CKEditorFuncNum']?>, url);
         window.close();
     }
    
