@@ -1,3 +1,7 @@
+3.58.11
+
+	* API. New method \Cetera\Iterator\User::inGroup($gid)
+
 3.58.10
 
 	* fixed bug in \Cetera\Server::getById()

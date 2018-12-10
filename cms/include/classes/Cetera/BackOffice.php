@@ -96,11 +96,16 @@ class BackOffice {
 		return array_values($this->events);
 	}
 
-    public function addModule($menu)
+    public function addModule($menu, $parent = null)
     {
         if (!isset($menu['id'])) return;
-        if (!isset($menu['path'])) $menu['path'] = $this->application->getCallerPath();  
-        $this->_user_modules[$menu['id']] = $menu;
+        if (!isset($menu['path'])) $menu['path'] = $this->application->getCallerPath();
+		if ($parent && isset($this->_user_modules[$parent])) {
+			$this->_user_modules[$parent]['submenu'][] = $menu;
+		}
+		else {
+			$this->_user_modules[$menu['id']] = $menu;
+		}
     }
     
     public function addScript($script, $calcPath = true)
