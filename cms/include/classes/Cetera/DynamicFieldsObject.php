@@ -72,8 +72,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
                 $o = User::create();
                 break;
             case Catalog::TYPE:
-				if ($fields && $fields['is_server'])
-				{
+				if ($fields && $fields['is_server']) {
 					$o  = Server::create();
 					break;
 				}
@@ -133,7 +132,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             }
                     
         } else {
-        
+		
             $o = self::$instances[$type_id][$id];
         
         }

@@ -1,3 +1,7 @@
+3.58.10
+
+	* fixed bug in \Cetera\Server::getById()
+
 3.58.9
 
 	* fixed \Cetera\User::create

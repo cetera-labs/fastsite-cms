@@ -263,9 +263,11 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 	 */
     public static function fetch($data, $i_am_server = false, $b = null)
     {
-        if ($i_am_server) return parent::fetch($data);
-        
+		
         if (is_array($data)) {
+			
+			if ($i_am_server) return parent::fetch($data);
+			
             if ($data['is_server']) {
                 return Server::fetch($data, true);
             } else {
@@ -274,6 +276,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         } else {
             $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
             if ($fields) {
+				if ($i_am_server) return parent::fetch($fields);
                 return static::fetch($fields);
             } else {
                 return parent::fetch($data);

@@ -48,7 +48,7 @@ abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
      * @return User      
      */ 
   	public static function getById($id)
-    {   
+    {           
         return static::fetch($id);
   	}  
     

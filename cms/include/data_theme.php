@@ -18,7 +18,8 @@ if (sizeof($_POST)) {
     
     foreach ($rows as $r) {
     
-        $s = Server::getById($r->id);
+        $s = Server::getById((int)$r->id);
+		
         if ($r->active)
             $s->setTheme($theme);
             else $s->setTheme();
