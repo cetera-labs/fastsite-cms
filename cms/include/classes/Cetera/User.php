@@ -28,8 +28,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			'google'        => USER_GOOGLE,
 			'livejournal'   => USER_LJ
 	);	
-    
-    private $_groups = FALSE;
 	
 	private $_external = FALSE;
 	
@@ -370,13 +368,13 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
      */ 
     public function getGroups()
     {
-        if (!$this->_groups) {
-            $this->_groups = array(GROUP_ALL);
-            if ($this->id == ADMIN_ID) $this->_groups[] = GROUP_ADMIN;
+        if (!is_array($this->fields['groups'])) {
+            $this->fields['groups'] = [GROUP_ALL];
+            if ($this->id == ADMIN_ID) $this->fields['groups'][] = GROUP_ADMIN;
             $r = self::getDbConnection()->fetchAll('SELECT group_id FROM users_groups_membership WHERE user_id='.$this->id);
-            foreach ($r as $f) $this->_groups[] = $f['group_id'];
+            foreach ($r as $f) $this->fields['groups'][] = $f['group_id'];
         }
-        return $this->_groups;
+        return $this->fields['groups'];
     }
     
     public function getName()
@@ -503,9 +501,11 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         if (isset($this->fields['groups']) && is_array($this->fields['groups']))
         {
             self::getDbConnection()->executeQuery('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
-            foreach($this->fields['groups'] as $gid) 
-              if ($gid && ($this->id != 1 || $gid != GROUP_ADMIN))
-                self::getDbConnection()->executeQuery('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
+            foreach(array_unique($this->fields['groups']) as $gid) {
+				if ($gid == GROUP_ALL) continue;
+                if ($gid && ($this->id != 1 || $gid != GROUP_ADMIN))
+                    self::getDbConnection()->executeQuery('INSERT INTO users_groups_membership SET user_id='.$this->id.', group_id='.(int)$gid);
+			}
         }
        
 	   if ($str == 'CREATE') {

@@ -49,7 +49,7 @@ class User extends DynamicObject {
     {   
 		if (count($this->groups)) {
 			$query->leftJoin('main', 'users_groups_membership', 'UGM', 'main.id = UGM.user_id');
-			$query->where('UGM.group_id IN ('.implode(',',$this->groups).')');
+			$query->andWhere('UGM.group_id IN ('.implode(',',$this->groups).')');
 		}
 		return parent::fixQuery($query);
     }	

@@ -12,6 +12,7 @@ trait Extendable {
 	
 	final public static function create()
 	{
+		//print "***".get_class().'==='.static::$extension."***\n";
 		if ( static::$extension ) {
 			return new static::$extension();
 		}

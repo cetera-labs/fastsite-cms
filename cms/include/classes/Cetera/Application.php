@@ -1220,6 +1220,8 @@ class Application {
 		
 			$mail = new \PHPMailer(true);
 			
+			$params['mailer'] = $mail;
+			
 			$emailStr = $twig->render('mail_to', $params);
 			if (!$emailStr) continue;
 			$toEmails = preg_split("/[,;]/", $emailStr );

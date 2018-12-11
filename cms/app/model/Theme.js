@@ -26,7 +26,7 @@ Ext.define('Cetera.model.Theme', {
 		simpleSortMode: true,
         api: {
             read    : 'include/data_themes.php',
-            update  : 'include/data_themes.php?action=update',			
+            update  : 'include/data_themes.php?action=update'			
         },		
         reader: {
 			type: 'json',
