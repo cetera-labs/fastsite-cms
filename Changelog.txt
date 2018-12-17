@@ -1,3 +1,7 @@
+3.58.12
+
+	* FO. Multiple register forms on onr page.
+
 3.58.11
 
 	* API. New method \Cetera\Iterator\User::inGroup($gid)

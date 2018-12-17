@@ -39,8 +39,7 @@ class Register extends \Cetera\Widget\Templateable {
 	{
 		$this->initRecaptcha();
 		
-		if (isset($_POST['UserRegister']))
-		{
+		if (isset($_POST['UserRegister']) && $_POST['UserRegister'] == $this->getUniqueId()) {
 			$this->post = $_POST;
 			try {
 				

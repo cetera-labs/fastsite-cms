@@ -8,7 +8,7 @@
 	
 		{% block form %}
 		<form method="post">
-			<input type="hidden" name="UserRegister" value="1" />
+			<input type="hidden" name="UserRegister" value="{{ widget.getUniqueId() }}" />
 			
 			{% if not widget.getParam('email_is_login') %}
 			<label>{{ _('Логин') }}*</label>
