@@ -223,31 +223,7 @@ Ext.define('Cetera.users.MainPanel', {
         }, this);
     },
     
-    edit: function(id) {
-        if (this.editWindow) this.editWindow.destroy();
-        
-        this.editWindow = Ext.create('Cetera.window.MaterialEdit', { 
-            title: _('Пользователь'),
-            listeners: {
-                close: {
-                    fn: function(win){
-                        this.store.reload();
-                    },
-                    scope: this
-                }
-            }
-        });
-        
-        var win = this.editWindow;
-		win.show();
-        
-        Ext.Loader.loadScript({
-            url: 'include/ui_material_edit.php?idcat=-2&id='+id+'&height='+this.editWindow.height,
-            onLoad: function() { 
-                var cc = Ext.create('MaterialEditor2', {win: win});
-                if (cc) cc.show();
-            }
-        });
-            
+    edit: function(id) {		
+		Cetera.getApplication().editUser(id, function(){ this.store.reload(); }, this);
     }
 });

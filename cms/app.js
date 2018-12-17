@@ -390,5 +390,29 @@ Ext.application({
             });
         }   */
         
-    }       
+    },
+
+	editUser: function(id, callback, scope) {
+		
+		var win = Ext.create('Cetera.window.MaterialEdit', { 
+			title: 'Пользователь',
+			listeners: {
+				close: {
+					fn:  callback,
+					scope: scope
+				}
+			}
+		});
+		
+		win.show();
+		
+		Ext.Loader.loadScript({
+			url: 'include/ui_material_edit.php?idcat=-2&id='+id+'&height='+win.height,
+			onLoad: function() { 
+				var cc = Ext.create('MaterialEditor2', {win: win});
+				if (cc) cc.show();
+			}
+		});
+	
+	}
 }); 

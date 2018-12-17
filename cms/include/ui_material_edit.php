@@ -122,13 +122,13 @@ try {
             else $objectRenderer->fields_def['alias']['required'] = 1;
 			
         $objectRenderer->fields_def['alias']['name'] = 'alias';
-        $objectRenderer->fields_def['autor']['required'] = 0;
-        $objectRenderer->fields_def['autor']['name'] = 'autor';
+        //$objectRenderer->fields_def['autor']['required'] = 0;
+        //$objectRenderer->fields_def['autor']['name'] = 'autor';
         $objectRenderer->fields_def['dat']['name'] = 'dat';
         $objectRenderer->fields_def['name']['name'] = 'name';
 		
         if (!isset($objectRenderer->fields_def['alias']['describ']))$objectRenderer->fields_def['alias']['describ'] = $translator->_('Alias');
-        if (!isset($objectRenderer->fields_def['autor']['describ']))$objectRenderer->fields_def['autor']['describ'] = $translator->_('Автор');
+        //if (!isset($objectRenderer->fields_def['autor']['describ']))$objectRenderer->fields_def['autor']['describ'] = $translator->_('Автор');
         if (!isset($objectRenderer->fields_def['dat']['describ']))  $objectRenderer->fields_def['dat']['describ']   = $translator->_('Дата создания');
         if (!isset($objectRenderer->fields_def['name']['describ'])) $objectRenderer->fields_def['name']['describ']  = $translator->_('Заголовок');
     }
@@ -281,13 +281,9 @@ try {
                     $objectRenderer->addToPage($objectRenderer->fields_def['alias']);
                     unset($objectRenderer->fields_def['alias']);
                     	   
-                    if ($others && (int)$idcat > 0)
-						$objectRenderer->fields_def['autor']['editor_str']='editor_link_user';
-                    	else 
-                            $objectRenderer->fields_def['autor']['editor_str'] = 'editor_hidden'; 
-							
-                    $objectRenderer->addToPage($objectRenderer->fields_def['autor']);
-                    unset($objectRenderer->fields_def['autor']);
+					//$objectRenderer->fields_def['autor']['editor_str']='editor_link_user';						
+                    //$objectRenderer->addToPage($objectRenderer->fields_def['autor']);
+                    //unset($objectRenderer->fields_def['autor']);
                     	  
                     $objectRenderer->fields_def['dat']['editor_str']='editor_datetime_pubdate';   
 					$objectRenderer->addToPage($objectRenderer->fields_def['dat']);
@@ -323,7 +319,7 @@ try {
             });
             this.items = this.tabPanel;
                        
-            <?if ($idcat >= 0 && !$_REQUEST['modal']) {?> 
+            <?if ($idcat > 0 && !$_REQUEST['modal']) {?> 
                         
                 this.savebut =  Ext.create('Ext.Button', {
                     text: '<?=$translator->_('Сохранить')?>',
@@ -462,7 +458,7 @@ try {
                         this.getForm().findField('alias').setValue(action.result.alias);
                         if (preview) {
 							if (!this.win.preview) {
-								this.win.preview = '<?php echo $section->getPreviewUrl(); ?>';
+								this.win.preview = '<?php echo $section?$section->getPreviewUrl():''; ?>';
 							}
 							window.open(this.win.preview + action.result.alias);
 						}

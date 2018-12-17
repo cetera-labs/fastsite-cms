@@ -10,7 +10,7 @@
     <script type="text/javascript" src="config.php"></script>
 <script>
 
-Ext.Loader.setPath('Ext.ux', '/<?php echoLIBRARY_PATH?>/extjs4/ux');
+Ext.Loader.setPath('Ext.ux', '/<?php echo LIBRARY_PATH; ?>/extjs4/ux');
 Ext.Loader.setPath('Cetera', 'app');
 
 Ext.require([
