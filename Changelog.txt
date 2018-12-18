@@ -1,6 +1,10 @@
+3.58.13
+
+	* https://pm.cetera.ru/browse/CCD-1331
+
 3.58.12
 
-	* FO. Multiple register forms on onr page.
+	* FO. Multiple register forms on one page.
 
 3.58.11
 

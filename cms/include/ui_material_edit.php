@@ -320,46 +320,45 @@ try {
             this.items = this.tabPanel;
                        
             <?if ($idcat > 0 && !$_REQUEST['modal']) {?> 
-                        
-                this.savebut =  Ext.create('Ext.Button', {
-                    text: '<?=$translator->_('Сохранить')?>',
-                    handler: this.save,
-                    scope: this
-                });
-            
-            	  <?if ($right_publish) {?>
-            	
-                this.publishbut = Ext.create('Ext.Button', {
-                    text: '<?=$translator->_('Сохранить и опубликовать')?>',
-                    handler: function() { 
-						this.save_publish(0);
-					},
-                    scope: this
-                });
-            	  <?}?>
-              
-                this.previewbut = Ext.create('Ext.Button', {
-                    text: '<?=$translator->_('Предпросмотр')?>',
-                    handler: this.save_preview,
-                    scope: this
-                });
-                
-                this.buttons = [this.savebut, <?if ($right_publish) {?>this.publishbut, <?}?>this.previewbut];
+                                                     
+                this.buttons = [
+					{
+						text: _('Сохранить'),
+						handler: this.save,
+						scope: this
+					}
+					<?php if ($right_publish) : ?>
+					,
+					{
+						text: _('Сохранить и опубликовать'),
+						handler: function() { 
+							this.save_publish(0);
+						},
+						scope: this
+					}			
+					<?php endif; ?>	
+					<?php if ($section && $section->getPreviewUrl() ) : ?>
+					,
+					{
+						text: _('Предпросмотр'),
+						handler: this.save_preview,
+						scope: this
+					}
+					<?php endif; ?>	
+				];
             	
             <?} else {?>
-            
-                this.okbut = Ext.create('Ext.Button', {
-                    text: '<?=$translator->_('OK')?>',
-                    handler: function() { 
-						this.save_publish(1);
-					},
-                    scope: this
-                });
-                
+                            
                 this.buttons = [
-                    this.okbut,
+					{
+						text: _('OK'),
+						handler: function() { 
+							this.save_publish(1);
+						},
+						scope: this
+					},
                     {
-                        text: '<?=$translator->_('Отмена')?>',
+                        text: _('Отмена'),
                         scope: this,
                         handler: function() { 
                             this.win.returnValue = false;
@@ -445,7 +444,7 @@ try {
             this.getForm().submit({
                 url:'/<?=CMS_DIR?>/include/action_material_save.php', 
                 params: this.saveParams,
-                waitMsg:'<?=$translator->_('Подождите ...')?>',
+                waitMsg: _('Подождите ...'),
                 scope: this,
                 success: function(form, action) {
 					if (Cetera.getApplication) Cetera.getApplication().msg(Config.Lang.materialSaved, '', 1000);

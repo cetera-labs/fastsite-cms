@@ -363,7 +363,9 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */    
     public function getPreviewUrl()
     {      	
-		return $this->getParentServer()->getFullUrl().PREVIEW_PREFIX.$this->getUrl();
+		$s = $this->getParentServer();
+		if (!$s) return false;
+		return $s->getFullUrl().PREVIEW_PREFIX.$this->getUrl();
     }	
        
     /**
