@@ -27,8 +27,10 @@
 			<input type="password" required name="password" class="{% if widget.password_error %} is-invalid-input{% endif %}">
 			{% if widget.password_error %}<span class="form-error is-visible">{{ widget.password_error }}</span>{% endif %}
 
+			{% if widget.getParam('check_password')  %}
 			<label>{{ _('Повторите пароль') }}*</label>
 			<input type="password" required name="password2">	
+			{% endif %}
 
 			{% if widget.showRecaptcha %}
 			<div class="g-recaptcha" data-sitekey="{{ widget.getParam('recaptcha_site_key') }}"></div>
