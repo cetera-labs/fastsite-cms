@@ -558,10 +558,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 				return;
 			}			
 		}
-		
-		if ($params['password'] != $params['password2']) {
-			throw new Exception\Form($t->_('Пароли не совпадают'), 'password', 'password');
-		}
 
 		$u = self::create();
 		$u->setFields($params);		
