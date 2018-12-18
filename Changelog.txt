@@ -1,3 +1,5 @@
+	* API. Widget 'User.Register'. New parameter 'check_password'
+
 3.58.13
 
 	* https://pm.cetera.ru/browse/CCD-1331

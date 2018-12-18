@@ -14,6 +14,8 @@ class Register extends \Cetera\Widget\Templateable {
 	
 	public $post = null;	
 	public $error = false;
+	public $error_message = '';
+	public $error_field = null;
 	public $success = false;
 	public $login_error = null;
 	public $email_error = null;
@@ -51,7 +53,7 @@ class Register extends \Cetera\Widget\Templateable {
 				}		
 
 				if ($this->getParam('check_password') && $_POST['password'] != $_POST['password2']) {
-					throw new Exception\Form($t->_('Пароли не совпадают'), 'password', 'password');
+					throw new \Cetera\Exception\Form($this->t->_('Пароли не совпадают'), 'password', 'password');
 				}
 				
 				$u = \Cetera\User::register($_POST, $this->getParam('unique_email'));
@@ -79,11 +81,14 @@ class Register extends \Cetera\Widget\Templateable {
 				}
 				
 				$this->$field = $e->getMessage();
+				$this->error_message = $e->getMessage();
+				$this->error_field = $field;
 				$this->error = true;
 				return;
 			}
 			catch (\Exception $e) {
-				$this->error = $e->getMessage();
+				$this->error = true;
+				$this->error_message = $e->getMessage();
 				return;
 			}			
 		}

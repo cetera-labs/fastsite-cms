@@ -2,8 +2,8 @@
 {% block html %}
 	{% if not widget.success %}
 	
-		{% if widget.error and widget.error|length>1 %}
-		<div class="callout alert">{{ widget.error }}</div>
+		{% if widget.error and not widget.error_field %}
+		<div class="callout alert">{{ widget.error_message }}</div>
 		{% endif %}	
 	
 		{% block form %}
