@@ -4,7 +4,6 @@ title: Быстрый старт, уроки для разработчиков
 nav_order: 1
 parent: Руководство разработчика
 has_children: true
-
 permalink: /docs/developer-guide/fast-start
 ---
 
