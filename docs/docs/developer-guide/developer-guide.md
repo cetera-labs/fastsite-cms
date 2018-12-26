@@ -6,9 +6,8 @@ has_children: true
 permalink: /docs/developer-guide
 ---
 # Руководство разработчика Cetera CMS
-{:.no_toc}
 ## Содержание
-{: .no_toc .text-delta }
+{:toc}
 
 ## Быстрый старт, уроки для разработчиков
 
