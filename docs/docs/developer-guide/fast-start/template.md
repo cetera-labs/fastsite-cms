@@ -14,7 +14,7 @@ grand_parent: Руководство разработчика
 
 Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
 
-
+```{% raw %}
 	$a = $application;
 	// Сервер
 	$s = $a->getServer();
@@ -23,7 +23,7 @@ grand_parent: Руководство разработчика
 	$twig = $a->getTwig();
 	$twig->addGlobal('server',  $s);
 	$twig->addGlobal('catalog', $c);
-
+```
 
 * layout.twig — основной каркас сайта
 * page_index.twig — главная страница
