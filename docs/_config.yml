@@ -2,6 +2,6 @@ title: Cetera CMS Docs
 remote_theme: pmarsceill/just-the-docs
 search_enabled: true
 aux_links:
-    "Just the Docs on GitHub":
-      - "//github.com/pmarsceill/just-the-docs"
+    "Cetera CMS":
+      - "https://cetera.ru/cetera-cms/"
 baseurl: "/cetera-cms" # the subpath of your site, e.g. /blog
