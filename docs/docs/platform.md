@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Платформа
+title: Общее описание платформы
 nav_order: 3
 ---
 # Платформа
