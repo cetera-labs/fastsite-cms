@@ -7,6 +7,8 @@ permalink: /docs/developer-guide
 ---
 # Руководство разработчика Cetera CMS
 {:.no_toc}
+## Содержание
+{: .no_toc .text-delta }
 
 ## Быстрый старт, уроки для разработчиков
 
