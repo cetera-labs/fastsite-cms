@@ -14,7 +14,8 @@ grand_parent: Руководство разработчика
 
 Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
 
-`$a = $application;
+```
+$a = $application;
 // Сервер
 $s = $a->getServer();
 // Активный раздел
@@ -22,14 +23,16 @@ $c = $a->getCatalog();
 $twig = $a->getTwig();
 $twig->addGlobal('server',  $s);
 $twig->addGlobal('catalog', $c);
-`
+```
 
 * layout.twig — основной каркас сайта
 * page_index.twig — главная страница
 * page_ordinary.twig — рядовая страница
 
 www/.templates/design/layout.twig:
-`<!doctype html>
+
+```
+<!doctype html>
 <html class="no-js" lang="ru">
   <head>
     <meta charset="utf-8" />
@@ -49,28 +52,28 @@ www/.templates/design/layout.twig:
     {# Основное содержимое #}   
     {% block main %}{% endblock %}   
  
-`  </body> 
+  </body> 
 </html>
-`
+
 Макет индексной страницы — в www/.templates/design/page_index.twig:
 
-`{% extends "layout.twig" %}`
+{% extends "layout.twig" %}
  
 
 Макет рядовой страницы — в www/.templates/design/page_ordinary.twig:
 
-`{% extends "layout.twig" %}`
+{% extends "layout.twig" %}
  
 
 Теперь контроллер главной страницы www/.templates/default.php будет выглядеть гораздо проще:
 
-`$twig->display('page_index.twig');`
+$twig->display('page_index.twig');
  
 
 По такому же принципу создадим контроллер рядовой страницы www/.templates/ordinary.php:
 
-`$twig->display('page_ordinary.twig');`
- 
+$twig->display('page_ordinary.twig');
+ ```
 
 Для всех разделов первого уровня надо указать, что они используют контроллер ordinary.php:
 
