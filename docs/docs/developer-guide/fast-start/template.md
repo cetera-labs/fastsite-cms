@@ -31,7 +31,7 @@ grand_parent: Руководство разработчика
 
 www/.templates/design/layout.twig:
 
-```
+```{% raw %}
 	<!doctype html>
 	<html class="no-js" lang="ru">
 	  <head>
@@ -39,18 +39,14 @@ www/.templates/design/layout.twig:
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	  </head>
 	  <body>
- 
     <div class="row">
       <div class="large-12 columns">
         <a href="/" title="На главную"><img src="{{ server.picture }}" alt="LOGO" align="left"></a>
         <h1>{{ server.name|raw }}</h1>
- 
       </div>
     </div>
- 
     {# Основное содержимое #}   
     {% block main %}{% endblock %}   
- 
 	  </body> 
 	</html>
 ```
