@@ -15,7 +15,7 @@ grand_parent: Руководство разработчика
 
 Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
 
-```{% raw %}
+```
 	$a = $application;
 	// Сервер
 	$s = $a->getServer();
@@ -32,7 +32,7 @@ grand_parent: Руководство разработчика
 
 www/.templates/design/layout.twig:
 
-```{% raw %}
+```
 	<!doctype html>
 	<html class="no-js" lang="ru">
 	  <head>
