@@ -45,9 +45,6 @@ permalink: /docs/developer-guide
 
 ---
 
-## Содержание
-{: .no_toc .text-delta }
-
 1. TOC
 {:toc}
 
