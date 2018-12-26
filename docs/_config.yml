@@ -1,6 +1,5 @@
 title: Cetera CMS Docs
 remote_theme: pmarsceill/just-the-docs
-search_enabled: true
 aux_links:
     "Cetera CMS":
       - "https://cetera.ru/cetera-cms/"
