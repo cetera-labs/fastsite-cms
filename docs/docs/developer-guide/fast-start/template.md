@@ -15,7 +15,7 @@ grand_parent: Руководство разработчика
 
 Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
 
-```
+
 	$a = $application;
 	// Сервер
 	$s = $a->getServer();
@@ -24,7 +24,7 @@ grand_parent: Руководство разработчика
 	$twig = $a->getTwig();
 	$twig->addGlobal('server',  $s);
 	$twig->addGlobal('catalog', $c);
-```
+
 
 * layout.twig — основной каркас сайта
 * page_index.twig — главная страница
@@ -32,7 +32,7 @@ grand_parent: Руководство разработчика
 
 www/.templates/design/layout.twig:
 
-```
+
 	<!doctype html>
 	<html class="no-js" lang="ru">
 	  <head>
@@ -50,7 +50,7 @@ www/.templates/design/layout.twig:
     {% block main %}{% endblock %}   
 	  </body> 
 	</html>
-```
+
 Макет индексной страницы — в www/.templates/design/page_index.twig:
 
 	{% extends "layout.twig" %}
