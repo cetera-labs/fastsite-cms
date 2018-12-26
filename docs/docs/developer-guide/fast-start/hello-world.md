@@ -15,3 +15,8 @@ grand_parent: Руководство разработчика
 `echo '<h1>Hello world!!!</h1>';`
 
 В свойствах сервера укажем, что нужно использовать index.php при обращении к сайту:
+
+![Свойства раздела](site.baseurl/images/pic1.png)
+![Свойства раздела]({{site.baseurl}}/images/pic1.png)
+
+site.baseurl
