@@ -16,7 +16,10 @@ grand_parent: Руководство разработчика
 
 В свойствах сервера укажем, что нужно использовать index.php при обращении к сайту:
 
-![Свойства раздела](site.baseurl/images/pic1.png)
 ![Свойства раздела]({{site.baseurl}}/images/pic1.png)
 
-site.baseurl
+Пробуем открыть сайт:
+
+![Hello World]({{site.baseurl}}/images/pic3.png)
+
+Ура! Мы только что создали первый сайт на Cetera CMS.
