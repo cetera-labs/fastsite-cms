@@ -6,9 +6,6 @@ has_children: true
 permalink: /docs/developer-guide
 ---
 # Руководство разработчика Cetera CMS
-## Содержание
-1. TOC
-{:toc}
 
 ## Быстрый старт, уроки для разработчиков
 
@@ -33,5 +30,11 @@ permalink: /docs/developer-guide
 ## API Cetera CMS
 
 Документация по API Cetera CMS
+
+## Содержание
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 
