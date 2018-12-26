@@ -41,8 +41,8 @@ www/.templates/design/layout.twig:
 	  <body>
     <div class="row">
       <div class="large-12 columns">
-        <a href="/" title="На главную"><img src="{{ server.picture }}" alt="LOGO" align="left"></a>
-        <h1>{{ server.name|raw }}</h1>
+        <a href="/" title="На главную"><img src="{% raw %}{{ server.picture }}{% endraw %}" alt="LOGO" align="left"></a>
+        <h1>{% raw %}{{ server.name|raw }}{% endraw %}</h1>
       </div>
     </div>
     {# Основное содержимое #}   
