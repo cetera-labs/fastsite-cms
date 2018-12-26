@@ -9,7 +9,7 @@ permalink: /docs/developer-guide
 
 ---
 
-## [Быстрый старт, уроки для разработчиков](/cetera/cms/docs/developer-guide/fast-start)
+## [Быстрый старт, уроки для разработчиков](/cetera-cms/docs/developer-guide/fast-start)
 
 Быстрый старт для разработчиков в Cetera CMS
 
