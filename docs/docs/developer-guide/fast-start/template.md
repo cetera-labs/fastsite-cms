@@ -14,16 +14,16 @@ grand_parent: Руководство разработчика
 
 Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
 
-```
-$a = $application;
-// Сервер
-$s = $a->getServer();
-// Активный раздел
-$c = $a->getCatalog();
-$twig = $a->getTwig();
-$twig->addGlobal('server',  $s);
-$twig->addGlobal('catalog', $c);
-```
+
+	$a = $application;
+	// Сервер
+	$s = $a->getServer();
+	// Активный раздел
+	$c = $a->getCatalog();
+	$twig = $a->getTwig();
+	$twig->addGlobal('server',  $s);
+	$twig->addGlobal('catalog', $c);
+
 
 * layout.twig — основной каркас сайта
 * page_index.twig — главная страница
@@ -31,14 +31,14 @@ $twig->addGlobal('catalog', $c);
 
 www/.templates/design/layout.twig:
 
-```
-<!doctype html>
-<html class="no-js" lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>`
+
+	<!doctype html>
+	<html class="no-js" lang="ru">
+	  <head>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	  </head>
+	  <body>
  
     <div class="row">
       <div class="large-12 columns">
@@ -52,28 +52,28 @@ www/.templates/design/layout.twig:
     {# Основное содержимое #}   
     {% block main %}{% endblock %}   
  
-  </body> 
-</html>
+	  </body> 
+	</html>
 
 Макет индексной страницы — в www/.templates/design/page_index.twig:
 
-{% extends "layout.twig" %}
+	{% extends "layout.twig" %}
  
 
 Макет рядовой страницы — в www/.templates/design/page_ordinary.twig:
 
-{% extends "layout.twig" %}
+	{% extends "layout.twig" %}
  
 
 Теперь контроллер главной страницы www/.templates/default.php будет выглядеть гораздо проще:
 
-$twig->display('page_index.twig');
+	$twig->display('page_index.twig');
  
 
 По такому же принципу создадим контроллер рядовой страницы www/.templates/ordinary.php:
 
-$twig->display('page_ordinary.twig');
- ```
+	$twig->display('page_ordinary.twig');
+
 
 Для всех разделов первого уровня надо указать, что они используют контроллер ordinary.php:
 
