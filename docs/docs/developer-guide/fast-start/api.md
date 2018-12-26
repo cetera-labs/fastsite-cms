@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Первое знакомство с API
-nav_order: 2
+nav_order: 3
 parent: Быстрый старт, уроки для разработчиков
 grand_parent: Руководство разработчика
 ---
