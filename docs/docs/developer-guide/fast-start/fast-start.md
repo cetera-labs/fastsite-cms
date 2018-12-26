@@ -12,7 +12,7 @@ permalink: /docs/developer-guide/fast-start
 
 ---
 
-## Hello World
+## [Hello World](/cetera-cms/docs/developer-guide/fast-start/hello-world.html)
 
 Создаем первый сайт на Cetera CMS
 
