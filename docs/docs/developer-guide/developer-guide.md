@@ -43,6 +43,4 @@ permalink: /docs/developer-guide
 
 Документация по API Cetera CMS
 
----
-
 
