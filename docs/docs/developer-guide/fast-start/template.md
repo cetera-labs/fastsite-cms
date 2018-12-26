@@ -42,7 +42,6 @@ www/.templates/design/layout.twig:
  
     <div class="row">
       <div class="large-12 columns">
- 
         <a href="/" title="На главную"><img src="{{ server.picture }}" alt="LOGO" align="left"></a>
         <h1>{{ server.name|raw }}</h1>
  
