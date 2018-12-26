@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Подключаем шаблонизатор
-nav_order: 4
+nav_order: 3
 parent: Быстрый старт, уроки для разработчиков
 grand_parent: Руководство разработчика
 ---
