@@ -44,7 +44,6 @@ permalink: /docs/developer-guide
 Документация по API Cetera CMS
 
 ---
-{:toc}
-
+1. TOC
 
 
