@@ -31,7 +31,7 @@ grand_parent: Руководство разработчика
 
 www/.templates/design/layout.twig:
 
-
+```
 	<!doctype html>
 	<html class="no-js" lang="ru">
 	  <head>
@@ -53,7 +53,7 @@ www/.templates/design/layout.twig:
  
 	  </body> 
 	</html>
-
+```
 Макет индексной страницы — в www/.templates/design/page_index.twig:
 
 	{% extends "layout.twig" %}
