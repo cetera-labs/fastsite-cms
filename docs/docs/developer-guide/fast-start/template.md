@@ -4,7 +4,6 @@ title: Подключаем шаблонизатор
 nav_order: 3
 parent: Быстрый старт, уроки для разработчиков
 grand_parent: Руководство разработчика
-
 ---
 
 # Подключаем шаблонизатор
@@ -47,18 +46,18 @@ www/.templates/design/layout.twig:
       </div>
     </div>
     {# Основное содержимое #}   
-    {% block main %}{% endblock %}   
+    {% raw %}{% block main %}{% endblock %}{% endraw %} 
 	  </body> 
 	</html>
 
 Макет индексной страницы — в www/.templates/design/page_index.twig:
 
-	{% extends "layout.twig" %}
+    {% raw %}{% extends "layout.twig" %}{% endraw %} 
  
 
 Макет рядовой страницы — в www/.templates/design/page_ordinary.twig:
 
-	{% extends "layout.twig" %}
+	{% raw %}{% extends "layout.twig" %}{% endraw %} 
  
 
 Теперь контроллер главной страницы www/.templates/default.php будет выглядеть гораздо проще:
