@@ -17,13 +17,13 @@ permalink: /docs/developer-guide/fast-start
 
 ---
 
-## Первое знакомство с API
+## [Первое знакомство с API]({{site.baseurl}}/docs/developer-guide/fast-start/api.html)
 
 Наполним главную страницу более осмысленной информацией
 
 ---
 
-## Подключаем шаблонизатор
+## [Подключаем шаблонизатор]({{site.baseurl}}/docs/developer-guide/fast-start/template.html)
 
 Подключим Twig в качестве шаблонизатора
 
