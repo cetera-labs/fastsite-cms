@@ -129,7 +129,7 @@ class DynamicObject extends DbObject {
 		
 	}
 	
-	public function filterExclude($fieldName, $condition) {
+	public function filterExclude($fieldName, $condition, $combination = 'AND') {
 		
 		$field = $this->objectDefinition->getField($fieldName); 		
 		return parent::where('main.id NOT IN (SELECT l.id FROM '.$field->getLinkTable().' l LEFT JOIN '.$field->getObjectDefinition()->table.' t ON (l.dest=t.id) WHERE '.$condition.')', $combination);		
