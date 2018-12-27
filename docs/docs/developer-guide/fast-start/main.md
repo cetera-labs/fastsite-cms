@@ -59,8 +59,7 @@ $twig->display('index.html', array(
 
 Шаблон главной страницы www/.templates/design/index.html:
 ```
-{% raw %}
-{% extends "layout.html" %}
+{% raw %}{% extends "layout.html" %}
  
 {% block title %}Главная{% endblock %}
  
@@ -87,8 +86,7 @@ $twig->display('index.html', array(
         </div>
     </div>    
     {% endif %}
-{% endblock %}
-{% endraw %} 
+{% endblock %}{% endraw %} 
 ```
 
 Что получилось:
@@ -136,8 +134,7 @@ $twig->display('index.html', array(
 И отобразим его в шаблоне index.html:
 
 ```
-{% raw %}
-{% extends "layout.html" %}
+{% raw %}{% extends "layout.html" %}
  
 {% block title %}Главная{% endblock %}
  
@@ -191,8 +188,7 @@ $twig->display('index.html', array(
     </div>    
     {% endif %}
  
-{% endblock %}
-{% endraw %} 
+{% endblock %}{% endraw %} 
 ```
 
 Наслаждаемся:
