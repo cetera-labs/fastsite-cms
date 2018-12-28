@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Руководство пользователя
+title: Общие понятия
 nav_order: 1
 parent: Руководство пользователя
 ---
