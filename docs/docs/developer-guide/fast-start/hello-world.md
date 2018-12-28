@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Hello, World!
+title: Урок №1. Hello World
 nav_order: 1
 parent: Быстрый старт, уроки для разработчиков
 grand_parent: Руководство разработчика
 ---
 
-# Hello World
+# Урок №1. Hello World
 
 В Cetera CMS все скрипты фронтофиса располагаются в каталоге www/.templates. Допускается создание подкаталогов.
 
