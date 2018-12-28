@@ -27,7 +27,7 @@ grand_parent: Руководство разработчика
 
 Сохраним его как «news.twig» и приступим к модификации:
 
-![Пример]({{site.baseurl}}/images/lesson7-3.png)
+![Пример]({{site.baseurl}}/images/lesson-7-3.png)
 
 Список новостей выводится виджетом List, {% raw %}({% widget 'List' with......){% endraw %}. Добавим рядом со списком новостей виджет Calendar:
 
