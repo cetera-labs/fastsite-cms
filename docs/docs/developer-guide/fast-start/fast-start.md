@@ -23,13 +23,13 @@ permalink: /docs/developer-guide/fast-start
 
 ---
 
-## [Урок №3. Подключаем шаблонизатор]({{site.baseurl}}/docs/developer-guide/fast-start/template.html)
+## [Урок  №3. Подключаем шаблонизатор]({{site.baseurl}}/docs/developer-guide/fast-start/template.html)
 
 Подключим Twig в качестве шаблонизатора
 
 ---
 
-## [Урок №4. Формируем главную страницу сайта]({{site.baseurl}}/docs/developer-guide/fast-start/main.html)
+## [Урок  №4. Формируем главную страницу сайта]({{site.baseurl}}/docs/developer-guide/fast-start/main.html)
 
 Разместим на главной странице сайта последние новости и проекты
 
