@@ -69,5 +69,3 @@ permalink: /docs/developer-guide/fast-start
 
 Как добавить фильтр для ленты
 
----
-
