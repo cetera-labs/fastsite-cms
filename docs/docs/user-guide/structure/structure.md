@@ -8,29 +8,29 @@ permalink: /docs/user-guide/structure
 ---
 # Работа со структурой сайта
 
-## Удаление раздела
+## [Удаление раздела]({{site.baseurl}}/docs/developer-guide/structure/del.html)
 
 Как удалить раздел?
 
 ---
-## Создание нового раздела
+## [Создание нового раздела]({{site.baseurl}}/docs/developer-guide/structure/basic-syntax.html)
 
 Как создать новый раздел сайта?
 
 ---
 
-## Перемещение раздела
+## [Перемещение раздела]({{site.baseurl}}/docs/developer-guide/structure/move.html)
 
 Как переместить раздел выше или ниже относительно соседних разделов?
 
 ---
 
-## Копирование раздела
+## [Копирование раздела]({{site.baseurl}}/docs/developer-guide/structure/copy.html)
 
 Как сделать копию раздела?
 
 ---
 
-## Изменение свойств раздела
+## [Изменение свойств раздела]({{site.baseurl}}/docs/developer-guide/structure/edit.html)
 
 Как изменить свойства раздела?
