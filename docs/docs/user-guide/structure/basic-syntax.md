@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Создание нового раздела
-nav_order: 1
+nav_order: 2
 parent: Работа со структурой сайта
 grand_parent: Руководство пользователя
 ---
