@@ -24,7 +24,7 @@ grand_parent: Руководство разработчика
 
 Вернемся к фронт-офису. Настало время реализации поставленной в начале главы задачи. Изменим файл www/.templates/default.php:
 
-`
+```
 <?php
 $application = Application::getInstance();
 $server = $application->getServer();
@@ -39,7 +39,7 @@ $server = $application->getServer();
       <h1><?php echo $server->name; ?></h1>
   </body>
 </html>
-`
+```
 
 Немного пояснений:
 
