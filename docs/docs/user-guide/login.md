@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Вход в систему
-nav_order: 1
+nav_order: 2
 parent: Руководство пользователя
 ---
 # Вход в систему
