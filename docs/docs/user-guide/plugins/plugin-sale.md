@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Модуль «Карта сайта»
+title: Модуль «Торговля»
 nav_order: 4
 parent: Плагины
 grand_parent: Руководство пользователя
@@ -50,9 +50,9 @@ save() | Сохранить заказ в БД.
 
 Пример вызова Twig
 
-
+```
 	{% raw %}{% widget 'Comments.Add' with { material: article } %}{% endraw %}
-
+```
 
 Параметр | Описание
 --------------------
