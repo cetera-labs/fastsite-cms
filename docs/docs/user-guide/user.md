@@ -4,7 +4,7 @@ title: Пользователи системы
 nav_order: 6
 parent: Руководство пользователя
 has_children: true
-permalink: /docs/user-guide/content
+permalink: /docs/user-guide/user
 ---
 # Пользователи системы
 
