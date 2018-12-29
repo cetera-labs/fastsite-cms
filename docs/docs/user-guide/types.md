@@ -3,7 +3,6 @@ layout: default
 title: Типы материалов
 nav_order: 5
 parent: Руководство пользователя
-permalink: /docs/user-guide/content
 ---
 # Типы материалов
 
