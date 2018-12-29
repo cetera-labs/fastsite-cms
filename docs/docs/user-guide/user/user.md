@@ -8,9 +8,9 @@ permalink: /docs/user-guide/user
 ---
 # Пользователи системы
 
-## [Удаление пользователя]({{site.baseurl}}/docs/user-guide/user/del.html)
+## [Введение]({{site.baseurl}}/docs/user-guide/user/intro.html)
 
-Как удалить пользователя из системы Cetera CMS?
+Как перейти в режим управления пользователями?
 
 ---
 
@@ -38,6 +38,6 @@ permalink: /docs/user-guide/user
 
 ---
 
-## [Введение]({{site.baseurl}}/docs/user-guide/user/intro.html)
+## [Удаление пользователя]({{site.baseurl}}/docs/user-guide/user/del.html)
 
-Как перейти в режим управления пользователями?
+Как удалить пользователя из системы Cetera CMS?
