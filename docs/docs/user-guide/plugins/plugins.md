@@ -15,6 +15,7 @@ permalink: /docs/user-guide/plugins
 ---
 
 [Модуль «Веб-формы»]({{site.baseurl}}/docs/user-guide/plugins/plugin-web-forms.html)
+
 Для размещения форм на сайте
 
 ---
