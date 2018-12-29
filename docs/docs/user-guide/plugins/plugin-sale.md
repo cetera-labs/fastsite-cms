@@ -50,7 +50,7 @@ save() | Сохранить заказ в БД.
 
 Пример вызова Twig
 
-	{{%% raw %%}}{% widget 'Comments.Add' with { material: article } %}{{%% endraw %%}}
+	{{%% raw %%}}\{% widget 'Comments.Add' with { material: article } %}{{%% endraw %%}}
 
 Параметр | Описание
 --------------------
