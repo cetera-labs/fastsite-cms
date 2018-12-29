@@ -98,7 +98,7 @@ grand_parent: Руководство пользователя
 
 Для вставки виджета непосредственно в код страницы, необходимо использовать тег:
 
-<cms action=«widget» widgetname=«forms» widgetparams=«form=FORM_ID»></cms>
+`<cms action=«widget» widgetname=«forms» widgetparams=«form=FORM_ID»></cms>
 
 где FORM_ID — идентификатор формы.
 
