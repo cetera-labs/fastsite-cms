@@ -10,7 +10,7 @@ permalink: /docs/user-guide/content
 
 ---
 
-## [Редактирование и удаление материала]({{site.baseurl/docs/user-guide/content/edit.html}})
+## [Редактирование и удаление материала]({{site.baseurl}}/docs/user-guide/structure/del.html)
 
 Как отредактировать или удалить материал?
 
