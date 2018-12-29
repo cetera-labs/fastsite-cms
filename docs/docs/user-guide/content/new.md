@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Публикация нового материала
-nav_order: 1
+nav_order: 2
 parent: Работа с материалами сайта
 grand_parent: Руководство пользователя
 ---
