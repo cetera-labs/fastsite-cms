@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Удаление пользователя
-nav_order: 1
+nav_order: 6
 parent: Пользователи системы
 grand_parent: Руководство пользователя
 ---
