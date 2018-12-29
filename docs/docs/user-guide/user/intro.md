@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Введение
-nav_order: 6
+nav_order: 1
 parent: Пользователи системы
 grand_parent: Руководство пользователя
 ---
