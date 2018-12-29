@@ -49,9 +49,9 @@ save() | Сохранить заказ в БД.
 Показывает список товаров
 
 Пример вызова Twig
-
-	{{%% raw %%}}\{% widget 'Comments.Add' with { material: article } %}{{%% endraw %%}}
-
+{{%% raw %%}}
+	{% widget 'Comments.Add' with { material: article } %}
+{{%% endraw %%}}
 Параметр | Описание
 --------------------
 template | Шаблон вывода
