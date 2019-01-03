@@ -53,23 +53,23 @@ filterExclude($fieldName, $condition, $combination = 'AND')|То же самое
 
 Пример, получить материалы текущего раздела:
 
-	$list = \Cetera\Application::getInstance()->getCatalog()->getMaterials();
+	{% raw %}$list = \Cetera\Application::getInstance()->getCatalog()->getMaterials();{% endraw %}
  
 
 Пример, получить материалы опубликованные в 2016 году в хронологическом порядке:
 
-	$list = $catalog->getMaterials()->where('DATE_FORMAT(dat,"%Y") = 2016');
+	{% raw %}$list = $catalog->getMaterials()->where('DATE_FORMAT(dat,"%Y") = 2016');{% endraw %}
  
 
 Пример, получить неопубликованные материалы:
 
 	// с помощью ->unpublished() добавляем в итератор неопубликованные материалы, 
 	// а затем с помощью ->where('type=0') оставляем только неопубликованные материалы
-	$list = $catalog->getMaterials()->unpublished()->where('type=0');
+	{% raw %}$list = $catalog->getMaterials()->unpublished()->where('type=0');{% endraw %}
  
 Пример, получить все материалы типа «Материал» (стандартный тип материалов, имеющий id=1):
 
-	$list = \Cetera\ObjectDefinition::findById(1)->getMaterials();
+	{% raw %}$list = \Cetera\ObjectDefinition::findById(1)->getMaterials();{% endraw %}
  
 ### Методы \Cetera\Iterator\Material
 
@@ -90,19 +90,19 @@ unpublished()|Включать также неопубликованные ма�
 
 Пример, вывести все разделы верхнего уровня, исключая скрытые:
 
-	$menu = \Cetera\Application::getInstance()-getServer()->getChildren()->where('hidden<>1');
+	{% raw %}$menu = \Cetera\Application::getInstance()-getServer()->getChildren()->where('hidden<>1');
 	foreach ($menu as $catalog)
 	{
 	    echo $catalog->name.'<br>';
-	}
+	}{% endraw %}
  
 Пример, вывести хлебные крошки к текущему разделу:
 
-	foreach (\Cetera\Application::getInstance()-getCatalog()->getPath() as $catalog)
+	{% raw %}foreach (\Cetera\Application::getInstance()-getCatalog()->getPath() as $catalog)
 	{
 	    if ($catalog->isRoot()) continue;// пропускаем раздел root
 	    echo $catalog->name.' / ';
-	}
+	}{% endraw %}
  
 ### Методы \Cetera\Iterator\Catalog
 
@@ -121,4 +121,4 @@ has($catalog)|Имеется ли в коллекции указанный ра�
 Пример, найти пользователей, родившихся 15 августа:
 
 	// предполагается, что в поле birth_date хранится дата рождения
-	$list = \Cetera\User::enum()->where('DATE_FORMAT(birth_date,"%d.%m") = "15.08"');
+	{% raw %}$list = \Cetera\User::enum()->where('DATE_FORMAT(birth_date,"%d.%m") = "15.08"');{% endraw %}
