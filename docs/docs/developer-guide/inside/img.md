@@ -64,45 +64,46 @@ size=4
 ## Примеры:
 
 Оригинал  
-[Пример](https://cetera.ru/images/manager.png) 675px × 249px
+[https://cetera.ru/images/manager.png](https://cetera.ru/images/manager.png) 675px × 249px
 
 ![675px × 249px](https://cetera.ru/images/manager.png)
 
 Уменьшить до 150px по ширине  
-[Пример](https://cetera.ru/imagetransform/width_150/images/manager.png)
+[https://cetera.ru/imagetransform/width_150/images/manager.png](https://cetera.ru/imagetransform/width_150/images/manager.png)
 
 ![150px](https://cetera.ru/imagetransform/width_150/images/manager.png)
 
 Уменьшить до 100px по высоте  
-[Пример](https://cetera.ru/imagetransform/height_100/images/manager.png)
+[https://cetera.ru/imagetransform/height_100/images/manager.png](https://cetera.ru/imagetransform/height_100/images/manager.png)
 
 ![100px](https://cetera.ru/imagetransform/height_100/images/manager.png)
 
 Сделать 200px x 200px  
-[Пример](https://cetera.ru/imagetransform/width_200_height_200_fit_1/images/manager.png)
+[https://cetera.ru/imagetransform/width_200_height_200_fit_1/images/manager.png](https://cetera.ru/imagetransform/width_200_height_200_fit_1/images/manager.png)
 
 ![200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_1/images/manager.png)
 
 Сделать 200px x 200px, но центрировать  
-[Пример](https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png)
+[https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png](https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png)
+
 ![200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png)
 
 Сделать 200px x 200px, но ничего не обрезать    
-[Пример](https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png)
+[https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png](https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png)
 
 ![200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png)
 
 Наложить водяной знак  
-[Пример](https://cetera.ru/imagetransform/watermark/images/manager.png)
+[https://cetera.ru/imagetransform/watermark/images/manager.png](https://cetera.ru/imagetransform/watermark/images/manager.png)
 
 ![Водяной знак](https://cetera.ru/imagetransform/watermark/images/manager.png)
 
 Наложить водяной знак 2, и сделать 400×400  
-[Пример](https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png)
+[https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png](https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png)
 
 ![Водяной знак](https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png)
 
 Запросто комбинируем водяные знаки  
-[Пример](https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png)
+[https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png](https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png)
 
 ![Водяной знак](https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png)
