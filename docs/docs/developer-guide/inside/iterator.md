@@ -18,25 +18,74 @@ grand_parent: Руководство разработчика
 
 ### Методы \Cetera\Iterator\DbObject
 
-Метод | Описание
----|---
-count()|Количество объектов в коллекции
-getCountAll()|Количество объектов, исключая ограничение, заданное методом **setItemCountPerPage**
-getFirstIndex()|Порядковый номер первого элемента коллекции
-getLastIndex()|Порядковый номер последнего элемента коллекции
-getPageCount()|Количество получившихся страниц, если задано ограничение методом **setItemCountPerPage**
-setOffset( $offset )|Исключить из коллекции первые $offset объектов
-setItemCountPerPage($itemCountPerPage)|Ограничить количество объектов в коллекции
-setCurrentPageNumber($pageNumber)|Выбрать страницу, если задано ограничение методом **setItemCountPerPage**
-orderBy($sort, $order = null, $add = true)|сортировать объекты по полю
-groupBy($groupBy, $add = true)|группировать объекты по полю
-where($where, $combination = 'AND')|Дополнительное условие для отбора объектов.
-**$where SQL**-условие для отбора объектов.
-**$combination** - способ комбинации с предыдущим вызовом where
-filterInclude($fieldName, $condition, $combination = 'AND')|Позволяет включить в итератор объекты, используя связь определенную полями "группа материалов" или "ссылка на группу материалов". $fieldName - имя поля, $condition - SQL-условие для отбора в материалов в этом поле. $combination - способ добавления (см. where).
-Например, в материалах есть поле "colors" - группа материалов из справочника цветов. Нам нужно получить в итераторе только те материалы, в которых присутствуют либо красный, либо желный цвет. Это фильтруется следующим способом.
-$iterator->filterInclude('colors', 'name IN ("красный","желтый")')
-filterExclude($fieldName, $condition, $combination = 'AND')|То же самое, что и filterInclude, только материалы, попадающие под условие исключаются из итератора.
+<table>
+	<tbody>
+		<tr>
+			<th>Метод</th>
+			<th>Описание</th>
+		</tr>
+		<tr>
+			<td><strong>count()</strong></td>
+			<td>Количество объектов в коллекции</td>
+		</tr>
+		<tr>
+			<td><strong>getCountAll()</strong></td>
+			<td>Количество объектов, исключая ограничение, заданное методом <strong>setItemCountPerPage</strong></td>
+		</tr>
+		<tr>
+			<td><strong>getFirstIndex()</strong></td>
+			<td>Порядковый номер первого элемента коллекции</td>
+		</tr>
+		<tr>
+			<td><strong>getLastIndex()</strong></td>
+			<td>Порядковый номер последнего элемента коллекции</td>
+		</tr>
+		<tr>
+			<td><strong>getPageCount()</strong></td>
+			<td>Количество получившихся страниц, если задано ограничение методом <strong>setItemCountPerPage</strong></td>
+		</tr>
+		<tr>
+			<td><strong>setOffset( $offset )</strong></td>
+			<td>Исключить из коллекции первые $offset объектов</td>
+		</tr>
+		<tr>
+			<td><strong>setItemCountPerPage($itemCountPerPage)</strong></td>
+			<td>Ограничить количество объектов в коллекции</td>
+		</tr>
+		<tr>
+			<td><strong>setCurrentPageNumber($pageNumber)</strong></td>
+			<td>Выбрать страницу, если задано ограничение методом <strong>setItemCountPerPage</strong></td>
+		</tr>
+		<tr>
+			<td><strong>orderBy($sort, $order = null, $add = true)</strong></td>
+			<td>сортировать объекты по полю</td>
+		</tr>
+		<tr>
+			<td><strong>groupBy($groupBy, $add = true)</strong></td>
+			<td>группировать объекты по полю</td>
+		</tr>
+		<tr>
+			<td><strong>where($where, $combination = 'AND')</strong></td>
+			<td>
+			<p>Дополнительное условие для отбора объектов.<br>
+			<strong>$where </strong>SQL-условие для отбора объектов.<br>
+			<strong>$combination - </strong>способ комбинации с предыдущим вызовом <strong>where</strong></p>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>filterInclude($fieldName, $condition, $combination = 'AND')</strong></td>
+			<td>
+			<p>Позволяет включить в итератор объекты, используя связь определенную полями "группа материалов" или "ссылка на группу материалов". <strong>$fieldName - </strong>имя поля, <strong>$condition - </strong>SQL-условие для отбора в материалов в этом поле. <strong>$combination - </strong>способ добавления (см.<strong> where</strong>).</p>
+			<p>Например, в материалах есть поле "colors" - группа материалов из справочника цветов. Нам нужно получить в итераторе только те материалы, в которых присутствуют либо красный, либо желный цвет. Это фильтруется следующим способом.<br>
+			$iterator-&gt;filterInclude('colors', 'name IN ("красный","желтый")')</p>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>filterExclude($fieldName, $condition, $combination = 'AND')</strong></td>
+			<td>То же самое, что и <strong>filterInclude,</strong> только материалы, попадающие под условие исключаются из итератора.</td>
+		</tr>
+	</tbody>
+</table>
 
 Методы \Cetera\Iterator\DbObject доступны в любом из нижеописанных итераторов.
 
