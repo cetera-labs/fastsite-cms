@@ -55,6 +55,9 @@ src=/images/logo.png
 left=-20
 top=-20
 alpha=50
+
+aaa
+bbb
  
 [watermark_2]
 src=/images/logo_b.png
