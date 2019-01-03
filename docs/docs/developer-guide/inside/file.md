@@ -44,7 +44,7 @@ grand_parent: Руководство разработчика
 
 Инициализация движка производится в bootstrap.php:
 
-$twig = \Cetera\Application::getInstance()->getTwig();
+	$twig = \Cetera\Application::getInstance()->getTwig();
  
 Правила именования шаблонов
 Все шаблоны в подкаталоге design
