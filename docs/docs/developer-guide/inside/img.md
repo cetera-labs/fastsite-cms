@@ -50,18 +50,15 @@ grand_parent: Руководство разработчика
 
 Пример:
 
-[watermark]
-src=/images/logo.png
-left=-20
-top=-20
+[watermark]  
+src=/images/logo.png  
+left=-20  
+top=-20  
 alpha=50
 
-aaa
-bbb
- 
-[watermark_2]
-src=/images/logo_b.png
-alpha=15
+[watermark_2]  
+src=/images/logo_b.png  
+alpha=15  
 size=4
 
 ## Примеры:
