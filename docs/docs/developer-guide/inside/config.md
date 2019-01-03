@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Конфигурация Cetera CMSS
+title: Конфигурация Cetera CMS
 nav_order: 3
 parent: Cetera CMS изнутри
 grand_parent: Руководство разработчика
