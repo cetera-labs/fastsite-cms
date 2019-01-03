@@ -86,24 +86,24 @@ https://cetera.ru/imagetransform/width_200_height_200_fit_1/images/manager.png
 Сделать 200px x 200px, но центрировать
 https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png
 
-[200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png)
+![200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_2/images/manager.png)
 
 Сделать 200px x 200px, но ничего не обрезать
 https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png
 
-[200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png)
+![200px x 200px](https://cetera.ru/imagetransform/width_200_height_200_fit_3/images/manager.png)
 
 Наложить водяной знак
 https://cetera.ru/imagetransform/watermark/images/manager.png
 
-[Водяной знак](https://cetera.ru/imagetransform/watermark/images/manager.png)
+![Водяной знак](https://cetera.ru/imagetransform/watermark/images/manager.png)
 
 Наложить водяной знак 2, и сделать 400×400
 https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png
 
-[Водяной знак](https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png)
+![Водяной знак](https://cetera.ru/imagetransform/watermark_2_width_400_height_400_fit_2/images/manager.png)
 
 Запросто комбинируем водяные знаки
 https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png
 
-[Водяной знак](https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png)
+![Водяной знак](https://cetera.ru/imagetransform/watermark_2_watermark/images/manager.png)
