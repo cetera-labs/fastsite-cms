@@ -9,6 +9,8 @@ permalink: /docs/developer-guide/inside
 
 # Cetera CMS изнутри
 
+---
+
 Поля материалов и редакторы полей
 
 ---
