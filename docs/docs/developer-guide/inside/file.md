@@ -8,7 +8,7 @@ grand_parent: Руководство разработчика
 
 # Файловая структура Cetera CMS
 ```
-&lt;DOCUMENT_ROOT&gt;
+<DOCUMENT_ROOT>
 +---.prefs            — основные настройки CMS
 +---.htaccess         — настройки прав доступа и url rewrite
 +---robots.txt    
