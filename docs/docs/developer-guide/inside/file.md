@@ -7,6 +7,7 @@ grand_parent: Руководство разработчика
 ---
 
 # Файловая структура Cetera CMS
+
 ```
 <DOCUMENT_ROOT>
 +---.prefs            — основные настройки CMS
