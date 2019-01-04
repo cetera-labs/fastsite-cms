@@ -69,6 +69,6 @@ permalink: /docs/developer-guide/inside
 
 ---
 
-## [Расширение встроенных в CeteraCMS классов]({{site.baseurl}}/docs/developer-guide/inside/extensions.html)
+## [Расширение встроенных в CeteraCMS классов]({{site.baseurl}}/docs/developer-guide/inside/extension.html)
 
 В CeteraCMS v3.19.2 и выше
