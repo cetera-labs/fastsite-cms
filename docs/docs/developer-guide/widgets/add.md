@@ -18,7 +18,7 @@ grand_parent: Руководство разработчика
 
 Все виджеты наследуют базовый класс *\Cetera\Widget\Widget*
 
-Чтобы получить виджет, следует пользоваться методом *\Cetera\Application::getWidget(String \<виджет>*, Array \<параметры виджета>)
+Чтобы получить виджет, следует пользоваться методом *\Cetera\Application::getWidget(String \<виджет>*, Array \<*параметры виджета*>)
 
 Далее, для отображения виджета используются методы *\Cetera\Widget\Widget::getHtml()* или *\Cetera\Widget\Widget::display()*
 
