@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Итераторы
-nav_order: 7
+nav_order: 8
 parent: Cetera CMS изнутри
 grand_parent: Руководство разработчика
 ---

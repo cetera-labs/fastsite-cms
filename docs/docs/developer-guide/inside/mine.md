@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Использование своих классов для работы с материалами
-nav_order: 9
+nav_order: 10
 parent: Cetera CMS изнутри
 grand_parent: Руководство разработчика
 ---

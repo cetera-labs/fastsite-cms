@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Работа с изображениями
-nav_order: 8
+nav_order: 9
 parent: Cetera CMS изнутри
 grand_parent: Руководство разработчика
 ---

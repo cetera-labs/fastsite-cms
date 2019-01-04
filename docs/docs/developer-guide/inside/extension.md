@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Расширение встроенных в CeteraCMS классов
-nav_order: 10
+nav_order: 11
 parent: Cetera CMS изнутри
 grand_parent: Руководство разработчика
 ---
