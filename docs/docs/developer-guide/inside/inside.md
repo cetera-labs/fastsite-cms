@@ -45,30 +45,30 @@ permalink: /docs/developer-guide/inside
 
 ---
 
-## [Работа с пользователями]({{site.baseurl}}/docs/developer-guide/inside/iterator.html)
+## [Работа с пользователями]({{site.baseurl}}/docs/developer-guide/inside/users.html)
 
 Что использовать для работы с пользователями?
 
 ---
 
-## [Итераторы]({{site.baseurl}}/docs/developer-guide/inside/img.html)
+## [Итераторы]({{site.baseurl}}/docs/developer-guide/inside/iterator.html)
 
 Итераторы CeteraCMS
 
 ---
 
-## [Работа с изображениями]({{site.baseurl}}/docs/developer-guide/inside/mine.html)
+## [Работа с изображениями]({{site.baseurl}}/docs/developer-guide/inside/img.html)
 
 В CeteraCMS встроен скрипт для изменения размеров изображений
 
 ---
 
-## [Использование своих классов для работы с материалами]({{site.baseurl}}/docs/developer-guide/inside/fields.html)
+## [Использование своих классов для работы с материалами]({{site.baseurl}}/docs/developer-guide/inside/mine.html)
 
 В CeteraCMS v3.18.0 и выше
 
 ---
 
-## [Расширение встроенных в CeteraCMS классов]({{site.baseurl}}/docs/developer-guide/inside/fields.html)
+## [Расширение встроенных в CeteraCMS классов]({{site.baseurl}}/docs/developer-guide/inside/extensions.html)
 
 В CeteraCMS v3.19.2 и выше
