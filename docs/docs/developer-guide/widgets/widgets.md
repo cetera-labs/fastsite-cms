@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Виджеты
-nav_order: 4
+nav_order: 3
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/widgets
