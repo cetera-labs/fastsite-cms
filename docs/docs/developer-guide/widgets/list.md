@@ -20,7 +20,7 @@ grand_parent: Руководство разработчика
 	    'paginator' => true,
 	))->display();
 
-Пример вызова Twig
+## Пример вызова Twig
 
 	{% raw %}{% widget 'List' with { limit:6, paginator:1, template: 'tiles.twig' } %}{% endraw %}
 
