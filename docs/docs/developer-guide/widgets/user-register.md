@@ -15,9 +15,10 @@ grand_parent: Руководство разработчика
 	{% raw %}{% widget 'User.Register' with { recaptcha: 1 } %}{% endraw %}
  
 
-Описание | параметров
+## Описание параметров
+
+Параметр | Описание
 ---|---
-Параметр|Описание
 template|Шаблон вывода
 unique_email|`[TRUE|FALSE]` Для каждого пользователя должен быть уникальный e-mail. По умолчанию **FALSE**
 email_is_login|`[TRUE|FALSE]` Использовать e-mail как имя пользователя. По умолчанию **FALSE**
