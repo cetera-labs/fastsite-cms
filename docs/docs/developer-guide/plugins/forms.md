@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Модуль «Конструктор форм»
-nav_order: 3
+nav_order: 4
 parent: Плагины (модули) Cetera CMS
 grand_parent: Руководство разработчика
 ---
