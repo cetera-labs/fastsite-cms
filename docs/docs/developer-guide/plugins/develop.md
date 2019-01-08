@@ -227,8 +227,7 @@ Cetera CMS 3.29+
 
 	$this->getTranslator()->addTranslation(__DIR__.'/lang');
 
-В файлах PHP фразы, подлежащие переводу оборачиваем в {% raw %}\Cetera\Application::getTranslator()::_():{% endraw %}
-
+В файлах PHP фразы, подлежащие переводу оборачиваем в \Cetera\Application::getTranslator()::\_():
 
 ```
 $t = \Cetera\Application::getInstance()->getTranslator();
@@ -269,7 +268,7 @@ Ext.define('Plugin.sale.Delivery', {
 });
 ```
 
-В Twig-шаблонах используем функцию _()
+В Twig-шаблонах используем функцию \_()
 
 ```
 {% raw %}<div id="add-to-favourites-auth-popup" data-reveal class="reveal tiny">
