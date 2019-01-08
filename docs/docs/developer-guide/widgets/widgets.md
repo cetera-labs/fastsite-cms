@@ -15,120 +15,120 @@ permalink: /docs/developer-guide/widgets
 
 ---
 
-## [User.Auth]
+## [User.Auth]({{site.baseurl}}/docs/developer-guide/widgets/user-auth.html)
 
 Виджет авторизации пользователя
 
 ---
 
-## [User.Register]
+## [User.Register]({{site.baseurl}}/docs/developer-guide/widgets/user-register.html)
 
 Виджет регистрации пользователя
 
 ---
 
-## [Calendar]
+## [Calendar]({{site.baseurl}}/docs/developer-guide/widgets/calendar.html)
 
 Показывает календарь
 
 ---
 
-## [Filter]
+## [Filter]({{site.baseurl}}/docs/developer-guide/widgets/filter.html)
 
 Показывает материал раздела
 
 ---
 
-## [SmiCalendar]
+## [SmiCalendar]({{site.baseurl}}/docs/developer-guide/widgets/smicalendar.html)
 
 Редакция «Сайт СМИ»
 
 ---
 
-## [Comments.List]
+## [Comments.List]({{site.baseurl}}/docs/developer-guide/widgets/comm-2.html)
 
 Модуль «Комментарии»
 
 ---
 
-## [Comments.Add]
+## [Comments.Add]({{site.baseurl}}/docs/developer-guide/widgets/comm-1.html)
 
 Модуль «Комментарии»
 
 ---
 
-## [Sitemap]
+## [Sitemap]({{site.baseurl}}/docs/developer-guide/widgets/sitemap.html)
 
 Модуль «Карта сайта»
 
 ---
 
-## [Forms]
+## [Forms]({{site.baseurl}}/docs/developer-guide/widgets/forms.html)
 
 Как добавить виджет на сайт в PHP или twig?
 
 ---
 
-## [WidgetBanner]
+## [WidgetBanner]({{site.baseurl}}/docs/developer-guide/widgets/widgetbanner.html)
 
 Модуль «Баннерная система»
 
 ---
 
-## [Section]
+## [Section]({{site.baseurl}}/docs/developer-guide/widgets/section.html)
 
 Показывает материал раздела
 
 ---
 
-## [Material]
+## [Material]({{site.baseurl}}/docs/developer-guide/widgets/material.html)
 
 Показывает материал
 
 ---
 
-## [Search]
+## [Search]({{site.baseurl}}/docs/developer-guide/widgets/search-guide.html)
 
 Поиск по сайту
 
 ---
 
-## [Breadcrumbs]
+## [Breadcrumbs]({{site.baseurl}}/docs/developer-guide/widgets/breadcrumbs.html)
 
 Хлебные крошки
 
 ---
 
-## [Paginator]
+## [Paginator]({{site.baseurl}}/docs/developer-guide/widgets/paginator.html)
 
 Страничная навигация
 
 ---
 
-## [MenuUser]
+## [MenuUser]({{site.baseurl}}/docs/developer-guide/widgets/menuuser.html)
 
 Пользовательское меню
 
 ---
 
-## [Menu]
+## [Menu]({{site.baseurl}}/docs/developer-guide/widgets/menu.html)
 
 Меню раздела
 
 ---
 
-## [List.Sections]
+## [List.Sections]({{site.baseurl}}/docs/developer-guide/widgets/list-sections.html)
 
 Список материалов раздела
 
 ---
 
-## [List]
+## [List]({{site.baseurl}}/docs/developer-guide/widgets/list.html)
 
 Список материалов раздела
 
 ---
 
-## [Container]
+## [Container]({{site.baseurl}}/docs/developer-guide/widgets/container.html)
 
 Контейнер виджетов
