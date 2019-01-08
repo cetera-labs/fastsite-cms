@@ -9,126 +9,126 @@ permalink: /docs/developer-guide/widgets
 
 # Виджеты
 
-## Добавление виджета на сайт
+## [Добавление виджета на сайт]({{site.baseurl}}/docs/developer-guide/widgets/add.html)
 
 Как добавить виджет на сайт в PHP или twig?
 
 ---
 
-## User.Auth
+## [User.Auth]
 
 Виджет авторизации пользователя
 
 ---
 
-## User.Register
+## [User.Register]
 
 Виджет регистрации пользователя
 
 ---
 
-## Calendar
+## [Calendar]
 
 Показывает календарь
 
 ---
 
-## Filter
+## [Filter]
 
 Показывает материал раздела
 
 ---
 
-## SmiCalendar
+## [SmiCalendar]
 
 Редакция «Сайт СМИ»
 
 ---
 
-## Comments.List
+## [Comments.List]
 
 Модуль «Комментарии»
 
 ---
 
-## Comments.Add
+## [Comments.Add]
 
 Модуль «Комментарии»
 
 ---
 
-## Sitemap
+## [Sitemap]
 
 Модуль «Карта сайта»
 
 ---
 
-## Forms
+## [Forms]
 
 Как добавить виджет на сайт в PHP или twig?
 
 ---
 
-## WidgetBanner
+## [WidgetBanner]
 
 Модуль «Баннерная система»
 
 ---
 
-## Section
+## [Section]
 
 Показывает материал раздела
 
 ---
 
-## Material
+## [Material]
 
 Показывает материал
 
 ---
 
-## Search
+## [Search]
 
 Поиск по сайту
 
 ---
 
-## Breadcrumbs
+## [Breadcrumbs]
 
 Хлебные крошки
 
 ---
 
-## Paginator
+## [Paginator]
 
 Страничная навигация
 
 ---
 
-## MenuUser
+## [MenuUser]
 
 Пользовательское меню
 
 ---
 
-## Menu
+## [Menu]
 
 Меню раздела
 
 ---
 
-## List.Sections
+## [List.Sections]
 
 Список материалов раздела
 
 ---
 
-## List
+## [List]
 
 Список материалов раздела
 
 ---
 
-## Container
+## [Container]
 
 Контейнер виджетов
