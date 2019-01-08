@@ -9,7 +9,7 @@ permalink: /docs/developer-guide/plugins
 
 # Плагины (модули) Cetera CMS
 
-## [Разработка плагинов]
+## [Разработка плагинов]({{site.baseurl}}/docs/developer-guide/plugins/123.html)
 
 В CeteraCMS v3.12 и выше
 
