@@ -12,18 +12,18 @@ Cetera CMS 3.12+
 
 ## Файловая структура плагина
 
-<имяплагина>/
-+---info.json
-+---config.php
-+---install.php
-+---schema.xml
-+---classes/
-|   +---<Имяплагина>/
-|       +---Classname1.php
-|       +---Classname2.php
-+---ext/
-    +---Component1.js
-    +---Component2.js
+	<имяплагина>/
+	+---info.json
+	+---config.php
+	+---install.php
+	+---schema.xml
+	+---classes/
+	|   +---<Имяплагина>/
+	|       +---Classname1.php
+	|       +---Classname2.php
+	+---ext/
+	    +---Component1.js
+	    +---Component2.js
 
 ## Файл info.json (обязателен)
 
