@@ -16,9 +16,9 @@ grand_parent: Руководство разработчика
 
 Метод | Описание
 ---|---
-getComments()|Возвращает итератор \Cetera\Iterator\Material с комментариями к материалу
-getCommentsCount()|Возвращает кол-во комментариев, синоним getComments()→getCountAll()
-addComment($text,$publish=true,$user=null,$nickname)|Добавляет комментарий к материалу. $text — текст комментария, $publish — флаг публикации комментария, $user — автор, комментария (если не указан, то используется \Cetera\Application::getUser())), $nickname — псевдоним автора (для неавторизованных пользователей)
+**getComments()**|Возвращает итератор \Cetera\Iterator\Material с комментариями к материалу
+**getCommentsCount()**|Возвращает кол-во комментариев, синоним getComments()→getCountAll()
+**addComment($text,$publish=true,$user=null,$nickname)**|Добавляет комментарий к материалу. $text — текст комментария, $publish — флаг публикации комментария, $user — автор, комментария (если не указан, то используется \Cetera\Application::getUser())), $nickname — псевдоним автора (для неавторизованных пользователей)
 
 ## ВиджетComments.Add
 
