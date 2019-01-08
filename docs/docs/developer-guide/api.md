@@ -9,4 +9,4 @@ parent: Руководство разработчика
 
 Документация по API Cetera CMS. Содержит набор готовых классов, методов и свойств для использования.
 
-![API Cetera CMS](https://cms.cetera.ru/doc/api/)
+[API Cetera CMS](https://cms.cetera.ru/doc/api/)
