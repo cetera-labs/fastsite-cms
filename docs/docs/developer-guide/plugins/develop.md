@@ -2,7 +2,7 @@
 layout: default
 title: Разработка плагинов
 nav_order: 1
-parent: Виджеты
+parent: Плагины (модули) Cetera CMS
 grand_parent: Руководство разработчика
 ---
 
