@@ -1,10 +1,9 @@
 ---
 layout: default
-title: Плагины
+title: Плагин «Статистика посещаемости»
 nav_order: 10
 parent: Руководство пользователя
-has_children: true
-permalink: /docs/user-guide/plugins
+permalink: /docs/user-guide/plugins/visit
 ---
 
 # Плагин «Статистика посещаемости»
