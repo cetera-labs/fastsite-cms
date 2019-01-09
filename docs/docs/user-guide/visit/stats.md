@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Плагин «Статистика посещаемости»
+title: Посещаемость
 nav_order: 1
-parent: Плагины
+parent: Плагин «Статистика посещаемости»
 grand_parent: Руководство пользователя
 has_children: true
 permalink: /docs/user-guide/plugins/stats
