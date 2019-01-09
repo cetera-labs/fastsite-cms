@@ -3,7 +3,7 @@ layout: default
 title: Посещаемость
 nav_order: 1
 parent: Плагин «Статистика посещаемости»
-grand_parent: Плагины (модули)
+grand_parent: Плагины
 ---
 
 # Посещаемость
