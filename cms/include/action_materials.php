@@ -212,7 +212,10 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
         
     	  foreach ($sel as $val) {
     	      $m = Material::getById((int)$val, $objectDefinition);
-    	      Event::trigger($code, ['message' => $m->getBoUrl()]);
+    	      Event::trigger($code, [
+		'message' => $m->getBoUrl(),
+		'material' => $m,
+	      ]);
         }
         
     }
