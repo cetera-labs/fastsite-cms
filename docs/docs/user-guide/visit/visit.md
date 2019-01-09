@@ -4,7 +4,7 @@ title: Плагин «Статистика посещаемости»
 nav_order: 10
 parent: Руководство пользователя
 has_children: true
-permalink: /docs/user-guide/plugins/visit
+permalink: /docs/user-guide/visit
 ---
 
 # Плагин «Статистика посещаемости»
