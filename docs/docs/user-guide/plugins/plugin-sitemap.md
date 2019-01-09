@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Карта сайта»
 nav_order: 3
-parent: Плагины
+parent: Плагины (модули)
 grand_parent: Руководство пользователя
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Плагины
+title: Плагины (модули)
 nav_order: 9
 parent: Руководство пользователя
 has_children: true
