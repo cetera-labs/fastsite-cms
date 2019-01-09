@@ -1,3 +1,11 @@
+3.58.17
+	* API. https://pm.cetera.ru/browse/CCD-1376
+
+3.58.16
+
+	* API. изменено поведение \Cetera\User::inInGroup($gid) теперь выдает только принадлежность к группе
+	* API. добавлен метод \Cetera\User::hasRight($gid) - имеет ли пользователь полномочия, которые предоставлены группе
+
 3.58.15
 
 	* added /cms/include/data_object.php - get JSON info of material
