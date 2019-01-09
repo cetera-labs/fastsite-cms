@@ -39,7 +39,7 @@ permalink: /docs/user-guide/stats
 
 ---
 
-## [Посещаемость]({{site.baseurl}}/docs/user-guide/visit/visit.html)
+## [Посещаемость]({{site.baseurl}}/docs/user-guide/stats/visit.html)
 
 Где можно проследить за посещаемостью ресурса?
 
