@@ -2,7 +2,7 @@
 layout: default
 title: Модуль Google Sitemap
 nav_order: 1
-parent: Плагины (модули)
+parent: Модули
 grand_parent: Руководство пользователя
 ---
 

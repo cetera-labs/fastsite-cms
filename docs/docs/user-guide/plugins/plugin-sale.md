@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Торговля»
 nav_order: 4
-parent: Плагины (модули)
+parent: Модули
 grand_parent: Руководство пользователя
 ---
 

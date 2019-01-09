@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Веб-формы»
 nav_order: 2
-parent: Плагины (модули)
+parent: Модули
 grand_parent: Руководство пользователя
 ---
 

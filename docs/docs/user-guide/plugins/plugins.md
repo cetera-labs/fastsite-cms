@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Плагины (модули)
+title: Модули
 nav_order: 9
 parent: Руководство пользователя
 has_children: true
 permalink: /docs/user-guide/plugins
 ---
-# Плагины
+# Модули
 
 [Модуль Google Sitemap]({{site.baseurl}}/docs/user-guide/plugins/plugin-google-sitemap.html)
 
