@@ -1,5 +1,6 @@
 3.58.17
 	* API. https://pm.cetera.ru/browse/CCD-1376
+	* API. Новый метод \Cetera\User::hasRight($group_id) - имеет ли полномочия пользователь, предоставляемые группе
 
 3.58.16
 
