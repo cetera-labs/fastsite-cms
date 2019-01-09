@@ -17,6 +17,14 @@ trait Extendable {
 			return new static::$extension();
 		}
 		return new static();
-	}	
+	}
+
+	final public static function callStatic($method)
+	{
+		if ( static::$extension ) {
+			return static::$extension::$method();
+		}
+		return static::$method();		
+	}
 	
 }

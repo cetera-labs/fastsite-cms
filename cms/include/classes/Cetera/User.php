@@ -354,12 +354,16 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
      * @return bool      
      */
     public function isInGroup($group_id)
-    {
-        if ($group_id == GROUP_ADMIN)
-            return in_array($group_id, $this->getGroups());
-            
-        return in_array($group_id, $this->getGroups()) || $this->allowAdmin();
+    {           
+        return in_array($group_id, $this->getGroups());
     }
+	
+	public function hasRight($group_id)
+	{
+		if (!$this->isEnabled()) return FALSE;
+		if ($this->isAdmin()) return TRUE;
+		return $this->isInGroup($group_id);
+	}
     
     /**
      * Список групп, в которых состоит пользователь
