@@ -4,7 +4,6 @@ title: Популярность страниц
 nav_order: 2
 parent: Плагин «Статистика посещаемости»
 grand_parent: Руководство пользователя
-permalink: /docs/user-guide/stats
 ---
 
 # Популярность страниц

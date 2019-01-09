@@ -4,7 +4,6 @@ title: Введение
 nav_order: 1
 parent: Плагин «Статистика посещаемости»
 grand_parent: Руководство пользователя
-permalink: /docs/user-guide/stats
 ---
 
 # Введение

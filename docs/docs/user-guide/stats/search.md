@@ -4,7 +4,6 @@ title: Поисковые фразы
 nav_order: 4
 parent: Плагин «Статистика посещаемости»
 grand_parent: Руководство пользователя
-permalink: /docs/user-guide/stats
 ---
 
 # Поисковые фразы
