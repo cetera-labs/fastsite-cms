@@ -15,31 +15,31 @@ permalink: /docs/developer-guide
 
 ---
 
-## Cetera CMS изнутри
+## [Cetera CMS изнутри]({{site.baseurl}}/docs/developer-guide/inside)
 
 Рассмотрим внутренности Cetera CMS
 
 ---
 
-## Виджеты
+## [Виджеты]({{site.baseurl}}/docs/developer-guide/widgets)
 
 Виджеты в Cetera CMS
 
 ---
 
-## Плагины (модули) Cetera CMS
+## [Плагины (модули) Cetera CMS]({{site.baseurl}}/docs/developer-guide/plugins)
 
 Плагины в Cetera CMS
 
 ---
 
-## Темы (редакции) Cetera CMS
+## [Темы (редакции) Cetera CMS]({{site.baseurl}}/docs/developer-guide/themes.html)
 
 Разработка новой темы
 
 ---
 
-## API Cetera CMS
+## [API Cetera CMS]({{site.baseurl}}/docs/developer-guide/api.html)
 
 Документация по API Cetera CMS
 
