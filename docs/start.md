@@ -88,9 +88,9 @@ nav_order: 6
 
 Базовый ликбез: 
 
-[https://cetera-labs.github.io/docs/developer-guide/fast-start/]({{site.baseurl}}/docs/developer-guide/fast-start/)  
-[https://cetera-labs.github.io/docs/developer-guide/inside/]({{site.baseurl}}/docs/developer-guide/inside/)  
-[https://cetera-labs.github.io/docs/developer-guide/widgets/]({{site.baseurl}}/docs/developer-guide/widgets/)
+[https://cetera-labs.github.io/docs/developer-guide/fast-start/]({{site.baseurl}}/docs/developer-guide/fast-start)  
+[https://cetera-labs.github.io/docs/developer-guide/inside/]({{site.baseurl}}/docs/developer-guide/inside)  
+[https://cetera-labs.github.io/docs/developer-guide/widgets/]({{site.baseurl}}/docs/developer-guide/widgets)
 
 ## 8. Полезные библиотеки, устанавливаемые вместе с Cetera CMS
 
