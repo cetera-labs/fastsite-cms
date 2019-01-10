@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Баннеры
-nav_order: 1
+nav_order: 2
 parent: Плагин «Баннерная система»
 grand_parent: Руководство пользователя
 ---
