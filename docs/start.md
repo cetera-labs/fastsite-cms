@@ -88,20 +88,20 @@ nav_order: 6
 
 Базовый ликбез: 
 
-https://cetera.ru/forclients/platform-and-hosting/cetera-cms-developer-guide/fast-start/  
-https://cetera.ru/forclients/platform-and-hosting/cetera-cms-developer-guide/inside/  
-https://cetera.ru/forclients/platform-and-hosting/cetera-cms-developer-guide/widgets/
+[https://cetera-labs.github.io/docs/developer-guide/fast-start/]({{site.baseurl}}/docs/developer-guide/fast-start/)  
+[https://cetera-labs.github.io/docs/developer-guide/inside/]({{site.baseurl}}/docs/developer-guide/inside/)  
+[https://cetera-labs.github.io/docs/developer-guide/widgets/]({{site.baseurl}}/docs/developer-guide/widgets/)
 
 ## 8. Полезные библиотеки, устанавливаемые вместе с Cetera CMS
 
-Guzzle http://docs.guzzlephp.org/en/stable/  
-Twig https://twig.symfony.com/  
-DBAL https://www.doctrine-project.org/projects/doctrine-dbal/en/2.7/index.html  
-ckeditor https://ckeditor.com/  
-zendframework1 http://framework.zend.com  
-phpmailer https://github.com/PHPMailer/PHPMailer/  
-sypexgeo http://sypexgeo.net/ru/download/  
-ua-parser https://github.com/tobie/ua-parser/tree/master/php  
-mysqldump-php https://github.com/ifsnop/mysqldump-php  
-phpmorphy https://sourceforge.net/projects/phpmorphy/  
-pclzip http://www.phpconcept.net/pclzip
+Guzzle [http://docs.guzzlephp.org/en/stable/](http://docs.guzzlephp.org/en/stable/)  
+Twig [https://twig.symfony.com/](https://twig.symfony.com/)  
+DBAL [https://www.doctrine-project.org/projects/doctrine-dbal/en/2.7/index.html](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.7/index.html)  
+ckeditor [https://ckeditor.com/](https://ckeditor.com/)  
+zendframework1 [http://framework.zend.com](http://framework.zend.com)  
+phpmailer [https://github.com/PHPMailer/PHPMailer/](https://github.com/PHPMailer/PHPMailer/)  
+sypexgeo [http://sypexgeo.net/ru/download/](http://sypexgeo.net/ru/download/)  
+ua-parser [https://github.com/tobie/ua-parser/tree/master/php](https://github.com/tobie/ua-parser/tree/master/php)  
+mysqldump-php [https://github.com/ifsnop/mysqldump-php](https://github.com/ifsnop/mysqldump-php)  
+phpmorphy [https://sourceforge.net/projects/phpmorphy/](https://sourceforge.net/projects/phpmorphy/)  
+pclzip [http://www.phpconcept.net/pclzip](http://www.phpconcept.net/pclzip)
