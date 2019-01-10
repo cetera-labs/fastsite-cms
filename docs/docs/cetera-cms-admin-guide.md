@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Руководство администратора Cetera CMS
-nav_order: 3
+nav_order: 5
 ---
 # Установка Cetera CMS
 
