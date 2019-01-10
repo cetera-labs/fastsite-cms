@@ -46,7 +46,7 @@ nav_order: 6
 
 **Важно!**
 
-Если вам необходимо расширение функциональности CMS в рамках проекта, реализуйте её в этом же каталоге, вместо того, чтобы создавать новый модуль в каталоге plugins/ Вся функциональность, описанная в [{{site.baseurl}}/docs/developer-guide/plugins/develop.html]({{site.baseurl}}/docs/developer-guide/plugins/develop.html) сохраняется и в каталоге themes/
+Если вам необходимо расширение функциональности CMS в рамках проекта, реализуйте её в этом же каталоге, вместо того, чтобы создавать новый модуль в каталоге plugins/ Вся функциональность, описанная в [https://cetera-labs.github.io/docs/developer-guide/plugins/develop.html]({{site.baseurl}}/docs/developer-guide/plugins/develop.html) сохраняется и в каталоге themes/
 
 Также, допускается размещение дополнительных модулей в каталоге themes/<ИМЯ_МОДУЛЯ>/
 
