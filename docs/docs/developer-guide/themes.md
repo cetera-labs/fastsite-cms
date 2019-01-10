@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Разработка новой темы
+title: Тумы (редакции) Cetera CMS
 nav_order: 5
 parent: Руководство разработчика
 ---
