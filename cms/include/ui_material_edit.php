@@ -86,13 +86,12 @@ try {
     }
     
     $objectRenderer = new ObjectRenderer($objectDefinition, $idcat, $id, $page_height, $translator->_('Свойства'));      
-    
+	
     if (!$id) {
     
         // Новый материал. Заполняем поля default значениями.
         foreach ($objectRenderer->fields_def as $name => $value) 
 			if (!isset($fields[$name])) $fields[$name] = $value['default_value'];	
-        if (!isset($fields['autor'])) $fields['autor'] = $user->id;
         $fields['idcat'] = $idcat;
         
         if ($idcat == CATALOG_VIRTUAL_HIDDEN)
@@ -131,8 +130,10 @@ try {
         //if (!isset($objectRenderer->fields_def['autor']['describ']))$objectRenderer->fields_def['autor']['describ'] = $translator->_('Автор');
         if (!isset($objectRenderer->fields_def['dat']['describ']))  $objectRenderer->fields_def['dat']['describ']   = $translator->_('Дата создания');
         if (!isset($objectRenderer->fields_def['name']['describ'])) $objectRenderer->fields_def['name']['describ']  = $translator->_('Заголовок');
+		
+		if (!$material->autor) $material->autor = $user->id;
     }
-    
+    	
     $objectRenderer->setObject($material);  
   
     ?>	

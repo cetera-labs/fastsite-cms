@@ -1,8 +1,6 @@
 <?php
 namespace Cetera\Widget; 
 
-require_once( 'phpmorphy/src/common.php');
-
 /**
  * Виджет "Поиск по сайту"
  * 
@@ -193,7 +191,7 @@ class Search extends Templateable {
 		}	
 		
 		if ($this->getParam('morphology')) {
-			$morphy = new \phpMorphy(DOCROOT.LIBRARY_PATH.'/phpmorphy/dicts/', 'ru_RU', array('storage' => PHPMORPHY_STORAGE_FILE));
+			$morphy = new \componavt\phpMorphy\Morphy();
 			$res = $morphy->getAllForms($words, \phpMorphy::IGNORE_PREDICT);
 			foreach ($words as $w) {
 				if (isset($res[$w])) {

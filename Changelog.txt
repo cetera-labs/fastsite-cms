@@ -1,4 +1,7 @@
-3.58.18
+	* https://pm.cetera.ru/browse/CCD-1352
+	* API. в library добавлена библиотека https://github.com/componavt/phpmorphy вместо оригинального phpMorphy
+
+3.58.19
 
 	* API. https://pm.cetera.ru/browse/CCD-1376
 	

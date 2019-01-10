@@ -19,12 +19,6 @@ $_ext = substr($url,-3);
 
 $_init = Cetera\Util::utime();
 
-$application->setFrontOffice();
-$application->connectDb();
-$application->initSession();
-$application->initPlugins();
-$application->ping();
-
 $application->route(\Cetera\ImageTransform::PREFIX,  array('\Cetera\ImageTransform', 'transformFromURI') );
 
 $application->route('/'.PREVIEW_PREFIX,  function() {
@@ -42,6 +36,12 @@ $application->route('/robots.txt',  function() {
 	return true;
 	
 } );
+
+$application->setFrontOffice();
+$application->connectDb();
+$application->initSession();
+$application->initPlugins();
+$application->ping();
 
 if ($application->getVar('fo_close')) {
 	$proceed = 0;
