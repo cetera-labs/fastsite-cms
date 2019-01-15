@@ -34,8 +34,8 @@ class Plugin implements \ArrayAccess  {
 		{
         	while (($__item = readdir($__dir)) !== false)
             {
-          		if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.'/'.$__item)) continue;
-        	    if (!file_exists(DOCROOT.PLUGIN_DIR.'/'.$__item.'/'.PLUGIN_INFO)) continue;
+          		if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item)) continue;
+        	    if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item.DIRECTORY_SEPARATOR.PLUGIN_INFO)) continue;
                 $plugins[$__item] = new self($__item);
         	}  
         	closedir($__dir);
@@ -51,8 +51,8 @@ class Plugin implements \ArrayAccess  {
 	*/	
     public static function find($name)
     {
-        if (!is_dir(DOCROOT.PLUGIN_DIR.'/'.$name)) return false;
-        if (!file_exists(DOCROOT.PLUGIN_DIR.'/'.$name.'/'.PLUGIN_INFO)) return false;
+        if (!is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$name)) return false;
+        if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.PLUGIN_INFO)) return false;
         return new self($name);
     }    
     
@@ -68,7 +68,6 @@ class Plugin implements \ArrayAccess  {
 	*/		
     public function isEnabled ()
     {   
-		
 		try {
 			// Если не хватает требуемых модулей, то отключаем
 			$this->checkRequirements();

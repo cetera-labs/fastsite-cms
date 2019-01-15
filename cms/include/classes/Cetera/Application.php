@@ -977,27 +977,27 @@ class Application {
         $translator = $this->getTranslator();
                 
         foreach (Plugin::enum() as $plugin) {
-            if (!$plugin->isEnabled()) continue;
-            if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES)) {
-                $loader = new \Composer\Autoload\ClassLoader();
+            if (!$plugin->isEnabled()) continue;	
+            if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES)) {
+			$loader = new \Composer\Autoload\ClassLoader();
 				
 				$parts = explode('_',$plugin->name);
 				$prefix = '';
 				foreach ($parts as $p) $prefix .= ucfirst($p);
 				
-                $loader->add($prefix, DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CLASSES);
+                $loader->add($prefix, DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES);
                 $loader->register();
             }            
             
-			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets') && is_dir(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets')) {
-				$this->_widgetPaths[] = DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets';
+			if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets') && is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets')) {
+				$this->_widgetPaths[] = DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets';
 			}
                 
             $this->_plugins_loaded[] = $plugin;      
         }
 		foreach ($this->_plugins_loaded as $plugin) {
-			if (file_exists(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG)) try {
-				include(DOCROOT.PLUGIN_DIR.'/'.$plugin->name.'/'.PLUGIN_CONFIG); 
+			if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG)) try {
+				include(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG); 
 			} 
 			catch (\Exception $e) {
 			}
@@ -1005,7 +1005,7 @@ class Application {
 		
 		foreach (Theme::enum() as $theme) {
 			
-            if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes') && is_dir(DOCROOT.THEME_DIR.'/'.$theme->name.'/classes'))
+            if (file_exists(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.'classes') && is_dir(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.'classes'))
 			{
                 $loader = new \Composer\Autoload\ClassLoader();
 				
@@ -1013,12 +1013,12 @@ class Application {
 				$prefix = '';
 				foreach ($parts as $p) $prefix .= ucfirst($p);				
 				
-                $loader->add($prefix, DOCROOT.THEME_DIR.'/'.$theme->name.'/classes');
+                $loader->add($prefix, DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.'classes');
                 $loader->register();
             }   			
             
-            if (file_exists(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG)) try {
-				include(DOCROOT.THEME_DIR.'/'.$theme->name.'/'.PLUGIN_CONFIG);  
+            if (file_exists(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG)) try {
+				include(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG);  
 			} 
 			catch (\Exception $e) {
 			}					
