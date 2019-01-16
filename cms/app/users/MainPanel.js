@@ -13,6 +13,14 @@ Ext.define('Cetera.users.MainPanel', {
 		
 		this.columns = [
 			{
+				title: "ID", 
+				hideable: false, 
+				menuDisabled: true, draggable: false,
+				width: 50, 
+				sortable: true, 
+				dataIndex: 'id'
+			},		
+			{
 				tooltip: "CMS", 
 				hideable: false, menuDisabled: true, draggable: false,
 				width: 25, 

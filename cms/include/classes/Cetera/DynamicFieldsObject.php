@@ -1016,7 +1016,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					  $link = $link->id;             
 				  }
 				  else {
-					  $link = (array)$link;
+					  $link = (array)$link;					  
+				  }
+			  } 
+
+			  if (is_array($link)) {
 					  $link['catalog_id'] = -1;
 					  $link['alias'] = 'hidden';
 					  if ($link['id']) {
@@ -1026,9 +1030,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 						  $m = DynamicFieldsObject::fetch($link, $type2, $tbl);
 					  }
 					  $m->save();
-					  $link = $m->id;					  
-				  }
-			  }  
+					  $link = $m->id;				  
+			  }
 			  
 			  if ((int)$link) { 
 				  if (isset($old[ $link ])) unset($old[ $link ]);
