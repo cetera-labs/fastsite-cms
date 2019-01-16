@@ -17,8 +17,12 @@ Ext.define('Cetera.field.UserSet', {
     initComponent : function(){
     
         if (!this.tpl) this.tpl = '<div class="list-item-user">{name}</div>';
-    
-        this.buttons = [{
+        
+        this.callParent();  
+    },
+	
+	getButtons: function() {
+        return [{
             xtype  : 'button',
             iconCls: 'icon-new',
             tooltip: Config.Lang.add,
@@ -30,8 +34,6 @@ Ext.define('Cetera.field.UserSet', {
             tooltip: Config.Lang.remove,
             handler: this.removeItem,
             scope  : this
-        }];
-    
-        this.callParent();  
-    }
+        }];		
+	}
 });
