@@ -9,6 +9,12 @@ permalink: /docs/developer-guide
 
 ---
 
+## [Разработка нового сайта на Cetera CMS(Developer style guide)]({{site.baseurl}}/docs/developer-guide/start)
+
+Быстрый старт для разработчиков в Cetera CMS
+
+---
+
 ## [Быстрый старт, уроки для разработчиков]({{site.baseurl}}/docs/developer-guide/fast-start)
 
 Быстрый старт для разработчиков в Cetera CMS
