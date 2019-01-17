@@ -1,7 +1,7 @@
 ---
 layout: default
 title: API Cetera CMS
-nav_order: 6
+nav_order: 8
 parent: Руководство разработчика
 ---
 

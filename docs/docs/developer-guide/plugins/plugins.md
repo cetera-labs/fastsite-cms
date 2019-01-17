@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Плагины (модули) Cetera CMS
-nav_order: 4
+nav_order: 6
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/plugins

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Быстрый старт, уроки для разработчиков
-nav_order: 1
+nav_order: 2
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/fast-start

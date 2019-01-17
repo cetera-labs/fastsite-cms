@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Cetera CMS изнутри
-nav_order: 2
+nav_order: 3
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/inside

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Темы (редакции) Cetera CMS
-nav_order: 5
+nav_order: 7
 parent: Руководство разработчика
 ---
 
