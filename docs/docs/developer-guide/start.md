@@ -3,6 +3,7 @@ layout: default
 title: Разработка нового сайта на Cetera CMS
 nav_order: 1
 parent: Руководство разработчика
+permalink: /docs/developer-guide/start/
 ---
 # Разработка нового сайта на Cetera CMS(Developer style guide)
 
