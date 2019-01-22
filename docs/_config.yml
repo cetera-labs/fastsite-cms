@@ -1,0 +1,6 @@
+title: Cetera CMS Docs
+remote_theme: pmarsceill/just-the-docs
+aux_links:
+    "Cetera CMS":
+      - "https://cetera.ru/cetera-cms/"
+baseurl: "/cetera-cms" # the subpath of your site, e.g. /blog
