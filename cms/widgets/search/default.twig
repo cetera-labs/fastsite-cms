@@ -15,23 +15,13 @@
 {% if widget.querySubmitted() %}
 
 	{% set list = widget.getResults() %}
+	
 	{% if not list or not list.getCountAll() %}
-	
-		{% set list = null %}
-	
-	{% else %}
-	
-		{% set first = (list.getCurrentPageNumber()-1) * widget.getParam('items_per_page') + 1 %}
-		{% set last = (list.getCurrentPageNumber() == list.getPageCount())?list.getCountAll():list.getCurrentPageNumber()*list.count() %}
-
-	{% endif %}
-	
-	{% if not list %}
 	
 		<p>{{ _('Поиск не дал результатов') }}</p>
 		
 	{% else %}
-		<p>Результаты поиска {{ first }} - {{ last }} из {{ list.getCountAll() }}</p>
+		<p>Результаты поиска {{ list.getFirstIndex() }} - {{ list.getLastIndex() }} из {{ list.getCountAll() }}</p>
 		{% for m in list %}
 			<hr><p></p>					
 			<h4><a href="{{ m.url }}">{{ m.name|raw }}</a></h4>
