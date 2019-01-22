@@ -11,7 +11,7 @@ nav_order: 5
 2. A recent version of cURL >= 7.19.4 compiled with OpenSSL and zlib.
 3. MySQL database >= 5.0
 
-​## Install release version (recommended for all users)
+## Install release version (recommended for all users)
 
 1. Unpack [/cetera_cms/install.php.zip](https://cetera.ru/cetera_cms/install.php.zip) at your webserver home folder.
 
