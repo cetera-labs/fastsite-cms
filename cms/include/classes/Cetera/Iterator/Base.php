@@ -410,5 +410,9 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
 	public function createFilter($name) {
 		return new \Cetera\Filter($name, $this);
 	}
+    
+    public function clone() {
+        return clone $this;
+    }
 
 }

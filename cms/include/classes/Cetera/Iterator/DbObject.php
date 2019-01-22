@@ -41,7 +41,9 @@ abstract class DbObject extends Base {
 
     function __clone()
     {
-        $this->query = clone $this->query;
+        if ($this->query) {
+            $this->query = clone $this->query;
+        }
     }	
     
     public function fetchElements()

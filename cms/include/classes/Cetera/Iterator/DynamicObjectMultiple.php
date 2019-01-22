@@ -28,6 +28,7 @@ class DynamicObjectMultiple extends DbObject {
 	
 	protected $where = '';
 	protected $order = '';
+    protected $group = 'GROUP BY main.id';
 	
 	protected $unpublished = false;		
     
@@ -111,12 +112,10 @@ class DynamicObjectMultiple extends DbObject {
 
     public function orderBy($sort, $order = null, $add = true)
     {
-		if ($this->order && $add)
-		{
+		if ($this->order && $add) {
 			$this->order .= ', '.$sort;
 		}
-		else
-		{
+		else {
 			$this->order = ' ORDER BY '.$sort;
 		}
 		if ($order) $this->order .= ' '.$order;
@@ -124,6 +123,19 @@ class DynamicObjectMultiple extends DbObject {
         $this->sync = false;
         return $this;       
     }  
+    
+    public function groupBy($field, $add = true)
+    {
+		if ($add) {
+			$this->group .= ', '.$field;
+		}
+		else {
+			$this->group = 'GROUP BY '.$field;
+		}
+        $this->sync = false;
+        
+        return $this;       
+    }     
 
     public function unpublished($unpublished = true)
     {
@@ -133,7 +145,7 @@ class DynamicObjectMultiple extends DbObject {
 	
     public function getQuery()
     {   
-		$q = array();
+		$q = [];
 		foreach ($this->objectDefinitionArray as $od)
 		{		
 			$from = '`'.$od->table.'` main';
@@ -212,9 +224,9 @@ class DynamicObjectMultiple extends DbObject {
 					$where .= 'main.type&'.MATH_PUBLISHED.'='.MATH_PUBLISHED.' and (main.dat<=NOW() or main.dat IS NULL or main.type&'.MATH_SHOW_FUTURE.'='.MATH_SHOW_FUTURE.')';
 				}
 			}
-			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $f).' FROM '.$from.' '.$where.' GROUP BY main.id';
+			$q[] = 'SELECT '.$od->id.' as  _type_id_, '.implode(',', $f).' FROM '.$from.' '.$where.' '.$this->group;
 		}
-		return implode(' UNION ', $q).$this->order;
+		return '('.implode(') UNION (', $q).') '.$this->order;
     } 	
 
 }

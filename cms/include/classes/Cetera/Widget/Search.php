@@ -77,7 +77,7 @@ class Search extends Templateable {
 		if (!$this->results)
 		{
 			
-			$sections = array();
+			$sections = [];
 			foreach ($this->getSections() as $c)
 			{
 				if ($c->isHidden()) continue;
@@ -121,22 +121,18 @@ class Search extends Templateable {
 		{
 			$sections = $this->getParam('sections');
 
-			if (!is_array($sections))
-			{
-				if ($sections)
-				{
+			if (!is_array($sections)) {
+				if ($sections) {
 					$sections = explode(',', $sections);
 					array_walk($sections, 'intval');
 				}				
-				if (!$sections || !count($sections))
-				{
+				if (!$sections || !count($sections)) {
 					$sections = array( $this->application->getServer()->id );
 				}
 
 			}
 			$this->_sections = array();
-			foreach ($sections as $id)
-			{
+			foreach ($sections as $id) {
 				$this->_sections[] = \Cetera\Catalog::getById($id);
 			}
 		}
