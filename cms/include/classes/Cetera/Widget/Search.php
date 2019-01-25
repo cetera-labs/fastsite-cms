@@ -256,7 +256,7 @@ class Search extends Templateable {
 		
 		$fields = $this->getSearchFields();
 		$words = $this->splitQueryToWords();
-		
+        
 		if (!count($words)) return false;
 		
 		$res = array();

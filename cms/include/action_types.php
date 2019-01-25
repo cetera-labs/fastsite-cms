@@ -223,26 +223,39 @@ try {
     }
     
     if ($_REQUEST['action'] == 'field_delete') {
-    
-		$f = $application->getConn()->fetchAssoc('select type, id, name, len, pseudo_type from types_fields where field_id=?', array($_REQUEST['id']));
-        if ($f) {            
-            if ($f['type'] > 0) {
-            
-                $od = new ObjectDefinition($f['id']);             
-
-                // УДАЛЕНИЕ ПОЛЯ
-                if (($f['type']!=FIELD_LINKSET)&&($f['type']!=FIELD_LINKSET2)&&($f['type']!=FIELD_MATSET)) {
-              	  $application->getConn()->executeQuery("alter table `".$od->table."` drop `".trim($f['name'])."`");
-              	} 
-				else {
-              	  ObjectDefinition::drop_link_table($od->table, $f['name'], $f['type'], $f['len'], $f['id'], $f['pseudo_type']);
-              	}
-            }
-            
-			$application->getConn()->executeQuery('delete from types_fields where field_id=?', array($_REQUEST['id']));
-			$application->getConn()->executeQuery('delete from types_fields_catalogs where field_id=?', array($_REQUEST['id']));
-        	$res['success'] = true;
+        
+        $rows = [];
+        if ($_REQUEST['id']) {
+            $rows = [[
+                'id' => $_REQUEST['id']
+            ]];
         }
+        elseif ($_REQUEST['rows']) {
+            $rows = json_decode($_REQUEST['rows'], true);
+            if (isset($rows['id'])) {
+                $rows = [$rows];
+            }
+        }
+        
+        foreach ($rows as $field) {
+            $fid = $field['id'];
+            $f = $application->getConn()->fetchAssoc('select type, id, name, len, pseudo_type from types_fields where field_id=?', [$fid]);
+            if ($f) {            
+                if ($f['type'] > 0) {            
+                    $od = new ObjectDefinition($f['id']);             
+                    // УДАЛЕНИЕ ПОЛЯ
+                    if (($f['type']!=FIELD_LINKSET)&&($f['type']!=FIELD_LINKSET2)&&($f['type']!=FIELD_MATSET)) {
+                      $application->getConn()->executeQuery("alter table `".$od->table."` drop `".trim($f['name'])."`");
+                    } 
+                    else {
+                      ObjectDefinition::drop_link_table($od->table, $f['name'], $f['type'], $f['len'], $f['id'], $f['pseudo_type']);
+                    }
+                }            
+                $application->getConn()->executeQuery('delete from types_fields where field_id=?', [$fid]);
+                $application->getConn()->executeQuery('delete from types_fields_catalogs where field_id=?', [$fid]);
+            }
+        }
+        $res['success'] = true;
     }
 	
 	if (in_array($_REQUEST['action'],['field_up','field_down'])) {

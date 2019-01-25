@@ -248,7 +248,10 @@ Ext.define('Cetera.panel.MaterialTypes', {
     // Удалить поле
     fieldDeleteClick: function() {
         Ext.MessageBox.confirm(Config.Lang.delete, Config.Lang.r_u_sure, function(btn) {
-            if (btn == 'yes') this.fieldCall('field_delete');
+            if (btn == 'yes') {
+                this.fieldsStore.remove( this.fieldsGrid.getSelectionModel().getSelection() );                                
+                //this.fieldCall('field_delete');
+            }
         }, this);      
     },
     
@@ -433,7 +436,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
             }],
 		
             selModel: {
-                singleSelect:true,
+                mode: 'MULTI',
                 listeners: {
                     'selectionchange' : {
                         fn: function(sm) {
@@ -444,11 +447,9 @@ Ext.define('Cetera.panel.MaterialTypes', {
                             Ext.getCmp(this.getId()+'tb_fld_delete').setDisabled(!hs);
                             Ext.getCmp(this.getId()+'tb_fld_edit').setDisabled(!hs);						
 							
-							if (hs)
-							{
+							if (hs){
 								var rec = this.fieldsGrid.getSelectionModel().getSelection()[0];
-								if (rec.get('fixed'))
-								{
+								if (rec.get('fixed')) {
 									Ext.getCmp(this.getId()+'tb_fld_delete').setDisabled(1);										
 								}
 							}
@@ -476,7 +477,7 @@ Ext.define('Cetera.panel.MaterialTypes', {
             closeAction: 'hide',
             plain:true,
             layout: 'fit',
-            resizable: false,
+            resizable: true,
             modal: true,
             items: [this.fieldsGrid],
             buttons: [{
