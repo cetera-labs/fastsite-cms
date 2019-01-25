@@ -15,7 +15,7 @@ Ext.define('Cetera.field.ck.Base', {
 
             
             Ext.Loader.loadScript({
-                url: '/library/vendor/ckeditor/ckeditor/ckeditor.js',
+                url: 'https://cdn.ckeditor.com/4.11.2/full/ckeditor.js',
                 onLoad: this.initEditor,
                 scope: this
             });

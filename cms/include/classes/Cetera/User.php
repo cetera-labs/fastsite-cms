@@ -456,7 +456,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			unset($fields['__password_crypted']);
 		}
 		
-        return parent::setFields($fields, $from_db);    
+        return parent::setFields($fields, $from_db);
     } 	
 	
     public function setPassword($value)
