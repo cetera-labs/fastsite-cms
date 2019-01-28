@@ -8,8 +8,6 @@ if (stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
 
 $application = Cetera\Application::getInstance();
 
-set_exception_handler('fo_exception_handler');
-
 list($url) = explode('?',$_SERVER['REQUEST_URI']);
 
 $_ext = '/'.LIBRARY_PATH.'/extjs';
@@ -177,41 +175,3 @@ $application->debug(DEBUG_COMMON, 'Success hits: '.$be->successCalls.' ('.($be->
 
 $application->applyOutputHandler($result);
 echo $result;
-
-function fo_exception_handler($exception) {
-
-    if ($exception instanceof \Cetera\Exception\CMS) {
-        $ext_message = $exception->getExtMessage();
-    } else {
-        $ext_message = 'In file <b>'.$exception->getFile().'</b> on line: '.$exception->getLine()."<br /><br /><b>Stack trace:</b><br />".nl2br($exception->getTraceAsString());
-    }
-   
-    // Ошибка в Back office
-    if (ob_get_level()) ob_clean();
-    
-    header('Content-type: text/html; charset=UTF-8');
-    
-    if ($exception instanceof \Cetera\Exception\HTTP) {
-        header("HTTP/1.0 ".$exception->getStatus());
-    } else {
-        header("HTTP/1.0 500");
-    }
-    
-    ?>
-    <html>
-        <head>
-            <link rel="stylesheet" type="text/css" href="/<?=CMS_DIR?>/css/error.css">
-        </head>
-        <body>
-            <table width="100%" height="100%"><tr><td align="center">
-                <div class="panel">
-                    <div class="error"><?=$exception->getMessage()?></div>
-                    <?if ($ext_message) {?><div class="extend"><?=$ext_message?></div><?}?>
-                </div>
-            </td></tr></table>
-        </body>
-    </html>
-    <?
-
-}
-?>

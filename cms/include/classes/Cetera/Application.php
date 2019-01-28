@@ -1938,6 +1938,13 @@ class Application {
 			self::$_instance->exit_code = 1;			
 			return;
 		}
+        
+        // Ошибка в FrontOffice, задействуем стандартный обработчик исключений
+        if (self::$_instance->isFrontOffice()) {
+            restore_exception_handler();
+            throw $exception;
+            return;            
+        }
 	
 		// Ошибка во время ajax обработки данных формы  
 		if ($exception instanceof \Cetera\Exception\Form) {
