@@ -6,9 +6,9 @@ See website - https://ceteralabs.com/cetera-cms/
 ## Launch your website in the cloud
 https://ceteralabs.com/cetera-cms/create/
 ## Docs
-* User Guide - https://cetera.ru/forclients/cetera-cms-user-guide/
-* Developers Guide - https://cetera.ru/forclients/cetera-cms-developer-guide/
-* Install Guide and requirements - https://cetera.ru/forclients/cetera-cms-admin-guide/
+* User Guide - https://cetera-labs.github.io/cetera-cms/docs/user-guide
+* Developers Guide - https://cetera-labs.github.io/cetera-cms/docs/developer-guide
+* Install Guide and requirements - https://cetera-labs.github.io/cetera-cms/docs/cetera-cms-admin-guide.html
 ## Support
 * Email — support@ceteralabs.com
 * Forum — http://community.fastsite.ru/
