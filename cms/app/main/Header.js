@@ -34,11 +34,11 @@ Ext.define('Cetera.main.Header', {
 			text: _('Справка'),
 			menu: [{
 				text: _('Руководство пользователя'),
-				href: 'https://cetera.ru/forclients/cetera-cms-user-guide/',
+				href: 'https://cetera-labs.github.io/cetera-cms/docs/user-guide',
 				hrefTarget: '_blank'
 			},{
 				text: _('Руководство разработчика'),
-				href: 'https://cetera.ru/forclients/cetera-cms-developer-guide/',
+				href: 'https://cetera-labs.github.io/cetera-cms/docs/developer-guide',
 				hrefTarget: '_blank'
 			},{
 				text: _('Вопросы и ответы'),
