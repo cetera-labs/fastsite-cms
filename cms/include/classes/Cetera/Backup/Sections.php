@@ -34,7 +34,11 @@ class Sections implements XmlInterface {
 			if ($xml->name == 'section' && $xml->nodeType == \XMLReader::ELEMENT) {
 				$section = $this->restoreSection($xml, $parentSection);
 				$permissions = [];
+                $fields = [];
 			}
+			if ($xml->name == 'field' && $xml->nodeType == \XMLReader::ELEMENT) {
+				$field = $xml->getAttribute('name');
+			}            
 			if ($xml->name == 'permission') {
 				$pid = $xml->getAttribute('id');
 				$gid = $xml->getAttribute('group_id');
@@ -44,6 +48,12 @@ class Sections implements XmlInterface {
 			if ($xml->name == 'section' && $xml->nodeType == \XMLReader::END_ELEMENT) {
 				if ($section) {
 					if (count($permissions)) $section->updatePermissions($permissions);
+                    if (count($fields)) {
+                        foreach ($fields as $name => $value) {
+                            $section->{$name} = $value;
+                        }
+                        $section->save();
+                    }
 				}
 			}
 			if ($xml->name == 'children' && $xml->nodeType == \XMLReader::ELEMENT) {
@@ -52,7 +62,10 @@ class Sections implements XmlInterface {
 			}		
 			if ($xml->name == 'children' && $xml->nodeType == \XMLReader::END_ELEMENT) {
 				$parentSection = array_pop($stack);
-			}						
+			}
+			if (in_array($xml->nodeType, array(\XMLReader::TEXT, \XMLReader::CDATA))) {
+                $fields[$field] .= $xml->value;	
+			}            
 		}		
 	}
 	
@@ -162,6 +175,43 @@ class Sections implements XmlInterface {
 			}
 			$this->xml->endElement();
 		}
+        
+        foreach($section->objectDefinition->getFields() as $f) {			
+            $value = $section->getDynamicField($f['name']);
+                        
+            $this->xml->startElement( 'field' );
+            $this->xml->writeAttribute('name', $f['name']);	
+            if ($f instanceof \Cetera\ObjectFieldText) {
+                if ($value) $this->xml->writeCdata( $value );
+            }				
+            elseif ($f instanceof \Cetera\ObjectFieldScalar) {
+                $this->xml->text( $value );
+            }
+            elseif ($f instanceof \Cetera\ObjectFieldLinkSet) {
+                foreach ($section->{$f['name']} as $link) {
+                    $this->xml->startElement( 'link' );
+                    $this->xml->writeAttribute('id', $link->id);
+                    $this->xml->endElement();	
+                }					
+            }
+            elseif ($f instanceof \Cetera\ObjectFieldMaterialSet && $section->{$f['name']}->getCountAll()) {
+                if ($f['pseudo_type'] == PSEUDO_FIELD_TAGS) {
+                    $this->xml->writeCdata( $section->{$f['name']}->implode('name',function($item, $index, $first, $last, $total){							
+                        if ($first) return $item;
+                        return ','.$item;							
+                    }) );
+                } 
+                else {
+                    $this->xml->startElement( 'materials' );
+                    $this->xml->writeAttribute('objectDefinition', $section->{$f['name']}->getObjectDefinition()->alias);
+                    foreach ($section->{$f['name']} as $link) {						
+                        $this->backupMaterial($link);						
+                    }
+                    $this->xml->endElement();	
+                }
+            }
+            $this->xml->endElement();				
+        }        
 		
 		if (count($section->children)) {
 			$this->xml->startElement( 'children' );
