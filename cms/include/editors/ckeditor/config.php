@@ -36,6 +36,7 @@ CKEDITOR.editorConfig = function( config )
 	         
     config.baseFloatZIndex = 20000;       
     config.extraPlugins = 'youtube,font,showblocks,widgets,colorbutton,colordialog';
+    config.removePlugins = 'iframe';
     config.allowedContent = true;
     config.resize_enabled = false;
     config.language = '<?=$application->getLocale()?>';

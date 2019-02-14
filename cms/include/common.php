@@ -84,7 +84,7 @@ if (get_magic_quotes_gpc()) {
 
 function check_upload_file_name(&$name)
 {
-     if ($name == '.htaccess' || substr($name,-4) == '.php') $name .= '_not_allowed';
+     if ($name == '.htaccess' || in_array(substr($name,-4), ['.php','.cgi','.asp','.dll','.exe','.pht']) || in_array(substr($name,-5), ['.php3','.php4','.php5','.php7']) )$name .= '_not_allowed';
 	 
 	 // Замена кириллицы	
 	 $name = translit($name, FALSE);
