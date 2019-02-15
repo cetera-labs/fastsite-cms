@@ -382,7 +382,7 @@ class Application {
      */
     public function getSession()
     {
-        return $this->_session;   
+        return $this->_session;
     }
     
     /**

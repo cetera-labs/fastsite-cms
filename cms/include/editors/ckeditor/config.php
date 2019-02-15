@@ -42,6 +42,7 @@ CKEDITOR.editorConfig = function( config )
     config.language = '<?=$application->getLocale()?>';
     config.filebrowserBrowseUrl = '/<?=CMS_DIR?>/include/ck_file_browser.php';
     config.filebrowserUploadUrl = '/<?=CMS_DIR?>/include/ck_file_uploader.php?path=<?php echo USER_UPLOAD_PATH.date('Ymd') ?>/';
+    config.filebrowserUploadMethod = 'form';
     <?php if ($application->getVar('htmleditor.css')) : ?>
     config.contentsCss = '<?php echo $application->getVar('htmleditor.css') ?>?' + ( new Date() * 1 );
     <?php endif; ?>

@@ -1,4 +1,7 @@
+3.59.2
+
     * CKEditor config: добавлена опция config.removePlugins = 'iframe';
+    * CKEditor config: добавлена опция config.filebrowserUploadMethod = 'form';
 
 3.59.1
 
