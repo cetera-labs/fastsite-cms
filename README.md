@@ -9,6 +9,7 @@ https://ceteralabs.com/cetera-cms/create/
 * User Guide - https://cetera-labs.github.io/cetera-cms/docs/user-guide
 * Developers Guide - https://cetera-labs.github.io/cetera-cms/docs/developer-guide
 * Install Guide and requirements - https://cetera-labs.github.io/cetera-cms/docs/cetera-cms-admin-guide.html
+* API - https://cms.cetera.ru/doc/api/
 ## Support
 * Email — support@ceteralabs.com
 * Forum — http://community.fastsite.ru/
