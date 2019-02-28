@@ -12,7 +12,7 @@ grand_parent: Руководство разработчика
 
 Замечание. Twig входит в пакет библиотек, устанавливаемых вместе с дистрибутивом CMS начиная с версии 3.10.1
 
-Создадим файл www/.templates/bootstrap.php в котором произведем инициализацию Twig:
+Создадим файл www/themes/default/bootstrap.php в котором произведем инициализацию Twig:
 
 
 	$a = $application;
@@ -29,7 +29,7 @@ grand_parent: Руководство разработчика
 * page_index.twig — главная страница
 * page_ordinary.twig — рядовая страница
 
-www/.templates/design/layout.twig:
+www/themes/default/design/layout.twig:
 
 
 	<!doctype html>
@@ -50,22 +50,22 @@ www/.templates/design/layout.twig:
 	  </body> 
 	</html>
 
-Макет индексной страницы — в www/.templates/design/page_index.twig:
+Макет индексной страницы — в www/themes/default/design/page_index.twig:
 
     {% raw %}{% extends "layout.twig" %}{% endraw %} 
  
 
-Макет рядовой страницы — в www/.templates/design/page_ordinary.twig:
+Макет рядовой страницы — в www/themes/default/design/page_ordinary.twig:
 
 	{% raw %}{% extends "layout.twig" %}{% endraw %} 
  
 
-Теперь контроллер главной страницы www/.templates/default.php будет выглядеть гораздо проще:
+Теперь контроллер главной страницы www/themes/default/default.php будет выглядеть гораздо проще:
 
 	$twig->display('page_index.twig');
  
 
-По такому же принципу создадим контроллер рядовой страницы www/.templates/ordinary.php:
+По такому же принципу создадим контроллер рядовой страницы www/themes/default/ordinary.php:
 
 	$twig->display('page_ordinary.twig');
 

@@ -13,7 +13,7 @@ grand_parent: Руководство разработчика
 Главное меню
 Для создания меню используем виджет Menu.
 
-Внесем изменения в www/.templates/design/layout.twig
+Внесем изменения в www/themes/default/design/layout.twig
 
 ```
 {% raw %}<!doctype html>
@@ -108,7 +108,7 @@ grand_parent: Руководство разработчика
 
 Таким образом для определения текущего раздела первого уровня, нам надо воспользоваться таким кодом: Application::getInstance()→getCatalog()→path[2]
 
-Боковое меню будет показываться только на рядовых страницах, поэтому размещаем его в шаблоне www/.templates/design/page_ordinary.twig:
+Боковое меню будет показываться только на рядовых страницах, поэтому размещаем его в шаблоне www/themes/default/design/page_ordinary.twig:
 
 ```
 {% raw %}{% extends "layout.twig" %}

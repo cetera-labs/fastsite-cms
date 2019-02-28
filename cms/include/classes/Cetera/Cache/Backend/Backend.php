@@ -31,17 +31,17 @@ class Backend {
         
             $app = \Cetera\Application::getInstance();
         
-            if ($app->getVar('cache_memcache') && self::isMemcacheAvailable()) {
+            if ($app->getVar('cache_memcache')!='off' && $app->getVar('cache_memcache')!='disable' && $app->getVar('cache_memcache')!='0' && self::isMemcacheAvailable()) {
 				$o = [];
 				if ( $app->getVar('memcache_server') ) {
 					$o['servers'] = $app->getVar('memcache_server');
 				}
                 $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Memcached($o));
 			}
-            elseif ($app->getVar('cache_memcached') && self::isMemcachedAvailable()) {
+            elseif ($app->getVar('cache_memcached')!='off'&& $app->getVar('cache_memcached')!='disable' && $app->getVar('cache_memcached')!='0' && self::isMemcachedAvailable()) {
 				$o = [];
 				if ( $app->getVar('memcached_server') ) {
-					$o['servers'] = $app->getVar('memcaches_server');
+					$o['servers'] = $app->getVar('memcached_server');
 				}				
                 $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached($o));				
             } 

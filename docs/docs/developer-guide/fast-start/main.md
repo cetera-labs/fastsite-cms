@@ -8,7 +8,7 @@ grand_parent: Руководство разработчика
 
 # Урок№4. Формируем главную страницу сайта
 
-Давайте займемся главной страницей нашего сайта. Итак, контроллер, реализующий логику работы главной страницы находится в www/.templates/default.php, шаблон страницы — в www/.templates/design/page_index.twig
+Давайте займемся главной страницей нашего сайта. Итак, контроллер, реализующий логику работы главной страницы находится в www/themes/default/default.php, шаблон страницы — в www/themes/default/design/page_index.twig
 
 Я хочу разместить на главной странице сайта 5 последних новостей компании, а также 3 наиболее интересных проекта из раздела «Портфолио».
 
@@ -38,7 +38,7 @@ grand_parent: Руководство разработчика
 * \Cetera\Iterator\Material::where($where, $combination = 'AND') — задать дополнительное условие для выбора материалов
 * \Cetera\Iterator\Material::orderBy($sort, $order = null, $add = true) — задать поле для сортировки, порядок сортировки, если $add = true, то добавить к предыдущему полю для сортировки
 * \Cetera\Iterator\Material::groupBy($groupBy, $add = true) — группировать результат по полю
-Добавим изученный код в www/.templates/index.php:
+Добавим изученный код в www/themes/default/index.php:
 
 ```
 try {
@@ -57,7 +57,7 @@ $twig->display('index.html', array(
 
 Я добавил обработчик исключений на случай, если раздел с новостями по тем или иным причинам не будет найден. Тогда блок последних новостей просто не будет показан.
 
-Шаблон главной страницы www/.templates/design/index.html:
+Шаблон главной страницы www/themes/default/design/index.html:
 ```
 {% raw %}{% extends "layout.html" %}
  
