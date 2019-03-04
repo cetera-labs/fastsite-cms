@@ -1,3 +1,7 @@
+3.59.3
+
+    * CKEditor: виджеты теперь можно размещать внутри параграфов как inline элемент
+
 3.59.2
 
     * CKEditor config: добавлена опция config.removePlugins = 'iframe';

@@ -39,7 +39,7 @@ function showWidgetWindow(editor, widgetName, sel) {
         
         buttons : [
             {
-                text: '<?=$translator->_('ОК')?>',
+                text: _('ОК'),
                 handler: function() {
                 
                     var window = this.up('window');
@@ -79,7 +79,7 @@ function showWidgetWindow(editor, widgetName, sel) {
 
                 }
             },{
-                text: '<?=$translator->_('Отмена')?>',
+                text: _('Отмена'),
                 handler: function() {
                     this.up('window').close();
                 }
@@ -106,6 +106,9 @@ CKEDITOR.plugins.add( 'widgets',
       					'height: 130px;' +
       				'}'
       	);
+        
+        CKEDITOR.dtd[ 'p' ][ 'cms' ] = 1;
+        CKEDITOR.dtd.$inline[ 'cms' ] = 1;
         
         Ext.Array.each(Config.widgets, function(item) {
 
@@ -151,7 +154,7 @@ CKEDITOR.plugins.add( 'widgets',
 				}
     		});
         
-        editor.lang.fakeobjects['cms'] = 'Виджет';
+        editor.lang.fakeobjects['cms'] = _('Виджет');
       
   	},
 
