@@ -272,20 +272,7 @@ class Application {
         $this->_locale = new \Zend_Locale('ru');
   	
         $this->initDebug();
-        
-        if (php_sapi_name() != 'cli') {
-        
-            if (!isset($_COOKIE['ccms'])) {
-                $this->_uid = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand());
-            } else {
-                $a = explode('.', $_COOKIE['ccms']);
-                $this->_uid = $a[0];
-                $this->_last_visit = $a[1];
-            }
-            setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
-            
-        }
-        
+                
         $this->_widgetsTemplatesPath[] = CMSROOT.'widgets/';
 		
 		Event::attach('*', array($this,'eventHandler'));
@@ -434,7 +421,7 @@ class Application {
             if (file_exists(PREFS_FILE)) {
                 $this->_config = array_merge($this->_config, parse_ini_file(PREFS_FILE, true));
             }
-			if (getenv('RUN_MODE', true) == 'development' && file_exists(PREFS_FILE_LOCAL)) {
+			if ((getenv('RUN_MODE', true) == 'development' || getenv('HOMEPATH', true) == '\ospanel') && file_exists(PREFS_FILE_LOCAL)) {
 				$this->_config = array_merge($this->_config, parse_ini_file(PREFS_FILE_LOCAL, true));
 			}
 			
@@ -630,6 +617,19 @@ class Application {
      */
     public function initSession()
     {
+        if (php_sapi_name() != 'cli') {
+        
+            if (!isset($_COOKIE['ccms'])) {
+                $this->_uid = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand());
+            } else {
+                $a = explode('.', $_COOKIE['ccms']);
+                $this->_uid = $a[0];
+                $this->_last_visit = $a[1];
+            }
+            setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
+            
+        }
+        
         \Zend_Session::setSaveHandler(new SessionSaveHandler());
                              
         $this->_session = new \Zend_Session_Namespace(SESSION_NAMESPACE);
