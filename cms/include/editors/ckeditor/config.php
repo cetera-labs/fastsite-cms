@@ -38,6 +38,12 @@ CKEDITOR.editorConfig = function( config )
     config.extraPlugins = 'youtube,font,showblocks,widgets,colorbutton,colordialog';
     config.removePlugins = 'iframe';
     config.allowedContent = true;
+    
+    config.pasteFromWordPromptCleanup = true;
+    config.pasteFromWordRemoveStyles = true;
+    config.pasteFromWordRemoveFontStyles = true;
+    config.pasteFromWord_heuristicsEdgeList = true;
+    
     config.resize_enabled = false;
     config.language = '<?=$application->getLocale()?>';
     config.filebrowserBrowseUrl = '/<?=CMS_DIR?>/include/ck_file_browser.php';
