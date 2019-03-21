@@ -112,17 +112,17 @@ class ProfileEdit extends \Cetera\Widget\Templateable {
 			if(!$f['show']) continue;
 			if (in_array($f['name'], $this->not_editable)) continue;
 			
-			$this->fields[] = array(
+			$this->fields[] = [
 				'name'    => $f['name'],
 				'describ' => $f['describ'],
 				'value'   => $this->user->{$f['name']},
 				'required'=> $f['required'],
 				'error'   => false,
-				'type'    => 'text',
-			);
+				'type'    => $f['type'],
+                'iterator'=> (is_subclass_of($f, '\\Cetera\\ObjectFieldLinkAbstract'))?$f->getIterator():null,
+			];
 			
-			if (isset($this->errors[$f['name']]))
-			{
+			if (isset($this->errors[$f['name']])) {
 				$id = count($this->fields) - 1;
 				$this->fields[$id]['error'] = $this->errors[$f['name']]['message'];
 				$this->fields[$id]['value'] = $this->errors[$f['name']]['value'];

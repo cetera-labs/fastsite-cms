@@ -367,7 +367,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 						}
 					}					
               		elseif ($t & Catalog::AUTOALIAS_TRANSLIT) {
-						$this->_alias = strtolower(translit($_POST['name']));
+						$this->_alias = strtolower(translit($this->name));
 					}
               	    else {
 						$this->_alias = date('YmdHis');

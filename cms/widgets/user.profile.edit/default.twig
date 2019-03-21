@@ -16,7 +16,7 @@
   
   {% for f in widget.fields %}
 	<label{% if f.error %} class="is-invalid-label"{% endif %}>{{ f.describ }}{% if f.required %} *{% endif %}</label>
-	<input name="{{ f.name }}" value="{{ f.value }}" type="{{ f.type }}"{% if f.required %} required{% endif %}{% if f.error %} class="is-invalid-input"{% endif %}>
+	<input name="{{ f.name }}" value="{{ f.value }}" type="text"{% if f.required %} required{% endif %}{% if f.error %} class="is-invalid-input"{% endif %}>
 	{% if f.error != 1 %}<span class="form-error is-visible">{{ f.error }}</span>{% endif %}
   {% endfor %}
   
