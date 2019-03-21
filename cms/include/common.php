@@ -32,20 +32,27 @@ mb_internal_encoding("UTF-8");
 
 ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'include/classes'.PATH_SEPARATOR.DOCROOT.LIBRARY_PATH);
 
-if (!file_exists(DOCROOT.LIBRARY_PATH)) {
-	
-	echo 'Download and unpack <a href="http://cetera.ru/cetera_cms/library.zip">http://cetera.ru/cetera_cms/library.zip</a> at your webserver home folder ';
-	echo '<a href="/cms/library_install.php">or click to automatic install</a>';
-	die();
-	
-}
-
 if (COMPOSER_INSTALL) {
 	
 	include VENDOR_PATH.'/autoload.php';
+    if (!file_exists(DOCROOT . LIBRARY_PATH)) {
+        symlink(VENDOR_PATH . '/cetera-labs/library', DOCROOT . LIBRARY_PATH );
+    }
+    
+    if (!file_exists(DOCROOT . CMS_DIR)) {
+        symlink(VENDOR_PATH . '/cetera-labs/cetera-cms/cms', DOCROOT . CMS_DIR );
+    }
 	
 }
 else {
+    
+    if (!file_exists(DOCROOT.LIBRARY_PATH)) {
+        
+        echo 'Download and unpack <a href="http://cetera.ru/cetera_cms/library.zip">http://cetera.ru/cetera_cms/library.zip</a> at your webserver home folder ';
+        echo '<a href="/cms/library_install.php">or click to automatic install</a>';
+        die();
+        
+    }
 
 	include DOCROOT.LIBRARY_PATH . '/vendor/composer/autoload_real.php';
 	if (class_exists('\ComposerAutoloaderInit5f42614c889c2666ee9d5273042f3a3b')) {
