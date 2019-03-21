@@ -26,7 +26,7 @@
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
-		"cetera-labs/library":"10"
+		"cetera-labs/library":"13"
 	},
 	"minimum-stability": "dev",
     "autoload": {
@@ -41,7 +41,7 @@
             "type":"package",
             "package":{
                 "name":"cetera-labs/library",
-                "version":"10",
+                "version":"13",
                 "dist":{
                     "url":"https://cms.cetera.ru/lib.zip",
                     "type":"zip"
