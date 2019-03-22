@@ -106,7 +106,7 @@ define('USER_UPLOAD_PATH', '/uploads/');
 
 define('LIBRARY_PATH', 'library');
 
-if (substr_count(__DIR__, 'vendor'.DIRECTORY_SEPARATOR.'cetera-labs'.DIRECTORY_SEPARATOR.'cetera-cms') > 0) {
+if (file_exists(DOCROOT.'/../vendor/cetera-labs/cetera-cms')) {
 	define('COMPOSER_INSTALL', true);
 	define('VENDOR_PATH', DOCROOT.'/../vendor');
 }

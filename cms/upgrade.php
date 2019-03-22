@@ -91,10 +91,10 @@ if ($action == 'upgrade') {
                   rename(WWWROOT.CMS_DIR, $backup);
               } catch (Exception $e) {} 
 			  
-        	  if(!$zip->extractTo('.')){   
+              if(!$zip->extractTo('.')){   
                   throw new Exception($t->_('Не удалось распаковать архив'));   
               }	
-			  else {
+	      else {
         		  try {
                       unlink(WWWROOT.DISTRIB_FILE);	
                   } catch (Exception $e) {}		

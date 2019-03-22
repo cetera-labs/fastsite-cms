@@ -35,13 +35,6 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 if (COMPOSER_INSTALL) {
 	
 	include VENDOR_PATH.'/autoload.php';
-    if (!file_exists(DOCROOT . LIBRARY_PATH)) {
-        symlink(VENDOR_PATH . '/cetera-labs/library', DOCROOT . LIBRARY_PATH );
-    }
-    
-    if (!file_exists(DOCROOT . CMS_DIR)) {
-        symlink(VENDOR_PATH . '/cetera-labs/cetera-cms/cms', DOCROOT . CMS_DIR );
-    }
 	
 }
 else {
