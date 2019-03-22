@@ -20,6 +20,28 @@ if (isset($_POST['token'])) {
 <head>
     <meta charset="utf-8">
     <title><?php echo APP_NAME; ?></title>
+    
+<?php if (COMPOSER_INSTALL) : ?>  
+
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <script type="text/javascript" src="js/vendor.js"></script>
+    
+    <?php if ($application->getVar('setup_done')) : ?>    
+    
+        <script type="text/javascript" src="config.php"></script>	
+        <script type="text/javascript" src="js/app.js"></script>
+        <script src="//ulogin.ru/js/ulogin.js"></script>
+        
+        <script type="text/javascript">	
+            <?php if ($user && !$user->allowBackOffice()) : ?>var userMessage = '<?=$application->getTranslator()->_('Недостаточно полномочий')?>';<?php else : ?> var userMessage = '';<?php endif ?> 		
+        </script>  
+    
+    <?php else : ?> 
+        <?php include('setup.php'); ?>         
+    <?php endif ?>     
+
+<?php else : ?>  
+    
     <link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.css">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,8 +72,7 @@ if (isset($_POST['token'])) {
 	<link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/extjs4/resources/css/ext-all.css"> 
     <script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/extjs4/ext-all.js"></script>
 	
-	<?php endif; ?>
-	
+	<?php endif; ?>	
 	
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify-css.js"></script>
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/beautify/beautify-html.js"></script>
@@ -61,7 +82,7 @@ if (isset($_POST['token'])) {
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.js"></script>
     <script src="//ulogin.ru/js/ulogin.js"></script>
     
-<?php if ($application->getVar('setup_done')) : ?>    
+    <?php if ($application->getVar('setup_done')) : ?>    
     
     <script type="text/javascript" src="config.php"></script>	
 	<script type="text/javascript" src="app.js"></script>
@@ -75,12 +96,13 @@ if (isset($_POST['token'])) {
     <?php endif ?> 		
     </script>  
     
-<?php else : ?> 
+    <?php else : ?> 
 
     <link rel="stylesheet" type="text/css" href="css/setup.css">
     <?php include('setup.php'); ?>     
     
-<?php endif ?> 
+    <?php endif ?> 
+<?php endif; ?>    
      
 </head>
 <body id="main_body" class="body-backoffice">

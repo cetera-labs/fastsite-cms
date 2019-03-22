@@ -49,10 +49,6 @@ if (!defined('CMS_DIR'))
     //define('CMS_DIR', substr($_SERVER['SCRIPT_NAME'], 1, strpos($_SERVER['SCRIPT_NAME'],'/',1) - 1));
     define('CMS_DIR', 'cms' );
 	
-/** Абсолютный путь к корню CMS */
-//define('CMSROOT', $_SERVER['DOCUMENT_ROOT'].'/'.CMS_DIR.'/');
-define('CMSROOT', str_replace('include','',__DIR__) );
-
 /** Абсолютный путь DOCUMENT ROOT */
 //define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].'/');
 if (!defined('DOCROOT')) {
@@ -65,6 +61,25 @@ if (!defined('DOCROOT')) {
 	define('DOCROOT', $dr );
 }
 define('WWWROOT', DOCROOT );
+
+define('LIBRARY_PATH', 'library');
+
+if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
+	define('COMPOSER_INSTALL', true);
+	define('VENDOR_PATH', DOCROOT.'../vendor');
+    define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
+}
+else {
+	define('COMPOSER_INSTALL', false);
+	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
+	
+	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
+		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
+	} else {
+		define('LIBRARY_VERSION', 1);
+	}	
+    define('CMSROOT', str_replace('include','',__DIR__) );
+}
 
 define('PREFS_FILE',       DOCROOT.'.prefs');
 define('PREFS_FILE_LOCAL', DOCROOT.'.prefs.local');
@@ -103,23 +118,6 @@ define('IMAGECACHE_DIR', CACHE_DIR.'/images');
 define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
-
-define('LIBRARY_PATH', 'library');
-
-if (file_exists(DOCROOT.'/../vendor/cetera-labs/cetera-cms')) {
-	define('COMPOSER_INSTALL', true);
-	define('VENDOR_PATH', DOCROOT.'/../vendor');
-}
-else {
-	define('COMPOSER_INSTALL', false);
-	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
-	
-	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
-		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
-	} else {
-		define('LIBRARY_VERSION', 1);
-	}	
-}
 
 // ----------- // файлы и каталоги -----------------
 
