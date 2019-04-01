@@ -11,6 +11,7 @@ class Filter {
 	const TYPE_TEXT           = 6;
 	const TYPE_DATE           = 7;
 	const TYPE_DATE_INTERVAL  = 8;
+    const TYPE_DROPDOWN_MULTIPLE = 9;
 
 	protected $iterator;
 	protected $active = false;
@@ -214,6 +215,13 @@ class Filter {
 						}
 					}
 					break;
+				case self::TYPE_DROPDOWN_MULTIPLE:
+					if ($this->submittedValue($f['name']) !== null) {
+						if (is_array($this->submittedValue($f['name']))) {
+							$this->iterator->where( $this->generateField($f['field']).' IN ("'.implode('","',$this->submittedValue($f['name'])).'")' );
+						}
+					}
+					break;                    
 				case self::TYPE_DATE_INTERVAL:
 					if ($f['value_min']) {
 						$this->iterator->where( $this->generateField($f['field']).' >= STR_TO_DATE(:'.$f['name'].'_min,"%Y-%m-%d")' )

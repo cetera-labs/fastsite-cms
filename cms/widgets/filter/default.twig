@@ -67,6 +67,16 @@
 								</select>						
 							{% endblock %}
 						{% endif %}	
+                        
+						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_DROPDOWN_MULTIPLE') %}
+							{% block dropdown_multiple %}
+								<select name="{{ widget.filter.name }}[{{ f.name }}][]" multiple>				
+									{% for m in f.iterator %}
+									<option value="{{ m.id }}" {% if m.id in f.value %}selected{% endif %}>{{ m.name }}</option>						
+									{% endfor %}
+								</select>						
+							{% endblock %}
+						{% endif %}	                        
 						
 						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_DATE') %}
 							{% block date %}

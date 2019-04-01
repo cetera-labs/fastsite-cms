@@ -1,3 +1,8 @@
+3.59.8
+
+    * https://pm.cetera.ru/browse/CCD-1419
+    * https://pm.cetera.ru/browse/CCD-1429
+
 3.59.7
 
     * Bugfix. Автозаполнение alias при сохранении материала.
