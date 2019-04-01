@@ -49,12 +49,6 @@
                 }
             }
         }
-    ],
-
-    "scripts": {
-        "post-update-cmd": [
-            "phing"
-        ]
-    }	
+    ]	
 
 }
