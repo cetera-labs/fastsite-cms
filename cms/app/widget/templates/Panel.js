@@ -115,9 +115,11 @@ Ext.define('Cetera.widget.templates.Panel', {
 				margins:'5 5 5 0',
 				layout: 'fit',
 				tbar: [
-					this.saveBtn,
-					this.saveAsBtn,
-					this.deleteBtn
+                    // Запрещаем изменять шаблоны из админки 
+                    // https://pm.cetera.ru/browse/CCD-1335
+					//this.saveBtn,
+					//this.saveAsBtn,
+					//this.deleteBtn
 				],	
 				bbar: this.statusBar,			
 				items: [this.editor]

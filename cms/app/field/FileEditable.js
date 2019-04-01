@@ -100,9 +100,11 @@ Ext.define('Cetera.field.FileEditable', {
             bodyStyle : 'background: none',
 			height: 10,
             items: [
-                this.fileInput,
-				this.editBtn, 
-				this.resetBtn
+                this.fileInput
+                // Запрещаем изменять файлы из админки 
+                // https://pm.cetera.ru/browse/CCD-1335
+				//,this.editBtn
+				//,this.resetBtn
             ]
         });    
     

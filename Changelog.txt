@@ -1,5 +1,6 @@
 3.59.8
 
+    * https://pm.cetera.ru/browse/CCD-1335
     * https://pm.cetera.ru/browse/CCD-1419
     * https://pm.cetera.ru/browse/CCD-1429
 
