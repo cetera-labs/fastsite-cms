@@ -1,9 +1,3 @@
-<?php
-header('Content-Type: application/javascript; charset=UTF-8');
-chdir('../../../../'); 
-include('common_bo.php'); 
-?>
-
 Ext.Loader.syncRequire('Cetera.widget.Panel'); 
 
 function showWidgetWindow(editor, widgetName, sel) {
@@ -14,9 +8,11 @@ function showWidgetWindow(editor, widgetName, sel) {
 
 		fakeImage = sel;
 		widgetNode = editor.restoreRealElement( fakeImage );
+        var params = Ext.Object.fromQueryString(widgetNode.getAttribute('widgetparams'));
 		var widgetPanel = Cetera.widget.Panel.getWidgetPanel({
 			widgetName  : widgetNode.getAttribute('widgetname'),
-			params      : Ext.Object.fromQueryString(widgetNode.getAttribute('widgetparams'))
+            widgetTitle : params.widgetTitle,
+			params      : params
 		});
 
 	} else {
@@ -137,14 +133,11 @@ CKEDITOR.plugins.add( 'widgets',
       				multiSelect: false
       			},
 				init: function () {
-
-					<?php
-					foreach ($application->getRegisteredWidgets() as $item)
-					{
-						if ($item['not_placeable']) continue;
-						print "this.add('".$item['name']."','".($item['icon']?'<img align="absmiddle" src="'.$item['icon'].'" /> ':'').$item['describ']."');\n";
-					}
-					?>
+                    
+                    var me = this;
+                    Config.widgets.forEach(function(item, i, arr) {
+                        me.add(item.name,'<img align="absmiddle" src="'+item.icon+'" /> '+item.describ);
+                    });                    
 					
 				},
 				onClick: function (value) {

@@ -5,7 +5,7 @@ include('../../common_bo.php');
 
 (function() {
 
-    CKEDITOR.plugins.addExternal('widgets', '/<?=CMS_DIR?>/include/editors/ckeditor/plugins/widgets/','plugin.php');
+    CKEDITOR.plugins.addExternal('widgets', '/<?=CMS_DIR?>/include/editors/ckeditor/plugins/widgets/','plugin.js');
     CKEDITOR.plugins.addExternal('youtube', '/<?=CMS_DIR?>/include/editors/ckeditor/plugins/youtube/','plugin.js');
 	
 	CKEDITOR.dtd.cms = { em:1 };
