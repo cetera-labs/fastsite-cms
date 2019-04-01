@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="CeteraCMS" default="dist">
+    <property name="CMS_DIST" value="./cms" />
+    <property name="LIB_DIST" value="../library" />
+    <property name="CMS_DIR" value="../../../www/cms" />
+    
+    <target name="prepare">
+        <mkdir dir="${CMS_DIR}" />
+        <mkdir dir="${CMS_DIR}/css" />
+        <mkdir dir="${CMS_DIR}/js" />
+        <mkdir dir="${CMS_DIR}/images" />
+        <mkdir dir="${CMS_DIR}/include" />
+        <mkdir dir="${CMS_DIR}/include/editors" />
+    </target>    
+    
+    <target name="dist" depends="prepare">
+    
+        <append destFile="${CMS_DIR}/css/global.css" append="no">
+            <fileset dir="${CMS_DIST}">
+              <include name="css/main.css" />
+              <include name="css/setup.css" />
+              <include name="app/***/*.css" />
+            </fileset>
+            <fileset dir="${LIB_DIST}" id="css_lib">
+              <include name="cropper/cropper.min.css" />
+              <include name="extjs4/resources/ext-theme-classic/ext-theme-classic-all.css" />
+            </fileset>            
+        </append> 
+
+        <copy todir="${CMS_DIR}/css" overwrite="true">
+            <fileset dir="${LIB_DIST}/extjs4/resources/ext-theme-classic">
+                <include name="images/***" />
+            </fileset>
+        </copy>          
+
+        <append destFile="${CMS_DIR}/js/vendor.js" append="no">
+            <fileset dir="${LIB_DIST}">
+              <include name="extjs4/ext-all.js" />
+              <include name="beautify/beautify-css.js" />
+              <include name="beautify/beautify-html.js" />
+              <include name="beautify/beautify.js" />
+              <include name="minify/htmlminifier.min.js" />
+              <include name="minify/ace/ace.js" />
+              <include name="cropper/cropper.min.js" />
+            </fileset>  
+        </append>
+        
+        <!-- append destFile="${CMS_DIR}/js/app.js" append="no">
+            <fileset dir="${CMS_DIST}">
+                <include name="app/***/*.js" />
+                <include name="app.js" />
+            </fileset>
+        </append -->        
+        
+        <copy todir="${CMS_DIR}/js" overwrite="true">
+            <fileset dir="${CMS_DIST}">
+                <include name="admin-panel.js" />
+                <include name="app.js" />
+            </fileset>
+        </copy>     
+
+        <copy todir="${CMS_DIR}" overwrite="true">
+            <fileset dir="${CMS_DIST}">
+                <include name="*.php" />
+                <include name="app/***/*.js" />
+                <include name="images/***" />
+                <include name="lang/***" />
+                <exclude name="library_install.php" />
+                <exclude name="upgrade.php" />
+                <include name="include/*.php" />
+                <include name="include/editors/**" />                
+            </fileset>
+        </copy> 
+        
+    </target>
+</project>

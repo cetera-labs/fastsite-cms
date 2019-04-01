@@ -26,7 +26,8 @@
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
-		"cetera-labs/library":"13"
+		"cetera-labs/library":"13",
+        "phing/phing": "2.*"
 	},
 	"minimum-stability": "dev",
     "autoload": {
@@ -48,6 +49,12 @@
                 }
             }
         }
-    ]	
+    ],
+
+    "scripts": {
+        "post-update-cmd": [
+            "phing"
+        ]
+    }	
 
 }

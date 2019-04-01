@@ -1,0 +1,40 @@
+Описание настроек конфигурации (файл .prefs)
+============================================
+
+; Параметры базы данных
+dbhost=localhost
+dbname=xbit_new
+dbuser=root
+dbpass=
+
+; Указывает, что дистрибутив установлен
+; Если этот параметр отсутствует, то работает перенаправление на скрипт установки
+setup_done=1
+
+; Посылать отладочные сообщения в FirePHP
+debug_level=1
+
+; Использовать memcached (если установлен) для кэширования
+cache_memcache=1
+
+; Использовать файлы для кэширования
+; каталог для кэширования WWWROOT/.cache/filecache
+cache_file=0
+
+; Ограничение доступа к FO
+;fo_close=0
+;fo_close_msg=Site closed
+;fo_allow_users_bo=1
+;fo_allow_users=1
+;fo_allow_user=test
+;fo_allow_pw=test
+
+; Не считать статистику для определенных IP
+; список IP через ,
+;stats_filter=0.0.0.0
+
+; css для встроенного html редактора
+;htmleditor.css=/css/style.css
+
+; класс body редактора
+;htmleditor.body_class=ordinary
