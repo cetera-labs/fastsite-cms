@@ -245,6 +245,11 @@ trait ObjectFieldUserTrait {
     {
         return new ObjectDefinition(User::TYPE, User::TABLE);
     }
+    
+	public function getIterator()
+	{
+		return $this->getObjectDefinition()->getMaterials();
+	}    
 }
 
 /**
