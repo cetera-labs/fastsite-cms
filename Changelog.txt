@@ -1,6 +1,6 @@
 3.59.9
     
-    *Bugfix in ObjectFieldLinkAbstract::getIterator()
+    * Bugfix in ObjectFieldLinkAbstract::getIterator()
     
 3.59.8
 
