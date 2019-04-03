@@ -56,6 +56,25 @@ if (!defined('DOCROOT')) {
 }
 define('WWWROOT', DOCROOT );
 
+define('LIBRARY_PATH', 'library');
+
+if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
+	define('COMPOSER_INSTALL', true);
+	define('VENDOR_PATH', DOCROOT.'../vendor');
+    define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
+}
+else {
+	define('COMPOSER_INSTALL', false);
+	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
+	
+	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
+		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
+	} else {
+		define('LIBRARY_VERSION', 1);
+	}	
+    define('CMSROOT', str_replace('include','',__DIR__) );
+}
+
 define('PREFS_FILE',       DOCROOT.'.prefs');
 define('PREFS_FILE_LOCAL', DOCROOT.'.prefs.local');
 
@@ -93,23 +112,6 @@ define('IMAGECACHE_DIR', CACHE_DIR.'/images');
 define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
-
-if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
-	define('COMPOSER_INSTALL', true);
-	define('VENDOR_PATH', DOCROOT.'../vendor');
-    define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
-}
-else {
-	define('COMPOSER_INSTALL', false);
-	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
-	
-	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
-		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
-	} else {
-		define('LIBRARY_VERSION', 1);
-	}	
-    define('CMSROOT', str_replace('include','',__DIR__) );
-}
 
 // ----------- // файлы и каталоги -----------------
 
