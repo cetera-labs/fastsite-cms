@@ -58,7 +58,7 @@ define('WWWROOT', DOCROOT );
 
 define('LIBRARY_PATH', 'library');
 
-if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
+if (file_exists(__DIR__.'/../../../vendor/cetera-labs/cetera-cms')) {
 	define('COMPOSER_INSTALL', true);
 	define('VENDOR_PATH', DOCROOT.'../vendor');
     define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
