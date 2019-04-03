@@ -26,6 +26,7 @@ if ( !function_exists(  'is_iterable' ) )
 
 error_reporting (E_ALL ^ E_NOTICE);
 
+require_once(__DIR__.'/path_detect.php');
 require_once(__DIR__.'/constants.php');
 
 mb_internal_encoding("UTF-8");
