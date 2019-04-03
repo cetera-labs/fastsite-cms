@@ -60,8 +60,8 @@ define('LIBRARY_PATH', 'library');
 
 if (file_exists(__DIR__.'/../../../vendor/cetera-labs/cetera-cms')) {
 	define('COMPOSER_INSTALL', true);
-	define('VENDOR_PATH', DOCROOT.'../vendor');
-    define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
+	define('VENDOR_PATH', __DIR__.'/../../../vendor');
+    define('CMSROOT', __DIR__.'/../../../vendor/cetera-labs/cetera-cms/cms/' );
 }
 else {
 	define('COMPOSER_INSTALL', false);
