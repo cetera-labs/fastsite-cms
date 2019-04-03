@@ -45,13 +45,10 @@ if (isset($_SERVER['HTTP_USER_AGENT'])) {
 // ----------- файлы и каталоги -----------------
 
 /** Каталог установки CMS */
-if (!defined('CMS_DIR'))
-    //define('CMS_DIR', substr($_SERVER['SCRIPT_NAME'], 1, strpos($_SERVER['SCRIPT_NAME'],'/',1) - 1));
+if (!defined('CMS_DIR')) {
     define('CMS_DIR', 'cms' );
+}
 	
-/** Абсолютный путь к корню CMS */
-define('CMSROOT', str_replace('include','',__DIR__) );
-
 /** Абсолютный путь DOCUMENT ROOT */
 if (!defined('DOCROOT')) {
 	$dr = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'.CMS_DIR.'/', 1 )).'/';
