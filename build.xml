@@ -40,7 +40,7 @@
               <include name="beautify/beautify-html.js" />
               <include name="beautify/beautify.js" />
               <include name="minify/htmlminifier.min.js" />
-              <include name="minify/ace/ace.js" />
+              <include name="ace/ace.js" />
               <include name="cropper/cropper.min.js" />
             </fileset>  
         </append>
@@ -62,7 +62,7 @@
         <copy todir="${CMS_DIR}" overwrite="true">
             <fileset dir="${CMS_DIST}">
                 <include name="*.php" />
-                <include name="app/***/*.js" />
+                <include name="app/***" />
                 <include name="images/***" />
                 <include name="lang/***" />
                 <exclude name="library_install.php" />
