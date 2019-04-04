@@ -65,10 +65,12 @@
                 <include name="app/***" />
                 <include name="images/***" />
                 <include name="lang/***" />
-                <exclude name="library_install.php" />
-                <exclude name="upgrade.php" />
+                <include name="widgets/***" />
                 <include name="include/*.php" />
-                <include name="include/editors/**" />                
+                <include name="include/editors/**" />  
+                
+                <exclude name="library_install.php" />
+                <exclude name="upgrade.php" />                
             </fileset>
         </copy> 
         
