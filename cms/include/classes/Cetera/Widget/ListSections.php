@@ -69,7 +69,10 @@ class ListSections extends Templateable {
 			}
 			else {
 				try {
-					$this->_children = $this->getCatalog()->getChildren()->orderBy($this->getParam('order'), $this->getParam('sort'));				
+					$this->_children = $this->getCatalog()->getChildren();
+                    if ($this->getParam('order')) {
+                        $this->_children->orderBy($this->getParam('order'), $this->getParam('sort'));
+                    }			
 					if ($this->getParam('subfolders') || $this->getParam('subsections')) {
 					//	$this->_children->subfolders();
 					}
