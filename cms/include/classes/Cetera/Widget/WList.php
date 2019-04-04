@@ -73,7 +73,11 @@ class WList extends Templateable {
 			}
 			else {
 				try {
-					$this->_children = $this->getCatalog()->getMaterials()->orderBy($this->getParam('order'), $this->getParam('sort'))->orderBy('id', 'ASC', true);
+					$this->_children = $this->getCatalog()->getMaterials();
+                    if ($this->getParam('order')) {
+                        $this->_children->orderBy($this->getParam('order'), $this->getParam('sort'));
+                    }
+                    $this->_children->orderBy('id', 'ASC', true);
 					if ($this->getParam('subfolders') || $this->getParam('subsections')) {
 						$this->_children->subfolders();
 					}
