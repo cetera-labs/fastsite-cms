@@ -40,7 +40,7 @@
               <include name="beautify/beautify-html.js" />
               <include name="beautify/beautify.js" />
               <include name="minify/htmlminifier.min.js" />
-              <include name="minify/ace/ace.js" />
+              <include name="ace/ace.js" />
               <include name="cropper/cropper.min.js" />
             </fileset>  
         </append>
