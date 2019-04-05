@@ -1,3 +1,7 @@
+3.59.10
+    
+    * Bugfix. В почтовых шаблонах не отправляются письма на пустой email
+    
 3.59.9
     
     * Bugfix in ObjectFieldLinkAbstract::getIterator()

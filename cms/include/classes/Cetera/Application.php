@@ -1226,7 +1226,11 @@ class Application {
 			if (!$emailStr) continue;
 			$toEmails = preg_split("/[,;]/", $emailStr );
 			if(!empty($toEmails)) {
-				foreach($toEmails as $address) $mail->AddAddress($address);	
+				foreach($toEmails as $address) {
+                    if (trim($address)) {
+                        $mail->AddAddress(trim($address));
+                    }
+                }
 			}
 			else {
 				continue;
