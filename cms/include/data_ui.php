@@ -77,7 +77,7 @@ foreach ($application->getBo()->getModules() as $id => $component) {
 }
 ksort($menu);
 
-
+header('Content-Type: application/json; charset=UTF-8');
 
 echo json_encode(array(
     'modules' => $components,
