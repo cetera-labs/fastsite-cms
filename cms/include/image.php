@@ -8,7 +8,7 @@
  
 if (!defined('CMS_DIR')) {
 
-    include( __DIR__ . '/constants.php' );
+    include( __DIR__ . '/common.php' );
     
     $src = isset($_GET['src'])?urldecode($_GET['src']):'';
     $width  = isset($_GET['width'])?(int)$_GET['width']:0;

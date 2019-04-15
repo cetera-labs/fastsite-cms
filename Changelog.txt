@@ -1,3 +1,7 @@
+3.59.11
+    
+    * Bugfix. https://pm.cetera.ru/browse/CCD-1439
+
 3.59.10
     
     * Bugfix. В почтовых шаблонах не отправляются письма на пустой email
