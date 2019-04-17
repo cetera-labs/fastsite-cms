@@ -27,7 +27,8 @@
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
 		"cetera-labs/library":"13",
-        "phing/phing": "2.*"
+        "phing/phing": "2.*",
+        "componavt/phpmorphy": "*"
 	},
 	"minimum-stability": "dev",
     "autoload": {
