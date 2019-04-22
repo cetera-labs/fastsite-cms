@@ -178,16 +178,12 @@ class Material extends DynamicFieldsObject implements SiteItem {
      */  
     public function delete()
     {
-		
+		        
 		Event::trigger(EVENT_CORE_MATH_DELETE, ['material' => $this , 'message' => $this->getBoUrl()]);
 		
         parent::delete();
         
-        $tpl = new Cache\Tag\Material($this->table, $this->id);
-        $tpl->clean();
-        
-        $tpl = new Cache\Tag\Material($this->table, 0);
-        $tpl->clean();
+        $this->updateCache();
     }
     
     /**
@@ -454,10 +450,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
         $this->saveDynimicLinks();
         $this->updateCache();
 		
-		Event::trigger(EVENT_CORE_MATERIAL_AFTER_SAVE, ['material' => $this]);
-		
-        $tpl = new Cache\Tag\Material($this->table, $this->id);
-        $tpl->clean();			
+		Event::trigger(EVENT_CORE_MATERIAL_AFTER_SAVE, ['material' => $this]);		
 		
 		return $this;
     }

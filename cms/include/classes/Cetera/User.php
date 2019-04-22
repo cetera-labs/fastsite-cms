@@ -381,6 +381,19 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         return $this->fields['groups'];
     }
     
+    public function setGroups($value)
+    {
+        if (is_array($value)) {
+            $this->fields['groups'] = $value;
+        }
+    } 
+
+    public function addGroup($gid)
+    {
+        $this->getGroups();
+        $this->fields['groups'][] = (int)$gid;
+    }
+    
     public function getName()
     {
         if ($this->fields['name']) return $this->fields['name'];

@@ -1,3 +1,7 @@
+3.59.12
+
+    * Added methods User::setGroups(), User::addGroup()
+
 3.59.11
     
     * Bugfix. https://pm.cetera.ru/browse/CCD-1439
