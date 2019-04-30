@@ -1330,12 +1330,10 @@ class Application {
 		
         $name = $config['name'];
 	
-        if (class_exists($config['class']) && is_subclass_of($config['class'], '\\Cetera\\Widget\\Widget'))
-		{
+        if (class_exists($config['class']) && is_subclass_of($config['class'], '\\Cetera\\Widget\\Widget')) {
 			$config['class']::setData($config);
 		}
-		else
-		{
+		else {
 			$config['class'] = '\\Cetera\\Widget\\Widget';
 		}
             
@@ -1593,7 +1591,7 @@ class Application {
     public function getCallerPath()
     {
             $d = debug_backtrace();     
-			$path = str_replace('N:\\CeteraCMS\\distrib\\','',dirname($d[1]['file']));   
+			$path = str_replace('D:\\cms\\www\\','',dirname($d[1]['file']));   
             $path = str_replace('N:\\CeteraCMS\\','',$path);   			
             $path = str_replace('\\','/', $path);           
             $path = str_replace(DOCROOT,'',$path);
