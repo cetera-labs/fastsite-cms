@@ -14,9 +14,9 @@ nav_order: 5
 ## Composer install
 
 1. To create a new Cetera CMS project, run this command (substituting <Path> with the path where Composer should create the project):
-
-    composer create-project cetera-labs/website-skeleton <Path>
-    
+```
+composer create-project cetera-labs/website-skeleton <Path>
+```    
 2. Set up your web server to host your project. Its document root should point to your <Path>/www/ directory
     
 3. Open http://server/install.php
