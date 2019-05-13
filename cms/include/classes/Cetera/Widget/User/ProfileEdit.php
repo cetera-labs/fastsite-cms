@@ -112,6 +112,22 @@ class ProfileEdit extends \Cetera\Widget\Templateable {
 			if(!$f['show']) continue;
 			if (in_array($f['name'], $this->not_editable)) continue;
 			
+            switch($f['type']) {
+                case FIELD_TEXT:
+                case FIELD_LONGTEXT:
+                case FIELD_HTML:
+                    $f['type'] = 'text';
+                    break;
+                case FIELD_INTEGER:
+                    $f['type'] = 'number';
+                    break;
+                case FIELD_BOOLEAN:
+                    $f['type'] = 'checkbox';
+                    break;
+                default:
+                    $f['type'] = 'text';
+            }
+            
 			$this->fields[] = [
 				'name'    => $f['name'],
 				'describ' => $f['describ'],
