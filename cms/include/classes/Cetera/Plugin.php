@@ -30,16 +30,25 @@ class Plugin implements \ArrayAccess  {
     public static function enum()
     {
         $plugins = array();
-        if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR))
-		{
-        	while (($__item = readdir($__dir)) !== false)
-            {
+        
+        if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR)) {
+        	while (($__item = readdir($__dir)) !== false) {
           		if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item)) continue;
         	    if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item.DIRECTORY_SEPARATOR.PLUGIN_INFO)) continue;
                 $plugins[$__item] = new self($__item);
         	}  
         	closedir($__dir);
-        }    
+        }
+
+        if (file_exists(VENDOR_DIR . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php') {
+            $composer_plugins = include( VENDOR_DIR . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
+            foreach($composer_plugins as $k => $p) {
+                $p['path'] = VENDOR_DIR . DIRECTORY_SEPARATOR . $k;
+                $p['composer'] = true;
+                $plugins[$p['name']] = new self($p);
+            }
+        }
+        
 		ksort($plugins);
         return $plugins;
     }
@@ -56,10 +65,16 @@ class Plugin implements \ArrayAccess  {
         return new self($name);
     }    
     
-    private function __construct($name)
+    private function __construct($data)
     {
-        $this->name = $name;
-    }
+        if (is_array($name)) {
+            $plugin->_info = $data; 
+            $this->name = $data['name'];
+        }
+        else {
+            $this->name = $data;
+        }
+    }    
     
 	/**
 	* Включен ли модуль
