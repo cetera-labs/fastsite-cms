@@ -17,6 +17,8 @@
     },
     "require": {
         "php": ">=7.0.0",
+        "cetera-labs/cetera-cms-plugin-controller": "*",
+        "cetera-labs/library":"13",
 		"doctrine/dbal": "2.5.1",
 		"true/punycode": "~1.1",
         "twig/twig": "~1.0",
@@ -26,7 +28,6 @@
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 		"ifsnop/mysqldump-php":"2.*",
-		"cetera-labs/library":"13",
         "phing/phing": "2.*",
         "componavt/phpmorphy": "*"
 	},

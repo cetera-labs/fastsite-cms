@@ -165,4 +165,9 @@ class Menu extends Base {
         return $this->_children;
     }  
     
+    public function __toString()
+    {
+        return json_encode($this->getChildren());
+    }       
+    
 }
