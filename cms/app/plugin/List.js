@@ -182,7 +182,9 @@ Ext.define('Cetera.plugin.List', {
                         this.enableAction.disable();
                         this.disableAction.enable();
                     }
-                    this.upgradeAction.enable();                  
+                    if (!rec.get('composer')) {
+                        this.upgradeAction.enable();
+                    }
                 } else {
                     this.deleteAction.disable();
                     this.enableAction.disable();
@@ -211,12 +213,13 @@ Ext.define('Cetera.plugin.List', {
             else value = '<img src="images/16X16/ball_green.gif" align="absmiddle" /> ' + value;
     
         return Ext.String.format(
-            '<div><b>{0}</b>&nbsp;{1}{3}</div><div class="x-grid-rowbody ">{2}</div><div class="x-grid-rowbody ">{4}</div>', 
+            '<div><b>{0}</b>&nbsp;{1}{5}{3}</div><div class="x-grid-rowbody ">{2}</div><div class="x-grid-rowbody ">{4}</div>', 
             value, 
-            record.get('version')?('v'+record.get('version')):'', 
+            record.get('version')?record.get('version'):'', 
             record.get('description'),
             record.get('disabled')?(' (' + Config.Lang.off + ')'):'',
-            upgrade
+            upgrade,
+            record.get('composer')?'[COMPOSER]':''
         );
     },
     

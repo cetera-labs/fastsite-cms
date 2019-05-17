@@ -978,26 +978,24 @@ class Application {
                 
         foreach (Plugin::enum() as $plugin) {
             if (!$plugin->isEnabled()) continue;	
-            if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES) && is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES)) {
-			$loader = new \Composer\Autoload\ClassLoader();
-				
+            if (!$plugin->composer && file_exists($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CLASSES) && is_dir($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CLASSES)) {
+			    $loader = new \Composer\Autoload\ClassLoader();				
 				$parts = explode('_',$plugin->name);
 				$prefix = '';
-				foreach ($parts as $p) $prefix .= ucfirst($p);
-				
+				foreach ($parts as $p) $prefix .= ucfirst($p);				
                 $loader->add($prefix, DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES);
                 $loader->register();
             }            
             
-			if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets') && is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets')) {
-				$this->_widgetPaths[] = DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.'widgets';
+			if (file_exists($plugin->getPath().DIRECTORY_SEPARATOR.'widgets') && is_dir($plugin->getPath().DIRECTORY_SEPARATOR.'widgets')) {
+				$this->_widgetPaths[] = $plugin->getPath().DIRECTORY_SEPARATOR.'widgets';
 			}
                 
             $this->_plugins_loaded[] = $plugin;      
         }
 		foreach ($this->_plugins_loaded as $plugin) {
-			if (file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG)) try {
-				include(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG); 
+			if (file_exists($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CONFIG)) try {
+				include($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CONFIG); 
 			} 
 			catch (\Exception $e) {
 			}

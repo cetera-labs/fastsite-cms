@@ -11,6 +11,7 @@ Ext.define('Cetera.model.Plugin', {
         'disabled', 
         'installed',
         'upgrade',  
-        'author'
+        'author',
+        'composer'
     ]
 });

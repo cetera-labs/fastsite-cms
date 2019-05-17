@@ -48,6 +48,7 @@ if (sizeof($plugins)) {
             'version'     => $p['version'],
             'disabled'    => $p['disabled'],
             'title'       => isset($p['title_'.$l])?$p['title_'.$l]:$p['title'],
+            'composer'    => $p->composer,
         );            
     
     }

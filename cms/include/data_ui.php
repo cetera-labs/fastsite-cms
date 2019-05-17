@@ -57,18 +57,18 @@ foreach ($application->getBo()->getModules() as $id => $component) {
       $menu[MENU_PLUGINS]['items'][] = $component;
   }
   
-  if ($component['url'])  $component['url']  = $root_folder.$component['url'];
-  if ($component['icon']) $component['icon'] = $root_folder.$component['icon'];
-  if ($component['html']) $component['html'] = $root_folder.$component['html'];
+  if ($component['url'])  $component['url']  = truePath($component['url'],$root_folder);
+  if ($component['icon']) $component['icon'] = truePath($component['icon'],$root_folder);
+  if ($component['html']) $component['html'] = truePath($component['html'],$root_folder);
   if (!$component['tree']) $component['tree'] = 'catalogs';
   $components[$id] = $component;   
   
   if (isset($component['submenu']) && is_array($component['submenu'])) 
      foreach ($component['submenu'] as $ii => $menu_subitem) {
      
-          if ($menu_subitem['url']) $menu_subitem['url'] = $root_folder.$menu_subitem['url'];
-          if ($menu_subitem['icon']) $menu_subitem['icon'] = $root_folder.$menu_subitem['icon'];
-          if ($menu_subitem['html']) $menu_subitem['html'] = $root_folder.$menu_subitem['html'];
+          if ($menu_subitem['url']) $menu_subitem['url'] = truePath($menu_subitem['url'],$root_folder);
+          if ($menu_subitem['icon']) $menu_subitem['icon'] = truePath($menu_subitem['icon'],$root_folder);
+          if ($menu_subitem['html']) $menu_subitem['html'] = truePath($menu_subitem['html'],$root_folder);
           if ($menu_subitem['tree']) $menu_subitem['tree'] = 'catalogs'; 
           
           $components[$id.'_'.$ii] = $menu_subitem;              
@@ -84,3 +84,10 @@ echo json_encode(array(
     'menu'    => $menu,
     'scripts' => $application->getBo()->getScripts()
 ));
+
+function truePath($path, $root) {
+    if (substr($path,0,1) == '/') {
+        return $path;
+    }
+    return $root.$path;
+}
