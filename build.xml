@@ -3,18 +3,20 @@
     <property name="CMS_DIST" value="./cms" />
     <property name="LIB_DIST" value="../library" />
     <property name="CMS_DIR" value="../../../www/cms" />
-    
+    <property name="WWW_DIR" value="../../../www" />
+       
     <target name="prepare">
         <mkdir dir="${CMS_DIR}" />
         <mkdir dir="${CMS_DIR}/css" />
         <mkdir dir="${CMS_DIR}/js" />
         <mkdir dir="${CMS_DIR}/images" />
         <mkdir dir="${CMS_DIR}/include" />
-        <mkdir dir="${CMS_DIR}/include/editors" />
+        <mkdir dir="${CMS_DIR}/include/editors" />  
+        <mkdir dir="${WWW_DIR}/plugins" />  
     </target>    
     
     <target name="dist" depends="prepare">
-    
+       
         <append destFile="${CMS_DIR}/css/global.css" append="no">
             <fileset dir="${CMS_DIST}">
               <include name="css/main.css" />
@@ -74,5 +76,34 @@
             </fileset>
         </copy>
         
+        <phingcall target="plugins"></phingcall>
+        
     </target>
+    
+    <target name="plugins">
+
+        <php class="\Cetera\Phing" function="plugins" returnProperty="PLUGINS" />
+        <foreach list="${PLUGINS}" param="PLUGIN" target="plugin" />
+    
+    </target>  
+    
+    <target name="plugin">
+        <echo msg="${PLUGIN}" />
+        <php class="\Cetera\Phing" function="pluginPath" returnProperty="PLUGIN_PATH">
+            <param value="${PLUGIN}"/>
+        </php>
+        <echo msg="${PLUGIN_PATH}" />
+        
+        <mkdir dir="${WWW_DIR}/plugins/${PLUGIN}" />
+        <copy todir="${WWW_DIR}/plugins/${PLUGIN}" overwrite="true">
+            <fileset dir="${PLUGIN_PATH}">
+                <include name="images/***" />
+                <include name="ext/***" />
+                <include name="css/***" />
+                <include name="js/***" />
+            </fileset>
+        </copy>        
+        
+    </target>
+    
 </project>
