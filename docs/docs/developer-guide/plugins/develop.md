@@ -8,12 +8,11 @@ grand_parent: Руководство разработчика
 
 # Разработка плагинов
 
-Cetera CMS 3.12+
-
 ## Файловая структура плагина
 
 	<имяплагина>/
 	+---info.json
+    +---composer.json
 	+---config.php
 	+---install.php
 	+---schema.xml
@@ -25,7 +24,7 @@ Cetera CMS 3.12+
 	    +---Component1.js
 	    +---Component2.js
 
-## Файл info.json (обязателен)
+## Файл info.json (обязателен, если модуль будет устанавливаться через MarketPlace)
 
 В файле содержится описательная часть плагина.
 
@@ -49,29 +48,70 @@ Cetera CMS 3.12+
 	    "author": "<a href='http://www.cetera.ru'>Cetera Labs</a>"
 	}
 
+## Файл composer.json (обязателен, если модуль будет устанавливаться как composer-пакет)
+
+### Структура
+    
+    Стандартная, за исключением:
+    
+	{
+	    "type": "cetera-cms-plugin",
+        "extra": {
+            "title": "Название модуля",
+            "description": "Описание модуля"
+        }
+	}
+    
+### Пример:
+
+    {
+        "name": "cetera-labs/plugin-dummy",
+        "type": "cetera-cms-plugin",
+        "license": "MIT",
+        "authors": [
+            {
+                "name": "Roman Romanov",
+                "email": "nicodim@mail.ru",
+                "role": "Lead Developer"
+            }
+        ],
+        
+        "minimum-stability": "dev",
+        
+        "autoload": {
+            "psr-4": { 
+                "Dummy\\": "classes/"
+            }
+        },
+
+        "extra": {
+            "description": "The dummy plugin for Cetera CMS"
+        }
+    }    
+
 ## Файл config.php
 
 Скрипт подключается в методе Application::initPlugins() и позволяет плагину встроить себя в интерфейс BackOffice, зарегистрировать фильтр вывода и т.д.
 
 ### Используемые методы:
 
-	$this→isFrontOffice()
+	$this->isFrontOffice()
 
 Определяет где в данные момент работает приложение в админке или на фронтофисе.
 
-	$this→getBo()
+	$this->getBo()
 
 Возвращает объект BackOffice, если мы находимся в админке или NULL — для фронтофиса
 
-	$this→getUser()
+	$this->getUser()
 
 Возвращает авторизованного пользователя
 
-	$this→registerOutputHandler(<array(class, method)>|<function>|<file>|<closure>)
+	$this->registerOutputHandler(<array(class, method)>|<function>|<file>|<closure>)
 
 Регистрирует фильтр вывода на фронтофисе. После выполнения кода контроллера, поочередно выполняются зарегистрированные фильтры. В качестве параметра им передается буфер вывода.
 
-	$this→addUserGroup(array('id'⇒<GROUP_ID>,'name'⇒'<GROUP_NAME>','describ'⇒'<GROUP_DESCRIB>'))
+	$this->addUserGroup(array('id'⇒<GROUP_ID>,'name'⇒'<GROUP_NAME>','describ'⇒'<GROUP_DESCRIB>'))
 
 Добавить предустановленную группу пользователей.
 
