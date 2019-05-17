@@ -25,7 +25,7 @@ if (sizeof($plugins)) {
     
     foreach ($plugins as $id => $p) {
     
-        if (isset($plugins_lib[$id])) {
+        if (!$p->composer && isset($plugins_lib[$id])) {
         
             // есть более новая версия
             if (version_compare($plugins_lib[$id]['version'], $p['version']) > 0) {

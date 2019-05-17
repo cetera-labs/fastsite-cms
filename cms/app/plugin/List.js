@@ -182,8 +182,13 @@ Ext.define('Cetera.plugin.List', {
                         this.enableAction.disable();
                         this.disableAction.enable();
                     }
-                    if (!rec.get('composer')) {
+                    if (rec.get('composer')) {
+                        this.upgradeAction.disable();
+                        this.deleteAction.disable();
+                    }
+                    else {
                         this.upgradeAction.enable();
+                        this.deleteAction.enable();                        
                     }
                 } else {
                     this.deleteAction.disable();
