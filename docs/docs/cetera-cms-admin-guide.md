@@ -19,7 +19,7 @@ composer create-project cetera-labs/website-skeleton <Path>
 ```    
 2. Set up your web server to host your project. Its document root should point to your <Path>/www/ directory
     
-3. Open http://server/install.php
+3. Open http://server/cms/setup.php
 
 4. Follow onscreen setup guide.    
 
