@@ -9,6 +9,9 @@
  **/
  
 namespace Cetera;
+
+use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Result;
  
 /**
  * Адаптер авторизации
@@ -16,7 +19,7 @@ namespace Cetera;
  * @package CeteraCMS
  * @access private
  */ 
-class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
+class UserAuthAdapter implements AdapterInterface {
 
 	/**
 	 * @ignore
@@ -63,30 +66,31 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
 	 * Авторизовать пользователя
 	 *  
 	 * Пример:
-	 *	$result = \Zend_Auth::getInstance()->authenticate(new \Cetera\UserAuthAdapter(array(<br>
+     *  $auth = \Cetera\Application::getInstance()->getAuth();
+	 *	$result = $auth->authenticate(new \Cetera\UserAuthAdapter(array(<br>
 	 *		'login'    => $_POST['login'],<br>
 	 *	    'pass'     => $_POST['password'],<br>
 	 *		'remember' => $_POST['remember']<br>
 	 *	))); <br>
      *<br>
 	 *	switch ($result->getCode()) {<br>
-	 *		case Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:<br>
+	 *		case Zend\Authentication\Result::FAILURE_IDENTITY_NOT_FOUND:<br>
 	 *			echo 'Пользователь не найден';<br>
 	 *			break;<br>
-	 *		case Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:<br>
+	 *		case Zend\Authentication\Result::FAILURE_CREDENTIAL_INVALID:<br>
 	 *			echo 'Неверный пароль';<br>
 	 *			break;<br>
-	 *		case Zend_Auth_Result::SUCCESS:<br>
+	 *		case Zend\Authentication\Result::SUCCESS:<br>
 	 * 			echo 'Добро пожаловать!';<br>
 	 * 			break;<br>
 	 *	}<br>
      *
-	 * @return \Zend_Auth_Result
+	 * @return Zend\Authentication\Result
 	 */	
     public function authenticate()
     {
         $this->_authenticateResultInfo = array(
-            'code'     => \Zend_Auth_Result::FAILURE,
+            'code'     => Result::FAILURE,
             'identity' => null
         );
         
@@ -96,23 +100,23 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
 		if (!$user && $this->_email) $user = User::getByEmail($this->_email);
 
 		if (!$user || !$user->isEnabled() || (!$user->allowBackOffice() && $this->_backoffice)) {
-			$this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
+			$this->_authenticateResultInfo['code'] = Result::FAILURE_IDENTITY_NOT_FOUND;
 			return $this->_authenticateCreateAuthResult();
 		}
 		
 		if (!$user->checkPassword($this->_password)) {
-			  $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID;
+			  $this->_authenticateResultInfo['code'] = Result::FAILURE_CREDENTIAL_INVALID;
 			  return $this->_authenticateCreateAuthResult(); 
 		}
 
-        $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::SUCCESS;
+        $this->_authenticateResultInfo['code'] = Result::SUCCESS;
         $this->_authenticateResultInfo['identity'] = array(
             'uniq'     => $user->authorize($this->_remember),
             'user_id'  => $user->id
         );
 		if ($this->_remember)
-			\Zend_Session::rememberMe(REMEMBER_ME_SECONDS);		
-			//else \Zend_Session::regenerateId();
+			 Application::getInstance()->getSession()->getManager()->rememberMe(REMEMBER_ME_SECONDS);		
+			//else Application::getInstance()->getSession()->getManager()->regenerateId();
         return $this->_authenticateCreateAuthResult();
     }
     
@@ -121,7 +125,7 @@ class UserAuthAdapter implements \Zend_Auth_Adapter_Interface {
      */	 
     protected function _authenticateCreateAuthResult()
     {
-        return new \Zend_Auth_Result(
+        return new Result(
             $this->_authenticateResultInfo['code'],
             $this->_authenticateResultInfo['identity']
         );

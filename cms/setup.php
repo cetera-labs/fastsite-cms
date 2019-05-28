@@ -216,18 +216,16 @@ function step1() {
             fields: ['abbr', 'state'],
             data : [
                 <?php
-                $locales = \Zend_Locale::getLocaleList();
+                $locales = $application->getLocaleList();
                 $l = $application->getLocale();
                 $i = 0;
                 $selected = 0;
-                foreach($locales as $locale => $exists) if ($exists) {
-                    if ($translator->isAvailable($locale)) {
+                foreach($locales as $locale => $name) {
                         if ($i) print ','; $i=1;
                         if (!$selected) $selected = $locale;
-                        if ($l->toString() == $locale) $selected = $locale;
+                        if ($l == $locale) $selected = $locale;
                         print '["'.$locale.'","'.$l->getTranslation($locale, 'language', $locale).'"]';
                         print "\n";
-                    }
                 }
                 ?>	
             ]

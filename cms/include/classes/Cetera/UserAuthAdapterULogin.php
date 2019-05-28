@@ -9,8 +9,11 @@
  **/
  
 namespace Cetera;
+
+use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Result;
  
-class UserAuthAdapterULogin extends ExternalUserAuthAdapter implements \Zend_Auth_Adapter_Interface {
+class UserAuthAdapterULogin extends ExternalUserAuthAdapter implements AdapterInterface {
         
     protected function getUser()
     {

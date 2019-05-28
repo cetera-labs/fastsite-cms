@@ -16,13 +16,52 @@ namespace Cetera\Cache\Tag;
  * @package CeteraCMS
  * @access private 
  **/ 
-abstract class Tag extends \Dklab_Cache_Frontend_Tag {
+abstract class Tag {
+    
+    /**
+     * Calculated ID associated to this slot.
+     * 
+     * @var string
+     */
+    private $_id = null;
+
+
+    /**
+     * Creates a new Tag object.
+     *
+     * @return Dklab_Cache_Tag
+     */
+    public function __construct($id)
+    {
+        $this->_id = $id;
+    }
+    
+    
+    /**
+     * Clears all keys associated to this tags.
+     * 
+     * @return void
+     */
+    public function clean()
+    {
+        $this->getBackend()->clean([$this->getNativeId()]);
+    }
+    
+    /**
+     * Returns generated ID of this tag.
+     * This method must be public, because it is used in Slot.
+     * 
+     * @return string    Tag name.
+     */
+    public function getNativeId()
+    {
+        return $this->_id;
+    }
+    
 	/**
 	 * @internal
 	 */
     public function getBackend() {
-        // Использовать \Zend_Registry совсем не обязательно; код может быть любым, 
-        // лишь бы он всегда возвращал один и тот же backend.
         return \Cetera\Cache\Backend\Backend::getInstance();
     }
 }

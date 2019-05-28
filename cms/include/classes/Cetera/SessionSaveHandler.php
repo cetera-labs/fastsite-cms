@@ -10,12 +10,14 @@
  
 namespace Cetera; 
 
+use Zend\Session\SaveHandler\SaveHandlerInterface;
+
 /**
  *  
  * @package CeteraCMS
  * @access private
  */ 
-class SessionSaveHandler implements \Zend_Session_SaveHandler_Interface
+class SessionSaveHandler implements SaveHandlerInterface
 {
 	use DbConnection;
 

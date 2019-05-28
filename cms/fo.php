@@ -1,4 +1,6 @@
 <?php
+use Zend\Authentication\Result;
+
 require('include/common.php');
 
 if (stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
@@ -52,12 +54,12 @@ if ($application->getVar('fo_close')) {
            $proceed = 1;
         } elseif ($application->getVar('fo_allow_users')) {
         
-            $result = \Zend_Auth::getInstance()->authenticate(new UserAuthAdapter(array(
+            $result = $application->getAuth()->authenticate(new UserAuthAdapter(array(
                 'login' => $_SERVER['PHP_AUTH_USER'],
                 'pass'  => $_SERVER['PHP_AUTH_PW']
             ))); 
             
-            if ($result->getCode() == \Zend_Auth_Result::SUCCESS) {
+            if ($result->getCode() == Result::SUCCESS) {
                 if (!$application->getVar('fo_allow_users_bo')) {
                     $proceed = 1;
                 } else {

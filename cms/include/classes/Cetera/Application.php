@@ -8,6 +8,12 @@
  **/
  
 namespace Cetera; 
+
+use Zend\Authentication\AuthenticationService;
+use Zend\Authentication\Storage\Session;
+use Zend\Session\Config\StandardConfig;
+use Zend\Session\SessionManager;
+use Zend\Session\Container;
  
 /**
  * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 
@@ -23,21 +29,21 @@ class Application {
     /**
      * Экземпляр переводчика
      * @internal     
-     * @var \Zend_Translate
+     * @var TranslatorWrapper
      */
     protected $_translator = null;
   
     /**
      * Локаль приложения
      * @internal     
-     * @var \Zend_Locale
+     * @var \Locale
      */
     protected $_locale;
     
     /**
      * Сессия приложения
      * @internal     
-     * @var \Zend_Session_Namespace
+     * @var Zend\Session\Container
      */
     protected $_session;
        
@@ -154,28 +160,7 @@ class Application {
 	private $_uid = '';
  
     private $debugMode = false;
-    
-  /*
-   * @internal
-   */   
-    private $_debug_writer = false;
-  /*
-   * @internal
-   */  
-    private $_debugger_request = false;
-  /*
-   * @internal
-   */  
-    private $_debugger_response = false;
-  /*
-   * @internal
-   */  
-    private $_debugger_channel = false;
-  /*
-   * @internal
-   */  
-    private $_debugger = false;   
-    
+        
   /*
    * @internal
    */  
@@ -269,7 +254,7 @@ class Application {
 		set_exception_handler('\Cetera\Application::exception_handler');
 		set_error_handler('\Cetera\Application::error_handler');		
 		
-        $this->_locale = new \Zend_Locale('ru');
+        $this->_locale = 'ru';
   	
         $this->initDebug();
                 
@@ -340,22 +325,21 @@ class Application {
     /**
      * Установливает новую локаль приложения и запоминает её в сессии.
      *      
-     * @param  string|\Zend_Locale $locale новая локаль
+     * @param  string $locale новая локаль
      * @return void
      */
     public function setLocale($locale = null, $remember = false)
     {
-        $this->_locale->setLocale($locale);
+        $this->_locale = $locale;
         $t = $this->getTranslator();
-        if ($t->isAvailable($this->_locale))
-            $t->setLocale($this->_locale);
-        if ($remember) $this->_session->locale = $this->_locale->toString();
+        $t->setLocale($this->_locale);
+        if ($remember) $this->_session->locale = $this->_locale;
     }
     
     /**
      * Локаль приложения
      *      
-     * @return \Zend_Locale
+     * @return \Locale
      */
     public function getLocale()
     {
@@ -365,7 +349,7 @@ class Application {
     /**
      * Сессия приложения
      *      
-     * @return \Zend_Session_Namespace
+     * @return Zend\Session\SessionManager
      */
     public function getSession()
     {
@@ -376,18 +360,22 @@ class Application {
      * Получить переводчик
      *      
      * @internal     
-     * @return \Zend_Translate
+     * @return TranslatorWrapper
      */
     public function getTranslator()
     {
         if (!$this->_translator) {
-
-			$this->_translator = new \Zend_Translate(   
-				'gettext', 
-				CMSROOT . 'lang',  
-				$this->_locale,  
-				array('scan'=>\Zend_Translate::LOCALE_FILENAME)
-			); 
+            
+            $this->_translator = TranslatorWrapper::factory([
+                'locale' => $this->_locale,
+                'translation_file_patterns' => [
+                    [
+                        'type'     => 'gettext',
+                        'base_dir' => CMSROOT . 'lang',
+                        'pattern'  => '%s.mo',   
+                    ],
+                ],                     
+            ]);
 
         }
         return $this->_translator;
@@ -586,19 +574,6 @@ class Application {
     private function initDebug()
     {
         if (!$this->getVar('debug_level') && !isset($_REQUEST['debug_level'])) return;
-
-		$this->debugMode = $this->getVar('debug_level') | $_REQUEST['debug_level'];
-		
-        $this->_debug_writer = new \Zend_Log_Writer_Firebug();
-        $this->_debugger_request  = new \Zend_Controller_Request_Http();
-        $this->_debugger_response = new \Zend_Controller_Response_Http();
-        $this->_debugger_channel  = \Zend_Wildfire_Channel_HttpHeaders::getInstance();
-        $this->_debugger_channel->setRequest($this->_debugger_request);
-        $this->_debugger_channel->setResponse($this->_debugger_response);
-        $this->_debugger = new \Zend_Log($this->_debug_writer);
-        $this->_debugger->addPriority('SQL', DEBUG_SQL);
-        $this->_debugger->addPriority('CACHE', DEBUG_CACHE);
-        $this->_debugger->addPriority('BANNER', DEBUG_BANNER);
         
         ob_start();
 		
@@ -630,12 +605,13 @@ class Application {
             
         }
         
-        \Zend_Session::setSaveHandler(new SessionSaveHandler());
-                             
-        $this->_session = new \Zend_Session_Namespace(SESSION_NAMESPACE);
+        $sessionManager = new SessionManager();
+        $sessionManager->setSaveHandler(new SessionSaveHandler());  
+        Container::setDefaultManager($sessionManager);
+        $this->_session = new Container(SESSION_NAMESPACE);        
         
         if (isset($this->_session->locale) && $this->_session->locale) {
-            $this->_locale->setLocale($this->_session->locale);
+            $this->_locale = $this->_session->locale;
         }
     }
     
@@ -646,13 +622,7 @@ class Application {
      */
     public static function shutdown()
     {    
-		
-        if (self::$_instance->_debugger_channel) {
-			self::$_instance->_debugger_channel->flush();
-			self::$_instance->_debugger_response->sendHeaders();
-			ob_end_flush();
-		}
-		
+				
 		if (self::$_instance->cronMode) {
 			if ( php_sapi_name() == 'cli' ) {
 				$txt = ob_get_contents();
@@ -680,8 +650,8 @@ class Application {
     */
     public function debug($mode, $str)
     {
-    	if (!$this->_debugger) return;
-    	$this->_debugger->log($str, $mode);
+    	//if (!$this->_debugger) return;
+    	//$this->_debugger->log($str, $mode);
     }
         
 	/**
@@ -1094,8 +1064,7 @@ class Application {
     */
     public function getAuth()
     {
-        $za = \Zend_Auth::getInstance();
-        $za->setStorage(new \Zend_Auth_Storage_Session( SESSION_NAMESPACE ));
+        $za = new AuthenticationService( new Session( SESSION_NAMESPACE ) );
         return $za;
     }
     
@@ -1940,7 +1909,7 @@ class Application {
 	public static function exception_handler($exception) {
 
 		// Ошибка во время cronJob
-		if (self::$_instance->cronMode) {
+		if (self::$_instance && self::$_instance->cronMode) {
 			print 'ERROR. '.$exception->getMessage()."\n";
 			print $exception->getTraceAsString();
 			self::$_instance->exit_code = 1;			
@@ -1948,7 +1917,7 @@ class Application {
 		}
         
         // Ошибка в FrontOffice, задействуем стандартный обработчик исключений
-        if (self::$_instance->isFrontOffice()) {
+        if (self::$_instance && self::$_instance->isFrontOffice()) {
             restore_exception_handler();
             throw $exception;
             return;            
@@ -1962,7 +1931,9 @@ class Application {
 			return;
 		}
 
-		self::$_instance->exitCode = 500;
+        if (self::$_instance) {
+            self::$_instance->exitCode = 500;
+        }
 
 		if ($exception instanceof \Cetera\Exception\CMS) {
 			$ext_message = $exception->getExtMessage();
@@ -1993,5 +1964,18 @@ class Application {
 				 '<div style="text-align: left; padding: 10px">'.$ext_message.'</div></div></td></tr></table></div></body>'); 
 		}
 	}	
+    
+    public function getLocaleList() {
+        return [
+            [
+                'abbr'  => 'ru',
+                'state' => 'Русский',
+            ],
+            [
+                'abbr'  => 'en',
+                'state' => 'English',
+            ],    
+        ];        
+    }
 	
 }

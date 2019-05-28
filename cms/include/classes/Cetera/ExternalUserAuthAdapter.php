@@ -9,8 +9,11 @@
  **/
  
 namespace Cetera;
+
+use Zend\Authentication\Adapter\AdapterInterface;
+use Zend\Authentication\Result;
  
-abstract class ExternalUserAuthAdapter implements \Zend_Auth_Adapter_Interface {
+abstract class ExternalUserAuthAdapter implements AdapterInterface {
     protected $_authenticateResultInfo = null;
     protected $user;
     private $_backoffice;
@@ -25,7 +28,7 @@ abstract class ExternalUserAuthAdapter implements \Zend_Auth_Adapter_Interface {
 
     protected function _authenticateCreateAuthResult()
     {
-        return new \Zend_Auth_Result(
+        return new Result(
             $this->_authenticateResultInfo['code'],
             $this->_authenticateResultInfo['identity']
         );
@@ -33,21 +36,21 @@ abstract class ExternalUserAuthAdapter implements \Zend_Auth_Adapter_Interface {
     
     public function authenticate()
     {
-        $this->_authenticateResultInfo = array('code' => \Zend_Auth_Result::FAILURE);
+        $this->_authenticateResultInfo = array('code' => Result::FAILURE);
         
         $user = $this->getUser();
         if (!$user || !$user->isEnabled() || (!$user->allowBackOffice() && $this->_backoffice)) {
-            $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND;
+            $this->_authenticateResultInfo['code'] = Result::FAILURE_IDENTITY_NOT_FOUND;
             return $this->_authenticateCreateAuthResult();
         }
         
-        $this->_authenticateResultInfo['code'] = \Zend_Auth_Result::SUCCESS;
+        $this->_authenticateResultInfo['code'] = Result::SUCCESS;
         $this->_authenticateResultInfo['identity'] = array(
             'uniq'     => $user->authorize(true),
             'user_id'  => $user->id
         );
         
-        \Zend_Session::rememberMe(REMEMBER_ME_SECONDS);	
+        Application::getInstance()->getSession()->getManager()->rememberMe(REMEMBER_ME_SECONDS);	
         return $this->_authenticateCreateAuthResult();
     }
 }
