@@ -129,7 +129,7 @@ if ($_REQUEST['action'] == 'create_folder') {
 if ($_REQUEST['action'] == 'upload') {
 
     $_SERVER['HTTP_X_REQUESTED_WITH'] = 'xmlhttprequest';
-
+    
     if (!isset($_FILES['file'])) {
 
         throw new \Exception($translator->_('Нет файла'));
@@ -156,8 +156,7 @@ if ($_REQUEST['action'] == 'upload') {
                 $msg = $translator->_('Невозможно загрузить данный тип файла');
                 break;
         }
-        $res['success'] = false;
-        $res['message'] = $msg;
+        throw new \Exception($msg);
 
     } else {
 
