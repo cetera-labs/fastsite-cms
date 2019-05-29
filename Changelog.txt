@@ -1,3 +1,8 @@
+3.60.1 
+
+    Bugfix: CCD-1452
+    Bugfix: добавил Exception при ошибке загрузки файлов
+
 3.60.0
 
     * Отказ от Zend Framework 1
