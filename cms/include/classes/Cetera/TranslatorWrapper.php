@@ -22,4 +22,8 @@ class TranslatorWrapper extends Translator {
         return (array)parent::getAllMessages($textDomain, $locale);
     }
     
+    public function addTranslation($baseDir) {
+        parent::addTranslationFilePattern('gettext', $baseDir, '%s.mo');
+    }
+    
 }
