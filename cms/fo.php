@@ -131,7 +131,20 @@ if (parse_url($template,  PHP_URL_HOST)) {
 	
 	header("HTTP/1.1 301 Moved Permanently");
 	header('Location: '.$template);
-	
+
+}
+elseif (is_callable($template)) {
+		ob_start();
+        list($class, $method) = explode('::', $template);
+        if ($class) {
+            $controller = new $class();
+            $controller->$method();
+        }
+        else {
+            $template();
+        }
+		$result = ob_get_contents();
+		ob_end_clean();    
 }
 else {
 	$path_parts = pathinfo($template);
