@@ -68,7 +68,7 @@ class Profiler
     
     public function remove($id)
     {
-        return $this->_backend->remove($id);      
+        return $this->_backend->removeItem($id);      
     }
     
     

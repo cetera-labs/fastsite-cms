@@ -100,7 +100,6 @@ Guzzle [http://docs.guzzlephp.org/en/stable/](http://docs.guzzlephp.org/en/stabl
 Twig [https://twig.symfony.com/](https://twig.symfony.com/)  
 DBAL [https://www.doctrine-project.org/projects/doctrine-dbal/en/2.7/index.html](https://www.doctrine-project.org/projects/doctrine-dbal/en/2.7/index.html)  
 ckeditor [https://ckeditor.com/](https://ckeditor.com/)  
-zendframework1 [http://framework.zend.com](http://framework.zend.com)  
 phpmailer [https://github.com/PHPMailer/PHPMailer/](https://github.com/PHPMailer/PHPMailer/)  
 sypexgeo [http://sypexgeo.net/ru/download/](http://sypexgeo.net/ru/download/)  
 ua-parser [https://github.com/tobie/ua-parser/tree/master/php](https://github.com/tobie/ua-parser/tree/master/php)  
