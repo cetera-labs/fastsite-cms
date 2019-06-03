@@ -10,18 +10,24 @@ grand_parent: Руководство разработчика
 
 В CeteraCMS v3.18.0 и выше.
 
-Классом, инкапсулирующим работу со всеми материалами в CeteraCMS, является \Cetera\Material. Если вы хотите расширить стандартную функциональность, создайте новый класс, расширяющий \Cetera\Material :
+Базовым классом, инкапсулирующим работу со всеми материалами в CeteraCMS, является \Cetera\Material. 
+Если вы хотите расширить стандартную функциональность, создайте новый класс, расширяющий \Cetera\MaterialUser :
 
-	class Article extends \Cetera\Material {
+	class Article extends \Cetera\MaterialUser {
 	 
+        public static function getTypeId() {
+            // здесь указываем ID тима материалов для которого создан класс
+            return 1;
+        }        
+     
 	    [ваши методы]
 	 
 	}
  
 
-И поместите его в .templates/classes/Article.php
+И поместите его в <каталог темы>/classes/Article.php
 
-Затем в bootstrap.php нужно объявить для какого типа материалов использовать этот класс:
+Затем в bootstrap.php нужно зарегистрировать этот класс:
 
 	// Для работы со стандартными материалами будем использовать свой класс
-	\Cetera\ObjectDefinition::registerClass(1, 'Article');
+	\Cetera\ObjectDefinition::registerClass('Article');

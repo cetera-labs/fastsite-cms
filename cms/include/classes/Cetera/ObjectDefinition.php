@@ -144,14 +144,20 @@ class ObjectDefinition extends Base {
 	/**
 	 * Зарегистрировать пользовательский класс для определенного типа материалов
 	 *
-	 * @param int $id ID типа материалов
+	 * @param int $id ID типа материалов или имя класса. Класс должен быть наследником \Cetera\MaterialUser
      * @param string $className Имя класса. Класс должен быть наследником \Cetera\Material
 	 * @return void
 	 */		
-    public static function registerClass($id, $className)
+    public static function registerClass($id, $className = null)
     {
+        if (is_subclass_of($id, '\Cetera\MaterialUser') ) {
+            $tid = call_user_func([$id, 'getTypeId']);
+            self::$userClasses[$tid] = $id;
+        }
+        else {
 		    if (! is_subclass_of($className, '\Cetera\Material') ) throw new \Exception('Класс '.$className.' должен быть наследником \Cetera\Material');
 		    self::$userClasses[$id] = $className;
+        }
     }	
     
 	/**

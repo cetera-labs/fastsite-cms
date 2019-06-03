@@ -51,8 +51,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         
     /**
      * Создает экземпляр нужного класса в зависимости от "Типа материалов".
-     *       
-     * @internal	 
+     *     
+     * @internal	     
      * @param int|ObjectDefinition $type "Тип материалов" объекта
      * @param string $table Таблица БД, в которой хранятся объекты         
      * @return DynamicFieldsObject       
@@ -96,8 +96,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     /**
      * Создает экземпляр нужного класса в зависимости от "Типа материалов",
      * поля загружаются из БД, резульат кэшируется     
-     *    
-     * @internal	 
+     *     
      * @param array $data поля объекта
      * @param int|ObjectDefinition $type "Тип материалов" объекта
      * @param string $table Таблица БД, в которой хранятся объекты         
@@ -146,8 +145,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     
     /**
      * Устанавливает поля объекта  
-     *       
-     * @internal	 
+     *        
      * @param array $fields поля объекта     
      */	
     public function setFields($fields)

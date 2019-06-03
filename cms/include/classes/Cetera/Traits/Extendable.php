@@ -10,9 +10,8 @@ trait Extendable {
 		static::$extension = $class;
 	}
 	
-	final public static function create()
+	public static function create()
 	{
-		//print "***".get_class().'==='.static::$extension."***\n";
 		if ( static::$extension ) {
 			return new static::$extension();
 		}

@@ -210,6 +210,8 @@ class Application {
      * @var Application
      */
     private static $_instance = null;
+    
+    private static $controller = null;
 
     /**
      * Singleton instance
@@ -1977,5 +1979,12 @@ class Application {
             ],    
         ];        
     }
-	
+    
+    public function setController(Controller $controller) {
+        $this->controller = $controller;
+	}
+    
+    public function getController() {
+        return $this->controller;
+	}    
 }
