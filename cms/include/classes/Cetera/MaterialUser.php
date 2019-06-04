@@ -29,4 +29,8 @@ abstract class MaterialUser extends Material {
         return $o;
     }
     
+    public static function getById($id, $type = 0, $table = null) {
+        return parent::getById($id, static::getObjectDefinition());
+    }
+    
 }
