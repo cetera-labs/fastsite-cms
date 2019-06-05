@@ -7,13 +7,8 @@ include('../../common_bo.php');
 
     CKEDITOR.plugins.addExternal('widgets', '/<?=CMS_DIR?>/include/editors/ckeditor/plugins/widgets/','plugin.js');
     CKEDITOR.plugins.addExternal('youtube', '/<?=CMS_DIR?>/include/editors/ckeditor/plugins/youtube/','plugin.js');
-	
-	CKEDITOR.dtd.cms = { em:1 };
-	CKEDITOR.dtd.$block.cms = 1;
-	CKEDITOR.dtd.body.cms = 1;
     
 })();
-
 
 CKEDITOR.editorConfig = function( config )
 {
