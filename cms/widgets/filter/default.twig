@@ -1,8 +1,31 @@
 {# стандартная верстка #}
+{% block html %}
+<div id="{{ widget.uniqueId }}" class="{{ widget.getParam('css_class') }}">
 
-{% import _self as filter %}
+	{% block responsive_toggle %}
+	<p class="show-for-small-only" data-responsive-toggle="filter-{{ widget.uniqueId }}" data-hide-for="medium">
+		<span class="button light-gray expanded" data-toggle><i class="fa fa-lg fa-filter"></i>&nbsp;{{ _('Фильтр') }}</span>
+	</p>
+	{% endblock %}
+	
+	<div id="filter-{{ widget.uniqueId }}">
+	
+		{{ widget.widgetTitle|raw }}
 
-{% macro field(f,widget) %}
+		<form action="{{ widget.getParam('action') }}">
+			{% block fields %}
+			<ul class="accordion {{ widget.getParam('css_class') }}__items" data-accordion data-multi-expand="true" data-allow-all-closed="true">
+			{% for f in widget.filter.getInfo() %}
+				<li class="accordion-item x-filter {{ widget.getParam('css_class') }}__item{% if f.submitted or (not widget.filter.isActive() and loop.first) %} is-active{% endif %}" data-accordion-item>
+					<a class="accordion-title {{ widget.getParam('css_class') }}__title" href="#">
+						<strong>{{ f.describ }}</strong>
+					</a>
+					<div class="accordion-content {{ widget.getParam('css_class') }}__content" data-tab-content>
+
+						<div class="clearfix">
+							<a href="#" title="{{ _('Сбросить этот фильтр') }}" class="x-clear float-right">сбросить</a>
+						</div>
+						
 						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_NUMERIC_SLIDER') %}
 							
 							{% block numeric_slider %}
@@ -22,7 +45,7 @@
 						
 						{% if f.filter_type == constant('\\Cetera\\Filter::TYPE_NUMERIC') %}	
 							
-							{% block numeric %}								
+							{% block numeric %}						
 								<div class="row collapse">
 								  <div class="small-6 column">
 									<input name="{{ widget.filter.name }}[{{ f.name }}_min]" id="sliderOutputStart" data-default="{{ f.min }}" value="{{ f.value_min }}" type="text">
@@ -101,37 +124,7 @@
 							{% block text %}
 								<input type="text" name="{{ widget.filter.name }}[{{ f.name }}]" value="{{ f.value }}">
 							{% endblock %}
-						{% endif %}						
-{% endmacro %}
-
-{% block html %}
-<div id="{{ widget.uniqueId }}" class="{{ widget.getParam('css_class') }}">
-
-	{% block responsive_toggle %}
-	<p class="show-for-small-only" data-responsive-toggle="filter-{{ widget.uniqueId }}" data-hide-for="medium">
-		<span class="button light-gray expanded" data-toggle><i class="fa fa-lg fa-filter"></i>&nbsp;{{ _('Фильтр') }}</span>
-	</p>
-	{% endblock %}
-	
-	<div id="filter-{{ widget.uniqueId }}">
-	
-		{{ widget.widgetTitle|raw }}
-
-		<form action="{{ widget.getParam('action') }}">
-			{% block fields %}
-			<ul class="accordion {{ widget.getParam('css_class') }}__items" data-accordion data-multi-expand="true" data-allow-all-closed="true">
-			{% for f in widget.filter.getInfo() %}
-				<li class="accordion-item x-filter {{ widget.getParam('css_class') }}__item{% if f.submitted or (not widget.filter.isActive() and loop.first) %} is-active{% endif %}" data-accordion-item>
-					<a class="accordion-title {{ widget.getParam('css_class') }}__title" href="#">
-						<strong>{{ f.describ }}</strong>
-					</a>
-					<div class="accordion-content {{ widget.getParam('css_class') }}__content" data-tab-content>
-
-						<div class="clearfix">
-							<a href="#" title="{{ _('Сбросить этот фильтр') }}" class="x-clear float-right">сбросить</a>
-						</div>
-						
-						{{ filter.field(f,widget) }}
+						{% endif %}		
 
 						
 					</div>

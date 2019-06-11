@@ -96,7 +96,8 @@ CKEDITOR.plugins.add( 'widgets',
         CKEDITOR.dtd['p']['cms']=1;  
         CKEDITOR.dtd['div']['cms']=1;
         CKEDITOR.dtd['td']['cms']=1;
-        CKEDITOR.dtd.$block['cms']=1;        
+        CKEDITOR.dtd.$block['cms']=1;
+        CKEDITOR.dtd.$object['cms']=1;
         
         Ext.Array.each(Config.widgets, function(item) {
 
