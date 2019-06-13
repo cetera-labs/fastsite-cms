@@ -14,6 +14,7 @@ use Zend\Authentication\Storage\Session;
 use Zend\Session\Config\StandardConfig;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
+use Zend\Http\PhpEnvironment\Request;
  
 /**
  * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 
@@ -25,6 +26,18 @@ use Zend\Session\Container;
 class Application {
 	
 	use DbConnection;
+        
+    /**
+     * @internal     
+     * @var Zend\Router\RouteInterface
+     */
+    protected $router = null;       
+    
+    /**
+     * @internal     
+     * @var Zend\Http\PhpEnvironment\Request
+     */
+    protected $request = null;    
 
     /**
      * Экземпляр переводчика
@@ -210,8 +223,6 @@ class Application {
      * @var Application
      */
     private static $_instance = null;
-    
-    private static $controller = null;
 
     /**
      * Singleton instance
@@ -1980,11 +1991,18 @@ class Application {
         ];        
     }
     
-    public function setController(Controller $controller) {
-        $this->controller = $controller;
-	}
+    public function getRequest() {
+        if ($this->request == null) {
+            $this->request = new Request();
+        }
+        return $this->request;
+    }
     
-    public function getController() {
-        return $this->controller;
-	}    
+    public function setRouter(Zend\Router\RouteInterface $router) {
+        $this->router = $router;
+    }
+    
+    public function getRouter() {
+        return $this->router;
+    }    
 }

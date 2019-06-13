@@ -133,6 +133,23 @@ if (parse_url($template,  PHP_URL_HOST)) {
 	header('Location: '.$template);
 
 }
+elseif ($router = $application->getRouter()) {
+    
+    $match = $router->match($application->getRequest());
+    if ( $match ) {
+        ob_start();
+        $class = $match->getParam('controller');
+        $method = $match->getParam('action');
+        $controller = new $class();
+        $controller->$method();
+		$result = ob_get_contents();
+		ob_end_clean();         
+    }
+    else {
+        throw new Cetera\Exception\CMS('No route match');
+    }
+    
+}
 elseif (is_callable($template)) {
 		ob_start();
         list($class, $method) = explode('::', $template);
@@ -147,34 +164,24 @@ elseif (is_callable($template)) {
 		ob_end_clean();    
 }
 else {
-    
-    if ($application->getController()) {
-        ob_start();
-        print '---';
-		$result = ob_get_contents();
-		ob_end_clean();         
-    }
-    else {
-    
-        $path_parts = pathinfo($template);
+        
+    $path_parts = pathinfo($template);
 
-        if ($path_parts['extension'] == 'php') {
-            $template_file = $application->getTemplatePath($template);
-            if (!file_exists($template_file))
-                throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
-            ob_start();
-            include($template_file);
-            $result = ob_get_contents();
-            ob_end_clean();
-            
-        }
-        elseif ($path_parts['extension'] == 'widget') {
-            $result = $application->getWidget($path_parts['filename'])->getHtml();            
-        }
-        elseif ($path_parts['extension'] == 'twig') {
-            $result = $application->getTwig()->render($template);
-        }
-    
+    if ($path_parts['extension'] == 'php') {
+        $template_file = $application->getTemplatePath($template);
+        if (!file_exists($template_file))
+            throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
+        ob_start();
+        include($template_file);
+        $result = ob_get_contents();
+        ob_end_clean();
+        
+    }
+    elseif ($path_parts['extension'] == 'widget') {
+        $result = $application->getWidget($path_parts['filename'])->getHtml();            
+    }
+    elseif ($path_parts['extension'] == 'twig') {
+        $result = $application->getTwig()->render($template);
     }
 }
 
