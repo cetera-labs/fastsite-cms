@@ -1987,7 +1987,7 @@ class Application {
         return $this->request;
     }
     
-    public function setRouter(Zend\Router\RouteInterface $router) {
+    public function setRouter($router) {
         $this->router = $router;
     }
     
