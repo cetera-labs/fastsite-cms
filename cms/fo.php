@@ -141,7 +141,7 @@ elseif ($router = $application->getRouter()) {
         $class = $match->getParam('controller');
         $method = $match->getParam('action');
         $controller = new $class();
-        $controller->$method(match);
+        $controller->$method($match->getParams());
 		$result = ob_get_contents();
 		ob_end_clean();         
     }
