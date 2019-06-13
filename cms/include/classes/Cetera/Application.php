@@ -1874,18 +1874,7 @@ class Application {
 			header('Content-type: text/plain; charset=UTF-8');
 		}		
 	}
-	
-	/**
-	* Возвращает значение из переменной $_REQUEST по заданному ключу
-	*
-	* @param  string $key
-	* @return mixed Значение
-	*/		
-	public function getRequest($key) 
-	{
-		return $_REQUEST[$key];
-	}
-	
+		
 	/**
 	* Определеет, опубликован ли пользовательский контент
 	*
