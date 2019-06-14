@@ -19,7 +19,16 @@ $_ext = substr($url,-3);
 
 $_init = Cetera\Util::utime();
 
-$application->route(\Cetera\ImageTransform::PREFIX,  array('\Cetera\ImageTransform', 'transformFromURI') );
+$application->getRouter()->addRoute('imagetransform',
+    \Zend\Router\Http\Regex::factory([
+        'regex' => \Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)\/(?<path>.+)',
+        'defaults' => [
+            'controller' => '\Cetera\ImageTransform',
+            'action'     => 'transformFromURI',
+        ],
+        'spec' => \Cetera\ImageTransform::PREFIX.'/%params%/%path%',
+    ])
+);
 
 $application->route('/'.PREVIEW_PREFIX,  function() {
 	
@@ -127,28 +136,24 @@ $_start = Cetera\Util::utime();
 if (file_exists($td.'/'.BOOTSTRAP_SCRIPT))
     include_once($td.'/'.BOOTSTRAP_SCRIPT);
 
-if (parse_url($template,  PHP_URL_HOST)) {
+$router = $application->getRouter();
+$match = $router->match($application->getRequest());
+if ( $match ) {
+    
+    ob_start();
+    $class = $match->getParam('controller');
+    $method = $match->getParam('action');
+    $controller = new $class();
+    $controller->$method($match->getParams());
+    $result = ob_get_contents();
+    ob_end_clean(); 
+    
+}
+elseif (parse_url($template,  PHP_URL_HOST)) {
 	
 	header("HTTP/1.1 301 Moved Permanently");
 	header('Location: '.$template);
-
-}
-elseif ($router = $application->getRouter()) {
-    
-    $match = $router->match($application->getRequest());
-    if ( $match ) {
-        ob_start();
-        $class = $match->getParam('controller');
-        $method = $match->getParam('action');
-        $controller = new $class();
-        $controller->$method($match->getParams());
-		$result = ob_get_contents();
-		ob_end_clean();         
-    }
-    else {
-        throw new Cetera\Exception\CMS('No route match');
-    }
-    
+  
 }
 elseif (is_callable($template)) {
 		ob_start();

@@ -581,10 +581,10 @@ class ImageTransform {
 		$nostore = false;
 		
 		$path = explode('/', $a->getUnparsedUrl() );
+        array_shift($path);
 		$params = explode('_', array_shift($path));
-		$file = implode('/', $path);
-
-		
+		$file = implode('/', $path);   
+        
 		if ($file) {		
 			if (!file_exists(WWWROOT.$file)) $nostore = true;		
 			$img = new self(WWWROOT.$file);

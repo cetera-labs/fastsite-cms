@@ -1990,8 +1990,11 @@ class Application {
     public function setRouter($router) {
         $this->router = $router;
     }
-    
+       
     public function getRouter() {
+        if (!$this->router) {
+            $this->router = new \Zend\Router\SimpleRouteStack();
+        }
         return $this->router;
     }    
 }
