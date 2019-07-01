@@ -119,7 +119,7 @@ class DynamicObject extends DbObject {
 			}
         }
 		elseif ($field instanceof \Cetera\ObjectFieldLinkAbstract) {
-			$this->query->leftJoin('main', $field->getTable(), $field->name, 'main.id = '.$field->name.'.'.$field->name);
+			$this->query->leftJoin('main', $od->table, $field->name, 'main.id = '.$field->name.'.'.$field->name);
 			$this->joinedFields[] = $fieldName;
 		}		
 
