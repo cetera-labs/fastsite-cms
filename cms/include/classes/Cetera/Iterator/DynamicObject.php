@@ -94,10 +94,10 @@ class DynamicObject extends DbObject {
 	public function joinReverse($od, $fieldName, $direct = 0) {
 		if (!is_a($od,'Cetera\ObjectDefinition')) {
 			if (is_int($od)) {
-				$od = ObjectDefinition::findById($od);
+				$od = \Cetera\ObjectDefinition::findById($od);
 			}
 			else {
-				$od = ObjectDefinition::findByAlias($od);
+				$od = \Cetera\ObjectDefinition::findByAlias($od);
 			}
 		}
 		
