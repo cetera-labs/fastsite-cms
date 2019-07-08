@@ -21,7 +21,7 @@ $_init = Cetera\Util::utime();
 
 $application->getRouter()->addRoute('imagetransform',
     \Zend\Router\Http\Regex::factory([
-        'regex' => \Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)\/(?<path>.+)',
+        'regex' => str_replace('/','\/',\Cetera\ImageTransform::PREFIX).'\/(?<params>[a-zA-Z0-9_-]+)\/(?<path>.+)',
         'defaults' => [
             'controller' => '\Cetera\ImageTransform',
             'action'     => 'transformFromURI',

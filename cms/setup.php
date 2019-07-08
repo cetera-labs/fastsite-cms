@@ -195,7 +195,7 @@ function step3() {
 
 // Проверка окружения
 function step2() {
-    if ('<?php echo $application->getLocale()->toString()?>' != locale.getValue()) {
+    if ('<?php echo $application->getLocale()?>' != locale.getValue()) {
         location = 'index.php?locale=' + locale.getValue();
     } else {
         request_action();
@@ -224,7 +224,7 @@ function step1() {
                         if ($i) print ','; $i=1;
                         if (!$selected) $selected = $locale;
                         if ($l == $locale) $selected = $locale;
-                        print '["'.$locale.'","'.$l->getTranslation($locale, 'language', $locale).'"]';
+                        print '["'.$name['abbr'].'","'.$name['state'].'"]';
                         print "\n";
                 }
                 ?>	
