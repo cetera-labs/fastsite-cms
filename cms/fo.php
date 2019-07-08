@@ -21,13 +21,13 @@ $_init = Cetera\Util::utime();
 
 $application->getRouter()->addRoute('imagetransform',
     \Zend\Router\Http\Regex::factory([
-        'regex' => str_replace('/','\/',\Cetera\ImageTransform::PREFIX).'\/(?<params>[a-zA-Z0-9_-]+)\/(?<path>.+)',
+        'regex' => \Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)/(?<path>.+)',
         'defaults' => [
             'controller' => '\Cetera\ImageTransform',
             'action'     => 'transformFromURI',
         ],
         'spec' => \Cetera\ImageTransform::PREFIX.'/%params%/%path%',
-    ])
+    ]), 10
 );
 
 $application->route('/'.PREVIEW_PREFIX,  function() {
