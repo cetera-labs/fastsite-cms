@@ -629,7 +629,7 @@ class ObjectDefinition extends Base {
 						editor=".$params['editor'].",
 						editor_user='".$params['editor_user']."',
 						page='".$params['page']."',
-						tag='".$params['tag']."'
+						tag='".(int)$params['tag']."'
 					WHERE field_id=".$params['field_id'];			
 		}
 		else 

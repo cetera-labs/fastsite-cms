@@ -94,7 +94,7 @@ Ext.define('CKFieldBase', {
         
         this.editor.on('contentDom', function(e) {
             e.editor.document.on('keyup', function(event) {
-                modules['materials_0']['object'].clearInactivityTimeout();
+                Config.modules['materials']['object'].clearInactivityTimeout();
             });
         });
 
