@@ -282,6 +282,11 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
                 return parent::fetch($data);
             }
         }
+    }
+
+    public function getName()
+    {
+        return $this->decodeLocaleString($this->_name);
     }    
        
     /**
@@ -1355,7 +1360,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 		
 		return array(
 			'id'       => $this->id,
-			'name'     => $this->name,
+			'name'     => $this->_name,
 			'alias'    => $this->alias,
 			'is_link'  => $this->isLink(),
 			'is_server'=> $this->isServer(),

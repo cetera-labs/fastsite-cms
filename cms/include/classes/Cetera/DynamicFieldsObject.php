@@ -353,7 +353,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         		    break;
         	case FIELD_LINKSET2: 
                 return $this->getLinkset2Field($fields[$name]);
-        		    break;					
+        		    break;	
+            case FIELD_TEXT: 
+                return $this->decodeLocaleString($this->getPlainField($fields[$name])); 
+                break;
         	default: 
                 return $this->getPlainField($fields[$name]); 
         }

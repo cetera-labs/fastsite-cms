@@ -213,5 +213,9 @@ abstract class Base {
 		throw new \LogicException("Method {$name} is not exists");
     }
 	
+    public function decodeLocaleString($str) 
+    {
+        return Application::getInstance()->decodeLocaleString($str);
+    }
     
 }
