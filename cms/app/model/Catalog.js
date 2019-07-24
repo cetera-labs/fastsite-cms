@@ -6,6 +6,10 @@ Ext.define('Cetera.model.Catalog', {
 			type: 'string'
 		},
 		{
+			name: 'name2',
+			type: 'string'
+		},        
+		{
 			name: 'alias',
 			type: 'string'
 		},

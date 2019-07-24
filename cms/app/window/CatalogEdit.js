@@ -114,7 +114,7 @@ Ext.define('Cetera.window.CatalogEdit', {
 	
 	setup: function() {
 		if (!this.catalog) return;
-		this.setTitle(Config.Lang.catProps + ' "'+ this.catalog.name +'" (ID='+this.catalog.id+')');
+		this.setTitle(Config.Lang.catProps + ' "'+ this.catalog.name2 +'" (ID='+this.catalog.id+')');
 		
 		this.variables = this.catalog.is_root || this.catalog.is_server;
 		this.permissions = !this.catalog.is_link && Config.user.permissions.admin;

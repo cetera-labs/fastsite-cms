@@ -1360,7 +1360,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 		
 		return array(
 			'id'       => $this->id,
-			'name'     => $this->_name,
+			'name2'    => $this->name,
+            'name'     => $this->_name,
 			'alias'    => $this->alias,
 			'is_link'  => $this->isLink(),
 			'is_server'=> $this->isServer(),
