@@ -20,6 +20,7 @@
         "cetera-labs/cetera-cms-plugin-controller": "*",
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.6",
+        "doctrine/orm": "2.6.3",
         "zendframework/zend-authentication": "^2.7",
         "zendframework/zend-session": "^2.8",
         "zendframework/zend-i18n": "^2.9",
