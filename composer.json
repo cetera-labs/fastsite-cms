@@ -16,10 +16,10 @@
         "forum": "http://community.fastsite.ru/"
     },
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "cetera-labs/cetera-cms-plugin-controller": "*",
         "cetera-labs/library":"13",
-        "doctrine/dbal": "2.5.1",
+        "doctrine/dbal": "^2.6",
         "zendframework/zend-authentication": "^2.7",
         "zendframework/zend-session": "^2.8",
         "zendframework/zend-i18n": "^2.9",
