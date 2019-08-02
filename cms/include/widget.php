@@ -9,6 +9,9 @@ $application->initSession();
 $application->initPlugins();
 $application->setFrontOffice();
 
+$t = $application->getServer()->getTheme();
+if ($t) $t->addTranslation($application->getTranslator());
+
 $td = $application->getTemplateDir();
 if (file_exists($td.'/classes') && is_dir($td.'/classes')) {
     $loader = new \Composer\Autoload\ClassLoader();
