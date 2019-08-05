@@ -38,7 +38,6 @@ define("UPGRADE_SCRIPT", 'upgrade.php');
 define("INSTALL_SCRIPT", 'install.php');
 
 define('WWWROOT', DOCROOT );
-define('LIBRARY_PATH', 'library');
 
 define('PREFS_FILE',       DOCROOT.'.prefs');
 define('PREFS_FILE_LOCAL', DOCROOT.'.prefs.local');

@@ -20,6 +20,7 @@ if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
     define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
 }
 else {
+    define('LIBRARY_PATH', 'library');
 	define('COMPOSER_INSTALL', false);
 	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
 	

@@ -220,10 +220,10 @@ function step1() {
                 $l = $application->getLocale();
                 $i = 0;
                 $selected = 0;
-                foreach($locales as $locale => $name) {
+                foreach($locales as $name) {
                         if ($i) print ','; $i=1;
-                        if (!$selected) $selected = $locale;
-                        if ($l == $locale) $selected = $locale;
+                        if (!$selected) $selected = $name['abbr'];
+                        if ($l == $name['abbr']) $selected = $name['abbr'];
                         print '["'.$name['abbr'].'","'.$name['state'].'"]';
                         print "\n";
                 }
