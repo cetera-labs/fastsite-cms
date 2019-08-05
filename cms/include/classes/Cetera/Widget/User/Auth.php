@@ -36,11 +36,11 @@ class Auth extends \Cetera\Widget\Templateable {
 			$result = $this->application->getAuth()->authenticate(new \Cetera\UserAuthAdapter($_POST)); 
 			switch ($result->getCode()) {
 				case Result::FAILURE_IDENTITY_NOT_FOUND:
-					$this->login_error = 'Пользователь не найден';
+					$this->login_error = $this->t->_('Пользователь не найден');
 					break;
 			
 				case Result::FAILURE_CREDENTIAL_INVALID:
-					$this->password_error = 'Неправильный пароль';
+					$this->password_error = $this->t->_('Неправильный пароль');
 					break;
 			}			
 		}
