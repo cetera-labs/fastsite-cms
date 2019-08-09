@@ -20,7 +20,7 @@
         "cetera-labs/cetera-cms-plugin-controller": "*",
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.6",
-        "doctrine/orm": "2.6.3",
+        "doctrine/orm": "^2.6.3",
         "zendframework/zend-authentication": "^2.7",
         "zendframework/zend-session": "^2.8",
         "zendframework/zend-i18n": "^2.9",
@@ -28,7 +28,7 @@
         "zendframework/zend-cache": "^2.8",
         "zendframework/zend-http": "^2.10",
         "zendframework/zend-router": "^3.3",
-	    "phpmailer/phpmailer": "~5.2",
+        "phpmailer/phpmailer": "~5.2",
         "true/punycode": "~1.1",
         "twig/twig": "~1.0",
         "twig/extensions": "*",
@@ -37,8 +37,8 @@
         "ifsnop/mysqldump-php":"2.*",
         "phing/phing": "2.*",
         "componavt/phpmorphy": "*"
-	},
-	"minimum-stability": "dev",
+    },
+    "minimum-stability": "dev",
     "autoload": {
         "psr-0": { 
 			"Cetera\\": "cms/include/classes/",
