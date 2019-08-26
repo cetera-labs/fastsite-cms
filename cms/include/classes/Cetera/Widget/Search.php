@@ -23,6 +23,8 @@ class Search extends Templateable {
 			'min_length'           => 3,
 			'sections'             => null,
 			'search_subsections'   => true,
+            'fulltext'             => false,
+            'fulltext_boolean'     => false,
 			'morphology'           => false,
 			'translit'             => false,
 			'fields'               => 'name, text, short',
@@ -109,7 +111,9 @@ class Search extends Templateable {
 					$this->results->where( $this->getParam('where') );
 				}	
 				
-				//print $this->results->getQuery();
+				if ($this->getParam('debug')) {
+                    print $this->results->getQuery();
+                }
 			}
 		}
 		return $this->results;
@@ -175,7 +179,114 @@ class Search extends Templateable {
 		
 		return $res;
 	}	
+		
+	protected function buildRelevance()
+	{
+        if ($this->getParam('fulltext')) {
+            return $this->buildFullTextQuery();
+        }
+        else {            
+            $fields = $this->getSearchFields();
+            $words = $this->splitQueryToWords();
+            
+            $res = '';
+            $i = 0;
+            foreach ($fields as $f) {
+                $f = '`'.$f.'`';
+                if ($res) $res .= ' + ';
+                $res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
+                
+                foreach ($words as $key => $word) {
+                    
+                    if (is_array($word)) {
+                        $weight = 500;
+                        foreach ($word as $w) {						
+                            if (strlen($w) < $this->getParam('min_length')) continue;
+                            $res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
+                            $weight = 100;
+                        }
+                    } else {
+                        if (strlen($key) < $this->getParam('min_length')) continue;
+                        $res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
+                    }				
+                    
+                }
+                
+                $i++;
+            }
+
+            return $res;
+        }
+	}		
 	
+	protected function buildWhere()
+	{
+        if ($this->getParam('fulltext')) {
+            return $this->buildFullTextQuery();
+        }
+        else {
+		
+            $fields = $this->getSearchFields();
+            $words = $this->splitQueryToWords();
+            
+            if (!count($words)) return false;
+            
+            $res = array();
+            foreach ($fields as $f) {
+                $f = '`'.$f.'`';
+                $res2 = array();
+                foreach ($words as $key => $word) {
+                    $res3 = array();
+                    if (is_array($word)) {
+                        foreach ($word as $w) {						
+                            if (strlen($w) < $this->getParam('min_length')) continue;
+                            $res3[] = $f.' LIKE "%'.$w.'%"';
+                        }
+                        $res2[] = '('.implode(' or ',$res3).')';
+                    } else {
+                        if (strlen($key) < $this->getParam('min_length')) continue;
+                        $res2[] = '('.$f.' LIKE "%'.$key.'%")';
+                    }
+                }
+                $res[] = '('.implode(' and ',$res2).')';
+            }
+            return '('.implode(' or ',$res).')';
+        
+        }
+	} 
+    
+    protected function buildFulltextQuery()
+    {
+        $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".$this->queryValue()."'";
+        if ($this->getParam('fulltext_boolean')) {
+            $res .= ' IN BOOLEAN MODE';
+        }
+        $res .= ')';
+        return $res;
+    }
+
+	public function getCatalog() 
+	{
+		return $this->application->server;
+	}
+	
+	public function getChildren() 
+	{
+		return $this->getResults();
+	}	
+    
+	protected function getSearchFields()
+	{
+		$f = trim($this->getParam('fields'));
+		if (!$f) $f = 'name';
+		$fields = array();
+		foreach (explode(',', $f) as $field) {
+			$fields[] = trim($field);
+		}
+		
+		return $fields;
+	}	    
+
 	protected function splitQueryToWords()
 	{
 		$q = $this->queryValue();
@@ -188,7 +299,7 @@ class Search extends Templateable {
 		
 		if ($this->getParam('morphology')) {
 			$morphy = new \componavt\phpMorphy\Morphy();
-			$res = $morphy->getAllForms($words, \phpMorphy::IGNORE_PREDICT);
+			$res = $morphy->getAllForms($words);
 			foreach ($words as $w) {
 				if (isset($res[$w])) {
 					$words[$w] = $res[$w];
@@ -203,92 +314,5 @@ class Search extends Templateable {
 			}
 		}	
 		return $words;
-	}
-
-	protected function getSearchFields()
-	{
-		$f = trim($this->getParam('fields'));
-		if (!$f) $f = 'name';
-		$fields = array();
-		foreach (explode(',', $f) as $field) {
-			$fields[] = trim($field);
-		}
-		
-		return $fields;
-	}		
-	
-	protected function buildRelevance()
-	{
-		$fields = $this->getSearchFields();
-		$words = $this->splitQueryToWords();
-		
-		$res = '';
-		$i = 0;
-		foreach ($fields as $f) {
-			$f = '`'.$f.'`';
-			if ($res) $res .= ' + ';
-			$res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
-			
-			foreach ($words as $key => $word) {
-				
-				if (is_array($word)) {
-					$weight = 500;
-					foreach ($word as $w) {						
-						if (strlen($w) < $this->getParam('min_length')) continue;
-						$res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
-						$weight = 100;
-					}
-				} else {
-					if (strlen($key) < $this->getParam('min_length')) continue;
-					$res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
-				}				
-				
-			}
-			
-			$i++;
-		}
-
-		return $res;
-	}		
-	
-	protected function buildWhere()
-	{
-		
-		$fields = $this->getSearchFields();
-		$words = $this->splitQueryToWords();
-        
-		if (!count($words)) return false;
-		
-		$res = array();
-		foreach ($fields as $f) {
-			$f = '`'.$f.'`';
-			$res2 = array();
-			foreach ($words as $key => $word) {
-				$res3 = array();
-				if (is_array($word)) {
-					foreach ($word as $w) {						
-						if (strlen($w) < $this->getParam('min_length')) continue;
-						$res3[] = $f.' LIKE "%'.$w.'%"';
-					}
-					$res2[] = '('.implode(' or ',$res3).')';
-				} else {
-					if (strlen($key) < $this->getParam('min_length')) continue;
-					$res2[] = '('.$f.' LIKE "%'.$key.'%")';
-				}
-			}
-			$res[] = '('.implode(' and ',$res2).')';
-		}
-		return '('.implode(' or ',$res).')';
-	} 
-
-	public function getCatalog() 
-	{
-		return $this->application->server;
-	}
-	
-	public function getChildren() 
-	{
-		return $this->getResults();
-	}	
-      
+	}    
 }
