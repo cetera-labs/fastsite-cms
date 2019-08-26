@@ -257,7 +257,11 @@ class Search extends Templateable {
     
     protected function buildFulltextQuery()
     {
-        $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".$this->queryValue()."'";
+        $query = $this->queryValue();
+		if ($this->getParam('translit')) {
+			$query .= ' '.translit($query);
+		}        
+        $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".$query."'";
         if ($this->getParam('fulltext_boolean')) {
             $res .= ' IN BOOLEAN MODE';
         }
