@@ -21,6 +21,7 @@ class Plugin implements \ArrayAccess  {
     private static $disabled = null;
     
     public $name;
+    public $composer;
     
 	/**
 	* Возвращает все установленные модули
@@ -30,16 +31,24 @@ class Plugin implements \ArrayAccess  {
     public static function enum()
     {
         $plugins = array();
-        if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR))
-		{
-        	while (($__item = readdir($__dir)) !== false)
-            {
+        
+        if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR)) {
+        	while (($__item = readdir($__dir)) !== false) {
           		if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item)) continue;
         	    if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item.DIRECTORY_SEPARATOR.PLUGIN_INFO)) continue;
                 $plugins[$__item] = new self($__item);
         	}  
         	closedir($__dir);
-        }    
+        }
+
+        if (file_exists(VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php')) {
+            $composer_plugins = include( VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
+            foreach($composer_plugins as $k => $p) {
+                $p['path'] = VENDOR_PATH . DIRECTORY_SEPARATOR . $k;
+                $plugins[$p['name']] = new self($p);
+            }
+        }
+        
 		ksort($plugins);
         return $plugins;
     }
@@ -56,10 +65,18 @@ class Plugin implements \ArrayAccess  {
         return new self($name);
     }    
     
-    private function __construct($name)
+    private function __construct($data)
     {
-        $this->name = $name;
-    }
+        if (is_array($data)) {
+            $this->_info = $data; 
+            $this->name = $data['name'];
+            $this->composer = true;
+        }
+        else {
+            $this->name = $data;
+            $this->composer = false;
+        }
+    }    
     
 	/**
 	* Включен ли модуль
@@ -129,6 +146,7 @@ class Plugin implements \ArrayAccess  {
 	*/		
     public function delete($data = false)
     {    
+        if ($this->composer) return;
 		if ($this->name == 'partner') return;
         if ($data) {
             $schema = new Schema();  
@@ -211,7 +229,17 @@ class Plugin implements \ArrayAccess  {
         if ($this->offsetExists ( $name )) return $this->_info[ $name ];
     
         return null;
-    }    
+    }  
+
+    public function getPath()
+    {
+        if ($this->composer) {
+            return $this['path'];
+        }
+        else {
+            return DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$this->name;
+        }
+    }        
     
     private function grabInfo()
     {
