@@ -44,7 +44,7 @@ class Theme implements \ArrayAccess  {
 	* @param Zend_Translate $translator класс-переводчик	
 	* @param boolean $extract_initial_data распаковать данные БД: тексты, разделы и т.д.
 	*/		
-    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false, $content = null)
+    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false, $content = null, $user_config = null)
     {
         if (!$translator) $translator = Application::getInstance()->getTranslator();
 		
@@ -122,6 +122,17 @@ class Theme implements \ArrayAccess  {
 		
 		// В файле config.json конфингурация темы "по умолчанию". Устанавливаем её для всех серверов
 		if (file_exists($themePath.'/config.json')) {
+			$config = json_decode( file_get_contents($themePath.'/config.json'), true );			
+		}
+        else {
+            $config = [];
+        }
+        
+        if (is_array($user_config)) {
+            $config = array_merge( $config, $user_config );
+        }
+        
+		if (count($config)) {
 			$config = json_decode( file_get_contents($themePath.'/config.json'), true );
 			foreach (Server::enum() as $s) {				
 				$t->loadConfig( $s );
@@ -135,7 +146,7 @@ class Theme implements \ArrayAccess  {
 				}					
 				$t->setConfig( $res, $s );				
 			}			
-		}
+		}        
 
 		//
         if (file_exists($themePath.'/'.THEME_INSTALL))
