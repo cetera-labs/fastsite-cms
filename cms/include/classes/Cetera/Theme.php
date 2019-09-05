@@ -133,7 +133,6 @@ class Theme implements \ArrayAccess  {
         }
         
 		if (count($config)) {
-			$config = json_decode( file_get_contents($themePath.'/config.json'), true );
 			foreach (Server::enum() as $s) {				
 				$t->loadConfig( $s );
 
