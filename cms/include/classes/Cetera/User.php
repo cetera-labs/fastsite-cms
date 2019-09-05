@@ -381,6 +381,19 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         return $this->fields['groups'];
     }
     
+    public function setGroups($value)
+    {
+        if (is_array($value)) {
+            $this->fields['groups'] = $value;
+        }
+    } 
+
+    public function addGroup($gid)
+    {
+        $this->getGroups();
+        $this->fields['groups'][] = (int)$gid;
+    }
+    
     public function getName()
     {
         if ($this->fields['name']) return $this->fields['name'];
@@ -394,11 +407,13 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
      */ 
     public static function logout($id = null)
     {
-        if (!$id) $id = \Zend_Auth::getInstance()->getIdentity();
+        $a = Application::getInstance();
+        $auth = $a->getAuth();
+        if (!$id) $id = $auth->getIdentity();
         if (!$id) return;
         self::getDbConnection()->executeQuery("DELETE FROM users_auth WHERE user_id=".$id['user_id']." and uniq='".$id['uniq']."'");
-        \Zend_Auth::getInstance()->clearIdentity();
-		\Zend_Session::forgetMe();		
+        $auth->clearIdentity();
+		$a->getSession()->getManager()->forgetMe();		
     }
     
     /**

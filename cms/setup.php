@@ -195,7 +195,7 @@ function step3() {
 
 // Проверка окружения
 function step2() {
-    if ('<?php echo $application->getLocale()->toString()?>' != locale.getValue()) {
+    if ('<?php echo $application->getLocale()?>' != locale.getValue()) {
         location = 'index.php?locale=' + locale.getValue();
     } else {
         request_action();
@@ -216,18 +216,16 @@ function step1() {
             fields: ['abbr', 'state'],
             data : [
                 <?php
-                $locales = \Zend_Locale::getLocaleList();
+                $locales = $application->getLocaleList();
                 $l = $application->getLocale();
                 $i = 0;
                 $selected = 0;
-                foreach($locales as $locale => $exists) if ($exists) {
-                    if ($translator->isAvailable($locale)) {
+                foreach($locales as $name) {
                         if ($i) print ','; $i=1;
-                        if (!$selected) $selected = $locale;
-                        if ($l->toString() == $locale) $selected = $locale;
-                        print '["'.$locale.'","'.$l->getTranslation($locale, 'language', $locale).'"]';
+                        if (!$selected) $selected = $name['abbr'];
+                        if ($l == $name['abbr']) $selected = $name['abbr'];
+                        print '["'.$name['abbr'].'","'.$name['state'].'"]';
                         print "\n";
-                    }
                 }
                 ?>	
             ]

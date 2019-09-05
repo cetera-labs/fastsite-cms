@@ -32,24 +32,34 @@ class Backend {
             $app = \Cetera\Application::getInstance();
         
             if ($app->getVar('cache_memcache')!='off' && $app->getVar('cache_memcache')!='disable' && $app->getVar('cache_memcache')!='0' && self::isMemcacheAvailable()) {
-				$o = [];
+                $o = array(
+                    'servers' => array(
+                        array('localhost', 11211)
+                    )
+                );
 				if ( $app->getVar('memcache_server') ) {
 					$o['servers'] = $app->getVar('memcache_server');
 				}
-                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Memcached($o));
+                $backend = new TagEmuWrapper(new \Zend\Cache\Storage\Adapter\Memcache($o));
 			}
             elseif ($app->getVar('cache_memcached')!='off'&& $app->getVar('cache_memcached')!='disable' && $app->getVar('cache_memcached')!='0' && self::isMemcachedAvailable()) {
-				$o = [];
+                $o = array(
+                    'servers' => array(
+                        array('localhost', 11211)
+                    )
+                );
 				if ( $app->getVar('memcached_server') ) {
 					$o['servers'] = $app->getVar('memcached_server');
 				}				
-                $backend = new \Dklab_Cache_Backend_TagEmuWrapper(new \Zend_Cache_Backend_Libmemcached($o));				
+                $backend =  new TagEmuWrapper(new \Zend\Cache\Storage\Adapter\Memcached($o));
             } 
 			elseif ($app->getVar('cache_file') && self::isFilecacheAvailable()) {
-                $backend = new \Zend_Cache_Backend_File(array('cache_dir'=>FILECACHE_DIR, 'hashed_directory_level'=>1));
+                $backend = new \Zend\Cache\Storage\Adapter\Filesystem([
+                    'cache_dir'=>FILECACHE_DIR,
+                ]);
             } 
 			else {
-                $backend = new BackendNull();
+                 $backend = new \Zend\Cache\Storage\Adapter\BlackHole();
             }
         
             self::$_instance = new Profiler($backend);
@@ -73,7 +83,7 @@ class Backend {
 	/**
 	 * Проверяет доступность memcached
 	 **/ 	
-    private static function isMemcachedAvailable() {		
+    private static function isMemcachedAvailable() {	
         if (!extension_loaded('memcached')) return FALSE;
         return true;
     }	

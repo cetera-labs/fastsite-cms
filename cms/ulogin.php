@@ -1,4 +1,6 @@
 <?php
+use Zend\Authentication\Result;
+
 require('include/common.php');
 
 $application->setFrontOffice(true);
@@ -10,7 +12,7 @@ $user = json_decode($s, true);
 
 $s = $application->getSession();
 $result = $application->getAuth()->authenticate(new \Cetera\UserAuthAdapterULogin($user, false));
-if ($result->getCode() != \Zend_Auth_Result::SUCCESS) 
+if ($result->getCode() != Result::SUCCESS) 
     $s->login_error = $result->getCode();
 
 if (isset($s->return_url)) {

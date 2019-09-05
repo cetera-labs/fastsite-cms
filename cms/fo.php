@@ -1,4 +1,6 @@
 <?php
+use Zend\Authentication\Result;
+
 require('include/common.php');
 
 if (stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
@@ -17,7 +19,33 @@ $_ext = substr($url,-3);
 
 $_init = Cetera\Util::utime();
 
-$application->route(\Cetera\ImageTransform::PREFIX,  array('\Cetera\ImageTransform', 'transformFromURI') );
+$application->getRouter()->addRoute('imagetransform',
+    \Zend\Router\Http\Regex::factory([
+        'regex' => \Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)/(?<path>.+)',
+        'defaults' => [
+            'controller' => '\Cetera\ImageTransform',
+            'action'     => 'transformFromURI',
+        ],
+        'spec' => \Cetera\ImageTransform::PREFIX.'/%params%/%path%',
+    ]), 10
+);
+
+$application->getRouter()->addRoute('api',
+    \Zend\Router\Http\Segment::factory([
+        'route' => '/api[/:controller][/:action][/:id]',
+        'constraints' => [
+            'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'id'         => '[a-zA-Z][a-zA-Z0-9_-]+',
+        ],
+        'defaults' => [
+            '__NAMESPACE__' => 'Cetera\Api',
+            'controller'    => 'Cetera\Api\IndexController',
+        ],
+    ])
+);
+
+
 
 $application->route('/'.PREVIEW_PREFIX,  function() {
 	
@@ -52,12 +80,12 @@ if ($application->getVar('fo_close')) {
            $proceed = 1;
         } elseif ($application->getVar('fo_allow_users')) {
         
-            $result = \Zend_Auth::getInstance()->authenticate(new UserAuthAdapter(array(
+            $result = $application->getAuth()->authenticate(new UserAuthAdapter(array(
                 'login' => $_SERVER['PHP_AUTH_USER'],
                 'pass'  => $_SERVER['PHP_AUTH_PW']
             ))); 
             
-            if ($result->getCode() == \Zend_Auth_Result::SUCCESS) {
+            if ($result->getCode() == Result::SUCCESS) {
                 if (!$application->getVar('fo_allow_users_bo')) {
                     $proceed = 1;
                 } else {
@@ -82,10 +110,12 @@ $pieces = explode('/',$application->getUnparsedUrl());
 
 if (!$application->getServer()) throw new \Cetera\Exception\HTTP(404, 'Server is not found');
 
+/*
 if ($application->getCatalog()->isLink()) {
 	header('Location: '.$application->getCatalog()->prototype->getFullUrl(), true, 301);
 	die();
 }
+*/
 
 $t = $application->getServer()->getTheme();
 if ($t) $t->addTranslation($application->getTranslator());
@@ -125,36 +155,91 @@ $_start = Cetera\Util::utime();
 if (file_exists($td.'/'.BOOTSTRAP_SCRIPT))
     include_once($td.'/'.BOOTSTRAP_SCRIPT);
 
-if (parse_url($template,  PHP_URL_HOST)) {
+$request  = $application->getRequest();
+$response = $application->getResponse();
+$router   = $application->getRouter();
+
+$match = $router->match($application->getRequest());
+if ( $match ) {
+    
+    
+    $class = $match->getParam('controller');
+    $method = $match->getParam('action');
+
+    if (!class_exists($class)) {
+        $class = $match->getParam('__NAMESPACE__').'\\'.ucfirst($class).'Controller';
+    }
+    
+    $controller = new $class();
+    
+    if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
+                                
+        $event = new Zend\Mvc\MvcEvent();
+        $event->setRouter($router);
+        $event->setRouteMatch($match);     
+        
+        $controller->setEvent($event);        
+        $res = $controller->dispatch($request,$response);
+        
+        $view = new \Zend\View\View();
+        $view->setRequest($request);
+        $view->setResponse($response);
+        
+        $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
+        $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
+        $jsonStrategy->attach($view->getEventManager(), 100);
+        
+        $view->render($res);
+                
+    }
+    else {
+        ob_start();
+        $method = $match->getParam('action');
+        $controller->$method($match->getParams());
+        $response->setContent(ob_get_contents());
+        ob_end_clean();         
+    }
+    
+}
+elseif (parse_url($template,  PHP_URL_HOST)) {
 	
 	header("HTTP/1.1 301 Moved Permanently");
 	header('Location: '.$template);
-	
+  
+}
+elseif (is_callable($template)) {
+		ob_start();
+        list($class, $method) = explode('::', $template);
+        if ($class) {
+            $controller = new $class();
+            $controller->$method();
+        }
+        else {
+            $template();
+        }
+		$result = ob_get_contents();
+		ob_end_clean();    
 }
 else {
-	$path_parts = pathinfo($template);
+        
+    $path_parts = pathinfo($template);
 
-	if ($path_parts['extension'] == 'php')
-	{
-		$template_file = $application->getTemplatePath($template);
-		if (!file_exists($template_file))
-			throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
-		ob_start();
-		include($template_file);
-		$result = ob_get_contents();
-		ob_end_clean();
-		
-	}
-	elseif ($path_parts['extension'] == 'widget')
-	{
-
-		$result = $application->getWidget($path_parts['filename'])->getHtml();
-		
-	}
-	elseif ($path_parts['extension'] == 'twig')
-	{
-		$result = $application->getTwig()->render($template);
-	}
+    if ($path_parts['extension'] == 'php') {
+        $template_file = $application->getTemplatePath($template);
+        if (!file_exists($template_file))
+            throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
+        ob_start();
+        include($template_file);
+        $response->setContent(ob_get_contents());
+        ob_end_clean();
+        
+    }
+    elseif ($path_parts['extension'] == 'widget') {
+        $response->setContent($application->getWidget($path_parts['filename'])->getHtml());
+    }
+    elseif ($path_parts['extension'] == 'twig') {
+        $response->setContent($application->getTwig()->render($template));
+    }
 }
 
 $_time_template = Cetera\Util::utime()-$_start;
@@ -173,5 +258,14 @@ $application->debug(DEBUG_COMMON, 'Backend: '.get_class($be->getBackend()));
 $application->debug(DEBUG_COMMON, 'Total hits: '.($be->successCalls+$be->failCalls));
 $application->debug(DEBUG_COMMON, 'Success hits: '.$be->successCalls.' ('.($be->successCalls*100/($be->successCalls+$be->failCalls)).'%)');
 
-$application->applyOutputHandler($result);
-echo $result;
+$application->applyOutputHandler();
+
+foreach ($response->getHeaders() as $header) {
+    if ($header instanceof Zend\Http\Header\MultipleHeaderInterface) {
+        header($header->toString(), false);
+        continue;
+    }
+    header($header->toString());
+}
+header($response->renderStatusLine());
+echo $response->getContent();

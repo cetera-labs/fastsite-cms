@@ -1,6 +1,8 @@
 <?php
 namespace Cetera\Widget\User; 
 
+use Zend\Authentication\Result;
+
 /**
  * Виджет "Постраничная навигация"
  * 
@@ -33,12 +35,12 @@ class Auth extends \Cetera\Widget\Templateable {
 			$this->login = $_POST['login'];
 			$result = $this->application->getAuth()->authenticate(new \Cetera\UserAuthAdapter($_POST)); 
 			switch ($result->getCode()) {
-				case \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
-					$this->login_error = 'Пользователь не найден';
+				case Result::FAILURE_IDENTITY_NOT_FOUND:
+					$this->login_error = $this->t->_('Пользователь не найден');
 					break;
 			
-				case \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
-					$this->password_error = 'Неправильный пароль';
+				case Result::FAILURE_CREDENTIAL_INVALID:
+					$this->password_error = $this->t->_('Неправильный пароль');
 					break;
 			}			
 		}

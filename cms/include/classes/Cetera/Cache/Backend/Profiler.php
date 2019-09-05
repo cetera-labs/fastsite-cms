@@ -15,13 +15,13 @@ namespace Cetera\Cache\Backend;
  * @package CeteraCMS
  * @access private 
  **/ 
-class Profiler implements \Zend_Cache_Backend_Interface 
+class Profiler
 {
     private $_backend = null;   
     public $successCalls = 0;
     public $failCalls = 0;
     
-    public function __construct(\Zend_Cache_Backend_Interface $backend)
+    public function __construct($backend)
     {
         $this->_backend = $backend;
     }
@@ -37,19 +37,19 @@ class Profiler implements \Zend_Cache_Backend_Interface
     }
     
     
-    public function load($id, $doNotTestCacheValidity = false)
+    public function load($id)
     {
-        $result = $this->_backend->load($id, $doNotTestCacheValidity);
-        if ($result === FALSE) {
+        $result = $this->_backend->getItem($id);
+        if ($result === NULL) {
             $this->failCalls++;
         } else $this->successCalls++;
         return $result;        
     }
     
 
-    public function multiLoad($ids, $doNotTestCacheValidity = false)
+    public function multiLoad($ids)
     {
-        return $this->_backend->multiLoad($ids, $doNotTestCacheValidity);
+        return $this->_backend->multiLoad($ids);
     }
     
         
@@ -59,20 +59,21 @@ class Profiler implements \Zend_Cache_Backend_Interface
     }
     
     
-    public function save($data, $id, $tags = array(), $specificLifetime = false)
+    public function save($data, $id, $tags = array())
     {
-        return $this->_backend->save($data, $id, $tags, $specificLifetime);    
+        $this->_backend->setTags($id, $tags);        
+        return $this->_backend->setItem($id, $data);
     }
     
     
     public function remove($id)
     {
-        return $this->_backend->remove($id);      
+        return $this->_backend->removeItem($id);      
     }
     
     
-    public function clean($mode = \Zend_Cache::CLEANING_MODE_ALL, $tags = array())
+    public function clean($tags = array())
     {
-        return $this->_backend->clean($mode, $tags);     
+        return $this->_backend->clearByTags($tags);   
     }
 }

@@ -1,5 +1,8 @@
 <?php
 namespace Cetera;
+
+use Zend\Authentication\Result;
+
 include('common.php');
 $translator = $application->getTranslator();  
 $application->connectDb();
@@ -41,17 +44,17 @@ if (isset($_POST['login']))
     $result = $application->getAuth()->authenticate(new UserAuthAdapter($_POST, true)); 
     switch ($result->getCode())
 	{
-        case \Zend_Auth_Result::FAILURE_IDENTITY_NOT_FOUND:
+        case Result::FAILURE_IDENTITY_NOT_FOUND:
             $res['errors']['login'] = $translator->_('Пользователь не найден');
             Event::trigger(EVENT_CORE_BO_LOGIN_FAIL, ['message' => 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']]);
             break;
     
-        case \Zend_Auth_Result::FAILURE_CREDENTIAL_INVALID:
+        case Result::FAILURE_CREDENTIAL_INVALID:
             $res['errors']['pass'] = $translator->_('Неправильный пароль');
             Event::trigger(EVENT_CORE_BO_LOGIN_FAIL, ['message' => 'Login: '.$_POST['login'].', Pass: '.$_POST['pass'].', IP: '.$_SERVER['REMOTE_ADDR']]);
             break;
     
-        case \Zend_Auth_Result::SUCCESS:
+        case Result::SUCCESS:
             $res['success'] = true;
             $res['user'] = $application->getUser()->boArray();
             Event::trigger(EVENT_CORE_BO_LOGIN_OK, ['message' => 'IP: '.$_SERVER['REMOTE_ADDR']]);
