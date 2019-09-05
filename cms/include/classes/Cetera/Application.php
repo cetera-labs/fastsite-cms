@@ -209,8 +209,6 @@ class Application {
    * @internal
    */  
     private $_dbConnection = null;  
-    
-    private $entityManager;
 
   /*
    * @internal
@@ -555,12 +553,7 @@ class Application {
             
         $this->_dbConnection->executeQuery('SET CHARACTER SET '.$charset);
         $this->_dbConnection->executeQuery('SET names '.$charset);
-        
-        $ormConfig = \Doctrine\ORM\Tools\Setup::createConfiguration( true );
-        $ormConfig->setMetadataDriverImpl(new ORM\Mapping\Driver( $this->_dbConnection->getSchemaManager() ));
-        
-        $this->entityManager = \Doctrine\ORM\EntityManager::create($connectionParams, $ormConfig);
-            
+                    
         $this->_connected = true; 
             
     }
