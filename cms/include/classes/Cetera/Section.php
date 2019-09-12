@@ -183,7 +183,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      * @internal
      * @var boolean          
      */   
-    protected $_inheritFields = TRUE;         
+    protected $_inheritFields = TRUE;    
        
     /**
      * Устанавливает поля раздела
@@ -353,10 +353,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */    
     public function getPath()
     {      	
-        if (!$this->_path) {
-			
-			$this->_path = new Iterator\Catalog\Path( $this );                
-        
+        if (!$this->_path) {			
+			$this->_path = new Iterator\Catalog\Path( $this );                        
         }
         return $this->_path;
     }
@@ -1387,4 +1385,5 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 			'user_fields' => $userFields,
 		);
 	}
+    
 }
