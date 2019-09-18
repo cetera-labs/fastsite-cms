@@ -138,6 +138,31 @@ if ($_POST['action'] == 'cat_delete') {
     $c->delete();
 }
 
+if ($_POST['action'] == 'hard_link_create') {
+    $em = $application->getEntityManager();
+    $structure_repo = $em->getRepository('\Cetera\Entity\Structure'); 
+    
+    $structure_repo->recoverParents();
+    $em->flush();
+    
+    $createLink = function($parent, $source) use($em,$structure_repo,&$createLink) {
+        $child = new \Cetera\Entity\Structure();
+        $child->setParent($parent);
+        $child->setSection($source->section);
+        $em->persist($child);
+
+        foreach($structure_repo->children($source, true) as $c) {
+            $createLink($child, $c);
+        }
+    };
+    
+    $parent = $structure_repo->findOneById( $_POST['parent_structure_id'] );
+    $source = $structure_repo->findOneById( $_POST['structure_id'] );   
+    $createLink($parent, $source);
+    
+    $em->flush();
+}
+
 if ($_POST['action'] == 'cat_create') {
   
     if (!$user->allowCat(PERM_CAT_ADMIN, $_POST['parent']))
@@ -145,10 +170,10 @@ if ($_POST['action'] == 'cat_create') {
     
     $c = Catalog::getById($_POST['parent']); 
     $res['id'] = $c->createChild(array(
-    	'name'		  => $_POST['name'],
-    	'alias'		  => $_POST['alias'],
-    	'typ'	  	  => $_POST['typ'],
-    	'link'		  => $_POST['link'],
+    	'name'		=> $_POST['name'],
+    	'alias'		=> $_POST['alias'],
+    	'typ'	  	=> $_POST['typ'],
+    	'link'		=> $_POST['link'],
     	'server'    => $_POST['server'],
         'autoalias' => Catalog::AUTOALIAS_TRANSLIT
     ));

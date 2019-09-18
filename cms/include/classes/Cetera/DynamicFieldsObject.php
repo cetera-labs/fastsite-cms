@@ -873,14 +873,12 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 					}
 				}
 		
-                if ($type == FIELD_LONGTEXT)  {
-            
+                if ($type == FIELD_LONGTEXT)  {           
         			  $this->fields[$name] = $this->process_longtext($this->fields[$name]);
-        			  $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]);
-        	       		  
+        			  $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]);        	       		  
                 } 
-				elseif ($type==FIELD_INTEGER || $type==FIELD_LINK || $type==FIELD_FORM || $type==FIELD_MATERIAL) { 
-        		    $values .= ",`".$name."`='".(int)$this->fields[$name]."'";         
+				elseif ($type==FIELD_INTEGER) { 
+        		    $values .= ",`".$name."`=".(int)$this->fields[$name];         
         	    } 
 				elseif ($type==FIELD_DOUBLE) { 
         		    $values .= ",`".$name."`=".(double)$this->fields[$name];                 			
@@ -892,11 +890,22 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	    //     $values .= ",`".$name."`='".(int)$this->process_hlink($this->fields[$name])."'";         
         	    //} 
 				elseif ($type == FIELD_DATETIME) {
-        	        if (!$this->fields[$name])
+        	        if (!$this->fields[$name]) {
         		        $values .= ",`".$name."`=NULL";
-        	    	    else $values .= ",`".$name."`='".$this->fields[$name]."'"; 
+                    }
+        	    	else {
+                        $values .= ",`".$name."`='".$this->fields[$name]."'"; 
+                    }
         		
         	    } 
+                elseif ($type == FIELD_LINK || $type==FIELD_MATERIAL || $type==FIELD_FORM) {
+        	        if (!$this->fields[$name]) {
+        		        $values .= ",`".$name."`=NULL";
+                    }
+        	    	else {
+                        $values .= ",`".$name."`=".(int)$this->fields[$name]; 
+                    }                    
+                }
 				else { 
         	        $values .= ',`'.$name.'`='.$this->getDbConnection()->quote($this->fields[$name]); 
         	    }

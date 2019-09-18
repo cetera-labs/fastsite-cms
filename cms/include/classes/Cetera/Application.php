@@ -15,6 +15,7 @@ use Zend\Session\Config\StandardConfig;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Http\PhpEnvironment\Request;
+use Zend\Http\PhpEnvironment\Response;
  
 /**
  * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 
@@ -37,7 +38,13 @@ class Application {
      * @internal     
      * @var Zend\Http\PhpEnvironment\Request
      */
-    protected $request = null;    
+    protected $request = null;  
+
+    /**
+     * @internal     
+     * @var Zend\Http\PhpEnvironment\Response
+     */
+    protected $response = null;     
 
     /**
      * Экземпляр переводчика
@@ -202,6 +209,8 @@ class Application {
    * @internal
    */  
     private $_dbConnection = null;  
+    
+    private $entityManager;
 
   /*
    * @internal
@@ -546,6 +555,15 @@ class Application {
             
         $this->_dbConnection->executeQuery('SET CHARACTER SET '.$charset);
         $this->_dbConnection->executeQuery('SET names '.$charset);
+        
+        $ormConfig = \Doctrine\ORM\Tools\Setup::createConfiguration( true );
+        $ormConfig->setMetadataDriverImpl(new ORM\Mapping\Driver( $this->_dbConnection->getSchemaManager() ));
+        
+        $evm = new \Doctrine\Common\EventManager();
+        $treeListener = new \Gedmo\Tree\TreeListener();
+        $evm->addEventSubscriber($treeListener);        
+        
+        $this->entityManager = \Doctrine\ORM\EntityManager::create($connectionParams, $ormConfig, $evm);
             
         $this->_connected = true; 
             
@@ -614,7 +632,7 @@ class Application {
                 $this->_uid = $a[0];
                 $this->_last_visit = $a[1];
             }
-            setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
+            //setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
             
         }
         
@@ -707,9 +725,19 @@ class Application {
 	 */ 
     public function getCatalog()
     {
+        return $this->getSection();
+    }
+    
+	/**
+	 * Возвращает текущий раздел
+	 * 	 	   
+	 * @return Catalog 
+	 */ 
+    public function getSection()
+    {
         if (!$this->_catalog) $this->decodeRequestUri();
         return $this->_catalog;
-    }
+    }    
     
 	/**
 	 * Возвращает нераспарсенную часть REQUEST_URI
@@ -845,8 +873,10 @@ class Application {
         $this->_result_handler[] = $function;
     }
     
-    public function applyOutputHandler(& $result)
+    public function applyOutputHandler()
     {
+        $result = $this->getResponse()->getContent();
+        
         $this->parseWidgets($result);
 		$this->parseParams($result);
         
@@ -870,6 +900,8 @@ class Application {
             
             }
         }
+        
+        $this->getResponse()->setContent($result);
     }
     
 	/**
@@ -1987,6 +2019,13 @@ class Application {
         return $this->request;
     }
     
+    public function getResponse() {
+        if ($this->response == null) {
+            $this->response = new Response();
+        }
+        return $this->response;
+    }    
+    
     public function setRouter($router) {
         $this->router = $router;
     }
@@ -1996,5 +2035,9 @@ class Application {
             $this->router = new \Zend\Router\SimpleRouteStack();
         }
         return $this->router;
-    }    
+    }
+
+    public function getEntityManager() {
+        return $this->entityManager;
+    }
 }

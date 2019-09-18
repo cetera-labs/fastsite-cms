@@ -52,6 +52,7 @@ class Catalog extends \Cetera\Iterator\DynamicObject implements \RecursiveIterat
 		parent::__construct( \Cetera\Catalog::getObjectDefinition() );  
 
 		$this->query->addSelect('b.level');
+        $this->query->addSelect('b.id as structure_id');
 		$this->query->innerJoin('main', 'dir_structure', 'b', 'main.id = b.data_id');		
         
     } 	

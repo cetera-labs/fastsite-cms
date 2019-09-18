@@ -30,6 +30,23 @@ $application->getRouter()->addRoute('imagetransform',
     ]), 10
 );
 
+$application->getRouter()->addRoute('api',
+    \Zend\Router\Http\Segment::factory([
+        'route' => '/api[/:controller][/:action][/:id]',
+        'constraints' => [
+            'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'id'         => '[a-zA-Z][a-zA-Z0-9_-]+',
+        ],
+        'defaults' => [
+            '__NAMESPACE__' => 'Cetera\Api',
+            'controller'    => 'Cetera\Api\IndexController',
+        ],
+    ])
+);
+
+
+
 $application->route('/'.PREVIEW_PREFIX,  function() {
 	
 	\Cetera\Application::getInstance()->setPreviewMode(true);
@@ -138,17 +155,50 @@ $_start = Cetera\Util::utime();
 if (file_exists($td.'/'.BOOTSTRAP_SCRIPT))
     include_once($td.'/'.BOOTSTRAP_SCRIPT);
 
-$router = $application->getRouter();
+$request  = $application->getRequest();
+$response = $application->getResponse();
+$router   = $application->getRouter();
+
 $match = $router->match($application->getRequest());
 if ( $match ) {
     
-    ob_start();
+    
     $class = $match->getParam('controller');
     $method = $match->getParam('action');
+
+    if (!class_exists($class)) {
+        $class = $match->getParam('__NAMESPACE__').'\\'.ucfirst($class).'Controller';
+    }
+    
     $controller = new $class();
-    $controller->$method($match->getParams());
-    $result = ob_get_contents();
-    ob_end_clean(); 
+    
+    if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
+                                
+        $event = new Zend\Mvc\MvcEvent();
+        $event->setRouter($router);
+        $event->setRouteMatch($match);     
+        
+        $controller->setEvent($event);        
+        $res = $controller->dispatch($request,$response);
+        
+        $view = new \Zend\View\View();
+        $view->setRequest($request);
+        $view->setResponse($response);
+        
+        $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
+        $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
+        $jsonStrategy->attach($view->getEventManager(), 100);
+        
+        $view->render($res);
+                
+    }
+    else {
+        ob_start();
+        $method = $match->getParam('action');
+        $controller->$method($match->getParams());
+        $response->setContent(ob_get_contents());
+        ob_end_clean();         
+    }
     
 }
 elseif (parse_url($template,  PHP_URL_HOST)) {
@@ -180,15 +230,15 @@ else {
             throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
         ob_start();
         include($template_file);
-        $result = ob_get_contents();
+        $response->setContent(ob_get_contents());
         ob_end_clean();
         
     }
     elseif ($path_parts['extension'] == 'widget') {
-        $result = $application->getWidget($path_parts['filename'])->getHtml();            
+        $response->setContent($application->getWidget($path_parts['filename'])->getHtml());
     }
     elseif ($path_parts['extension'] == 'twig') {
-        $result = $application->getTwig()->render($template);
+        $response->setContent($application->getTwig()->render($template));
     }
 }
 
@@ -208,5 +258,14 @@ $application->debug(DEBUG_COMMON, 'Backend: '.get_class($be->getBackend()));
 $application->debug(DEBUG_COMMON, 'Total hits: '.($be->successCalls+$be->failCalls));
 $application->debug(DEBUG_COMMON, 'Success hits: '.$be->successCalls.' ('.($be->successCalls*100/($be->successCalls+$be->failCalls)).'%)');
 
-$application->applyOutputHandler($result);
-echo $result;
+$application->applyOutputHandler();
+
+foreach ($response->getHeaders() as $header) {
+    if ($header instanceof Zend\Http\Header\MultipleHeaderInterface) {
+        header($header->toString(), false);
+        continue;
+    }
+    header($header->toString());
+}
+header($response->renderStatusLine());
+echo $response->getContent();

@@ -27,8 +27,14 @@ class Path extends Catalog implements \RecursiveIterator {
     {
 		parent::__construct( $parent );  		
 		$this->query->innerJoin('b', 'dir_structure', 'c', 'b.lft <= c.lft and b.rght >= c.rght');
-		$this->query->andWhere('c.data_id=:idcat')->setParameter('idcat', $this->catalog->id);
         $this->query->orderBy('b.lft', 'ASC');
+        
+        if ($this->catalog->structureId) {
+            $this->query->andWhere('c.id=:id')->setParameter('id', $this->catalog->structureId);
+        }
+        else {
+            $this->query->andWhere('c.data_id=:idcat')->setParameter('idcat', $this->catalog->id);
+        }
     } 	
 	
 	/*

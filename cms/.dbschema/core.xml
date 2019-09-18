@@ -4,6 +4,7 @@
 <table name="dir_structure">
     <field name="id" type="mediumint(8) unsigned" null="0" auto_increment="1" />
     <field name="data_id" type="mediumint(8) unsigned" null="0" default="1" />
+    <field name="parent_id" type="mediumint(8)" null="1" default="-1" />
     <field name="lft" type="mediumint(8) unsigned" null="0" default="1" />
     <field name="rght" type="mediumint(8) unsigned" null="0" default="1" />
     <field name="level" type="tinyint(3) unsigned" null="0" default="1" />

@@ -169,7 +169,7 @@ Ext.define('Cetera.panel.StructureTree', {
                     this.newLinkAction.enable();         
                 }
                 
-                if(node && node.getId() != 'item-0'){
+                if(node && node.getId() != 'item-0-1'){
                     this.upAction.enable();
                     this.downAction.enable();
                     this.copyAction.enable();

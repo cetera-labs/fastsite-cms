@@ -214,7 +214,7 @@ Ext.define('Cetera.panel.Menu', {
           
         this.callParent();
         
-        this.tree.expandPath('/root/item-0', 'id', '/');
+        this.tree.expandPath('/root/item-0-1', 'id', '/');
 
     },
     

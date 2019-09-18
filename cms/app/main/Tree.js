@@ -42,13 +42,22 @@ Ext.define('Cetera.main.Tree', {
                 tooltip: Config.Lang.newCatalog,
                 handler: this.create_new,
                 scope: this
-            },{
+            },
+            {
                 id:'tb_new_l',
                 iconCls:'icon-new_folder_linked',
                 tooltip: Config.Lang.newLink,
                 handler: this.create_link,
                 scope: this
-            },{
+            },
+            {
+                id:'tb_new_hard_link',
+                iconCls:'icon-new_folder_hardlinked',
+                tooltip: _('Создать жесткую ссылку'),
+                handler: this.create_hard_link,
+                scope: this
+            },            
+            {
                 id:'tb_prop',
                 iconCls:'icon-props',
                 tooltip: Config.Lang.catProps,
@@ -105,7 +114,7 @@ Ext.define('Cetera.main.Tree', {
                     }        
                 }
                 
-                if(node && node.getId() != 'item-0'){
+                if(node && node.getId() != 'item-0-1'){
                     Ext.getCmp('tb_up').enable();
                     Ext.getCmp('tb_down').enable();
                     Ext.getCmp('tb_copy').enable();
@@ -205,8 +214,7 @@ Ext.define('Cetera.main.Tree', {
     getSelectedId: function() {
         var sn = this.getSelectionModel().getLastSelected();
         if (!sn) return -1;
-        var a = sn.getId().split('-');
-        return a[1];
+        return sn.get('item_id');
     },
     
     edit: function(btn) {
@@ -222,30 +230,33 @@ Ext.define('Cetera.main.Tree', {
     create_new_server: function() {
         if (this.getSelectedId() < 0) return;
         
-        var cc = Ext.create('Cetera.catalog.ServerCreate', {
+        Ext.create('Cetera.catalog.ServerCreate', {
             win: this.getPropertyWindow()
-        });
-        cc.show();
+        }).show();
     },
     
     create_new: function() {
         if (this.getSelectedId() < 0) return;
         
-        var cc = Ext.create('Cetera.catalog.Create', {
+        Ext.create('Cetera.catalog.Create', {
             win: this.getPropertyWindow(),
             materialsType: this.getSelectionModel().getLastSelected().get('mtype')
-        });
-        cc.show();
+        }).show();
     },
     
     create_link: function() {
         if (this.getSelectedId() < 0) return;
         
-        var cc = Ext.create('Cetera.catalog.LinkCreate', {
+        Ext.create('Cetera.catalog.LinkCreate', {
             win: this.getPropertyWindow()
-        });
-        cc.show();
-        
+        }).show();        
+    },
+    
+    create_hard_link: function() {
+        if (this.getSelectedId() < 0) return;
+        Ext.create('Cetera.catalog.HardLinkCreate', {
+            win: this.getPropertyWindow()
+        }).show();         
     },
     
     move_up: function() {

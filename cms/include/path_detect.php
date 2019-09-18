@@ -6,7 +6,7 @@ if (!defined('CMS_DIR')) {
 	
 if (!defined('DOCROOT')) {
 	if (isset($_SERVER['DOCUMENT_ROOT'])) {
-		$dr = $_SERVER['DOCUMENT_ROOT'].'/';
+        $dr = rtrim($_SERVER['DOCUMENT_ROOT'],'/').'/';
 	}
 	else {
 		$dr = substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/'.CMS_DIR.'/', 1 )).'/';

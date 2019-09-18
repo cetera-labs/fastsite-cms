@@ -28,8 +28,9 @@ if ($node == 'root') {
     $nodes[] = array(
         'text' => 'root',
 		'name' => 'root',
-        'id'   => 'item-0',
+        'id'   => 'item-0-1',
 		'item_id'  => 0,
+        'structure_id'  => 0,
         'iconCls'  => 'tree-folder-visible',
         'qtip' => '',
         'leaf' => FALSE,
@@ -39,9 +40,10 @@ if ($node == 'root') {
 
 } else {
 
-    list($dummy, $id) = explode('-',$node);
+    list($dummy, $id, $structure_id) = explode('-',$node);
     $c = Catalog::getById($id);
     if ($c) {
+        $c->setStructureId($structure_id);
 		if (!$c->isLink()) {
 			foreach ($c->children as $child)
 			{
@@ -120,8 +122,9 @@ function process_child($child, $rule, $only, $nolink, $exclude, $nocatselect) {
         'text'  => '<span class="tree-alias">'.$child->alias.'</span>'.$child->name,
 		'name'  => $child->name, 
         'alias' => $child->alias,
-        'id'    => 'item-'.$child->id,
+        'id'    => 'item'.'-'.$child->id.'-'.$child->structureId,
 		'item_id' => $child->id,
+        'structure_id' => (int)$child->structureId,
         'iconCls'=> $cls,
         'qtip'  => $child->describ,
         'leaf'  => FALSE,
