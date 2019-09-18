@@ -89,7 +89,7 @@ class Driver implements MappingDriver {
             
             $builder->createManyToOne('section', '\\Cetera\\Entity\\Section')->addJoinColumn('data_id', 'id')->build();  
 
-            $metadata->setCustomRepositoryClass('Cetera\\Orm\\Repository\\NestedTreeRepository');            
+            $metadata->setCustomRepositoryClass('Cetera\\ORM\\Repository\\NestedTreeRepository');            
            
         }
         else {
