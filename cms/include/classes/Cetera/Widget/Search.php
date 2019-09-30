@@ -261,14 +261,14 @@ class Search extends Templateable {
 
         foreach ($words as $key => $word) {
             if (is_array($word)) {
-                $s[] = '+('.implode(' ',$word).')';
+                $s[] = '('.implode(' ',$word).')';
             } else {
-                $s[] = '+'.$key;
+                $s[] = $key;
             }
         }
 
         if ($this->getParam('fulltext_boolean')) {
-            $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".implode(' +',$s)."' IN BOOLEAN MODE)";
+            $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('+".implode(' +',$s)."' IN BOOLEAN MODE)";
         }
         else {
             $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".implode(' ',$s)."')";
