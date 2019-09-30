@@ -140,13 +140,13 @@ if ($_POST['action'] == 'cat_delete') {
 
 if ($_POST['action'] == 'hard_link_create') {
     $em = $application->getEntityManager();
-    $structure_repo = $em->getRepository('\Cetera\Entity\Structure'); 
+    $structure_repo = $em->getRepository('\Cetera\Entity\Node'); 
     
     $structure_repo->recoverParents();
     $em->flush();
     
     $createLink = function($parent, $source) use($em,$structure_repo,&$createLink) {
-        $child = new \Cetera\Entity\Structure();
+        $child = new \Cetera\Entity\Node();
         $child->setParent($parent);
         $child->setSection($source->section);
         $em->persist($child);
@@ -156,8 +156,8 @@ if ($_POST['action'] == 'hard_link_create') {
         }
     };
     
-    $parent = $structure_repo->findOneById( $_POST['parent_structure_id'] );
-    $source = $structure_repo->findOneById( $_POST['structure_id'] );   
+    $parent = $structure_repo->findOneById( $_POST['parent_node_id'] );
+    $source = $structure_repo->findOneById( $_POST['node_id'] );   
     $createLink($parent, $source);
     
     $em->flush();

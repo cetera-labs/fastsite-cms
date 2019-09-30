@@ -40,8 +40,8 @@ Ext.define('Cetera.field.Folder', {
         this.window.on('select', function(res) {
             this.path = res.path;    
             this.setDisplayValue(res.name_to);
-            if (this.structureValue) {
-                this.setValue(res.structure_id, true);  
+            if (this.nodeValue) {
+                this.setValue(res.node_id, true);  
             }
             else {
                 this.setValue(res.id, true);  

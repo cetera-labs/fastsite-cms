@@ -6,7 +6,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @Gedmo\Tree(type="nested")
  */
-class Structure extends AbstractEntity {
+class Node extends AbstractEntity {
 
     /**
      * @Gedmo\TreeLeft
@@ -32,7 +32,7 @@ class Structure extends AbstractEntity {
         
     protected $section;
     
-    public function setParent(Structure $parent = null)
+    public function setParent(Node $parent = null)
     {
         $this->parent = $parent;        
     }

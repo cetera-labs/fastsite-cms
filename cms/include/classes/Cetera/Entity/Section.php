@@ -1,7 +1,14 @@
 <?php
 namespace Cetera\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class Section extends AbstractEntity {
+    
+    /**
+     * Привязка раздела к структуре
+     */
+    protected $nodes;    
     
     protected $tag;
     protected $name;
@@ -19,4 +26,8 @@ class Section extends AbstractEntity {
     protected $metaTitle;
     protected $metaKeywords;
     protected $metaDescription;
+    
+    public function __construct() {
+        $this->nodes = new ArrayCollection();
+    }    
 }

@@ -25,12 +25,12 @@ class Driver implements MappingDriver {
     private $od;
     
     private $classToTableNames = [
-        'Cetera\Entity\Structure' => 'dir_structure'
+        'Cetera\Entity\Node' => 'dir_structure'
     ];
     
     private $classNamesForTables = [
         'dir_data'      => 'Section',
-        'dir_structure' => 'Structure'
+        'dir_structure' => 'Node'
     ];
     
     /**
@@ -84,10 +84,10 @@ class Driver implements MappingDriver {
             $builder->addField('rght', 'integer');
             $builder->addField('level', 'integer');
 
-            $builder->createManyToOne('parent', '\\Cetera\\Entity\\Structure')->addJoinColumn('parent_id', 'id', true, false, 'CASCADE', null)->inversedBy('children')->build();
+            $builder->createManyToOne('parent', '\\Cetera\\Entity\\Node')->addJoinColumn('parent_id', 'id', true, false, 'CASCADE', null)->inversedBy('children')->build();
             $builder->createOneToMany('children', '\\Cetera\\Entity\\Section')->mappedBy('parent')->build();
             
-            $builder->createManyToOne('section', '\\Cetera\\Entity\\Section')->addJoinColumn('data_id', 'id')->build();  
+            $builder->createManyToOne('section', '\\Cetera\\Entity\\Section')->addJoinColumn('data_id', 'id')->inversedBy('nodes')->build();  
 
             $metadata->setCustomRepositoryClass('Cetera\\ORM\\Repository\\NestedTreeRepository');            
            
@@ -95,7 +95,13 @@ class Driver implements MappingDriver {
         else {
             $this->buildIndexes($metadata);
             $this->buildFieldMappings($metadata);
-            $this->buildAssociationMappings($metadata);            
+            $this->buildAssociationMappings($metadata);
+
+            if ($tableName == 'dir_data') {
+                $builder = new ClassMetadataBuilder($metadata);
+                $builder->createOneToMany('nodes', '\\Cetera\\Entity\\Node')->mappedBy('section')->build();  
+            }
+            
         }
         
         //print_r($metadata);

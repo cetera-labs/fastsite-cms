@@ -52,7 +52,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      * @internal          
      * @var int
      */   
-    protected $_structureId;    
+    protected $_nodeId;    
     
     /**
      * Порядковый номер раздела
@@ -224,13 +224,13 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         
         parent::setFields($fields);
 		$this->_catalogType   = $fields['type'];
-        $this->_structureId   = $fields['structure_id'];
+        $this->_nodeId   = $fields['node_id'];
         $this->_inheritFields = isset($fields['inheritFields'])?$fields['inheritFields']:false;
     }
 	   
-    public function setStructureId($id)
+    public function setNodeId($id)
     {
-        $this->_structureId   = $id;
+        $this->_nodeId   = $id;
     }
 	
   	/**
@@ -285,7 +285,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
                 return parent::fetch($data);
             }
         } else {
-            $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level, B.id as structure_id FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
+            $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level, B.id as node_id FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
             if ($fields) {
 				if ($i_am_server) return parent::fetch($fields);
                 return static::fetch($fields);

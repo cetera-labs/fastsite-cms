@@ -547,7 +547,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
     public function boArray()
     {
         return array(
-            'id'          => $this->id,
+            'id'          => (int)$this->id,
             'name'        => $this->name,
             'permissions' => array(
                 'admin' => $this->allowAdmin(),

@@ -36,8 +36,8 @@ class Children extends Catalog {
 		parent::__construct( $parent );  
 		
 		$this->query->innerJoin('b', 'dir_structure', 'c', 'b.lft BETWEEN c.lft and c.rght and b.level=c.level+1');
-        if ($this->catalog->prototype->structureId) {
-            $this->query->andWhere('c.id=:id')->setParameter('id', $this->catalog->prototype->structureId);
+        if ($this->catalog->prototype->nodeId) {
+            $this->query->andWhere('c.id=:id')->setParameter('id', $this->catalog->prototype->nodeId);
         }
         else {
             $this->query->andWhere('c.data_id=:idcat')->setParameter('idcat', $this->catalog->prototype->id);

@@ -20,14 +20,14 @@ Ext.define('Cetera.catalog.HardLinkCreate', {
         {
             xtype: 'folderfield',
             id: 'link_id',
-            name: 'structure_id',
+            name: 'node_id',
             fieldLabel: Config.Lang.linkTo,
             value: 0,
             path: '',
             nolink: 1,
             rule: 7,
             allowBlank: false,
-            structureValue: true
+            nodeValue: true
         }    
     ],
 	
@@ -49,7 +49,7 @@ Ext.define('Cetera.catalog.HardLinkCreate', {
 							params: {
 								action: 'hard_link_create', 
 								parent_id: this.tree.getSelectedId(),
-                                parent_structure_id: this.tree.getSelectionModel().getLastSelected().get('structure_id')
+                                parent_node_id: this.tree.getSelectionModel().getLastSelected().get('node_id')
 							},
 							waitMsg: Config.Lang.wait,
 							scope: this,
