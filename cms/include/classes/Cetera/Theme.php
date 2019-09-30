@@ -145,7 +145,7 @@ class Theme implements \ArrayAccess  {
 				}					
 				$t->setConfig( $res, $s );				
 			}			
-		}        
+		} 
 
 		//
         if (file_exists($themePath.'/'.THEME_INSTALL))
@@ -426,6 +426,23 @@ class Theme implements \ArrayAccess  {
 		$dump->start($this->getPath().'/'.THEME_DB_DATA);
 		
 	}
+    
+	public function copy($params)
+	{
+        if (self::find($params['name'])) {
+            throw new \Cetera\Exception\Form('Тема уже сущесвует', 'name');
+        }
+        
+        Util::rcopy($this->getPath(), WWWROOT.THEME_DIR.'/'.$params['name']);
+        $new = self::find($params['name']);
+        $new->update($params);
+		// Переименование Ext компонента редактирования настроек
+		if (file_exists( $new->getPath().'/ext/Config.js' )) {
+			$text = file_get_contents($new->getPath().'/ext/Config.js');
+			$text = str_replace("'Theme.".$this->name.".Config'","'Theme.".$new->name.".Config'",$text);
+			file_put_contents($new->getPath().'/ext/Config.js', $text);
+		}        
+    }        
 	
 	public function rename($name)
 	{
@@ -547,11 +564,11 @@ class Theme implements \ArrayAccess  {
 
 		if (isset($info['disableUpgrade'])) unset($info['disableUpgrade']);
 		
-		foreach($info as $key => $value) {
-			if (isset($data[$key])) {
-				$info[$key] = $data[$key];
-			}
-		}
+		if (is_array($data)) {
+            foreach($data as $key => $value) {
+                $info[$key] = $data[$key];
+            }
+        }
 		$this->saveInfo($info);
 		
 		if ($data['name'] && $data['name'] != $this->name) {

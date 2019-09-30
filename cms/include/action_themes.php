@@ -24,7 +24,12 @@ $res = array(
 $action = $_REQUEST['action'];
 $theme = $_REQUEST['theme'];
 
-if ($action == 'delete') {
+if ($action == 'copy') {
+    $data = array_intersect_key($_REQUEST, array_flip(['name','title','version','description']));      
+    Theme::find($theme)->copy($data);
+    $res['success'] = true;
+}
+elseif ($action == 'delete') {
     Theme::find($theme)->delete();
 } 
 elseif ($action == 'install') {   
