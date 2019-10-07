@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.62.0');
+define('VERSION', '3.63.0');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -210,6 +210,7 @@ define('EDITOR_MATSET_RICH', 	    34);
 define('EDITOR_LINK_CATALOG',    	35);
 define('EDITOR_LINKSET2_DEFAULT', 	36);
 define('EDITOR_LINKSET_EDITABLE', 	37);
+define('EDITOR_ACE_HTML', 38);
 // ---------- // Field types ---------------
 
 define('DEBUG_SQL'      , 8);
