@@ -1,6 +1,6 @@
 TRUNCATE TABLE dir_structure;
-INSERT INTO dir_structure VALUES (1,0,1,4,0);
-INSERT INTO dir_structure VALUES (2,1,2,3,1);
+INSERT INTO dir_structure VALUES (1,0,0,1,4,0);
+INSERT INTO dir_structure VALUES (2,1,1,2,3,1);
 
 TRUNCATE TABLE types;
 INSERT INTO `types` 
