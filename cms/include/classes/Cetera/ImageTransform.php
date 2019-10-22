@@ -581,7 +581,6 @@ class ImageTransform {
 		$nostore = false;
 		
 		$path = explode('/', str_replace('imagetransform/','',$a->getUnparsedUrl()) );
-        array_shift($path);
 		$params = explode('_', array_shift($path));
 		$file = implode('/', $path);   
         
