@@ -1,6 +1,8 @@
 <?php
 namespace Cetera; 
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 /**
  * Cetera CMS 3 
  *

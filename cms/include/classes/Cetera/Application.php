@@ -16,6 +16,7 @@ use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\Http\PhpEnvironment\Response;
+use PHPMailer\PHPMailer\PHPMailer;
  
 /**
  * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 

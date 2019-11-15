@@ -30,7 +30,7 @@
         "zendframework/zend-http": "^2.10",
         "zendframework/zend-router": "^3.3",
         "zendframework/zend-mvc": "^3.1",
-        "phpmailer/phpmailer": "~5.2",
+        "phpmailer/phpmailer": "~6.1",
         "true/punycode": "~1.1",
         "twig/twig": "~1.0",
         "twig/extensions": "*",
