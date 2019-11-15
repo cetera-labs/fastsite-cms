@@ -77,14 +77,23 @@ Ext.define('Cetera.window.MailTemplate', {
 					}
 				},			
 				{
-					fieldLabel: _('От кого'),
+					fieldLabel: _('От кого (e-mail)'),
 					name: 'mail_from_email',
 					listeners: {
 						focus: function(elm) {
 							elm.up('window').lastFocus = elm;
 						}
 					}
-				},			
+				},	
+				{
+					fieldLabel: _('От кого (имя)'),
+					name: 'mail_from_name',
+					listeners: {
+						focus: function(elm) {
+							elm.up('window').lastFocus = elm;
+						}
+					}
+				},	                
 				{
 					fieldLabel: _('Кому'),
 					name: 'mail_to',
