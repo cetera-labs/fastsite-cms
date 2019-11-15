@@ -77,6 +77,6 @@ class Event {
 			foreach (self::$listeners['*'] as $callable) {
 				$callable($event, $params);
 			}			
-		}		
+		}	
 	}	
 }

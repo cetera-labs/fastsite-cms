@@ -599,18 +599,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		$this->save();
 		
 		$res = Event::trigger( EVENT_CORE_USER_RECOVER, array('user' => $this, 'server' => $a->getServer(), 'password' => $pass ));
-		
-		if (!$res) {
-			// если не было отправлено писем по событию, то принудительно сообщим о смене пароля
-			$mail = new \PHPMailer(true);
-			$mail->AddAddress($this->email);					
-			$mail->CharSet = 'utf-8';
-			$mail->ContentType = 'text/plain';
-            $mail->setFrom($mailFrom, $fromName);
-			$mail->Subject = $t->_('Ваш пароль на сайт ').$a->getServer()->name;
-			$mail->Body = $t->_('Ваш новый пароль: ').$pass."\n".$t->_('Отправлено с: ').$_SERVER["HTTP_HOST"];
-			$mail->Send();				
-		}
 	}
 
 }
