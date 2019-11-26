@@ -108,7 +108,10 @@ $_start = Cetera\Util::utime();
 
 $pieces = explode('/',$application->getUnparsedUrl());
 
-if (!$application->getServer()) throw new \Cetera\Exception\HTTP(404, 'Server is not found');
+if (!$application->getServer()) {
+    header("HTTP/1.0 404 Not Found");
+    die('Сервер не найден');
+}
 
 /*
 if ($application->getCatalog()->isLink()) {
