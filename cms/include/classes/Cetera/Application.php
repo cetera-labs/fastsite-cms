@@ -633,7 +633,7 @@ class Application {
                 $this->_uid = $a[0];
                 $this->_last_visit = $a[1];
             }
-            //setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
+            setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
             
         }
         
