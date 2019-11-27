@@ -364,7 +364,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
 
             if (is_callable($filter))
 			{
-                if (substr_count($filter, '::')) {
+                if (is_string($filter) && substr_count($filter, '::')) {
                     list($class, $method) = explode('::', $filter);
                     $c = new $class($item);
                     if (!$c->$method($item)) continue;

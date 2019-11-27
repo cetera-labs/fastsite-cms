@@ -1231,7 +1231,7 @@ class Application {
 				return \Cetera\Application::getInstance()->getTranslator()->_($text);
 			}));
 		
-			$mail = new \PHPMailer(true);
+			$mail = new PHPMailer(true);
 			
 			$params['mailer'] = $mail;
 			
