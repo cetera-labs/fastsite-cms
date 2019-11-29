@@ -23,13 +23,13 @@ if (isset($_POST['token'])) {
     
 <?php if (COMPOSER_INSTALL) : ?>  
 
-    <link rel="stylesheet" type="text/css" href="css/global.css">
-    <script type="text/javascript" src="js/vendor.js"></script>
+    <link rel="stylesheet" type="text/css" href="/cms/css/global.css">
+    <script type="text/javascript" src="/cms/js/vendor.js"></script>
     
     <?php if ($application->getVar('setup_done')) : ?>    
     
-        <script type="text/javascript" src="config.php"></script>	
-        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="/cms/config.php"></script>	
+        <script type="text/javascript" src="/cms/js/app.js"></script>
         <script src="//ulogin.ru/js/ulogin.js"></script>
         
         <script type="text/javascript">	
@@ -84,8 +84,8 @@ if (isset($_POST['token'])) {
     
     <?php if ($application->getVar('setup_done')) : ?>    
     
-    <script type="text/javascript" src="config.php"></script>	
-	<script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="/cms/config.php"></script>	
+	<script type="text/javascript" src="/cms/app.js"></script>
 	
     <script type="text/javascript">
 	
@@ -98,7 +98,7 @@ if (isset($_POST['token'])) {
     
     <?php else : ?> 
 
-    <link rel="stylesheet" type="text/css" href="css/setup.css">
+    <link rel="stylesheet" type="text/css" href="/cms/css/setup.css">
     <?php include('setup.php'); ?>     
     
     <?php endif ?> 
