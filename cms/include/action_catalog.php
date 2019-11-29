@@ -74,8 +74,6 @@ if ($_POST['action'] == 'cat_save') {
     if (!isset($_POST['hidden'])) $_POST['hidden'] = 0;
     if (!isset($_POST['autoalias'])) $_POST['autoalias'] = 0;
     
-    
-	
 	if ($catalog->isServer() && $user->allowAdmin())
 	{
 		$catalog->setRobots($_POST['_robots_txt']);

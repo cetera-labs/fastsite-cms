@@ -256,6 +256,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         $c = static::create();
 		$c->setFields(array(
             'id'            => 0,
+            'node_id'       => 1,
             'name'          => 'root', 
             'type'          => 0,
             'tag'           => 0,
@@ -396,7 +397,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
           $this->_treePath = '';
 
           foreach ($this->getPath() as $item) { 	  
-            $this->_treePath .= '/item-'.$item->id;
+            $this->_treePath .= '/item-'.$item->id.'-'.$item->nodeId;
             if ($item->isRoot()) continue;
             
             $this->_fullUrl .= '/'.$item->alias;
