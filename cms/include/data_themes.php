@@ -33,7 +33,9 @@ if (sizeof($themes)) {
     } catch (\Exception $e) {}        
     
     foreach ($themes as $id => $p) {
-		    
+		  
+        if ($p->is_plugin) continue;
+          
         if (isset($themes_lib[$id])) {
         		
             // есть более новая версия
