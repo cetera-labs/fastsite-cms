@@ -101,6 +101,7 @@
                 <include name="ext/***" />
                 <include name="css/***" />
                 <include name="js/***" />
+                <include name="scripts/*.php" />
             </fileset>
         </copy>        
         
