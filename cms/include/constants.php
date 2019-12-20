@@ -54,6 +54,7 @@ define ('BOOTSTRAP_SCRIPT', 'bootstrap.php');
 define ('DEFAULT_TEMPLATE', 'default.php');
 
 define('PLUGIN_DIR',      'plugins');
+define('PLUGIN_COMPOSER_DIR', 'plugins-composer');
 define('PLUGIN_CONFIG',   'config.php');
 define('PLUGIN_INFO',     'info.json');
 define('PLUGIN_CLASSES',  'classes');

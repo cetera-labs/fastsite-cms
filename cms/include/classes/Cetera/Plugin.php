@@ -153,7 +153,7 @@ class Plugin implements \ArrayAccess  {
             $schema->dropSchema($this->name);      
         }
         Util::delTree(WWWROOT.PLUGIN_DIR.'/'.$this->name);
-    }  
+    }   
     
 	/**
 	* Включить модуль
@@ -239,7 +239,17 @@ class Plugin implements \ArrayAccess  {
         else {
             return DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$this->name;
         }
-    }        
+    }  
+
+    public function getUrlPath()
+    {
+        if ($this->composer) {
+            return '/'.PLUGIN_COMPOSER_DIR.'/'.$this->name.'/';
+        }
+        else {
+            return '/'.PLUGIN_DIR.'/'.$this->name.'/';
+        }
+    }     
     
     private function grabInfo()
     {

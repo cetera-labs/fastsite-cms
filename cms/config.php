@@ -168,7 +168,7 @@ Ext.Loader.setPath('Theme.<?php echo $theme->name; ?>', '/<?php echo THEME_DIR.'
 <?php endforeach; ?>
 
 <?php foreach(\Cetera\Plugin::enum() as $plugin) : ?>
-Ext.Loader.setPath('Plugin.<?php echo $plugin->name; ?>', '/<?php echo PLUGIN_DIR.'/'.$plugin->name; ?>/ext');
+    Ext.Loader.setPath('Plugin.<?php echo $plugin->name; ?>', '<?php echo $plugin->getUrlPath(); ?>ext');
 <?php endforeach; ?>
 
 function _(key) {
