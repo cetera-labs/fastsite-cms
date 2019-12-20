@@ -94,8 +94,8 @@
         </php>
         <echo msg="${PLUGIN_PATH}" />
         
-        <mkdir dir="${WWW_DIR}/plugins/${PLUGIN}" />
-        <copy todir="${WWW_DIR}/plugins/${PLUGIN}" overwrite="true">
+        <mkdir dir="${WWW_DIR}/plugins-composer/${PLUGIN}" />
+        <copy todir="${WWW_DIR}/plugins-composer/${PLUGIN}" overwrite="true">
             <fileset dir="${PLUGIN_PATH}">
                 <include name="images/***" />
                 <include name="ext/***" />
