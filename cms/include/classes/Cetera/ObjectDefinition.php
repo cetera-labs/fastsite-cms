@@ -211,6 +211,8 @@ class ObjectDefinition extends Base {
     	$conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag) values ($id,'type',       3,'Properties[ru=Свойства]', 1, 1, 1, 0, 7)");
         $conn->executeQuery("insert into types_fields (id,name,type,describ,len,fixed,required,shw,tag,pseudo_type) values ($id,'idcat',      6,'Section[ru=Раздел]', 0, 1, 1, 0, 8, 1008)");
 
+        self::regenerateClasses();
+
         return new self($id, $params['alias']);
       
     }          
@@ -411,7 +413,8 @@ class ObjectDefinition extends Base {
         foreach ($r as $f) {
             DbConnection::getDbConnection()->executeQuery('DROP TABLE '.$f['alias'].'_'.$alias.'_'.$f['name']);
       	    DbConnection::getDbConnection()->executeQuery('DELETE FROM types_fields WHERE field_id='.$f['field_id']);
-        }    
+        } 
+        self::regenerateClasses();        
     }
     
 	/**
@@ -474,7 +477,10 @@ class ObjectDefinition extends Base {
 			$this->_description = $params['describ'];
 		}
         
-        if (count($sql)) DbConnection::getDbConnection()->executeQuery('update types set '.implode(',',$sql).' where id='.$this->id);
+        if (count($sql)) {
+            DbConnection::getDbConnection()->executeQuery('update types set '.implode(',',$sql).' where id='.$this->id);
+            self::regenerateClasses();
+        }
         
         return $this;
     }  
@@ -516,6 +522,7 @@ class ObjectDefinition extends Base {
 			"INSERT INTO types_fields (tag,name,type,pseudo_type,len,describ,shw,required,fixed,id,editor,editor_user, default_value, page) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
 			[$tag,$params['name'],$params['type'],$params['pseudo_type'],$params['len'],$params['describ'],$params['shw'],$params['required'],$params['fixed'],$this->id,(int)$params['editor'],$params['editor_user'],$params['default_value'],$params['page']]
 		);
+        self::regenerateClasses();
 		return DbConnection::getDbConnection()->lastInsertId();
     } 
        
@@ -642,7 +649,8 @@ class ObjectDefinition extends Base {
 					WHERE field_id=".$params['field_id'];			
 		}
 		
-		DbConnection::getDbConnection()->executeQuery($sql);    
+		DbConnection::getDbConnection()->executeQuery($sql);
+        self::regenerateClasses();
     }  
 
     /**
@@ -775,5 +783,11 @@ class ObjectDefinition extends Base {
             'fixed'   => (int)$this->fixed
         );		
 	}
+    
+    public static function regenerateClasses() {
+        $entityManager = Application::getInstance()->getEntityManager();
+        $d = $entityManager->getConfiguration()->getMetadataDriverImpl();
+        $d->generateClasses();        
+    }
 
 }

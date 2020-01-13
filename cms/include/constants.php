@@ -75,6 +75,7 @@ define('CACHE_DIR', DOCROOT.'.cache');
 define('FILECACHE_DIR', CACHE_DIR.'/filecache');
 define('IMAGECACHE_DIR', CACHE_DIR.'/images');
 define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
+define('ENTITY_CLASSES_DIR', CACHE_DIR.'/classes');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
 

@@ -1,10 +1,8 @@
 <?php
 namespace Cetera\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+abstract class AbstractSection extends AbstractEntity {
 
-class Section extends AbstractEntity {
-    
     /**
      * Привязка раздела к структуре
      */
@@ -22,12 +20,8 @@ class Section extends AbstractEntity {
     protected $hidden;
     protected $isServer;
     
-    protected $pic;
-    protected $metaTitle;
-    protected $metaKeywords;
-    protected $metaDescription;
-    
     public function __construct() {
         $this->nodes = new ArrayCollection();
-    }    
+    }
+    
 }

@@ -56,6 +56,45 @@ class Driver implements MappingDriver {
     public function setNamespace($namespace)
     {
         $this->namespace = $namespace;
+    }  
+    
+    public function generateClasses()
+    {
+        $path = ENTITY_CLASSES_DIR.'/Cetera/Entity';
+        if (!file_exists($path)) {
+            mkdir($path);
+        }
+        
+        foreach(\Cetera\ObjectDefinition::enum() as $od) {
+            $className = $this->classNamesForTables[$od->getTable()] ?? Inflector::classify(strtolower($od->getTable()));
+            $f = fopen($path.'/'.$className.'.php', 'w');
+            if ($className == 'Section') {
+                $superClass = 'AbstractSection';
+            }
+            else {
+                $superClass = 'AbstractMaterial';
+            }
+            fwrite($f,<<<EOF
+<?php
+namespace Cetera\Entity;
+
+class $className extends $superClass {
+
+
+EOF
+);
+
+            foreach($od->getFields() as $field) {
+                fwrite($f,'    protected $'.Inflector::camelize($field['name']).';'.PHP_EOL);
+            }
+
+            fwrite($f,PHP_EOL.'}'.PHP_EOL);
+            fclose($f);
+        }
+        
+        $loader = new \Composer\Autoload\ClassLoader();
+        $loader->add('Cetera\Entity', ENTITY_CLASSES_DIR);
+        $loader->register();        
     }    
     
     /**
@@ -157,14 +196,22 @@ class Driver implements MappingDriver {
         }        
         
         $list = \Cetera\ObjectDefinition::enum();
+        $generate = 0;
         
         foreach($list as $od) {
             $className = $this->getClassNameForObjectDefinition($od);
+            if (!class_exists($className)) {
+                $generate = 1;
+            }
             $tableName = $od->getTable();
             $this->od[$tableName] = $od;
             $this->tables[$tableName] = $this->_sm->listTableDetails($tableName);
             $this->classToTableNames[$className] = $tableName;
         }
+                    
+        if ($generate) {
+            $this->generateClasses();
+        }        
         
         //print_r($this->classToTableNames);
     }
