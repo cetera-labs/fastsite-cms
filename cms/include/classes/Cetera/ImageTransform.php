@@ -585,8 +585,17 @@ class ImageTransform {
 		$file = implode('/', $path);   
         
 		if ($file) {		
-			if (!file_exists(WWWROOT.$file)) $nostore = true;		
-			$img = new self(WWWROOT.$file);
+			if (!file_exists(WWWROOT.$file)) {
+                $nostore = true;		
+            }
+            else {
+                $pathinfo = pathinfo(WWWROOT.$file);
+                if (!in_array(strtolower($pathinfo['extension']),['jpg','png','gif','jpeg'])) {
+                    header('Location: /'.$file );
+                    die();
+                }
+            }
+            $img = new self(WWWROOT.$file);
 		}
 		else {
 			$nostore = true;
