@@ -115,9 +115,9 @@ class CMS extends \Exception
             case self::INVALID_EMAIL:           return $t->_('Неправильный E-mail');
             case self::SQL:                     return $t->_('Ошибка SQL: %s');
             case self::USER_EXISTS:             return $t->_('Такой пользователь уже существует');
-            case self::PASSWORDS_DOESNT_MATCH:  return $t->_('-');
-            case self::SERVER_NOT_FOUND:        return $t->_('-');
-            case self::TYPE_EXISTS:             return $t->_('-');
+            case self::PASSWORDS_DOESNT_MATCH:  return $t->_('Пароли не совпадают');
+            case self::SERVER_NOT_FOUND:        return $t->_('Сервер не найден');
+            case self::TYPE_EXISTS:             return $t->_('Тип материалов уже существует');
             case self::EMAIL_EXISTS:            return $t->_('Такой E-mail уже существует');
             case self::CANT_CREATE:             return $t->_('Невозможно содать тему обсуждения');
             case self::MESSAGE_EXISTS:          return $t->_('Сообщение уже существует');

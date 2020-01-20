@@ -62,7 +62,7 @@ class Driver implements MappingDriver {
     {
         $path = ENTITY_CLASSES_DIR.'/Cetera/Entity';
         if (!file_exists($path)) {
-            mkdir($path);
+            mkdir($path, 0777, true);
         }
         
         foreach(\Cetera\ObjectDefinition::enum() as $od) {
