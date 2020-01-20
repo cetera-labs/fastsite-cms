@@ -517,8 +517,7 @@ class Schema {
             try {
                 $f = $od->getField($field['name']);
                 
-          		foreach ($field as $prop => $value) 
-				{
+          		foreach ($field as $prop => $value) {
 						if ($prop == 'description') continue;
 						if ($prop == 'editor_user') continue;
 						if ($prop == 'fixed') continue;
@@ -526,8 +525,7 @@ class Schema {
 						    if ($prop == 'editor') continue;
 						}
 						
-						if ( $prop == 'length' && !(int)$value )
-						{
+						if ( $prop == 'length' && !(int)$value && $f[$prop]>0 ) {
 							$_od = ObjectDefinition::findById($f[$prop]);
 							$f[$prop] = $_od->alias;
 						}
@@ -544,8 +542,7 @@ class Schema {
 						}
                 }                
             } 
-			catch (\Exception $e)
-			{
+			catch (\Exception $e) {
         			  $res[] = array(
           					'error'  => self::TYPE_FIELD_NOT_FOUND,
           					'field'  => $field['name'],
