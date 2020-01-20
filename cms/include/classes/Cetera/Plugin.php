@@ -45,6 +45,9 @@ class Plugin implements \ArrayAccess  {
             $composer_plugins = include( VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
             foreach($composer_plugins as $k => $p) {
                 $p['path'] = VENDOR_PATH . DIRECTORY_SEPARATOR . $k;
+                if ($p['schema']) {
+                    $p['schema'] = $p['path'] . '/' . basename($p['schema']);
+                }
                 $plugins[$p['name']] = new self($p);
             }
         }
