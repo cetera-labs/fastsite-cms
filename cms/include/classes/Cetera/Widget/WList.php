@@ -45,7 +45,9 @@ class WList extends Templateable {
 			'css_class'          => 'content',
 			'css_row'            => '',
 			'template'		     => 'default.twig',
-			'filter'			 => false,
+			'filter'			 => null,
+            'not_found_block'    => false,
+            'not_found_text'     => '<div class="callout primary">Материалы не найдены</div>'
 		); 
 		
 	}
@@ -95,5 +97,16 @@ class WList extends Templateable {
 			$this->_children->setCurrentPageNumber( $this->getPage() ); 			
 		}
 		return $this->_children;
-    }  	
+    } 
+
+    protected function _getHtml()
+    {
+        if (!$this->getParam('not_found_block') || $this->getChildren()->count() > 0) {
+            return parent::_getHtml();
+        }
+        else {
+            return $this->getParam('not_found_text');
+        }
+        
+    }
 }
