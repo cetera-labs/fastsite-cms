@@ -1,0 +1,36 @@
+{# стандартный foundation pagination #}
+{% block html %}
+{% if widget.hasPages() %}
+
+<ul class="pagination" role="navigation">
+
+	<li class="pagination-previous{% if 1 == widget.getIterator().getCurrentPageNumber() %} disabled{% endif %}">
+		{% if 1 == widget.getIterator().getCurrentPageNumber() %}
+			{{ _('Предыдущая') }}<span class="show-for-sr"> {{ _('страница') }}</span>
+		{% else %}
+			<a href="{{ widget.getUrl(widget.getPreviousPage()) }}" data-page="{{ widget.getPreviousPage() }}">{{ _('Предыдущая') }}<span class="show-for-sr"> {{ _('страница') }}</span></a>
+		{% endif %}
+	</li>                                  
+		
+	{% for i in range(1, widget.getIterator().getPageCount()) %}	
+	<li{% if i == widget.getIterator().getCurrentPageNumber() %} class="current"{% endif %}>
+		{% if i == widget.getIterator().getCurrentPageNumber() %}
+			<span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
+		{% else %}
+			<a href="{{ widget.getUrl(i) }}" data-page="{{ i }}">{{ i }}</a>
+		{% endif %}
+	</li>		
+	{% endfor %}
+		
+	<li class="pagination-next{% if widget.getIterator().getPageCount() <= widget.getIterator().getCurrentPageNumber() %} disabled{% endif %}">
+		{% if widget.getIterator().getPageCount() <= widget.getIterator().getCurrentPageNumber() %}
+			{{ _('Следующая') }}<span class="show-for-sr"> {{ _('страница') }}</span>
+		{% else %}
+			<a href="{{ widget.getUrl(widget.getIterator().getCurrentPageNumber()+1) }}" data-page="{{ widget.getIterator().getCurrentPageNumber()+1 }}">{{ _('Следующая') }}<span class="show-for-sr"> {{ _('страница') }}</span></a>
+		{% endif %}
+	</li>	
+	
+</ul>
+
+{% endif %}
+{% endblock %}
