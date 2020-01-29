@@ -205,6 +205,7 @@ elseif (parse_url($template,  PHP_URL_HOST)) {
 	
 	header("HTTP/1.1 301 Moved Permanently");
 	header('Location: '.$template);
+    die();
   
 }
 elseif (is_callable($template)) {

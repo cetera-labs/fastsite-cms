@@ -32,7 +32,7 @@ $menu = array(
         'items' => array()
     ),
     MENU_PLUGINS => array(
-        'name'  => $translator->_('Плагины'),
+        'name'  => $translator->_('Модули'),
         'items' => array()
     ),            
 );
