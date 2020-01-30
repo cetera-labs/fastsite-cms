@@ -49,8 +49,12 @@ class SessionSaveHandler implements SaveHandlerInterface
      */
     public function read($id)
     { 
-		$res = $this->getDbConnection()->fetchColumn('SELECT value FROM session_data WHERE id=?',[$id],0);
-		if (!$res) $res = '';
+        try {
+            $res = $this->getDbConnection()->fetchColumn('SELECT value FROM session_data WHERE id=?',[$id],0);
+            if (!$res) $res = '';
+        } catch (\Exception $e) {
+            $res = '';
+        }
 		return $res;
     }
 
@@ -62,9 +66,12 @@ class SessionSaveHandler implements SaveHandlerInterface
      */
     public function write($id, $data)
     {
-        if (!$data) 
-            $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
-            else $this->getDbConnection()->executeQuery('REPLACE INTO session_data SET timestamp=?, id=?, value=?',[time(),$id,$data]);
+        try {
+            if (!$data) 
+                $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
+                else $this->getDbConnection()->executeQuery('REPLACE INTO session_data SET timestamp=?, id=?, value=?',[time(),$id,$data]);
+        } catch (\Exception $e) {
+        }
 		return true;
     }
 
@@ -76,7 +83,10 @@ class SessionSaveHandler implements SaveHandlerInterface
      */
     public function destroy($id)
     {
-        $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
+        try {
+            $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE id=?',[$id]);
+        } catch (\Exception $e) {
+        }
 		return true;
     }
 
@@ -88,7 +98,10 @@ class SessionSaveHandler implements SaveHandlerInterface
      */
     public function gc($maxlifetime)
     {
-        $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE timestamp<?',[time()-$maxlifetime]);
+        try {
+            $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE timestamp<?',[time()-$maxlifetime]);
+        } catch (\Exception $e) {
+        }            
 		return true;
     }
 
