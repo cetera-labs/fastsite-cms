@@ -181,7 +181,7 @@ class ImageTransform {
 		if (!$this->isDirty) return $this;
 		
 		if (!file_exists($this->src) || !is_file($this->src)) {
-			$this->src = $this->default;
+			//$this->src = $this->default;
 		}
 		
 		$this->src_exists = $this->src && file_exists($this->src) && is_file($this->src);
@@ -350,8 +350,8 @@ class ImageTransform {
 			$bg = imagecolorallocatealpha($this->dst_img , 255,255,255,127);	
 			imagefilledrectangle($this->dst_img, 0, 0, $this->width , $this->height, $bg);
 			imagealphablending($this->dst_img, true);
-		}
-		
+		}        
+
 		if ($this->src_exists) {
 			
 			$src_img = $function($this->src);
@@ -359,7 +359,9 @@ class ImageTransform {
 			ImageCopyResampled($this->dst_img,$src_img,$dx,$dy,$ox,$oy,$new_w,$new_h,$this->src_info[0],$this->src_info[1]);
 		  
 		} else {
-					  
+
+		   $c = imagecolorallocate($this->dst_img , 0,0,0);	  
+           imagestring($this->dst_img, 5, 0, 0, 'FILE NOT FOUND: '.$this->src, $c);  
 		   $this->src_info['mime'] = 'image/png';
 		   
 		}
