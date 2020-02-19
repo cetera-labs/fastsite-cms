@@ -16,7 +16,7 @@ $data = [];
 
 parse_dir( CMSROOT.'/widgets/'.$widget );
 foreach (Plugin::enum() as $plugin) {
-	parse_dir( WWWROOT.PLUGIN_DIR.'/'.$plugin->name.'/widgets/'.$widget );
+	parse_dir( $plugin->path.'/widgets/'.$widget );
 }
 foreach (Theme::enum() as $theme) {
 	parse_dir( WWWROOT.THEME_DIR.'/'.$theme->name.'/widgets/'.$widget, 'в теме "'.$theme->title.'"' );

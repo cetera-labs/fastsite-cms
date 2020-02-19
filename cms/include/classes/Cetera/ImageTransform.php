@@ -361,7 +361,7 @@ class ImageTransform {
 		} else {
 
 		   $c = imagecolorallocate($this->dst_img , 0,0,0);	  
-           imagestring($this->dst_img, 5, 0, 0, 'FILE NOT FOUND: '.$this->src, $c);  
+           imagestring($this->dst_img, 9, 0, 0, 'FILE NOT FOUND: '.$this->src, $c);  
 		   $this->src_info['mime'] = 'image/png';
 		   
 		}
