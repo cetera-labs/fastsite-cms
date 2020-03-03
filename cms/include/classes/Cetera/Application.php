@@ -607,8 +607,7 @@ class Application {
     {
         if (!$this->getVar('debug_level') && !isset($_REQUEST['debug_level'])) return;
         
-        ob_start();
-		
+        $this->debugMode = true;	
 		ini_set('display_errors', 1);
     }
 	
