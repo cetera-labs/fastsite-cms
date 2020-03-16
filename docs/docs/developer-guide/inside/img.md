@@ -33,7 +33,7 @@ grand_parent: Руководство разработчика
 Чтобы скрыть реальное имя файла и путь к картинке используйте фильтр "encode_image" для Twig или метод \Cetera\ImageTransform::encode($path)
 Напимер: 
 ```
-{{ "/imagetransform/width_300_height_300_fit_3#{material.pic}"|encode_image }}
+{% raw %}{{ "/imagetransform/width_300_height_300_fit_3#{material.pic}"|encode_image }}{% endraw %}
 ```
 
 ## Настройка водяных знаков:
