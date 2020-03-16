@@ -1701,6 +1701,8 @@ class Application {
 				return preg_replace('/[^\+^\d]/i','', $num);
 				
 			} ) );
+            
+            $this->twig->addFilter( new \Twig_SimpleFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
 			
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());
