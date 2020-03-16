@@ -583,7 +583,6 @@ class ImageTransform {
 		$nostore = false;
         
         $url = str_replace(self::PREFIX.'/','', $a->getUnparsedUrl() );
-        print $url.'<br>';
         
         if (self::PREFIX.'/'.self::ENCODE_PREFIX == substr($a->getUnparsedUrl(),0,strlen(self::PREFIX.'/'.self::ENCODE_PREFIX))) {
             $p = pathinfo($a->getUnparsedUrl());            
@@ -671,10 +670,13 @@ class ImageTransform {
     
     public static function encode($path) {
         $p = pathinfo($path);
+        if ('/'.self::PREFIX.'/' != substr($p['dirname'],0,strlen('/'.self::PREFIX.'/'))) {
+            $p['dirname'] = '/'.self::PREFIX.'/null'.$p['dirname'];
+        }
         return '/'.self::PREFIX.'/'.self::ENCODE_PREFIX.'/'.self::dsCrypt(str_replace('/'.self::PREFIX.'/','',$p['dirname'])).'/'.self::dsCrypt($p['filename']).'.'.$p['extension'];
     }
      
-    public static function dsCrypt($input,$decrypt=false) {
+    private static function dsCrypt($input,$decrypt=false) {
         $o = $s1 = $s2 = array(); // Arrays for: Output, Square1, Square2
         // формируем базовый массив с набором символов
         $basea = array('?','(','@',';','$','#',"]","&",'*'); // base symbol set
