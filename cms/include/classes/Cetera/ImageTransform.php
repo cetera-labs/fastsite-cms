@@ -213,7 +213,7 @@ class ImageTransform {
 
 		if ($this->src_exists) {
 		
-			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$info['mime']);
+			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$this->src_info['mime']);
 			
 			switch ($this->src_info[2]) {
 				case 1: $suf = 'gif'; break;

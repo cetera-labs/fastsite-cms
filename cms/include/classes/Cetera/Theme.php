@@ -109,7 +109,9 @@ class Theme implements \ArrayAccess  {
         if ($status) $status('OK', false);  
 		
 		$t = new self($theme);
-		Plugin::installRequirements($t->requires, $status, $translator);	
+        
+        //
+		//Plugin::installRequirements($t->requires, $status, $translator);	
 		
 		if ($extract_initial_data) {
 			
