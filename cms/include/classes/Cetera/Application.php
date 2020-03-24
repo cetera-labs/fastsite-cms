@@ -639,7 +639,10 @@ class Application {
         $sessionManager = new SessionManager();
         $sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
-        $this->_session = new Container(SESSION_NAMESPACE);        
+        try {
+            $this->_session = new Container(SESSION_NAMESPACE);     
+        }
+        catch (\Exception $e) {}     
         
         if (isset($this->_session->locale) && $this->_session->locale) {
             $this->_locale = $this->_session->locale;
