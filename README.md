@@ -2,14 +2,14 @@
 ## About
 Cetera CMS — innovative Cetera Labs content management and eCommerce-product, based at 10-years of experience and agile development methodologies. Cetera CMS helps to start your internet sales in 5 minutes. Cetera CMS is free and licensed under MIT. Product is open source and published at GitHub.
 ## Features, editions, screenshots
-See website — https://ceteralabs.com/ecommerce/software/cetera-cms/
+See website — https://ceteralabs.com/technologies/cetera-cms/
 ## Launch your website in the cloud
-https://ceteralabs.com/ecommerce/software/cetera-cms/create/
+https://ceteralabs.com/technologies/cetera-cms/create/
 ## Docker 
 https://hub.docker.com/r/ceteralabs/cetera-cms/
 ## Cetera Labs services
-* e-Commerce development — https://ceteralabs.com/ecommerce/services/development/
-* e-Commerce support — https://ceteralabs.com/ecommerce/services/support/
+* e-Commerce development — https://ceteralabs.com/services/ecommerce/ecommerce-development/
+* e-Commerce support — https://ceteralabs.com/services/ecommerce/ecommerce-support/
 ## Docs
 * User Guide — https://cetera-labs.github.io/cetera-cms/docs/user-guide
 * Developers Guide — https://cetera-labs.github.io/cetera-cms/docs/developer-guide
