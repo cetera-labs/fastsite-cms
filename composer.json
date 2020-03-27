@@ -29,7 +29,7 @@
         "zendframework/zend-http": "^2.10",
         "zendframework/zend-router": "^3.3",
         "zendframework/zend-mvc": "^3.1",
-	"phpmailer/phpmailer": "~5.2",
+	"phpmailer/phpmailer": "~6.1",
         "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
 	"ifsnop/mysqldump-php":"2.*",
