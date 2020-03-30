@@ -228,7 +228,7 @@ class Theme implements \ArrayAccess  {
     {
 		if (!$name) $name = $this->name;
         $c = $server->getDbConnection()->fetchAssoc('SELECT config FROM theme_config WHERE theme_name = ? and server_id = ?', array($name, $server->id));
-        if ($c) $this->config = json_decode($c['config'], true); else $this->config = null;
+        if ($c) $this->config = json_decode($c['config']); else $this->config = null;
         return $this;
     } 
     
