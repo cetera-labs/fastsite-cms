@@ -93,7 +93,11 @@ class Widget {
     public function getAjaxUrl()
     {
         return '/cms/include/widget.php?ajaxCall=1&locale='.$this->application->getLocale().'&widget='.$this->widgetName.'&unique='.$this->getUniqueId();
-    }		
+    }
+
+	public function isAjax() {
+		return isset($_REQUEST['ajaxCall']);
+	}
     
     public function getId()
     {
