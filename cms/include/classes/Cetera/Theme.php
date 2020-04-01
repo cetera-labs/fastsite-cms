@@ -1,6 +1,8 @@
 <?php
 namespace Cetera; 
 
+use PHPMailer\PHPMailer\PHPMailer;
+
 /**
  * Cetera CMS 3 
  *
@@ -44,7 +46,7 @@ class Theme implements \ArrayAccess  {
 	* @param Zend_Translate $translator класс-переводчик	
 	* @param boolean $extract_initial_data распаковать данные БД: тексты, разделы и т.д.
 	*/		
-    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false, $content = null)
+    public static function install($theme, $status = null, $translator = null, $extract_initial_data = false, $content = null, $user_config = null)
     {
         if (!$translator) $translator = Application::getInstance()->getTranslator();
 		
@@ -107,7 +109,9 @@ class Theme implements \ArrayAccess  {
         if ($status) $status('OK', false);  
 		
 		$t = new self($theme);
-		Plugin::installRequirements($t->requires, $status, $translator);	
+        
+        //
+		//Plugin::installRequirements($t->requires, $status, $translator);	
 		
 		if ($extract_initial_data) {
 			
@@ -122,7 +126,17 @@ class Theme implements \ArrayAccess  {
 		
 		// В файле config.json конфингурация темы "по умолчанию". Устанавливаем её для всех серверов
 		if (file_exists($themePath.'/config.json')) {
-			$config = json_decode( file_get_contents($themePath.'/config.json'), true );
+			$config = json_decode( file_get_contents($themePath.'/config.json'), true );			
+		}
+        else {
+            $config = [];
+        }
+        
+        if (is_array($user_config)) {
+            $config = array_merge( $config, $user_config );
+        }
+        
+		if (count($config)) {
 			foreach (Server::enum() as $s) {				
 				$t->loadConfig( $s );
 
@@ -135,7 +149,7 @@ class Theme implements \ArrayAccess  {
 				}					
 				$t->setConfig( $res, $s );				
 			}			
-		}
+		} 
 
 		//
         if (file_exists($themePath.'/'.THEME_INSTALL))
@@ -416,6 +430,23 @@ class Theme implements \ArrayAccess  {
 		$dump->start($this->getPath().'/'.THEME_DB_DATA);
 		
 	}
+    
+	public function copy($params)
+	{
+        if (self::find($params['name'])) {
+            throw new \Cetera\Exception\Form('Тема уже сущесвует', 'name');
+        }
+        
+        Util::rcopy($this->getPath(), WWWROOT.THEME_DIR.'/'.$params['name']);
+        $new = self::find($params['name']);
+        $new->update($params);
+		// Переименование Ext компонента редактирования настроек
+		if (file_exists( $new->getPath().'/ext/Config.js' )) {
+			$text = file_get_contents($new->getPath().'/ext/Config.js');
+			$text = str_replace("'Theme.".$this->name.".Config'","'Theme.".$new->name.".Config'",$text);
+			file_put_contents($new->getPath().'/ext/Config.js', $text);
+		}        
+    }        
 	
 	public function rename($name)
 	{
@@ -537,11 +568,11 @@ class Theme implements \ArrayAccess  {
 
 		if (isset($info['disableUpgrade'])) unset($info['disableUpgrade']);
 		
-		foreach($info as $key => $value) {
-			if (isset($data[$key])) {
-				$info[$key] = $data[$key];
-			}
-		}
+		if (is_array($data)) {
+            foreach($data as $key => $value) {
+                $info[$key] = $data[$key];
+            }
+        }
 		$this->saveInfo($info);
 		
 		if ($data['name'] && $data['name'] != $this->name) {

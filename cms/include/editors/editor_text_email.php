@@ -16,7 +16,7 @@ function editor_text_email_draw($field_def, $fieldvalue) {
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
                         value: '<?=str_replace("\r",'\r',str_replace("\n",'\n',addslashes($fieldvalue)))?>',
-                        regex: /^[A-Z0-9\._%-]+@[A-Z0-9\.-]+\.[A-Z]{2,4}$/i
+                        regex: /^[A-Z0-9\._%-]+@[A-Z0-9\.-]+\.[A-Z]+$/i
                     })
 <?
     return 25;

@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.60.2');
+define('VERSION', '3.64.2');
 
 /** Название продукта */
 define('APP_NAME', 'Cetera CMS');
@@ -38,7 +38,6 @@ define("UPGRADE_SCRIPT", 'upgrade.php');
 define("INSTALL_SCRIPT", 'install.php');
 
 define('WWWROOT', DOCROOT );
-define('LIBRARY_PATH', 'library');
 
 define('PREFS_FILE',       DOCROOT.'.prefs');
 define('PREFS_FILE_LOCAL', DOCROOT.'.prefs.local');
@@ -55,6 +54,7 @@ define ('BOOTSTRAP_SCRIPT', 'bootstrap.php');
 define ('DEFAULT_TEMPLATE', 'default.php');
 
 define('PLUGIN_DIR',      'plugins');
+define('PLUGIN_COMPOSER_DIR', 'cms/plugins');
 define('PLUGIN_CONFIG',   'config.php');
 define('PLUGIN_INFO',     'info.json');
 define('PLUGIN_CLASSES',  'classes');
@@ -75,6 +75,7 @@ define('CACHE_DIR', DOCROOT.'.cache');
 define('FILECACHE_DIR', CACHE_DIR.'/filecache');
 define('IMAGECACHE_DIR', CACHE_DIR.'/images');
 define('TWIG_CACHE_DIR', CACHE_DIR.'/twig');
+define('ENTITY_CLASSES_DIR', CACHE_DIR.'/classes');
 define('USER_UPLOADS_DIR', DOCROOT.'uploads');
 define('USER_UPLOAD_PATH', '/uploads/');
 
@@ -211,6 +212,7 @@ define('EDITOR_MATSET_RICH', 	    34);
 define('EDITOR_LINK_CATALOG',    	35);
 define('EDITOR_LINKSET2_DEFAULT', 	36);
 define('EDITOR_LINKSET_EDITABLE', 	37);
+define('EDITOR_ACE_HTML', 38);
 // ---------- // Field types ---------------
 
 define('DEBUG_SQL'      , 8);

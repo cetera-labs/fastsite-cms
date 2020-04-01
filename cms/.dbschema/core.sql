@@ -1,6 +1,6 @@
 TRUNCATE TABLE dir_structure;
-INSERT INTO dir_structure VALUES (1,0,1,4,0);
-INSERT INTO dir_structure VALUES (2,1,2,3,1);
+INSERT INTO dir_structure VALUES (1,0,0,1,4,0);
+INSERT INTO dir_structure VALUES (2,1,1,2,3,1);
 
 TRUNCATE TABLE types;
 INSERT INTO `types` 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `dir_data` (
   `type` int(11) unsigned NOT NULL DEFAULT '0',
   `template` varchar(250) DEFAULT NULL,
   `typ` int(11) NOT NULL DEFAULT '0',
-  `dat` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `dat` datetime NOT NULL DEFAULT '2000-01-01 00:00:00',
   `hidden` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `is_server` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `templateDir` varchar(100) DEFAULT NULL,

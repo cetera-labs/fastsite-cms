@@ -75,7 +75,7 @@ Ext.define('Cetera.catalog.ServerCreate', {
 							waitMsg: Config.Lang.wait,
 							scope: this,
 							success: function(form, action) {
-								this.tree.reloadNode(this.tree.getStore().getNodeById('item-0'));
+								this.tree.reloadNode(this.tree.getStore().getNodeById('item-0-1'));
 								this.win.hide();
 							}
 						});

@@ -129,7 +129,19 @@ class Util {
         }
         if ($self) return rmdir($dir);
 		return;
-    }     
+    }  
+
+    // copies files and non-empty directories
+    function rcopy($src, $dst) {
+      if (file_exists($dst)) rrmdir($dst);
+      if (is_dir($src)) {
+        mkdir($dst);
+        $files = scandir($src);
+        foreach ($files as $file)
+        if ($file != "." && $file != "..") self::rcopy("$src/$file", "$dst/$file");
+      }
+      else if (file_exists($src)) copy($src, $dst);
+    }    
     
     /*
     * Если аргумент строка - применяет к ней PHP-функцию addslashes()

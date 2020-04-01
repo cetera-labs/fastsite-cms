@@ -27,9 +27,10 @@ if ($node == 'root') {
 
     $nodes[] = array(
         'text' => 'root',
-		'name' => 'root',
-        'id'   => 'item-0',
-		'item_id'  => 0,
+	    'name' => 'root',
+        'id'   => 'item-0-1',
+	    'item_id'  => 0,
+        'node_id'  => 0,
         'iconCls'  => 'tree-folder-visible',
         'qtip' => '',
         'leaf' => FALSE,
@@ -39,9 +40,10 @@ if ($node == 'root') {
 
 } else {
 
-    list($dummy, $id) = explode('-',$node);
+    list($dummy, $id, $node_id) = explode('-',$node);
     $c = Catalog::getById($id);
     if ($c) {
+        $c->setNodeId($node_id);
 		if (!$c->isLink()) {
 			foreach ($c->children as $child)
 			{
@@ -120,8 +122,9 @@ function process_child($child, $rule, $only, $nolink, $exclude, $nocatselect) {
         'text'  => '<span class="tree-alias">'.$child->alias.'</span>'.$child->name,
 		'name'  => $child->name, 
         'alias' => $child->alias,
-        'id'    => 'item-'.$child->id,
+        'id'    => 'item'.'-'.$child->id.'-'.$child->nodeId,
 		'item_id' => $child->id,
+        'node_id' => (int)$child->nodeId,
         'iconCls'=> $cls,
         'qtip'  => $child->describ,
         'leaf'  => FALSE,

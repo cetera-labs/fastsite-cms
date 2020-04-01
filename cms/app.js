@@ -240,7 +240,7 @@ Ext.application({
         if (window.location.hash)
             this.openBoLink(window.location.hash.substr(1));
             else {            
-                mainTree.expandPath('/root/item-0', 'id', '/', function(bSuccess, oLastNode) {
+                mainTree.expandPath('/root/item-0-1', 'id', '/', function(bSuccess, oLastNode) {
                     if (bSuccess && oLastNode.firstChild) {
                         mainTree.getSelectionModel().doSingleSelect(oLastNode.firstChild);
                         mainTree.expandNode(oLastNode.firstChild);

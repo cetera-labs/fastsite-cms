@@ -60,6 +60,9 @@ class UserAuthAdapter implements AdapterInterface {
         $this->_password   = $v['pass']?$v['pass']:$v['password'];
         $this->_remember   = isset($v['remember'])?$v['remember']:FALSE;
         $this->_backoffice = $backoffice;
+        if (isset($v['backoffice'])) {
+            $this->_backoffice = $v['backoffice'];
+        }
     }
 
 	/**

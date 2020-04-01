@@ -15,6 +15,8 @@ use Zend\Session\Config\StandardConfig;
 use Zend\Session\SessionManager;
 use Zend\Session\Container;
 use Zend\Http\PhpEnvironment\Request;
+use Zend\Http\PhpEnvironment\Response;
+use PHPMailer\PHPMailer\PHPMailer;
  
 /**
  * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 
@@ -37,7 +39,13 @@ class Application {
      * @internal     
      * @var Zend\Http\PhpEnvironment\Request
      */
-    protected $request = null;    
+    protected $request = null;  
+
+    /**
+     * @internal     
+     * @var Zend\Http\PhpEnvironment\Response
+     */
+    protected $response = null;     
 
     /**
      * Экземпляр переводчика
@@ -202,6 +210,8 @@ class Application {
    * @internal
    */  
     private $_dbConnection = null;  
+    
+    private $entityManager;
 
   /*
    * @internal
@@ -546,6 +556,15 @@ class Application {
             
         $this->_dbConnection->executeQuery('SET CHARACTER SET '.$charset);
         $this->_dbConnection->executeQuery('SET names '.$charset);
+        
+        $ormConfig = \Doctrine\ORM\Tools\Setup::createConfiguration( true );
+        $ormConfig->setMetadataDriverImpl(new ORM\Mapping\Driver( $this->_dbConnection->getSchemaManager() ));
+        
+        $evm = new \Doctrine\Common\EventManager();
+        $treeListener = new \Gedmo\Tree\TreeListener();
+        $evm->addEventSubscriber($treeListener);        
+        
+        $this->entityManager = \Doctrine\ORM\EntityManager::create($connectionParams, $ormConfig, $evm);
             
         $this->_connected = true; 
             
@@ -588,8 +607,7 @@ class Application {
     {
         if (!$this->getVar('debug_level') && !isset($_REQUEST['debug_level'])) return;
         
-        ob_start();
-		
+        $this->debugMode = true;	
 		ini_set('display_errors', 1);
     }
 	
@@ -621,7 +639,10 @@ class Application {
         $sessionManager = new SessionManager();
         $sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
-        $this->_session = new Container(SESSION_NAMESPACE);        
+        try {
+            $this->_session = new Container(SESSION_NAMESPACE);     
+        }
+        catch (\Exception $e) {}     
         
         if (isset($this->_session->locale) && $this->_session->locale) {
             $this->_locale = $this->_session->locale;
@@ -707,9 +728,19 @@ class Application {
 	 */ 
     public function getCatalog()
     {
+        return $this->getSection();
+    }
+    
+	/**
+	 * Возвращает текущий раздел
+	 * 	 	   
+	 * @return Catalog 
+	 */ 
+    public function getSection()
+    {
         if (!$this->_catalog) $this->decodeRequestUri();
         return $this->_catalog;
-    }
+    }    
     
 	/**
 	 * Возвращает нераспарсенную часть REQUEST_URI
@@ -845,8 +876,10 @@ class Application {
         $this->_result_handler[] = $function;
     }
     
-    public function applyOutputHandler(& $result)
+    public function applyOutputHandler()
     {
+        $result = $this->getResponse()->getContent();
+        
         $this->parseWidgets($result);
 		$this->parseParams($result);
         
@@ -870,6 +903,8 @@ class Application {
             
             }
         }
+        
+        $this->getResponse()->setContent($result);
     }
     
 	/**
@@ -1198,7 +1233,7 @@ class Application {
 				return \Cetera\Application::getInstance()->getTranslator()->_($text);
 			}));
 		
-			$mail = new \PHPMailer(true);
+			$mail = new PHPMailer(true);
 			
 			$params['mailer'] = $mail;
 			
@@ -1669,6 +1704,8 @@ class Application {
 				return preg_replace('/[^\+^\d]/i','', $num);
 				
 			} ) );
+            
+            $this->twig->addFilter( new \Twig_SimpleFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
 			
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());
@@ -1987,6 +2024,13 @@ class Application {
         return $this->request;
     }
     
+    public function getResponse() {
+        if ($this->response == null) {
+            $this->response = new Response();
+        }
+        return $this->response;
+    }    
+    
     public function setRouter($router) {
         $this->router = $router;
     }
@@ -1996,5 +2040,9 @@ class Application {
             $this->router = new \Zend\Router\SimpleRouteStack();
         }
         return $this->router;
-    }    
+    }
+
+    public function getEntityManager() {
+        return $this->entityManager;
+    }
 }

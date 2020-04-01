@@ -63,6 +63,10 @@ else {
 
 }
 
+$loader = new \Composer\Autoload\ClassLoader();
+$loader->add('Cetera\Entity', ENTITY_CLASSES_DIR);
+$loader->register();
+
 $application = \Cetera\Application::getInstance();
 
 if ($application->getVar('class_compability')) {

@@ -270,7 +270,7 @@ class BackOffice {
                 
                 $this->_modules['plugins'] = array(
 					'position' => MENU_SERVICE,
-					'name' 	   => $translator->_('Плагины'),
+					'name' 	   => $translator->_('Установленные модули'),
 					'icon'     => 'images/plugin.png',
 					'class'    => 'Cetera.plugin.List',
 					'iconCls'  => 'x-fa fa-plug'

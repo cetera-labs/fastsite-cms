@@ -34,7 +34,11 @@ Ext.define('Cetera.model.SiteTree', {
 		{
 			name: 'item_id',
 			type: 'int'
-		}		
+		},
+		{
+			name: 'node_id',
+			type: 'int'
+		}			
 	],
 	
 	proxy: {

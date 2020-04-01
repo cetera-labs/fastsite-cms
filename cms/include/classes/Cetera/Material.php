@@ -388,11 +388,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
         if (!$this->id) {
             if ($this->idcat == CATALOG_VIRTUAL_HIDDEN) $type = $type | MATH_ADDED | MATH_PUBLISHED;
         }
-        $author = json_decode( $this->fields['autor'] );
-        if ( is_object($author) ) $this->fields['autor'] = $author->id;
         
-        $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->name).',idcat='.(int)$this->idcat.',autor='.(int)$this->fields['autor'].",type=$type";
-        $values .= $this->saveDynamicFields(array('name', 'alias', 'idcat', 'autor'), $hidden);
+        $values = 'alias="'.$this->alias.'", name='.$this->getDbConnection()->quote($this->name).',idcat='.(int)$this->idcat.",type=$type";
+        $values .= $this->saveDynamicFields(['name', 'alias', 'idcat'], $hidden);
 		
 		if (isset($this->fields['DESIRABLE_ID'])) {
 			$res = self::getDbConnection()->fetchColumn('SELECT COUNT(*) FROM '.$this->table.' WHERE id=?',[$this->fields['DESIRABLE_ID']],0);
@@ -401,16 +399,11 @@ class Material extends DynamicFieldsObject implements SiteItem {
 			}
 		}
              
-        if ($this->id) {
-        
-            $sql = "UPDATE ".$this->table." SET ".$values." WHERE id=".$this->id;
-            
-        } else {
-        
-            $sql = "INSERT INTO ".$this->table." SET ".$values;
-            
+        if ($this->id) {        
+            $sql = "UPDATE ".$this->table." SET ".$values." WHERE id=".$this->id;            
+        } else {        
+            $sql = "INSERT INTO ".$this->table." SET ".$values;            
         }
-
         $this->getDbConnection()->executeQuery($sql);
         
 		if (!$this->id) {

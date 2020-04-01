@@ -45,6 +45,9 @@ class Plugin implements \ArrayAccess  {
             $composer_plugins = include( VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
             foreach($composer_plugins as $k => $p) {
                 $p['path'] = VENDOR_PATH . DIRECTORY_SEPARATOR . $k;
+                if ($p['schema']) {
+                    $p['schema'] = $p['path'] . '/' . basename($p['schema']);
+                }
                 $plugins[$p['name']] = new self($p);
             }
         }
@@ -153,7 +156,7 @@ class Plugin implements \ArrayAccess  {
             $schema->dropSchema($this->name);      
         }
         Util::delTree(WWWROOT.PLUGIN_DIR.'/'.$this->name);
-    }  
+    }   
     
 	/**
 	* Включить модуль
@@ -239,7 +242,17 @@ class Plugin implements \ArrayAccess  {
         else {
             return DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$this->name;
         }
-    }        
+    }  
+
+    public function getUrlPath()
+    {
+        if ($this->composer) {
+            return '/'.PLUGIN_COMPOSER_DIR.'/'.$this->name.'/';
+        }
+        else {
+            return '/'.PLUGIN_DIR.'/'.$this->name.'/';
+        }
+    }     
     
     private function grabInfo()
     {

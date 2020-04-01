@@ -124,7 +124,22 @@ Ext.define('Cetera.widget.List', {
 				name: 'paginator_url',
 				fieldLabel: _('ссылка на страницу')
 			}]
-		},			
+		},	
+		{
+			xtype: 'fieldcontainer',
+			cls: 'x-field',
+			layout: 'hbox',
+			items: [{
+                flex: 1,
+				xtype:          'checkbox',
+				boxLabel:       _('текст, если нет материалов'),
+				name:           'not_found_block'
+			}, {
+                flex: 2,
+				xtype: 'textfield',
+				name: 'not_found_text'
+			}]
+		},		
 		{
 			xtype: 'widgettemplate',
 			widget: 'List'

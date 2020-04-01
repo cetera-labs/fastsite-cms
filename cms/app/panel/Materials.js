@@ -144,7 +144,7 @@ Ext.define('Cetera.panel.Materials', {
     
         if (!this.siteTree) {
             this.siteTree = Ext.create('Cetera.window.SiteTree', {
-                expand   : '/root/item-0',
+                expand   : '/root/item-0-1',
                 nolink : 1,
                 rule   : '5u6',
 				norootselect: 1,

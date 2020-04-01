@@ -24,6 +24,7 @@ class ObjectField implements \ArrayAccess {
         switch($data['type']) {
             case FIELD_LINK:
                 if ($data['pseudo_type'] == PSEUDO_FIELD_LINK_USER) return new ObjectFieldLinkUser($data, $od);
+                if ($data['pseudo_type'] == PSEUDO_FIELD_LINK_CATALOG) return new ObjectFieldLinkCatalog($data, $od);
                 return new ObjectFieldLink($data, $od);
             case FIELD_LINKSET:
                 if ($data['pseudo_type'] == PSEUDO_FIELD_LINKSET_USER) return new ObjectFieldLinkSetUser($data, $od);
@@ -187,6 +188,14 @@ class ObjectFieldMaterial extends ObjectFieldLinkAbstract {
 class ObjectFieldLinkUser extends ObjectFieldLinkAbstract {
 
     use ObjectFieldUserTrait;
+}
+
+/**
+ * @internal
+*/
+class ObjectFieldLinkCatalog extends ObjectFieldLinkAbstract {
+
+    use ObjectFieldCatalogTrait;
 }
 
 /**

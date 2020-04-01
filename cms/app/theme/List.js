@@ -57,10 +57,20 @@ Ext.define('Cetera.theme.List', {
 
             }
         });
+        
+        this.copyAction = Ext.create('Ext.Action', {
+            iconCls: 'icon-copy', 
+            text: _('Копировать'),
+            disabled: true,
+            scope: this,
+            handler: function(widget, event) {
+				this.getCopyWindow().show();
+            }
+        });        
 		
         this.renameAction = Ext.create('Ext.Action', {
             iconCls: 'icon-settings', 
-            tooltip: _('Конфигурация'),
+            text: _('Конфигурация'),
             disabled: true,
             scope: this,
             handler: function(widget, event) {
@@ -74,10 +84,8 @@ Ext.define('Cetera.theme.List', {
             hidden: !Config.developerKey,
 			disabled: true,
             scope: this,
-            handler: function(widget, event) {
-				
+            handler: function(widget, event) {				
 				this.getContentSettingsWindow().show();
-
             }
         });			
     
@@ -102,7 +110,9 @@ Ext.define('Cetera.theme.List', {
                     }, '-',
                     this.activateAction,
                     this.upgradeAction,
-                    this.deleteAction, '-',
+                    this.deleteAction, 
+                    this.copyAction, 
+                    '-',
 					this.renameAction, 
 					this.uploadAction,
 					'-',				
@@ -140,8 +150,11 @@ Ext.define('Cetera.theme.List', {
         this.contextMenu = Ext.create('Ext.menu.Menu', {
             items: [
                 this.activateAction,
-                this.upgradeAction,'-',
-                this.deleteAction,'-',
+                this.upgradeAction,
+                '-',
+                this.copyAction,
+                this.deleteAction,
+                '-',
 				this.renameAction			
             ]
         });
@@ -155,6 +168,7 @@ Ext.define('Cetera.theme.List', {
                 if (selections.length) {
                     this.activateAction.enable(); 
 					this.renameAction.enable();
+                    this.copyAction.enable();
 					if (selections[0].get('repository') && !selections[0].get('disableUpgrade')) {
 						this.upgradeAction.enable(); 
 					}
@@ -165,7 +179,7 @@ Ext.define('Cetera.theme.List', {
 						this.deleteAction.disable();
 					}
 					else {
-						this.deleteAction.enable();	
+						this.deleteAction.enable();		
 					}
 					if (selections[0].get('developerMode')) {
 						this.uploadAction.enable(); 
@@ -174,6 +188,7 @@ Ext.define('Cetera.theme.List', {
 						this.uploadAction.disable();  
 					}					
                 } else {
+                    this.copyAction.disable();
                     this.deleteAction.disable();
                     this.activateAction.disable();
                     this.upgradeAction.disable();
@@ -250,6 +265,24 @@ Ext.define('Cetera.theme.List', {
 		}
 		return this.settingsWindow;
 	},
+    
+	getCopyWindow: function() {
+		
+        var rec = this.getSelectionModel().getSelection()[0];
+		
+		if (!this.copyWindow) {
+			this.copyWindow = Ext.create('Cetera.theme.Copy',{
+				theme: rec,
+				listeners: {
+					'theme_update': function() {
+						this.reload();
+					},
+					scope: this
+				}
+			});
+		}
+		return this.copyWindow;
+	},    
 
 	getContentSettingsWindow: function() {
 		

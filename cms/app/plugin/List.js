@@ -122,16 +122,17 @@ Ext.define('Cetera.plugin.List', {
                     }, '-',
                     this.enableAction,
                     this.disableAction,
-                    this.upgradeAction,
-                    this.deleteAction, '-',
-                    {
+                    //this.upgradeAction,
+                    this.deleteAction, 
+                    '-',
+                    /*{
                         text: Config.Lang.addPlugin,
                         icon: 'images/16X16/pack.gif',
                         handler: function() { 
 							Ext.create('Cetera.plugin.Add').show();
 						},
                         scope: this
-                    }
+                    }*/
                 ]
             }],
             
@@ -161,7 +162,7 @@ Ext.define('Cetera.plugin.List', {
             items: [
                 this.enableAction,
                 this.disableAction,
-                this.upgradeAction,
+                //this.upgradeAction,
                 this.deleteAction
             ]
         });

@@ -82,6 +82,7 @@ Ext.define('Cetera.window.SiteTree', {
         var name = sn.get('text');
         if (sn) {
             var a = sn.getId().split('-');
+            var node_id = sn.get('node_id');
             var res = '';
             var n = '';
 			var url = '/';
@@ -95,11 +96,12 @@ Ext.define('Cetera.window.SiteTree', {
             }
             this.fireEvent('select', {
                 id:         a[1],
+                node_id:    node_id,
                 path:       this.path,
                 name:       name,
                 name_to:    res,
 				url:        url,
-                table:      a[2]?a[2]:'main',
+                table:      a[3]?a[2]:'main',
 				type:       a[3]?a[3]:4,
             });
         }

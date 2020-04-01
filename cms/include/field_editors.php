@@ -42,6 +42,7 @@ $editors = array(
 	EDITOR_MATERIAL_DEFAULT => 'editor_material_default',
 	EDITOR_DOUBLE_DEFAULT   => 'editor_double_default',
 	EDITOR_TAGS_DEFAULT     => 'editor_tags_default',
+    EDITOR_ACE_HTML         => 'editor_ace_html',
 );
 
 $field_editors = array(
@@ -49,6 +50,7 @@ $field_editors = array(
 						EDITOR_TEXT_DEFAULT,
 						EDITOR_TEXT_AREA,
 						EDITOR_TEXT_CKEDITOR_SMALL,
+                        EDITOR_ACE_HTML,
 						EDITOR_TEXT_ALIAS,
 						EDITOR_TEXT_PASSWORD,
 						EDITOR_TEXT_EMAIL,
@@ -62,12 +64,14 @@ $field_editors = array(
 						EDITOR_TEXT_CKEDITOR,
                         EDITOR_TEXT_CKEDITOR_SMALL,
 						EDITOR_TEXT_AREA,
+                        EDITOR_ACE_HTML,
 						EDITOR_USER,
 					   ),
 	FIELD_HUGETEXT => array(
 						EDITOR_TEXT_CKEDITOR,
                         EDITOR_TEXT_CKEDITOR_SMALL,
 						EDITOR_TEXT_AREA,
+                        EDITOR_ACE_HTML,
 						EDITOR_USER,
     ),
 	FIELD_INTEGER => array(
@@ -195,6 +199,7 @@ $l_editors = array(
 	EDITOR_LINK_FORM 		=> $translator->_('Выбор формы (выпадающий список)'),
 	EDITOR_TEXT_ALIAS 		=> $translator->_('Однострочный редактор текста (только лат. и цифр. символы)'),
 	EDITOR_TEXT_AREA		=> $translator->_('Многострочный редактор текста'),
+    EDITOR_ACE_HTML         => $translator->_('Многострочный редактор c подсветкой HTML'),
 	EDITOR_HIDDEN			=> $translator->_('отсутствует'),
 	EDITOR_USER				=> $translator->_('Специальный редактор'),
 	EDITOR_MATSET_FILES		=> $translator->_('Загрузка/редактирование группы файлов'),

@@ -122,13 +122,12 @@ Ext.define('Cetera.catalog.SiteTree', {
     
     afterRender: function() {
         this.callParent();  
-        this.expandPath( '/root/item-0' );   
+        this.expandPath( '/root/item-0-1' );   
     },
     
     getSelectedId: function() {
         var sn = this.getSelectionModel().getLastSelected();
         if (!sn) return false;
-        var a = sn.getId().split('-');
-        return a[1];
+        return sn.get('item_id');
     }
 });

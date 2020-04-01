@@ -251,6 +251,7 @@ body .main-navigation .x-treelist-item-selected > .x-treelist-row {
 .icon-up { background:url(../images/up.gif) no-repeat center center !important; }
 .icon-down { background:url(../images/down.gif) no-repeat center center !important; }
 .icon-new_folder_linked { background:url(../images/new_folder_linked.gif) no-repeat center center !important; }
+.icon-new_folder_hardlinked { background:url(../images/new_folder_linked_hard.png) no-repeat center center !important;}
 .icon-copy { background:url(../images/copy.gif) no-repeat center center !important; }
 .icon-delete { background:url(../images/delete.gif) no-repeat center center !important; }
 .icon-delete2 { background:url(../images/16X16/delete.gif) no-repeat center center !important; }

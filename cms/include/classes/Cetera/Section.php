@@ -48,6 +48,13 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
     private $_children = FALSE;
     
     /**
+     * Id структуры в которой находится раздел
+     * @internal          
+     * @var int
+     */   
+    protected $_nodeId;    
+    
+    /**
      * Порядковый номер раздела
      * @internal          
      * @var int
@@ -133,7 +140,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
     protected $_fullUrl = FALSE;
     
     /**
-     * Путь до раздела для Ext.tree (/root/item-0/.../item-ID)
+     * Путь до раздела для Ext.tree (/root/item-0-1/.../item-ID-SectionId)
      * @internal          
      * @var string
      */ 
@@ -183,7 +190,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      * @internal
      * @var boolean          
      */   
-    protected $_inheritFields = TRUE;         
+    protected $_inheritFields = TRUE;    
        
     /**
      * Устанавливает поля раздела
@@ -217,10 +224,14 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         
         parent::setFields($fields);
 		$this->_catalogType   = $fields['type'];
+        $this->_nodeId   = $fields['node_id'];
         $this->_inheritFields = isset($fields['inheritFields'])?$fields['inheritFields']:false;
     }
 	   
-     
+    public function setNodeId($id)
+    {
+        $this->_nodeId   = $id;
+    }
 	
   	/**
   	 * Возвращает раздел по его идентификатору.	
@@ -245,6 +256,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         $c = static::create();
 		$c->setFields(array(
             'id'            => 0,
+            'node_id'       => 1,
             'name'          => 'root', 
             'type'          => 0,
             'tag'           => 0,
@@ -274,7 +286,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
                 return parent::fetch($data);
             }
         } else {
-            $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
+            $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level, B.id as node_id FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
             if ($fields) {
 				if ($i_am_server) return parent::fetch($fields);
                 return static::fetch($fields);
@@ -353,10 +365,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */    
     public function getPath()
     {      	
-        if (!$this->_path) {
-			
-			$this->_path = new Iterator\Catalog\Path( $this );                
-        
+        if (!$this->_path) {			
+			$this->_path = new Iterator\Catalog\Path( $this );                        
         }
         return $this->_path;
     }
@@ -387,7 +397,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
           $this->_treePath = '';
 
           foreach ($this->getPath() as $item) { 	  
-            $this->_treePath .= '/item-'.$item->id;
+            $this->_treePath .= '/item-'.$item->id.'-'.$item->nodeId;
             if ($item->isRoot()) continue;
             
             $this->_fullUrl .= '/'.$item->alias;
@@ -410,18 +420,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */ 
     public function getUrl()
     {
-		if ($this->isLink()) {
-			if ($this->getParentServer()->id != $this->prototype->getParentServer()->id) {
-				return $this->prototype->getFullUrl();
-			}
-			else {
-				return $this->prototype->getUrl();
-			}
-		}
-		else {
-			if ($this->_url === FALSE) $this->fillPath();
-			return $this->_url;
-		}
+		if ($this->_url === FALSE) $this->fillPath();
+        return $this->_url;        
     } 
     
     /**
@@ -818,8 +818,10 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
     		$conn->executeQuery('UPDATE dir_data SET '.implode(',', $p).' WHERE id='.$id);
     
         $tree = new CDBTree('dir_structure');
-        $prnt = $conn->fetchColumn('select id from dir_structure where data_id=?', array($this->id));
-        $tree->insert($prnt, array('data_id'=>$id));
+        $prnt = $conn->fetchAll('select id from dir_structure where data_id=?', array($this->id));
+        foreach ($prnt as $p) {
+            $tree->insert($p['id'], array('data_id'=>$id));
+        }
         	   
         if ($fields['server']) {
         		$conn->executeQuery("delete from server_aliases where id=$id");
@@ -869,14 +871,12 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 		
 		}
     
-    	$parent = array();
-    	$r = self::getDbConnection()->query('SELECT A.id, B.data_id 
-                          FROM dir_structure A, dir_structure B 
-                          WHERE A.data_id='.$this->id.' and B.lft<A.lft and B.rght>A.rght and B.level=A.level-1
+    	$r = self::getDbConnection()->query('SELECT A.id
+                          FROM dir_structure A
+                          WHERE A.data_id='.$this->id.'
             			  ORDER BY A.lft DESC');
     	$res = TRUE;
     	while ($f = $r->fetch()) {
-    		$parent[] = $f['data_id'];
     		if (!$tree->deleteAll($f['id'])) $res = FALSE;
     	} // while
 		
@@ -1387,4 +1387,5 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 			'user_fields' => $userFields,
 		);
 	}
+    
 }

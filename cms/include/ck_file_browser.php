@@ -4,19 +4,23 @@
 <head>    
     <meta charset="utf-8">
     <base href="../">
+<?php if (COMPOSER_INSTALL) : ?> 
+    <link rel="stylesheet" type="text/css" href="/cms/css/global.css">
+    <script type="text/javascript" src="/cms/js/vendor.js"></script> 
+<?php else : ?>      
     <?php \Cetera\Util::commonHead(); ?>
 	<link rel="stylesheet" type="text/css" href="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.css">
 	<script type="text/javascript" src="/<?php echo LIBRARY_PATH; ?>/cropper/cropper.min.js"></script>
+<?php endif; ?>    
     <script type="text/javascript" src="config.php"></script>
 <script>
 
-Ext.Loader.setPath('Ext.ux', '/<?php echo LIBRARY_PATH; ?>/extjs4/ux');
+Ext.Loader.setPath('Ext.ux', './app/ux');
 Ext.Loader.setPath('Cetera', 'app');
 
 Ext.require([
     'Ext.ux.StatusBar'
 ]);
-
 
 Ext.onReady(function(){
 

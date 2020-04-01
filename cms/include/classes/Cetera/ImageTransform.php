@@ -16,7 +16,8 @@ namespace Cetera;
  */ 
 class ImageTransform {
 	
-	const PREFIX = '/imagetransform';
+	const PREFIX = 'imagetransform';
+    const ENCODE_PREFIX = 'c';
 	
 	const FIT_NONE = 0;
 	const FIT_CROP = 1;
@@ -181,7 +182,7 @@ class ImageTransform {
 		if (!$this->isDirty) return $this;
 		
 		if (!file_exists($this->src) || !is_file($this->src)) {
-			$this->src = $this->default;
+			//$this->src = $this->default;
 		}
 		
 		$this->src_exists = $this->src && file_exists($this->src) && is_file($this->src);
@@ -212,7 +213,7 @@ class ImageTransform {
 
 		if ($this->src_exists) {
 		
-			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$info['mime']);
+			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$this->src_info['mime']);
 			
 			switch ($this->src_info[2]) {
 				case 1: $suf = 'gif'; break;
@@ -350,8 +351,8 @@ class ImageTransform {
 			$bg = imagecolorallocatealpha($this->dst_img , 255,255,255,127);	
 			imagefilledrectangle($this->dst_img, 0, 0, $this->width , $this->height, $bg);
 			imagealphablending($this->dst_img, true);
-		}
-		
+		}        
+
 		if ($this->src_exists) {
 			
 			$src_img = $function($this->src);
@@ -359,7 +360,9 @@ class ImageTransform {
 			ImageCopyResampled($this->dst_img,$src_img,$dx,$dy,$ox,$oy,$new_w,$new_h,$this->src_info[0],$this->src_info[1]);
 		  
 		} else {
-					  
+
+		   $c = imagecolorallocate($this->dst_img , 0,0,0);	  
+           imagestring($this->dst_img, 9, 0, 0, 'FILE NOT FOUND: '.$this->src, $c);  
 		   $this->src_info['mime'] = 'image/png';
 		   
 		}
@@ -577,17 +580,32 @@ class ImageTransform {
 	public static function transformFromURI()
 	{
 		$a = Application::getInstance();
-		
 		$nostore = false;
-		
-		$path = explode('/', $a->getUnparsedUrl() );
-        array_shift($path);
+        
+        $url = str_replace(self::PREFIX.'/','', $a->getUnparsedUrl() );
+        
+        if (self::PREFIX.'/'.self::ENCODE_PREFIX == substr($a->getUnparsedUrl(),0,strlen(self::PREFIX.'/'.self::ENCODE_PREFIX))) {
+            $p = pathinfo($a->getUnparsedUrl());            
+            $url = self::dsCrypt( str_replace(self::PREFIX.'/'.self::ENCODE_PREFIX.'/','',$p['dirname']),true ).'/'.self::dsCrypt($p['filename'],true).'.'.$p['extension'];
+        }        
+                		
+		$path = explode('/',$url);
 		$params = explode('_', array_shift($path));
+        
 		$file = implode('/', $path);   
         
 		if ($file) {		
-			if (!file_exists(WWWROOT.$file)) $nostore = true;		
-			$img = new self(WWWROOT.$file);
+			if (!file_exists(WWWROOT.$file)) {
+                $nostore = true;		
+            }
+            else {
+                $pathinfo = pathinfo(WWWROOT.$file);
+                if (!in_array(strtolower($pathinfo['extension']),['jpg','png','gif','jpeg'])) {
+                    header('Location: /'.$file );
+                    die();
+                }
+            }
+            $img = new self(WWWROOT.$file);
 		}
 		else {
 			$nostore = true;
@@ -648,5 +666,63 @@ class ImageTransform {
        
         // insert cut resource to destination image
         imagecopymerge($dst_im, $cut, $dst_x, $dst_y, 0, 0, $src_w, $src_h, $pct);
-    } 	
+    }
+    
+    public static function encode($path) {
+        $p = pathinfo($path);
+        if ('/'.self::PREFIX.'/' != substr($p['dirname'],0,strlen('/'.self::PREFIX.'/'))) {
+            $p['dirname'] = '/'.self::PREFIX.'/null'.$p['dirname'];
+        }
+        return '/'.self::PREFIX.'/'.self::ENCODE_PREFIX.'/'.self::dsCrypt(str_replace('/'.self::PREFIX.'/','',$p['dirname'])).'/'.self::dsCrypt($p['filename']).'.'.$p['extension'];
+    }
+     
+    private static function dsCrypt($input,$decrypt=false) {
+        $o = $s1 = $s2 = array(); // Arrays for: Output, Square1, Square2
+        // формируем базовый массив с набором символов
+        $basea = array('?','(','@',';','$','#',"]","&",'*'); // base symbol set
+        $basea = array_merge($basea, range('a','z'), range('A','Z'), range(0,9) );
+        $basea = array_merge($basea, array('!',')','_','+','|','%',']','[','.',' ') );
+
+        $basea = array_merge(['_'], range('a','z'), range(0,9) );
+
+        $dimension=6; // of squares
+        for($i=0;$i<$dimension;$i++) { // create Squares
+            for($j=0;$j<$dimension;$j++) {
+                $s1[$i][$j] = $basea[$i*$dimension+$j];
+                $s2[$i][$j] = str_rot13($basea[($dimension*$dimension-1) - ($i*$dimension+$j)]);
+            }
+        }
+        unset($basea);
+        $m = floor(strlen($input)/2)*2; // !strlen%2
+        $symbl = $m==strlen($input) ? '':$input[strlen($input)-1]; // last symbol (unpaired)
+        $al = array();
+        // crypt/uncrypt pairs of symbols
+        for ($ii=0; $ii<$m; $ii+=2) {
+            $symb1 = $symbn1 = strval($input[$ii]);
+            $symb2 = $symbn2 = strval($input[$ii+1]);
+            $a1 = $a2 = array();
+            for($i=0;$i<$dimension;$i++) { // search symbols in Squares
+                for($j=0;$j<$dimension;$j++) {
+                    if ($decrypt) {
+                        if ($symb1===strval($s2[$i][$j]) ) $a1=array($i,$j);
+                        if ($symb2===strval($s1[$i][$j]) ) $a2=array($i,$j);
+                        if (!empty($symbl) && $symbl===strval($s2[$i][$j])) $al=array($i,$j);
+                    }
+                    else {
+                        if ($symb1===strval($s1[$i][$j]) ) $a1=array($i,$j);
+                        if ($symb2===strval($s2[$i][$j]) ) $a2=array($i,$j);
+                        if (!empty($symbl) && $symbl===strval($s1[$i][$j])) $al=array($i,$j);
+                    }
+                }
+            }
+            if (sizeof($a1) && sizeof($a2)) {
+                $symbn1 = $decrypt ? $s1[$a1[0]][$a2[1]] : $s2[$a1[0]][$a2[1]];
+                $symbn2 = $decrypt ? $s2[$a2[0]][$a1[1]] : $s1[$a2[0]][$a1[1]];
+            }
+            $o[] = $symbn1.$symbn2;
+        }
+        if (!empty($symbl) && sizeof($al)) // last symbol
+            $o[] = $decrypt ? $s1[$al[1]][$al[0]] : $s2[$al[1]][$al[0]];
+        return implode('',$o);
+    }   
 }
