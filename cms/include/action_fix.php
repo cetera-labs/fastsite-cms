@@ -68,7 +68,7 @@ if ($_REQUEST['db_structure']) {
     		    if (!isset($types[$error['table']])) {
         		    $res = $schema->parseSchema($error['module']);
 					$types = array_merge($types, $res['types']);
-					$schema->fixTypes($res['types']);
+					$schema->fixTypes($res['types'], false);
         		}          
         
         } else {

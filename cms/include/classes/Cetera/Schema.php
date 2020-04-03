@@ -294,7 +294,7 @@ class Schema {
     	if (is_array($types)) foreach ($types as $type) 
 		{	
 			if (!$force) {
-				$res = $this->compateType('',$type);
+				$res = $this->compareType('',$type);
 				if (!count($res)) {
 					continue;
 				}
