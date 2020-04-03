@@ -199,7 +199,7 @@ class Schema {
 				$this->dbConnection->executeQuery($this->getCreateTable($table));
 			}
         
-        $this->fixTypes($res['types']);
+        $this->fixTypes($res['types'], true);
 		$this->fixWidgets($res['widgets']);
 		$this->fixMenus($res['menus']);
      
@@ -218,7 +218,8 @@ class Schema {
             $this->dbConnection->executeQuery( $this->get_fix_query($a['tables'], $error) );
         }
         
-        $this->fixTypes($a['types']);        
+        $this->fixTypes($a['types'], false); 
+		
         $this->fixWidgets($a['widgets']);
 		$this->fixMenus($a['menus']);
     } 
@@ -287,19 +288,43 @@ class Schema {
     	}      
     } 
     
-    public function fixTypes($types)
+    public function fixTypes($types, $force = true)
     {       
     
     	if (is_array($types)) foreach ($types as $type) 
-		{		
-            try 
-			{
+		{	
+			if (!$force) {
+				$res = $this->compateType('',$type);
+				if (!count($res)) {
+					continue;
+				}
+				if ($res[0]['error'] != self::TYPE_NOT_EXISTS) {
+					$od = ObjectDefinition::findByTable($type['name']);
+					foreach ($res as $r) {
+						foreach($type['fields'] as $field) {
+							if ($field['name'] == $r['field']) {
+								break;
+							}
+						}
+						if ($r['error'] == self::TYPE_FIELD_NOT_FOUND) {
+							$od->addField($field);
+						}
+						else {
+							$f = $od->getField($field['name']);
+							$field['field_id'] = $f['field_id'];
+							$od->updateField($field);
+						}
+					}
+					continue;
+				}
+			}
+			
+            try {
                 $od = ObjectDefinition::findByTable($type['name'])->update($type);
             } catch (\Exception $e) {
                 $od = ObjectDefinition::create($type);
             }            
-            foreach($type['fields'] as $field) {
-            
+            foreach($type['fields'] as $field) {           
                 try {
                     $f = $od->getField($field['name']);
                 } catch (\Exception $e) {                
@@ -523,6 +548,7 @@ class Schema {
 						if ($prop == 'fixed') continue;
 						if ($prop == 'show') continue;
 						if ($prop == 'pseudo_type') continue;
+						if ($prop == 'required') continue;
 						if (!$f['fixed']) {
 						    if ($prop == 'editor') continue;
 						}
