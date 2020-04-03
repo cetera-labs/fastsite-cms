@@ -521,6 +521,8 @@ class Schema {
 						if ($prop == 'description') continue;
 						if ($prop == 'editor_user') continue;
 						if ($prop == 'fixed') continue;
+						if ($prop == 'show') continue;
+						if ($prop == 'pseudo_type') continue;
 						if (!$f['fixed']) {
 						    if ($prop == 'editor') continue;
 						}
@@ -1045,9 +1047,7 @@ class Schema {
         $xml = '<object name="'.$od->table.'" description="'.htmlspecialchars($od->description).'" fixed="'.(int)$od->fixed.'" handler="'.htmlspecialchars($od->handler).'" plugin="'.htmlspecialchars($od->plugin).'">'."\n";
       	
         foreach($od->getFields() as $f) {
-        
             $xml .= '    <field name="'.htmlspecialchars($f['name']).'" type="'.(int)$f['type'].'" pseudo_type="'.(int)$f['pseudo_type'].'" description="'.htmlspecialchars($f['describ']).'" length="'.(int)$f['len'].'" show="'.(int)$f['shw'].'" required="'.(int)$f['required'].'" fixed="'.(int)$f['fixed'].'" editor="'.(int)$f['editor'].'" editor_user="'.htmlspecialchars($f['editor_user']).'" default_value="'.htmlspecialchars($f['default_value']).'" />'."\n";
-        
         }
         
         $xml .= "</object>\n\n";
