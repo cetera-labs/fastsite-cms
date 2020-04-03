@@ -1,0 +1,19 @@
+{# бесконечная подгрузка #}
+{% if widget.hasPages() and widget.getIterator().getCurrentPageNumber() < widget.getIterator().getPageCount() %}
+
+    <a class="x-infinite-marker" href="{{ widget.getUrl(widget.getIterator().getCurrentPageNumber()+1) }}" data-page="{{ widget.getIterator().getCurrentPageNumber()+1 }}">***</a>
+
+    {% set script %}
+    document.addEventListener('DOMContentLoaded', function () {
+        jQuery(window).scroll(function () {
+            var marker = jQuery('.x-infinite-marker');
+            if (!marker.get(0)) return;
+            if ( marker.get(0).getBoundingClientRect().top - $(window).height() < 10) {
+                marker.get(0).click();
+            }
+        });
+    });
+    {% endset %}
+    {% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
+
+{% endif %}
