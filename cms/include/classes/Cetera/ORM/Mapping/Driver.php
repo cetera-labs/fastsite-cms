@@ -136,8 +136,11 @@ EOF
             $this->buildFieldMappings($metadata);
             $this->buildAssociationMappings($metadata);
 
+			$builder = new ClassMetadataBuilder($metadata);
+			
+			$builder->createManyToOne('section', '\\Cetera\\Entity\\Section')->addJoinColumn('idcat', 'id', true, false, 'CASCADE', null)->inversedBy('materials')->build();
+			
             if ($tableName == 'dir_data') {
-                $builder = new ClassMetadataBuilder($metadata);
                 $builder->createOneToMany('nodes', '\\Cetera\\Entity\\Node')->mappedBy('section')->build();  
             }
             
