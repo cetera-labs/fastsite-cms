@@ -31,5 +31,9 @@ abstract class AbstractSection extends AbstractEntity {
 		}
 		return $this->nodes[0]->getUrl();
 	}
+	
+    public function isServer() {
+        return $this->isServer;
+    }	
     
 }
