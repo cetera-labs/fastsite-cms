@@ -24,5 +24,12 @@ abstract class AbstractSection extends AbstractEntity {
     public function __construct() {
         $this->nodes = new ArrayCollection();
     }
+	
+	public function getUrl() {
+		if (!count($this->nodes)) {
+			return false;
+		}
+		return $this->nodes[0]->getUrl();
+	}
     
 }
