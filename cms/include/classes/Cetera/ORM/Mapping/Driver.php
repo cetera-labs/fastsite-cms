@@ -85,7 +85,7 @@ EOF
 );
 
             foreach($od->getFields() as $field) {
-                fwrite($f,'    protected $'.Inflector::camelize($field['name']).';'.PHP_EOL);
+                fwrite($f,'    public $'.Inflector::camelize($field['name']).';'.PHP_EOL);
             }
 
             fwrite($f,PHP_EOL.'}'.PHP_EOL);

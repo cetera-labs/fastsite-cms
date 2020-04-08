@@ -22,16 +22,16 @@ class Node extends AbstractEntity {
     /**
      * @Gedmo\TreeLevel
      */
-    protected $level;
+    public $level;
 
     /**
      * @Gedmo\TreeParent
      */
-    protected $parent;
+    public $parent;
 
-    protected $children;
+    public $children;
         
-    protected $section;
+    public $section;
 	
     protected $url = false;
 	protected $fullUrl = false;

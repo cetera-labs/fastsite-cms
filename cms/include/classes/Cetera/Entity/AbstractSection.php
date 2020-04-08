@@ -6,20 +6,20 @@ abstract class AbstractSection extends AbstractEntity {
     /**
      * Привязка раздела к структуре
      */
-    protected $nodes;    
+    public $nodes;    
     
-    protected $tag;
-    protected $name;
-    protected $tablename;
-    protected $type;
-    protected $template;
-    protected $templatedir;
-    protected $inheritfields;
-    protected $typ;
-    protected $dat;
-    protected $hidden;
-    protected $isServer;
-	protected $preview;
+    public $tag;
+    public $name;
+    public $tablename;
+    public $type;
+    public $template;
+    public $templatedir;
+    public $inheritfields;
+    public $typ;
+    public $dat;
+    public $hidden;
+    public $isServer;
+	public $preview;
     
     public function __construct() {
         $this->nodes = new ArrayCollection();

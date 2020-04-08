@@ -3,7 +3,7 @@ namespace Cetera\Entity;
 
 abstract class AbstractEntity {
 
-    protected $id;
+    public $id;
     
     public function __get($name)
     {
