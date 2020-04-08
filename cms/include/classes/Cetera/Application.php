@@ -564,6 +564,8 @@ class Application {
         $treeListener = new \Gedmo\Tree\TreeListener();
         $evm->addEventSubscriber($treeListener);        
         
+		$this->_dbConnection->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+		
         $this->entityManager = \Doctrine\ORM\EntityManager::create($connectionParams, $ormConfig, $evm);
             
         $this->_connected = true; 

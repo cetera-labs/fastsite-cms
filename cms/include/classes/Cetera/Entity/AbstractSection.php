@@ -19,6 +19,7 @@ abstract class AbstractSection extends AbstractEntity {
     protected $dat;
     protected $hidden;
     protected $isServer;
+	protected $preview;
     
     public function __construct() {
         $this->nodes = new ArrayCollection();
