@@ -34,6 +34,10 @@ abstract class AbstractSection extends AbstractEntity {
 	
     public function isServer() {
         return $this->isServer;
+    }
+
+    public function getAlias() {
+        return $this->tablename;
     }	
     
 }

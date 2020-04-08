@@ -70,7 +70,7 @@ class Node extends AbstractEntity {
 			$this->fullUrl .= '/'.$item->section->alias;
 			if ($item->section->isServer()) continue;
 
-			$this->url .= '/'.$item->alias;
+			$this->url .= '/'.$item->section->alias;
 		}
 		$this->url      = $this->url.'/';
 		$this->fullUrl  = $this->fullUrl.'/';
