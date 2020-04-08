@@ -11,12 +11,13 @@ abstract class AbstractMaterial extends AbstractEntity {
     protected $type;
     protected $autor;
     protected $alias;
+	protected $section;
 	
     public function getUrl() {
         if ($this->idcat < 0) return false;     
         $url = '/'.$this->alias;             
-        if ( $this->getSection()->isServer() ) return $url;                   
-        return rtrim($this->getSection()->getUrl(),'/').$url;
+        if ( $this->section->isServer() ) return $url;                   
+        return rtrim($this->section->getUrl(),'/').$url;
     } 	
     
 }
