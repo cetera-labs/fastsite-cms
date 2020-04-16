@@ -22,7 +22,7 @@ class Children extends Catalog {
      *         
      * @var boolean    
      */   	
-    protected $hidden = true;		
+    protected $hidden = false;		
 	
     /**
      * Конструктор              
@@ -44,11 +44,29 @@ class Children extends Catalog {
         }        
 		
     } 
+	
+    /**
+     * Включать скрытые разделы 
+     *         
+     * @return Cetera\Iterator\Catalog\Children
+     */	
+    public function hidden($hidden = true)
+    {
+         $this->hidden = $hidden;         
+         return $this;
+    }	
 
     protected function fixQuery($query)
     {   
 		$query->addOrderBy('main.tag', 'ASC');
 		parent::fixQuery($query);
-    }		
+    }
+
+	protected function fixWhere($query)
+	{
+        if (!$this->hidden) {
+			$query->andWhere('main.hidden=0');      
+		}
+    }	
 	
 }
