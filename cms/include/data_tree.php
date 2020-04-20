@@ -45,8 +45,7 @@ if ($node == 'root') {
     if ($c) {
         $c->setNodeId($node_id);
 		if (!$c->isLink()) {
-			foreach ($c->children as $child)
-			{
+			foreach ($c->children->hidden(true) as $child) {
 				$a = process_child($child, $rule, $only, $nolink, $exclude, $nocatselect);    
 				if (is_array($a)) $nodes[] = $a;  
 			}  
