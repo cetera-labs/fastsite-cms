@@ -257,7 +257,7 @@ elseif ($step == 2) {
     if (check_dir(IMAGECACHE_DIR, 2)) $res['warning'] = true;
     if (check_dir(FILECACHE_DIR, 2)) $res['warning'] = true;
     check_dir(USER_UPLOADS_DIR, 2);
-    check_dir(DOCROOT.PLUGIN_DIR, 2);
+    //check_dir(DOCROOT.PLUGIN_DIR, 2);
     $str .= ob_get_contents();
     ob_end_clean(); 
     
