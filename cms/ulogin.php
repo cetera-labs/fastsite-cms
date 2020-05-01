@@ -1,7 +1,7 @@
 <?php
 use Zend\Authentication\Result;
 
-require('include/common.php');
+require_once('include/common.php');
 
 $application->setFrontOffice(true);
 $application->connectDb();

@@ -8,7 +8,7 @@
 
 set_time_limit(99999);
 define('DOCROOT', __DIR__.'/../');
-require('include/common.php');
+require_once('include/common.php');
 $application->connectDb();
 $application->initPlugins();
 $application->cronJob(DOCROOT.'../logs/cron.log');

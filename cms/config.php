@@ -1,5 +1,5 @@
 <?php
-include('include/common.php');
+include_once('include/common.php');
 
 $application->connectDb();
 $application->initSession();

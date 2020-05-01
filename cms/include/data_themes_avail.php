@@ -1,6 +1,6 @@
 <?php
 namespace Cetera;
-include('common.php');
+include_once('common.php');
 header('Content-Type: application/json');
 
 $data = [];

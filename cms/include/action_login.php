@@ -3,7 +3,7 @@ namespace Cetera;
 
 use Zend\Authentication\Result;
 
-include('common.php');
+include_once('common.php');
 $translator = $application->getTranslator();  
 $application->connectDb();
 $application->initSession();

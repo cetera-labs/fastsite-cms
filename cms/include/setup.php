@@ -3,7 +3,7 @@ namespace Cetera;
 
 $step = (isset($_REQUEST['step']))?(int)$_REQUEST['step']:0;
 
-include('common.php');
+include_once('common.php');
 
 if ($application->getVar('setup_done')) die();
 

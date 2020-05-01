@@ -1,7 +1,7 @@
 <?php
 namespace Cetera;
 
-include('common.php');
+include_once('common.php');
 
 $application = Application::getInstance();
 $application->connectDb();

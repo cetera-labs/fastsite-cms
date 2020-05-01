@@ -1,5 +1,5 @@
 <?php
-require('include/common.php');
+require_once('include/common.php');
 include_once(CMSROOT.'/include/classes/UserAuthAdapterOpenID.php');
 
 $application->setFrontOffice(true);
