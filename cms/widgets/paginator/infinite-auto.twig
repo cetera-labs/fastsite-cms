@@ -13,6 +13,7 @@
 				marker.remove();
             }
         });
+		jQuery(window).scroll();
     });
     {% endset %}
     {% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
