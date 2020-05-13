@@ -99,8 +99,8 @@ class Section extends Templateable {
 			
 		if ($this->error404)
 		{
-			header("HTTP/1.0 404 Not Found");
 			$this->setMetaTitle($this->getParam('page404_title'));
+			$a->getResponse()->setStatusCode(404);
 		}
 		elseif ($this->getParam('show_meta') && $c && !$m)
 		{
