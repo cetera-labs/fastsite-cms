@@ -839,6 +839,9 @@ class Application {
     	  while ($alias = array_shift($dir)) {
     	    try {
                 $c = $this->_catalog->prototype->getChildByAlias($alias);
+				if ($c->isHidden()) {
+					throw new \Exception('Hidden section');
+				}
                 $this->_catalog = $c;
                 $this->_urlPath[] = $this->_catalog;
                 $this->debug(DEBUG_COMMON, 'Catalog: '.$alias.'('.$c->id.')');
