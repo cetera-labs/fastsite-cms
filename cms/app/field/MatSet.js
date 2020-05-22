@@ -1,6 +1,7 @@
 Ext.define('Cetera.field.MatSet', {
 
     extend:'Cetera.field.Set',
+    alias : 'widget.matset',
 
     onAddItem: function() {
         this.openWindow();
