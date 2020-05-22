@@ -28,7 +28,7 @@ Ext.define('Cetera.widget.Widget', {
             
             var formfields = [{
                 name: 'widgetTitle',
-                fieldLabel: Config.Lang.name,
+                fieldLabel: _('Заголовок'),
                 allowBlank: true
             }];               
         
@@ -42,7 +42,7 @@ Ext.define('Cetera.widget.Widget', {
                 uncheckedValue: 0
             },{
                 name: 'widgetTitle',
-                fieldLabel: Config.Lang.name,
+                fieldLabel: _('Заголовок'),
                 allowBlank: true
             }];    
             
