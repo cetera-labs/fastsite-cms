@@ -144,6 +144,13 @@ Ext.define('Cetera.field.Set', {
     }, 
     
     initComponent : function(){
+        
+        this.store = Ext.create('Ext.data.ArrayStore', {
+            autoDestroy: true,
+            fields: ['id','name'],
+            data: []
+        })        
+        
         this.callParent(arguments);
         this.prepareValue();
     },       
