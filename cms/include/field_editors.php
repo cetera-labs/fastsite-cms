@@ -43,6 +43,7 @@ $editors = array(
 	EDITOR_DOUBLE_DEFAULT   => 'editor_double_default',
 	EDITOR_TAGS_DEFAULT     => 'editor_tags_default',
     EDITOR_ACE_HTML         => 'editor_ace_html',
+    EDITOR_VISUAL_TEMPLATE  => 'editor_visual_template',
 );
 
 $field_editors = array(
@@ -159,6 +160,10 @@ $field_editors = array(
 		EDITOR_LINK_CATALOG,
 		EDITOR_USER,
 	],	
+    
+    PSEUDO_FIELD_WIDGETS => [
+        EDITOR_VISUAL_TEMPLATE,
+    ]
 );
  
 $l_field_types[FIELD_TEXT]  		= $translator->_('Текстовый (1-65535 байт)');
@@ -182,6 +187,7 @@ $l_field_types[PSEUDO_FIELD_LINKSET_USER]= $translator->_('Набор польз
 $l_field_types[PSEUDO_FIELD_TAGS]= $translator->_('Ключевые слова');
 $l_field_types[PSEUDO_FIELD_LINKSET_CATALOG]= $translator->_('Ссылка на разделы');
 $l_field_types[PSEUDO_FIELD_LINK_CATALOG]= $translator->_('Ссылка на раздел');
+$l_field_types[PSEUDO_FIELD_WIDGETS]= $translator->_('Коллекция виджетов');
 
 $l_editors = array(
 	EDITOR_TEXT_DEFAULT		=> $translator->_('Однострочный редактор текста'),
@@ -217,9 +223,13 @@ $l_editors = array(
     EDITOR_CKEDITOR_SMALL  	=> $translator->_('CKEditor малый'),
     EDITOR_FILE_IMAGE     	=> $translator->_('Выбор рисунка'),
     EDITOR_MATSET_RICH    	=> $translator->_('Редактируемая группа материалов'),
+    EDITOR_VISUAL_TEMPLATE  => $translator->_('Редактор виджетов'),
 );
 
 $pseudo_to_original = array(
+    PSEUDO_FIELD_WIDGETS => array(
+        'original' => FIELD_LONGTEXT
+    ),
     PSEUDO_FIELD_FILESET => array(
         'original' => FIELD_MATSET
     ),
