@@ -88,7 +88,7 @@ EOF
 			fwrite($f,'    const OID = '.$od->id.';'.PHP_EOL);
 
             foreach($od->getFields() as $field) {
-                fwrite($f,'    public $'.Inflector::camelize($field['name']).';'.PHP_EOL);
+                fwrite($f,'    public $'.$inflector->camelize($field['name']).';'.PHP_EOL);
             }
 
             fwrite($f,PHP_EOL.'}'.PHP_EOL);
