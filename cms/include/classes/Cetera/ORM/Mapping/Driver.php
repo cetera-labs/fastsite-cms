@@ -3,7 +3,6 @@ namespace Cetera\ORM\Mapping;
 
 use \Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
 use \Doctrine\Common\Persistence\Mapping\ClassMetadata;
-use \Doctrine\Common\Inflector\Inflector;
 use \Doctrine\DBAL\Schema\AbstractSchemaManager;
 use \Doctrine\DBAL\Schema\Table;
 use \Doctrine\DBAL\Schema\Column;
@@ -14,6 +13,7 @@ use \Doctrine\ORM\Mapping\ClassMetadataInfo;
 use \Doctrine\ORM\Mapping\MappingException;
 use \Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use \InvalidArgumentException;
+use \Doctrine\Inflector\InflectorFactory;
 
 class Driver implements MappingDriver {
     
@@ -65,8 +65,10 @@ class Driver implements MappingDriver {
             mkdir($path, 0777, true);
         }
         
+        $inflector = InflectorFactory::create()->build();
+        
         foreach(\Cetera\ObjectDefinition::enum() as $od) {
-            $className = $this->classNamesForTables[$od->getTable()] ?? Inflector::classify(strtolower($od->getTable()));
+            $className = $this->classNamesForTables[$od->getTable()] ?? $inflector->classify(strtolower($od->getTable()));
             $f = fopen($path.'/'.$className.'.php', 'w');
             if ($className == 'Section') {
                 $superClass = 'AbstractSection';
