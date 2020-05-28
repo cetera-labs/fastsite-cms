@@ -115,6 +115,8 @@ Ext.define('Cetera.field.VisualTemplatePanel', {
 			beforedrop: true,
 			drop: true
 		});
+        
+        this.on('resize', function(){ this.doLayout(); }, this);
 
 	},
 	// private
