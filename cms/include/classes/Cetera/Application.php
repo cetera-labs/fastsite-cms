@@ -1357,7 +1357,7 @@ class Application {
 			$config['class'] = '\\Cetera\\Widget\\Widget';
 		}
             
-        $config['icon'] = $this->getCallerPath().'/'.$config['icon'];
+        $config['icon'] = $config['icon'];
     
 		$this->initWidgets();
         $this->_widgets[$name] = $config;
