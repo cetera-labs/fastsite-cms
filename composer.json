@@ -21,7 +21,6 @@
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.6",
 	    "doctrine/orm": "^2.8",
-        "doctrine/inflector": "^2.0",
         "gedmo/doctrine-extensions": "^2.4",       
 		"laminas/laminas-authentication": "^2.7",
 		"laminas/laminas-session": "^2.8",
