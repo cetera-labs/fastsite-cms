@@ -31,6 +31,27 @@ Ext.define('Cetera.field.MatSet', {
         this.removeItem();
     }, 
     
+    getObjectById: function(value) {
+        
+        Ext.Ajax.request({
+           url: 'include/data_object.php',
+           params: { id: value, type: this.mat_type },
+           scope: this,
+            success: function(response, opts) {
+                var rec = this.store.getById( value );
+                if (rec) {
+                    var res = Ext.decode(response.responseText);
+                    rec.set('name', res.fields.name);
+                }
+            }           
+        });        
+        
+        return {
+            'id': value,
+            'name': _('Загрузка ..')
+        };
+    },     
+    
     openWindow: function(id,duplicate) {
         if (!id) id = 0;
 		if (!duplicate) {

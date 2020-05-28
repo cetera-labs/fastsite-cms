@@ -19,13 +19,25 @@ Ext.define('Cetera.field.Set', {
         var obj = Ext.JSON.decode(value, true);
         if (!obj) return;
         
-        Ext.Array.each(obj, function(value) {                
-            var rec = this.store.findRecord('id', value.id);
-            if (!rec) this.store.add(value);
+        this.store.removeAll();
+        Ext.Array.each(obj, function(value) {    
+            if (value === Object(value)) {
+                this.store.add(value);
+            }
+            else {
+                this.store.add(this.getObjectByValue(value));
+            }
         }, this); 
         
         this.prepareValue();
         
+    },
+    
+    getObjectByValue: function(value) {
+        return {
+            'id': value,
+            'name': '-'
+        };
     },
     
     moveSelectedRow: function(direction) {
