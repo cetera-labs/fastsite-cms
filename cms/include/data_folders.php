@@ -36,7 +36,7 @@ function read_dir($path, $walk) {
     $iterator = new \DirectoryIterator(DOCROOT.$path);
     foreach ($iterator as $fileinfo) {
         if ($fileinfo->isDot() || !$fileinfo->isDir()) continue;
-        if ( $path == '' && in_array( $fileinfo->getFilename(), array(CMS_DIR,LIBRARY_PATH,'.cache') ) ) continue;
+        if ( $path == '' && in_array( $fileinfo->getFilename(), [CMS_DIR,LIBRARY_PATH,'.cache','imagetransform'] ) ) continue;
         $localpath = $path.'/'.$fileinfo->getFilename().'/';
         if (!$user->allowFilesystem($localpath)) continue;
         
@@ -44,7 +44,7 @@ function read_dir($path, $walk) {
         if ($expand == $fileinfo->getFilename()) 
             $children = read_dir($path.'/'.$fileinfo->getFilename(), $walk);
         
-		$w = $fileinfo->isWritable() && (substr( $localpath, 0, strlen(USER_UPLOAD_PATH) ) == USER_UPLOAD_PATH);
+		$w = $fileinfo->isWritable();// && (substr( $localpath, 0, strlen(USER_UPLOAD_PATH) ) == USER_UPLOAD_PATH);
 		
         $nodes[] = array(
             'text'     => $fileinfo->getFilename(),
