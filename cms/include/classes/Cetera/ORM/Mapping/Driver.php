@@ -20,7 +20,9 @@ class Driver implements MappingDriver {
     /**
      * @var AbstractSchemaManager
      */
-    private $_sm;    
+    private $_sm;   
+
+    private $inflector;
     
     private $od;
     
@@ -44,13 +46,14 @@ class Driver implements MappingDriver {
     public function __construct(AbstractSchemaManager $schemaManager)
     {
         $this->_sm = $schemaManager;
+        $this->inflector = InflectorFactory::create()->build();
     }  
 
     /**
      * Set the namespace for the generated entities.
      *
      * @param string $namespace
-     *
+7     *
      * @return void
      */
     public function setNamespace($namespace)
@@ -65,10 +68,8 @@ class Driver implements MappingDriver {
             mkdir($path, 0777, true);
         }
         
-        $inflector = InflectorFactory::create()->build();
-        
         foreach(\Cetera\ObjectDefinition::enum() as $od) {
-            $className = $this->classNamesForTables[$od->getTable()] ?? $inflector->classify(strtolower($od->getTable()));
+            $className = $this->classNamesForTables[$od->getTable()] ?? $this->inflector->classify(strtolower($od->getTable()));
             $f = fopen($path.'/'.$className.'.php', 'w');
             if ($className == 'Section') {
                 $superClass = 'AbstractSection';
@@ -88,7 +89,7 @@ EOF
 			fwrite($f,'    const OID = '.$od->id.';'.PHP_EOL);
 
             foreach($od->getFields() as $field) {
-                fwrite($f,'    public $'.$inflector->camelize($field['name']).';'.PHP_EOL);
+                fwrite($f,'    public $'.$this->inflector->camelize($field['name']).';'.PHP_EOL);
             }
 
             fwrite($f,PHP_EOL.'}'.PHP_EOL);
@@ -192,7 +193,7 @@ EOF
     {
         return 'Cetera\\Entity\\' . (
             $this->classNamesForTables[$od->getTable()]
-                ?? Inflector::classify(strtolower($od->getTable()))
+                ?? $this->inflector->classify(strtolower($od->getTable()))
         );
     }    
 
@@ -433,7 +434,7 @@ EOF
         if ($fk) {
             $columnName = str_replace('_id', '', $columnName);
         }
-        return Inflector::camelize($columnName);
+        return $this->inflector->camelize($columnName);
     }    
 
 }
