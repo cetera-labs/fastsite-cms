@@ -132,7 +132,8 @@ class Material extends DynamicFieldsObject implements SiteItem {
      */ 
     public function getUrl()
     {
-        if ($this->idcat < 0) return false;     
+        if ($this->idcat < 0) return false;  
+        if (!$this->getCatalog()) return false;  
         $url = '/'.$this->_alias;             
         if ( $this->getCatalog()->isServer() ) return $url;                   
         return rtrim($this->getCatalog()->getUrl(),'/').$url;
