@@ -30,8 +30,8 @@ trait Meta {
 				list($width, $height) = getimagesize(WWWROOT.$pic);
 			}
 			$a = $this->application;
-			$a->addHeadString('<meta itemprop="image" content="http://'.$_SERVER['SERVER_NAME'].$pic.'"/>');
-			$a->addHeadString('<meta name="twitter:image:src" content="http://'.$_SERVER['SERVER_NAME'].$pic.'">');
+			//$a->addHeadString('<meta itemprop="image" content="http://'.$_SERVER['SERVER_NAME'].$pic.'"/>');
+			$a->addHeadString('<meta name="twitter:image" content="http://'.$_SERVER['SERVER_NAME'].$pic.'">');
 			$a->addHeadString('<meta property="og:image" content="http://'.$_SERVER['SERVER_NAME'].$pic.'"/>', 'og:image');		
 			if ($width)  $a->addHeadString('<meta property="og:image:width" content="'.$width.'"/>', 'og:image:width');	
 			if ($height) $a->addHeadString('<meta property="og:image:height" content="'.$height.'"/>', 'og:image:height');	
