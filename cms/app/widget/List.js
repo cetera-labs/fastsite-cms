@@ -2,6 +2,8 @@
 Ext.require('Cetera.field.Folder');
 Ext.require('Cetera.field.FileEditable');
 Ext.require('Cetera.field.WidgetTemplate');
+Ext.require('Cetera.field.LinkSet2');
+Ext.require('Cetera.field.MatSet');
 
 Ext.define('Cetera.widget.List', {
 
@@ -147,7 +149,13 @@ Ext.define('Cetera.widget.List', {
 		{
             name: 'filter',
             fieldLabel: _('Доп. фильтр'),
-        }		
+        },
+		{
+            xtype: 'linkset2',
+            name: 'materials',
+            fieldLabel: _('Ручной выбор материалов'),
+            height: 100
+        }      
 		];
         this.callParent();
     }

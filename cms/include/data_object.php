@@ -5,7 +5,12 @@ include('common_bo.php');
 
 try {
    
-	$obj = DynamicFieldsObject::getByIdType($_REQUEST['id'], $_REQUEST['type']);
+    if (isset($_REQUEST['type'])) {
+        $obj = DynamicFieldsObject::getByIdType($_REQUEST['id'], $_REQUEST['type']);
+    }
+    elseif (isset($_REQUEST['section'])) {
+        $obj = \Cetera\Catalog::getById($_REQUEST['section'])->getMaterialById($_REQUEST['id']);
+    }
     
     echo json_encode([
         'success' => true,

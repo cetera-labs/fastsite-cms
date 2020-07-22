@@ -1,6 +1,8 @@
 Ext.define('Cetera.field.LinkSet', {
 
     extend: 'Cetera.field.Set',
+    
+    alias : 'widget.linkset',
 
     onAddItem: function() {
     

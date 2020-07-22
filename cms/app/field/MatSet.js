@@ -31,7 +31,7 @@ Ext.define('Cetera.field.MatSet', {
         this.removeItem();
     }, 
     
-    getObjectById: function(value) {
+    getObjectByValue: function(value) {
         
         Ext.Ajax.request({
            url: 'include/data_object.php',

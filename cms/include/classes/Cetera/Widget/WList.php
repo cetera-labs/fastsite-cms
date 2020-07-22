@@ -25,7 +25,7 @@ class WList extends Templateable {
  	
 	protected function initParams()
 	{
-		$this->_params = array(
+		$this->_params = [
 			'name'               => '',
 			'catalog'            => 0,
 			'where'              => null,
@@ -47,8 +47,9 @@ class WList extends Templateable {
 			'template'		     => 'default.twig',
 			'filter'			 => null,
             'not_found_block'    => false,
-            'not_found_text'     => '<div class="callout primary">Материалы не найдены</div>'
-		); 
+            'not_found_text'     => '<div class="callout primary">Материалы не найдены</div>',
+            'materials'          => null,
+		]; 
 		
 	}
 
@@ -68,8 +69,39 @@ class WList extends Templateable {
 	 */ 	
     public function getChildren()
     {
-		if (!$this->_children)
-		{
+        
+		if (!$this->_children) {
+            if ($this->getParam('materials')) {
+                $m = $this->getParam('materials');
+                if (!is_array($m)) {
+                    $m = json_decode($m, true);
+                }
+                if (!is_array($m)) {
+                    $m = explode(';',$m);
+                }
+                if (is_array($m)) {
+                    $children = [];
+                    foreach ($m as $id) {
+                        try {
+                            if (is_numeric($id)) {
+                                $children[] = $this->getCatalog()->getMaterialById($id);
+                            }
+                            else {
+                                list($cid,$mid) = explode('_',$id);
+                                $children[] = \Cetera\Catalog::getById($cid)->getMaterialById($mid);
+                            }
+                        }
+                        catch (\Exception $e) {
+                            continue;
+                        }
+                    }
+                    if (count($children)) {
+                        $this->_children = $children;
+                    }
+                }
+            }
+        }
+        if (!$this->_children) {
 			if ($this->getParam('iterator')) {
 				$this->_children = $this->getParam('iterator');
 			}
