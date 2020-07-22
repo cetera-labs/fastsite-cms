@@ -26,7 +26,7 @@ Ext.define('Cetera.field.LinkSet2', {
         var a = value.split('_');
         Ext.Ajax.request({
             url: 'include/data_object.php',
-            params: { id: a[1], section: a[0] },
+            params: { id: a[1], type: a[0] },
             scope: this,
             success: function(response, opts) {
                 var rec = this.store.getById( value );

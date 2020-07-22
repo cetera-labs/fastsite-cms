@@ -87,8 +87,8 @@ class WList extends Templateable {
                                 $children[] = $this->getCatalog()->getMaterialById($id);
                             }
                             else {
-                                list($cid,$mid) = explode('_',$id);
-                                $children[] = \Cetera\Catalog::getById($cid)->getMaterialById($mid);
+                                list($tid,$mid) = explode('_',$id);
+                                $children[] =  \Cetera\DynamicFieldsObject::getByIdType($mid, $tid);
                             }
                         }
                         catch (\Exception $e) {

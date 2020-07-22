@@ -9,7 +9,7 @@ try {
         $obj = DynamicFieldsObject::getByIdType($_REQUEST['id'], $_REQUEST['type']);
     }
     elseif (isset($_REQUEST['section'])) {
-        $obj = \Cetera\Catalog::getById($_REQUEST['section'])->getMaterialById($_REQUEST['id']);
+        $obj = Section::getById($_REQUEST['section'])->getMaterialById($_REQUEST['id']);
     }
     
     echo json_encode([
