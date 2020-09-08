@@ -104,6 +104,11 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */ 
     protected $_template;
     
+    protected $_visual_constructor;
+    
+    // id раздела, в котором находятся данные visual_constructor
+    protected $_visual_constructor_origin;
+    
     /**
      * Тип материалов раздела
      * @internal          
@@ -265,7 +270,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
             'materialsType' => 0,
             'dat'           => '',
             'preview'       => '',
-            'template'      => ''
+            'template'      => '',
+            'visual_constructor'   => ''
         ));
         return $c;
     }
@@ -733,10 +739,13 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 			}
 			else {
 				$this->_defaultTemplate = $this->template;
+                $this->_visual_constructor_origin = $this->id;
 			}
 		}
 		else {
 			$this->_defaultTemplate = $this->parent->getDefaultTemplate();
+            $this->_visual_constructor = $this->parent->visual_constructor;
+            $this->_visual_constructor_origin = $this->parent->visual_constructor_origin;
 		}
 
         return $this->_defaultTemplate;
@@ -1368,7 +1377,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 			'is_root'  => $this->isRoot(),
 			'aliases'  => $this->isServer()?$this->getAliases():null,
 			'template' => $this->template,
-			'templateDir'=> $this->templateDir,
+            'visual_constructor'   => $this->visual_constructor,
+			'templateDir'   => $this->templateDir,
 			'materialsCount'=> $this->materialsCount,
 			'materialsType' => (int)$this->materialsType,
 			'autoalias'     => ($this->catalogType&Catalog::AUTOALIAS)?1:0,

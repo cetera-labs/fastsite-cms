@@ -12,13 +12,18 @@ namespace Cetera;
  **/
 include('common_bo.php');
 
-$data = array();
+$data = [];
+
+$data[] = [
+    'name'     => '[visual_constructor]',
+    'display'  => 'Конструктор',
+];
  
 $r = $application->getConn()->fetchAll('SELECT * FROM widgets WHERE widgetName="Container" ORDER BY widgetAlias');
-
 foreach($r as $f) {
     $data[] = array(
-        'name'     => $f['widgetAlias'].'.widget'
+        'name'     => $f['widgetAlias'].'.widget',
+        'display'  => $f['widgetAlias'].'.widget',
     );
 }
 
@@ -44,9 +49,10 @@ if (file_exists($dir) && is_dir($dir)) {
         if ($path_parts['extension'] != 'php') continue;  
         if ($fileinfo->getFilename() == BOOTSTRAP_SCRIPT) continue;    
         
-        $data[] = array(
-            'name'     => $fileinfo->getFilename()
-        );
+        $data[] = [
+            'name'     => $fileinfo->getFilename(),
+            'display'  => $fileinfo->getFilename(),
+        ];
     
     }
 	
@@ -64,7 +70,8 @@ if (file_exists($dir) && is_dir($dir)) {
 			if (substr($fileinfo->getFilename(),0,5) != 'page_') continue;    
 			
 			$data[] = array(
-				'name'     => $fileinfo->getFilename()
+				'name'     => $fileinfo->getFilename(),
+                 'display'  => $fileinfo->getFilename(),
 			);
 		
 		}
@@ -87,4 +94,3 @@ echo json_encode(array(
     'success' => true,
     'rows'    => $data
 ));
-?>

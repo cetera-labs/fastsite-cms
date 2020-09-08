@@ -9,11 +9,12 @@ Ext.define('Cetera.window.CatalogEdit', {
 		'Cetera.field.Folder',
 		'Cetera.field.MaterialType',
 		'Cetera.field.SectionController',
-		'Cetera.model.Theme'
+		'Cetera.model.Theme',
+        'Cetera.field.VisualTemplate'
 	],
 
 	closable:true,
-	width:750,
+	width:850,
 	height: 500,
 	minHeight: 300,
 	plain:true,
@@ -173,7 +174,7 @@ Ext.define('Cetera.window.CatalogEdit', {
 			Ext.Array.push(fields, {
 				xtype: 'section_controller',
 				section: this.catalog
-			});				
+			});	
 
 			if (!this.catalog.is_server)
 			{
@@ -291,6 +292,27 @@ Ext.define('Cetera.window.CatalogEdit', {
 				items: fields			
 			});
 		}
+        
+        // Construсtor
+		if (this.catalog.template=='[visual_constructor]' && Config.user.permissions.admin)
+		{
+			this.tabs.add({
+				title  : _('Конструктор'),
+				border    : false,
+				bodyBorder: false,
+				layout     : 'anchor',
+				defaults   : { anchor: '100% 100%' },	                
+				items  : [
+                    {
+                        fieldLabel: _('Шаблон'),
+                        xtype: 'visualtemplate',
+                        name: 'visual_constructor',
+                        hideLabel: true,
+                        value: this.catalog.visual_constructor
+                    }	
+				]		
+			});	
+		}        
 		
 		// robots.txt
 		if (this.catalog.is_server && Config.user.permissions.admin)

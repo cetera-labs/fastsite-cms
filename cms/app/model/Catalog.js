@@ -33,6 +33,7 @@ Ext.define('Cetera.model.Catalog', {
 		'materialsType',
 		'parent',
 		'template',
+        'visual_constructor',
 		'templateDir',
 		'materialsCount',
 		'autoalias',

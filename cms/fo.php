@@ -222,10 +222,14 @@ elseif (is_callable($template)) {
 		ob_end_clean();    
 }
 else {
-        
+            
     $path_parts = pathinfo($template);
-
-    if ($path_parts['extension'] == 'php') {
+    
+    if ($template == '[visual_constructor]') {
+        $application->getTwig()->addGlobal('visual_constructor', $application->getCatalog()->visual_constructor);
+        $response->setContent($application->getTwig()->render('page_visual_constructor.twig'));
+    }
+    elseif ($path_parts['extension'] == 'php') {
         $template_file = $application->getTemplatePath($template);
         if (!file_exists($template_file))
             throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);

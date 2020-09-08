@@ -6,7 +6,7 @@ Ext.define('Cetera.field.SectionController', {
     
 	fieldLabel: _('Контроллер'),
 	valueField: 'name',
-	displayField: 'name',
+	displayField: 'display',
 	name: 'template',
 	store: this.controllerLookupStore,
 	triggerAction: 'all',
@@ -21,7 +21,7 @@ Ext.define('Cetera.field.SectionController', {
 			value: this.section.template,
 			
 			store: Ext.create('Ext.data.JsonStore', {
-				fields: ['name'],
+				fields: ['name','display'],
 				proxy: {
 					type: 'ajax',
 					url: 'include/data_templates.php',
