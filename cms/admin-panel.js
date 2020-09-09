@@ -8,7 +8,7 @@ Ext.onReady(function(){
 	Config.setLocale(Config.locale);
 
     var tb = Ext.create('Ext.toolbar.Toolbar',{
-        itemId: 'admin-toolbar',
+        id: 'admin-toolbar',
         style: {
             position: 'fixed',
 			right: '0',
@@ -41,8 +41,7 @@ Ext.onReady(function(){
 					});  					
 				
 				}
-			},	
-			'-',            
+			},	          
 			'->',
 			{
 				xtype: 'tbtext',
