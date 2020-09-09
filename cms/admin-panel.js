@@ -1,5 +1,5 @@
 var widgetEdit = [];
-var tmo = null;
+var tmo = [];
 Ext.onReady(function(){
 	
 	Ext.Loader.setPath('Cetera', '/cms/app');
@@ -8,6 +8,7 @@ Ext.onReady(function(){
 	Config.setLocale(Config.locale);
 
     var tb = Ext.create('Ext.toolbar.Toolbar',{
+        itemId: 'admin-toolbar',
         style: {
             position: 'fixed',
 			right: '0',
@@ -23,7 +24,6 @@ Ext.onReady(function(){
 					document.location = '/cms/';
 				}
 			},
-			'-',
 			{
 				iconCls: 'icon-edit',
 				text: 'Режим правки',
@@ -41,7 +41,8 @@ Ext.onReady(function(){
 					});  					
 				
 				}
-			},			
+			},	
+			'-',            
 			'->',
 			{
 				xtype: 'tbtext',
@@ -65,6 +66,15 @@ Ext.onReady(function(){
 	});	
 		
 	var widgets = Ext.select(".x-cetera-widget");
+
+    // пропускаем вложеные виджеты
+    widgets.each(function(el, widgets){
+        
+        if (el.parent(".x-cetera-widget")) {
+            widgets.removeElement(el);
+        }
+        
+    });
 	
 	widgets.on('mouseleave', function(e,t) {
 				
@@ -77,28 +87,56 @@ Ext.onReady(function(){
 		
 		if (!Config.foEditMode) return;
 		
-		if (tmo) clearTimeout(tmo);
 		var widget = e.getTarget('.x-cetera-widget', 10, true);
+       
 		if (!widget.getAttribute( 'data-class' )) return;
 		
 		widget.addCls('x-cetera-widget-active');
+        if (tmo[widget.id]) clearTimeout(tmo[widget.id]);
 		
 		var c = widget.getAttribute( 'data-class' );
-		if (!widgetEdit[c])
-		{
-			widgetEdit[c] = Ext.create(c);
-			widgetEdit[c].render( Ext.getBody() );
-			widgetEdit[c].getEl().on('mouseenter', function(e,t) {
-				if (tmo) clearTimeout(tmo);
+		if (!widgetEdit[widget.id])
+		{            
+            var group = Ext.create(c);
+            group.widget = widget;
+            var items = [
+                group
+            ];
+            
+            // ищем вложеные виджеты, и добавляем их на тулбар
+            var subwidgets = widget.select(".x-cetera-widget");
+            subwidgets.each(function(el){
+                
+                if (!el.getAttribute( 'data-class' )) return;
+                
+                var group = Ext.create( el.getAttribute( 'data-class' ) );
+                group.widget = el;
+                items.push(group);
+                
+            });            
+            
+            widgetEdit[widget.id] = Ext.create('Ext.Toolbar', {
+                border: false,
+                style: {
+                    position: 'absolute'
+                },
+                items: items
+            });
+            
+			widgetEdit[widget.id].render( Ext.getBody() );
+            widgetEdit[widget.id].getEl().set( {'data-parent': widget.id} );
+			widgetEdit[widget.id].getEl().on('mouseenter', function(e,el) {
+                var wid = el.getAttribute( 'data-parent' );
+				if (tmo[wid]) clearTimeout(tmo[wid]);
 			});
-			widgetEdit[c].getEl().on('mouseleave', function(e,t) {
-				hideWidget( Ext.select(".x-cetera-widget-active").first() );
+			widgetEdit[widget.id].getEl().on('mouseleave', function(e,el) {
+                var widget = Ext.get( el.getAttribute( 'data-parent' ) );
+				hideWidget( widget );
 			});
-		}
-		widgetEdit[c].widget = widget;		
+		}        
 		
-		widgetEdit[c].setXY( [widget.getX(),widget.getY() - widgetEdit[c].getHeight()] );	
-		widgetEdit[c].setWidth( widget.getWidth() );
+		widgetEdit[widget.id].setXY( [widget.getX(),widget.getY() - widgetEdit[widget.id].getHeight()] );	
+		widgetEdit[widget.id].setWidth( widget.getWidth() );
 				
 	});
 	
@@ -107,13 +145,14 @@ Ext.onReady(function(){
 function hideWidget(widget)
 {
 	if (!widget) return;
+    if (!widget.id) return;
 	if (!widget.getAttribute( 'data-class' )) return;
 	var c = widget.getAttribute( 'data-class' );
 	
-	if (widgetEdit[c]) tmo = setTimeout(function() { 
+	if (widgetEdit[widget.id]) tmo[widget.id] = setTimeout(function() { 
 		widget.removeCls('x-cetera-widget-active');
-		widgetEdit[c].setY(-100);
-		widgetEdit[c].widget = null;
-		tmo = null; 
+		widgetEdit[widget.id].setY(-100);
+		widgetEdit[widget.id].widget = null;
+		tmo[widget.id] = null; 
 	}, 200);	
 }
