@@ -13,87 +13,11 @@ Ext.define('Cetera.theme.Activate', {
 		var wait = Ext.Msg.wait(_('Загрузка ...'),_('Подождите'),{
 			modal: true
 		});
-    	
-        this.serversPanel = Ext.create('Ext.grid.GridPanel', {
-            enableHdMenu     : false,
-            enableColumnMove : false,
-            enableColumnResize: false,
-            region: 'west',
-			width: 300,
-            
-            store: new Ext.data.JsonStore({
-                autoDestroy: true,
-                autoLoad: true,
-                fields: ['id','name','active','config'],
-                proxy: {
-                    type: 'ajax',
-                    api: {
-                        read    : 'include/data_theme.php',
-                        update  : 'include/data_theme.php'
-                    },                   
-                    reader: {
-                        type: 'json',
-                        root: 'rows'
-                    },
-                    writer: {
-                        type: 'json',
-                        writeAllFields: true,
-                        root: 'rows',
-                        encode: true
-                    },                    
-                    extraParams: {
-                        'theme': this.theme.get('id')
-                    }                    
-                },
-				listeners: {
-					scope: this,
-					'datachanged': function() {
-						this.isDirty = false;
-						this.setLoading( false );
-						if (this.closeAfterSave) this.close();
-					},
-					'load': function() {
-						var sel = 0;
-						if (this.serverId) {
-							var rec = this.serversPanel.getStore().getById(this.serverId);
-							if (rec) sel = [rec];
-						}
-						this.serversPanel.getSelectionModel().select(sel);
-					}
-				}
-            }),
-            
-            columns: [
-          		{
-                  header: Config.Lang.server, 
-                  flex: 1,
-                  dataIndex: 'name'
-              },{
-                  xtype: 'checkcolumn',
-                  header: Config.Lang.used,
-                  dataIndex: 'active',
-                  width: 100
-              }
-          	]
-        });  
-        
-        this.serversPanel.on({
-            'select' : function(sm, rec){
-                if ( !this.configPanel ) return;				
-				this.configPanel.setServer(rec);
-            },
-            'deselect' : function(sm, rec){
-                if ( !this.configPanel ) return;
-                rec.set( 'config', this.configPanel.getForm().getValues() );
-            },            
-            scope:this
-        });                   	
         
 		var data = {
 			disabled: true,
-			region: 'center',
-			margin: '0 0 0 5',
 			theme: this.theme,
+            serverId: this.serverId,
 			listeners: {
 				 scope: this,
 				 'dirtychange': function() {
@@ -110,8 +34,23 @@ Ext.define('Cetera.theme.Activate', {
 			this.configPanel = Ext.create('Cetera.theme.ConfigEmpty', data);
 		}
         
+        Ext.Ajax.request({
+            url: '/cms/include/action_themes.php',
+            params: {
+                action: 'get_config',
+                theme: this.theme.get('id'),
+                server: this.serverId,
+            },
+            success: function(response){
+                var obj = Ext.decode(response.responseText);
+                this.configPanel.getForm().setValues( obj.config );
+                this.configPanel.enable();
+            },
+            scope: this
+        });        
+        
         this.applyButton = Ext.create('Ext.Button', {
-            text : Config.Lang.apply,
+            text : _('Применить'),
             scope: this,
             handler: this.saveChanges
         });
@@ -148,8 +87,8 @@ Ext.define('Cetera.theme.Activate', {
             width:'80%',
             height: '80%',
             resizable: false,
-            layout: 'border',
-            items: [this.serversPanel, this.configPanel],
+            layout: 'fit',
+            items: this.configPanel,
             buttons: [this.applyButton],
             bodyPadding: 5                      
         });
@@ -160,13 +99,24 @@ Ext.define('Cetera.theme.Activate', {
 		
 	saveChanges: function() {
 		
-				this.setLoading( true );
-                var sm = this.serversPanel.getSelectionModel();
-                if (this.configPanel && sm.hasSelection()) {
-                    sm.getSelection()[0].set( 'config', this.configPanel.getForm().getValues() );
-                }
-                
-                this.serversPanel.store.update();		
+        this.setLoading( true );
+        
+        Ext.Ajax.request({
+            url: '/cms/include/action_themes.php',
+            params: {
+                action: 'save_config',
+                theme: this.theme.get('id'),
+                server: this.serverId,
+                config: Ext.JSON.encode(this.configPanel.getForm().getValues())
+            },
+            success: function(response){
+                this.setLoading(false);
+            },
+            failure: function(response){
+                this.setLoading(false);
+            },
+            scope: this
+        });        	
 		
 	}
 }); 

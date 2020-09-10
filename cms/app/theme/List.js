@@ -7,22 +7,7 @@ Ext.define('Cetera.theme.List', {
 	contentSettingsWindow: null,
 
     initComponent: function(){
-    
-        this.activateAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-on',  
-            text: Config.Lang.activate + ' / ' + Config.Lang.setup,
-            disabled: true,
-            scope: this,
-            handler: function(widget, event) {
-                var rec = this.getSelectionModel().getSelection()[0];
-
-                Ext.create('Cetera.theme.Activate',{
-                    theme: rec
-                });                
-
-            }
-        });
-        
+            
         this.upgradeAction = Ext.create('Ext.Action', {
             iconCls: 'icon-unpack', 
             text: Config.Lang.upgrade,
@@ -108,7 +93,6 @@ Ext.define('Cetera.theme.List', {
                         handler: function() { this.reload(); },
                         scope: this
                     }, '-',
-                    this.activateAction,
                     this.upgradeAction,
                     this.deleteAction, 
                     this.copyAction, 
@@ -149,7 +133,6 @@ Ext.define('Cetera.theme.List', {
         
         this.contextMenu = Ext.create('Ext.menu.Menu', {
             items: [
-                this.activateAction,
                 this.upgradeAction,
                 '-',
                 this.copyAction,
@@ -166,7 +149,6 @@ Ext.define('Cetera.theme.List', {
         this.getSelectionModel().on({
             selectionchange: function(sm, selections) {
                 if (selections.length) {
-                    this.activateAction.enable(); 
 					this.renameAction.enable();
                     this.copyAction.enable();
 					if (selections[0].get('repository') && !selections[0].get('disableUpgrade')) {
@@ -190,7 +172,6 @@ Ext.define('Cetera.theme.List', {
                 } else {
                     this.copyAction.disable();
                     this.deleteAction.disable();
-                    this.activateAction.disable();
                     this.upgradeAction.disable();
 					this.renameAction.disable();
 					this.uploadAction.disable();  
