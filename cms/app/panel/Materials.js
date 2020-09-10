@@ -18,8 +18,8 @@ Ext.define('Cetera.panel.Materials', {
             dataIndex: 'icon', 
             renderer: function (value) {
                 if (value == '1')
-                    return '<img src="images/globe_s.gif" title="'+Config.Lang.published+'" width="14" height="14" />';
-                    else return '<img src="images/globe_c_s.gif" title="'+Config.Lang.unpublished+'" width="14" height="14" />';
+                    return '<img src="/cms/images/globe_s.gif" title="'+Config.Lang.published+'" width="14" height="14" />';
+                    else return '<img src="/cms/images/globe_c_s.gif" title="'+Config.Lang.unpublished+'" width="14" height="14" />';
             }
         },
         {header: Config.Lang.srt, width: 50, dataIndex: 'tag'},
@@ -72,7 +72,7 @@ Ext.define('Cetera.panel.Materials', {
         win.show();
 
         Ext.Loader.loadScript({
-            url: 'include/ui_material_edit.php?type='+this.mat_type+'&id='+id+'&height='+this.editWindow.height,
+            url: '/cms/include/ui_material_edit.php?type='+this.mat_type+'&id='+id+'&height='+this.editWindow.height,
 			scope: this,
             onLoad: function() { 
                 var cc = Ext.create( this.editorClass() , {win: win});
@@ -122,7 +122,7 @@ Ext.define('Cetera.panel.Materials', {
       
     call: function(action, cat) {
         Ext.Ajax.request({
-            url: 'include/action_materials.php',
+            url: '/cms/include/action_materials.php',
             params: { 
                 action: action, 
                 type: this.mat_type, 
@@ -247,7 +247,7 @@ Ext.define('Cetera.panel.Materials', {
 			sorters: [{property: "dat", direction: "DESC"}],
 			proxy: {
 				type: 'ajax',
-				url: 'include/data_materials.php',
+				url: '/cms/include/data_materials.php',
 				simpleSortMode: true,
 				reader: {
 					type: 'json',
