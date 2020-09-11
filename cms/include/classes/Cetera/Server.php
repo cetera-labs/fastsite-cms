@@ -178,7 +178,9 @@ class Server extends Catalog {
     	    }
         }
         
-        self::getDbConnection()->update('dir_data', array('templateDir' => $props['templateDir']), array('id'=>$this->id));
+        if (isset($props['templateDir'])) {
+            self::getDbConnection()->update('dir_data', ['templateDir' => $props['templateDir']], ['id'=>$this->id]);
+        }
     
         parent::update($props);
     }
