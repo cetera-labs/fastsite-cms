@@ -1,6 +1,8 @@
 var widgetEdit = [];
 var tmo = [];
 Ext.onReady(function(){
+    
+    Ext.themeName = 'neptune';
 	
 	Ext.Loader.setPath('Cetera', '/cms/app');
 	Ext.Loader.setPath('Ext.ux', '/cms/app/ux');
@@ -9,6 +11,7 @@ Ext.onReady(function(){
 
     var tb = Ext.create('Ext.toolbar.Toolbar',{
         id: 'admin-toolbar',
+        cls: 'front-office',
         style: {
             position: 'fixed',
 			right: '0',
