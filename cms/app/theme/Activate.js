@@ -111,6 +111,10 @@ Ext.define('Cetera.theme.Activate', {
             },
             success: function(response){
                 this.setLoading(false);
+                this.isDirty = false;
+                if (this.closeAfterSave) {
+                    this.close();
+                }
             },
             failure: function(response){
                 this.setLoading(false);
