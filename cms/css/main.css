@@ -613,6 +613,10 @@ tr.highlight .x-grid-cell-inner {
 	z-index: 18000;
 }
 
+.x-cetera-widget-active.x-cetera-widget__container-child {
+   border: 4px solid #99bce8;   
+}
+
 .x-field td, .x-panel-body td {
 	padding: 0;
 	border: none;
@@ -625,6 +629,10 @@ tr.highlight .x-grid-cell-inner {
 
 .x-field textarea, .x-field input[type="text"], .x-field table {
 	margin: 0;
+}
+
+.x-table-layout td {
+    padding: 0;
 }
 
 table.x-field tbody {

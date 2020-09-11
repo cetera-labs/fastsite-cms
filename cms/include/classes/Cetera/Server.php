@@ -117,6 +117,8 @@ class Server extends Catalog {
     public function getDefaultTemplate() {
         if ($this->_defaultTemplate) return $this->_defaultTemplate;
         
+        $this->_visual_constructor_origin = $this->id;
+        
         if ($this->template) 
             $this->_defaultTemplate = $this->template;
             else $this->_defaultTemplate = DEFAULT_TEMPLATE;

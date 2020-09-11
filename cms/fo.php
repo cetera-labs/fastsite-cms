@@ -136,7 +136,9 @@ if ($template)
         $template = false;
     
 } 
-if (!$template) $template = $application->getCatalog()->getDefaultTemplate();
+if (!$template) {
+    $template = $application->getCatalog()->getDefaultTemplate();
+}
 
 $application->debug(DEBUG_COMMON, 'Main template: '.$template);
 
@@ -227,6 +229,7 @@ else {
     
     if ($template == '[visual_constructor]') {
         $application->getTwig()->addGlobal('visual_constructor', $application->getCatalog()->visual_constructor);
+        $application->getTwig()->addGlobal('visual_constructor_section', $application->getCatalog()->visual_constructor_origin);
         $response->setContent($application->getTwig()->render('page_visual_constructor.twig'));
     }
     elseif ($path_parts['extension'] == 'php') {

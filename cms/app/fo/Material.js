@@ -1,18 +1,14 @@
 Ext.define('Cetera.fo.Material', {
-    extend: 'Ext.Toolbar',
+    extend: 'Ext.container.ButtonGroup',
 	
 	border: false,
-	
-	style: {
-		position: 'absolute'
-	},	
 
 	items: [
 		{
 			iconCls: 'icon-edit',
 			text: 'Редактировать материал',
 			handler: function(btn) { 
-				var me = btn.up('toolbar');
+				var me = btn.up('buttongroup');
 				var w = me.widget;
 				if (!w) return;
 				
