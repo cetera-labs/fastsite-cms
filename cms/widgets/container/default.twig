@@ -1,4 +1,13 @@
 {# стандартная верстка #}
+<div class="x-cetera-widget__container" data-section="{{ widget.getParam('section') }}">
 {% for w in widget.getChildren() %}
+    <div 
+        class="x-cetera-widget x-cetera-widget__container-child" 
+        data-class="Cetera.fo.Widget" 
+        data-index="{{ loop.index0 }}" 
+        data-params="{{ w.getParams()|json_encode() }}" 
+    >
 	{{ w.getHtml()|raw }}
+    </div>
 {% endfor %}
+</div>

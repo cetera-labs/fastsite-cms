@@ -20,32 +20,40 @@ Ext.onReady(function(){
 			'z-index': '19000'
         },
 		items: [
-			{
-				iconCls: 'icon-setup',
-				text: 'Администрирование',
-				handler: function() {
-					document.location = '/cms/';
-				}
-			},
-			{
-				iconCls: 'icon-edit',
-				text: 'Режим правки',
-				enableToggle: true,
-				pressed: Config.foEditMode,
-				handler: function(btn) {
+            {
+                xtype: 'buttongroup',
+                title: 'Контент',
+                items: [
+                    {
+                        iconCls: 'icon-edit',
+                        text: 'Режим правки',
+                        scale: 'medium',
+                        enableToggle: true,
+                        pressed: Config.foEditMode,
+                        handler: function(btn) {
 
-					Config.foEditMode = btn.pressed;
-					Ext.Ajax.request({
-					  url: '/cms/include/ajax.php',
-					  params: {
-						  action: 'fo_edit_mode',
-						  mode: btn.pressed?1:0
-					  }
-					});  					
-				
-				}
-			},	          
-			'->',
+                            Config.foEditMode = btn.pressed;
+                            Ext.Ajax.request({
+                              url: '/cms/include/ajax.php',
+                              params: {
+                                  action: 'fo_edit_mode',
+                                  mode: btn.pressed?1:0
+                              }
+                            });  					
+                        
+                        }
+                    },
+                    {
+                        iconCls: 'icon-setup',
+                        scale: 'medium',
+                        text: 'Администрирование',
+                        handler: function() {
+                            document.location = '/cms/';
+                        }
+                    }                    
+                ]
+            },	          
+			'->',                      
 			{
 				xtype: 'tbtext',
 				text: Config.user.name

@@ -117,6 +117,8 @@ class Server extends Catalog {
     public function getDefaultTemplate() {
         if ($this->_defaultTemplate) return $this->_defaultTemplate;
         
+        $this->_visual_constructor_origin = $this->id;
+        
         if ($this->template) 
             $this->_defaultTemplate = $this->template;
             else $this->_defaultTemplate = DEFAULT_TEMPLATE;
@@ -176,7 +178,9 @@ class Server extends Catalog {
     	    }
         }
         
-        self::getDbConnection()->update('dir_data', array('templateDir' => $props['templateDir']), array('id'=>$this->id));
+        if (isset($props['templateDir'])) {
+            self::getDbConnection()->update('dir_data', ['templateDir' => $props['templateDir']], ['id'=>$this->id]);
+        }
     
         parent::update($props);
     }

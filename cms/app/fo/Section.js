@@ -1,18 +1,16 @@
 Ext.define('Cetera.fo.Section', {
-    extend: 'Ext.Toolbar',
+    extend: 'Ext.container.ButtonGroup',
 	
 	border: false,
-	
-	style: {
-		position: 'absolute'
-	},	
+    
+    title: 'Виджет List',
 
 	items: [
 		{
 			iconCls: 'icon-new',
-			text: 'Создать материал',
+			text: 'Добавить материал в раздел',
 			handler: function(btn) { 
-				var me = btn.up('toolbar');
+				var me = btn.up('buttongroup');
 				var w = me.widget;
 				if (!w) return;
 				

@@ -24,7 +24,20 @@ $res = array(
 $action = $_REQUEST['action'];
 $theme = $_REQUEST['theme'];
 
-if ($action == 'copy') {
+if ($action == 'get_config') {
+    $theme = Theme::find($_REQUEST['theme']);
+    $s = Server::getById((int)$_REQUEST['server']);
+    $res['config'] = $theme->loadConfig($s)->config;
+    $res['success'] = true;
+}
+elseif ($action == 'save_config') {
+    $theme = Theme::find($_REQUEST['theme']);
+    $s = Server::getById((int)$_REQUEST['server']);
+    $config = json_decode($_REQUEST['config'],true);
+    $theme->setConfig($config, $s);
+    $res['success'] = true;
+}
+elseif ($action == 'copy') {
     $data = array_intersect_key($_REQUEST, array_flip(['name','title','version','description']));      
     Theme::find($theme)->copy($data);
     $res['success'] = true;
