@@ -5,6 +5,8 @@ Ext.define('Cetera.fo.Widget', {
 	
     title: 'Параметры виджета',
     
+    widgetsContainer: null,
+    
 	items: [
 		{
 			iconCls: 'icon-setup',
@@ -75,25 +77,57 @@ Ext.define('Cetera.fo.Widget', {
 		}, 
         {
 			iconCls: 'icon-up',
-			text: 'Выше',            
+			text: 'Выше',
+            handler: function(btn) {
+				var me = btn.up('buttongroup');
+				var w = me.widget;
+				if (!w) return;   
+                var prev = w.prev('.x-cetera-widget__container-child');           
+                if (!prev) return;
+                w.insertBefore(prev);
+                me.saveContent();                
+            }
         }, 
         {
 			iconCls: 'icon-down',
-			text: 'Ниже',            
+			text: 'Ниже',     
+            handler: function(btn) {
+				var me = btn.up('buttongroup');
+				var w = me.widget;
+				if (!w) return;   
+                var next = w.next('.x-cetera-widget__container-child');           
+                if (!next) return;
+                w.insertAfter(next);
+                me.saveContent();
+            }            
         }, 
         {
 			iconCls: 'icon-delete',
-			text: 'Удалить',            
+			text: 'Удалить',     
+            handler: function(btn) {
+				var me = btn.up('buttongroup');
+				var w = me.widget;
+				if (!w) return;   
+                Ext.MessageBox.confirm(_('Удалить виджет'), _('Вы уверены?'), function(btn) {
+                    if (btn == 'yes') {
+                        me.widgetsContainer = w.parent('.x-cetera-widget__container');
+                        w.remove();
+                        me.saveContent();
+                    }
+                }, this);                
+            }            
         }
 	],
 
     saveContent: function() {
-		var w = this.widget;
-		if (!w) return;
-        var container = w.parent('.x-cetera-widget__container');
-        var section = container.getAttribute( 'data-section' );
+        if (!this.widgetsContainer) {
+            var w = this.widget;
+            if (!w) return;            
+            this.widgetsContainer = w.parent('.x-cetera-widget__container');
+        }
+        var section = this.widgetsContainer.getAttribute( 'data-section' );
         var data = [];
-        container.select('.x-cetera-widget__container-child').each(function(el, widgets){
+        this.widgetsContainer.select('.x-cetera-widget__container-child').each(function(el, widgets){
             Ext.Array.push(data, JSON.parse(el.getAttribute( 'data-params' )));
         });
 
