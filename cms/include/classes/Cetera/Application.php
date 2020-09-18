@@ -1436,7 +1436,8 @@ class Application {
 				'name'    => 'File',
 				'class'   => '\\Cetera\\Widget\\File',
 				'describ' => $t->_('Файл'),
-				'icon'    => '/cms/images/16X16/documents.gif'
+				'icon'    => '/cms/images/16X16/documents.gif',
+                'not_placeable' => true
 			),  
 
 			'Paginator' => array(

@@ -93,64 +93,68 @@ Ext.onReady(function(){
 
 	});
 	
-	widgets.on('mouseenter', function(e,t) {
-		
-		if (!Config.foEditMode) return;
-		
-		var widget = e.getTarget('.x-cetera-widget', 10, true);
-       
-		if (!widget.getAttribute( 'data-class' )) return;
-		
-		widget.addCls('x-cetera-widget-active');
-        if (tmo[widget.id]) clearTimeout(tmo[widget.id]);
-		
-		var c = widget.getAttribute( 'data-class' );
-		if (!widgetEdit[widget.id])
-		{            
-            var group = Ext.create(c);
-            group.widget = widget;
-            var items = [
-                group
-            ];
-            
-            // ищем вложеные виджеты, и добавляем их на тулбар
-            var subwidgets = widget.select(".x-cetera-widget");
-            subwidgets.each(function(el){
-                
-                if (!el.getAttribute( 'data-class' )) return;
-                
-                var group = Ext.create( el.getAttribute( 'data-class' ) );
-                group.widget = el;
-                items.push(group);
-                
-            });            
-            
-            widgetEdit[widget.id] = Ext.create('Ext.Toolbar', {
-                border: false,
-                style: {
-                    position: 'absolute'
-                },
-                items: items
-            });
-            
-			widgetEdit[widget.id].render( Ext.getBody() );
-            widgetEdit[widget.id].getEl().set( {'data-parent': widget.id} );
-			widgetEdit[widget.id].getEl().on('mouseenter', function(e,el) {
-                var wid = el.getAttribute( 'data-parent' );
-				if (tmo[wid]) clearTimeout(tmo[wid]);
-			});
-			widgetEdit[widget.id].getEl().on('mouseleave', function(e,el) {
-                var widget = Ext.get( el.getAttribute( 'data-parent' ) );
-				hideWidget( widget );
-			});
-		}        
-		
-		widgetEdit[widget.id].setXY( [widget.getX(),widget.getY() - widgetEdit[widget.id].getHeight()] );	
-		widgetEdit[widget.id].setWidth( widget.getWidth() );
-				
-	});
+	widgets.on('mouseenter', widgetEnter);
 	
 });
+
+function widgetEnter(e,t) {    
+    if (!Config.foEditMode) return;
+    
+    var widget = e.getTarget('.x-cetera-widget', 10, true);
+   
+    if (!widget.getAttribute( 'data-class' )) return;
+    
+    widget.addCls('x-cetera-widget-active');
+    if (tmo[widget.id]) clearTimeout(tmo[widget.id]);
+    
+    var c = widget.getAttribute( 'data-class' );
+    if (!widgetEdit[widget.id])
+    {            
+        var group = Ext.create(c, {
+            widget: widget
+        });
+        
+        var items = [
+            group
+        ];
+        
+        // ищем вложеные виджеты, и добавляем их на тулбар
+        var subwidgets = widget.select(".x-cetera-widget");
+        subwidgets.each(function(el){
+            
+            if (!el.getAttribute( 'data-class' )) return;
+            
+            var group = Ext.create( el.getAttribute( 'data-class' ), {
+                widget: el
+            } );
+            items.push(group);
+            
+        });            
+        
+        widgetEdit[widget.id] = Ext.create('Ext.Toolbar', {
+            border: false,
+            style: {
+                position: 'absolute'
+            },
+            items: items
+        });
+        
+        widgetEdit[widget.id].render( Ext.getBody() );
+        widgetEdit[widget.id].getEl().set( {'data-parent': widget.id} );
+        widgetEdit[widget.id].getEl().on('mouseenter', function(e,el) {
+            var wid = el.getAttribute( 'data-parent' );
+            if (tmo[wid]) clearTimeout(tmo[wid]);
+        });
+        widgetEdit[widget.id].getEl().on('mouseleave', function(e,el) {
+            var widget = Ext.get( el.getAttribute( 'data-parent' ) );
+            hideWidget( widget );
+        });
+    }        
+    
+    widgetEdit[widget.id].setXY( [widget.getX(),widget.getY() - widgetEdit[widget.id].getHeight()] );	
+    widgetEdit[widget.id].setWidth( widget.getWidth() );
+            
+}
 
 function hideWidget(widget)
 {
