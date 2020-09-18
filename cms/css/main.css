@@ -223,6 +223,14 @@ body .main-navigation .x-treelist-item-selected > .x-treelist-row {
     font-size: 120%;
 }
 
+#app-header-title-fo {
+    background:url(../images/cmslogo_white.png) no-repeat center center;
+    padding: 0 25px 0 25px;
+    font-weight: bold;
+    font-size: 150%;
+    background-size: contain;
+}
+
 .x-grid-row-summary .x-grid-cell-inner {
     font-weight: bold;
 }

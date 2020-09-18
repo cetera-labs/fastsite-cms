@@ -21,6 +21,11 @@ Ext.onReady(function(){
         },
 		items: [
             {
+                xtype: 'component',
+                id: 'app-header-title-fo',
+                html: '&nbsp;'
+            },
+            {
                 xtype: 'buttongroup',
                 title: 'Контент',
                 items: [
