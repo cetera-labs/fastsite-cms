@@ -1,6 +1,6 @@
 # Fastsite CMS
 ## About
-Cetera CMS — innovative Cetera Labs content management and eCommerce-product, based at 10-years of experience and agile development methodologies. Fastsite CMS helps to start your internet sales in 5 minutes. Cetera CMS is free and licensed under MIT. Product is open source and published at GitHub.
+Fastsite CMS — innovative Cetera Labs content management and eCommerce-product, based at 10-years of experience and agile development methodologies. Fastsite CMS helps to start your internet sales in 5 minutes. Fastsite CMS is free and licensed under MIT. Product is open source and published at GitHub.
 ## Features, editions, screenshots
 See website — http://en.fastsite.ru/portfolio/
 ## Launch your website in the cloud
