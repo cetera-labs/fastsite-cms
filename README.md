@@ -8,8 +8,8 @@ http://en.fastsite.ru/
 ## Docker 
 https://hub.docker.com/r/ceteralabs/cetera-cms/
 ## Cetera Labs services
-* e-Commerce development — https://ceteralabs.com/services/ecommerce/ecommerce-development/
-* e-Commerce support — https://ceteralabs.com/services/ecommerce/ecommerce-support/
+* e-Commerce development — https://ceteralabs.com/
+* e-Commerce support — https://ceteralabs.com/ecommerce-support/
 ## Docs
 * User Guide — https://cetera-labs.github.io/cetera-cms/docs/user-guide
 * Developers Guide — https://cetera-labs.github.io/cetera-cms/docs/developer-guide
