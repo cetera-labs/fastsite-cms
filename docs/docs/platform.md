@@ -63,7 +63,7 @@ nav_order: 2
 		</tr>
 		<tr>
 			<td><a href="http://twig.sensiolabs.org/" title="Перейти на сайт twig.sensiolabs.org">Twig</a></td>
-			<td>Шаблонизатор для PHP. Используется в <a href="https://cetera.ru/cetera-cms/" title="О Fastsite CMS">Fastsite CMS</a>.</td>
+			<td>Шаблонизатор для PHP. Используется в <a href="https://fastsite.ru/" title="О Fastsite CMS">Fastsite CMS</a>.</td>
 		</tr>
 		<tr>
 			<td>HTML</td>

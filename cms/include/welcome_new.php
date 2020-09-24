@@ -376,7 +376,7 @@ Ext.create('Ext.Button', {
                 <hr noshade />
                 <div align="left">
                 &copy; 2000-<?=date('Y',time());?> <?=$translator->_('Компания')?> <a href="http://<?=APP_WWW?>" target="_blank">Cetera labs</a><br /><BR />
-                <a href="https://github.com/cetera-labs/cetera-cms/blob/master/LICENSE">MIT License</a><br>
+                <a href="https://github.com/cetera-labs/fastsite/blob/master/LICENSE">MIT License</a><br>
 
                 </div>
                 <?php if ($new_version) :?>

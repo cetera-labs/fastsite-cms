@@ -11,9 +11,9 @@ https://hub.docker.com/r/ceteralabs/cetera-cms/
 * e-Commerce development — https://ceteralabs.com/
 * e-Commerce support — https://ceteralabs.com/ecommerce-support/
 ## Docs
-* User Guide — https://cetera-labs.github.io/cetera-cms/docs/user-guide
-* Developers Guide — https://cetera-labs.github.io/cetera-cms/docs/developer-guide
-* Install Guide and requirements — https://cetera-labs.github.io/cetera-cms/docs/cetera-cms-admin-guide.html
+* User Guide — https://cetera-labs.github.io/fastsite-cms/docs/user-guide
+* Developers Guide — https://cetera-labs.github.io/fastsite-cms/docs/developer-guide
+* Install Guide and requirements — https://cetera-labs.github.io/fastsite-cms/docs/fastsite-cms-admin-guide.html
 * API — https://cms.cetera.ru/doc/api/
 * Free e-Commerce check-list — https://ceteralabs.com/ecommerce/check-list/
 ## Support

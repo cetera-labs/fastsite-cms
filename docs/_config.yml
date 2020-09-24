@@ -2,5 +2,5 @@ title: Fastsite CMS Docs
 remote_theme: pmarsceill/just-the-docs
 aux_links:
     "Fastsite CMS":
-      - "https://cetera.ru/cetera-cms/"
-baseurl: "/cetera-cms" # the subpath of your site, e.g. /blog
+      - "https://fastsite.ru/"
+baseurl: "/fastsite-cms" # the subpath of your site, e.g. /blog
