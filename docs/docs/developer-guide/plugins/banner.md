@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Баннерная система»
 nav_order: 6
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

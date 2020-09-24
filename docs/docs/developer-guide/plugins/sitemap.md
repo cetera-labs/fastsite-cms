@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Карта сайта»
 nav_order: 5
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

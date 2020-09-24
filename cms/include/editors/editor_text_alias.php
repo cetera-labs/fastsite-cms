@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Cetera CMS
+ * Fastsite CMS
  * 
  * Default редактор поля "Текст"
  *

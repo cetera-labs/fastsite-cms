@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Конструктор форм»
 nav_order: 4
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

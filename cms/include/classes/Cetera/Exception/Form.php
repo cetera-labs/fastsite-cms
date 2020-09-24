@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 
@@ -11,7 +11,7 @@
 namespace Cetera\Exception;  
  
 /**
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Form extends CMS
 {

@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Рассылки»
 nav_order: 8
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Cetera CMS 3\n"
+"Project-Id-Version: Fastsite CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-08 09:29+0300\n"
 "PO-Revision-Date: 2018-08-08 09:33+0300\n"
@@ -1325,14 +1325,14 @@ msgstr "no"
 #: include/classes/Cetera/Plugin.php:96 include/data_plugins_lib.php:43
 #: include/data_themes_lib.php:33
 #, php-format
-msgid "Не подходящая версия Cetera CMS. Требуется %s или выше"
-msgstr "Incompatible version of Cetera CMS. %s or higher is required."
+msgid "Не подходящая версия Fastsite CMS. Требуется %s или выше"
+msgstr "Incompatible version of Fastsite CMS. %s or higher is required."
 
 #: include/classes/Cetera/Plugin.php:100 include/data_plugins_lib.php:48
 #: include/data_themes_lib.php:38
 #, php-format
-msgid "Не подходящая версия Cetera CMS. Требуется не выше %s"
-msgstr "Incompatible version of Cetera CMS. %s or lower is required."
+msgid "Не подходящая версия Fastsite CMS. Требуется не выше %s"
+msgstr "Incompatible version of Fastsite CMS. %s or lower is required."
 
 #: include/classes/Cetera/Plugin.php:113
 #, fuzzy, php-format
@@ -1916,8 +1916,8 @@ msgid "Запрос к серверу обновлений"
 msgstr "The request to the update server"
 
 #: include/welcome_new.php:342
-msgid "Поздравляем с успешной установкой Cetera CMS"
-msgstr "Congratulations! Cetera CMS is successfully installed"
+msgid "Поздравляем с успешной установкой Fastsite CMS"
+msgstr "Congratulations! Fastsite CMS is successfully installed"
 
 #: include/welcome_new.php:355
 msgid "Система контент-менеджмента веб-сайтов"
@@ -2760,8 +2760,8 @@ msgstr "You have been successfully registered!"
 #~ msgid "анализировать структуру разделов"
 #~ msgstr "Analyze the sections structure"
 
-#~ msgid "Пароль в CeteraCMS на "
-#~ msgstr "CeteraCMS password on"
+#~ msgid "Пароль в FastsiteCMS на "
+#~ msgstr "FastsiteCMS password on"
 
 #~ msgid "C таким e-mail уже зарегистрирован другой пользователь"
 #~ msgstr "Another user with same email has been registered already"

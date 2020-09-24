@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/

@@ -1,10 +1,10 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  * 
  * Информационной модуль "О системе". Показывает информацию о системе, лицензию и т.д.  
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author unknown 
@@ -343,7 +343,7 @@ Ext.create('Ext.Button', {
 			<tr height="0">
 			<td>
 				<div id="theme_setup" class="theme_setup">
-						<h2><?=$translator->_('Поздравляем с успешной установкой Cetera CMS');?></h2>
+						<h2><?=$translator->_('Поздравляем с успешной установкой Fastsite CMS');?></h2>
 						<div id="setup_theme"></div>
 						<div id="publish_help"></div>
 						<div id="setup_theme_cancel"></div>

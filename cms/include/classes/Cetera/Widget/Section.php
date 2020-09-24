@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Раздел"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Section extends Templateable {
 			

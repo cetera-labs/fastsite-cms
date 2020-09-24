@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Меню"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Menu extends Templateable {
 	

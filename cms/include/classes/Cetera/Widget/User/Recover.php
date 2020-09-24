@@ -4,7 +4,7 @@ namespace Cetera\Widget\User;
 /**
  * Виджет "Форма регистрации пользователя"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Recover extends \Cetera\Widget\Templateable {
 	

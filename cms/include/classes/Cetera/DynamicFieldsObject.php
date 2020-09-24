@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -12,7 +12,7 @@ namespace Cetera;
 /**
  * Абстрактный класс для объектов системы с настраиваемыми полями (Материалы, Пользователи).
  *  
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @abstract
  * @internal
  */ 
@@ -200,7 +200,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     /**
      * Перегрузка чтения свойств класса. 
      * 
-     * Организуется доступ к полям объекта, созданным в конструкторе "Типы материалов" CeteraCMS, 
+     * Организуется доступ к полям объекта, созданным в конструкторе "Типы материалов" FastsiteCMS, 
      * как к свойствам объекта                     
      * 
   	 * @internal  
@@ -233,7 +233,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     /**
      * Перегрузка записи свойств класса.  
      *        
-     * Организуется доступ к полям объекта, созданным в конструкторе "Типы материалов" CeteraCMS, 
+     * Организуется доступ к полям объекта, созданным в конструкторе "Типы материалов" FastsiteCMS, 
      * как к свойствам объекта  
      *          
      * @internal  	 

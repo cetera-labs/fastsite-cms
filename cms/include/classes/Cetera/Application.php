@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -19,11 +19,11 @@ use Zend\Http\PhpEnvironment\Response;
 use PHPMailer\PHPMailer\PHPMailer;
  
 /**
- * Объект Application (приложение) является главным в иерархии объектов CeteraCMS и 
- * представляет само приложение CeteraCMS. Cвойства и методы предназначены для 
+ * Объект Application (приложение) является главным в иерархии объектов FastsiteCMS и 
+ * представляет само приложение FastsiteCMS. Cвойства и методы предназначены для 
  * доступа к параметрам сайта.
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  **/ 
 class Application {
 	
@@ -1613,7 +1613,7 @@ class Application {
     {
             $d = debug_backtrace();     
 			$path = str_replace('D:\\cms\\www\\','',dirname($d[1]['file']));   
-            $path = str_replace('N:\\CeteraCMS\\','',$path);   			
+            $path = str_replace('N:\\FastsiteCMS\\','',$path);   			
             $path = str_replace('\\','/', $path);           
             $path = str_replace(DOCROOT,'',$path);
             return '/'.$path;      

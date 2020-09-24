@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$ 
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -12,7 +12,7 @@ namespace Cetera\Cache\Backend;
 /**
  * Backend для кэширования объектов системы
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @access private 
  **/ 
 class Backend {

@@ -13,7 +13,7 @@ Ext.define('Cetera.main.Header', {
         this.items = [{
             xtype: 'component',
             id: 'app-header-title',
-            html: 'Cetera CMS'
+            html: 'Fastsite CMS'
         },
 		{ xtype: 'tbseparator' },
 		{

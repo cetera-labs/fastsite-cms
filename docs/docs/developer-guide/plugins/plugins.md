@@ -1,17 +1,17 @@
 ---
 layout: default
-title: Плагины (модули) Cetera CMS
+title: Плагины (модули) Fastsite CMS
 nav_order: 6
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/plugins
 ---
 
-# Плагины (модули) Cetera CMS
+# Плагины (модули) Fastsite CMS
 
 ## [Разработка плагинов]({{site.baseurl}}/docs/developer-guide/plugins/develop.html)
 
-В CeteraCMS v3.12 и выше
+В FastsiteCMS v3.12 и выше
 
 ---
 
@@ -77,4 +77,4 @@ permalink: /docs/developer-guide/plugins
 
 ## [Модуль «API»]({{site.baseurl}}/docs/developer-guide/plugins/api.html)
 
-Реализация REST API для взаимодействия с Cetera CMS.
+Реализация REST API для взаимодействия с Fastsite CMS.

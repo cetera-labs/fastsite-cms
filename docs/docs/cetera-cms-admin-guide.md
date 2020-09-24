@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Руководство администратора Cetera CMS
+title: Руководство администратора Fastsite CMS
 nav_order: 5
 ---
-# Установка Cetera CMS
+# Установка Fastsite CMS
 
 ## Requirements
 
@@ -13,7 +13,7 @@ nav_order: 5
 
 ## Composer install
 
-1. To create a new Cetera CMS project, run this command (substituting <Path> with the path where Composer should create the project):
+1. To create a new Fastsite CMS project, run this command (substituting <Path> with the path where Composer should create the project):
 ```
 composer create-project cetera-labs/website-skeleton <Path>
 ```    

@@ -4,7 +4,7 @@ namespace Cetera\Widget\User;
 /**
  * Виджет "Постраничная навигация"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class ProfileEdit extends \Cetera\Widget\Templateable {
 

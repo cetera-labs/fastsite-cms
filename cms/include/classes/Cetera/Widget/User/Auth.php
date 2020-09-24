@@ -6,7 +6,7 @@ use Zend\Authentication\Result;
 /**
  * Виджет "Постраничная навигация"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Auth extends \Cetera\Widget\Templateable {
 	

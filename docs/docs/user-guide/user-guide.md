@@ -5,7 +5,7 @@ nav_order: 4
 has_children: true
 permalink: /docs/user-guide
 ---
-# Руководство пользователя Cetera CMS
+# Руководство пользователя Fastsite CMS
 
 ## Право интеллектуальной собственности
 
@@ -13,7 +13,7 @@ permalink: /docs/user-guide
 
 Copyright © 2003-2018 Cetera Labs
 
-Все права на пакет Cetera CMS Enterprise Suite принадлежат компании Cetera Labs.
+Все права на пакет Fastsite CMS Enterprise Suite принадлежат компании Cetera Labs.
 
 Данный программный продукт охраняется действующим законодательством Российской Федерации и международными соглашениями об охране интеллектуальной собственности.
 

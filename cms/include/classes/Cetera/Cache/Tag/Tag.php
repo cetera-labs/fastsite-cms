@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$ 
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -13,7 +13,7 @@ namespace Cetera\Cache\Tag;
  * Базовый класс для всех будущих пользовательских классов-тэгов.
  * Определяет, с каким backend-ом будет идти работа.
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @access private 
  **/ 
 abstract class Tag {

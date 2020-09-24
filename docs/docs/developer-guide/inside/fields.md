@@ -2,7 +2,7 @@
 layout: default
 title: Поля материалов и редакторы полей
 nav_order: 1
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 

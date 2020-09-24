@@ -13,7 +13,7 @@ permalink: /docs/developer-guide/fast-start
 
 ## [Урок №1. Hello World]({{site.baseurl}}/docs/developer-guide/fast-start/hello-world.html)
 
-Создаем первый сайт на Cetera CMS
+Создаем первый сайт на Fastsite CMS
 
 ---
 
