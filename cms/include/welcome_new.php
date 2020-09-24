@@ -354,7 +354,7 @@ Ext.create('Ext.Button', {
 			
             <tr height="100%"><td align="center">
                 <div class="about">
-                    <img src="http://cetera.ru/cetera_cms/logo.gif" />
+                    <img src="https://www.fastsite.ru/logo-fastsite.svg"/>
                     <br />
                     <?=$translator->_('Система контент-менеджмента веб-сайтов');?><br /><?=APP_NAME?> v<?=VERSION?>
                 </div>
