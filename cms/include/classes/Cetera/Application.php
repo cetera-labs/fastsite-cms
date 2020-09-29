@@ -793,26 +793,34 @@ class Application {
 		if (is_callable($hook))
 			$this->routes['general'][$path] = $hook;
 	}
+    
+    public function setRequestUri($uri) {
+        $this->decodeRequestUri($uri);
+    }
 	
 	/**
 	 * Парсит REQUEST_URI
 	 * 	 	   
 	 * @return void	 
 	 */ 
-    private function decodeRequestUri()
+    private function decodeRequestUri($uri = null)
     {
+        if ($uri === null) {
+            $uri = $_SERVER['REQUEST_URI'];
+        }
+        
 		foreach ($this->routes['general'] as $p => $callable)
 		{
-			if (preg_match('|^'.$p.'|', $_SERVER['REQUEST_URI'], $matches)) {
-				list($url) = explode('?',$_SERVER['REQUEST_URI']);
+			if (preg_match('|^'.$p.'|', $uri, $matches)) {
+				list($url) = explode('?',$uri);
 				$this->_unparsedUrl = trim(str_replace($matches[0], '', $url),'/');
 				$res = $callable($matches);
 				if ($res) die();
 			}
 			/*
-			if (substr($_SERVER['REQUEST_URI'],0,strlen($p)) == $p )
+			if (substr($uri,0,strlen($p)) == $p )
 			{
-				list($url) = explode('?',$_SERVER['REQUEST_URI']);
+				list($url) = explode('?',$uri);
 				$this->_unparsedUrl = trim(str_replace($p, '', $url),'/');
 				$res = $callable();
 				if ($res) die();
@@ -825,7 +833,7 @@ class Application {
         $this->_catalog = $this->getServer();
         $this->_urlPath[] = $this->_catalog;
         if (!$this->_catalog) return;
-        list($url) = explode('?',$_SERVER['REQUEST_URI']);
+        list($url) = explode('?',$uri);
         $url = trim($url, '/');
     	$dir = explode("/", $url);
     	

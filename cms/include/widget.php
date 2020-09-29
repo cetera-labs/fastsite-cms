@@ -9,6 +9,10 @@ $application->initSession();
 $application->initPlugins();
 $application->setFrontOffice();
 
+if (isset($_REQUEST['url'])) {
+    $application->setRequestUri($_REQUEST['url']);
+}
+
 $t = $application->getServer()->getTheme();
 if ($t) $t->addTranslation($application->getTranslator());
 

@@ -316,7 +316,7 @@
 </object>
 
 <object name="dir_data" description="Sections[ru=Разделы]" fixed="1" handler="" plugin="">
-    <field name="visual_constructor" type="1" pseudo_type="0" description="Constructor[ru=Конструктор]" length="1000" show="0" required="0" fixed="1" editor="0" editor_user="" default_value="" />
+    <field name="visual_constructor" type="1" pseudo_type="0" description="Constructor[ru=Конструктор]" length="10000" show="0" required="0" fixed="1" editor="0" editor_user="" default_value="" />
 </object>
 
 </schema>

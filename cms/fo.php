@@ -19,7 +19,7 @@ $_ext = substr($url,-3);
 
 $_init = Cetera\Util::utime();
 
-$application->getRouter()->addRoute('imagetransform',
+$application->getRouter()->addRoute(\Cetera\ImageTransform::PREFIX,
     \Zend\Router\Http\Regex::factory([
         'regex' => '/'.\Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)/(?<path>.+)',
         'defaults' => [

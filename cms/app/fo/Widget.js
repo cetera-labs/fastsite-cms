@@ -207,11 +207,11 @@ Ext.define('Cetera.fo.Widget', {
     reloadWidget: function(widget) {
         
         var params = JSON.parse(widget.getAttribute( 'data-params' ));
-        
         Ext.Ajax.request({
             url: '/cms/include/widget.php',
             params: {
                 widget: params.name,
+                url: location.pathname + location.search, 
                 params: widget.getAttribute( 'data-params' )
             },
             success: function(response, opts) {
