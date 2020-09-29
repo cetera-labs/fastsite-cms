@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Конфигурация Cetera CMS
+title: Конфигурация Fastsite CMS
 nav_order: 3
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 
-# Конфигурация Cetera CMS
+# Конфигурация Fastsite CMS
 
-Глобальный параметры конфигурации Cetera CMS находятся в файле .prefs в корневом каталоге сервера
+Глобальный параметры конфигурации Fastsite CMS находятся в файле .prefs в корневом каталоге сервера
 
 	{% raw %}; Параметры базы данных
 	dbhost=localhost

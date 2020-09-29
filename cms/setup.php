@@ -241,7 +241,7 @@ function step1() {
     
     var form = Ext.create('Ext.form.FormPanel', {
         items: [
-            textPanel('<div class="welcome"><img src="images/brand_small.gif" width="323" height="40" /><br /><br /><?php echo $translator->_('Добро пожаловать в программу установки')?><br /><strong><?php echo APP_NAME?> <?php echo VERSION?></strong></div>'),
+            textPanel('<div class="welcome"><img src="images/logo-fastsite.svg" width="323" height="40" /><br /><br /><?php echo $translator->_('Добро пожаловать в программу установки')?><br /><strong><?php echo APP_NAME?> <?php echo VERSION?></strong></div>'),
             locale
         ],
         waitMsgTarget: true,

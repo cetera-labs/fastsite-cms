@@ -2,11 +2,11 @@
 namespace Cetera;
 header('Content-Type: application/javascript; charset=UTF-8');
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  * 
  * Интерфейс редактирования материала  
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 

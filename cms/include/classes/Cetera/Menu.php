@@ -4,7 +4,7 @@ namespace Cetera;
 /**
  * Меню.
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Menu extends Base {
 	

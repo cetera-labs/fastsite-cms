@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Хлебные крошки"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Breadcrumbs extends Templateable {
 	

@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Календарь"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Calendar extends Templateable {
 			

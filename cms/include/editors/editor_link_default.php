@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Cetera CMS
+ * Fastsite CMS
  * 
- * Default редактор поля "Ссылка на другой материал"
+ * Default пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
  *
  * @version $Id: editor_link_default.php,v 1.1 2006/10/16 18:33:15 romanov Exp $
  * @copyright 2006 
@@ -16,7 +16,7 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
 	if ($field_def['type'] == FIELD_LINK) {
 		if (!$field_def['len']) $field_def['len'] = $idcat;    
 		$from_section = $field_def['len'];
-		// получаем имя таблицы и id типа материала, на который ссылка
+		// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ id пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 		$section = \Cetera\Catalog::getById($field_def['len']);
 		$only = $section->getMaterialsObjectDefinition()->id;
 	}
@@ -25,7 +25,7 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
 		$only = $field_def['len'];
 	}
 		   
-    // Получаем заголовок материала и id раздела в котором он находится
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ id пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	/*
 	$lnk_name = $lnk_idcat = $lnk_cat = '';
 	if ($fieldvalue) {		

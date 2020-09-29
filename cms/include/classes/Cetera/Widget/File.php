@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Файл"
  *  
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class File extends Widget {
 

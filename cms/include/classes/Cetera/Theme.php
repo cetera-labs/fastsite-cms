@@ -4,9 +4,9 @@ namespace Cetera;
 use PHPMailer\PHPMailer\PHPMailer;
 
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -14,7 +14,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 /**
  * Тема
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  **/ 
 class Theme implements \ArrayAccess  {
 

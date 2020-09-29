@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Cetera CMS
+ * Fastsite CMS
  * 
- * Default редактор поля "Материал"
+ * Default пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
  *
  * @version $Id: editor_link_default.php,v 1.1 2006/10/16 18:33:15 romanov Exp $
  * @copyright 2006 

@@ -1,8 +1,8 @@
 <?
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author unknown 
  **/
@@ -12,7 +12,7 @@ namespace Cetera;
 /**
  * Nested Sets 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @access private 
  * @internal
  **/
@@ -126,7 +126,7 @@ class CDBTree {
 		if(!(list($leftIdP, $rightIdP, $levelP) = $this->getNodeInfo($newParentId))) return FALSE;
 		if($ID == $newParentId || $leftId == $leftIdP || ($leftIdP >= $leftId && $leftIdP <= $rightId)) return false;
 
-      // если происходит перемещение вверх по родительской оси
+      // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
       if ($leftIdP < $leftId && $rightIdP > $rightId && $levelP < $level - 1 ) {
          $this->sql = 'UPDATE '.$this->table.' SET '
             . $this->level.'=IF('.$this->left.' BETWEEN '.$leftId.' AND '.$rightId.', '.$this->level.sprintf('%+d', -($level-1)+$levelP).', '.$this->level.'), '

@@ -2,13 +2,13 @@
 layout: default
 title: Модуль «API»
 nav_order: 12
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 
 # Модуль «API»
 
-Реализация REST API для взаимодействия с Cetera CMS.
+Реализация REST API для взаимодействия с Fastsite CMS.
 
 В случае успеха методы возвращают ответ вида:
 

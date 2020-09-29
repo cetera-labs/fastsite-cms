@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Cetera CMS 3\n"
+"Project-Id-Version: Fastsite CMS 3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-26 08:25+0300\n"
 "PO-Revision-Date: 2017-05-26 08:26+0300\n"
@@ -1281,12 +1281,12 @@ msgstr ""
 
 #: include/data_plugins_lib.php:40 include/data_themes_lib.php:33
 #, php-format
-msgid "Не подходящая версия Cetera CMS. Требуется %s или выше"
+msgid "Не подходящая версия Fastsite CMS. Требуется %s или выше"
 msgstr ""
 
 #: include/data_plugins_lib.php:45 include/data_themes_lib.php:38
 #, php-format
-msgid "Не подходящая версия Cetera CMS. Требуется не выше %s"
+msgid "Не подходящая версия Fastsite CMS. Требуется не выше %s"
 msgstr ""
 
 #: include/data_types.php:88
@@ -1742,7 +1742,7 @@ msgid "Запрос к серверу обновлений"
 msgstr ""
 
 #: include/welcome_new.php:336
-msgid "Поздравляем с успешной установкой Cetera CMS"
+msgid "Поздравляем с успешной установкой Fastsite CMS"
 msgstr ""
 
 #: include/welcome_new.php:349

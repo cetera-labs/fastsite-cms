@@ -2,7 +2,7 @@
 layout: default
 title: Разработка плагинов
 nav_order: 1
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 
@@ -86,7 +86,7 @@ grand_parent: Руководство разработчика
         },
 
         "extra": {
-            "description": "The dummy plugin for Cetera CMS"
+            "description": "The dummy plugin for Fastsite CMS"
         }
     }    
 
@@ -260,9 +260,9 @@ a:6:{s:4:"name";s:0:"";s:7:"catalog";s:2:"14";s:5:"limit";s:1:"8";s:5:"order";s:
 
 ## Поддержка многоязычности в плагинах
 
-Cetera CMS 3.29+
+Fastsite CMS 3.29+
 
-Мультиязычность в Cetera CMS построена с использованием GNU gettext. Файлы c переводами размещаются в подкаталоге lang.
+Мультиязычность в Fastsite CMS построена с использованием GNU gettext. Файлы c переводами размещаются в подкаталоге lang.
 
 В файле config.php указываем местоположение переводов к модулю:
 

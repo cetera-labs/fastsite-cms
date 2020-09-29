@@ -1,18 +1,18 @@
 ---
 layout: default
-title: Разработка нового сайта на Cetera CMS
+title: Разработка нового сайта на Fastsite CMS
 nav_order: 1
 parent: Руководство разработчика
 permalink: /docs/developer-guide/start/
 ---
-# Разработка нового сайта на Cetera CMS(Developer style guide)
+# Разработка нового сайта на Fastsite CMS(Developer style guide)
 
 ## 0. Перенос с площадки fastsite.ru
 Если проект был изначально создан по методологии «Быстрый старт» и открыт через конструктор на площадке fastsite.ru, то необходимо запланировать и не забыть перенести его на свою собственную площадку хостинга.
 
 ## 1. Установка
 
-Устанавливаем Cetera CMS согласно инструкции. Алгоритм выбора начальной темы:
+Устанавливаем Fastsite CMS согласно инструкции. Алгоритм выбора начальной темы:
 
 * разработка интернет-магазина - выбираем shop-2018 последней версии;
 * все остальные случаи - выбираем corp-2018 последней версии.
@@ -72,7 +72,7 @@ permalink: /docs/developer-guide/start/
 
 ## 6. Контроллеры
 
-В CeteraCMS контроллер (в 99% случаев) - это PHP-cкрипт, расположенный в корневом каталоге темы и запускаемый при обращении к сайту.
+В FastsiteCMS контроллер (в 99% случаев) - это PHP-cкрипт, расположенный в корневом каталоге темы и запускаемый при обращении к сайту.
 
 Выбрать какой контроллер будет запускаться при обращении к определенному разделу сайта можно указав имя контроллера в свойствах раздела в админке.
 
@@ -88,7 +88,7 @@ permalink: /docs/developer-guide/start/
 
 ## 7. API
 
-Все API классы Cetera CMS находятся в пространстве имен Cetera
+Все API классы Fastsite CMS находятся в пространстве имен Cetera
 
 Описание: [https://cetera.ru/cetera_cms/doc/api/](https://cetera.ru/cetera_cms/doc/api/)
 
@@ -98,7 +98,7 @@ permalink: /docs/developer-guide/start/
 [https://cetera-labs.github.io/docs/developer-guide/inside]({{site.baseurl}}/docs/developer-guide/inside)  
 [https://cetera-labs.github.io/docs/developer-guide/widgets]({{site.baseurl}}/docs/developer-guide/widgets)
 
-## 8. Полезные библиотеки, устанавливаемые вместе с Cetera CMS
+## 8. Полезные библиотеки, устанавливаемые вместе с Fastsite CMS
 
 Guzzle [http://docs.guzzlephp.org/en/stable/](http://docs.guzzlephp.org/en/stable/)  
 Twig [https://twig.symfony.com/](https://twig.symfony.com/)  

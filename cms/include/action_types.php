@@ -1,11 +1,11 @@
 <?php
 namespace Cetera;
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  * 
  * AJAX-backend действия с типами материалов
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 

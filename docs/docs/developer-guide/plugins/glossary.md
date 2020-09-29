@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Глоссарий»
 nav_order: 11
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

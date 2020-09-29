@@ -2,7 +2,7 @@
 layout: default
 title: Работа с пользователями
 nav_order: 7
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 
@@ -35,7 +35,7 @@ grand_parent: Руководство разработчика
 
 ## Авторизация
 
-Авторизация в CeteraCMS построена на базе класса [\Zend_Auth](http://framework.zend.com/manual/1.11/ru/zend.auth.introduction.html) используя адаптер \Cetera\UserAuthAdapter, реализующий интерфейс \Zend_Auth_Adapter_Interface
+Авторизация в FastsiteCMS построена на базе класса [\Zend_Auth](http://framework.zend.com/manual/1.11/ru/zend.auth.introduction.html) используя адаптер \Cetera\UserAuthAdapter, реализующий интерфейс \Zend_Auth_Adapter_Interface
 
 Пример авторизации пользователя:
 

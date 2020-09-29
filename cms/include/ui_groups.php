@@ -2,7 +2,7 @@
 namespace Cetera;
 header('Content-Type: application/javascript; charset=UTF-8');
 /*****************************************
- *  Cetera CMS 3                         *
+ *  Fastsite CMS 3                         *
  *  Интерфейс работы с группами          *
  *****************************************/ 
   

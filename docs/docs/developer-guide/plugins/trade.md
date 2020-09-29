@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Торговля»
 nav_order: 7
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

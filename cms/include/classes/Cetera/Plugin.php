@@ -2,9 +2,9 @@
 namespace Cetera; 
 
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -12,7 +12,7 @@ namespace Cetera;
 /**
  * Класс для работы с подключаемыми модулями
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  **/ 
 class Plugin implements \ArrayAccess  {
 
@@ -112,11 +112,11 @@ class Plugin implements \ArrayAccess  {
 		
 		// требуется более свежая CMS
 		if ($this->cms_version_min && version_compare($this->cms_version_min, $application->getVersion()) > 0 ) {
-			throw new \Exception(sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется %s или выше'), $this->cms_version_min));
+			throw new \Exception(sprintf($translator->_('Не подходящая версия Fastsite CMS. Требуется %s или выше'), $this->cms_version_min));
 		}
 		// CMS слишком новая
 		if ($this->cms_version_max && version_compare($this->cms_version_max, $application->getVersion()) <= 0 ) {
-			throw new \Exception(sprintf($translator->_('Не подходящая версия Cetera CMS. Требуется не выше %s'), $this->cms_version_max));
+			throw new \Exception(sprintf($translator->_('Не подходящая версия Fastsite CMS. Требуется не выше %s'), $this->cms_version_max));
 		}		
 		
 	}		

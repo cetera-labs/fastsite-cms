@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Постраничная навигация"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Material extends Templateable {
 		

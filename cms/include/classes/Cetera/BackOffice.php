@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -10,9 +10,9 @@
 namespace Cetera; 
  
 /**
- * Класс, реализующий логику работы BackOffice части CeteraCMS
+ * Класс, реализующий логику работы BackOffice части FastsiteCMS
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  **/ 
 class BackOffice {
 

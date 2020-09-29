@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Фотогалереи»
 nav_order: 3
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

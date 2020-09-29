@@ -10,7 +10,7 @@ grand_parent: Руководство разработчика
 
 Виджет показывает форму, позволяюшую фильтровать материалы в итераторе. Является визуализатором \Cetera\Filter
 
-*CeteraCMS 3.37+*
+*FastsiteCMS 3.37+*
 
 ## Пример вызова в Twig
 	{% raw %}{% widget 'Filter' with { filter: filter } %}{% endraw %}

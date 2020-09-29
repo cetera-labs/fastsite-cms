@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Поиск по сайту"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Search extends Templateable {
 	

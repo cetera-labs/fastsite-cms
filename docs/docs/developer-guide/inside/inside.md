@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Cetera CMS изнутри
+title: Fastsite CMS изнутри
 nav_order: 3
 parent: Руководство разработчика
 has_children: true
 permalink: /docs/developer-guide/inside
 ---
 
-# Cetera CMS изнутри
+# Fastsite CMS изнутри
 
 ---
 
@@ -15,21 +15,21 @@ permalink: /docs/developer-guide/inside
 
 ---
 
-## [Файловая структура Cetera CMS]({{site.baseurl}}/docs/developer-guide/inside/file.html)
+## [Файловая структура Fastsite CMS]({{site.baseurl}}/docs/developer-guide/inside/file.html)
 
-Какова файловая структура сайта под управлением Cetera CMS?
-
----
-
-## [Конфигурация Cetera CMS]({{site.baseurl}}/docs/developer-guide/inside/config.html)
-
-Где находятся глобальные параметры конфигурации Cetera CMS?
+Какова файловая структура сайта под управлением Fastsite CMS?
 
 ---
 
-## [Генерация страницы фронтофиса в Cetera CMS]({{site.baseurl}}/docs/developer-guide/inside/front-office.html)
+## [Конфигурация Fastsite CMS]({{site.baseurl}}/docs/developer-guide/inside/config.html)
 
-Что происходит при обращении к сайту под управлением Cetera CMS?
+Где находятся глобальные параметры конфигурации Fastsite CMS?
+
+---
+
+## [Генерация страницы фронтофиса в Fastsite CMS]({{site.baseurl}}/docs/developer-guide/inside/front-office.html)
+
+Что происходит при обращении к сайту под управлением Fastsite CMS?
 
 ---
 
@@ -53,22 +53,22 @@ permalink: /docs/developer-guide/inside
 
 ## [Итераторы]({{site.baseurl}}/docs/developer-guide/inside/iterator.html)
 
-Итераторы CeteraCMS
+Итераторы FastsiteCMS
 
 ---
 
 ## [Работа с изображениями]({{site.baseurl}}/docs/developer-guide/inside/img.html)
 
-В CeteraCMS встроен скрипт для изменения размеров изображений
+В FastsiteCMS встроен скрипт для изменения размеров изображений
 
 ---
 
 ## [Использование своих классов для работы с материалами]({{site.baseurl}}/docs/developer-guide/inside/mine.html)
 
-В CeteraCMS v3.18.0 и выше
+В FastsiteCMS v3.18.0 и выше
 
 ---
 
-## [Расширение встроенных в CeteraCMS классов]({{site.baseurl}}/docs/developer-guide/inside/extension.html)
+## [Расширение встроенных в FastsiteCMS классов]({{site.baseurl}}/docs/developer-guide/inside/extension.html)
 
-В CeteraCMS v3.19.2 и выше
+В FastsiteCMS v3.19.2 и выше

@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Импорт»
 nav_order: 9
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

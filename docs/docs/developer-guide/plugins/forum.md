@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Форум»
 nav_order: 10
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

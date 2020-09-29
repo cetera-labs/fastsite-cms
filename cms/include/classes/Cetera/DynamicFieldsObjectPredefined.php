@@ -1,8 +1,8 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
@@ -12,7 +12,7 @@ namespace Cetera;
 /**
  * Абстрактный класс для объектов системы с известной таблицей в БД. (Пользователи, Разделы)
  *  
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 abstract class DynamicFieldsObjectPredefined extends DynamicFieldsObject {
 

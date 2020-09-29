@@ -4,7 +4,7 @@ namespace Cetera\Widget\User;
 /**
  * Виджет "Форма регистрации пользователя"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Register extends \Cetera\Widget\Templateable {
 	

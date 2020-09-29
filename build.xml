@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="CeteraCMS" default="dist">
+<project name="FastsiteCMS" default="dist">
     <property name="CMS_DIST" value="./cms" />
     <property name="LIB_DIST" value="../library" />
     <property name="CMS_DIR" value="../../../www/cms" />

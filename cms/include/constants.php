@@ -1,10 +1,10 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  * 
  * Определение констант  
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author Roman Romanov <nicodim@mail.ru> 
@@ -14,7 +14,7 @@
 define('VERSION', '3.66.0');
 
 /** Название продукта */
-define('APP_NAME', 'Cetera CMS');
+define('APP_NAME', 'Fastsite CMS');
 
 /** Cайт производителя */
 define('APP_WWW', 'www.cetera.ru');
@@ -85,7 +85,7 @@ define('PREVIEW_PREFIX', '_preview_');
 
 define('REMEMBER_ME_SECONDS', 3600*24*365);
 define('AUTH_INACTIVITY_SECONDS', 3600*24);
-define('SESSION_NAMESPACE', 'CeteraCMS');
+define('SESSION_NAMESPACE', 'FastsiteCMS');
 
 // материалы
 define('MATH_PUBLISHED',   1);

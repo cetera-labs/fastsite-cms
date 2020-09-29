@@ -2,15 +2,15 @@
 layout: default
 title: Использование своих классов для работы с материалами
 nav_order: 10
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 
 # Использование своих классов для работы с материалами
 
-В CeteraCMS v3.18.0 и выше.
+В FastsiteCMS v3.18.0 и выше.
 
-Базовым классом, инкапсулирующим работу со всеми материалами в CeteraCMS, является \Cetera\Material. 
+Базовым классом, инкапсулирующим работу со всеми материалами в FastsiteCMS, является \Cetera\Material. 
 Если вы хотите расширить стандартную функциональность, создайте новый класс, расширяющий \Cetera\MaterialUser :
 
 	class Article extends \Cetera\MaterialUser {

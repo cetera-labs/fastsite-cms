@@ -1,10 +1,10 @@
 <?php
 /**
- * Cetera CMS 3 
+ * Fastsite CMS 3 
  * 
  * Информационной модуль "О системе". Показывает информацию о системе, лицензию и т.д.  
  *
- * @package CeteraCMS
+ * @package FastsiteCMS
  * @version $Id$
  * @copyright 2000-2010 Cetera labs (http://www.cetera.ru) 
  * @author unknown 
@@ -343,7 +343,7 @@ Ext.create('Ext.Button', {
 			<tr height="0">
 			<td>
 				<div id="theme_setup" class="theme_setup">
-						<h2><?=$translator->_('Поздравляем с успешной установкой Cetera CMS');?></h2>
+						<h2><?=$translator->_('Поздравляем с успешной установкой Fastsite CMS');?></h2>
 						<div id="setup_theme"></div>
 						<div id="publish_help"></div>
 						<div id="setup_theme_cancel"></div>
@@ -354,7 +354,7 @@ Ext.create('Ext.Button', {
 			
             <tr height="100%"><td align="center">
                 <div class="about">
-                    <img src="http://cetera.ru/cetera_cms/logo.gif" />
+                    <img src="https://www.fastsite.ru/logo-fastsite.svg"/>
                     <br />
                     <?=$translator->_('Система контент-менеджмента веб-сайтов');?><br /><?=APP_NAME?> v<?=VERSION?>
                 </div>
@@ -376,7 +376,7 @@ Ext.create('Ext.Button', {
                 <hr noshade />
                 <div align="left">
                 &copy; 2000-<?=date('Y',time());?> <?=$translator->_('Компания')?> <a href="http://<?=APP_WWW?>" target="_blank">Cetera labs</a><br /><BR />
-                <a href="https://github.com/cetera-labs/cetera-cms/blob/master/LICENSE">MIT License</a><br>
+                <a href="https://github.com/cetera-labs/fastsite/blob/master/LICENSE">MIT License</a><br>
 
                 </div>
                 <?php if ($new_version) :?>

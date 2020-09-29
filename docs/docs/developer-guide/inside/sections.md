@@ -2,7 +2,7 @@
 layout: default
 title: Работа с разделами
 nav_order: 5
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 
@@ -10,7 +10,7 @@ grand_parent: Руководство разработчика
 
 Для работы с разделами используется класс [\Cetera\Catalog](https://cetera.ru/cetera_cms/doc/api/Cetera/Catalog.html). Все разделы объединены в древовидную структуру, в корне которой находится раздел ROOT, имеющий id=0
 
-Каждый сайт, работающий под управлением CeteraCMS представлен разделом [\Cetera\Server](https://cetera.ru/cetera_cms/doc/api/Cetera/Server.html), являющимся потомком раздела ROOT.
+Каждый сайт, работающий под управлением FastsiteCMS представлен разделом [\Cetera\Server](https://cetera.ru/cetera_cms/doc/api/Cetera/Server.html), являющимся потомком раздела ROOT.
 
 ## Методы \Cetera\Catalog
 

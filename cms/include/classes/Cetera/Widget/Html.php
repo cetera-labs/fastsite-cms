@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Html"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Html extends Widget {
     protected $_params = array(

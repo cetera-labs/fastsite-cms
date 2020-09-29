@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Cetera CMS
+ * Fastsite CMS
  * 
- * Default редактор поля "Форма"
+ * Default пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅ"
  *
  * @version $Id$
  * @copyright 2006 

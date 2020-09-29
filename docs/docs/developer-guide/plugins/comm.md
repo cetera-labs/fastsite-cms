@@ -2,7 +2,7 @@
 layout: default
 title: Модуль «Комментарии»
 nav_order: 2
-parent: Плагины (модули) Cetera CMS
+parent: Плагины (модули) Fastsite CMS
 grand_parent: Руководство разработчика
 ---
 

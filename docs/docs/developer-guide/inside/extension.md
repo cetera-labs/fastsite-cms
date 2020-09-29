@@ -1,14 +1,14 @@
 ---
 layout: default
-title: Расширение встроенных в CeteraCMS классов
+title: Расширение встроенных в FastsiteCMS классов
 nav_order: 11
-parent: Cetera CMS изнутри
+parent: Fastsite CMS изнутри
 grand_parent: Руководство разработчика
 ---
 
-# Расширение встроенных в CeteraCMS классов
+# Расширение встроенных в FastsiteCMS классов
 
-В CeteraCMS v3.19.2 и выше.
+В FastsiteCMS v3.19.2 и выше.
 
 Допустим, требуется сделать функционал активации для пользователей. Создаем класс, расширяющий Cetera\User:
 

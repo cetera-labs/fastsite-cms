@@ -28,7 +28,7 @@ permalink: /docs/user-guide/user
 
 ## [Запрет на вход в систему]({{site.baseurl}}/docs/user-guide/user/restrict.html)
 
-Как запретить пользователю вход в систему Cetera CMS?
+Как запретить пользователю вход в систему Fastsite CMS?
 
 ---
 
@@ -40,4 +40,4 @@ permalink: /docs/user-guide/user
 
 ## [Удаление пользователя]({{site.baseurl}}/docs/user-guide/user/del.html)
 
-Как удалить пользователя из системы Cetera CMS?
+Как удалить пользователя из системы Fastsite CMS?
