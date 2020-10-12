@@ -471,6 +471,9 @@ class Application {
 		else {
 			$this->_config[$name] = $value;
 		}
+        
+        if (!$store) return;
+        
 		$f = fopen(PREFS_FILE,'w');
 		foreach($this->_config as $name => $value) {
 			if (is_array($value)) continue;
