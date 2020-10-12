@@ -462,7 +462,7 @@ class Application {
      * @param string $name имя переменной     
      * @return mixed
      */
-    public function setVar($name, $value)
+    public function setVar($name, $value, $store = true)
     {
         $this->loadVars();
 		if ($value === null) {
