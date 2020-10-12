@@ -901,7 +901,10 @@ class Application {
         
         foreach($this->_result_handler as $handler) {
         
-            if (is_array($handler)) {
+            if (is_object($handler)) {
+                $handler($result);
+            }
+            elseif (is_array($handler)) {
             
                 if ( is_object($handler[0]) )
                     $handler[0]->$handler[1]($result); 
