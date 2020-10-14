@@ -16,8 +16,6 @@ Ext.define('Cetera.window.MaterialEdit', {
 	constrainHeader: true,
     
     materialForm: false,
-	
-	preview: false,
     
     html: '<table class="loading" style="position:absolute; top: 0; left: 0;" height="100%" width="100%"><tr><td style="vertical-align: middle"><div class="outer-circle small"></div><div class="inner-circle small"></div></td></tr></table>'
 });

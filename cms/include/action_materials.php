@@ -37,6 +37,12 @@ elseif ($type) {
 	}	
 }
 
+if ($action == 'preview') { 
+    $m = Material::getById((int)$_REQUEST['mat_id'], (int)$_REQUEST['type']);
+    header('Location: '. $m->getSection()->getPreviewUrl().$m->alias);
+    die();
+}
+
 if ($action == 'lock') {  
     $m = Material::getById((int)$_REQUEST['mat_id'], (int)$_REQUEST['type']);
     $m->lock($user->id);

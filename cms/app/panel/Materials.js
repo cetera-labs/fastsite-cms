@@ -66,7 +66,6 @@ Ext.define('Cetera.panel.Materials', {
                 }
             }
         });
-        this.editWindow.preview = this.preview;
 
         var win = this.editWindow;
         win.show();
