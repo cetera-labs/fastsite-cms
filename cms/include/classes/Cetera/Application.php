@@ -462,7 +462,7 @@ class Application {
      * @param string $name имя переменной     
      * @return mixed
      */
-    public function setVar($name, $value)
+    public function setVar($name, $value, $store = true)
     {
         $this->loadVars();
 		if ($value === null) {
@@ -471,6 +471,9 @@ class Application {
 		else {
 			$this->_config[$name] = $value;
 		}
+        
+        if (!$store) return;
+        
 		$f = fopen(PREFS_FILE,'w');
 		foreach($this->_config as $name => $value) {
 			if (is_array($value)) continue;
@@ -898,7 +901,10 @@ class Application {
         
         foreach($this->_result_handler as $handler) {
         
-            if (is_array($handler)) {
+            if (is_object($handler)) {
+                $handler($result);
+            }
+            elseif (is_array($handler)) {
             
                 if ( is_object($handler[0]) )
                     $handler[0]->$handler[1]($result); 

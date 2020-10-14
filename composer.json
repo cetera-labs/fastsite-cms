@@ -1,7 +1,7 @@
 {
-    "name": "cetera-labs/cetera-cms",
+    "name": "fastsite-labs/fastsite-cms",
     "type": "library",
-    "description": "Fastsite CMS — innovative Cetera Labs content management and eCommerce-product, based at 10-years experience and agile development methodologies. Fastsite CMS helps to start your internet sales in 5 minutes.",
+    "description": "Fastsite CMS — innovative content management and eCommerce-product, based at 10-years experience and agile development methodologies. Fastsite CMS helps to start your internet sales in 5 minutes.",
     "keywords": ["cms","ecommerce","shop","website","website-builder","website-template","ecommerce-platform","ecommerce-framework","ecommerce-shopping-solution","ecommerce-application","ecommerce-store","ecommerce-website","webdevelopment","webdevelop"],
     "homepage": "https://fastsite.ru/",
     "license": "MIT",

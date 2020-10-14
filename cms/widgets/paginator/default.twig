@@ -17,7 +17,7 @@
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
                 {% else %}
-                    <a href="{{ widget.getUrl(i) }}">{{ i }}</a>
+                    <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
     {% endfor %}   
@@ -31,7 +31,7 @@
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
                 {% else %}
-                    <a href="{{ widget.getUrl(i) }}" aria-label="Page {{ i }}">{{ i }}</a>
+                    <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}" aria-label="Page {{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
     {% endfor %} 
@@ -45,7 +45,7 @@
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
                 {% else %}
-                    <a href="{{ widget.getUrl(i) }}" aria-label="Page {{ i }}">{{ i }}</a>
+                    <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}" aria-label="Page {{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
     {% endfor %}   
