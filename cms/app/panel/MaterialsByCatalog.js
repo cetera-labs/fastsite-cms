@@ -7,7 +7,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
     allow_own: false,   // право работать со своими материалами
     allow_all: false,   // право работать со всеми материалами
     allow_pub: false,   // право на публикацию материалов
-    preview: '', 
 	
 	structureTree: mainTree,
                    
@@ -41,7 +40,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                         this.allow_own = obj.right[0];
                         this.allow_all = obj.right[1];
                         this.allow_pub = obj.right[2];
-                        this.preview   = obj.right[3];
                         this.mat_type  = obj.right[4];
                         
                         this.toolbar.getComponent('tb_mat_new').setDisabled(!this.allow_own && !this.allow_all);
@@ -69,7 +67,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 }
             }
         });
-        this.editWindow.preview = this.preview;
         
         if (!mat_type) mat_type = this.mat_type;
         var win = this.editWindow;
@@ -184,7 +181,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 iconCls:'icon-preview',
                 tooltip: Config.Lang.preview,
                 handler: function () {
-                    window.open(this.preview + this.getSelectionModel().getSelection()[0].get('alias'));
+                    window.open('/cms/include/action_materials.php?action=preview&type='+this.mat_type+'&mat_id=' + this.getSelectionModel().getSelection()[0].getId());
                 },
                 scope: this
             },

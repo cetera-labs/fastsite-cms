@@ -456,12 +456,7 @@ try {
                         this.win.close();
                     <?} else {?>
                         this.getForm().findField('alias').setValue(action.result.alias);
-                        if (preview) {
-							if (!this.win.preview) {
-								this.win.preview = '<?php echo $section?$section->getPreviewUrl():''; ?>';
-							}
-							window.open(this.win.preview + action.result.alias);
-						}
+                        if (preview) window.open('<?php echo $section?$section->getPreviewUrl():''; ?>' + action.result.alias);
                         if (close) this.win.close();
                     <?}?>
                 },
