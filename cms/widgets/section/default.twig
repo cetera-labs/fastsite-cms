@@ -11,33 +11,37 @@
 
 {% elseif widget.material %}
 
-	{% widget 'Material' with {
-		catalog:       widget.catalog.id, 
-		template:      widget.getParam('material_template'), 
-		material_id:   widget.material.id,
-		share_buttons: widget.getParam('material_share_buttons'),
-		show_pic:      widget.getParam('material_show_pic'),
-		show_meta:     widget.getParam('show_meta')
-	} %}	
+    {% block material %}
+        {% widget 'Material' with {
+            catalog:       widget.catalog.id, 
+            template:      widget.getParam('material_template'), 
+            material_id:   widget.material.id,
+            share_buttons: widget.getParam('material_share_buttons'),
+            show_pic:      widget.getParam('material_show_pic'),
+            show_meta:     widget.getParam('show_meta')
+        } %}
+    {% endblock %}
 
 {% else %}
 
-	{% widget 'List' with { 
-		catalog:    widget.catalog.id, 
-		template:   widget.getParam('list_template'), 
-		where:      widget.getParam('list_where'), 
-		page:       widget.getParam('list_page'), 
-		page_param: widget.getParam('list_page_param'), 
-		limit:      widget.getParam('list_limit'), 
-		order:      widget.getParam('list_order'), 
-		subsections:widget.getParam('list_subsections'), 
-		sort:       widget.getParam('list_sort'), 
-		paginator:  widget.getParam('list_paginator'),
-		css_class:  widget.getParam('list_css_class'), 	
-		css_row:    widget.getParam('list_css_row'), 	
-        ajax:       widget.getParam('list_ajax'),
-        infinite:   widget.getParam('list_infinite'),        
-		paginator_template:  widget.getParam('paginator_template')
-	} %}	
+    {% block list %}
+        {% widget 'List' with { 
+            catalog:    widget.catalog.id, 
+            template:   widget.getParam('list_template'), 
+            where:      widget.getParam('list_where'), 
+            page:       widget.getParam('list_page'), 
+            page_param: widget.getParam('list_page_param'), 
+            limit:      widget.getParam('list_limit'), 
+            order:      widget.getParam('list_order'), 
+            subsections:widget.getParam('list_subsections'), 
+            sort:       widget.getParam('list_sort'), 
+            paginator:  widget.getParam('list_paginator'),
+            css_class:  widget.getParam('list_css_class'), 	
+            css_row:    widget.getParam('list_css_row'), 	
+            ajax:       widget.getParam('list_ajax'),
+            infinite:   widget.getParam('list_infinite'),        
+            paginator_template:  widget.getParam('paginator_template')
+        } %}	
+    {% endblock %}
 	
 {% endif %}
