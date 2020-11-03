@@ -105,6 +105,23 @@ class WList extends Templateable {
 			if ($this->getParam('iterator')) {
 				$this->_children = $this->getParam('iterator');
 			}
+			elseif ($this->getParam('type')) {
+                if (is_int($this->getParam('type'))) {
+                    $od = \Cetera\ObjectDefinition::getById($this->getParam('type'));
+                }
+                else {
+                    $od = \Cetera\ObjectDefinition::findByAlias($this->getParam('type'));
+                }
+				$this->_children = $od->getMaterials();
+                if ($this->getParam('order')) {
+                    $this->_children->orderBy($this->getParam('order'), $this->getParam('sort'));
+                }
+                $this->_children->orderBy('id', 'ASC', true);
+                if ($this->getParam('filter')) {
+                    list($filter) = explode(';',$this->getParam('filter'));
+                    eval('$this->_children->'.$filter.';');
+                }                
+			}            
 			else {
 				try {
 					$this->_children = $this->getCatalog()->getMaterials();
