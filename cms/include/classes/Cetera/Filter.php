@@ -72,7 +72,15 @@ class Filter {
 				$d['name'] = $d['field']['name'];
 				$d['field_id'] = $d['field']['field_id'];
 				
-				if (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkAbstract')) {					
+                if (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkSetAbstract')) {
+                    $d['iterator'] = $d['field']->getIterator()->joinReverse($this->iterator->getObjectDefinition(), $d['field']->name)->where($d['field']->name.'.id > 0');
+					$d['value'] = $this->submittedValue($d['name']);
+					if ($d['value']) {
+						$this->active = true;
+						$d['submitted'] = true;
+					}	
+                }    
+				elseif (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkAbstract')) {					
 					$d['iterator'] = $d['field']->getIterator();
 					$d['value'] = $this->submittedValue($d['name']);
 					if ($d['value']) {
