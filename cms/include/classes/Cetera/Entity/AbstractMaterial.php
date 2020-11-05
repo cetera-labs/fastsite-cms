@@ -12,6 +12,11 @@ abstract class AbstractMaterial extends AbstractEntity {
     public $autor;
     public $alias;
 	public $section;
+    
+    public function __construct() {
+        $this->tag = 0;
+        $this->alias = 'empty';
+    }    
 	
     public function getUrl() {
         if ($this->idcat < 0) return false;     
