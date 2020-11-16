@@ -1600,9 +1600,14 @@ class Application {
             }
             
             if ($name) {
-                $widget = $this->getWidget(array('name' => $name));
-                $widget->setParams($params);
-                $result = str_replace($widget_str, $widget->getHtml(), $result);
+                try {
+                    $widget = $this->getWidget(array('name' => $name));
+                    $widget->setParams($params);
+                    $result = str_replace($widget_str, $widget->getHtml(), $result);
+                }
+                catch (\Exception $e) {
+                    $result = str_replace($widget_str, $e->getMessage(), $result);
+                }
             }
             
         }
