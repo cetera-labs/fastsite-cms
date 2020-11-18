@@ -806,30 +806,32 @@ class Application {
 	 * 	 	   
 	 * @return void	 
 	 */ 
-    private function decodeRequestUri($uri = null)
-    {
-        if ($uri === null) {
+    private function decodeRequestUri($url = null)
+    {  
+
+        if ($url === null) {
             $uri = $_SERVER['REQUEST_URI'];
+        }
+        else {
+            $uri = $url;
         }
         
 		foreach ($this->routes['general'] as $p => $callable)
 		{
 			if (preg_match('|^'.$p.'|', $uri, $matches)) {
-				list($url) = explode('?',$uri);
-				$this->_unparsedUrl = trim(str_replace($matches[0], '', $url),'/');
+				list($u) = explode('?',$uri);
+				$this->_unparsedUrl = trim(str_replace($matches[0], '', $u),'/');
 				$res = $callable($matches);
 				if ($res) die();
 			}
-			/*
-			if (substr($uri,0,strlen($p)) == $p )
-			{
-				list($url) = explode('?',$uri);
-				$this->_unparsedUrl = trim(str_replace($p, '', $url),'/');
-				$res = $callable();
-				if ($res) die();
-			}
-			*/
-		}		
+		}	
+
+        if ($url === null) {
+            $uri = $_SERVER['REQUEST_URI'];
+        }
+        else {
+            $uri = $url;
+        } 	
 		
 		$this->_unparsedUrl = null;
 		
@@ -839,15 +841,8 @@ class Application {
         list($url) = explode('?',$uri);
         $url = trim($url, '/');
     	$dir = explode("/", $url);
-    	
-		/*
-    	if (sizeof($dir) && $dir[0] == PREVIEW_PREFIX) {
-            array_shift($dir);
-            $this->_previewMode = true;
-        }
-		*/
 
-    	  while ($alias = array_shift($dir)) {
+    	while ($alias = array_shift($dir)) {
     	    try {
                 $c = $this->_catalog->prototype->getChildByAlias($alias);
 				if ($c->isHidden()) {
@@ -1605,9 +1600,14 @@ class Application {
             }
             
             if ($name) {
-                $widget = $this->getWidget(array('name' => $name));
-                $widget->setParams($params);
-                $result = str_replace($widget_str, $widget->getHtml(), $result);
+                try {
+                    $widget = $this->getWidget(array('name' => $name));
+                    $widget->setParams($params);
+                    $result = str_replace($widget_str, $widget->getHtml(), $result);
+                }
+                catch (\Exception $e) {
+                    $result = str_replace($widget_str, $e->getMessage(), $result);
+                }
             }
             
         }

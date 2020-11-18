@@ -253,6 +253,10 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
 		return $count;
 	}		
     
+    public function limit($itemCountPerPage = null) {
+        return $this->setItemCountPerPage($itemCountPerPage);
+    }    
+    
     public function setItemCountPerPage($itemCountPerPage = null)
     {
         $this->itemCountPerPage = $itemCountPerPage;
