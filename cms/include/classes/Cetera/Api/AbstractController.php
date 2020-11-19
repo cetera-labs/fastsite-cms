@@ -19,8 +19,10 @@ class AbstractController extends AbstractRestfulController
             $data = $request->getPost()->toArray();
         }
         
-        foreach($data as $key => $value) {
-            $this->params[ strtolower($key) ] = $value;
+        if (is_array($data)) {
+            foreach($data as $key => $value) {
+                $this->params[ strtolower($key) ] = $value;
+            }
         }
         
         return parent::dispatch($request, $response);
