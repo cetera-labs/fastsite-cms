@@ -49,5 +49,16 @@ class AbstractController extends AbstractRestfulController
             ]
         ]);
     }
+    
+    public function getBearerToken() {
+        $header = $this->getRequest()->getHeaders('Authorization');
+        // HEADER: Get the access token from the header
+        if ($header) {
+            if (preg_match('/Bearer\s(\S+)/', $header->getFieldValue(), $matches)) {
+                return $matches[1];
+            }
+        }
+        return null;
+    }     
 
 }
