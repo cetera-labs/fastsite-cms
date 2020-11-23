@@ -835,7 +835,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         	if ($field['shw'] || $hidden) {
         	
 				if ($type != FIELD_LINKSET && $type != FIELD_LINKSET2 && $type != FIELD_MATSET) {
-					if (!isset($this->fields[$name])) continue;
+					if (!array_key_exists($name, $this->fields)) continue;
 				}
         
                 if (/*$type==FIELD_LINKSET || */$type==FIELD_MATSET || $type==FIELD_MATERIAL) {
