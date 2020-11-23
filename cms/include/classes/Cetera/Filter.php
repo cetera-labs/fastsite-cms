@@ -12,6 +12,7 @@ class Filter {
 	const TYPE_DATE           = 7;
 	const TYPE_DATE_INTERVAL  = 8;
     const TYPE_DROPDOWN_MULTIPLE = 9;
+    const TYPE_AUTO = 10;
 
 	protected $iterator;
 	protected $active = false;
@@ -19,6 +20,8 @@ class Filter {
 	protected $data = null;
 	protected $a;
 	public $name = false;	
+    
+    protected $values = [];
 	
     public function __construct($name, Iterator\DynamicObject $iterator)
     {
@@ -26,16 +29,25 @@ class Filter {
 		$this->name = $name;	
 		$this->a = \Cetera\Application::getInstance();
 		$this->data = array();
+        
+        if (isset($_REQUEST[ $this->name ]) && is_array($_REQUEST[ $this->name ])) {
+            $this->values = $_REQUEST[ $this->name ];
+        }
     } 	
+    
+    public function setValues($values)
+    {
+        $this->values = $values;
+    }
 	
 	public function submittedValue($name)
 	{
-		return (isset($_REQUEST[ $this->name ][$name]) && $_REQUEST[ $this->name ][$name])?$_REQUEST[ $this->name ][$name]:null;
+		return (isset($this->values[$name]) && $this->values[$name])?$this->values[$name]:null;
 	}
 	
 	public function getQueryString()
 	{
-		return http_build_query(array($this->name => $_REQUEST[ $this->name ]));
+		return http_build_query(array($this->name => $this->values));
 	}
 
 	public function isActive()
@@ -250,7 +262,19 @@ class Filter {
 					if ($f['value']) {
 						$this->iterator->where( $this->generateField($f['field']).' LIKE :'.$f['name'] )
 									   ->setParameter($f['name'], '%'.$f['value'].'%');						
-					}					
+					}
+				case self::TYPE_AUTO:
+                    if (is_int($f['value'])) {
+						$this->iterator->where( $this->generateField($f['field']).' = :'.$f['name'] )
+									   ->setParameter($f['name'], $f['value']);		                        
+                    }
+                    elseif (is_array($f['value'])) {
+                        $this->iterator->where( $this->generateField($f['field']).' IN ('.implode(',',$f['value']).')' );
+                    }
+					else ($f['value']) {
+						$this->iterator->where( $this->generateField($f['field']).' LIKE :'.$f['name'] )
+									   ->setParameter($f['name'], '%'.$f['value'].'%');						
+					}	                    
 					break;
 			}
 		}
