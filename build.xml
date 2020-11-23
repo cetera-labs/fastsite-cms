@@ -88,11 +88,9 @@
     </target>  
     
     <target name="plugin">
-        <echo msg="${PLUGIN}" />
         <php class="\Cetera\Phing" function="pluginPath" returnProperty="PLUGIN_PATH">
             <param value="${PLUGIN}"/>
         </php>
-        <echo msg="${PLUGIN_PATH}" />
         
         <mkdir dir="${CMS_DIR}/plugins/${PLUGIN}" />
         <copy todir="${CMS_DIR}/plugins/${PLUGIN}" overwrite="true">

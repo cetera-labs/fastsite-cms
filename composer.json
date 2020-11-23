@@ -38,7 +38,8 @@
         "guzzlehttp/guzzle": "~6.0",
         "ifsnop/mysqldump-php":"2.*",
         "phing/phing": "2.*",
-        "componavt/phpmorphy": "*"
+        "componavt/phpmorphy": "*",
+        "firebase/php-jwt": "*"
     },
     "minimum-stability": "dev",
     "autoload": {

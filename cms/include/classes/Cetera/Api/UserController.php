@@ -45,6 +45,6 @@ class UserController extends AbstractController
         }        
         
         return new JsonModel( $res );
-    }  
+    }     
 
 }

@@ -13,13 +13,16 @@ class AbstractController extends AbstractRestfulController
     public function dispatch(Request $request, Response $response = null)
     {
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
-            $data = $this->create($this->jsonDecode($request->getContent()));
+            $data = $this->jsonDecode($request->getContent());
         }
-
-        $data = $request->getPost()->toArray();
+        else {
+            $data = $request->getPost()->toArray();
+        }
         
-        foreach($data as $key => $value) {
-            $this->params[ strtolower($key) ] = $value;
+        if (is_array($data)) {
+            foreach($data as $key => $value) {
+                $this->params[ strtolower($key) ] = $value;
+            }
         }
         
         return parent::dispatch($request, $response);
@@ -46,5 +49,16 @@ class AbstractController extends AbstractRestfulController
             ]
         ]);
     }
+    
+    public function getBearerToken() {
+        $header = $this->getRequest()->getHeaders('Authorization');
+        // HEADER: Get the access token from the header
+        if ($header) {
+            if (preg_match('/Bearer\s(\S+)/', $header->getFieldValue(), $matches)) {
+                return $matches[1];
+            }
+        }
+        return null;
+    }     
 
 }
