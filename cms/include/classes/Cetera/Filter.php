@@ -267,6 +267,7 @@ class Filter {
 						$this->iterator->where( $this->generateField($f['field']).' LIKE :'.$f['name'] )
 									   ->setParameter($f['name'], '%'.$f['value'].'%');						
 					}
+                    break;
 				case self::TYPE_AUTO:
                     if (is_int($f['value'])) {
 						$this->iterator->where( $this->generateField($f['field']).' = :'.$f['name'] )
@@ -275,11 +276,11 @@ class Filter {
                     elseif (is_array($f['value'])) {
                         $this->iterator->where( $this->generateField($f['field']).' IN ('.implode(',',$f['value']).')' );
                     }
-					else ($f['value']) {
+					elseif ($f['value']) {
 						$this->iterator->where( $this->generateField($f['field']).' LIKE :'.$f['name'] )
 									   ->setParameter($f['name'], '%'.$f['value'].'%');						
-					}	                    
-					break;
+					}
+                    break;                    
 			}
 		}
 		$this->iterator->groupBy('main.id');
