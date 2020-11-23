@@ -23,15 +23,19 @@ class Filter {
     
     protected $values = [];
 	
-    public function __construct($name, Iterator\DynamicObject $iterator)
+    public function __construct($name, Iterator\DynamicObject $iterator, $values = false)
     {
 		$this->iterator = $iterator;
 		$this->name = $name;	
 		$this->a = \Cetera\Application::getInstance();
 		$this->data = array();
         
-        if (isset($_REQUEST[ $this->name ]) && is_array($_REQUEST[ $this->name ])) {
-            $this->values = $_REQUEST[ $this->name ];
+        if (!$values && isset($_REQUEST[ $this->name ])) {
+            $values = $_REQUEST[ $this->name ];
+        }
+        
+        if (is_array($values)) {
+            $this->values = $values;
         }
     } 	
     
