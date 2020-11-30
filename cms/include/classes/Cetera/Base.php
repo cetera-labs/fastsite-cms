@@ -73,7 +73,7 @@ abstract class Base {
     public function asArray()
     {
 		if (func_num_args() == 0) {
-			$fields = array('id');
+			$fields = ['id'];
 		}
 		else {
 			$fields = array();
@@ -86,9 +86,22 @@ abstract class Base {
 			}
 		}
 		
-		$obj = array();
-		foreach ($fields as $f) {
-			$obj[$f] = $this->$f;
+		$obj = [];
+		foreach ($fields as $f_key => $f_value) {
+            if (!is_array($f_value)) {
+                $f_key = $f_value;
+            }
+            $value = $this->$f;
+            if ($value instanceof $base) {
+                if (!is_array($f_value)) {
+                    $value = $value->id;
+                }
+                else {
+                    $value = $value->asArray($f_value);
+                }
+            }
+            
+			$obj[$f] = $value
 		}
 		return $obj;
     }
