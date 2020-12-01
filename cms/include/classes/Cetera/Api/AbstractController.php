@@ -59,6 +59,18 @@ class AbstractController extends AbstractRestfulController
             }
         }
         return null;
-    }     
+    }
+
+    /*
+    * Проверка авторизации
+    */
+    public function checkAuth()
+    {
+        $user = \Cetera\Application::getInstance()->getUser();
+        if (!$user){
+            $this->getResponse()->setStatusCode(401);
+            throw new \Exception('Ошибка авторизации');
+        }        
+    }    
 
 }
