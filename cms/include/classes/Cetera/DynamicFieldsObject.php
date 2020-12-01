@@ -167,7 +167,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         $fields = $this->getDbConnection()->fetchAssoc('SELECT * FROM `'.$this->objectDefinition->table.'` WHERE id = ?', array($id));
         if (!$fields) throw new \Exception('Object '.$this->objectDefinition->table.':'.$id.' is not found'); 
         $this->setFields($fields);
-        $this->_id = $id;
+        $this->_id = (int)$id;
         return $this;
     }
     

@@ -96,7 +96,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
 				$data[] = $item->asArray($fields);   
 			}
 			else {
-				$obj = array();
+				$obj = [];
 				foreach ($fields as $f) {
 					$obj[$f] = $item->$f;
 				}

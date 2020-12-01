@@ -102,6 +102,11 @@ abstract class Base {
 		}
 		return $obj;
     }
+    
+    public function getId()
+    {
+        return (int)$this->_id;
+    }     
          
     /**
      * Перегрузка чтения свойств класса. 
