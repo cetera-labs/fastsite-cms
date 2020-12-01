@@ -92,7 +92,7 @@ abstract class Base {
                 $f_key = $f_value;
             }
             $value = $this->$f;
-            if ($value instanceof $base) {
+            if ($value instanceof Base) {
                 if (!is_array($f_value)) {
                     $value = $value->id;
                 }
