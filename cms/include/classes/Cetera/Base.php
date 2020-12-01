@@ -87,17 +87,14 @@ abstract class Base {
 		}
 		
 		$obj = [];
-		foreach ($fields as $f_key => $f_value) {
-            if (!is_array($f_value)) {
-                $f_key = $f_value;
-            }
+		foreach ($fields as $f) {
             $value = $this->$f;
             if ($value instanceof Base) {
-                if (!is_array($f_value)) {
+                if (!is_array($f)) {
                     $value = $value->id;
                 }
                 else {
-                    $value = $value->asArray($f_value);
+                    $value = $value->asArray($f);
                 }
             }
             
