@@ -101,7 +101,7 @@ abstract class Base {
                 }
             }
             
-			$obj[$f] = $value
+			$obj[$f] = $value;
 		}
 		return $obj;
     }
