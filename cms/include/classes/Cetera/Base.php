@@ -76,19 +76,21 @@ abstract class Base {
 			$fields = ['id'];
 		}
 		else {
-			$fields = array();
-			$args = func_get_args();
-			if (count($args)==1 && is_array($args[0])) {
-				$args = $args[0];
+			$fields = func_get_args();
+			if (count($fields)==1 && is_array($fields[0])) {
+				$fields = $fields[0];
 			}			
-			foreach ($args as $f ) {
-				if (is_string($f)) $fields[] = $f;
-			}
 		}
-		
+
 		$obj = [];
-		foreach ($fields as $f) {
-            $value = $this->$f;
+		foreach ($fields as $k => $f) {
+            
+            if (!is_array($f)) {
+                $k = $f;
+            }
+            
+            $value = $this->$k;
+            
             if ($value instanceof Base) {
                 if (!is_array($f)) {
                     $value = $value->id;
@@ -98,15 +100,17 @@ abstract class Base {
                 }
             }
             elseif ($value instanceof Iterator\Base) {
+                
                 if (!is_array($f)) {
                     $value = $value->asArray();
                 }
                 else {
                     $value = $value->asArray($f);
                 }
-            }            
+                
+            }
             
-			$obj[$f] = $value;
+			$obj[$k] = $value;
 		}
 		return $obj;
     }
