@@ -97,6 +97,14 @@ abstract class Base {
                     $value = $value->asArray($f);
                 }
             }
+            elseif ($value instanceof Iterator\Base) {
+                if (!is_array($f)) {
+                    $value = $value->asArray();
+                }
+                else {
+                    $value = $value->asArray($f);
+                }
+            }            
             
 			$obj[$f] = $value;
 		}
