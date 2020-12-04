@@ -64,13 +64,26 @@ class AbstractController extends AbstractRestfulController
     /*
     * Проверка авторизации
     */
-    public function checkAuth()
+    public function checkAuth($groups = null)
     {
         $user = \Cetera\Application::getInstance()->getUser();
         if (!$user){
             $this->getResponse()->setStatusCode(401);
             throw new \Exception('Ошибка авторизации');
-        }        
+        } elseif (is_array($groups)) {
+            foreach ($groups as $g) {
+                if (!$user->hasRight($g)) {
+                    $this->getResponse()->setStatusCode(401);
+                    throw new \Exception('Недостаточно полномочий');                    
+                }
+            }
+        }
+        elseif( is_integer($groups) ) {
+            if (!$user->hasRight($groups)) {
+                $this->getResponse()->setStatusCode(401);
+                throw new \Exception('Недостаточно полномочий');                    
+            }            
+        }
     }    
 
 }
