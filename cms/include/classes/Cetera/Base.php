@@ -73,25 +73,52 @@ abstract class Base {
     public function asArray()
     {
 		if (func_num_args() == 0) {
-			$fields = array('id');
+			$fields = ['id'];
 		}
 		else {
-			$fields = array();
-			$args = func_get_args();
-			if (count($args)==1 && is_array($args[0])) {
-				$args = $args[0];
+			$fields = func_get_args();
+			if (count($fields)==1 && is_array($fields[0])) {
+				$fields = $fields[0];
 			}			
-			foreach ($args as $f ) {
-				if (is_string($f)) $fields[] = $f;
-			}
 		}
-		
-		$obj = array();
-		foreach ($fields as $f) {
-			$obj[$f] = $this->$f;
+
+		$obj = [];
+		foreach ($fields as $k => $f) {
+            
+            if (!is_array($f)) {
+                $k = $f;
+            }
+            
+            $value = $this->$k;
+            
+            if ($value instanceof Base) {
+                if (!is_array($f)) {
+                    $value = $value->id;
+                }
+                else {
+                    $value = $value->asArray($f);
+                }
+            }
+            elseif ($value instanceof Iterator\Base) {
+                
+                if (!is_array($f)) {
+                    $value = $value->asArray();
+                }
+                else {
+                    $value = $value->asArray($f);
+                }
+                
+            }
+            
+			$obj[$k] = $value;
 		}
 		return $obj;
     }
+    
+    public function getId()
+    {
+        return (int)$this->_id;
+    }     
          
     /**
      * Перегрузка чтения свойств класса. 

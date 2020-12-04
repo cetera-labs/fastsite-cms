@@ -34,7 +34,6 @@
         "true/punycode": "~1.1",
         "twig/twig": "~1.0",
         "twig/extensions": "*",
-        "ua-parser/uap-php": "*",
         "guzzlehttp/guzzle": "~6.0",
         "ifsnop/mysqldump-php":"2.*",
         "phing/phing": "2.*",

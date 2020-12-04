@@ -30,7 +30,23 @@ $application->getRouter()->addRoute(\Cetera\ImageTransform::PREFIX,
     ]), 10
 );
 
-$application->getRouter()->addRoute('api',
+$application->getRouter()->addRoute('api_entities',
+    \Zend\Router\Http\Segment::factory([
+        'route' => '/api/entity[/:entity][/:action][/:id]',
+        'constraints' => [
+            'entity' => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+            'id'         => '[a-zA-Z][a-zA-Z0-9_-]+',
+        ],
+        'defaults' => [
+            '__NAMESPACE__' => 'Cetera\Api',
+            'controller'    => 'Cetera\Api\EntityController',
+            'action'        => 'default',
+        ],
+    ]), 10
+);
+
+$application->getRouter()->addRoute('api_main',
     \Zend\Router\Http\Segment::factory([
         'route' => '/api[/:controller][/:action][/:id]',
         'constraints' => [
@@ -42,7 +58,7 @@ $application->getRouter()->addRoute('api',
             '__NAMESPACE__' => 'Cetera\Api',
             'controller'    => 'Cetera\Api\IndexController',
         ],
-    ])
+    ]), 0
 );
 
 
@@ -164,14 +180,13 @@ $router   = $application->getRouter();
 $match = $router->match($application->getRequest());
 if ( $match ) {
     
-    
     $class = $match->getParam('controller');
     $method = $match->getParam('action');
 
     if (!class_exists($class)) {
         $class = $match->getParam('__NAMESPACE__').'\\'.ucfirst($class).'Controller';
     }
-    
+       
     $controller = new $class();
     
     if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
