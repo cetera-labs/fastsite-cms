@@ -47,7 +47,7 @@ class EntityController extends AbstractController
             'success' => true,
             'total' => (int)$c,
             //'pages' => (int)$list->getPageCount(),            
-            'data' => $paginator->getIterator(),
+            'data' => $paginator->asArray(),
         ];
         
         return new JsonModel( $res );
