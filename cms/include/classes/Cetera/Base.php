@@ -173,7 +173,7 @@ abstract class Base {
     /**
      * Disallow cloning          
      */         
-    final private function __clone(){}
+    final public function __clone(){}
 	
     /**
      * Расширяет функциональность класса с помощью методов другого класса.

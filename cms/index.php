@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include_once('include/common.php');
+$user = null;
 
 if (isset($_POST['token'])) {
     $_s = \Cetera\Util::curlGet('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);

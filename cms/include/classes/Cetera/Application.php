@@ -1841,7 +1841,7 @@ class Application {
 	*/	
 	public function getPageProperty($name)
 	{
-		return $this->params[$name];
+		return isset($this->params[$name])?$this->params[$name]:null;
 	}	
 	
 	/**

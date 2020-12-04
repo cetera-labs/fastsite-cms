@@ -229,7 +229,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         
         parent::setFields($fields);
 		$this->_catalogType   = $fields['type'];
-        $this->_nodeId   = $fields['node_id'];
+        $this->_nodeId   = isset($fields['node_id'])?$fields['node_id']:null;
         $this->_inheritFields = isset($fields['inheritFields'])?$fields['inheritFields']:false;
     }
 	   

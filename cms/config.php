@@ -120,13 +120,13 @@ Config = {
 			<?php
 			$f = true;
 			foreach ($application->getRegisteredWidgets() as $item) {
-				if ($item['not_placeable']) continue;
+				if (isset($item['not_placeable'])) continue;
 				if (!$f) print ',';
 				print "{\n";
 				print '    icon:    "'.$item['icon']."\",\n";
 				print '    name:    "'.$item['name']."\",\n";
 				print '    describ: "'.$item['describ']."\",\n";   
-				print '    ui:      "'.$item['ui']."\"\n";     
+				print '    ui:      "'.((isset($item['ui']))?$item['ui']:'')."\"\n";     
 				print "}";
 				$f = false;
 			}
