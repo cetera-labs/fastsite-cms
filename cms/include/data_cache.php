@@ -5,6 +5,10 @@ include('common_bo.php');
 
 $t = Application::getInstance()->getTranslator();
 
+if (!isset($_GET['action'])) {
+    $_GET['action'] = '';
+}
+
 if ($_GET['action'] == 'clear') {
 	Util::clearAllCache();
 }

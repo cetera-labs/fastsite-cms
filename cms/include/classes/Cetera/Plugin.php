@@ -204,7 +204,7 @@ class Plugin implements \ArrayAccess  {
     public function offsetGet ( $offset )
     {    
         $this->grabInfo();
-        return $this->_info[ $offset ];    
+        return isset($this->_info[ $offset ])?$this->_info[ $offset ]:null;
     }
     
 	/**

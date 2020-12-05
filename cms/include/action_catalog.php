@@ -29,7 +29,7 @@ if ($_REQUEST['action'] == 'get_path_info') {
     }
 }
 
-if ($_POST['action'] == 'cat_copy') {
+if ($_REQUEST['action'] == 'cat_copy') {
     $id = (int)$_REQUEST['id'];
 
     if (!$user->allowCat(PERM_CAT_ADMIN, $id))
@@ -43,7 +43,7 @@ if ($_POST['action'] == 'cat_copy') {
     Event::trigger(EVENT_CORE_DIR_CREATE, ['message' => $nc->getBoUrl()]);
 }
 
-if ($_POST['action'] == 'cat_prefs') {
+if ($_REQUEST['action'] == 'cat_prefs') {
 
     $id = (int)$_REQUEST['id'];
 
@@ -57,7 +57,7 @@ if ($_POST['action'] == 'cat_prefs') {
     $res['success'] = true;   
 }
 
-if ($_POST['action'] == 'cat_save') {
+if ($_REQUEST['action'] == 'cat_save') {
 
     $id = (int)$_REQUEST['id'];
 
@@ -114,7 +114,7 @@ if ($_POST['action'] == 'cat_save') {
 
 }
 
-if ($_POST['action']=='up' || $_POST['action']=='down') {
+if ($_REQUEST['action']=='up' || $_REQUEST['action']=='down') {
 
 	if ($_POST['id']) {
 		if (!$user->allowCat(PERM_CAT_ADMIN, $_POST['id']))
@@ -126,7 +126,7 @@ if ($_POST['action']=='up' || $_POST['action']=='down') {
 
 }
 
-if ($_POST['action'] == 'cat_delete') {
+if ($_REQUEST['action'] == 'cat_delete') {
 
     if (!$user->allowCat(PERM_CAT_ADMIN, $_POST['id'])) 
         throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
@@ -136,7 +136,7 @@ if ($_POST['action'] == 'cat_delete') {
     $c->delete();
 }
 
-if ($_POST['action'] == 'hard_link_create') {
+if ($_REQUEST['action'] == 'hard_link_create') {
     $em = $application->getEntityManager();
     $structure_repo = $em->getRepository('\Cetera\Entity\Node'); 
     
@@ -161,7 +161,7 @@ if ($_POST['action'] == 'hard_link_create') {
     $em->flush();
 }
 
-if ($_POST['action'] == 'cat_create') {
+if ($_REQUEST['action'] == 'cat_create') {
   
     if (!$user->allowCat(PERM_CAT_ADMIN, $_POST['parent']))
         throw new Exception\CMS(Exception\CMS::NO_RIGHTS);    
@@ -183,7 +183,7 @@ if ($_POST['action'] == 'cat_create') {
 	
 	// https://pm.cetera.ru/browse/CCD-1166
 	// Создает материал с тем же названием и alias=index в созданной папке одновременно. 
-	if ($_POST['create_index']) {
+	if (isset($_POST['create_index'])) {
 		$m = Material::fetch([
 			'idcat'   => $nc->id,
 			'alias'   => 'index',

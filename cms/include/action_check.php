@@ -25,12 +25,10 @@ $res = array(
   	'text' => false
 ); 
 
-if ($_REQUEST['db_structure']) {
+if (isset($_REQUEST['db_structure'])) {
     $schema = new Schema();   
     
-    $result = $schema->compare_schemas($_REQUEST['ignore_fields'], $_REQUEST['ignore_keys']);
-	
-	
+    $result = $schema->compare_schemas(isset($_REQUEST['ignore_fields']), isset($_REQUEST['ignore_keys']));
     
   	if (sizeof($result)) {
   	 	$res['success'] = false;
@@ -58,7 +56,7 @@ if ($_REQUEST['db_structure']) {
   	}
 }
 
-if ($_REQUEST['cat_structure']) {
+if (isset($_REQUEST['cat_structure'])) {
 	
 	$errorText = '';
 

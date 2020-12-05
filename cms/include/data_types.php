@@ -45,7 +45,7 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
             } catch (\Exception $e) {}
         }
         if ($f['pseudo_type']) $f['type'] = $f['pseudo_type'];
-        $f['type_name'] = $l_field_types[$f['type']];
+        $f['type_name'] = isset($l_field_types[$f['type']])?$l_field_types[$f['type']]:null;
         $f['fixed'] = (int)$f['fixed'];
         $f['shw'] = (int)$f['shw'];
         $f['required'] = (int)$f['required'];
