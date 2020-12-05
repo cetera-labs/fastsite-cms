@@ -68,12 +68,12 @@ class Event {
 	*/		
 	public static function trigger($event, $params = [])
 	{
-		if ( is_array(self::$listeners[$event]) ) {			
+		if ( isset(self::$listeners[$event]) && is_array(self::$listeners[$event]) ) {			
 			foreach (self::$listeners[$event] as $callable) {
 				$callable($event, $params);
 			}			
 		}
-		if ( is_array(self::$listeners['*']) ) {			
+		if ( isset(self::$listeners['*']) && is_array(self::$listeners['*']) ) {			
 			foreach (self::$listeners['*'] as $callable) {
 				$callable($event, $params);
 			}			

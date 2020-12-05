@@ -40,7 +40,7 @@ $menu = array(
 foreach ($application->getBo()->getModules() as $id => $component) {
 
   $root_folder = '/'.CMS_DIR.'/';
-  if ($component['path']) $root_folder = $component['path'].'/';
+  if (isset($component['path'])) $root_folder = $component['path'].'/';
           
   $component['id'] = $id;          
           
@@ -57,19 +57,19 @@ foreach ($application->getBo()->getModules() as $id => $component) {
       $menu[MENU_PLUGINS]['items'][] = $component;
   }
   
-  if ($component['url'])  $component['url']  = truePath($component['url'],$root_folder);
-  if ($component['icon']) $component['icon'] = truePath($component['icon'],$root_folder);
-  if ($component['html']) $component['html'] = truePath($component['html'],$root_folder);
-  if (!$component['tree']) $component['tree'] = 'catalogs';
+  if (isset($component['url']))  $component['url']  = truePath($component['url'],$root_folder);
+  if (isset($component['icon'])) $component['icon'] = truePath($component['icon'],$root_folder);
+  if (isset($component['html'])) $component['html'] = truePath($component['html'],$root_folder);
+  if (!isset($component['tree'])) $component['tree'] = 'catalogs';
   $components[$id] = $component;   
   
   if (isset($component['submenu']) && is_array($component['submenu'])) 
      foreach ($component['submenu'] as $ii => $menu_subitem) {
      
-          if ($menu_subitem['url']) $menu_subitem['url'] = truePath($menu_subitem['url'],$root_folder);
-          if ($menu_subitem['icon']) $menu_subitem['icon'] = truePath($menu_subitem['icon'],$root_folder);
-          if ($menu_subitem['html']) $menu_subitem['html'] = truePath($menu_subitem['html'],$root_folder);
-          if ($menu_subitem['tree']) $menu_subitem['tree'] = 'catalogs'; 
+          if (isset($menu_subitem['url'])) $menu_subitem['url'] = truePath($menu_subitem['url'],$root_folder);
+          if (isset($menu_subitem['icon'])) $menu_subitem['icon'] = truePath($menu_subitem['icon'],$root_folder);
+          if (isset($menu_subitem['html'])) $menu_subitem['html'] = truePath($menu_subitem['html'],$root_folder);
+          if (isset($menu_subitem['tree'])) $menu_subitem['tree'] = 'catalogs'; 
           
           $components[$id.'_'.$ii] = $menu_subitem;              
      }                 

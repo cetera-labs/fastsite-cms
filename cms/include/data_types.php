@@ -73,11 +73,11 @@ elseif (isset($_GET['mode']) && $_GET['mode'] == 'fields') {
 } 
 else {
 
-    if ($_REQUEST['empty']) $data[] = array(
+    if (isset($_REQUEST['empty'])) $data[] = [
         'id'      => 0,
 		'describDisplay' => '- '.$translator->_('Без материалов').' -',
         'describ' => '- '.$translator->_('Без материалов').' -'
-    ); 
+    ]; 
 
     $query = 'SELECT * FROM types WHERE 1=1';
     if ($_REQUEST['exclude']) $query .= ' and id <> '.(int)$_REQUEST['exclude'];
@@ -95,7 +95,7 @@ else {
     
 }
 
-echo json_encode(array(
+echo json_encode([
     'success' => true,
     'rows'    => $data
-));
+]);

@@ -132,7 +132,7 @@ class ObjectRenderer {
     
     public function addToPage($field) {
     
-        if ($field['type'] < 0) return;        
+        if (isset($field['type']) && $field['type'] < 0) return;               
        
         if (!isset($field['editor_str'])) return;
   
@@ -249,7 +249,7 @@ class ObjectRenderer {
         	if (isset($editors[EDITOR_HIDDEN])) 
                 $this->fields_def[$id]['editor_str'] = $editors[EDITOR_HIDDEN];
               
-        	if (is_array($field_editors[$f['type']])) {
+        	if (isset($field_editors[$f['type']]) && is_array($field_editors[$f['type']])) {
           
         	    if (!in_array($_editor, $field_editors[$f['type']])) 
         			   $_editor = $field_editors[$f['type']][0];

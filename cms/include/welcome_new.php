@@ -12,54 +12,16 @@
  
 include('common_bo.php');
 
-
 try {
     if (file_exists(WWWROOT.UPGRADE_SCRIPT)) unlink(WWWROOT.UPGRADE_SCRIPT);
     if (file_exists(WWWROOT.INSTALL_SCRIPT)) unlink(WWWROOT.INSTALL_SCRIPT);
 } catch (\Exception $e) {}
 
+$setup_theme = false;
 
-if ($user->allowAdmin() && !COMPOSER_INSTALL) {
-  
-    if (!$application->getVar('no_update_check')) {
-		$no_updates = false;
-        try {
-    		
-    		$client = new \GuzzleHttp\Client();
-    		$res = $client->get(DISTRIB_INFO, ['verify'=>false]);
-            $info = json_decode( $res->getBody(), true);
-    		
-            $can_auto = is_writable(CMSROOT) && is_writable(WWWROOT);
-        
-            if (is_array($info)) {
-            
-                if (version_compare($info['version'], $application->getVersion()) > 0) {
-                    $new_version = true;
-                } 
-				elseif ($can_auto && substr_count($application->getVersion(), 'beta') > 0) {
-                    $rollback = true;
-                }
-                
-                if (
-                      $application->getVar('beta_versions') &&
-                      $can_auto && 
-                      is_array($info['beta']) && 
-                      version_compare($info['beta']['version'], $application->getVersion()) > 0 &&
-                      version_compare($info['beta']['version'], $info['version']) > 0
-                   )
-                {
-                    $new_version_beta = true;
-                }
-                
-            }
-        
-        } catch (\Exception $e) {}
-    }
-	else {
-		$no_updates = true;
-	}
+if ($user->allowAdmin()) {
 	
-	  if ($application->getVar('setup_theme') && \Cetera\Server::getDefault())
+	if ($application->getVar('setup_theme') && \Cetera\Server::getDefault())
 		    $setup_theme = \Cetera\Server::getDefault()->getTheme()->name;
     
 }
@@ -182,7 +144,7 @@ table.partner td {
 }
     </style>
 	
-<?php if ($setup_theme) : ?>
+<?php if (isset($setup_theme)) : ?>
 <script>
 Ext.require('Cetera.model.Theme');
 
@@ -254,83 +216,6 @@ Ext.create('Ext.Button', {
 </script>
 <?php endif; ?>    	
     
-<?php if ($user->allowAdmin()) : ?>    
-    <script>
-                    var itr = false;
-                    var dh = Ext.DomHelper;
-                    
-                    <?php if ($new_version && $can_auto) : ?>  
-                    Ext.create('Ext.Button', {
-                        text: '<?=$translator->_('Обновить');?> <?=APP_NAME?> <?=$translator->_('прямо сейчас');?>',
-                        renderTo: 'upgrade',
-                        handler: function() {
-                            this.disable();
-                            upgrade('include/action_upgrade.php','upgrade', false, 'log', 0);
-                        }
-                    });
-                    <?php endif; ?>  
-                    
-                    <?php if ($rollback) : ?>  
-                    Ext.create('Ext.Button', {
-                        text: '<?=$translator->_('Вернуть ');?> <?=APP_NAME?> <?=$info['version']?>',
-                        renderTo: 'upgrade',
-                        handler: function() {
-                            this.disable();
-                            upgrade('include/action_upgrade.php', 'upgrade', false, 'log', 0);
-                        }
-                    });
-                    <?php endif; ?>                     
-                    
-                    <?php if ($new_version_beta) : ?>  
-                    Ext.create('Ext.Button', {
-                        text: '<?=$translator->_('Обновить');?> <?=APP_NAME?> <?=$translator->_('прямо сейчас');?>',
-                        renderTo: 'upgrade_beta',
-                        handler: function() {
-                            this.disable();
-                            upgrade('include/action_upgrade.php', 'upgrade', false, 'log_beta', 1);
-                        }
-                    });
-                    <?php endif; ?>                      
-                    
-                    function upgrade(url, action, text, log, beta) {
-                    
-                          if (!text) text = '<?=$translator->_('Запрос к серверу обновлений');?>';
-                          text += ' .';
-                          dh.append(log, text);
-                          
-                          itr = setInterval(function(){
-                              dh.append(log, '.');
-                          }, 1000);  
-                          
-                          Ext.Ajax.timeout = 200000;
-                          
-                          Ext.Ajax.request({
-                              url: url,
-                              params: {
-                                  action: action,
-                                  beta: beta,
-								  log: log
-                              },
-                              success: function(resp){
-                                  var obj = Ext.decode(resp.responseText);
-                                  clearInterval(itr);
-                                  dh.append(log, ' ' + obj.message);
-                                  if (obj.success) {
-                                      if (obj.next) {
-                                          if (obj.next.url) url = obj.next.url;
-                                          upgrade(url, obj.next.action, obj.next.text, log, beta);
-                                      } else {
-                                          Cetera.getApplication().reload();
-                                      }
-                                  }
-                              }
-                          });                                               
-                    
-                    }                    
-                    
-    </script>   
-<?php endif; ?>      
-    
 </head>
 <body class="inset" scroll="no">
 <table width="100%" height="100%" cellpadding="0" cellspacing="0">
@@ -379,40 +264,6 @@ Ext.create('Ext.Button', {
                 <a href="https://github.com/cetera-labs/fastsite/blob/master/LICENSE">MIT License</a><br>
 
                 </div>
-                <?php if ($new_version) :?>
-                
-                <div class="new_version">
-                    <p><?=$translator->_('Обнаружена новая версия');?> <?=APP_NAME?> <b>v<?=$info['version']?></b></p>
-                    <p><?=$info['describ']?></p>
-                    <?if ($can_auto) {?>
-                    <div id="upgrade"></div><div id="log"></div>
-                    <?} else {?>
-                    <div><?=$translator->_('Автоматическое обновление невозможно. Обратитесь в компанию Cetera labs для обновления системы.')?></div>
-                    <?}?>
-                </div>
-                
-                <? elseif ($rollback) :?>
-                
-                <div class="new_version">
-                    <p><?=$translator->_('Вы используйте beta-версию. Возможен откат для последнюю стабильную версию ');?><?=APP_NAME?> <b>v<?=$info['version']?></b></p>
-                    <div id="upgrade"></div><div id="log"></div>
-                </div>    
-
-				<? elseif ($no_updates) :?>			
-
-				<div class="latest"><?=$translator->_('Проверка обновлений запрещена в настройках.')?></div>  
-                              
-                <? endif; ?>
-                
-                <?php if ($new_version_beta) : ?>
-                <div class="new_version">
-                    <p><?=$translator->_('Обнаружена новая beta-версия ');?><?=APP_NAME?> <b>v<?=$info['beta']['version']?></b></p>
-                    <p><?=$info['beta']['describ']?></p>
-                    <div id="upgrade_beta"></div><div id="log_beta"></div>
-                </div>
-                <?php endif; ?>   
-                                             
-                
             </td></tr>
             </table>
         

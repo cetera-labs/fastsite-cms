@@ -14,7 +14,7 @@ function editor_datetime_pubdate_draw($field_def, $fieldvalue) {
                     new Ext.form.DateField({
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
-                        allowBlank:<?=($field_def['required']?'false':'true')?>,
+                        allowBlank:<?=(isset($field_def['required'])?'false':'true')?>,
                         value: '<?=$fieldvalue?>',
                         format: 'Y-m-d H:i:s',
                         listeners : {

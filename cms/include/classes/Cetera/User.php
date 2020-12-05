@@ -372,7 +372,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
      */ 
     public function getGroups()
     {
-        if (!is_array($this->fields['groups'])) {
+        if (!isset($this->fields['groups']) || !is_array($this->fields['groups'])) {
             $this->fields['groups'] = [GROUP_ALL];
             if ($this->id == ADMIN_ID) $this->fields['groups'][] = GROUP_ADMIN;
             $r = self::getDbConnection()->fetchAll('SELECT group_id FROM users_groups_membership WHERE user_id='.$this->id);
@@ -471,7 +471,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			unset($fields['__password_crypted']);
 		}
 		
-        return parent::setFields($fields, $from_db);
+        return parent::setFields($fields);
     } 	
 	
     public function setPassword($value)

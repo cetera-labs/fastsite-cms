@@ -15,14 +15,14 @@ include_once('common_bo.php');
 
 $res = array(
     'success' => false,
-    'errors'  => array()
+    'errors'  => []
 );
 
 
-$action = $_REQUEST['action'];
-$sel = $_REQUEST['sel'];
-$id = (int)$_REQUEST['id'];
-$type = $_REQUEST['type'];
+$action = isset($_REQUEST['action'])?$_REQUEST['action']:null;
+$sel = isset($_REQUEST['sel'])?$_REQUEST['sel']:null;
+$id = isset($_REQUEST['id'])?(int)$_REQUEST['id']:null;
+$type = isset($_REQUEST['type'])?$_REQUEST['type']:null;
 
 if ($id) {
 	$catalog = Catalog::getById($id);
