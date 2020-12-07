@@ -55,6 +55,7 @@ class UserAuthAdapter implements AdapterInterface {
 	 */	
     public function __construct($v, $backoffice = false)
     {
+        $v = array_merge(['email' => null, 'login' => null, 'pass' => null, 'backoffice' => null], $v);
         $this->_username   = $v['login'];
         $this->_email      = $v['email'];
         $this->_password   = $v['pass']?$v['pass']:$v['password'];

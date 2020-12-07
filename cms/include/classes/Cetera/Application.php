@@ -1144,7 +1144,7 @@ class Application {
 			'event_log',
 			array(
 				'dat'     => new \DateTime(),
-				'user_id' => (int)$this->getUser()->id,
+				'user_id' => $this->getUser()?(int)$this->getUser()->id:0,
 				'code'    => $event_code,
 				'text'    => $text,
 			),

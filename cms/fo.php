@@ -195,18 +195,22 @@ if ( $match ) {
         $event->setRouter($router);
         $event->setRouteMatch($match);     
         
-        $controller->setEvent($event);        
+        $controller->setEvent($event);       
         $res = $controller->dispatch($request,$response);
-        
-        $view = new \Zend\View\View();
-        $view->setRequest($request);
-        $view->setResponse($response);
-        
-        $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
-        $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
-        $jsonStrategy->attach($view->getEventManager(), 100);
-        
-        $view->render($res);
+        if (is_object($res)) {        
+            $view = new \Zend\View\View();
+            $view->setRequest($request);
+            $view->setResponse($response);
+            
+            $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
+            $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
+            $jsonStrategy->attach($view->getEventManager(), 100);
+            
+            $view->render($res);
+        }
+        else {
+            $response->setContent($res);
+        }
                 
     }
     else {
