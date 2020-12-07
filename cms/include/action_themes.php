@@ -27,7 +27,7 @@ $theme = $_REQUEST['theme'];
 if ($action == 'get_config') {
     $theme = Theme::find($_REQUEST['theme']);
     $s = Server::getById((int)$_REQUEST['server']);
-    $res['config'] = $theme->loadConfig($s)->config;
+    $res['config'] = $theme->loadConfig($s)->config->export();
     $res['success'] = true;
 }
 elseif ($action == 'save_config') {
