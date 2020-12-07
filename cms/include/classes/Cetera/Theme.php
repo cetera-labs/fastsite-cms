@@ -673,5 +673,9 @@ class ThemeConfig {
     
     public function __call($name, $arguments) {
         return (isset($this->c->$name))?$this->c->$name:null;
-    }    
+    }   
+
+    public function export() {
+        return $this->c;
+    }     
 }
