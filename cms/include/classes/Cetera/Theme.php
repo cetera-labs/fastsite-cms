@@ -670,4 +670,8 @@ class ThemeConfig {
     public function __get($prop) {
         return (isset($this->c->$prop))?$this->c->$prop:null;
     }
+    
+    public function __call($name, $arguments) {
+        return (isset($this->c->$name))?$this->c->$name:null;
+    }    
 }
