@@ -2,7 +2,8 @@ Ext.define('Cetera.panel.StructureTree', {
 	
 	extend: 'Ext.tree.Panel',
 	alias : 'widget.structuretree',
-	requires: 'Cetera.field.File',
+
+    requires: ['Cetera.Ajax','Cetera.field.File'],
 	
 	rootVisible:false,
 	useArrows: true,
