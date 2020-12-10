@@ -144,7 +144,7 @@ table.partner td {
 }
     </style>
 	
-<?php if (isset($setup_theme)) : ?>
+<?php if ($setup_theme) : ?>
 <script>
 Ext.require('Cetera.model.Theme');
 

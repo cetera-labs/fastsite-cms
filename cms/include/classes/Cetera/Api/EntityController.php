@@ -32,21 +32,25 @@ class EntityController extends AbstractController
 
     public function listAction()
     {
+        if (!$this->params['page']) {
+            $this->params['page'] = 1;
+        }
+        if (!$this->params['items_per_page']) {
+            $this->params['items_per_page'] = 10;
+        }          
+        
         $query = $this->em->createQueryBuilder()
                                ->select('e')
                                ->from($this->entity, 'e')
-                               ->setFirstResult(0)
-                               ->setMaxResults(5);
+                               ->setFirstResult( $this->params['items_per_page']*($this->params['page']-1) )
+                               ->setMaxResults( $this->params['items_per_page'] );
 
 
         $paginator = new Paginator($query);
 
-        $c = count($paginator);
-
         $res = [
             'success' => true,
-            'total' => (int)$c,
-            //'pages' => (int)$list->getPageCount(),            
+            'total' => count($paginator),           
             'data' => $paginator->asArray(),
         ];
         
