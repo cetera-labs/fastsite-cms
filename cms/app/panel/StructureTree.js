@@ -459,8 +459,9 @@ Ext.define('Cetera.panel.StructureTree', {
 		win.setTitle(_('Экспорт'));			
 		win.show();
 		win.setLoading(true);
-		Ext.Ajax.request({
+		Cetera.Ajax.request({
 		   url: 'include/action_backup.php',
+           timeout: 1000000,
 		   params: { 
 				action: 'backup', 
 				section: this.getSelectedId()
