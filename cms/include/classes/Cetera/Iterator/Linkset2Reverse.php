@@ -32,7 +32,8 @@ class Linkset2Reverse extends Base {
             $res = $this->getDbConnection()->fetchAll('SELECT * FROM '.$t['alias'].'_'.$fieldName.' WHERE dest_id=? and dest_type=? ORDER BY tag',[$object->id, $object->objectDefinition->id]);
             foreach ($res as $r) {
                 try {
-                    $this->elements[] = \Cetera\Material::getById($r['id'], $t['id']);
+                    $m = \Cetera\Material::getById($r['id'], $t['id']);
+                    if ($m->published) $this->elements[] = $m;
                 }
                 catch (\Exception $e) {}
             }

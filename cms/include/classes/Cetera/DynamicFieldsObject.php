@@ -724,6 +724,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             $this->getDbConnection()->executeQuery("delete from ".$this->table."_".$tbl."_"."$f[0] where id=".$this->id);
         }
         
+        $r = $this->getDbConnection()->fetchAll("select B.name from types A, types_fields B where A.alias='".$this->table."' and B.id=A.id and B.type=".FIELD_LINKSET2);
+        foreach ($r as $f) {
+            $this->getDbConnection()->executeQuery("delete from ".$this->table."_".$f['name']." where id=".$this->id);
+        }
+        
         // удаление ссылок на этот материал
         if (property_exists($this, 'idcat') && $this->idcat >= 0) {
         	$r = $this->getDbConnection()->query("select A.alias, B.name, B.type from types A, types_fields B where B.id=A.id and B.len=".$this->idcat." and (B.type=".FIELD_LINK." or B.type=".FIELD_LINKSET.")");
@@ -739,6 +744,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             while ($f = $r->fetch(\PDO::FETCH_NUM)) {
         	  $this->getDbConnection()->executeQuery("delete from $f[0]"."_".$this->table."_"."$f[1] where dest=".$this->id);
         	}
+        }
+        
+        $r = $this->getDbConnection()->fetchAll("select B.name, A.id, A.alias from types A, types_fields B where B.id=A.id and B.type=".FIELD_LINKSET2);
+        foreach ($r as $f) {
+            $this->getDbConnection()->executeQuery("delete from ".$f['alias']."_".$f['name']." where dest_type=".$this->objectDefinition->id." and dest_id=".$this->id);
         }
                 
         // удаление самого материала
