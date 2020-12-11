@@ -286,6 +286,8 @@ class ObjectRenderer {
 	private function getLinks()
 	{
 		if (!$this->objectId) return;
+        if ($this->objectDefinition->alias == 'dir_data') return;
+        if ($this->objectDefinition->alias == 'users') return;
         
         $f = [
             'name' => 'links_in',
