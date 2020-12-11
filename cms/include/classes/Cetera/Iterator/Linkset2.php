@@ -36,7 +36,8 @@ class Linkset2 extends Base {
 		
 		foreach ($res as $r) {
             try {
-                $this->elements[] = \Cetera\Material::getById($r['dest_id'], $r['dest_type']);
+                $m = \Cetera\Material::getById($r['dest_id'], $r['dest_type']);
+                if ($m->published) $this->elements[] = $m;
             }
             catch (\Exception $e) {}
 		}
