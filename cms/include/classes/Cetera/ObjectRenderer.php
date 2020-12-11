@@ -335,7 +335,7 @@ class ObjectRenderer {
 			$this->fields_def[] = $f;
 		} catch (\Exception $e) {}
 		$this->initData .= ob_get_contents();
-		ob_end_clean();					
+		ob_end_clean();	
+*/        
 	}
-*/
 }
