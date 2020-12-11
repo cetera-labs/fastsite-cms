@@ -81,7 +81,7 @@ try {
 			'id' => $f->id,
 			'name' => $f->name,
 			'alias' => $f->alias,
-			'catalog' => $f->catalog->getPath()->implode(function($catalog, $index, $first, $last, $total) { return (!$first?'/':'').$catalog->alias; }),
+			'catalog' => $f->catalog?$f->catalog->getPath()->implode(function($catalog, $index, $first, $last, $total) { return (!$first?'/':'').$catalog->alias; }):'',
 			'icon' => $f->published,
             'type_id' => $l['type_id'],
             'field_name' => $l['field_name'],
