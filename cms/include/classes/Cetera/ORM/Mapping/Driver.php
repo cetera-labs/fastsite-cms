@@ -27,7 +27,8 @@ class Driver implements MappingDriver {
     private $od;
     
     private $classToTableNames = [
-        'Cetera\Entity\Node' => 'dir_structure'
+        'Cetera\Entity\Node' => 'dir_structure',
+        'Cetera\Entity\Link' => 'object_links',
     ];
     
     private $classNamesForTables = [
@@ -135,7 +136,25 @@ EOF
             $metadata->setCustomRepositoryClass('Cetera\\ORM\\Repository\\NestedTreeRepository');            
            
         }
+        elseif ($tableName == 'object_links') {
+            $metadata->mapField([
+                'id' => true,
+                'fieldName'  => 'dest_id',
+                'columnName' => 'dest_id',
+                'type'       => Type::INTEGER,
+                'nullable'   => false, 
+            ]);
+            $metadata->mapField([
+                'id' => true,
+                'fieldName'  => 'dest_type',
+                'columnName' => 'dest_type',
+                'type'       => Type::INTEGER,
+                'nullable'   => false, 
+            ]);   
+            $builder = new ClassMetadataBuilder($metadata);
+        }
         else {
+            
             $this->buildIndexes($metadata);
             $this->buildFieldMappings($metadata);
             $this->buildAssociationMappings($metadata);
@@ -231,7 +250,7 @@ EOF
      */
     private function buildIndexes(ClassMetadataInfo $metadata)
     {
-        $tableName = $metadata->table['name'];
+        $tableName = $metadata->table['name'];       
         $indexes   = $this->tables[$tableName]->getIndexes();
 
         foreach ($indexes as $index) {
@@ -357,18 +376,44 @@ EOF
      */
     private function buildAssociationMappings(ClassMetadataInfo $metadata)
     {
-        $tableName   = $metadata->table['name'];      
+        $tableName   = $metadata->table['name'];          
         $od     = $this->od[$tableName];
         $fields = $od->getFields();
 
         foreach($fields as $field) {
-            if (! is_subclass_of($field, 'Cetera\ObjectFieldLinkAbstract')) {
+            if (!is_subclass_of($field, 'Cetera\ObjectFieldLinkAbstract') && !is_a($field,'Cetera\ObjectFieldLinkSet2')) {
                 continue;
             }
             
             $associationMapping = [];            
             
-            if (is_subclass_of($field, 'Cetera\ObjectFieldLinkSetAbstract')) {
+            if (is_a($field,'Cetera\ObjectFieldLinkSet2')) {
+                
+                $associationMapping['fieldName'] = $this->getFieldNameForColumn($tableName, $field->name, true);
+                $associationMapping['targetEntity'] = 'Cetera\\Entity\\Link';
+                $associationMapping['joinTable'] = [
+                    'name' => $field->getLinkTable(),
+                    'joinColumns' => [
+                        [
+                            'name' => 'id',
+                            'referencedColumnName' => 'id',
+                        ],   
+                    ],
+                    'inverseJoinColumns' => [
+                        [
+                            'name' => 'dest_id',
+                            'referencedColumnName' => 'dest_id',
+                        ],
+                        [
+                            'name' => 'dest_type',
+                            'referencedColumnName' => 'dest_type',
+                        ]                         
+                    ],                    
+                ];                 
+                $metadata->mapManyToMany($associationMapping);
+                
+            }
+            elseif (is_subclass_of($field, 'Cetera\ObjectFieldLinkSetAbstract')) {
 
                 $associationMapping['fieldName'] = $this->getFieldNameForColumn($tableName, $field->name, true);
                 $associationMapping['targetEntity'] = $this->getClassNameForObjectDefinition($field->getObjectDefinition());

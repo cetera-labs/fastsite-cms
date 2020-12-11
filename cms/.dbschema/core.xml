@@ -298,6 +298,15 @@
     </key>	
 </table>
 
+<table name="object_links">
+    <field name="dest_type" type="int(10) unsigned" null="0" />
+    <field name="dest_id" type="int(10) unsigned" null="0" />
+    <key name="PRIMARY" unique="1">
+        <column name="dest_type" />
+        <column name="dest_id" />
+    </key>
+</table>
+
 <object name="materials" description="Materials[ru=Материалы]" fixed="1" handler="" plugin="">
     <field name="tag" type="3" pseudo_type="0" description="Sort[ru=Сортировка]" length="1" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="100" tag="1" />
     <field name="name" type="1" pseudo_type="0" description="Title[ru=Заголовок]" length="1024" show="1" required="0" fixed="1" editor="0" editor_user="" default_value="" tag="2" />
