@@ -26,7 +26,7 @@ function editor_linkset2_default_draw($field_def, $fieldvalue, $id = false, $idc
                             data: [
 <? 
 	$first = 1;
-	if (is_array($fieldvalue)) foreach ($fieldvalue as $m) {
+	if ($fieldvalue) foreach ($fieldvalue as $m) {
 		  	if (!$first) print ',';
 		  	$first = 0;
 			print "['".$m->objectDefinition->id."_".$m->id."', '".str_replace("\n",'',addslashes($m->catalog->getPath()->implode().' / '.$m->name))."']";		

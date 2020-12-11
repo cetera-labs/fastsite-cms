@@ -620,7 +620,10 @@ class ObjectDefinition extends Base {
 							  $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
 							  $sql = "alter table `$alias` change `".trim($f[2])."` `".$params['name']."` $def";
 							  $params['len'] = (integer) $params['len'];
-						  } 
+						  }
+                          elseif ($params['type'] == FIELD_LINKSET2) {
+                              $sql = "alter table ".$alias."_".$f[2]." rename ".$alias."_".$params['name'];
+                          }
 						  else {
 							  $tbl = self::get_table($params['type'], $params['len'], $this->id,$params['pseudo_type']);
 							  $tbl1 = self::get_table($f[0],$f[1], $this->id,$params['pseudo_type']);
@@ -759,14 +762,15 @@ class ObjectDefinition extends Base {
      * @internal
      **/	
     public static function get_table($field_type, $len, $type_id, $pseudo_type = 0) { 
-      if ($pseudo_type == PSEUDO_FIELD_CATOLOGS) return Catalog::TABLE;
+        if ($pseudo_type == PSEUDO_FIELD_CATOLOGS) return Catalog::TABLE;
        
     	if ($field_type == FIELD_LINKSET && $len) {
     	    if ($len == CATALOG_VIRTUAL_USERS) return User::TABLE;
     	  	$r = DbConnection::getDbConnection()->fetchColumn("select A.alias from types A, dir_data B where A.id = B.typ and B.id=?",[$len],0);
-    	} else {
-    	  if ($field_type == FIELD_LINKSET) $len = $type_id;
-    	  $r = DbConnection::getDbConnection()->fetchColumn("select alias from types where id=?",[$len],0);
+    	} 
+        else {
+            if ($field_type == FIELD_LINKSET) $len = $type_id;
+            $r = DbConnection::getDbConnection()->fetchColumn("select alias from types where id=?",[$len],0);
     	}
     	return $r;
     }
