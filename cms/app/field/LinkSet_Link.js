@@ -17,11 +17,11 @@ Ext.define('Cetera.field.LinkSet_Link', {
 			autoDestroy: true,
 			remoteSort: true,
 
-			model: Cetera.model.Material,	
+            fields: [
+                'id','name','alias','catalog','icon','type_id','field_name','field_describ'
+            ],
 			
 			totalProperty: 'total',
-			pageSize: Config.defaultPageSize,
-			sorters: [{property: "dat", direction: "DESC"}],
 			proxy: {
 				type: 'ajax',
 				url: '/cms/include/data_materials_linked.php',
@@ -31,21 +31,31 @@ Ext.define('Cetera.field.LinkSet_Link', {
 					root: 'rows'
 				},
 				extraParams: {
-					'mat_type'    : this.mat_type,
-					'field_name'  : this.field_name,
+					//'mat_type'    : this.mat_type,
+					//'field_name'  : this.field_name,
 					'parent_type' : this.parent_type,
 					'parent_id'   : this.parent_id,
-					'limit'       : Config.defaultPageSize
+					//'limit'       : Config.defaultPageSize
 				}
 			}		
 		
 		});
+        
+		this.reloadAction = new Ext.Action({
+			tooltip: Config.Lang.edit,
+			scope: this,
+			handler: function () { this.store.load(); },
+			iconCls:'icon-reload'
+		});	        
 		
 		this.editAction = new Ext.Action({
 			tooltip: Config.Lang.edit,
 			disabled: true,
 			scope: this,
-			handler: function () { this.edit(this.grid.getSelectionModel().getSelection()[0].getId()); },
+			handler: function () { 
+                var rec = this.grid.getSelectionModel().getSelection()[0];
+                this.edit(rec.getId(),rec.get('type_id')); 
+            },
 			iconCls:'icon-edit'
 		});	
 
@@ -65,7 +75,7 @@ Ext.define('Cetera.field.LinkSet_Link', {
 			iconCls:'icon-delete2',
 		});			
 
-		var tbarConfig = [this.editAction,this.deleteLinkAction];
+		var tbarConfig = [this.reloadAction,this.editAction,this.deleteLinkAction, this.deleteAction];
 		
 		if (this.field_type == Config.fields.FIELD_MATERIAL) {
 			tbarConfig = [
@@ -85,15 +95,6 @@ Ext.define('Cetera.field.LinkSet_Link', {
         this.grid = Ext.create('Ext.grid.GridPanel', {
 
 			tbar: tbarConfig,
-		
-			bbar: Ext.create('Ext.PagingToolbar', {
-				store: this.store,
-				items: [Config.Lang.filter + ': ', Ext.create('Cetera.field.Search', {
-					store: this.store,
-					paramName: 'query',
-					width:200
-				})]
-			}),			
 		
 			store: this.store,
             multiSelect: false,
@@ -123,23 +124,26 @@ Ext.define('Cetera.field.LinkSet_Link', {
 						return value;
 					}			
 				},
-				{header: "Alias", width: 175, dataIndex: 'alias'},
-				{header: Config.Lang.date, width: 105, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
 				{
 					header: Config.Lang.catalog, 
-					width: 100, 
+					flex:1,
 					dataIndex: 'catalog',
-					getSortParam: function(){ return 'E.name'; }
+				},
+				{
+					header: _('Связь'), 
+					width: 100, 
+					dataIndex: 'field_describ',
 				}
 			]
         });
 		
         this.grid.getSelectionModel().on({
             'selectionchange' : function(sm){
-                var hs = sm.hasSelection();               
+                var hs = sm.hasSelection();    
+                var record = sm.getSelection()[0];
                 this.editAction.setDisabled(!hs);
-                this.deleteAction.setDisabled(!hs);	
-				this.deleteLinkAction.setDisabled(!hs);	
+                this.deleteAction.setDisabled(!hs || record.get('field_type') != Config.fields.FIELD_MATERIAL);	
+				this.deleteLinkAction.setDisabled(!hs || record.get('field_type') == Config.fields.FIELD_MATERIAL);	
             },
             'beforeselect' : function(t , record, index, eOpts) {
                 if (record.get('disabled')) return false;
@@ -151,7 +155,7 @@ Ext.define('Cetera.field.LinkSet_Link', {
     
     }, 
 	
-	edit: function(id) {
+	edit: function(id,type) {
 		
 		var me = this;
 		
@@ -168,9 +172,9 @@ Ext.define('Cetera.field.LinkSet_Link', {
         });	
 		        
         Ext.Loader.loadScript({
-            url: 'include/ui_material_edit.php?type='+me.mat_type+'&idcat=-1&id='+id,
+            url: 'include/ui_material_edit.php?type='+type+'&idcat=-1&id='+id,
             onLoad: function() { 
-                var cc = Ext.create('MaterialEditor'+me.mat_type, {win: me.editWindow});
+                var cc = Ext.create('MaterialEditor'+type, {win: me.editWindow});
                 if (cc) cc.show();
 				if (!id) {
 					cc.getForm().findField( me.field_name ).setValue( me.parent_id );
@@ -182,20 +186,35 @@ Ext.define('Cetera.field.LinkSet_Link', {
 	
     deleteMat: function() {
         Ext.MessageBox.confirm(Config.Lang.materialDelete, Config.Lang.r_u_sure, function(btn) {
-            if (btn == 'yes') this.call('delete');
+            if (btn == 'yes') {
+                var rec = this.grid.getSelectionModel().getSelection()[0];
+                Ext.Ajax.request({
+                    url: 'include/action_materials.php',
+                    params: { 
+                        action: 'delete', 
+                        type: rec.get('type_id'), 
+                        'sel[]': rec.getId()
+                    },
+                    scope: this,
+                    success: function(resp) {
+                        this.store.load();
+                    }
+                });                
+            }
         }, this);
     },
 	
     deleteLink: function() {
         Ext.MessageBox.confirm(_('Удалить связь материалов'), Config.Lang.r_u_sure, function(btn) {
             if (btn == 'yes') {
+                var rec = this.grid.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					url: 'include/action_materials.php',
 					params: { 
 						action:   'delete_link', 
-						type:     this.mat_type, 
-						'sel[]':  this.getSelected(),
-						field:    this.field_name,
+						type:     rec.get('type_id'),
+						'sel[]':  rec.getId(),
+						field:    rec.get('field_name'),
 						src_id:   this.parent_id,
 						src_type: this.parent_type
 					},
@@ -206,29 +225,6 @@ Ext.define('Cetera.field.LinkSet_Link', {
 				});				
 			}
         }, this);
-    },	
-	
-    call: function(action, cat) {
-        Ext.Ajax.request({
-            url: 'include/action_materials.php',
-            params: { 
-                action: action, 
-                type: this.mat_type, 
-                'sel[]': this.getSelected(),
-                cat: cat
-            },
-            scope: this,
-            success: function(resp) {
-                this.store.load();
-            }
-        });
-    },
-
-    getSelected: function() {
-        var a = this.grid.getSelectionModel().getSelection();
-        ret = [];
-        for (var i=0; i<a.length; i++) ret[i] = a[i].getId();
-        return ret;
-    }	
+    }
     
 });

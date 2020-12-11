@@ -286,7 +286,18 @@ class ObjectRenderer {
 	private function getLinks()
 	{
 		if (!$this->objectId) return;
-
+        
+        $f = [
+            'name' => 'links_in',
+            'id' => $this->objectDefinition->id,
+			'describ' => '[Входящие связи]',
+			'editor_str' => 'editor_linkset_link',      
+        ];
+        if ( file_exists('editors/'.$f['editor_str'].'.php') ) 
+            include_once('editors/'.$f['editor_str'].'.php');
+        $this->fields_def[] = $f;  
+        return;
+/*
 		// поля типа FIELD_MATERIAL
 		$fields = self::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE type='.FIELD_MATERIAL.' and pseudo_type=0 and len='.$this->objectDefinition->id);		
 		
@@ -326,5 +337,5 @@ class ObjectRenderer {
 		$this->initData .= ob_get_contents();
 		ob_end_clean();					
 	}
-
+*/
 }

@@ -50,10 +50,24 @@ class Linkset2 extends Base {
      * @return void  
      */ 	
 	public function add($material, $check = true) {
-		if ($material->objectDefinition->id != $this->objectDefinition->id) {
-			throw new \Exception('Illegal type of material '.$material->objectDefinition->id.'. Must be '.$this->objectDefinition->id);
-		}
 		return parent::add($material, $check);
+	}
+
+    /**
+     * Удаляет материал из итератора
+     *  
+     * @param \Cetera\DynamicFieldsObject $material
+     * @return void  
+     */ 	
+	public function remove(\Cetera\DynamicFieldsObject $material) {
+		foreach ($this->elements as $key => $value) {
+			if ($value->id == $material->id && $value->objectDefinition->id == $material->objectDefinition->id) {
+				unset($this->elements[$key]);
+				$this->elements = array_values($this->elements);
+				break;
+			}
+		}
+		return $this;
 	}	
 
 }

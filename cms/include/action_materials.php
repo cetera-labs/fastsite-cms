@@ -115,7 +115,7 @@ if ($action == 'delete_link' && is_array($sel)) {
   
 	foreach ($sel as $val) {
 	   $m = Material::getById($val, $objectDefinition);	   
-       if ( $m->{$_REQUEST['field']} instanceof \Cetera\Iterator\Linkset ) {
+       if ( $m->{$_REQUEST['field']} instanceof \Cetera\Iterator\Linkset || $m->{$_REQUEST['field']} instanceof \Cetera\Iterator\Linkset2 ) {
 		    $m->{$_REQUEST['field']}->remove($src);
 			$m->save();
 	   }
