@@ -69,6 +69,8 @@ class Driver implements MappingDriver {
             mkdir($path, 0777, true);
         }
         
+        $queries = [];
+        
         foreach(\Cetera\ObjectDefinition::enum() as $od) {
             $className = $this->classNamesForTables[$od->getTable()] ?? $this->inflector->classify(strtolower($od->getTable()));
             $f = fopen($path.'/'.$className.'.php', 'w');
@@ -95,11 +97,18 @@ EOF
 
             fwrite($f,PHP_EOL.'}'.PHP_EOL);
             fclose($f);
+            
+            $queries[] = 'SELECT '.$od->id.' AS dest_type, id AS dest_id FROM '.$od->getTable();
         }
         
         $loader = new \Composer\Autoload\ClassLoader();
         $loader->add('Cetera\Entity', ENTITY_CLASSES_DIR);
-        $loader->register();        
+        $loader->register();   
+
+        if (count($queries)) {
+            $od->getDbConnection()->executeQuery('DROP VIEW IF EXISTS `object_links`');
+            $od->getDbConnection()->executeQuery('CREATE VIEW `object_links` AS ('.implode(' UNION ', $queries).')'.);
+        }
     }    
     
     /**
