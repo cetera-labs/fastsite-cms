@@ -9,6 +9,8 @@ Ext.define('Cetera.catalog.SiteTree', {
     autoScroll  : true,
     
     loadMask: true,
+    
+    nodesToExpand: [],
 	
 	setOnly : function(value) {
 		this.only = value;
@@ -37,17 +39,33 @@ Ext.define('Cetera.catalog.SiteTree', {
         });
 		
 	},
+    
+    checkExpanded: function(node){
+        if (node.isExpanded()) {
+            var res = 0;
+            for (var i = 0; i < node.childNodes.length; i++) {
+                res += this.checkExpanded(node.childNodes[i]);
+            }
+            if (res == 0) {
+                this.nodesToExpand[this.nodesToExpand.length] = node.getPath();
+            }
+            return 1;
+        }
+        return 0;
+    },
 	
 	reload: function(){
-		var sn = this.getSelectionModel().getLastSelected();
-		this.getSelectionModel().deselectAll();
-		if (sn) var path = sn.getPath();
+        this.nodesToExpand = [];
+        this.checkExpanded(this.getRootNode());
 
 		var store = this.getStore();
 		store.load({
 			node: store.getNodeById('root'),
 			callback: function() {
-				if (path) this.selectPath(path, 'id', '/'); 
+                for (var i = 0; i < this.nodesToExpand.length; i++) {
+                    this.expandPath(this.nodesToExpand[i], 'id', '/'); 
+                }   
+                
 			},
 			scope: this
 		});		
@@ -88,11 +106,18 @@ Ext.define('Cetera.catalog.SiteTree', {
         
         if (this.materials) {
         
-            this.tbar[1] = Ext.create('Cetera.field.Search', {
+            var search = Ext.create('Cetera.field.Search', {
                 store: this.store,
                 paramName: 'query',
+                reloadStore: false,
                 width:150
-            });
+            });        
+            
+            search.on('search', function() {
+                this.reload();
+            },this); 
+
+            this.tbar[this.tbar.length] = search;            
         
         }
         

@@ -20,15 +20,20 @@ Ext.define('Cetera.field.Search', {
     width:180,
     hasSearch : false,
     paramName : 'query',
+    reloadStore : true,
 
     onTrigger1Click : function(){
         this.setValue('');
         if(this.hasSearch){
-            var o = {start: 0};
             this.store.proxy.extraParams = this.store.proxy.extraParams || {};
             this.store.proxy.extraParams[this.paramName] = '';
-            this.store.load({params:o});
+            if (this.reloadStore) {
+                var o = {start: 0};
+                this.store.load({params:o});
+            }
             this.hasSearch = false;
+            this.fireEvent('search', {
+            });             
         }
     },
 
@@ -38,10 +43,14 @@ Ext.define('Cetera.field.Search', {
             this.onTrigger1Click();
             return;
         }
-        var o = {start: 0};
         this.store.proxy.extraParams = this.store.proxy.extraParams || {};
         this.store.proxy.extraParams[this.paramName] = v;
-        this.store.load({params:o});
+        if (this.reloadStore) {
+            var o = {start: 0};
+            this.store.load({params:o});
+        }
         this.hasSearch = true;
+        this.fireEvent('search', {
+        });        
     }
 });
