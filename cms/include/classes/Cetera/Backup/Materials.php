@@ -173,7 +173,7 @@ class Materials implements XmlInterface {
 				}
 				elseif ($f instanceof \Cetera\ObjectFieldMaterialSet && $m->{$f['name']}->getCountAll()) {
 					if ($f['pseudo_type'] == PSEUDO_FIELD_TAGS) {
-						$this->xml->writeCdata( $m->{$f['name']}->implode('name',function($item, $index, $first, $last, $total){							
+						$this->xml->writeCdata( $m->{$f['name']}->implode( function($item, $index, $first, $last, $total){							
 							if ($first) return $item;
 							return ','.$item;							
 						}) );

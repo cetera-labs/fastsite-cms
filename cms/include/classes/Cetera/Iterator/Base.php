@@ -77,17 +77,13 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     public function asArray()
     {
 		if (func_num_args() == 0) {
-			$fields = array('id');
+			$fields = ['id'];
 		}
 		else {
-			$fields = array();
-			$args = func_get_args();
-			if (count($args)==1 && is_array($args[0])) {
-				$args = $args[0];
+			$fields = func_get_args();
+			if (count($fields)==1 && is_array($fields[0])) {
+				$fields = $fields[0];
 			}			
-			foreach ($args as $f ) {
-				if (is_string($f)) $fields[] = $f;
-			}
 		}
 		
         $data = array();

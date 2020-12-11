@@ -2,7 +2,8 @@ Ext.define('Cetera.panel.StructureTree', {
 	
 	extend: 'Ext.tree.Panel',
 	alias : 'widget.structuretree',
-	requires: 'Cetera.field.File',
+
+    requires: ['Cetera.Ajax','Cetera.field.File'],
 	
 	rootVisible:false,
 	useArrows: true,
@@ -459,8 +460,9 @@ Ext.define('Cetera.panel.StructureTree', {
 		win.setTitle(_('Экспорт'));			
 		win.show();
 		win.setLoading(true);
-		Ext.Ajax.request({
+		Cetera.Ajax.request({
 		   url: 'include/action_backup.php',
+           timeout: 1000000,
 		   params: { 
 				action: 'backup', 
 				section: this.getSelectedId()
