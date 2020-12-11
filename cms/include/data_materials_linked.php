@@ -75,7 +75,12 @@ try {
     
     foreach ($list as $l) {
 
-        $f = Material::getById($l['material_id'], $l['type_id']);
+        try {
+            $f = Material::getById($l['material_id'], $l['type_id']);
+        }
+        catch(\Exception $e) {
+            continue;
+        }
         
         $materials[] = [
 			'id' => $f->id,
