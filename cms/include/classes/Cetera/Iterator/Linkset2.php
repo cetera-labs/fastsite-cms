@@ -35,7 +35,10 @@ class Linkset2 extends Base {
         $res = $this->getDbConnection()->fetchAll('SELECT * FROM '.$material->objectDefinition->table.'_'.$field->name.' WHERE id=? ORDER BY tag',[$material->id]);
 		
 		foreach ($res as $r) {
-			$this->elements[] = \Cetera\Material::getById($r['dest_id'], $r['dest_type']);
+            try {
+                $this->elements[] = \Cetera\Material::getById($r['dest_id'], $r['dest_type']);
+            }
+            catch (\Exception $e) {}
 		}
     } 	
 	
