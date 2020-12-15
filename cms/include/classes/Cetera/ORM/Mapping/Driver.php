@@ -217,7 +217,7 @@ EOF
         return true;
     } 
     
-    private function getClassNameForObjectDefinition($od)
+    public function getClassNameForObjectDefinition($od)
     {
         return 'Cetera\\Entity\\' . (
             $this->classNamesForTables[$od->getTable()]
