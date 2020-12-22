@@ -107,6 +107,7 @@ EOF
 
         if (count($queries)) {
             $od->getDbConnection()->executeQuery('DROP VIEW IF EXISTS `object_links`');
+            $od->getDbConnection()->executeQuery('DROP TABLE IF EXISTS `object_links`');
             $od->getDbConnection()->executeQuery('CREATE VIEW `object_links` AS '.implode(' UNION ', $queries));
         }
     }    
