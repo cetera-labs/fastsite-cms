@@ -8,6 +8,8 @@
  **/
 namespace Cetera; 
 
+use \Doctrine\Inflector\InflectorFactory;
+
 /**
  * Класс реализующий управление типами материалов системы 
  *
@@ -795,9 +797,15 @@ class ObjectDefinition extends Base {
 	}
     
     public static function regenerateClasses() {
-        $entityManager = Application::getInstance()->getEntityManager();
-        $d = $entityManager->getConfiguration()->getMetadataDriverImpl();
+        $em = Application::getInstance()->getEntityManager();
+        $d = $em->getConfiguration()->getMetadataDriverImpl();
         $d->generateClasses();        
     }
+    
+    public function getEntityClassName() {
+        $em = Application::getInstance()->getEntityManager();
+        $d = $em->getConfiguration()->getMetadataDriverImpl();
+        return $d->getClassNameForObjectDefinition($this);
+    }     
 
 }
