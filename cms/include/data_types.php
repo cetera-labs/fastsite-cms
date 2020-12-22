@@ -81,7 +81,7 @@ else {
 
     $query = 'SELECT * FROM types WHERE 1=1';
     if (isset($_REQUEST['exclude'])) $query .= ' and id <> '.(int)$_REQUEST['exclude'];
-    if (isset($_REQUEST['linkable'])) $query .= ' and id not in ('.User::TYPE.','.Catalog::TYPE.')'; 
+    if (isset($_REQUEST['linkable']) && $_REQUEST['linkable']) $query .= ' and id not in ('.User::TYPE.','.Catalog::TYPE.')'; 
 
     $query .= ' ORDER by fixed desc, alias';
     $r = $application->getConn()->query($query);
