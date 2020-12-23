@@ -90,10 +90,12 @@ class Filter {
 				
                 if (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkSetAbstract')) {
                     //$d['iterator'] = $d['field']->getIterator()->joinReverse($this->iterator->getObjectDefinition(), $d['field']->name)->where($d['field']->name.'.id > 0')->groupBy('main.id');
+                    $i = clone $this->iterator;
                     $d['iterator'] =  $d['field']
                         ->getIterator()
                         ->where('id IN (:values)')
-                        ->setParameter('values', array_map( function($v){ return $v['dest']; }, $this->iterator->join($d['field']->name)->select($d['field']->name.'.dest')->groupBy($d['field']->name.'.dest')->asArray('dest') ), \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
+                        ->setParameter('values', array_map( function($v){ return $v['dest']; }, $i->join($d['field']->name)->select($d['field']->name.'.dest')
+                        ->groupBy($d['field']->name.'.dest')->asArray('dest') ), \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
 					
                     $d['value'] = $this->submittedValue($d['name']);
 					if ($d['value']) {
@@ -104,10 +106,11 @@ class Filter {
                 }    
 				elseif (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkAbstract')) {					
 					//$d['iterator'] = $d['field']->getIterator();
+                    $i = clone $this->iterator;
                     $d['iterator'] =  $d['field']
                         ->getIterator()
                         ->where('id IN (:values)')
-                        ->setParameter('values', array_map( function($v){ return $v['dest']; }, $this->iterator->select($d['field']->name.' as dest')->asArray('dest') ), \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
+                        ->setParameter('values', array_map( function($v){ return $v['dest']; }, $i->select($d['field']->name.' as dest')->asArray('dest') ), \Doctrine\DBAL\Connection::PARAM_INT_ARRAY);
 					                    
 					$d['value'] = $this->submittedValue($d['name']);
 					if ($d['value']) {
