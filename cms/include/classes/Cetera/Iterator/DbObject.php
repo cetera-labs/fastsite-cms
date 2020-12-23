@@ -114,7 +114,7 @@ abstract class DbObject extends Base {
             $this->countAll = $stmt->fetchColumn();
         }
         
-        return $this->countAll;  
+        return (int)$this->countAll;  
     }
 	
     public function getElements() {
