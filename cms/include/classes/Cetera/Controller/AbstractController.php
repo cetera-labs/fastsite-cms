@@ -37,7 +37,18 @@ class AbstractController extends AbstractController
             $this->material = null;
         }
         
-        return parent::dispatch($request, $response);
+        try {
+            return parent::dispatch($request, $response);
+        } 
+        catch (\Exception $e){
+            return $this->serverErrorAction($e);
+        }
     }
+    
+    public function serverErrorAction($exception)
+    {
+        $this->getResponse()->setStatusCode(500);
+        print $exception->getMessage();        
+    }     
 
 }
