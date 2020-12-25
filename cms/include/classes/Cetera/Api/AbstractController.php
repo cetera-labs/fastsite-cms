@@ -25,8 +25,24 @@ class AbstractController extends AbstractRestfulController
             }
         }
         
-        return parent::dispatch($request, $response);
+        try {
+            return parent::dispatch($request, $response);
+        } 
+        catch (\Exception $e){
+            return $this->serverErrorAction($e);
+        }
     }  
+    
+    public function serverErrorAction($exception)
+    {
+        $this->getResponse()->setStatusCode(500);
+        return new JsonModel([
+            'success' => false,
+            'error' => [
+                'message' => $exception->getMessage()
+            ]
+        ]);        
+    }        
 
     public function checkParams($params)
     {
