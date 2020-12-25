@@ -1,11 +1,11 @@
 <?php
 namespace Cetera\Controller;
 
-use Zend\Mvc\Controller\AbstractController;
+use Zend\Mvc\Controller\AbstractController as ZendAbstractController;
 use Zend\Stdlib\RequestInterface as Request;
 use Zend\Stdlib\ResponseInterface as Response;    
 
-class AbstractController extends AbstractController
+class AbstractController extends ZendAbstractController
 {
     
     protected $application;
