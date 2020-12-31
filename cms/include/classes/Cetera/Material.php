@@ -216,7 +216,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
     	$fld_types = array();
     	while($f = $r->fetch()) {
     	    $fld_types[$f['name']] = $f['type'];
-    		if (($f['type'] != FIELD_LINKSET)&&($f['type'] != FIELD_MATSET)) {
+    		if ($f['type'] != FIELD_LINKSET && $f['type'] != FIELD_LINKSET2 && $f['type'] != FIELD_MATSET) {
     		    $flds[] = $f['name'];
     			//if ($f['type'] == FIELD_HLINK) $hlinks[] = $f['name'];
     		} 
@@ -288,8 +288,13 @@ class Material extends DynamicFieldsObject implements SiteItem {
     				$this->getDbConnection()->executeQuery('INSERT INTO '.$table.'_'.$tablel.'_'.$field['name'].' (id, dest, tag) VALUES ('.$newid.','.$f['dest'].','.$f['tag'].')');
     			} // while
     		} 
-			else
-			{
+            elseif ($field['type'] == FIELD_LINKSET2) {
+    			$r = $this->getDbConnection()->query('SELECT dest_type, dest_id, tag FROM '.$table.'_'.$field['name'].' WHERE id='.$this->id);
+    			while($f = $r->fetch()){
+    				$this->getDbConnection()->executeQuery('INSERT INTO '.$table.'_'.$field['name'].' (id, dest_type, dest_id, tag) VALUES ('.$newid.','.$f['dest_type'].','.$f['dest_id'].','.$f['tag'].')');
+    			} // while                
+            }
+			else {
     			$tablel = $this->getDbConnection()->fetchColumn('SELECT alias FROM types WHERE id='.(int)$field['len']);
     			if (!$tablel) continue;	
     			$r = $this->getDbConnection()->query('SELECT dest, tag FROM '.$table.'_'.$tablel.'_'.$field['name'].' WHERE id='.$this->id);
