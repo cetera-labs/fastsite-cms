@@ -58,7 +58,7 @@ class Section extends Templateable {
 				$c = $this->getCatalog();
 				
 				if ($mid) {
-					$this->_material = $c->getMaterialByID($id);
+					$this->_material = $c->getMaterialByID($mid);
 				}
 				else {
 					$alias = $this->getParam('material_alias');
