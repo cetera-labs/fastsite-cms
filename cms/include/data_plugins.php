@@ -46,7 +46,7 @@ if (sizeof($plugins)) {
             'upgrade'     => $p['upgrade'],
             'description' => isset($p['description_'.$l])?$p['description_'.$l]:$p['description'],
             'version'     => $p['version'],
-            'disabled'    => $p['disabled'],
+            'disabled'    => !$p->isEnabled(),
             'title'       => isset($p['title_'.$l])?$p['title_'.$l]:$p['title'],
             'composer'    => $p->composer,
         );            

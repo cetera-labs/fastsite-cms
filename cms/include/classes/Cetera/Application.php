@@ -2057,7 +2057,7 @@ class Application {
        
     public function getRouter() {
         if (!$this->router) {
-            $this->router = new \Zend\Router\SimpleRouteStack();
+            $this->router = new \Zend\Router\Http\TreeRouteStack();
         }
         return $this->router;
     }
