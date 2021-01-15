@@ -47,7 +47,7 @@ class Material extends DynamicObject {
      */ 
     public function __construct($object)
     {
-        if ($object instanceof \Cetera\Catalog) {
+        if ($object instanceof \Cetera\Section) {
         
             $this->catalog = $object; 
             $this->objectDefinition = $this->catalog->materialsObjectDefinition;
@@ -59,7 +59,7 @@ class Material extends DynamicObject {
             
         } else {
         
-            throw new \Cetera\Exception\CMS('В конструктор должен быть передан либо Catalog, либо ObjectDefinition');
+            throw new \Cetera\Exception\CMS('В конструктор должен быть передан либо Section, либо ObjectDefinition');
             
         }
         
