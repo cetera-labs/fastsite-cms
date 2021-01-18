@@ -1,0 +1,8 @@
+{% extends layout %}
+
+{% block main %}
+    <div class="grid-container">
+	{% widget 'Container' with { template: 'visual.twig', data: visual_constructor, section: visual_constructor_section } %}	  				
+    </div>
+{% endblock %}
+

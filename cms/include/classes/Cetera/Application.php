@@ -1686,16 +1686,16 @@ class Application {
 		
 		if (!$this->twig)
 		{
-			$loader = new \Twig_Loader_Filesystem( $this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH, getcwd() );
+			$loader = new \Twig_Loader_Filesystem( [$this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH, CMSROOT.'/twig_templates/pages'], getcwd() );
 			
 			if (file_exists($this->getTemplateDir().'/widgets'))
 				$loader->addPath( $this->getTemplateDir().'/widgets' ,'widget' );
 			
 			foreach ($this->_widgetPaths as $p) $loader->addPath( $p ,'widget' );			
-			$loader->addPath( CMSROOT.'/widgets' ,'widget' );
+			$loader->addPath( CMSROOT.'/twig_templates/widgets' ,'widget' );
 			
 			foreach ($this->_widgetPaths as $p) $loader->addPath( $p ,'widget_distrib' );			
-			$loader->addPath( CMSROOT.'/widgets' ,'widget_distrib' );			
+			$loader->addPath( CMSROOT.'/twig_templates/widgets' ,'widget_distrib' );			
 			
 			$options = array(
 				'cache'       => TWIG_CACHE_DIR,
@@ -1730,7 +1730,8 @@ class Application {
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());
 			$this->twig->addGlobal('s',  $_SERVER);
-			
+			$this->twig->addGlobal('layout',  'layout.twig');
+            
 		}
 		
 		return $this->twig;
