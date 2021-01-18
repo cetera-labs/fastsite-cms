@@ -35,12 +35,10 @@ class Catalog extends \Cetera\Iterator\DynamicObject implements \RecursiveIterat
 
 		if ( $catalog )
 		{
-			if ($catalog instanceof \Cetera\Catalog)
-			{
+			if ($catalog instanceof \Cetera\Section) {
 				$this->catalog = $catalog; 			          				
 			} 
-			else
-			{
+			else {
 				throw new \Cetera\Exception\CMS('В конструктор должен быть передан Catalog, либо ничего');				
 			}
 		}
