@@ -528,7 +528,7 @@ class ImageTransform {
 
 		if ($dst) {
 			$p = pathinfo($dst);		
-			if (!is_dir($p['dirname'])) mkdir($p['dirname'], 0777, true);
+			if (!is_dir($p['dirname']) && !file_exists($p['dirname'])) mkdir($p['dirname'], 0777, true);
 		}	
 		else {
 			header('Content-type: '.$this->src_info['mime']);
