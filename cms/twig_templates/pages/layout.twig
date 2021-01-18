@@ -1,1 +1,27 @@
- 
+ <!DOCTYPE html>
+<html class="no-js" lang="ru">
+  <head>
+  {% block head %}
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright" content="Создание сайтов - Cetera Labs, www.cetera.ru, 2016">
+    <meta name="author" content="Cetera Labs, http://www.cetera.ru/, {{ _('создание сайтов') }}, {{ _('поддержка сайтов') }}, {{ _('продвижение сайтов') }}">
+    <meta name="cmsmagazine" content="f21b68cb09efe1a7161ca2caaacaf749">
+	
+	{{ application.showTitle() }}
+	{{ application.showMeta('description') }}
+	{{ application.showMeta('keywords') }}
+	{{ application.showCSS() }}
+	{{ application.showHeadStrings() }}	
+	
+  {% endblock %}
+  </head>
+  <body>
+    {{ application.showAdminPanel() }}
+	
+	{% block main %}{% endblock %}
+
+    {{ application.showScripts() }}
+  </body>
+</html>
