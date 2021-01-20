@@ -1365,11 +1365,14 @@ class Application {
 		else {
 			$config['class'] = '\\Cetera\\Widget\\Widget';
 		}
-            
-        $config['icon'] = $config['icon'];
     
 		$this->initWidgets();
-        $this->_widgets[$name] = $config;
+        $this->_widgets[$name] = array_merge([
+            'icon' => null,
+            'not_placeable' => false,
+            'describ' => null,
+            'ui' => null,
+        ],$config);
     } 
     
     /**

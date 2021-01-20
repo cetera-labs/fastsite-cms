@@ -341,9 +341,8 @@ class ObjectDefinition extends Base {
 	 */		
     public function getFields( $dir = null ) {
         $inherit = false;
-        if ($dir !== false && !is_a($dir, 'Cetera\\Catalog') && (int)$dir && $dir > 0) $dir = Catalog::getById($dir); 
-        if (is_a($dir, 'Cetera\\Catalog'))
-		{
+        if ($dir !== false && !is_a($dir, 'Cetera\\Section') && (int)$dir && $dir > 0) $dir = Section::getById($dir); 
+        if (is_a($dir, 'Cetera\\Section')) {
             while ($dir->inheritFields && !$dir->isRoot()) $dir = $dir->getParent();
             if (!$dir->inheritFields) {
                 $r = DbConnection::getDbConnection()->fetchAll('SELECT * FROM types_fields_catalogs WHERE type_id=? and catalog_id=?',[$this->id,$dir->id]);
@@ -368,8 +367,7 @@ class ObjectDefinition extends Base {
         }
         
         return $res;
-         
-    } 
+    }  
     
 	/**
 	 * Возвращает поле данного типа материалов
