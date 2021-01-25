@@ -44,7 +44,6 @@ if ($node == 'root') {
     $id = isset($dummy[1])?$dummy[1]:null;
     $node_id = isset($dummy[2])?$dummy[2]:null;
 
-    list($dummy, $id, $node_id) = explode('-',$node);
     $c = Catalog::getById($id);
     if ($c) {
         $c->setNodeId($node_id);
