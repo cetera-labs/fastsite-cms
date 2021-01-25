@@ -32,7 +32,7 @@ $query = '
     '.$group.'
     WHERE A.id<>0'
 		  .((isset($_REQUEST['id']) && $_REQUEST['id'])?' and A.id = '.(int)$_REQUEST['id']:'')
-          .(($_REQUEST['bo']=='true')?' and (A.id = 1 or B.group_id='.GROUP_BACKOFFICE.' or B.group_id='.GROUP_ADMIN.')':'')
+          .((isset($_REQUEST['bo']) && $_REQUEST['bo']=='true')?' and (A.id = 1 or B.group_id='.GROUP_BACKOFFICE.' or B.group_id='.GROUP_ADMIN.')':'')
           .((isset($_REQUEST['query']) && $_REQUEST['query'])?' and (A.email LIKE '.$conn->quote('%'.$_REQUEST['query'].'%').' or A.login LIKE '.$conn->quote('%'.$_REQUEST['query'].'%').' or A.name LIKE '.$conn->quote('%'.$_REQUEST['query'].'%').')':'').'
     GROUP BY A.id
     ORDER BY '.$conn->quoteIdentifier($_REQUEST['sort']).' '.$_REQUEST['dir'];

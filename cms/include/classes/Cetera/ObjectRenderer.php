@@ -151,7 +151,7 @@ class ObjectRenderer {
             
             if ($h < 0)
 			{
-                $this->newPage( ($field['page']?$field['page'].' ':'').$field['describ'], 'fit', $data);
+                $this->newPage( (isset($field['page'])?$field['page'].' ':'').$field['describ'], 'fit', $data);
                 return;
             }            
             

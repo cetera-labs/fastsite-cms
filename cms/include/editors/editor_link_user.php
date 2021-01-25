@@ -12,6 +12,10 @@
 function editor_link_user_draw($field_def, $fieldvalue) {
 	global $application;
 
+    if (is_object($fieldvalue)) {
+        $fieldvalue = $fieldvalue->id;
+    }
+
     $uname = $application->getDbConnection()->fetchColumn('SELECT IF(name<>"" and name IS NOT NULL, name, login) as autor FROM users WHERE id='.(int)$fieldvalue);
     
 ?>

@@ -7,6 +7,9 @@ $path = $_REQUEST['path'];
 if (file_exists(WWWROOT.$path))  {
     $size = getimagesize(WWWROOT.$path);
 }
+else {
+    $size = null;
+}
 
 if ($size) {
     echo json_encode(array(

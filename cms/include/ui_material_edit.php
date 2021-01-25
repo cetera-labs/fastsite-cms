@@ -320,7 +320,7 @@ try {
             });
             this.items = this.tabPanel;
                        
-            <?if ($idcat > 0 && !$_REQUEST['modal']) {?> 
+            <?if ($idcat > 0 && !isset($_REQUEST['modal'])) {?> 
                                                      
                 this.buttons = [
 					{
