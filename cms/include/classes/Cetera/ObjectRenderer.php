@@ -149,16 +149,17 @@ class ObjectRenderer {
             $data = ob_get_contents();
             ob_end_clean();
             
-            if ($h < 0)
-			{
+            if ($h < 0) {
                 $this->newPage( (isset($field['page'])?$field['page'].' ':'').$field['describ'], 'fit', $data);
                 return;
             }            
             
-            if ( isset($field['page']) ) {
+            if ( isset($field['page']) && $field['page'] ) {
             
-                $idx = $this->getPageIndexByTitle( $field['page'] );
-                if ( $idx < 0 ) $idx = $this->newPage( $field['page'] );
+                $page = Application::getInstance()->decodeLocaleString($field['page']);
+            
+                $idx = $this->getPageIndexByTitle( $page );
+                if ( $idx < 0 ) $idx = $this->newPage( $page );
                 $this->pages[$idx]['height'] += $h;
                 $this->pages[$idx]['fields'][] = $data;            
             

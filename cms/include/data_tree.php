@@ -57,9 +57,9 @@ if ($node == 'root') {
         if ($materials && ((!$only || $c->prototype->materialsType==$only) && $c->prototype->materialsType))
         {                            
             $where = 'id<>'.$exclude_mat;
-            if ($_GET['query'])
+            if (isset($_GET['query'])) {
                 $where .= ' and name LIKE '.$application->getConn()->quote('%'.$_GET['query'].'%');
-            //$m = $c->getMaterials('name', $where, $matsort, '', 500, 0);
+            }
 			$m = $c->getMaterials()->where($where)->setItemCountPerPage(500);
 			
             foreach ($m as $material) {
