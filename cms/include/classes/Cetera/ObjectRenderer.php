@@ -155,15 +155,15 @@ class ObjectRenderer {
                 return;
             }            
             
-            if ( $field['page'] ) {
+            if ( isset($field['page']) ) {
             
                 $idx = $this->getPageIndexByTitle( $field['page'] );
                 if ( $idx < 0 ) $idx = $this->newPage( $field['page'] );
                 $this->pages[$idx]['height'] += $h;
                 $this->pages[$idx]['fields'][] = $data;            
             
-            } else
-			{
+            } 
+            else {
             
                 if ($this->currentPage < 0) {
                     $this->currentPage = $this->newPage($this->pageTitle);
