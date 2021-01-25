@@ -339,7 +339,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 		
         $this->getFieldsDef();
         
-		$type = $this->raw_fields['type'];
+		$type = isset($this->raw_fields['type'])?$this->raw_fields['type']:0;
 
         if ($this->published) $type = $type | MATH_PUBLISHED;
 		if ($this->fields['show_future']) $type = $type | MATH_SHOW_FUTURE; else $type = $type & ~MATH_SHOW_FUTURE;
@@ -434,7 +434,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 					'material' => $this
 				]);              
             }
-            if ($this->fields['publish']) Event::trigger(EVENT_CORE_MATH_PUB, [
+            if (isset($this->fields['publish']) && $this->fields['publish']) Event::trigger(EVENT_CORE_MATH_PUB, [
 				'message' => $this->getBoUrl(),
 				'material' => $this
 			]);

@@ -106,7 +106,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     {
         if (is_array($data)) {
         
-            $id = (int)$data['id'];
+            $id = (isset($data['id']))?(int)$data['id']:0;
             $fields = $data;
         
         } else {
@@ -444,8 +444,12 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
         if (isset($this->fields[$field['name']]) && is_object($this->fields[$field['name']]))
             return $this->fields[$field['name']];
             
+        if (!isset($this->fields['id'])) {
+            $this->fields['id'] = null;
+        }            
+            
         $slot = new Cache\Slot\MaterialField($this->table, $this->fields['id'], $field['name']);
-        if (!$this->fields['id'] || false === ($_tmp = $slot->load())) {        
+        if (!$this->fields['id'] || false === ($_tmp = $slot->load())) {      
     
             if (!isset($this->fields[$field['name']]))
                 $this->fields[$field['name']] = $this->getPlainField($field);
