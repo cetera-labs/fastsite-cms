@@ -5,7 +5,7 @@ trait ReCaptcha {
 	
 	public function showRecaptcha()
 	{
-		return $this->getParam('recaptcha') && !$this->getParam('ajax') && $this->getParam('recaptcha_site_key') && $this->getParam('recaptcha_secret_key');
+		return $this->getParam('recaptcha') && !$this->getParam('ajax') && $this->getParam('recaptcha_site_key');
 	}
 
 	public function initRecaptcha()
