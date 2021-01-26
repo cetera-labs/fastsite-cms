@@ -444,11 +444,12 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         if ($this->id == 0 || $this->id == ADMIN_ID) return FALSE;
 		$conn = self::getDbConnection();
 		$str = 'DELETE [LOGIN='.$this->login.'][ID='.$this->id.']';
+        
+        Event::trigger(EVENT_CORE_USER_DELETE,['user' => $this, 'message' => $str]);
+        
         $conn->executeQuery('DELETE FROM users_groups_membership WHERE user_id='.$this->id);
         $conn->executeQuery('DELETE FROM users_auth WHERE user_id='.$this->id);
         parent::delete();
-			
-	    Event::trigger(EVENT_CORE_USER_PROP,['message' => $str]);
     }
 	
     public function setFields($fields)

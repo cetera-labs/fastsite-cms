@@ -33,7 +33,7 @@ class BackOffice {
         $this->application = $a;
 		
 		$t = $this->application->getTranslator();
-		
+        
 		$this->registerEvent(
 			EVENT_CORE_USER_REGISTER,
 			$t->_('Зарегистрирован пользователь'),
@@ -60,8 +60,9 @@ class BackOffice {
 				'server.fullUrl' => $t->_('Адрес сайта'),
 				'server.name'    => $t->_('Имя сайта')					
 			]
-		);	
+		);
 
+		$this->registerEvent(EVENT_CORE_USER_DELETE, $t->_('Удален пользователь'));        
 		$this->registerEvent(EVENT_CORE_BO_LOGIN_OK,   $t->_('Вход в систему'));
 		$this->registerEvent(EVENT_CORE_BO_LOGIN_FAIL, $t->_('Попытка входа в систему'));
 		$this->registerEvent(EVENT_CORE_LOG_CLEAR,     $t->_('Очищен журнал аудита'));
