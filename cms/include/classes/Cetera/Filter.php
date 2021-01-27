@@ -108,6 +108,7 @@ class Filter {
 				elseif (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkAbstract')) {					
 					//$d['iterator'] = $d['field']->getIterator();
                     $i = clone $this->iterator;
+                    $i->setItemCountPerPage(0);
                     $d['iterator'] =  $d['field']
                         ->getIterator()
                         ->where('id IN (:values)')
