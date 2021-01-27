@@ -91,6 +91,7 @@ class Filter {
                 if (is_subclass_of($d['field'], '\\Cetera\\ObjectFieldLinkSetAbstract')) {
                     //$d['iterator'] = $d['field']->getIterator()->joinReverse($this->iterator->getObjectDefinition(), $d['field']->name)->where($d['field']->name.'.id > 0')->groupBy('main.id');
                     $i = clone $this->iterator;
+                    $i->setItemCountPerPage(0);
                     $d['iterator'] =  $d['field']
                         ->getIterator()
                         ->where('id IN (:values)')
