@@ -1729,6 +1729,8 @@ class Application {
 			} ) );
             
             $this->twig->addFilter( new \Twig_SimpleFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
+            
+            $this->twig->addFilter( new \Twig_SimpleFilter('encode', '\\Cetera\\Util::dsCrypt' ));
 			
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());

@@ -35,7 +35,7 @@
 			{% endif %}
 			
 			var request = new XMLHttpRequest();
-			var body = '{% for name,value in widget.params %}params[{{ name }}]={% if name == "page" %}' + page + '{% else %}{{ value|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
+			var body = '{% for name,value in widget.params %}params[{{ name }}]={% if name == "page" %}' + page + '{% else %}{{ value|encode|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
 			request.open('POST', '{{ widget.getAjaxUrl()|raw }}', true);
 			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 			request.onload = function (e) {

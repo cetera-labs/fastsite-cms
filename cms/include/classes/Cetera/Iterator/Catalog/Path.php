@@ -43,7 +43,7 @@ class Path extends Catalog implements \RecursiveIterator {
     public function fetchElements()
     {
         parent::fetchElements();
-		if ( $this->elements[0]->id > 0 ) array_unshift ( $this->elements , \Cetera\Catalog::getRoot() );
+		if ( isset($this->elements[0]) && $this->elements[0]->id > 0 ) array_unshift ( $this->elements , \Cetera\Catalog::getRoot() );
     }	
 	
 }

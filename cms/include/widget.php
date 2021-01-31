@@ -30,10 +30,17 @@ if (isset($_REQUEST['locale'])) {
 	$application->setLocale($_REQUEST['locale']);
 }
 
-if ($_REQUEST['params'] && !is_array($_REQUEST['params'])) {
+if (isset($_REQUEST['params']) && !is_array($_REQUEST['params'])) {
     $_REQUEST['params'] = json_decode($_REQUEST['params'], true);
 }
 
-if (isset($_REQUEST['ajaxCall'])) $_REQUEST['params']['ajaxCall'] = 1;
-$w = $application->getWidget($_REQUEST['widget'],$_REQUEST['params'],$_REQUEST['unique']);
+$params = [];
+if (is_array($_REQUEST['params'])) {
+    foreach($_REQUEST['params'] as $key => $value) {
+        $params[$key] = Util::dsCrypt($value, true);
+    }
+}
+
+if (isset($_REQUEST['ajaxCall'])) $params['ajaxCall'] = 1;
+$w = $application->getWidget($_REQUEST['widget'],$params,$_REQUEST['unique']);
 $w->display();

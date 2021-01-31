@@ -44,9 +44,9 @@ if (sizeof($themes)) {
                 $p['upgrade'] = $themes_lib[$id]['version'];
                 
                 // обновление невозможно, требуется более свежая CMS
-                if ($themes_lib[$id]['cms_version_min'] && version_compare($themes_lib[$id]['cms_version_min'], VERSION) > 0 ) $p['upgrade'] = false;
+                if (isset($themes_lib[$id]['cms_version_min']) && version_compare($themes_lib[$id]['cms_version_min'], VERSION) >  0 ) $p['upgrade'] = false;
                 // обновление невозможно, CMS слишком новая
-                if ($themes_lib[$id]['cms_version_max'] && version_compare($themes_lib[$id]['cms_version_max'], VERSION) <= 0 ) $p['upgrade'] = false;                      
+                if (isset($themes_lib[$id]['cms_version_max']) && version_compare($themes_lib[$id]['cms_version_max'], VERSION) <= 0 ) $p['upgrade'] = false;                      
             
             }
         
@@ -72,7 +72,7 @@ if (sizeof($themes)) {
     
 }
 
-echo json_encode(array(
+echo json_encode([
     'success' => true,
     'rows'    => $data
-));
+]);
