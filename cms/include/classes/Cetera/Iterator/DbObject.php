@@ -203,7 +203,7 @@ abstract class DbObject extends Base {
 	
 	private static function isSafe($sql)
 	{
-		return !preg_match("#(update|insert into|drop table|alter table|delete from|create table|select)+#is", $sql);
+		return !preg_match("#(update|insert|into|drop|alter|table|union|delete|from|create|select|show)+#is", $sql);
 	}
 
 }
