@@ -11,7 +11,7 @@
  **/
 
 /** Версия */
-define('VERSION', '3.67.0');
+define('VERSION', '3.68.0');
 
 /** Название продукта */
 define('APP_NAME', 'Fastsite CMS');
