@@ -82,9 +82,8 @@ class Templateable extends Widget {
 				}
 			
 			}
-			catch (\Exception $e)
-			{
-				return $e->getMessage().' '.$e->getFile().' '.$e->getLine();
+			catch (\Exception $e) {
+				return 'Error in '.$e->getFile().':'.$e->getLine();
 			}
 
         } 
