@@ -356,7 +356,7 @@ class Application {
         $this->_locale = $locale;
         $t = $this->getTranslator();
         $t->setLocale($this->_locale);
-        if ($remember) $this->_session->locale = $this->_locale;
+        if ($remember && $this->_session) $this->_session->locale = $this->_locale;
     }
     
     /**
