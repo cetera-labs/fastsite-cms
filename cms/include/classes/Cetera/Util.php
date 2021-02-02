@@ -26,7 +26,7 @@ class Util {
         
     public static function dsCrypt($input,$decrypt=false) {
         
-        $crypt = new \phpseclib3\Crypt\AES();
+        $crypt = new \phpseclib3\Crypt\AES(\phpseclib3\Crypt\AES::MODE_CTR);
         $crypt->setKey(Application::getInstance()->getVar('dbpass'));
         
         if ($decrypt) {
