@@ -16,14 +16,16 @@ include('common_bo.php');
 $data = array();
 
 $s = $application->getSession();
-$s->explorer_folder = $_REQUEST['path'];
+if ($s) {
+    $s->explorer_folder = $_REQUEST['path'];
 
-if (!isset($s->explorer_history) || !is_array($s->explorer_history))
-    $s->explorer_history = array();
-    
-if (!in_array($_REQUEST['path'], $s->explorer_history))
-    array_unshift($s->explorer_history, $_REQUEST['path']);
-$s->explorer_history = array_slice($s->explorer_history, 0, 6);
+    if (!isset($s->explorer_history) || !is_array($s->explorer_history))
+        $s->explorer_history = array();
+        
+    if (!in_array($_REQUEST['path'], $s->explorer_history))
+        array_unshift($s->explorer_history, $_REQUEST['path']);
+    $s->explorer_history = array_slice($s->explorer_history, 0, 6);
+}
 
 $path = rtrim(str_replace('|','/',$_REQUEST['path']),'/');
 $path = str_replace(DOCROOT, '', $path);

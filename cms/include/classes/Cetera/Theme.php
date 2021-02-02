@@ -232,7 +232,7 @@ class Theme implements \ArrayAccess  {
             $this->config = new ThemeConfig(json_decode($c['config']));
         }
         else {
-            $this->config = null;
+            $this->config = new ThemeConfig(json_decode('{}'));
         }
         return $this;
     } 
