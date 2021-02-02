@@ -38,13 +38,13 @@
         "ifsnop/mysqldump-php":"2.*",
         "phing/phing": "2.*",
         "componavt/phpmorphy": "*",
-        "firebase/php-jwt": "*"
+        "firebase/php-jwt": "*",
+        "phpseclib/phpseclib": "^3.0"
     },
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": { 
-			"Cetera\\": "cms/include/classes/",
-			"Dklab_": "cms/include/classes/"
+			"Cetera\\": "cms/include/classes/"
 		}
     },
 	
