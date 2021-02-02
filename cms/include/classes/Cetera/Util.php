@@ -26,16 +26,17 @@ class Util {
         
     public static function dsCrypt($input,$decrypt=false) {
         
-        $crypt = new \phpseclib3\Crypt\AES(\phpseclib3\Crypt\AES::MODE_CTR);
-        $crypt->setKey(Application::getInstance()->getVar('dbpass'));
+        $cipher = new \phpseclib3\Crypt\AES('ctr');
+        $cipher->setIV(substr(str_repeat(Application::getInstance()->getVar('dbname'),16),0,16));
+        $cipher->setKey(substr(str_repeat(Application::getInstance()->getVar('dbpass'),16),0,16));
         
         if ($decrypt) {
-            return $crypt->decrypt($input);
+            return $cipher->decrypt($input);
         }
         else {
-            return $crypt->encrypt($input);
+            return $cipher->encrypt($input);
         }
-    }   
+    }
         
     /*
     * Вычисляет размер каталога
