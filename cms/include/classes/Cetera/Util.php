@@ -26,14 +26,14 @@ class Util {
         
     public static function dsCrypt($input,$decrypt=false) {
         
-        $blowfish = new \phpseclib3\Crypt\Blowfish();
-        $blowfish->setKey(Application::getInstance()->getVar('dbpass'));
+        $crypt = new \phpseclib3\Crypt\AES();
+        $crypt->setKey(Application::getInstance()->getVar('dbpass'));
         
         if ($decrypt) {
-            return $blowfish->decrypt($input);
+            return $crypt->decrypt($input);
         }
         else {
-            return $blowfish->encrypt($input);
+            return $crypt->encrypt($input);
         }
     }   
         
