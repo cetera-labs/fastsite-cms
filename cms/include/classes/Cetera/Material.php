@@ -342,7 +342,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 		$type = isset($this->raw_fields['type'])?$this->raw_fields['type']:0;
 
         if ($this->published) $type = $type | MATH_PUBLISHED;
-		if ($this->fields['show_future']) $type = $type | MATH_SHOW_FUTURE; else $type = $type & ~MATH_SHOW_FUTURE;
+		if (isset($this->fields['show_future'])) $type = $type | MATH_SHOW_FUTURE; else $type = $type & ~MATH_SHOW_FUTURE;
         
         if (isset($this->fieldsDef['tag']) && !$this->fields['tag'])
 		{
