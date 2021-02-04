@@ -35,7 +35,9 @@ class AbstractController extends AbstractRestfulController
     
     public function serverErrorAction($exception)
     {
-        $this->getResponse()->setStatusCode(500);
+        if ($this->getResponse()->getStatusCode() < 300) {
+            $this->getResponse()->setStatusCode(500);
+        }
         return new JsonModel([
             'success' => false,
             'error' => [
