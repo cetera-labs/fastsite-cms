@@ -836,6 +836,10 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				$values .= ',dat_update=NOW()';
 				continue;
 			}
+            
+            if (!array_key_exists($name, $this->fields)) {
+                $this->fields[$name] = null;
+            }
 			
 			if ($name == 'dat' || $name == 'date_reg') {
         	    if ($this->fields[$name]) {
