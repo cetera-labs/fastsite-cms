@@ -836,13 +836,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				$values .= ',dat_update=NOW()';
 				continue;
 			}
-            
-            if (!array_key_exists($name, $this->fields)) {
-                $this->fields[$name] = null;
-            }
-			
+            			
 			if ($name == 'dat' || $name == 'date_reg') {
-        	    if ($this->fields[$name]) {
+        	    if (array_key_exists($name, $this->fields) && $this->fields[$name]) {
         		      $values .= ",`".$name."`='".$this->fields[$name]."'";
         		} else {
         		     if (!$this->id) $values .= ",`".$name."`=NOW()";
@@ -866,7 +862,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				
 				if ( $type==FIELD_LINK ) {
 					
-					if (is_object($this->fields[$name])) {
+					if (array_key_exists($name, $this->fields) && is_object($this->fields[$name])) {
 						$this->fields[$name] = $this->fields[$name]->id;
 					}
 					
