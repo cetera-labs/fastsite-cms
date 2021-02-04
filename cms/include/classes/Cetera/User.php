@@ -537,7 +537,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 	   }	   
 	   
        $str .= ' [LOGIN='.$login.'][ID='.$this->id.']';
-       if (is_array($this->fields['groups'])) $str .= '[GROUPS='.implode(',',$this->fields['groups']).']';
+       if (isset($this->fields['groups']) && is_array($this->fields['groups'])) $str .= '[GROUPS='.implode(',',$this->fields['groups']).']';
 	   Event::trigger(EVENT_CORE_USER_PROP,['message' => $str]);
 	   
        $tpl = new Cache\Tag\Material($this->table, $this->id);
