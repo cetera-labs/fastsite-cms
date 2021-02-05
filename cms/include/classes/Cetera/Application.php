@@ -1648,6 +1648,8 @@ class Application {
 	*/
 	public function ping()
 	{
+        return;
+        
 		try {
 			
 			$last_ping = (int)self::configGet('last_ping');
