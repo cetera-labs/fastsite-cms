@@ -37,7 +37,7 @@ if (isset($_REQUEST['params']) && !is_array($_REQUEST['params'])) {
 $params = [];
 if (is_array($_REQUEST['params'])) {
     foreach($_REQUEST['params'] as $key => $value) {
-        if ($value != (int)$value) {
+        if ((string)$value != (string)(int)$value) {
             $params[$key] = Util::dsCrypt($value, true);
         }
         else {

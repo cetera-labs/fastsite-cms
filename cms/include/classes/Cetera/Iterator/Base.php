@@ -88,7 +88,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
 		
         $data = array();
         foreach ($this as $item) {
-			if (method_exists ( $item , 'asArray' )) {
+			if (is_object($item) && method_exists ( $item , 'asArray' )) {
 				$data[] = $item->asArray($fields);   
 			}
 			else {
