@@ -678,7 +678,7 @@ class Application {
                 if (class_exists($handler)) {   
                     $reflect  = new \ReflectionClass($handler);
                     if (isset($monolog['params'][$hk])) {
-                        $args = explode(',',$monolog['params'][$hk]);
+                        $args = explode(';',$monolog['params'][$hk]);
                     }
                     else {
                         $args = [];
