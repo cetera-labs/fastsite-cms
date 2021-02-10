@@ -27,9 +27,12 @@ class ObjectDefinition extends Base {
 	 * Пользовательские классы для определенных типов материалов
 	 * @internal
 	 */  
-    public static $userClasses = array();
+    public static $userClasses = [];
 	
-	public static $plugins = array();
+	public static $plugins = [];
+    
+    private static $dataById = [];
+    private static $dataByAlias = [];
 
 	/**
 	 * @internal
@@ -223,8 +226,7 @@ class ObjectDefinition extends Base {
 	 * @internal
 	 */		
     public function __construct($id = null, $table = null) 
-    {
-    
+    {        
         if (!$id && !$table) throw new Exception\CMS('One of $id or $table must be specified.');
         
         if (!$table && $id && !(int)$id) {
@@ -246,8 +248,11 @@ class ObjectDefinition extends Base {
     public function getId()
     {
         if (!$this->_id) {
-            $r = DbConnection::getDbConnection()->fetchAssoc('select * from types where alias=?',[$this->table]);
-    		if ($r) 
+            if (!isset(self::$dataByAlias[$this->table])) {
+                self::$dataByAlias[$this->table] = DbConnection::getDbConnection()->fetchAssoc('select * from types where alias=?',[$this->table]);
+            }
+            $r = self::$dataByAlias[$this->table];
+    		if ($r)
           		$this->setData($r);   	
                 else throw new Exception\CMS('Type "'.$this->table.'" is not found.');        
         }
@@ -259,7 +264,10 @@ class ObjectDefinition extends Base {
 	 */	
     private function fetchData()
     {
-    	$r = DbConnection::getDbConnection()->fetchAssoc("select * from types where id=?",[$this->id]);
+        if (!isset(self::$dataById[$this->id])) {
+            self::$dataById[$this->id] = DbConnection::getDbConnection()->fetchAssoc("select * from types where id=?",[$this->id]);
+        }
+        $r = self::$dataById[$this->id];
         if ($r) {
     	    $this->setData($r);                
     	} 

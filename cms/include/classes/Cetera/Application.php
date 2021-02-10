@@ -698,6 +698,11 @@ class Application {
         $this->logger->info('logger is now ready');
     }
     
+    public function getLogger()
+    {
+        return $this->logger;
+    }      
+    
     /**
      * Инициализация дебаггера
      *      
