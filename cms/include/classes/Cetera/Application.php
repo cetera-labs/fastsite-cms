@@ -556,7 +556,11 @@ class Application {
         $this->_dbConnection = \Doctrine\DBAL\DriverManager::getConnection( 
             $connectionParams, 
             new \Doctrine\DBAL\Configuration()
-        );        
+        );   
+
+        if ($this->getVar('debug_sql')) {
+            $this->_dbConnection->getConfiguration()->setSQLLogger(new Database\Logger);
+        }        
 
 		$charset = $this->getVar('dbcharset');
 		if (!$charset) $charset = 'utf8';
