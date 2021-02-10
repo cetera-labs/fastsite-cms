@@ -39,7 +39,8 @@
         "phing/phing": "2.*",
         "componavt/phpmorphy": "*",
         "firebase/php-jwt": "*",
-        "phpseclib/phpseclib": "^3.0"
+        "phpseclib/phpseclib": "^3.0",
+        "monolog/monolog": "*",
     },
     "minimum-stability": "dev",
     "autoload": {

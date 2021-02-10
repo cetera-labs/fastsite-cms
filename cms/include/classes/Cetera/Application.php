@@ -603,24 +603,7 @@ class Application {
         return $this->_connected;
     }
            
-    /**
-     * Инициализация дебаггера
-     *      
-     * @return void    
-     */
-    private function initDebug()
-    {
-        if (!$this->getVar('debug_level') && !isset($_REQUEST['debug_level'])) return;
-        
-        $this->debugMode = true;	
-		ini_set('display_errors', 1);
-    }
-	
-    public function isDebugMode()
-    {
-		return $this->debugMode;
-	}
-    
+   
     /**
      * Инициализация сессии
      *      
@@ -680,8 +663,26 @@ class Application {
 		}		
     }
     
+    /**
+     * Инициализация дебаггера
+     *      
+     * @return void    
+     */
+    private function initDebug()
+    {
+        if (!$this->getVar('debug_level') && !isset($_REQUEST['debug_level'])) return;
+        
+        $this->debugMode = true;	
+		ini_set('display_errors', 1);
+    }
+	
+    public function isDebugMode()
+    {
+		return $this->debugMode;
+	}    
+    
     /*
-    * Принимает отладочное сооющение
+    * Принимает отладочное сообщение
     * 
     * @param string тип сообщения
     * @param string сообщение
