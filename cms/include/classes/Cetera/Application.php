@@ -181,6 +181,8 @@ class Application {
 	private $_uid = '';
  
     private $debugMode = false;
+    
+    private $logger = null;
         
   /*
    * @internal
@@ -279,6 +281,8 @@ class Application {
 		
         $this->_locale = 'ru';
   	
+        $this->initLogger();
+    
         $this->initDebug();
                 
         $this->_widgetsTemplatesPath[] = CMSROOT.'widgets/';
@@ -663,6 +667,12 @@ class Application {
 		}		
     }
     
+    private function initLogger()
+    {
+        $this->logger = new \Monolog\Logger('cetera_cms');
+        $this->logger->pushHandler(new \Monolog\Handler\FirePHPHandler());
+    }
+    
     /**
      * Инициализация дебаггера
      *      
@@ -690,8 +700,9 @@ class Application {
     */
     public function debug($mode, $str)
     {
-    	//if (!$this->_debugger) return;
-    	//$this->_debugger->log($str, $mode);
+    	if ($this->logger) {
+            $logger->debug($str);
+        }
     }
         
 	/**
