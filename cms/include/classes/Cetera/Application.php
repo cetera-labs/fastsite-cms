@@ -701,7 +701,7 @@ class Application {
     public function debug($mode, $str)
     {
     	if ($this->logger) {
-            $logger->debug($str);
+            $this->logger->debug($str);
         }
     }
         
