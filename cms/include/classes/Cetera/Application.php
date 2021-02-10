@@ -669,8 +669,29 @@ class Application {
     
     private function initLogger()
     {
-        $this->logger = new \Monolog\Logger('cetera_cms');
-        $this->logger->pushHandler(new \Monolog\Handler\FirePHPHandler());
+        $this->logger = new \Monolog\Logger('FASTSITE');
+        
+        $monolog = $this->getVar('monolog');
+        
+        if (isset($monolog['handler']) && is_array($monolog['handler'])) {
+            foreach ($monolog['handler'] as $hk => $handler) {
+                if (class_exists($handler)) {   
+                    $reflect  = new \ReflectionClass($handler);
+                    if (isset($monolog['params'][$hk])) {
+                        $args = explode(',',$monolog['params'][$hk]);
+                    }
+                    else {
+                        $args = [];
+                    }
+                    $h = $reflect->newInstanceArgs($args);
+                }
+                if ($h) {
+                    $this->logger->pushHandler($h);
+                }
+            }
+        }
+        
+        $this->logger->info('logger is now ready');
     }
     
     /**
