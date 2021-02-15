@@ -16,7 +16,6 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
 	if ($field_def['type'] == FIELD_LINK) {
 		if (!$field_def['len']) $field_def['len'] = $idcat;    
 		$from_section = $field_def['len'];
-		// �������� ��� ������� � id ���� ���������, �� ������� ������
 		$section = \Cetera\Catalog::getById($field_def['len']);
 		$only = $section->getMaterialsObjectDefinition()->id;
 	}
@@ -24,30 +23,11 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
 		$from_section = 0;
 		$only = $field_def['len'];
 	}
-		   
-    // �������� ��������� ��������� � id ������� � ������� �� ���������
-	/*
-	$lnk_name = $lnk_idcat = $lnk_cat = '';
-	if ($fieldvalue) {		
-		if ($a = json_decode($fieldvalue, true) ) {
-			$mid = $a['id'];
-		}
-		else {
-			$mid = (int)$fieldvalue;
-		}
-		
-		$material = \Cetera\Material::getById($mid, $only);
-		$lnk_name = $material->name;
-        $lnk_cat = $material->catalog->getPath()->implode();
-	}
-	*/
-	
 ?>
                     Ext.create('Cetera.field.Folder', {
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
-                        //displayValue: '<?=($fieldvalue?$lnk_cat.' / '.$lnk_name:'')?>',
                         value: '<?=addslashes($fieldvalue)?>',
                         from: '<?=$from_section?>',
 						only: '<?=$only?>',
@@ -66,7 +46,6 @@ function editor_link_default_draw($field_def, $fieldvalue, $id = false, $idcat =
                     })
 <?		
 	}
-	
 	
     return 25;
 }
