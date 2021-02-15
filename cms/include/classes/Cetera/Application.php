@@ -1371,19 +1371,24 @@ class Application {
             $widgetName = $this->_widgetAliases[$widgetName];
         }
         
-        $class = $this->_widgets[$widgetName]['class'];
-        $widget = new $class($id, $params, $uid);
-        $widget->application = $this;
-        $widget->widgetName = $widgetName;
-		$widget->widgetDescrib = $this->_widgets[$widgetName]['describ'];
-		
-		if ($f)
-		{
-			$widget->widgetAlias = $f['widgetAlias'];
-			$widget->widgetTitle = $f['widgetTitle'];
-			$widget->widgetDisabled = $f['widgetDisabled'];
-			$widget->widgetProtected = $f['protected'];			
-		}	
+		try {        
+            $class = $this->_widgets[$widgetName]['class'];
+            $widget = new $class($id, $params, $uid);
+            $widget->application = $this;
+            $widget->widgetName = $widgetName;
+            $widget->widgetDescrib = $this->_widgets[$widgetName]['describ'];
+            if ($f) {
+                $widget->widgetAlias = $f['widgetAlias'];
+                $widget->widgetTitle = $f['widgetTitle'];
+                $widget->widgetDisabled = $f['widgetDisabled'];
+                $widget->widgetProtected = $f['protected'];			
+            }	            
+        }
+        catch (\Exception $e) {
+            $widget = new Widget\Html(0, [
+                'template' => $e->getMessage().' In '.$e->getFile().':'.$e->getLine()
+            ]);
+        } 	
         
         return $widget;
     }
