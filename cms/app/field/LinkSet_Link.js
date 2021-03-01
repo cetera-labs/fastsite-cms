@@ -31,8 +31,8 @@ Ext.define('Cetera.field.LinkSet_Link', {
 					root: 'rows'
 				},
 				extraParams: {
-					//'mat_type'    : this.mat_type,
-					//'field_name'  : this.field_name,
+					'mat_type'    : this.mat_type,
+					'field_name'  : this.field_name,
 					'parent_type' : this.parent_type,
 					'parent_id'   : this.parent_id,
 					//'limit'       : Config.defaultPageSize
@@ -77,6 +77,40 @@ Ext.define('Cetera.field.LinkSet_Link', {
 
 		var tbarConfig = [this.reloadAction,this.editAction,this.deleteLinkAction, this.deleteAction];
 		
+        var columnConfig = [
+            {
+                header: "", 
+                width: 25, 
+                sortable: false, 
+                dataIndex: 'icon', 
+                renderer: function (value) {
+                    if (value == '1')
+                        return '<img src="images/globe_s.gif" title="'+Config.Lang.published+'" width="14" height="14" />';
+                        else return '<img src="images/globe_c_s.gif" title="'+Config.Lang.unpublished+'" width="14" height="14" />';
+                }
+            },
+            {header: "ID", width: 50, dataIndex: 'id'},
+            {
+                header: Config.Lang.title, width: 75, dataIndex: 'name', flex:1,
+                renderer: function (value,meta,rec) {
+                    if (rec.get('locked')) {
+                        value += '<br><small>' + Ext.String.format(Config.Lang.materialLocked, rec.get('locked_login')) + '</small>';
+                    }
+                    return value;
+                }			
+            },
+            {
+                header: Config.Lang.catalog, 
+                flex:1,
+                dataIndex: 'catalog',
+            },
+            {
+                header: _('Связь'), 
+                width: 100, 
+                dataIndex: 'field_describ',
+            }
+        ];
+        
 		if (this.field_type == Config.fields.FIELD_MATERIAL) {
 			tbarConfig = [
 				{
@@ -88,7 +122,20 @@ Ext.define('Cetera.field.LinkSet_Link', {
 				},
 				this.editAction,
 				this.deleteAction			
-			];	
+			];
+
+            columnConfig = [
+                {header: "ID", width: 50, dataIndex: 'id'},
+                {
+                    header: Config.Lang.title, width: 75, dataIndex: 'name', flex:1,
+                    renderer: function (value,meta,rec) {
+                        if (rec.get('locked')) {
+                            value += '<br><small>' + Ext.String.format(Config.Lang.materialLocked, rec.get('locked_login')) + '</small>';
+                        }
+                        return value;
+                    }			
+                }
+            ];
 		}
 		
 			 
@@ -101,40 +148,7 @@ Ext.define('Cetera.field.LinkSet_Link', {
             hideHeaders: false, 
 			loadMask: true,
 
-			columns: [
-				{
-					header: "", 
-					width: 25, 
-					sortable: false, 
-					dataIndex: 'icon', 
-					renderer: function (value) {
-						if (value == '1')
-							return '<img src="images/globe_s.gif" title="'+Config.Lang.published+'" width="14" height="14" />';
-							else return '<img src="images/globe_c_s.gif" title="'+Config.Lang.unpublished+'" width="14" height="14" />';
-					}
-				},
-				{header: "ID", width: 50, dataIndex: 'id'},
-				{
-					header: Config.Lang.title, width: 75, dataIndex: 'name', flex:1,
-					renderer: function (value,meta,rec) {
-						if (rec.get('locked'))
-						{
-							value += '<br><small>' + Ext.String.format(Config.Lang.materialLocked, rec.get('locked_login')) + '</small>';
-						}
-						return value;
-					}			
-				},
-				{
-					header: Config.Lang.catalog, 
-					flex:1,
-					dataIndex: 'catalog',
-				},
-				{
-					header: _('Связь'), 
-					width: 100, 
-					dataIndex: 'field_describ',
-				}
-			]
+			columns: columnConfig
         });
 		
         this.grid.getSelectionModel().on({
