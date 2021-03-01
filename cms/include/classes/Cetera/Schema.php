@@ -158,22 +158,22 @@ class Schema {
     	foreach ($this->schemas as $id => $scheme) {
     		$a = $this->parseSchema($id);
         
-    		if ($a['tables']) foreach ($a['tables'] as $table) {
+    		if (isset($a['tables']) && is_array($a['tables'])) foreach ($a['tables'] as $table) {
 				$r = $this->compareTable($id, $table, $ignore_extra_fields, $ignore_extra_keys);
 				$res = array_merge($res, $r);
     		}
         
-    		if ($a['types']) foreach ($a['types'] as $type) {
+    		if (isset($a['types']) && is_array($a['types'])) foreach ($a['types'] as $type) {
 				$r = $this->compareType($id, $type);
 				$res = array_merge($res, $r);
     		}                          
         
-    		if ($a['widgets']) foreach ($a['widgets'] as $widget) {
+    		if (isset($a['widgets']) && is_array($a['widgets'])) foreach ($a['widgets'] as $widget) {
 				$r = $this->compareWidget($id, $widget);
 				$res = array_merge($res, $r);
     		}
 			
-    		if ($a['menus']) foreach ($a['menus'] as $m) {
+    		if (isset($a['menus']) && is_array($a['menus'])) foreach ($a['menus'] as $m) {
 				$r = $this->compareMenu($id, $m);
 				$res = array_merge($res, $r);
     		}			
@@ -610,7 +610,7 @@ class Schema {
 			return $res;
 		}
 		
-		if ($table['engine'] && $dbtable['engine'] != $table['engine']) {
+		if (isset($table['engine']) && $dbtable['engine'] != $table['engine']) {
 		    $res[] = array(
 				'error'    => self::TABLE_WRONG_ENGINE,
 				'table'    => $table['name'],
@@ -667,7 +667,7 @@ class Schema {
 				continue;		    
 			}
 						
-			if (($dbtable['keys'][$kid]['columns'] != $key['columns'])||($dbtable['keys'][$kid]['unique'] != $key['unique'])) {
+			if (($dbtable['keys'][$kid]['columns'] != $key['columns'])||(isset($key['unique']) && $dbtable['keys'][$kid]['unique'] != $key['unique'])) {
 			    $res[] = array(
 					'error'  => self::KEY_DONT_MATCH,
 					'field'  => $key['name'],
@@ -731,7 +731,7 @@ class Schema {
     private function getFieldDef($field, $auto_increment = true)
     {
     	$sql = $field['type'];
-    	if ($field['null'] == 0) $sql .= ' NOT NULL'; else $sql .= ' NULL';
+    	if (isset($field['null']) && $field['null'] == 0) $sql .= ' NOT NULL'; else $sql .= ' NULL';
     	if (isset($field['default'])) 
            $sql .= " default '".$field['default']."'";
     	   elseif ((!isset($field['auto_increment']) || !$field['auto_increment'])&&(substr_count(strtolower($field['type']),'int')>0 || substr_count(strtolower($field['type']),'double'))>0)

@@ -20,8 +20,11 @@ if ($_REQUEST['db_structure']) {
   	$tables = array(); 
     $types = array(); 
     $widgets = array(); 
+    
+    $if = isset($_REQUEST['ignore_fields'])?$_REQUEST['ignore_fields']:false;
+    $ik = isset($_REQUEST['ignore_keys'])?$_REQUEST['ignore_keys']:false;
        
-    $result = $schema->compare_schemas($_REQUEST['ignore_fields'], $_REQUEST['ignore_keys']);
+    $result = $schema->compare_schemas($if, $ik);
     
     if (sizeof($result)) foreach ($result as $error) {
     
@@ -92,7 +95,7 @@ if ($_REQUEST['db_structure']) {
     $r['text'] = $msg;
 }
 
-if ($_REQUEST['cat_structure']) {
+if (isset($_REQUEST['cat_structure']) && $_REQUEST['cat_structure']) {
 	
 	// Backup
 	$application->getConn()->executeQuery('DROP TABLE IF EXISTS '.STRUCTURE_BACKUP);
