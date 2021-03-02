@@ -56,13 +56,13 @@ try {
 			$describ       = $_REQUEST['describ'];
 			$type          = (int)$_REQUEST['type'];
 			$len           = (int)$_REQUEST['len'];
-			$shw           = 1-(int)$_REQUEST['hidden'];
+			$shw           = isset($_REQUEST['hidden'])?1-(int)$_REQUEST['hidden']:1;
 			$required      = (int)$_REQUEST['required'];
 			$default_value = $_REQUEST['default_value'];
 			$editor        = (int)$_REQUEST['editor'];
 			$editor_user   = $_REQUEST['editor_user'];
 			$page          = $_REQUEST['page'];
-			$tag           = $_REQUEST['tag'];
+			$tag           = isset($_REQUEST['tag'])?$_REQUEST['tag']:0;
 			
 			if ($type==FIELD_MATSET || $type==FIELD_MATERIAL) {
 				 $len = $_REQUEST['types'];
