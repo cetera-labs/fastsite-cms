@@ -57,7 +57,7 @@ try {
 			$type          = (int)$_REQUEST['type'];
 			$len           = (int)$_REQUEST['len'];
 			$shw           = isset($_REQUEST['hidden'])?1-(int)$_REQUEST['hidden']:1;
-			$required      = (int)$_REQUEST['required'];
+			$required      = isset($_REQUEST['required'])?(int)$_REQUEST['required']:0;
 			$default_value = $_REQUEST['default_value'];
 			$editor        = (int)$_REQUEST['editor'];
 			$editor_user   = $_REQUEST['editor_user'];
