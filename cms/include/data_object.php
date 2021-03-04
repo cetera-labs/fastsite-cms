@@ -12,10 +12,12 @@ try {
         $obj = Section::getById($_REQUEST['section'])->getMaterialById($_REQUEST['id']);
     }
     
-    echo json_encode([
+    $data = [
         'success' => true,
         'fields'  => $obj->fields
-    ]);
+    ];
+    
+    echo json_encode($data);
     
 } catch (\Exception $e) {
 

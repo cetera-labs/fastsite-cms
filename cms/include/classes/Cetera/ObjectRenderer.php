@@ -84,19 +84,46 @@ class ObjectRenderer {
             else return null;
                 
     }
+
+    public function toArray($page = false, $return = false) {
+        $data = [];
+        if (is_array($this->fields_def)) { 
+			foreach ($this->fields_def as $name => $def) {
+				$this->addToPage($def);
+			}
+			if ($page === false) {
+                 $data = [];
+                 foreach ($this->pages as $id => $page) {
+                    $data[] = [
+                        'title'     => $page['title'],
+                        'layout'    => $page['layout'],
+                        'defaults'  => [ 'anchor' => '0' ],
+                        'autoScroll'=>  ($this->pageHeight<0 && $page['layout'] != 'fit')?true:false,
+                        'border'    => false,
+                        'bodyBorder'=> false,
+                        'bodyStyle' => 'background: none; padding: 5px',
+                        'items'     => $page['fields']
+                    ]; 
+                }
+                
+			} 
+			elseif (isset($this->pages[$page])) {
+				$data = $this->pages[$page]['fields'];
+            }            
+        }
+        return $data;
+    }
     
     public function renderFields($page = false, $return = false) {
     
-		if (is_array($this->fields_def))
-		{ 
-			foreach ($this->fields_def as $name => $def)
-			{
+		if (is_array($this->fields_def)) { 
+        
+			foreach ($this->fields_def as $name => $def) {
 				$this->addToPage($def);
 			}
 
-			if ($page === false)
-			{
-                 $data = array();
+			if ($page === false) {
+                 $data = [];
                  foreach ($this->pages as $id => $page) {
     
                       $data[] = '
@@ -118,11 +145,8 @@ class ObjectRenderer {
                 $res = implode(',', $data);
                 
 			} 
-			elseif (isset($this->pages[$page]))
-			{
-            
+			elseif (isset($this->pages[$page])) {
 				$res = implode(',',$this->pages[$page]['fields']);          
-            
             }
              
         }  

@@ -102,6 +102,8 @@ Config = {
             }
             ?>	
         ],
+        
+        userObjectDefinitionId: <?=\Cetera\User::TYPE?>,
 		
 		userObjectGridFields: [
 		<?php foreach(\Cetera\User::getObjectDefinition()->getFields() as $field) : ?>

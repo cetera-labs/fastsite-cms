@@ -71,6 +71,18 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
         if (!mat_type) mat_type = this.mat_type;
         var win = this.editWindow;
         win.show();
+/*
+        cc = Ext.create( 'Cetera.panel.MaterialEdit' , {
+            win: win,
+            objectId: id,
+            sectionId: idcat,
+            objectDefinitionId: this.mat_type,            
+        }); 
+        if (cc) { 
+            cc.show(); 
+            this.fireEvent('material_editor_ready', win, cc);
+        } 
+*/        
 
         Ext.Loader.loadScript({
             url: 'include/ui_material_edit.php?type='+mat_type+'&idcat='+idcat+'&id='+id+'&height='+this.editWindow.height,
@@ -83,7 +95,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
 				        }
             }
         });
-        
+      
         // Таймер неактивности
         this.clearInactivityTimeout();
         this.timeoutTask = Ext.TaskManager.start({

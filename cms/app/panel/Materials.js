@@ -69,7 +69,7 @@ Ext.define('Cetera.panel.Materials', {
 
         var win = this.editWindow;
         win.show();
-
+        
         Ext.Loader.loadScript({
             url: '/cms/include/ui_material_edit.php?type='+this.mat_type+'&id='+id+'&height='+this.editWindow.height,
 			scope: this,
@@ -81,7 +81,7 @@ Ext.define('Cetera.panel.Materials', {
 				}
             }
         });
-        
+       
         // Таймер неактивности
         this.clearInactivityTimeout();
         this.timeoutTask = Ext.TaskManager.start({
