@@ -156,8 +156,8 @@ Ext.define('Cetera.field.LinkSet_Link', {
                 var hs = sm.hasSelection();    
                 var record = sm.getSelection()[0];
                 this.editAction.setDisabled(!hs);
-                this.deleteAction.setDisabled(!hs || record.get('field_type') != Config.fields.FIELD_MATERIAL);	
-				this.deleteLinkAction.setDisabled(!hs || record.get('field_type') == Config.fields.FIELD_MATERIAL);	
+                this.deleteAction.setDisabled(!hs);	
+				this.deleteLinkAction.setDisabled(!hs);	
             },
             'beforeselect' : function(t , record, index, eOpts) {
                 if (record.get('disabled')) return false;

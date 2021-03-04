@@ -384,6 +384,7 @@ try {
                 this.destroy();
             }, this);
             
+            this.win.title = '[<?=$objectDefinition->alias?>:<?=$material->id?>] <?=addslashes($material->name)?>';
             
             this.win.add(this);
             this.win.doLayout();
