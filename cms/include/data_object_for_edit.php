@@ -2,11 +2,18 @@
 namespace Cetera;
 
 include('common_bo.php');
+include_once('editors/editor_datetime_pubdate.php');
+include_once('editors/editor_text_default.php');
+include_once('editors/editor_boolean_showfuture.php');
+include_once('editors/editor_text_alias.php');
+include_once('editors/editor_link_user.php');
+include_once('editors/editor_hidden.php');
+include_once('editors/editor_integer_default.php');
 
 try {
-    $section_id = Util::get('section_id', TRUE);
-    $duplicate = Util::get('duplicate', TRUE);
-    $id = Util::get('id', TRUE);
+    $section_id = Util::post('section_id', TRUE);
+    $duplicate = Util::post('duplicate', TRUE);
+    $id = Util::post('id', TRUE);
     
     if (isset($_REQUEST['od_id']) && $_REQUEST['od_id']) {
         $objectDefinition = ObjectDefinition::findById($_REQUEST['od_id']);
@@ -17,31 +24,28 @@ try {
     
     $data = [
         'success' => true,
-        'objectDefinition' => [
+        'object_definition' => [
             'id' => $objectDefinition->id,
             'alias' => $objectDefinition->alias,
         ],
     ];     
    
     if ($id) {
-        
 	    $r = $application->getConn()->fetchAssoc('SELECT user_id FROM `lock` WHERE  dat >= NOW()-INTERVAL 10 SECOND and material_id=? and type_id=?', [$id, $objectDefinition->id] );
         if ($r) throw new Exception\CMS( $translator->_('Материал заблокирован другим пользователем.'), false, true );        
         
         // новый материал по шаблону
         if ($duplicate) {
-          $fields = $application->getConn()->fetchAssoc("SELECT * from $math WHERE id=?", array($id));
+          $fields = $application->getConn()->fetchAssoc("SELECT * from $math WHERE id=?", [$id]);
           $id = null;
           $fields['alias'] = '';
           $fields['idcat'] = $section_id;
           $material = DynamicFieldsObject::fetch($fields, $objectDefinition->id);
         } 
         else {
-
           $material = DynamicFieldsObject::getByIdType($id, $objectDefinition->id);
           if ($section_id != CATALOG_VIRTUAL_USERS) $section_id  = $material->idcat;
           $fields = [];
-          
         }
     }
     
@@ -69,6 +73,7 @@ try {
 		$section = Section::getById( $section_id );		
     	$cat_type = $application->getConn()->fetchColumn("select type from dir_data where id=?", [$section_id]);
     } else {
+        $section = 0;
         $cat_type = 0;
     }
        
@@ -80,7 +85,16 @@ try {
         'publish' => $right_publish,
     ];
 
-    $data['fields'] = $fields;
+    $data['fields'] = $material->fields;
+    
+    $data['section_id'] = $section_id;
+    
+    if ($section && $section->getPreviewUrl() ) {
+        $data['preview_url'] = $section->getPreviewUrl();
+    }
+    else {
+        $data['preview_url'] = '';
+    }
     
     if ($section_id != CATALOG_VIRTUAL_USERS)  {
         if ($cat_type & Catalog::AUTOALIAS) 

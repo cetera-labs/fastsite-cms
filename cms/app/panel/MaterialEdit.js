@@ -15,11 +15,9 @@ Ext.define('Cetera.panel.MaterialEdit', {
     objectId: 0,
     sectionId: 0,
     objectDefinitionId: 0,
-    objectDefinitionAlias: 0,
+    objectDefinitionAlias: '',
     isModal: 0,
     isDuplicate: 0,
-    canPublish: 0,
-    previewUrl: 0,
         
     saveParams: {},  
 
@@ -45,7 +43,7 @@ Ext.define('Cetera.panel.MaterialEdit', {
              interval: 10000
         }); 
         
-        tabs = [];
+        var tabs = [];
 
         if (this.sectionId == -2) {
             this.generateUserPanels();
@@ -76,55 +74,9 @@ Ext.define('Cetera.panel.MaterialEdit', {
         
         this.items = this.tabPanel;
         
-        if (this.sectionId > 0 && !this.isModal) { 
-                                                 
-            this.buttons = [
-                {
-                    text: _('Сохранить'),
-                    handler: this.save,
-                    scope: this
-                },{
-                    text: _('Сохранить и опубликовать'),
-                    disabled: !this.canPublish,
-                    handler: function() { 
-                        this.save_publish(0);
-                    },
-                    scope: this
-                },{
-                    text: _('Предпросмотр'),
-                    disabled: !this.previewUrl,
-                    handler: this.save_preview,
-                    scope: this
-                }
-            ];
-            
-        } else {
-                        
-            this.buttons = [
-                {
-                    text: _('OK'),
-                    handler: function() { 
-                        this.save_publish(1);
-                    },
-                    scope: this
-                },
-                {
-                    text: _('Отмена'),
-                    scope: this,
-                    handler: function() { 
-                        this.win.returnValue = false;
-                        this.win.close(); 
-                    }
-                }
-            ];
-            
-        }
+        this.buttons = [];
         
-        this.saveParams = {
-            table: this.objectDefinitionAlias, 
-            id: this.objectId, 
-            catalog_id: this.sectionId
-        };     
+        this.saveParams = {};     
         
         this.callParent();        
         
@@ -147,7 +99,59 @@ Ext.define('Cetera.panel.MaterialEdit', {
     },
     
     buildEditor : function() {
-        this.win.setTitle('Редактирование: [' + this.objectDefinitionAlias + ':' + this.objectId + '] ' + this.editData.fields.name);
+        this.win.setTitle('Редактирование: [' + this.editData.object_definition.alias + ':' + this.objectId + '] ' + this.editData.fields.name);
+        
+        this.saveParams = {
+            table: this.editData.object_definition.alias, 
+            id: this.objectId, 
+            catalog_id: this.editData.section_id
+        };         
+        
+        if (this.editData.fields.idcat > 0 && !this.isModal) { 
+                                                 
+            var buttons = [
+                {
+                    text: _('Сохранить'),
+                    handler: this.save,
+                    scope: this
+                },{
+                    text: _('Сохранить и опубликовать'),
+                    disabled: !this.editData.permissions.publish,
+                    handler: function() { 
+                        this.save_publish(0);
+                    },
+                    scope: this
+                },{
+                    text: _('Предпросмотр'),
+                    disabled: !this.editData.preview_url,
+                    handler: this.save_preview,
+                    scope: this
+                }
+            ];
+            
+        } else {
+                        
+            var buttons = [
+                {
+                    text: _('OK'),
+                    handler: function() { 
+                        this.save_publish(1);
+                    },
+                    scope: this
+                },
+                {
+                    text: _('Отмена'),
+                    scope: this,
+                    handler: function() { 
+                        this.win.returnValue = false;
+                        this.win.close(); 
+                    }
+                }
+            ];
+            
+        }        
+        
+        this.down('>toolbar[dock="bottom"]').add(buttons);
         
         if (this.editData.init) {
             eval(this.editData.init);
@@ -230,7 +234,7 @@ Ext.define('Cetera.panel.MaterialEdit', {
                     this.win.close();
                 } else {
                     this.getForm().findField('alias').setValue(action.result.alias);
-                    if (preview) window.open(this.previewUrl + action.result.alias);
+                    if (preview) window.open(this.editData.preview_url + action.result.alias);
                     if (close) this.win.close();
                 }
             },

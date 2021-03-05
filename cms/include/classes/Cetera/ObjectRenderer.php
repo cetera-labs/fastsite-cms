@@ -42,13 +42,12 @@ class ObjectRenderer {
     public function initalizeFields($return = false) {
 		ob_start();
     	if (is_array($this->fields_def)) 
-             foreach ($this->fields_def as $name => $def)
-			 {
-        	     if (!isset($def['editor_str'])) continue;
-                 $init = $def['editor_str'].'_init';
-        		 if (function_exists($init)) 
-        		         $init($def, $this->getObjectValue($name), $this->objectId, $this->catalog, $this->objectDefinition->getTable(), Application::getInstance()->getUser());
-        	 }
+            foreach ($this->fields_def as $name => $def) {
+        	    if (!isset($def['editor_str'])) continue;
+                $init = $def['editor_str'].'_init';
+        		if (function_exists($init)) 
+                    $init($def, $this->getObjectValue($name), $this->objectId, $this->catalog, $this->objectDefinition->getTable(), Application::getInstance()->getUser());
+        	}
 		$res = $this->initData."\n\n".ob_get_contents();
 		ob_end_clean();
 		
