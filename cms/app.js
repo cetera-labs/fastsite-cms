@@ -92,6 +92,10 @@ Ext.application({
 		Ext.require('Cetera.field.RichMatsetMaterialAbstract');
 		
 		Ext.state.Manager.setProvider(Ext.create('Ext.state.CookieProvider'));
+        
+        Ext.Object.each(Config.extLoaderPath, function(key,value) {
+            Ext.Loader.setPath(key, value);
+        }, this);         
     }, 
     
     msg : function(title, format, delay){

@@ -135,7 +135,7 @@ Config = {
 			?>        
         ],
 		
-		Lang: {},
+		Lang: {},        
 		
 	setLocale: function(locale,callback) {
 		var url = Ext.util.Format.format("/cms/lang/ext-lang-{0}.js", locale);
@@ -157,21 +157,23 @@ Config = {
 				if (callback) callback();
 			}
 		});             
-	}		
+	},
+
+    extLoaderPath: {
+        <?php foreach(\Cetera\Theme::enum() as $theme) : ?>
+            'Theme.<?php echo $theme->name; ?>': '/<?php echo THEME_DIR.'/'.$theme->name; ?>/ext',
+        <?php endforeach; ?>
+
+        <?php foreach(\Cetera\Plugin::enum() as $plugin) : ?>
+            'Plugin.<?php echo $plugin->name; ?>': '<?php echo $plugin->getUrlPath(); ?>ext',
+        <?php endforeach; ?>        
+    }
          
 }
 <?php 
 foreach($l_editors as $eid => $value) print "Config.fieldEditors[".$eid."]='".addslashes($value)."';\n";
 foreach($field_editors as $fid => $value) print "Config.fields_fieldEditors[".$fid."] = [".implode(', ', $value)."];\n";
 ?>
-
-<?php foreach(\Cetera\Theme::enum() as $theme) : ?>
-Ext.Loader.setPath('Theme.<?php echo $theme->name; ?>', '/<?php echo THEME_DIR.'/'.$theme->name; ?>/ext');
-<?php endforeach; ?>
-
-<?php foreach(\Cetera\Plugin::enum() as $plugin) : ?>
-    Ext.Loader.setPath('Plugin.<?php echo $plugin->name; ?>', '<?php echo $plugin->getUrlPath(); ?>ext');
-<?php endforeach; ?>
 
 function _(key) {
 	if (Config.Lang[key]) return Config.Lang[key];
