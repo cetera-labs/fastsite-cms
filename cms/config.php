@@ -22,8 +22,8 @@ if (!$user || !$user->allowBackOffice()) {
 $components = array(
     'welcome' => array(
         'name'     => $translator->_('Добро пожаловать'), 
-        'html'     => 'include/welcome_new.php', 
-        'icon'     => '../images/cmslogo_small.gif', 
+        'html'     => '/cms/include/welcome_new.php', 
+        'icon'     => 'images/cmslogo_small.gif', 
         'toolbar'  => 0    
     )
 );
