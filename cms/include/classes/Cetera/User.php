@@ -553,7 +553,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
             'permissions' => array(
                 'admin'   => $this->allowAdmin(),
                 'adminRootCat' => $this->allowCat(PERM_CAT_ADMIN,0),
-                'backOffice'   => $thisuser->allowBackOffice(),
+                'backOffice'   => $this->allowBackOffice(),
             )
         );
     }      
