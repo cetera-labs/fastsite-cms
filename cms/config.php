@@ -113,6 +113,11 @@ Config = {
 		foEditMode: <?php echo isset($application->getSession()->foEditMode)?$application->getSession()->foEditMode:'false' ?>,
         
         user: <?=$user?>,
+        <?php if ($user && !$user->allowBackOffice()) : ?>
+        userMessage: '<?=$application->getTranslator()->_('Недостаточно полномочий')?>',
+        <?php else : ?> 
+        userMessage: '',
+        <?php endif ?> 		        
 		
 		groupAdmin: <?=GROUP_ADMIN?>,
 		
