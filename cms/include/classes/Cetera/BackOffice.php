@@ -171,14 +171,14 @@ class BackOffice {
                 'structure' => [
                 	  'position'  => MENU_SITE,
                       'name' 	  => $translator->_('Структура и материалы'),
-					  'iconCls'   => 'tree-folder-visible',
+					  'iconCls'   => 'x-fa fa-folder',
                       'class'     => 'Cetera.panel.Structure'
                 ],			
                 'materials' => [
                 	  'position'  => MENU_SITE,
                       'name' 	  => $translator->_('Материалы'),
                 	  'icon'      => 'images/math2.gif',
-					  'iconCls'   => 'x-fa fa-file-text',
+					  'iconCls'   => 'x-fa fa-file-alt',
                       'class'     => 'Cetera.panel.MaterialsByCatalog'
                 ]
             ];          
@@ -189,7 +189,7 @@ class BackOffice {
                 	  'position' => MENU_SITE,
                       'name' 	 => $translator->_('Шаблоны виджетов'),
                 	  'icon'     => 'images/widget_icon.png',
-					  'iconCls'  => 'x-fa fa-file-code-o',
+					  'iconCls'  => 'x-fa fa-file-code',
                 	  'class'    => 'Cetera.widget.templates.Panel',
 					  'ext6_compat'=> true
                 );
@@ -248,7 +248,7 @@ class BackOffice {
 					'name' 	   => $translator->_('Журнал'),
 					'icon'     => 'images/audit1.gif',
 					'class'    => 'EventlogPanel',
-					'iconCls'  => 'x-fa fa-file-text-o',
+					'iconCls'  => 'x-fa fa-file',
 					'class'    => 'Cetera.eventlog.Panel',
                 ); 
                 
@@ -281,7 +281,7 @@ class BackOffice {
 					'position' => MENU_SERVICE,
 					'name' 	   => $translator->_('Темы'),
 					'icon'     => 'images/16X16/gallery.gif',
-					'iconCls'  => 'x-fa fa-picture-o',
+					'iconCls'  => 'x-fa fa-sliders-h',
 					'class'    => 'Cetera.theme.List',
                 );                
                  
