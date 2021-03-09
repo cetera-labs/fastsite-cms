@@ -8,24 +8,29 @@ $translator = $application->getTranslator();
 $application->connectDb();
 $application->initSession();
     
-if (isset($_POST['recover']))
-{
-        $user = User::getByLogin($_POST['recover']);
-        
+if (isset($_POST['recover'])) {
+    $res = array(
+        'success' => false,
+        'errors'  => []
+    );
+
+    
+    try {
+        $user = User::getByEmail($_POST['recover']);
         if (!$user || !$user->isEnabled() || !$user->allowBackOffice()) {
-            echo $translator->_('Пользователь не найден');
-            exit;
+            throw new \Exception($translator->_('Пользователь не найден'));
         }
-		
-		try {
-			$user->recoverPassword();	
-			echo $translator->_('Новый пароль отправлен');        		
-		}
-		catch (\Exception $e) {
-			echo $e->getMessage();
-		}		
-                             
-        exit;
+    
+        $user->recoverPassword();	
+        $res['success'] = true;
+        $res['message'] = $translator->_('Новый пароль отправлен');        		
+    }
+    catch (\Exception $e) {
+        $res['errors']['recover'] = $e->getMessage();
+    }		
+                         
+    echo json_encode($res);
+    exit;
 }
 
 if (isset($_POST['login']))

@@ -413,7 +413,9 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
         if (!$id) return;
         self::getDbConnection()->executeQuery("DELETE FROM users_auth WHERE user_id=".$id['user_id']." and uniq='".$id['uniq']."'");
         $auth->clearIdentity();
-		$a->getSession()->getManager()->forgetMe();		
+        if ($a->getSession()) {
+            $a->getSession()->getManager()->forgetMe();
+        }
     }
     
     /**
