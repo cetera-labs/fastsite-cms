@@ -811,7 +811,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 				dat=NOW(),
 				is_server=".(int)$fields['server'];
 				
-      if ((int)$fields['id']) {
+      if (isset($fields['id']) && (int)$fields['id']) {
           $sql .= ',id='.(int)$fields['id'];
           unset($fields['id']);
       }	  
