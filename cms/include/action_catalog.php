@@ -166,6 +166,12 @@ if ($_REQUEST['action'] == 'cat_create') {
     if (!$user->allowCat(PERM_CAT_ADMIN, $_POST['parent']))
         throw new Exception\CMS(Exception\CMS::NO_RIGHTS);    
     
+    $_POST = array_merge([
+        'link' => false,
+        'server' => false,
+        'parent' => 0,
+    ],$_POST);
+    
     $c = Catalog::getById($_POST['parent']); 
     $res['id'] = $c->createChild(array(
     	'name'		=> $_POST['name'],
