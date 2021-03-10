@@ -191,10 +191,9 @@ if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unp
         $tpl->clean();
     }
     
+    $stat = null;
 	if ($action == 'pub') {
-	
 	   $stat = "update ".$objectDefinition->table." set type=type | ".MATH_PUBLISHED;
-	  
 	}
 	if ($action == 'unpub') {
 	
