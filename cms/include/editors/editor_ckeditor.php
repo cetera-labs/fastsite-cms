@@ -1,12 +1,11 @@
 <?php
-include_once('ckeditor/field_base.php');
+//include_once('ckeditor/field_base.php');
 ?>
 Ext.define('CKField', {
 
-    extend:'CKFieldBase',
+    extend:'Cetera.field.ck.Base',
     hideLabel: true,
-    editorConfig: {
-    }
+    editorConfig: {}
        
 });
 <?php

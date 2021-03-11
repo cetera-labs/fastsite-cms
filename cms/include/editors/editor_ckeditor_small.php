@@ -1,9 +1,9 @@
 <?php
-include_once('ckeditor/field_base.php');
+//include_once('ckeditor/field_base.php');
 ?>
 Ext.define('CKFieldSmall', {
 
-    extend:'CKFieldBase',
+    extend:'Cetera.field.ck.Base',
     height: 300,
     editorConfig: {
         removePlugins : 'smiley,showblocks,find,flash,iframe,specialchar,wsc,scayt',
