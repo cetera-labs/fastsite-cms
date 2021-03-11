@@ -46,5 +46,5 @@ function editor_linkset_default_draw($field_def, $fieldvalue, $id = false, $idca
                         })
                     })
 <?
-    return 100;
+    return 150;
 }
