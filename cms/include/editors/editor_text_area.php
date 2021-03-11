@@ -11,7 +11,7 @@
 
 function editor_text_area_draw($field_def, $fieldvalue) {
 ?>
-                    new Ext.form.TextArea({
+                    Ext.create('Ext.form.field.TextArea',{
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,

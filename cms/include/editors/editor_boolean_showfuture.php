@@ -12,7 +12,7 @@
 function editor_boolean_showfuture_draw($field_def, $fieldvalue) {
 	
 ?>
-                    new Ext.form.Checkbox({
+                    Ext.create('Ext.form.field.Checkbox',{
 						boxLabel: 'показать на сайте',
                         name: '<?=$field_def['name']?>',
                         inputValue: '1',

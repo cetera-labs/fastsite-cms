@@ -12,7 +12,7 @@
 function editor_boolean_default_draw($field_def, $fieldvalue) {
 	
 ?>
-                    new Ext.form.Checkbox({
+                    Ext.create('Ext.form.field.Checkbox',{
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         inputValue: '1',

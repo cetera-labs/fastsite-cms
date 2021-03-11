@@ -11,7 +11,7 @@
  
 function editor_boolean_radio_draw($field_def, $fieldvalue) {
     ?>
-    new Ext.form.RadioGroup({
+    Ext.create('Ext.form.RadioGroup',{
         fieldLabel: '<?=$field_def['describ']?>',
         width: 100,
         items: [

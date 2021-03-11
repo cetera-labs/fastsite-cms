@@ -11,7 +11,7 @@
  
 function editor_integer_default_draw($field_def, $fieldvalue) {
 ?>
-                    new Ext.form.NumberField({
+                    Ext.create('Ext.form.field.Number',{
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,

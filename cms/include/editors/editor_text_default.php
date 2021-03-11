@@ -13,7 +13,7 @@
  
 function editor_text_default_draw($field_def, $fieldvalue) {
 ?>
-                    Ext.create('Ext.form.TextField',{
+                    Ext.create('Ext.form.field.Text',{
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,

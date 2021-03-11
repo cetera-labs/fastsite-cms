@@ -11,7 +11,7 @@
  
 function editor_hidden_draw($field_def, $fieldvalue) {
 ?>
-                    new Ext.form.Hidden({
+                    Ext.create('Ext.form.field.Hidden',{
                         name: '<?=$field_def['name']?>',
                         value: '<?=$fieldvalue?>'
                     })

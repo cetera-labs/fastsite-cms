@@ -12,7 +12,7 @@
 function editor_enum_default_draw($field_def, $fieldvalue, $id = false, $idcat = false, $math = false, $user = false) {
 	global $application;
 ?>
-                    new Ext.form.ComboBox({
+                    Ext.create('Ext.form.field.ComboBox',{
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
