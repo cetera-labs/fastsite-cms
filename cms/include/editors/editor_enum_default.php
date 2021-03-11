@@ -31,7 +31,7 @@ function editor_enum_default_draw($field_def, $fieldvalue, $id = false, $idcat =
                         displayField: 'value',
                         queryMode: 'local',
                         triggerAction: 'all',
-                        selectOnFocus:true,
+                        selectOnFocus:false,
                         value: '<?=$fieldvalue?>'
                     })
 <?
