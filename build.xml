@@ -4,6 +4,7 @@
     <property name="LIB_DIST" value="../library" />
     <property name="CMS_DIR" value="../../../www/cms" />
     <property name="WWW_DIR" value="../../../www" />
+    <property name="CMS_UI" value="./back-office/build" />
        
     <target name="prepare">
         <mkdir dir="${CMS_DIR}" />
@@ -14,7 +15,7 @@
         <mkdir dir="${CMS_DIR}/include/editors" />  
         <mkdir dir="${WWW_DIR}/plugins" />  
     </target>    
-    
+       
     <target name="dist" depends="prepare">
        
         <append destFile="${CMS_DIR}/css/global.css" append="no">
@@ -76,9 +77,29 @@
             </fileset>
         </copy>
         
+        <phingcall target="ui"></phingcall>
+        
         <phingcall target="plugins"></phingcall>
         
     </target>
+    
+    <target name="ui">
+        <if>
+            <available file="${CMS_UI}" type="dir" />
+            <then>
+                <copy todir="${WWW_DIR}" overwrite="true">
+                    <fileset dir="${CMS_UI}">
+                        <include name="cms/***" />              
+                    </fileset>
+                </copy> 
+                <copy todir="${CMS_DIR}" overwrite="true">
+                    <fileset dir="${CMS_UI}">
+                        <include name="ui.html" />           
+                    </fileset>
+                </copy>
+            </then>
+        </if>    
+    </target>    
     
     <target name="plugins">
 

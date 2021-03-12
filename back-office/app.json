@@ -6,8 +6,7 @@
   "template": "classicdesktop",
   "indexHtmlPath": "index.html",
   "requires": [
-    "font-awesome",
-    "ux"
+    "font-awesome"
   ],
 
   "builds": {
@@ -50,18 +49,18 @@
 
   "output": {
     "base": "${workspace.build.dir}",
-    "page": "index.html",
-    "manifest": "generatedFiles/${build.id}.json",
-    "js": "generatedFiles/${build.id}/app.js",
+    "page": "ui.html",
+    "manifest": "/cms/ui/generatedFiles/${build.id}.json",
+    "js": "/cms/ui/generatedFiles/app.js",
     "appCache": {"enable": false},
     "resources": {
-      "path": "${build.id}/resources",
-      "shared": "resources"
+      "path": "/cms/ui/resources",
+      "shared": "/cms/ui/resources"
     }
   },
   
   "fashion": {
-"missingParameters": "error",
+    "missingParameters": "error",
     "inliner": {"enable": false}
   },
 
@@ -111,14 +110,14 @@
   },
   "bootstrap": {
     "base": "${app.dir}/generatedFiles",
-"manifest": "${build.id}.json",
+    "manifest": "${build.id}.json",
     "microloader": "bootstrap.js",
     "css": "bootstrap.css"
   },
 
   "cache": {
     "enable": false,
-    "deltas": "${build.id}/deltas"
+    "deltas": false
   },
 
   "appCache": {
@@ -128,7 +127,7 @@
   },
 
 
-  "archivePath": "archive/${build.id}",
+  "archivePath": false,
 
   "ignore": ["(^|/)CVS(/?$|/.*?$)"],
   "id": "fe7642bb-abb4-476e-9cf3-00467c3fe18b"
