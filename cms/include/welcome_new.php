@@ -110,26 +110,8 @@ td {
     margin-top: 10px;
 }
 
-.theme_setup {
-    padding: 10px 10px 20px 10px;
-    background: #efffef;
-	text-align: center;
-}
-
-.new_version p {
-    font-size: 90%;
-}
-
-#log {
-    font-size: 90%;
-    margin-top: 5px;
-    font-family: Courier;
-}
-
 .big-button .x-btn-inner {
-	
 	font-size: 150%;
-	
 }
 
 table.partner {
@@ -201,7 +183,7 @@ Ext.create('Ext.Button', {
 		});		
 		
         Ext.Ajax.request({
-            url: 'include/action_prefs.php',
+            url: '/cms/include/action_prefs.php',
             params: {
 				name: 'setup_theme',
                 value: '0'

@@ -118,8 +118,9 @@ class UserAuthAdapter implements AdapterInterface {
             'uniq'     => $user->authorize($this->_remember),
             'user_id'  => $user->id
         );
-		if ($this->_remember)
-			 Application::getInstance()->getSession()->getManager()->rememberMe(REMEMBER_ME_SECONDS);		
+        $s = Application::getInstance()->getSession();
+		if ($this->_remember && $s)
+			 $s->getManager()->rememberMe(REMEMBER_ME_SECONDS);		
 			//else Application::getInstance()->getSession()->getManager()->regenerateId();
         return $this->_authenticateCreateAuthResult();
     }

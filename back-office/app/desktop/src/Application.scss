@@ -1,0 +1,185 @@
+$circle-border-radius: dynamic(50%);
+$base-border-color: dynamic(#ddd);
+$lightest-color: dynamic(#fff);
+$font-weight: dynamic(400);
+$font-weight-bold: dynamic(500);
+
+$blank-page-background-color: dynamic(#ebebeb);
+$blank-page-color: dynamic(#cacaca);
+
+@include extjs-button-toolbar-small-ui(
+  $ui: 'toolbutton',
+  $font-size: 24px,
+  $padding: 5px 10px 5px 10px,
+  $background-color: transparent,
+  $glyph-color: white,
+  $border-color: transparent
+);
+
+.x-btn-default-toolbar-small {
+    padding: 8px;
+}
+
+.x-title-text-default::after {
+    display: none!important;
+}
+
+.link-button {
+    background: none!important;
+    border: none!important;
+    
+    .x-btn-inner-default-small {
+        color: $base-color;
+        
+        &.x-btn-focus {
+            background: none!important;
+        }
+    }
+    
+    &:hover {
+        background: $light-color!important;
+    }
+}
+
+#tab-welcome-body .x-panel-body {
+    background-image: url('images/lock2.jpg');
+    background-size: cover;
+    background-repeat: repeat; 
+    color: white;
+    
+    .theme_setup {
+        text-align: center;
+        background: none;
+    }
+    
+    a {
+        color: $light-color;
+    }
+    
+    .partner td {
+        background-color: $base-color;
+    }
+    
+    .about {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}
+
+
+
+
+.launching {
+    background-color: $base-color;
+    background-image: url('images/lock1.jpg');
+    background-size: cover;
+    background-repeat: repeat;    
+}
+
+#splash {
+    color: white;
+    margin-top:20%;
+    font-family:Arial;
+    font-size:64px;
+    text-align:center;
+}
+
+.inner-circle {
+    background-image: url(images/cmslogo.png);
+    background-size: cover;
+    background-position: center;
+    background-color: #fff;
+
+    border-radius: 50px;
+    
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Catalogs tree */
+.tree-folder-visible { background-image:url(images/folder1.gif)!important;}
+.tree-folder-hidden { background-image:url(images/folder1_hidden.gif)!important;}
+.tree-folder-link { background-image:url(images/folder1_linked.gif)!important;}
+.tree-folder-locked { background-image:url(images/folder1_red.gif)!important;}
+.tree-help { background-image:url(images/help.gif)!important;}
+.tree-server { background-image:url(images/server.gif)!important;}
+.tree-material { background-image:url(images/math1.gif)!important;}
+.x-tree-node-text span.tree-alias { color: #336699; padding-right: 5px;}
+
+/* Icons */
+.icon-expandall { background:url(images/expand-all.gif) no-repeat center center !important; }
+.icon-reload { background:url(images/reload_micro.gif) no-repeat center center !important; }
+.icon-server { background:url(images/server_tb.gif) no-repeat center center !important; }
+.icon-new_folder { background:url(images/new_folder.gif) no-repeat center center !important; }
+.icon-folder { background:url(images/folder1.gif) no-repeat center center !important; }
+.icon-folder_delete { background:url(images/folder_delete.gif) no-repeat center center !important; }
+.icon-new { background:url(images/new.gif) no-repeat center center !important; }
+.icon-new1 { background:url(images/new1.gif) no-repeat center center !important; }
+.icon-up { background:url(images/up.gif) no-repeat center center !important; }
+.icon-down { background:url(images/down.gif) no-repeat center center !important; }
+.icon-new_folder_linked { background:url(images/new_folder_linked.gif) no-repeat center center !important; }
+.icon-new_folder_hardlinked { background:url(images/new_folder_linked_hard.png) no-repeat center center !important;}
+.icon-copy { background:url(images/copy.gif) no-repeat center center !important; }
+.icon-delete { background:url(images/delete.gif) no-repeat center center !important; }
+.icon-delete2 { background:url(images/16X16/delete.gif) no-repeat center center !important; }
+.icon-edit { background:url(images/edit.gif) no-repeat center center !important; }
+.icon-props { background:url(images/prop1.gif) no-repeat center center !important; }
+.icon-pub { background:url(images/globe.gif) no-repeat center center !important; }
+.icon-unpub { background:url(images/globe_c.gif) no-repeat center center !important; }
+.icon-preview { background:url(images/preview.gif) no-repeat center center !important; }
+.icon-move { background:url(images/move.gif) no-repeat center center !important; }
+.icon-subs { background:url(images/subs.gif) no-repeat center center !important; }
+.icon-new-user { background:url(images/user_new.gif) no-repeat center center !important; }
+.icon-user { background:url(images/user.gif) no-repeat center center !important; }
+.icon-user-disabled { background:url(images/user_disabled.gif) no-repeat center center !important; }
+.icon-user-delete { background:url(images/user_delete.gif) no-repeat center center !important; }
+.icon-cms { background:url(images/cmslogo_small.gif) no-repeat center center !important; }
+.icon-users { background:url(images/users.gif) no-repeat center center !important; }
+.icon-close { background:url(images/lock.gif) no-repeat center center !important; }
+.icon-open { background:url(images/lock_open.gif) no-repeat center center !important; }
+.icon-down { background:url(images/down.gif) no-repeat center center !important; }
+.icon-upload { background:url(images/upload.gif) no-repeat center center !important; }
+.icon-upload2 { background:url(images/upload_mega.gif) no-repeat center center !important; }
+.icon-image-add { background: url(images/image_add.png) no-repeat 0 0 !important; }
+.icon-new-group { background:url(images/new_group.gif) no-repeat center center !important; }
+.icon-lamp { background:url(images/lamp.gif) no-repeat center center !important; }
+.icon-lamp_glow { background:url(images/lamp_glow.gif) no-repeat center center !important; }
+.icon-pict { background:url(images/pict.gif) no-repeat center center !important; }
+.icon-find { background:url(images/find.gif) no-repeat center center !important; }
+.icon-instable { background:url(images/cal.gif) no-repeat center center !important; }
+.icon-plus { background:url(images/plus.gif) no-repeat center center !important; }
+.icon-minus { background:url(images/minus.gif) no-repeat center center !important; }
+.icon-clean { background:url(images/clean.png) no-repeat center center !important; }
+.icon-thumbs { background:url(images/preview_view.gif) no-repeat center center !important; }
+.icon-table { background:url(images/table_view.gif) no-repeat center center !important; }
+.icon-plus { background:url(images/plus.gif) no-repeat center center !important; }
+.icon-minus { background:url(images/minus.gif) no-repeat center center !important; }
+.icon-clean { background:url(images/clean.png) no-repeat center center !important; }
+.icon-fb { background:url(images/facebook.png) no-repeat center center !important; }
+.icon-google { background:url(images/google-plus.png) no-repeat center center !important; background-size:contain !important; }
+.icon-tw { background:url(images/twitter.png) no-repeat center center !important; }
+.icon-vk { background:url(images/vk.png) no-repeat center center !important; }
+.icon-odno { background:url(images/odno.png) no-repeat center center !important; }
+.icon-help { background:url(images/16X16/help.gif) no-repeat center center !important; }
+.icon-on { background:url(images/16X16/ball_green.gif) no-repeat center center !important; }
+.icon-off { background:url(images/16X16/ball_red.gif) no-repeat center center !important; }
+.icon-undo { background:url(images/16X16/undo.gif) no-repeat center center !important; }
+.icon-setup { background:url(images/setup_small.gif) no-repeat center center !important; }
+.icon-save { background:url(images/16X16/save.gif) no-repeat center center !important; }
+.icon-save-as { background:url(images/16X16/save_as2.gif) no-repeat center center !important; }
+.icon-settings { background:url(images/16X16/settings.gif) no-repeat center center !important; }
+.icon-unpack { background:url(images/16X16/unpack.gif) no-repeat center center !important; }
+.icon-crop { background:url(images/crop.png) no-repeat center center !important; }
+.icon-export { background:url(images/16X16/export.gif) no-repeat center center !important; }
+.icon-import { background:url(images/16X16/import.gif) no-repeat center center !important; }
+
+/* Navigation tree */
+.tab-welcome { background-image:url(../images/cmslogo_small.gif);}
+.tab-materials, .tree-materials .x-tree-node-icon { background-image:url(images/math2.gif);}
+.tab-templates, .tree-templates .x-tree-node-icon { background-image:url(images/xsl.gif);}
+.tab-templateshtml, .tree-templateshtml .x-tree-node-icon { background-image:url(images/html.gif);}
+.tab-types, .tree-types .x-tree-node-icon { background-image:url(images/setup_small.gif);}
+.navigation-tree li.x-tree-node {padding: 0 0 2px 2px;}
+.navigation-tree .x-grid-row-selected .x-grid-td { background-color: white !important; }

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html manifest="">
+<head><base href="/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+	<title>Fastsite CMS</title>
+  
+  <script type="text/javascript" src="/cms/config.php"></script>	
+  <script type="text/javascript">
+    var Ext = Ext || {};
+    Ext.beforeLoad = function (tags) {
+      //var s = location.search;
+      var profile;
+      profile = 'desktop';
+      Ext.manifest ='generatedFiles/' + profile;
+    };    
+  </script>
+
+  <!-- The line below must be kept intact for Sencha Cmd to build your application -->
+  <script id="microloader" data-app="fd801804-cc21-4375-a588-f37860b52809" type="text/javascript" src="generatedFiles/bootstrap.js"></script>
+ 
+</head>
+  <body class="launching" id="main_body">
+    <div id="splash">      
+      <div class="fa fa-spin inner-circle"></div>
+    </div>
+  <script type="text/javascript" src="main.js?c60ef4783cff0ed2f734"></script></body>
+</html>

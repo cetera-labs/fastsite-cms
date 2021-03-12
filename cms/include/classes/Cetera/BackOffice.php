@@ -184,7 +184,7 @@ class BackOffice {
             ];          
             
             if ($this->application->getUser() && $this->application->getUser()->allowAdmin()) {
-        
+        /*
                 $this->_modules['widgets'] = array(
                 	  'position' => MENU_SITE,
                       'name' 	 => $translator->_('Шаблоны виджетов'),
@@ -193,7 +193,8 @@ class BackOffice {
                 	  'class'    => 'Cetera.widget.templates.Panel',
 					  'ext6_compat'=> true
                 );
-		
+		*/
+        /*
                 $this->_modules['widget_areas'] = array(
                 	  'position' => MENU_SITE,
                       'name' 	 => $translator->_('Области'),
@@ -201,7 +202,7 @@ class BackOffice {
 					  'iconCls'  => 'x-fa fa-cog',
                 	  'class'    => 'Cetera.widget.Panel'
                 ); 
-                
+        */        
                 $this->_modules['menus'] = array(
                 	  'position' => MENU_SITE,
                       'name' 	   => $translator->_('Меню'),
@@ -214,7 +215,7 @@ class BackOffice {
                 			'position' => MENU_SERVICE,
                             'name' 	   => $translator->_('Настройки'),
                 			'icon'     => 'images/setup_small.gif',
-							'iconCls'  => 'x-fa fa-cogs',
+							'iconCls'  => 'x-fa fa-cog',
                 			'class'    => 'Cetera.panel.Setup'
                 );				
             
@@ -222,7 +223,7 @@ class BackOffice {
                 			'position' => MENU_SERVICE,
                             'name' 	   => $translator->_('Типы материалов'),
                 			'icon'     => 'images/setup_small.gif',
-							'iconCls'  => 'x-fa fa-cogs',
+							'iconCls'  => 'x-fa fa-firstdraft',
                 			'class'    => 'Cetera.panel.MaterialTypes'
                 );
                 
@@ -281,7 +282,7 @@ class BackOffice {
 					'position' => MENU_SERVICE,
 					'name' 	   => $translator->_('Темы'),
 					'icon'     => 'images/16X16/gallery.gif',
-					'iconCls'  => 'x-fa fa-sliders-h',
+					'iconCls'  => 'x-fa fa-leaf',
 					'class'    => 'Cetera.theme.List',
                 );                
                  
