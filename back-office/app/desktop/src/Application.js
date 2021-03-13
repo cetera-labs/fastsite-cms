@@ -1,7 +1,7 @@
 Ext.define('Cetera.Application', {
 	extend: 'Ext.app.Application',
 	name: 'Cetera',
-	requires: ['Cetera.*'],
+	requires: ['Cetera.*','Ext.form.*'],
     
     scriptsLoading: 0,
       
