@@ -62,7 +62,7 @@ Ext.define('Cetera.view.main.Navigation', {
                 Ext.Object.each(value.submenu, function(k, v) {
                     item.children.push({
                         text    : v.name,
-                        iconCls : 'tab-'+value.id + '_' + k,
+                        iconCls : v.iconCls?v.iconCls:'tab-'+value.id + '_' + k,
                         id      : value.id + '_' + k,
                         children: []            
                     });     

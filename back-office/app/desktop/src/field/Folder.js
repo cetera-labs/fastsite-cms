@@ -15,10 +15,17 @@ Ext.define('Cetera.field.Folder', {
 	displayValue: '',
     
     initComponent : function(){
-    
-        this.trigger1Cls = 'icon-delete';
-        this.trigger2Cls = 'icon-folder';
-        this.editable    = false;  
+            
+        this.setTriggers({
+            del: {
+                cls: 'x-fas fa-times',
+                handler: this.onTrigger1Click,
+            },
+            user: {
+                cls: 'x-fa fa-folder',
+                handler: this.onTrigger2Click,
+            }
+        });        
 		
 		if (this.mat_type) this.url = '/cms/include/data_tree_materials_by_type.php?type='+this.mat_type;
     
@@ -128,7 +135,7 @@ Ext.define('Cetera.field.Folder', {
     },
      
 	  onDestroy: function(){
-		    this.window.close();
+		this.window.close();
         this.callParent();
 	  }, 
     

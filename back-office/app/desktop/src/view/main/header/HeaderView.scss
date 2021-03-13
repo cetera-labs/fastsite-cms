@@ -1,13 +1,12 @@
 .headerview { 
   font-size: 18px;
-  border-bottom: 1px solid darken($base-color, 10%);
-  color: white;
-  background-color:$base-color;
-  box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.4);
+  color: black;
+  background-color:$light-color;
   
+  .x-btn-icon-el-toolbutton-toolbar-small,
   .x-btn-inner-toolbutton-toolbar-small {
-    color: white;
     font-size: 16px;
+    color: black;
   }
 }
 

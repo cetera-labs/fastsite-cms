@@ -5,7 +5,7 @@ Ext.define('Cetera.field.Panel', {
       
     onResize : function(w, h){
         this.callParent(arguments);
-        this.panel.setSize(w - this.labelWidth, h);
+        this.panel.setSize(w - this.labelWidth - 5, h);
     },
     
     getPanel : function() {

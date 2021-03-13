@@ -23,13 +23,13 @@ Ext.define('Cetera.field.Aliases', {
 	getButtons: function() {
 		return [{
             xtype:'button',
-            iconCls:'icon-new',
+            iconCls:'x-fa fa-plus',
             tooltip:Config.Lang.add,
             handler: this.addItem,
             scope: this
         },{
             xtype:'button',
-            iconCls:'icon-delete',
+            iconCls:'x-fa fa-minus',
             tooltip:Config.Lang.remove,
             handler: this.removeItem,
             scope: this
@@ -38,7 +38,7 @@ Ext.define('Cetera.field.Aliases', {
 	
     initComponent : function(){
        
-        this.height = 100;
+        this.height = 130;
 		
 		this.store = Ext.create('Ext.data.Store', {
 			fields: ['id','name'],

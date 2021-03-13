@@ -80,8 +80,8 @@ Ext.define('Cetera.users.Panel', {
             this.columns= [
                 {header: "", width: 25, sortable: false, dataIndex: 'bo', renderer: this.renderIconCms},
                 {header: "", width: 25, sortable: false, dataIndex: 'disabled', renderer: this.renderIcon},
-                {id: 'title', header: Config.Lang.nickname, width: 250, dataIndex: 'login'},
-                {id: 'name', header: Config.Lang.name, flex:1, dataIndex: 'name'}
+                {header: Config.Lang.nickname, width: 250, dataIndex: 'login'},
+                {header: Config.Lang.name, flex:1, dataIndex: 'name'}
             ];
         } else {
             this.columns = [
@@ -112,8 +112,8 @@ Ext.define('Cetera.users.Panel', {
                 },
                 {header: "", width: 25, sortable: false, dataIndex: 'bo', renderer: this.renderIconCms},
                 {header: "", width: 25, sortable: false, dataIndex: 'disabled', renderer: this.renderIcon},
-                {id: 'title', header: Config.Lang.nickname, width: 250, dataIndex: 'login'},
-                {id: 'name', header: Config.Lang.name, flex:1, dataIndex: 'name'}
+                {header: Config.Lang.nickname, width: 250, dataIndex: 'login'},
+                {header: Config.Lang.name, flex:1, dataIndex: 'name'}
             ];
         }
         

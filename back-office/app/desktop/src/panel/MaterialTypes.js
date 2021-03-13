@@ -395,41 +395,41 @@ Ext.define('Cetera.panel.MaterialTypes', {
         var grid = Ext.create('Cetera.grid.Fields', {
             store: this.fieldsStore,
             tbar: [{
-                tooltip: Config.Lang.refresh,
-                iconCls: 'icon-reload',
+                tooltip: _('Обновить'),
+                iconCls:'x-fa fa-sync',
                 handler: function(){ this.fieldsStore.load(); },
                 scope: this
             }, '-',  {
-                tooltip: Config.Lang.add,
-                iconCls: 'icon-new',
+                tooltip: _('Добавить'),
+                iconCls:'x-fa fa-plus',
                 handler: this.fieldAddClick,
                 scope: this
             }, {
                 id: this.getId()+'tb_fld_edit',
-                tooltip: Config.Lang.edit,
+                tooltip: _('Изменить'),
                 disabled: true,
-                iconCls: 'icon-edit',
+                iconCls:'x-fa fa-edit',
                 handler: this.fieldEditClick,
                 scope: this
             }, '-',  {
                 id: this.getId()+'tb_fld_up',
                 disabled: true,
-                iconCls:'icon-up',
-                tooltip: Config.Lang.upper,
+                iconCls:'x-fa fa-arrow-up',
+                tooltip: _('Вверх'),
                 handler: function() { this.fieldCall('field_up'); },
                 scope: this
             },{
                 id: this.getId()+'tb_fld_down',
                 disabled: true,
-                iconCls:'icon-down',
-                tooltip: Config.Lang.downer,
+                iconCls:'x-fa fa-arrow-down',
+                tooltip: _('Вниз'),
                 handler: function() { this.fieldCall('field_down'); },
                 scope: this
             }, '-', {
                 id: this.getId()+'tb_fld_delete',
                 disabled: true,
-                tooltip: Config.Lang.delete,
-                iconCls: 'icon-delete',
+                tooltip: _('Удалить'),
+                iconCls:'x-fa fa-trash',
                 handler: this.fieldDeleteClick,
                 scope: this
             }],
@@ -698,8 +698,8 @@ Ext.define('Cetera.panel.MaterialTypes', {
     
         var win = new Ext.Window({
             closable:true,
-            width:500,
-            height:320,
+            width:600,
+            height:500,
             closeAction: 'hide',
             plain:true,
             layout: 'fit',

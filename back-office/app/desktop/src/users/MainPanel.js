@@ -205,7 +205,7 @@ Ext.define('Cetera.users.MainPanel', {
     
     call: function(action) {
         Ext.Ajax.request({
-            url: 'include/action_users.php',
+            url: '/cms/include/action_users.php',
             params: { 
                 action: action, 
                 'sel[]': this.getSelected()

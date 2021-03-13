@@ -18,14 +18,14 @@ Ext.define('Cetera.panel.Materials', {
             dataIndex: 'icon', 
             renderer: function (value) {
                 if (value == '1')
-                    return '<img src="/cms/images/globe_s.gif" title="'+Config.Lang.published+'" width="14" height="14" />';
-                    else return '<img src="/cms/images/globe_c_s.gif" title="'+Config.Lang.unpublished+'" width="14" height="14" />';
+                    return '<span class="x-fas fa-eye"></span>';
+                    else return '<span class="x-fas fa-eye-slash"></span>';
             }
         },
-        {header: _('Сорт.'), width: 50, dataIndex: 'tag'},
-        {header: "ID", width: 50, dataIndex: 'id'},
+        {header: _('Сорт.'), width: 75, dataIndex: 'tag'},
+        {header: "ID", width: 75, dataIndex: 'id'},
         {
-			header: Config.Lang.title, width: 75, dataIndex: 'name', flex:1,
+			header: _('Заголовок'), width: 75, dataIndex: 'name', flex:1,
             renderer: function (value,meta,rec) {
 				if (rec.get('locked'))
 				{
@@ -167,24 +167,24 @@ Ext.define('Cetera.panel.Materials', {
         return Ext.create('Ext.toolbar.Toolbar', {items: [
             {
                 itemId:  'tb_mat_new',
-                iconCls: 'icon-new',
-                tooltip: Config.Lang.newMaterial,
+                iconCls: 'x-far fa-file',
+                tooltip: _('Создать'),
                 handler: function () { this.edit(0); },
                 scope:   this
             },
             {
                 itemId: 'tb_mat_edit',
                 disabled: true,
-                iconCls:'icon-edit',
-                tooltip: Config.Lang.edit,
+                iconCls: 'x-fa fa-edit',
+                tooltip: _('Изменить'),
                 handler: function () { this.edit(this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_delete',
                 disabled: true,
-                iconCls:'icon-delete',
-                tooltip: Config.Lang.delete,
+                iconCls: 'x-fa fa-trash',
+                tooltip: _('Удалить'),
                 handler: function () { this.deleteMat(); },
                 scope: this
             },

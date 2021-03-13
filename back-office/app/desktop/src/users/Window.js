@@ -9,8 +9,8 @@ Ext.define('Cetera.users.Window', {
         
         this.grid.reload();
    
-        if (!this.width) this.width = 500;
-        if (!this.height) this.height = 400;
+        if (!this.width) this.width = 600;
+        if (!this.height) this.height = 450;
         this.title = Config.Lang.users;
         this.closeAction = 'hide';
         this.layout = 'fit';

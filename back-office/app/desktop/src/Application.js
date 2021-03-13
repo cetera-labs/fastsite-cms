@@ -162,7 +162,7 @@ Ext.define('Cetera.Application', {
                 id: tab_id,
                 layout: 'fit',
                 title: Config.ui.modules[module]['name'],
-                iconCls: Config.ui.modules[module]['icon']?'tab-'+module:Config.ui.modules[module]['iconCls']
+                iconCls: Config.ui.modules[module]['iconCls']?Config.ui.modules[module]['iconCls']:'tab-'+module
             });
             tabs.setActiveTab(tab_id);
     

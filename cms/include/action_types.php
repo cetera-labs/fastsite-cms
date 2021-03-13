@@ -225,12 +225,12 @@ try {
     if ($_REQUEST['action'] == 'field_delete') {
         
         $rows = [];
-        if ($_REQUEST['id']) {
+        if (isset($_REQUEST['id'])) {
             $rows = [[
                 'id' => $_REQUEST['id']
             ]];
         }
-        elseif ($_REQUEST['rows']) {
+        elseif (isset($_REQUEST['rows'])) {
             $rows = json_decode($_REQUEST['rows'], true);
             if (isset($rows['id'])) {
                 $rows = [$rows];

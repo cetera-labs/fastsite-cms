@@ -12,7 +12,7 @@ Ext.define('Cetera.window.Upload', {
    
     initComponent : function(){
         if (this.showPath) {
-            this.height = 150;
+            this.height = 250;
             this.pathField = new Ext.form.TextField({
                 fieldLabel: Config.Lang.uploadCat,
                 name: 'path',
@@ -20,7 +20,7 @@ Ext.define('Cetera.window.Upload', {
                 allowBlank: false      
             });
         } else {
-            this.height = 120;
+            this.height = 200;
             this.pathField = new Ext.form.Hidden({
                 name: 'path',
                 value: this.path    

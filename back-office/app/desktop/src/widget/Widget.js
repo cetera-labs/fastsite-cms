@@ -243,7 +243,7 @@ Ext.define('Cetera.widget.Widget', {
         this.setLoading( true );
     
         Ext.Ajax.request({
-            url: 'include/action_set_widget.php',
+            url: '/cms/include/action_set_widget.php',
             params: params,
             success: function(response) {
                 var obj = Ext.decode(response.responseText);

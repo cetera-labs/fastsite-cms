@@ -126,17 +126,17 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
 	getToolbar: function() {
         return Ext.create('Ext.toolbar.Toolbar', {items: [
             {
-                itemId:       'tb_mat_new',
-                iconCls: 'icon-new',
-                tooltip: Config.Lang.newMaterial,
+                itemId:  'tb_mat_new',
+                iconCls: 'x-far fa-file',
+                tooltip: _('Создать'),
                 handler: function () { this.edit(this.catalogId,0); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_new1',
                 disabled: true,
-                iconCls:'icon-new1',
-                tooltip: Config.Lang.newMaterialAs,
+                iconCls: 'x-fa fa-file',
+                tooltip: _('Создать по образцу'),
                 handler: function () { this.edit(this.catalogId,this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },
@@ -144,16 +144,16 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
             {
                 itemId: 'tb_mat_edit',
                 disabled: true,
-                iconCls:'icon-edit',
-                tooltip: Config.Lang.edit,
+                iconCls: 'x-fa fa-edit',
+                tooltip: _('Изменить'),
                 handler: function () { this.edit(0,this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_delete',
                 disabled: true,
-                iconCls:'icon-delete',
-                tooltip: Config.Lang.delete,
+                iconCls: 'x-fa fa-trash',
+                tooltip: _('Удалить'),
                 handler: function () { this.deleteMat(); },
                 scope: this
             },
@@ -161,24 +161,24 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
             {
                 itemId: 'tb_mat_pub',
                 disabled: true,
-                iconCls:'icon-pub',
-                tooltip: Config.Lang.publish,
+                iconCls: 'x-fa fa-eye',
+                tooltip: _('Опубликовать'),
                 handler: function() { this.call('pub'); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_unpub',
                 disabled: true,
-                iconCls:'icon-unpub',
-                tooltip: Config.Lang.unpublish,
+                iconCls: 'x-fa fa-eye-slash',
+                tooltip: _('Отменить публикоцию'),
                 handler: function() { this.call('unpub'); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_preview',
                 disabled: true,
-                iconCls:'icon-preview',
-                tooltip: Config.Lang.preview,
+                iconCls: 'x-fab fa-internet-explorer',
+                tooltip: _('Предварительный просмотр'),
                 handler: function () {
                     window.open('/cms/include/action_materials.php?action=preview&type='+this.mat_type+'&mat_id=' + this.getSelectionModel().getSelection()[0].getId());
                 },
@@ -188,24 +188,24 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
             {
                 itemId: 'tb_mat_move',
                 disabled: true,
-                iconCls:'icon-move',
-                tooltip: Config.Lang.move,
+                iconCls:'x-far fa-copy',
+                tooltip: _('Переместить'),
                 handler: function () { this.move('move'); },
                 scope: this
             },
             {
                 itemId: 'tb_mat_copy',
                 disabled: true,
-                iconCls:'icon-copy',
-                tooltip: Config.Lang.copy,
+                iconCls: 'x-fa fa-copy',
+                tooltip: _('Копировать'),
                 handler: function () { this.move('copy'); },
                 scope: this
             },			
             '-',
             {
                 itemId: 'tb_mat_subs',
-                iconCls:'icon-subs',
-                tooltip: Config.Lang.materialDeep,
+                iconCls:'x-fa fa-sitemap',
+                tooltip: _('Показать материалы из подразделов'),
                 enableToggle: true,
                 toggleHandler: function () { this.reload(); },
                 pressed: false,
@@ -216,8 +216,8 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 itemId: 'tb_mat_up',
                 disabled: true,
 				hidden: true,
-                iconCls:'icon-up',
-                tooltip: Config.Lang.upper,
+                iconCls:'x-fa fa-arrow-up',
+                tooltip: _('Вверх'),
                 handler: function() { 
                     if (this.store.sorters.get(0).direction == 'ASC') 
                         this.call('up'); 
@@ -229,8 +229,8 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 itemId: 'tb_mat_down',
                 disabled: true,
 				hidden: true,
-                iconCls:'icon-down',
-                tooltip: Config.Lang.downer,
+                iconCls:'x-fa fa-arrow-down',
+                tooltip: _('Вниз'),
                 handler: function() {
                     if (this.store.sorters.get(0).direction == 'ASC') 
                         this.call('down'); 

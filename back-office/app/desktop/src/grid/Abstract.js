@@ -5,7 +5,7 @@ Ext.define('Cetera.grid.Abstract', {
 	initComponent: function() {
 		
         this.editAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-edit', 
+            iconCls: 'x-fa fa-edit', 
             text: Config.Lang.edit,
             disabled: true,
             scope: this,
@@ -17,7 +17,7 @@ Ext.define('Cetera.grid.Abstract', {
         });		
 		
         this.addAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-new', 
+            iconCls: 'x-fa fa-plus', 
             text: Config.Lang.add,
             scope: this,
             handler: function(widget, event)
@@ -27,7 +27,7 @@ Ext.define('Cetera.grid.Abstract', {
         });	
 
 		this.deleteAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-delete', 
+            iconCls: 'x-fa fa-trash', 
             text: Config.Lang.delete,
             disabled: true,
             scope: this,
@@ -50,7 +50,7 @@ Ext.define('Cetera.grid.Abstract', {
 					items: [
 						{
 							tooltip: Config.Lang.reload,
-							iconCls: 'icon-reload',
+							iconCls: 'x-fa fa-sync', 
 							handler: function(btn) { btn.up('grid').getStore().load(); }
 						},
 						this.addAction,

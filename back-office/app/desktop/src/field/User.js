@@ -6,16 +6,17 @@ Ext.define('Cetera.field.User', {
     
     initComponent : function(){
     
-        this.trigger1Cls = 'icon-delete';
-        this.trigger2Cls = 'icon-user';
-    
-        this.window = Ext.create('Cetera.users.Window');
+        this.setTriggers({
+            del: {
+                cls: 'x-fas fa-user-slash',
+                handler: this.onTrigger1Click,
+            },
+            user: {
+                cls: 'x-fa fa-user',
+                handler: this.onTrigger2Click,
+            }
+        }); 
         
-        this.window.on('select', function(res) {
-            this.setValue(Ext.JSON.encode(res));     
-            this.fireEvent('select', res);
-        }, this);
-    
         this.callParent();
     },
     
@@ -25,7 +26,19 @@ Ext.define('Cetera.field.User', {
     },
     
     onTrigger2Click: function() {
-        this.window.show();
+        this.getWindow().show();
+    },
+    
+    getWindow: function() {
+        if (!this.window) {
+            this.window = Ext.create('Cetera.users.Window');
+            
+            this.window.on('select', function(res) {
+                this.setValue(Ext.JSON.encode(res));     
+                this.fireEvent('select', res);
+            }, this);
+        }
+        return this.window;
     },
     
     setValue : function(value) {
@@ -48,7 +61,7 @@ Ext.define('Cetera.field.User', {
     },
             
   	onDestroy: function(){
-		this.window.close();
+		if (this.window) this.window.destroy();
   		this.callParent();
   	}
 });

@@ -99,29 +99,29 @@ Ext.define('Cetera.field.MatSet', {
 		return [
 			{
 				xtype  : 'button',
-				iconCls: 'icon-new',
-				tooltip: Config.Lang.add,
+                iconCls: 'x-far fa-file',
+                tooltip: _('Создать'),
 				handler: this.onAddItem,
 				scope  : this
 			},
             {
                 xtype  : 'button',
-                iconCls:'icon-new1',
-                tooltip: Config.Lang.newMaterialAs,
+                iconCls: 'x-fa fa-file',
+                tooltip: _('Создать по образцу'),
                 handler: this.onAddCopyItem,
                 scope: this
             },			
 			{
 				xtype  :'button',
-				iconCls: 'icon-edit',
-				tooltip: Config.Lang.edit,
+                iconCls: 'x-fa fa-edit',
+                tooltip: _('Изменить'),
 				handler: this.onEditItem,
 				scope  : this
 			},
 			{
 				xtype  : 'button',
-				iconCls: 'icon-delete',
-				tooltip: Config.Lang.remove,
+                iconCls: 'x-fa fa-trash',
+                tooltip: _('Удалить'),
 				handler: this.onRemoveItem,
 				scope  : this
 			}

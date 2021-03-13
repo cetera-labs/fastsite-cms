@@ -276,7 +276,7 @@ Ext.define('Cetera.view.main.Tree', {
         var tree = this;
         var path = tree.getSelectedPath();
         Ext.Ajax.request({
-            url: 'include/action_catalog.php',
+            url: '/cms/include/action_catalog.php',
             params: { action: 'up', id: id },
             success: function() {
                 tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode, function() {

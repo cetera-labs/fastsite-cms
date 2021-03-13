@@ -112,7 +112,7 @@ Ext.define('Cetera.field.Set', {
         this.buttons[this.buttons.length] = {
             xtype:'button',
             margins:'8 0 0 0',
-            iconCls:'icon-up',
+            iconCls:'x-fa fa-arrow-up',
             tooltip: _('Выше'),
             handler: this.moveUp,
             scope: this
@@ -120,7 +120,7 @@ Ext.define('Cetera.field.Set', {
         
         this.buttons[this.buttons.length] = {
             xtype:'button',
-            iconCls:'icon-down',
+            iconCls:'x-fa fa-arrow-down',
             tooltip: _('Ниже'),
             handler: this.moveDown,
             scope: this
@@ -136,7 +136,7 @@ Ext.define('Cetera.field.Set', {
                 {
                     region: 'east',
                     border: false, 
-                    width: 24,
+                    width: 32,
                     bodyStyle:'background: none',
                     layout: {
                         type:'vbox',

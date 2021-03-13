@@ -1,12 +1,12 @@
 Ext.define('Cetera.field.Trigger', {
 
-    extend:'Ext.form.TriggerField',
+    extend:'Ext.form.Text',
     
     fieldSubTpl: [ // note: {id} here is really {inputId}, but {cmpId} is available
             '<input id="{id}-display" style="width:100%" value="{displayValue}" type="text" readonly="readonly"',
             '<tpl if="name"> name="{name}-display"</tpl>',
             '<tpl if="disabled"> disabled="disabled"</tpl>',
-            ' class="{fieldCls} {typeCls} {editableCls} {inputCls}" />',
+            ' class="{fieldCls} {typeCls} {typeCls}-{ui} {editableCls} {inputCls} {fixCls}" />',
             '<input id="{id}" type="hidden" readonly="readonly"',
             '<tpl if="name"> name="{name}"</tpl>',
             '<tpl if="value"> value="{[Ext.util.Format.htmlEncode(values.value)]}"</tpl>',
@@ -46,8 +46,7 @@ Ext.define('Cetera.field.Trigger', {
         if (this.el)
 		{
             var displayEl = this.el.getById(this.getDisplayId());
-            if (displayEl) 
-			{
+            if (displayEl) {
 				displayEl[hasError ? 'addCls' : 'removeCls'](me.invalidCls + '-field');
 			}
         }			

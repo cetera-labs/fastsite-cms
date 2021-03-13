@@ -11,10 +11,7 @@ Ext.define('Cetera.field.File', {
     onTrigger2Click: function() {
         this.uploadWindow.show();
     },
-    
-    trigger1Cls:'icon-folder',
-    trigger2Cls:'icon-upload',
-    
+       
     getUploadWindow : function() {
         this.uploadWindow = Ext.create('Cetera.window.Upload', { showPath: true });
         
@@ -35,7 +32,19 @@ Ext.define('Cetera.field.File', {
         });
     },
     
-    initComponent : function() {       
+    initComponent : function() { 
+
+        this.setTriggers({
+            del: {
+                cls: 'x-fas fa-folder',
+                handler: this.onTrigger1Click,
+            },
+            user: {
+                cls: 'x-fa fa-file-upload',
+                handler: this.onTrigger2Click,
+            }
+        });  
+    
         this.getWindow();
         this.getUploadWindow();
       

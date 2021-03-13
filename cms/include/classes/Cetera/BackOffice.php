@@ -223,7 +223,7 @@ class BackOffice {
                 			'position' => MENU_SERVICE,
                             'name' 	   => $translator->_('Типы материалов'),
                 			'icon'     => 'images/setup_small.gif',
-							'iconCls'  => 'x-fa fa-firstdraft',
+							'iconCls'  => 'x-fab fa-firstdraft',
                 			'class'    => 'Cetera.panel.MaterialTypes'
                 );
                 

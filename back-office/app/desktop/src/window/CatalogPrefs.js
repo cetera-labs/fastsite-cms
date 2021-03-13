@@ -87,9 +87,9 @@ Ext.define('Cetera.window.CatalogPrefs', {
 		this.items = [{
 			xtype:'tabpanel',
 			plain:true,
-			bodyStyle:'background: none;',
+			//bodyStyle:'background: none;',
 			border    : false,
-			defaults:{bodyStyle:'background:none; padding:5px'},
+			defaults:{bodyStyle:'padding:5px'},
 			items:[
 				{ 
 					title      : _('Видимость полей'),

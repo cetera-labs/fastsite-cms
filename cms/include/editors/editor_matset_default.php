@@ -47,5 +47,5 @@ function editor_matset_default_draw($field_def, $fieldvalue, $id = false, $idcat
                         })
                     })
 <?
-    return 175;
+    return 225;
 }

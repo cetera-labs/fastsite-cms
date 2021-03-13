@@ -30,16 +30,16 @@ Ext.define('Cetera.window.CatalogEdit', {
 	initComponent : function() {
 	
 		this.tabs = Ext.create('Ext.tab.Panel',{
-			plain:true,
-			bodyStyle:'background: none;',
-			border    : false,
-			defaults:{bodyStyle:'background:none; padding:5px'}			
+			//plain:true,
+			//bodyStyle:'background: none;',
+			//border    : false,
+			defaults:{bodyStyle:'padding:5px'}			
 		});
 		
 		this.form = Ext.create('Ext.form.Panel',{
 			border: false,
 			bodyBorder: false,
-			bodyStyle:'background: none',
+			//bodyStyle:'background: none',
 			margin: '2 0 0 0',
 			waitMsgTarget: true,
 			layout: 'fit',
@@ -159,15 +159,20 @@ Ext.define('Cetera.window.CatalogEdit', {
 						model: 'Cetera.model.Theme',
 						autoLoad: true
 					}),
-					trigger2Cls: 'icon-setup',
-					onTrigger2Click: function() {
-						var rec = this.findRecordByValue(this.getValue());
-						if (!rec) return;
-						Ext.create('Cetera.theme.Activate',{
-							theme: rec,
-							serverId: this.up('window').catalog.id
-						});
-					}
+                    triggers: {
+                        del: {
+                            cls: 'x-fa fa-cog',
+                            scope: this,
+                            handler: function(field) {
+                                var rec = field.findRecordByValue(field.getValue());
+                                if (!rec) return;
+                                Ext.create('Cetera.theme.Activate',{
+                                    theme: rec,
+                                    serverId: field.up('window').catalog.id
+                                });
+                            },
+                        },
+                    },                    
 				});			
 			}
 			
