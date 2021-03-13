@@ -1,5 +1,7 @@
 Ext.define('Cetera.panel.MaterialEdit', {
     extend: 'Ext.FormPanel',
+    
+    require: 'Ext.form.field.Date',
 
     layout: 'fit',
     bodyStyle: 'background: none',
