@@ -94,12 +94,11 @@ Ext.define('Cetera.catalog.Create', {
     },
     
     show : function() {
-
-        this.win.setWidth(365);
-        this.win.setHeight(170);
+        this.win.setWidth(500);
+        this.win.setHeight(260);
         this.win.add(this);
         this.win.setTitle(Config.Lang.newCatalog);
-        this.win.doLayout();
+        this.win.updateLayout();
         this.win.show();        
         this.callParent();
     }

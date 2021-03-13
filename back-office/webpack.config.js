@@ -87,7 +87,8 @@ module.exports = async function (env) {
       node: false,
       devServer: {
         proxy: {
-            '/cms': 'http://localhost:8080'
+            '/cms':    'http://localhost:8080',
+            '/themes': 'http://localhost:8080',
         },
         contentBase: outputFolder,
         hot: isProd,

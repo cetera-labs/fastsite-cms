@@ -21,7 +21,7 @@ Ext.define('Cetera.catalog.HardLinkCreate', {
             xtype: 'folderfield',
             id: 'link_id',
             name: 'node_id',
-            fieldLabel: Config.Lang.linkTo,
+            fieldLabel: _('Ссылка на'),
             value: 0,
             path: '',
             nolink: 1,
@@ -37,7 +37,7 @@ Ext.define('Cetera.catalog.HardLinkCreate', {
 			buttons: [
 				{
 					xtype: 'button',
-					text: Config.Lang.ok,
+					text: _('OK'),
 					formBind: true,
 					disabled:true,  
 					scope: this,
@@ -72,11 +72,11 @@ Ext.define('Cetera.catalog.HardLinkCreate', {
 
      show : function() {
 
-        this.win.setWidth(365);
-        this.win.setHeight(100);
+        this.win.setWidth(500);
+        this.win.setHeight(150);
         this.win.add(this);
         this.win.setTitle(Config.Lang.newLink);
-        this.win.doLayout();
+        this.win.updateLayout();
         this.win.show();        
         this.callParent();
     }

@@ -17,23 +17,23 @@ Ext.define('Cetera.catalog.ServerCreate', {
    
     items: [
         {
-            fieldLabel: Config.Lang.name,
+            fieldLabel: _('Имя'),
             name: 'name',
             allowBlank:false
         }, 
         {
-            fieldLabel: Config.Lang.domainName,
+            fieldLabel: _('Доманное имя'),
             name: 'alias',
             allowBlank:false,
             regex: /(([\-\w]+\.)+\w{2,3}(\/[%\-\w]+(\.\w{2,})?)*)/i
         },
         {
             xtype: 'combo',
-            fieldLabel: Config.Lang.materialType,
+            fieldLabel: _('Тип материалов'),
             valueField: 'id',
             displayField: 'describDisplay',
             name: 'typ',
-            store: new Ext.data.JsonStore({
+            store: {
                 fields: ['id', 'describDisplay'],
                 autoLoad: false,  
                 proxy: {
@@ -41,12 +41,11 @@ Ext.define('Cetera.catalog.ServerCreate', {
                     url: '/cms/include/data_types.php?linkable=1&empty=1',
                     reader: {
                         type: 'json',
-                        root: 'rows'
+                        rootProperty: 'rows'
                     }
                 }
-            }),
+            },
             triggerAction: 'all',
-            selectOnFocus:true,
             editable: false,
             allowBlank: false             
         }
@@ -58,7 +57,7 @@ Ext.define('Cetera.catalog.ServerCreate', {
 			buttons: [
 				{
 					xtype: 'button',
-					text: Config.Lang.ok,
+					text: _('OK'),
 					formBind: true,
 					disabled:true,  
 					scope: this,
@@ -93,11 +92,11 @@ Ext.define('Cetera.catalog.ServerCreate', {
     
     show : function() {
 
-        this.win.setWidth(365);
-        this.win.setHeight(160);
+        this.win.setWidth(500);
+        this.win.setHeight(230);
         this.win.add(this);
         this.win.setTitle(Config.Lang.createServer);
-        this.win.doLayout();
+        this.win.updateLayout();
         this.win.show();        
         this.callParent();
     }

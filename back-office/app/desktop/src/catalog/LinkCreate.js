@@ -21,14 +21,14 @@ Ext.define('Cetera.catalog.LinkCreate', {
             xtype: 'folderfield',
             id: 'link_id',
             name: 'typ',
-            fieldLabel: Config.Lang.linkTo,
+            fieldLabel: _('Ссылка на'),
             value: 0,
             path: '',
             nolink: 1,
             rule: 7,
             allowBlank: false
         },{
-            fieldLabel: Config.Lang.name,
+            fieldLabel: _('Имя'),
             name: 'name',
             allowBlank: false
         },{
@@ -45,7 +45,7 @@ Ext.define('Cetera.catalog.LinkCreate', {
 			buttons: [
 				{
 					xtype: 'button',
-					text: Config.Lang.ok,
+					text: _('ОК'),
 					formBind: true,
 					disabled:true,  
 					scope: this,
@@ -81,11 +81,11 @@ Ext.define('Cetera.catalog.LinkCreate', {
 
      show : function() {
 
-        this.win.setWidth(365);
-        this.win.setHeight(150);
+        this.win.setWidth(500);
+        this.win.setHeight(220);
         this.win.add(this);
         this.win.setTitle(Config.Lang.newLink);
-        this.win.doLayout();
+        this.win.updateLayout();
         this.win.show();        
         this.callParent();
     }
