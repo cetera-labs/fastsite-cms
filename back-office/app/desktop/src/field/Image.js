@@ -118,7 +118,7 @@ Ext.define('Cetera.field.Image', {
         this.btnCounter = Ext.create('Ext.Button',{
             scope   : this,
             border    : false,
-            style : 'background:url(resources/desktop/images/counterclockwise-arrow.png);margin-right:5px;opacity:0;transition:0.5s;',
+            style : 'background:url(resources/images/counterclockwise-arrow.png);margin-right:5px;opacity:0;transition:0.5s;',
             width   : 30,
             height   : 30,
             handler : function() {
@@ -129,7 +129,7 @@ Ext.define('Cetera.field.Image', {
         this.btnClockwise = Ext.create('Ext.Button',{
             scope   : this,
             border    : false,
-            style : 'background:url(resources/desktop/images/clockwise-arrow.png);opacity:0;transition:0.5s;',
+            style : 'background:url(resources/images/clockwise-arrow.png);opacity:0;transition:0.5s;',
             width   : 30,
             height   : 30,
             handler : function() {

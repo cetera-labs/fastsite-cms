@@ -6,7 +6,8 @@
   "template": "classicdesktop",
   "indexHtmlPath": "index.html",
   "requires": [
-    "font-awesome"
+    "font-awesome",
+    "ux"
   ],
 
   "builds": {
@@ -50,12 +51,12 @@
   "output": {
     "base": "${workspace.build.dir}",
     "page": "ui.html",
-    "manifest": "/cms/ui/generatedFiles/${build.id}.json",
-    "js": "/cms/ui/generatedFiles/app.js",
+    "manifest": "cms/ui/generatedFiles/${build.id}.json",
+    "js": "cms/ui/generatedFiles/app.js",
     "appCache": {"enable": false},
     "resources": {
-      "path": "/cms/ui/resources",
-      "shared": "/cms/ui/resources"
+      "path": "cms/ui/resources",
+      "shared": "cms/ui/resources"
     }
   },
   
