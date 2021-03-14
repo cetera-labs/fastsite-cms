@@ -238,10 +238,10 @@ class BackOffice {
                 $this->_modules['groups'] = array(
                 	  'position' => MENU_SERVICE,
                       'name' 	   => $translator->_('Группы пользователей'),
-                      'url'      => 'include/ui_groups.php',
+                      //'url'      => 'include/ui_groups.php',
                 	  'icon'     => 'images/users.gif',
 					  'iconCls'  => 'x-fa fa-users',
-                	  'class'    => 'GroupsPanel'
+                	  'class'    => 'Cetera.users.Groups'
                 );
                 
                 $this->_modules['eventlog'] = array(

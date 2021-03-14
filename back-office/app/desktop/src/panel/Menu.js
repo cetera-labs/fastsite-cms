@@ -13,25 +13,25 @@ Ext.define('Cetera.panel.Menu', {
        
         this.tbar = [
             {
-                iconCls:'icon-reload',
+                iconCls:'x-fa fa-sync',
                 toolTip: Config.Lang.reload,
                 handler: function() { this.store.load(); },
                 scope: this
             },{
-                iconCls:'icon-plus',
+                iconCls:'x-fa fa-plus-square',
                 text: _('Добавить меню'),
                 handler: this.addMenu,
                 scope: this
             },{
                 id: 'tb_menu_delete',
-                iconCls:'icon-minus',
+                iconCls:'x-fa fa-trash',
                 disabled: true,
                 text: _('Удалить меню'),
                 handler: this.deleteMenu,
                 scope: this
             },{
                 id: 'tb_menu_rename',
-                iconCls:'icon-edit',
+                iconCls:'x-fa fa-edit',
                 disabled: true,
                 text: _('Переименовать'),
                 handler: this.renameMenu,
@@ -39,7 +39,7 @@ Ext.define('Cetera.panel.Menu', {
             },'-',	
 			{
                 itemId: 'add_item',
-                iconCls:'icon-new',
+                iconCls:'x-fa fa-plus',
                 disabled: true,
                 text: _('Добавить ссылку'),
                 handler: this.addItem,
@@ -47,7 +47,7 @@ Ext.define('Cetera.panel.Menu', {
             },	
 			{
                 itemId: 'edit_item',
-                iconCls:'icon-edit',
+                iconCls:'x-far fa-edit',
                 disabled: true,
                 text: _('Изменить ссылку'),
                 handler: this.editItem,
@@ -55,7 +55,7 @@ Ext.define('Cetera.panel.Menu', {
             },				
 			{
                 id: 'tb_menu_deleteitem',
-                iconCls:'icon-delete',
+                iconCls:'x-fa fa-minus',
                 disabled: true,
                 text: _('Удалить элемент'),
                 handler: this.deleteItem,
@@ -67,7 +67,7 @@ Ext.define('Cetera.panel.Menu', {
             model: Cetera.model.Menu,
             proxy: {
                 type: 'ajax',
-                url: 'include/data_menus.php'
+                url: '/cms/include/data_menus.php'
             },
             root: {
                 text: 'root',
@@ -182,7 +182,7 @@ Ext.define('Cetera.panel.Menu', {
             scope:this
         });
         
-        this.menus.on('dblclick', this.edit, this);
+        //this.menus.on('itemdblclick', this.edit, this);
         
         this.tree = Ext.create('Cetera.catalog.SiteTree', {
             region: 'center',
@@ -395,7 +395,7 @@ Ext.define('Cetera.panel.Menu', {
     
     call: function(params, no_reload) {
         Ext.Ajax.request({
-            url: 'include/action_menus.php',
+            url: '/cms/include/action_menus.php',
             params: params,                  
             success: function(response){
                 if (!no_reload) this.store.load();

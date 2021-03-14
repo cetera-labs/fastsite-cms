@@ -18,7 +18,7 @@ function editor_linkset2_default_draw($field_def, $fieldvalue, $id = false, $idc
                         fieldLabel: '<?=$field_def['describ']?>',
                         name: '<?=$field_def['name']?>',
                         allowBlank:<?=($field_def['required']?'false':'true')?>,
-                        height: 100,
+                        height: 200,
                         from: 0,
                         store: new Ext.data.ArrayStore({
                             autoDestroy: true,

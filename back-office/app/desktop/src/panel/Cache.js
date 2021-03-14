@@ -38,7 +38,7 @@ Ext.define('Cetera.panel.Cache', {
 	
 	tbar: [
 		{ 
-			iconCls:'icon-reload',
+			iconCls:'x-fa fa-sync',
 			tooltip: _('Обновить'),
 			handler: function () { 
 				this.up('grid').getStore().load();
@@ -46,7 +46,7 @@ Ext.define('Cetera.panel.Cache', {
 		},
 		'-',
 		{
-			iconCls:'icon-clean',
+			iconCls:'x-fa fa-broom',
 			text:_('Очистить устаревшее'),
 			handler: function () { 
 				this.up('grid').getStore().load({
@@ -69,7 +69,7 @@ Ext.define('Cetera.panel.Cache', {
 		},		
 		'-',
 		{ 
-			iconCls:'icon-delete',
+			iconCls:'x-fa fa-trash',
 			text: _('Удалить все'),
 			handler: function () { 
 				this.up('grid').getStore().load({

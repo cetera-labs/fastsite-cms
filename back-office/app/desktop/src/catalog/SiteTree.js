@@ -86,7 +86,7 @@ Ext.define('Cetera.catalog.SiteTree', {
         
         this.tbar = [
             {
-                iconCls: 'icon-reload',
+                iconCls:'x-fa fa-sync',
                 tooltip: Config.Lang.refresh,
                 handler: function () { 
 									
@@ -95,7 +95,7 @@ Ext.define('Cetera.catalog.SiteTree', {
                 },
                 scope: this
             },{
-                iconCls: 'icon-expandall',
+                iconCls:'x-fa fa-angle-double-down',
                 tooltip: Config.Lang.expandAll,
                 handler: function () { 
                     this.expandAll();
@@ -110,7 +110,7 @@ Ext.define('Cetera.catalog.SiteTree', {
                 store: this.store,
                 paramName: 'query',
                 reloadStore: false,
-                width:150
+                width:250
             });        
             
             search.on('search', function() {

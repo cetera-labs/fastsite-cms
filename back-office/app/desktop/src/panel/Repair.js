@@ -17,16 +17,16 @@ Ext.define('Cetera.panel.Repair', {
     initComponent : function() {
     
         this.panel = new Ext.Panel({
-            bodyCls: 'x-panel-body',
+            border: 1,
             padding: 5,
             bodyStyle: 'padding: 10px',
             flex: 1
         });
         
         this.form = new Ext.form.FormPanel({
-        fieldDefaults : { 
-            labelWidth: 1
-        },
+            fieldDefaults : { 
+                labelWidth: 1
+            },
             bodyStyle: 'background: none',
             border: false,
             height: 100,

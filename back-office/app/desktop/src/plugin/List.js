@@ -6,7 +6,7 @@ Ext.define('Cetera.plugin.List', {
     initComponent: function(){
     
         this.enableAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-on',  
+            iconCls: 'x-fa fa-toggle-on',  
             text: Config.Lang.do_on,
             disabled: true,
             scope: this,
@@ -17,7 +17,7 @@ Ext.define('Cetera.plugin.List', {
         });
         
         this.disableAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-off', 
+            iconCls: 'x-fa fa-toggle-off',
             text: Config.Lang.do_off,
             disabled: true,
             scope: this,
@@ -43,7 +43,7 @@ Ext.define('Cetera.plugin.List', {
         });        
         
         this.deleteAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-delete2', 
+            iconCls: 'x-fa fa-trash',
             text: Config.Lang.remove,
             disabled: true,
             scope: this,
@@ -106,7 +106,7 @@ Ext.define('Cetera.plugin.List', {
                     url: '/cms/include/data_plugins.php',
                     reader: {
                         type: 'json',
-                        root: 'rows'
+                        rootProperty: 'rows'
                     }
                 }
             }),
@@ -116,7 +116,7 @@ Ext.define('Cetera.plugin.List', {
                 items: [
                     {
                         tooltip: Config.Lang.reload,
-                        iconCls: 'icon-reload',
+                        iconCls:'x-fa fa-sync',
                         handler: function() { this.store.load(); },
                         scope: this
                     }, '-',
@@ -215,8 +215,8 @@ Ext.define('Cetera.plugin.List', {
         }
         
         if (record.get('disabled'))
-            value = '<img src="images/16X16/ball_red.gif" align="absmiddle" /> ' + value;
-            else value = '<img src="images/16X16/ball_green.gif" align="absmiddle" /> ' + value;
+            value = '<span class="x-fa fa-toggle-off"></span> ' + value;
+            else value = '<span class="x-fa fa-toggle-on"></span> ' + value;
     
         return Ext.String.format(
             '<div><b>{0}</b>&nbsp;{1}{5}{3}</div><div class="x-grid-rowbody ">{2}</div><div class="x-grid-rowbody ">{4}</div>', 

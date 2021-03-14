@@ -16,14 +16,14 @@ Ext.define('Cetera.users.MainPanel', {
 				title: "ID", 
 				hideable: false, 
 				menuDisabled: true, draggable: false,
-				width: 50, 
+				width: 100, 
 				sortable: true, 
 				dataIndex: 'id'
 			},		
 			{
 				tooltip: "CMS", 
 				hideable: false, menuDisabled: true, draggable: false,
-				width: 25, 
+				width: 30, 
 				sortable: false, 
 				dataIndex: 'bo', 
 				renderer: function (value, metaData){
@@ -33,24 +33,24 @@ Ext.define('Cetera.users.MainPanel', {
 			{
 				tooltip: _('Заблокирован'),
 				hideable: false, menuDisabled: true, draggable: false,
-				width: 25, sortable: false, dataIndex: 'disabled', 
+				width: 30, sortable: false, dataIndex: 'disabled', 
 				renderer: function (value, metaData){
-					if (value)
-						metaData.css = 'icon-user-disabled';
-						else metaData.css = 'icon-user';
+					if (value) {
+						return '<span class="x-fa fa-user-lock"></span>';
+                    }
 				}
 			},
 			{
 				tooltip: _('Соцсети'), 
 				hideable: false, menuDisabled: true, draggable: false,
-				width: 25, sortable: false, 
+				width: 30, sortable: false, 
 				dataIndex: 'external', 
 				renderer: function (value, metaData){
-					if (value == -6) metaData.css = 'icon-fb';
-					if (value == -7) metaData.css = 'icon-tw';
-					if (value == -8) metaData.css = 'icon-vk';
-					if (value == -10) metaData.css = 'icon-odno';
-					if (value == -9) metaData.css = 'icon-google';
+					if (value == -6) return '<span class="x-fab fa-facebook-square"></span>';
+					if (value == -7) return '<span class="x-fab fa-twitter-square"></span>';
+					if (value == -8) return '<span class="x-fab fa-vk"></span>';
+					if (value == -10) return '<span class="x-fab fa-odnoklassniki-square"></span>';
+					if (value == -9) return '<span class="x-fab fa-google-plus-square"></span>';
 				}
 			}
 		];	
@@ -94,11 +94,12 @@ Ext.define('Cetera.users.MainPanel', {
             pageSize: Cetera.defaultPageSize,         
             proxy: {
                 type: 'ajax',
-                url: 'include/data_users.php',
+                url: '/cms/include/data_users.php',
                 simpleSortMode: true,
                 reader: {
                     type: 'json',
-                    rootProperty: 'rows'
+                    rootProperty: 'rows',
+                    keepRawData: true
                 },
                 extraParams: {
                     'bo': false,
@@ -109,37 +110,37 @@ Ext.define('Cetera.users.MainPanel', {
     
         this.tbar = [
             {
-                iconCls:'icon-reload',
+                iconCls:'x-fa fa-sync',
                 tooltip: _('Обновить'),
                 handler: function () { this.reload(); },
                 scope: this
             },{
                 id: 'tb_user_new',
-                iconCls:'icon-new-user',
+                iconCls:'x-fa fa-user-plus',
                 tooltip: _('Новый пользователь'),
                 handler: function () { this.edit(0); },
                 scope: this
             },{
                 id: 'tb_user_delete',
-                iconCls:'icon-delete',
+                iconCls:'x-fa fa-user-slash',
                 tooltip: _('Удалить'),
                 handler: this.deleteUsers,
                 scope: this
             },'-',{
                 id: 'tb_user_disable',
-                iconCls:'icon-user-disabled',
+                iconCls:'x-fa fa-user-lock',
                 tooltip: _('Запретить доступ'),
                 handler: function () { this.call('disable'); },
                 scope: this
             },{
                 id: 'tb_user_enable',
-                iconCls:'icon-user',
+                iconCls:'x-fa fa-user-check',
                 tooltip:_('Разрешить доступ'),
                 handler: function () { this.call('enable'); },
                 scope: this
             },'-',{
                 id: 'tb_user_props',
-                iconCls:'icon-props',
+                iconCls:'x-fa fa-user-edit',
                 tooltip: _('Свойства'),
                 handler: function () { this.edit(this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this

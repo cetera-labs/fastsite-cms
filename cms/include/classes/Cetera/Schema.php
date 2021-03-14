@@ -759,7 +759,7 @@ class Schema {
 		foreach ($key['columns'] as $i => $col) {
 			if ($i) $sql .= ',';
 			$sql .= '`'.$col['name'].'`';
-			if ($col['length']) {
+			if (isset($col['length'])) {
 				$sql .= '('.$col['length'].')';
 			}
 		}

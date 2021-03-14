@@ -54,6 +54,7 @@ foreach (Menu::enum() as $menu) {
         'menu_alias'=> $menu->alias,
         'allowDrag' => false,
         'icon'      => 'images/icon_menu.png',
+        'iconCls'   => 'x-fa fa-bars',
         'children'  => $children,
         'expanded'  => true
     ];
