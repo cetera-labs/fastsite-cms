@@ -53,9 +53,6 @@ Ext.override(Ext.form.field.Checkbox, {
 	applyState: function(state) { this.setValue(state.value); }
 });
 
-Ext.override(Ext.form.Basic, {
-});
-
 Ext.DomQuery.pseudos.scrollable = function(c, t) {
     var r = [], ri = -1;
     for(var i = 0, ci; ci = c[i]; i++){

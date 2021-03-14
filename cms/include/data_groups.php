@@ -19,19 +19,15 @@ foreach ($r as $f) $data[$f['id']] = $f;
 
 $d = array();
 
-if (isset($_REQUEST['member'])) {
+if (isset($_REQUEST['member']) && $_REQUEST['member']) {
 	
-	if ($_REQUEST['member']) {
+    $u = User::getById($_REQUEST['member']);
+    if ($u) 
+        foreach ($u->getGroups() as $gid) 
+            if (isset($data[$gid])) 
+                $d[] = $data[$gid];
 	
-		$u = User::getById($_REQUEST['member']);
-		if ($u) 
-			foreach ($u->getGroups() as $gid) 
-				if (isset($data[$gid])) 
-					$d[] = $data[$gid];
-			
-	}
-	
-} elseif (isset($_REQUEST['avail']) && $_REQUEST['member']) {
+} elseif (isset($_REQUEST['avail']) && $_REQUEST['avail']) {
 	
     $u = User::getById($_REQUEST['avail']);
     if ($u) foreach ($u->getGroups() as $gid) 

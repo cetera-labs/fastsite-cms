@@ -18,7 +18,7 @@ Ext.define('Cetera.field.Folder', {
             
         this.setTriggers({
             del: {
-                cls: 'x-fas fa-times',
+                cls: 'x-fas fa-times-circle',
                 handler: this.onTrigger1Click,
             },
             user: {

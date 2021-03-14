@@ -14,7 +14,7 @@ Ext.define('Cetera.eventlog.Panel', {
             ],
             sorters: [{property: "dat", direction: "DESC"}],
             totalProperty: 'total',
-            pageSize: Cetera.defaultPageSize,
+            pageSize: Config.defaultPageSize,
             proxy: {
                 type: 'ajax',
                 url: '/cms/include/data_eventlog.php',
@@ -25,7 +25,7 @@ Ext.define('Cetera.eventlog.Panel', {
                     keepRawData: true
                 },
                 extraParams: {
-                    'limit': Cetera.defaultPageSize,
+                    'limit': Config.defaultPageSize,
                     'filter[]' : []
                 }
             }
@@ -35,7 +35,23 @@ Ext.define('Cetera.eventlog.Panel', {
 			model: 'Cetera.model.Event'		
 		});	
 
-		this.filterMenu = new Ext.menu.Menu();		
+		this.filterMenu = new Ext.menu.Menu();	
+
+		this.eventsStore.load({
+			scope: this,
+			callback: function(records) {
+				Ext.Array.each(records, function(rec){
+					this.filterMenu.add({
+						id: 'event_item_'+rec.getId(),
+						text: rec.get('name'),
+						checked: true, 
+						scope: this,
+						checkHandler: this.reload
+					});
+				}, this);
+				this.reload();
+			}
+		});        
     
         this.tbar = [
             {
@@ -81,37 +97,27 @@ Ext.define('Cetera.eventlog.Panel', {
 
     },
     
-    afterShow: function() {
-		this.eventsStore.load({
-			scope: this,
-			callback: function(records) {
-				Ext.Array.each(records, function(rec){
-					this.filterMenu.add({
-						id: 'event_item_'+rec.getId(),
-						text: rec.get('name'),
-						checked: true, 
-						scope: this,
-						checkHandler: this.reload
-					});
-				}, this);
-				this.reload();
-			}
-		});        
+    afterShow: function() {        
         this.callParent();
     },
     
     columns: [
-        {header: _('Событие'), width: 200, dataIndex: 'name'},
+        {header: _('Событие'), width: 250, dataIndex: 'name'},
         {
 			header: _('Пользователь'), 
 			width: 150, 
 			dataIndex: 'login', 
             renderer: function (value, p, record) {
-                return '<a href="javascript:Cetera.getApplication().openBoLink(\'user:' + record.get('user_id') + '\')">'+value+'</a>';
+                if (record.get('user_id') > 0) {
+                    return '<a href="javascript:Cetera.getApplication().openBoLink(\'user:' + record.get('user_id') + '\')">'+value+'</a>';
+                }
+                else {
+                    return '';
+                }
             }
 		},
-        {header: _('Дата'), width: 105, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
-        {header: _('Дополнительно'), width: 275, dataIndex: 'text', flex: 1}
+        {header: _('Дата'), width: 120, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
+        {header: _('Дополнительно'), dataIndex: 'text', flex: 1}
     ],
 
     reload: function() {

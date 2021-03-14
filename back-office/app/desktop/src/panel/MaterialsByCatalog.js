@@ -72,7 +72,7 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
         var win = this.editWindow;
         win.show();
 
-        cc = Ext.create( 'Cetera.panel.MaterialEdit' , {
+        var cc = Ext.create( 'Cetera.panel.MaterialEdit' , {
             win: win,
             objectId: id,
             sectionId: idcat,

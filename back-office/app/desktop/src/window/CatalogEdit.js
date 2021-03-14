@@ -15,7 +15,7 @@ Ext.define('Cetera.window.CatalogEdit', {
 
 	closable:true,
 	width:850,
-	height: 500,
+	height: 550,
 	minHeight: 300,
 	plain:true,
 	layout: 'fit',

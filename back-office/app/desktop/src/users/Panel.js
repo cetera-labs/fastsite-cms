@@ -9,7 +9,7 @@ Ext.define('Cetera.users.Panel', {
         
         this.baseParams = this.baseParams || {};
         this.bo = this.bo || false;
-        this.baseParams['limit'] = Cetera.defaultPageSize;
+        this.baseParams['limit'] = Config.defaultPageSize;
         this.baseParams['bo'] = this.bo;
         
         this.store = new Ext.data.JsonStore({
@@ -18,7 +18,7 @@ Ext.define('Cetera.users.Panel', {
             fields: ['id','login','name','disabled', 'bo', 'checked'],
             sorters: [{property: "login", direction: "ASC"}],
             totalProperty: 'total',
-            pageSize: Cetera.defaultPageSize,
+            pageSize: Config.defaultPageSize,
             proxy: {
                 type: 'ajax',
                 url: (this.url)?this.url:'/cms/include/data_users.php',

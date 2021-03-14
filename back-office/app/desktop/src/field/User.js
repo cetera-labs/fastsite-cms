@@ -8,7 +8,7 @@ Ext.define('Cetera.field.User', {
     
         this.setTriggers({
             del: {
-                cls: 'x-fas fa-user-slash',
+                cls: 'x-fas fa-times-circle',
                 handler: this.onTrigger1Click,
             },
             user: {

@@ -91,7 +91,7 @@ Ext.define('Cetera.users.MainPanel', {
             fields: userFields,
             sorters: [{property: "login", direction: "ASC"}],
             totalProperty: 'total',  
-            pageSize: Cetera.defaultPageSize,         
+            pageSize: Config.defaultPageSize,
             proxy: {
                 type: 'ajax',
                 url: '/cms/include/data_users.php',
@@ -103,7 +103,7 @@ Ext.define('Cetera.users.MainPanel', {
                 },
                 extraParams: {
                     'bo': false,
-                    limit: Cetera.defaultPageSize
+                    limit: Config.defaultPageSize
                 }
             }    
         });
@@ -114,13 +114,22 @@ Ext.define('Cetera.users.MainPanel', {
                 tooltip: _('Обновить'),
                 handler: function () { this.reload(); },
                 scope: this
-            },{
+            },
+            {
                 id: 'tb_user_new',
                 iconCls:'x-fa fa-user-plus',
                 tooltip: _('Новый пользователь'),
                 handler: function () { this.edit(0); },
                 scope: this
-            },{
+            },
+            {
+                id: 'tb_user_props',
+                iconCls:'x-fa fa-user-edit',
+                tooltip: _('Свойства'),
+                handler: function () { this.edit(this.getSelectionModel().getSelection()[0].getId()); },
+                scope: this
+            },            
+            {
                 id: 'tb_user_delete',
                 iconCls:'x-fa fa-user-slash',
                 tooltip: _('Удалить'),
@@ -137,12 +146,6 @@ Ext.define('Cetera.users.MainPanel', {
                 iconCls:'x-fa fa-user-check',
                 tooltip:_('Разрешить доступ'),
                 handler: function () { this.call('enable'); },
-                scope: this
-            },'-',{
-                id: 'tb_user_props',
-                iconCls:'x-fa fa-user-edit',
-                tooltip: _('Свойства'),
-                handler: function () { this.edit(this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },'-',{
                 id: 'tb_user_bo',

@@ -42,24 +42,7 @@ Ext.define('Cetera.panel.MaterialEdit', {
              scope: this,
              interval: 10000
         }); 
-        
-        var tabs = [];
-
-        if (this.sectionId == -2) {
-            this.generateUserPanels();
-            tabs.push([
-                {
-                    title:_('Членство в группах'),
-                    layout:'anchor',
-                    defaults: {anchor: '0'},
-                    border    : false,
-                    bodyBorder: false,
-                    bodyStyle:'background: none; padding: 5px',
-                    items: [this.mGrid, this.aGrid]
-                }            
-            ]);
-        }
-        
+                
         this.tabPanel = Ext.create('Ext.TabPanel',{
             activeTab : 0,
             border    : false,
@@ -68,8 +51,7 @@ Ext.define('Cetera.panel.MaterialEdit', {
             defaults  :{
                 height: this.win.height-105, 
                 bodyStyle:'padding:10px'
-            }, 
-            items: tabs
+            }
         });
         
         this.items = this.tabPanel;
@@ -78,8 +60,8 @@ Ext.define('Cetera.panel.MaterialEdit', {
         
         this.saveParams = {};     
         
-        this.callParent();        
-        
+        this.callParent();
+                
         Ext.Ajax.request({
             url: '/cms/include/data_object_for_edit.php',
             params: {
@@ -165,6 +147,20 @@ Ext.define('Cetera.panel.MaterialEdit', {
             }, this );
             this.tabPanel.add(tab);
         }, this );
+        
+        if (this.sectionId == -2) {
+            this.generateUserPanels();        
+            this.tabPanel.add({
+                title:_('Членство в группах'),
+                layout:'anchor',
+                defaults: {anchor: '0'},
+                border    : false,
+                bodyBorder: false,
+                bodyStyle:'background: none; padding: 5px',
+                items: [this.mGrid, this.aGrid]
+            });
+        }        
+        
         this.tabPanel.setActiveTab(0);
     },
     
@@ -213,7 +209,8 @@ Ext.define('Cetera.panel.MaterialEdit', {
             if (Cetera.getApplication) Cetera.getApplication().msg('<span style="color:red">'+Config.Lang.materialNotSaved+'</span>', Config.Lang.materialFixFields, 3000);
             var f = this.getForm().findInvalid();
             if (f) {
-                f.getAt(0).ensureVisible();
+                this.tabPanel.setActiveTab( f.getAt(0).up('panel') );
+                //f.getAt(0).ensureVisible();
                 return;
             }
         }			
@@ -239,15 +236,13 @@ Ext.define('Cetera.panel.MaterialEdit', {
             failure: function(form, action) {
                 var s = '';
                 //console.log(action);
-                if (action.result)
-                {
+                if (action.result) {
                     Ext.Object.each(action.result.errors, function(key, value, myself) {
                         s += value + '<br>';
                     });	
                     if (Cetera.getApplication) Cetera.getApplication().msg('<span style="color:red">'+Config.Lang.materialNotSaved+'</span>', s, 3000);
                 }
-                else
-                {
+                else {
                     var obj = Ext.decode(action.response.responseText);
                     if (Cetera.getApplication) Cetera.getApplication().msg('<span style="color:red">'+Config.Lang.materialNotSaved+'</span>', '', 3000);
                     var win = Ext.create('Cetera.window.Error', {
@@ -260,7 +255,8 @@ Ext.define('Cetera.panel.MaterialEdit', {
                 
                 var f = form.findInvalid();
                 if (f) {
-                    f.getAt(0).ensureVisible();
+                    this.tabPanel.setActiveTab( f.getAt(0).up('panel') );
+                    //f.getAt(0).ensureVisible();
                 }
 
             }

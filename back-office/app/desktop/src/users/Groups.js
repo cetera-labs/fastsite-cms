@@ -6,26 +6,26 @@ Ext.define('Cetera.users.Groups', {
        
         this.tbar = [
             {
-                iconCls:'icon-reload',
+                iconCls:'x-fa fa-sync',
                 tooltip: _('Обновить'),
                 handler: function () { this.reload(); },
                 scope: this
             },{
                 id: 'tb_group_new',
-                iconCls: 'icon-new-group',
+                iconCls:'x-fa fa-plus',
                 tooltip: _('Новая группа'),
                 handler: function () { this.newGroup(); },
                 scope: this
             },{
                 id: 'tb_group_delete',
-                iconCls:'icon-delete2',
+                iconCls:'x-fa fa-trash',
                 disabled: true,
                 tooltip: _('Удалить'),
                 handler: this.deleteGroup,
                 scope: this
             },'-',{
                 id: 'tb_group_props',
-                iconCls:'icon-props',
+                iconCls:'x-fa fa-edit',
                 disabled: true,
                 tooltip: _('Свойства'),
                 handler: function () { this.edit(); },
