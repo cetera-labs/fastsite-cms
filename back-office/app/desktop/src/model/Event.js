@@ -10,7 +10,7 @@ Ext.define('Cetera.model.Event', {
     proxy: {
 		type: 'ajax',
 		simpleSortMode: true,
-        url : 'include/data_events.php',		
+        url : '/cms/include/data_events.php',		
         reader: {
 			type: 'json',
             rootProperty: 'rows'

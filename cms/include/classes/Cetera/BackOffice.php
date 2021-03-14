@@ -249,7 +249,7 @@ class BackOffice {
 					'name' 	   => $translator->_('Журнал'),
 					'icon'     => 'images/audit1.gif',
 					'class'    => 'EventlogPanel',
-					'iconCls'  => 'x-fa fa-file',
+					'iconCls'  => 'x-fa fa-book',
 					'class'    => 'Cetera.eventlog.Panel',
                 ); 
                 
