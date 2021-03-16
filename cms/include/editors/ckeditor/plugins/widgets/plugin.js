@@ -21,7 +21,7 @@ function showWidgetWindow(editor, widgetName, sel) {
 
     var win = Ext.create('Ext.Window', {
         plain: true,
-        width: 700,
+        width: 800,
         modal: true,
         layout: 'fit',
         border: false,
@@ -37,7 +37,7 @@ function showWidgetWindow(editor, widgetName, sel) {
                     var window = this.up('window');
                     var widgetPanel = window.items.getAt(0);
                     
-                    if (!widgetPanel.isValid()) return;
+                    if (!widgetPanel || !widgetPanel.isValid()) return;
                     
             		if (sel) {
                         sel.setAttributes({
