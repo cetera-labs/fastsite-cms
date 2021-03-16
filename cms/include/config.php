@@ -6,7 +6,7 @@ $application->initSession();
 $application->initBo();
 
 $translator = $application->getTranslator();  
-include_once(__DIR__.'include/field_editors.php');
+include_once(__DIR__.'/field_editors.php');
 
 $application->initPlugins();
 
