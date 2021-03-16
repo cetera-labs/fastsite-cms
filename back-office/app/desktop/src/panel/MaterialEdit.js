@@ -28,21 +28,7 @@ Ext.define('Cetera.panel.MaterialEdit', {
         if (this.sectionId == -2) {
             this.objectDefinitionId = Config.userObjectDefinitionId
         }
-                
-        this.task = Ext.TaskManager.start({
-             run: function() {
-                if (this.objectId > 0) {
-                    Ext.Ajax.request({
-                        url: '/cms/include/action_materials.php?action=lock&mat_id=' + this.objectId + '&type=' + this.objectDefinitionId,
-                        failure: function(){},
-                        scope: this
-                    });
-                }
-             },
-             scope: this,
-             interval: 10000
-        }); 
-                
+                                
         this.tabPanel = Ext.create('Ext.TabPanel',{
             activeTab : 0,
             border    : false,
@@ -81,6 +67,21 @@ Ext.define('Cetera.panel.MaterialEdit', {
     },
     
     buildEditor : function() {
+        
+        this.task = Ext.TaskManager.start({
+             run: function() {
+                if (this.objectId > 0) {
+                    Ext.Ajax.request({
+                        url: '/cms/include/action_materials.php?action=lock&mat_id=' + this.objectId + '&type=' + this.objectDefinitionId,
+                        failure: function(){},
+                        scope: this
+                    });
+                }
+             },
+             scope: this,
+             interval: 10000
+        });         
+        
         this.win.setTitle('Редактирование: [' + this.editData.object_definition.alias + ':' + this.objectId + '] ' + this.editData.fields.name);
         
         this.saveParams = {
