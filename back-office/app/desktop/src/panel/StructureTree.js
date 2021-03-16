@@ -295,7 +295,7 @@ Ext.define('Cetera.panel.StructureTree', {
         var tree = this;
         var path = tree.getSelectedPath();
         Ext.Ajax.request({
-            url: 'include/action_catalog.php',
+            url: '/cms/include/action_catalog.php',
             params: { action: 'up', id: id },
             success: function() {
                 tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode, function() {
@@ -311,7 +311,7 @@ Ext.define('Cetera.panel.StructureTree', {
         var tree = this;
         var path = tree.getSelectedPath();
         Ext.Ajax.request({
-            url: 'include/action_catalog.php',
+            url: '/cms/include/action_catalog.php',
             params: { action: 'down', id: id },
             success: function() {
                 tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode, function() {
@@ -366,7 +366,7 @@ Ext.define('Cetera.panel.StructureTree', {
             handler: function() { 
                 if (dest_tree.getSelectedId()<0) return;
                 form.getForm().submit({
-                    url:     'include/action_catalog.php', 
+                    url:     '/cms/include/action_catalog.php', 
                     params:  {action: 'cat_copy', id: id, dest: dest_tree.getSelectedId() },
                     waitMsg: Config.Lang.wait,
                     scope:   this,
@@ -423,7 +423,7 @@ Ext.define('Cetera.panel.StructureTree', {
         Ext.MessageBox.confirm(Config.Lang.confirmation, Config.Lang.r_u_sure, function(btn) {
             if (btn == 'yes') {
                 Ext.Ajax.request({
-                   url: 'include/action_catalog.php',
+                   url: '/cms/include/action_catalog.php',
                    params: { action: 'cat_delete', id: id },
                    success: function() {
                         tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode);
@@ -461,7 +461,7 @@ Ext.define('Cetera.panel.StructureTree', {
 		win.show();
 		win.setLoading(true);
 		Cetera.Ajax.request({
-		   url: 'include/action_backup.php',
+		   url: '/cms/include/action_backup.php',
            timeout: 1000000,
 		   params: { 
 				action: 'backup', 
@@ -506,7 +506,7 @@ Ext.define('Cetera.panel.StructureTree', {
 						var form = this.up('form').getForm();
 						if (!form.isValid()) return;
 						form.submit({
-							url: 'include/action_backup.php',
+							url: '/cms/include/action_backup.php',
 							waitMsg: Config.Lang.wait,
 						    params: { 
 								action: 'restore',

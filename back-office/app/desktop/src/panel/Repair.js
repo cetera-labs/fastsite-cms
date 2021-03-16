@@ -101,7 +101,7 @@ Ext.define('Cetera.panel.Repair', {
     fix: function() {
         this.btnRepair.hide();  
         this.form.getForm().submit({
-            url:'include/action_fix.php', 
+            url:'/cms/include/action_fix.php', 
             waitMsg:_('Подождите ...'),
             scope: this,
             success: function(form, action) {

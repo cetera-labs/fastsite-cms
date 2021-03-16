@@ -292,7 +292,7 @@ Ext.define('Cetera.view.main.Tree', {
         var tree = this;
         var path = tree.getSelectedPath();
         Ext.Ajax.request({
-            url: 'include/action_catalog.php',
+            url: '/cms/include/action_catalog.php',
             params: { action: 'down', id: id },
             success: function() {
                 tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode, function() {
@@ -347,7 +347,7 @@ Ext.define('Cetera.view.main.Tree', {
             handler: function() { 
                 if (dest_tree.getSelectedId()<0) return;
                 form.getForm().submit({
-                    url:     'include/action_catalog.php', 
+                    url:     '/cms/include/action_catalog.php', 
                     params:  {action: 'cat_copy', id: id, dest: dest_tree.getSelectedId() },
                     waitMsg: Config.Lang.wait,
                     scope:   this,
@@ -404,7 +404,7 @@ Ext.define('Cetera.view.main.Tree', {
         Ext.MessageBox.confirm(Config.Lang.confirmation, Config.Lang.r_u_sure, function(btn) {
             if (btn == 'yes') {
                 Ext.Ajax.request({
-                   url: 'include/action_catalog.php',
+                   url: '/cms/include/action_catalog.php',
                    params: { action: 'cat_delete', id: id },
                    success: function() {
                         tree.reloadNode(tree.getSelectionModel().getLastSelected().parentNode);

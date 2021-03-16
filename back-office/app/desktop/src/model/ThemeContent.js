@@ -11,6 +11,6 @@ Ext.define('Cetera.model.ThemeContent', {
 
     proxy: {
 		type: 'ajax',
-        url: 'include/data_theme_content.php'
+        url: '/cms/include/data_theme_content.php'
     }		
 });

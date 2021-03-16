@@ -137,7 +137,7 @@ Ext.define('Cetera.eventlog.Panel', {
     
     call: function(action) {
         Ext.Ajax.request({
-            url: 'include/action_eventlog.php',
+            url: '/cms/include/action_eventlog.php',
             params: { 
                 action: action
             },

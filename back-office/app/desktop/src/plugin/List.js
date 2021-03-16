@@ -235,7 +235,7 @@ Ext.define('Cetera.plugin.List', {
         if (!rec) return;
     
         Ext.Ajax.request({
-            url: 'include/action_plugins.php',
+            url: '/cms/include/action_plugins.php',
             params: { 
                 action: action, 
                 'plugin': rec.get('id')

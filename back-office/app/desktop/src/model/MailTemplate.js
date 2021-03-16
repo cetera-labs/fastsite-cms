@@ -17,10 +17,10 @@ Ext.define('Cetera.model.MailTemplate', {
 		type: 'ajax',
 		simpleSortMode: true,
         api: {
-            read    : 'include/data_mail_templates.php',
-            update  : 'include/data_mail_templates.php?action=update',
-            create  : 'include/data_mail_templates.php?action=create',
-            destroy : 'include/data_mail_templates.php?action=destroy'			
+            read    : '/cms/include/data_mail_templates.php',
+            update  : '/cms/include/data_mail_templates.php?action=update',
+            create  : '/cms/include/data_mail_templates.php?action=create',
+            destroy : '/cms/include/data_mail_templates.php?action=destroy'			
         },		
         reader: {
 			type: 'json',

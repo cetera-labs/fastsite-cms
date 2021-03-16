@@ -15,7 +15,7 @@ Ext.define('Cetera.plugin.Install', {
             bodyPadding: 10,
             html: Config.Lang.loading,
             loader: {
-                url: 'include/action_plugins.php',
+                url: '/cms/include/action_plugins.php',
                 autoLoad: true,
 				ajaxOptions: {
 					timeout: 1000000

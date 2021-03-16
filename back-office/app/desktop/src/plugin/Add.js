@@ -14,7 +14,7 @@ Ext.define('Cetera.plugin.Add', {
             model: 'Cetera.model.Plugin',
             proxy: {
                 type: 'ajax',
-                url:  'include/data_plugins_lib.php',
+                url:  '/cms/include/data_plugins_lib.php',
                 reader: {
                     type: 'json',
                     root: 'rows'
