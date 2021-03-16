@@ -12,6 +12,7 @@ abstract class AbstractController extends AbstractActionController
     protected $twig;
     protected $uu;
     protected $c;
+    protected $section;
     protected $material = null;
     
     public $twigParams = [
@@ -24,6 +25,7 @@ abstract class AbstractController extends AbstractActionController
         $this->twig = $this->application->getTwig();
         $this->uu = $this->application->getUnparsedUrl();
         $this->c = $this->application->getCatalog();
+        $this->section = $this->c;
         
         if ($this->uu) try {
             $arr = explode('/',$this->uu);
