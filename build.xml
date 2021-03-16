@@ -92,11 +92,6 @@
                         <include name="cms/***" />              
                     </fileset>
                 </copy> 
-                <copy todir="${CMS_DIR}" overwrite="true">
-                    <fileset dir="${CMS_UI}">
-                        <include name="ui.html" />           
-                    </fileset>
-                </copy>
             </then>
         </if>    
     </target>    

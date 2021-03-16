@@ -49,7 +49,7 @@ Ext.define('Cetera.view.main.header.HeaderView', {
         iconCls: 'x-fa fa-sign-out-alt',
         text: _('Выход'),
         hrefTarget: '_top',
-        href: "/cms/logout.php?redirect=index.html"
+        href: "/cms/logout.php?redirect=ui.html"
     }   
   ]
 });

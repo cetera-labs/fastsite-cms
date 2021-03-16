@@ -37,12 +37,12 @@ module.exports = async function (env) {
   
   if (environment === 'production') { isProd = true; }
   
-  if(isProd) {
+  if(isProd) {     
     replace({
       regex: '<script.+?(?=src)src="main.js[^<]+</script>',
       replacement: "",
       paths: ['index.html']
-    });
+    });   
   }
 
   portfinder.basePort = (env && env.port) || 1962
@@ -87,7 +87,8 @@ module.exports = async function (env) {
       node: false,
       devServer: {
         proxy: {
-            '/cms':    'http://localhost:8080',
+            '/cms/include':    'http://localhost:8080',
+            '/cms/lang':    'http://localhost:8080',
             '/themes': 'http://localhost:8080',
         },
         contentBase: outputFolder,

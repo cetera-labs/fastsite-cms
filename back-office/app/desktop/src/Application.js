@@ -26,6 +26,10 @@ Ext.define('Cetera.Application', {
 
 	},
     
+    reload: function() {
+        document.location.reload();      
+    },    
+    
     launchBackOffice: function () {
         
         this.scriptsLoading = 0;

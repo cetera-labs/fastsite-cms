@@ -20,7 +20,17 @@
           "src": "${build.id}/sass/save"
         }
       }
-    }
+    },
+    "modern": {
+      "toolkit": "modern",
+      "theme": "theme-triton",
+      "sass": {
+        "generated": {
+          "var": "${build.id}/sass/save.scss",
+          "src": "${build.id}/sass/save"
+        }
+      }
+    }    
   },
 
   "classpath": ["app/shared/src","app/${build.id}/src"],
@@ -42,23 +52,29 @@
   },
 
   "resources": [
-    { "path": "resources", "output": "shared" }
-
-    ,{ "path": "resources/${build.id}" }
+    { "path": "resources", "output": "shared" },
+    { "path": "resources/${build.id}" }
 
   ],
 
   "output": {
-    "base": "${workspace.build.dir}",
-    "page": "ui.html",
-    "manifest": "cms/ui/generatedFiles/${build.id}.json",
-    "js": "cms/ui/generatedFiles/app.js",
+    "base": "${workspace.build.dir}/cms/ui",
+    "page": "../ui.html",
+    "manifest": "${build.id}.json",
+    "js": "${build.id}/app.js",
     "appCache": {"enable": false},
     "resources": {
-      "path": "cms/ui/resources",
-      "shared": "cms/ui/resources"
+      "path": "${build.id}/resources",
+      "shared": "resources"
     }
   },
+  
+  "bootstrap": {
+    "base": "${app.dir}/cms/ui",
+    "manifest": "${build.id}.json",
+    "microloader": "bootstrap.js",
+    "css": "bootstrap.css"
+  },  
   
   "fashion": {
     "missingParameters": "error",
@@ -108,12 +124,6 @@
     "watch": {
       "delay": 250
     }
-  },
-  "bootstrap": {
-    "base": "${app.dir}/generatedFiles",
-    "manifest": "${build.id}.json",
-    "microloader": "bootstrap.js",
-    "css": "bootstrap.css"
   },
 
   "cache": {

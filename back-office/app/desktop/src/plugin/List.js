@@ -24,23 +24,7 @@ Ext.define('Cetera.plugin.List', {
             handler: function(widget, event) {
                 this.call('disable');
             }
-        });
-        
-        this.upgradeAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-up', 
-            text: Config.Lang.upgrade,
-            disabled: true,
-            scope: this,
-            handler: function(widget, event) {
-            
-                var rec = this.getSelectionModel().getSelection()[0];
-                if (!rec) return;            
-            
-                Ext.create('Cetera.plugin.Install',{
-                    pluginName: rec.get('id')
-                });
-            }
-        });        
+        });       
         
         this.deleteAction = Ext.create('Ext.Action', {
             iconCls: 'x-fa fa-trash',
@@ -122,7 +106,6 @@ Ext.define('Cetera.plugin.List', {
                     }, '-',
                     this.enableAction,
                     this.disableAction,
-                    //this.upgradeAction,
                     this.deleteAction, 
                     '-',
                     /*{
@@ -162,7 +145,6 @@ Ext.define('Cetera.plugin.List', {
             items: [
                 this.enableAction,
                 this.disableAction,
-                //this.upgradeAction,
                 this.deleteAction
             ]
         });
@@ -184,18 +166,15 @@ Ext.define('Cetera.plugin.List', {
                         this.disableAction.enable();
                     }
                     if (rec.get('composer')) {
-                        this.upgradeAction.disable();
                         this.deleteAction.disable();
                     }
                     else {
-                        this.upgradeAction.enable();
                         this.deleteAction.enable();                        
                     }
                 } else {
                     this.deleteAction.disable();
                     this.enableAction.disable();
                     this.disableAction.disable();
-                    this.upgradeAction.disable();
                 }
             },
             scope: this
@@ -208,12 +187,7 @@ Ext.define('Cetera.plugin.List', {
      * @private
      */
     formatTitle: function(value, p, record){
-    
-        var upgrade = '';
-        if (record.get('upgrade')) {
-            upgrade = '<img src="images/au.gif" align="absmiddle" /> ' + Config.Lang.upgradeAvail + ' (v' + record.get('upgrade') + ')';
-        }
-        
+            
         if (record.get('disabled'))
             value = '<span class="x-fa fa-toggle-off"></span> ' + value;
             else value = '<span class="x-fa fa-toggle-on"></span> ' + value;
@@ -224,7 +198,6 @@ Ext.define('Cetera.plugin.List', {
             record.get('version')?record.get('version'):'', 
             record.get('description'),
             record.get('disabled')?(' (' + Config.Lang.off + ')'):'',
-            upgrade,
             record.get('composer')?'[COMPOSER]':''
         );
     },
