@@ -10,7 +10,32 @@
   <script type="text/javascript">
     var Ext = Ext || {};
     Ext.beforeLoad = function (tags) {
-      Ext.manifest ='cms/ui/desktop.json';
+    
+        var s = location.search,  // the query string (ex "?foo=1&bar")
+            profile = 'desktop';
+
+        // For testing look for "?classic" or "?modern" in the URL to override
+        // device detection default.
+        //
+        if (s.match(/\bclassic\b/)) {
+            profile = 'desktop';
+        }
+        else if (s.match(/\bmodern\b/)) {
+            profile = 'modern';
+        }
+        // uncomment this if you have added native build profiles to your app.json
+        /*else if (tags.webview) {
+            if (tags.ios) {
+                profile = 'ios';
+            }
+            // add other native platforms here
+        }*/
+        else {
+            //profile = tags.desktop ? 'classic' : 'modern';
+            //profile = tags.phone ? 'modern' : 'classic';
+        }
+            
+        Ext.manifest ='cms/ui/'+profile+'.json';
     };    
   </script>
 
@@ -22,5 +47,5 @@
     <div id="splash">      
       <div class="fa fa-spin inner-circle"></div>
     </div>
-  <script type="text/javascript" src="main.js?4b58516fcc78fc0b9cf9"></script></body>
+  <script type="text/javascript" src="main.js?8eae88421e7a5f68794b"></script></body>
 </html>

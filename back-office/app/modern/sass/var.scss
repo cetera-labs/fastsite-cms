@@ -1,0 +1,50 @@
+/*
+ * This file defines variables used throughout the application for modern and
+ * classic builds.
+ */
+
+$base-color: dynamic(#35baf6);
+
+$panel-navigation-background-color: dynamic(#32404e);
+$panel-navigation-item-line-height: dynamic(64px);
+$panel-navigation-item-text-color: dynamic(#ADB3B8);
+
+$progress-bar-background-color: dynamic(#458fd2);
+
+//Form and Toolbar Button UI colors
+
+$color-blue: dynamic(#167abc);
+$color-soft-cyan: dynamic(#03b4d5);
+$color-soft-blue: dynamic(#2eadf5);
+$color-soft-green: dynamic(#9cc96b);
+$color-soft-orange: dynamic(#ffc107);
+$color-soft-red: dynamic(#e44959);
+$color-soft-purple: dynamic(#925e8b);
+$color-gray: dynamic(#949495);
+$color-green: dynamic(#16b603);
+
+$chart-icon-background-color: dynamic(#f1f1f1);
+
+$grid-item-edit-btn-color: dynamic(#e9e9e9);
+$grid-item-close-btn-color: dynamic(#fc8999);
+$grid-item-ban-btn-color: dynamic(#ffc000);
+$legend-research: dynamic(#6aa5db);
+$legend-marketing: dynamic(#ee929c);
+
+$force-background-color: dynamic(#56B750);
+
+$like-comment-btn-background-color: dynamic(#f4f4f4);
+$article-comment-color: dynamic(#eee);
+
+//----------------------------------------------------
+// Wizards
+
+$wizard-primary-background-color: dynamic(#579ddb);
+$wizard-button-background-color: dynamic(#579ddb);
+
+$wizard-two-primary-background-color: dynamic(#986291);
+$wizard-two-button-background-color: dynamic(#925e8b);
+
+$wizard-three-primary-background-color: dynamic(#9cc96b);
+$wizard-three-button-background-color: dynamic(#9cc96b);
+

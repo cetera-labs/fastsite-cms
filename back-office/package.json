@@ -25,12 +25,14 @@
     "dev:desktop": "webpack-dev-server --env.profile=desktop --env.browser=yes --env.verbose=no",
     "build:desktop": "npm run clean && cross-env webpack --env.profile=desktop --env.environment=production --env.treeshake=yes",
     "dev:modern": "webpack-dev-server --env.profile=modern --env.browser=yes --env.verbose=no",
-    "build:modern": "npm run clean && cross-env webpack --env.profile=modern --env.environment=production --env.treeshake=yes"    
+    "build:modern": "npm run clean && cross-env webpack --env.profile=modern --env.environment=production --env.treeshake=yes"
   },
   "dependencies": {
     "@sencha/ext": "~7.0.0",
     "@sencha/ext-classic": "~7.0.0",
     "@sencha/ext-classic-theme-triton": "~7.0.0",
+    "@sencha/ext-modern": "^7.0.0",
+    "@sencha/ext-modern-theme-triton": "^7.0.0",
     "@sencha/ext-ux": "^7.0.0",
     "ace-builds": "^1.4.12"
   },

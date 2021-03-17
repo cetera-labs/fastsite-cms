@@ -69,38 +69,6 @@ $blank-page-color: dynamic(#cacaca);
     }
 }
 
-
-
-
-.launching {
-    background-color: $base-color;
-    background-image: url('images/lock1.jpg');
-    background-size: cover;
-    background-repeat: repeat;    
-}
-
-#splash {
-    color: white;
-    margin-top:20%;
-    font-family:Arial;
-    font-size:64px;
-    text-align:center;
-}
-
-.inner-circle {
-    background-image: url(images/cmslogo.png);
-    background-size: cover;
-    background-position: center;
-    background-color: #fff;
-
-    border-radius: 50px;
-    
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    position: relative;
-}
-
 /* Catalogs tree */
 .tree-folder-visible { background-image:url(images/folder1.gif)!important;}
 .tree-folder-hidden { background-image:url(images/folder1_hidden.gif)!important;}

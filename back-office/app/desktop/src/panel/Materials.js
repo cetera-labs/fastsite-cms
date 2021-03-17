@@ -4,15 +4,17 @@ Ext.define('Cetera.panel.Materials', {
 
     mat_type: 0,   
 	
-	requires: 'Cetera.model.Material',
+	requires: [
+        'Cetera.model.Material',
+        'Ext.Responsive'
+    ],  
     
-    border: false,
-    stripeRows: true,   
-    multiSelect: true,     
+    border: false, 
+    stripeRows: true, 
+    multiSelect: true,                 
               
     columns: [
         {
-            header: "", 
             width: 25, 
             sortable: false, 
             dataIndex: 'icon', 
@@ -22,26 +24,86 @@ Ext.define('Cetera.panel.Materials', {
                     else return '<span class="x-fas fa-eye-slash"></span>';
             }
         },
-        {header: _('Сорт.'), width: 75, dataIndex: 'tag'},
-        {header: "ID", width: 75, dataIndex: 'id'},
+        {
+            header: _('Сорт.'), width: 75, dataIndex: 'tag',
+            responsiveConfig: {
+                small: {
+                    hidden: true
+                },
+                large: {
+                    hidden: false
+                }
+            },            
+        },
+        {
+            header: "ID", width: 75, dataIndex: 'id',
+            responsiveConfig: {
+                small: {
+                    width: 50,
+                    hidden: true
+                },
+                large: {
+                    width: 75,
+                    hidden: false
+                }
+            },              
+        },
         {
 			header: _('Заголовок'), width: 75, dataIndex: 'name', flex:1,
             renderer: function (value,meta,rec) {
-				if (rec.get('locked'))
-				{
-					value += '<br><small>' + Ext.String.format(Config.Lang.materialLocked, rec.get('locked_login')) + '</small>';
-				}
+				if (rec.get('locked')) value += '<br><small>' + Ext.String.format(Config.Lang.materialLocked, rec.get('locked_login')) + '</small>';
                 return value;
-            }			
+            }, 			
 		},
-        {header: "Alias", width: 175, dataIndex: 'alias'},
-        {header: _('Дата'), width: 120, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i')},
-        {header: _('Автор'), width: 100, dataIndex: 'autor'},
+        {
+            header: "Alias", width: 175, dataIndex: 'alias',
+            responsiveConfig: {
+                small: {
+                    width: 100
+                },
+                large: {
+                    width: 175
+                }
+            },            
+        },
+        {
+            header: _('Дата'), width: 120, dataIndex: 'dat', renderer: Ext.util.Format.dateRenderer('d.m.Y H:i'),
+            responsiveConfig: {
+                small: {
+                    width: 80,
+                    renderer: Ext.util.Format.dateRenderer('d.m.y'),
+                },
+                large: {
+                    width: 120,
+                    renderer: Ext.util.Format.dateRenderer('d.m.Y H:i'),
+                }
+            },             
+        },
+        {
+            header: _('Автор'), width: 100, dataIndex: 'autor',
+            visible: false,
+            responsiveConfig: {
+                small: {
+                    hidden: true
+                },
+                large: {
+                    hidden: false
+                }
+            },            
+        },
 		{
 			header: _('Раздел'), 
 			width: 100, 
 			dataIndex: 'catalog',
-			getSortParam: function(){ return 'E.name'; }
+			getSortParam: function(){ return 'E.name'; },
+            responsiveConfig: {
+                small: {
+                    hidden: true
+                },
+                large: {
+                    hidden: false
+                }
+            },            
 		}
     ],
      

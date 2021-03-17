@@ -1,7 +1,11 @@
 Ext.define('Cetera.Application', {
 	extend: 'Ext.app.Application',
 	name: 'Cetera',
-	requires: ['Cetera.*','Ext.form.*'],
+	requires: [
+        'Cetera.*',
+        'Ext.form.*',
+        'Ext.Responsive'
+    ],  
     
     scriptsLoading: 0,
       
@@ -75,15 +79,16 @@ Ext.define('Cetera.Application', {
 				expanded: true,
 				iconCls: 'tree-folder-visible'
 			}
-		});		
+		});	
         
         Ext.create({xtype: 'mainview', plugins: 'viewport'});
+        
+        var mainTree = Ext.getCmp('main_tree');
         
         if (window.location.hash) {
             this.openBoLink(window.location.hash.substr(1));
         }
         else {    
-            var mainTree = Ext.getCmp('main_tree');
             mainTree.expandPath('/root/item-0-1', 'id', '/', function(bSuccess, oLastNode) {
                 if (bSuccess && oLastNode.firstChild) {
                     mainTree.getSelectionModel().doSingleSelect(oLastNode.firstChild);

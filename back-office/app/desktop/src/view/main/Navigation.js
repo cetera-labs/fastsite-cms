@@ -40,6 +40,10 @@ Ext.define('Cetera.view.main.Navigation', {
         this.on({
             'itemclick' : function( t, record, item, index, e, eOpts ) {
                 Cetera.getApplication().activateModule(record.getId());
+                var westPanel = Ext.getCmp('west-panel');
+                if (westPanel.closable) {
+                    westPanel.close();
+                }
             },
             scope:this
         });

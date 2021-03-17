@@ -1,5 +1,10 @@
 Ext.define('Cetera.view.main.header.HeaderView', {
   extend: 'Ext.toolbar.Toolbar',
+  
+	requires: [
+        'Ext.Responsive'
+    ],  
+  
   height: 50,
   xtype: 'headerview',
   cls: 'headerview',
@@ -8,27 +13,83 @@ Ext.define('Cetera.view.main.header.HeaderView', {
   },
   items: [
     {
+        iconCls: 'x-fa fa-bars',
+        xtype: 'button',
+        tooltip: _('Навигация'),
+        hidden: true,
+        responsiveConfig: {
+            small: {
+                hidden: false,
+            },
+            large: {
+                hidden: true,
+            }
+        },   
+        handler: function() {
+            var westPanel = Ext.getCmp('west-panel');
+            if (westPanel.isHidden()) {
+                westPanel.show();
+            } 
+            else {
+                westPanel.hide();
+            } 
+        } 
+    },  
+    {
         xtype: 'component',
         cls: 'app-header-title',
-        html: 'Fastsite CMS'
+        html: 'Fastsite CMS',
+        responsiveConfig: {
+            small: {
+                html: 'Fastsite',
+            },
+            large: {
+                html: 'Fastsite CMS',
+            }
+        },        
     },  
     '->',
     {
         xtype: 'button',
         text: _('Перейти на сайт'),
         hrefTarget: '_top',
-        href: "/"
+        href: "/",
+        responsiveConfig: {
+            small: {
+                hidden: true
+            },
+            large: {
+                hidden: false
+            }
+        },   
     },	
     {
         iconCls: 'x-fa fa-bug',
         xtype: 'button',
-        text: _('Сообщить об ошибке'),
-        href: 'https://cetera.ru/support/default.php?project=CCD&lang='+Config.locale
+        tooltip: _('Сообщить об ошибке'),
+        href: 'https://cetera.ru/support/default.php?project=CCD&lang='+Config.locale,
+        responsiveConfig: {
+            small: {
+                text: '',
+            },
+            large: {
+                text: _('Сообщить об ошибке'),
+            }
+        },   
+        
     },		
     {
         iconCls: 'x-fa fa-question-circle',
         xtype: 'button',
-        text: _('Справка'),
+        tooltip: _('Справка'),
+        responsiveConfig: {
+            small: {
+                text: '',
+            },
+            large: {
+                text: _('Справка'),
+            }
+        },        
         menu: [{
             text: _('Руководство пользователя'),
             href: 'https://cetera-labs.github.io/fastsite-cms/docs/user-guide',
@@ -47,9 +108,17 @@ Ext.define('Cetera.view.main.header.HeaderView', {
     {
         xtype: 'button',
         iconCls: 'x-fa fa-sign-out-alt',
-        text: _('Выход'),
+        tooltip: _('Выход'),
         hrefTarget: '_top',
-        href: "/cms/logout.php?redirect=ui.html"
+        href: "/cms/logout.php?redirect=ui.html",
+        responsiveConfig: {
+            small: {
+                text: '',
+            },
+            large: {
+                text: _('Выход'),
+            }
+        },        
     }   
   ]
 });
