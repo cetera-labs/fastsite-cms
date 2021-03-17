@@ -59,7 +59,7 @@
 
   "output": {
     "base": "${workspace.build.dir}/cms/ui",
-    "page": "../ui.html",
+    "page": "../../ui.html",
     "manifest": "${build.id}.json",
     "js": "${build.id}/app.js",
     "appCache": {"enable": false},
