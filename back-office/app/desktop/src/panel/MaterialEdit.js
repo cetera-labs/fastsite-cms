@@ -7,10 +7,29 @@ Ext.define('Cetera.panel.MaterialEdit', {
     pollForChanges: true,    
     timeout : 100,    
     
+	requires: [
+        'Ext.Responsive'
+    ],     
+    
     fieldDefaults: {
         labelAlign: 'right',
-        labelWidth: 180
-    },   
+        labelWidth: 180,
+    },  
+
+    responsiveConfig: {
+        small: {
+            fieldDefaults: {
+                labelAlign: 'top',
+                labelWidth: '100%',
+            },
+        },
+        large: {
+            fieldDefaults: {
+                labelAlign: 'right',
+                labelWidth: 180,
+            },
+        }
+    },    
     
     objectId: 0,
     sectionId: 0,
@@ -95,10 +114,21 @@ Ext.define('Cetera.panel.MaterialEdit', {
             var buttons = [
                 {
                     text: _('Сохранить'),
+                    iconCls: 'x-fa fa-save',
                     handler: this.save,
-                    scope: this
-                },{
-                    text: _('Сохранить и опубликовать'),
+                    scope: this,
+                    responsiveConfig: {
+                        small: {
+                            text: '',
+                        },
+                        large: {
+                            text: _('Сохранить'),
+                        }
+                    },                      
+                },
+                {
+                    text: _('+ опубликовать'),
+                    iconCls: 'x-fa fa-save',
                     disabled: !this.editData.permissions.publish,
                     handler: function() { 
                         this.save_publish(0);

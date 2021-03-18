@@ -140,7 +140,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 handler: function () { this.edit(this.catalogId,this.getSelectionModel().getSelection()[0].getId()); },
                 scope: this
             },
-            '-',
             {
                 itemId: 'tb_mat_edit',
                 disabled: true,
@@ -157,7 +156,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 handler: function () { this.deleteMat(); },
                 scope: this
             },
-            '-',
             {
                 itemId: 'tb_mat_pub',
                 disabled: true,
@@ -184,7 +182,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 },
                 scope: this
             },
-            '-',
             {
                 itemId: 'tb_mat_move',
                 disabled: true,
@@ -201,7 +198,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 handler: function () { this.move('copy'); },
                 scope: this
             },			
-            '-',
             {
                 itemId: 'tb_mat_subs',
                 iconCls:'x-fa fa-sitemap',
@@ -211,7 +207,6 @@ Ext.define('Cetera.panel.MaterialsByCatalog', {
                 pressed: false,
                 scope: this
             },
-			'-',			
             {
                 itemId: 'tb_mat_up',
                 disabled: true,

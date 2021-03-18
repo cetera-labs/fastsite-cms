@@ -1,6 +1,10 @@
 Ext.define('Cetera.window.MaterialEdit', {
 
     extend:'Ext.Window',
+    
+	requires: [
+        'Ext.Responsive'
+    ],     
 
     maximizable: true, 
     closable:    true,
@@ -16,5 +20,22 @@ Ext.define('Cetera.window.MaterialEdit', {
 	constrainHeader: true,
     
     materialForm: false,
+    
+    responsiveConfig: {
+        small: {
+            maximized: true,
+            maximizable: false,
+            minHeight:   50,
+            minWidth:    50,   
+            resizable:   false,
+        },
+        large: {
+            maximized: false,
+            maximizable: true,
+            minHeight:   450,
+            minWidth:    450,  
+            resizable:   true,
+        }
+    },     
     
 });

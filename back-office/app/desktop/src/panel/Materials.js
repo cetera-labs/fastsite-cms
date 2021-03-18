@@ -250,7 +250,6 @@ Ext.define('Cetera.panel.Materials', {
                 handler: function () { this.deleteMat(); },
                 scope: this
             },
-            '-',
             {
                 itemId: 'tb_mat_pub',
                 disabled: true,
@@ -267,7 +266,6 @@ Ext.define('Cetera.panel.Materials', {
                 handler: function() { this.call('unpub'); },
                 scope: this
             },
-            '-',
             {
                 itemId: 'tb_mat_move',
                 disabled: true,

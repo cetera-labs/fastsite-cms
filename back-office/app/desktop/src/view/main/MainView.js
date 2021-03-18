@@ -42,6 +42,7 @@ Ext.define('Cetera.view.main.MainView', {
                 collapsed: false,
                 collapsible: false,
                 closable: false,
+                hidden: false,
             }
         },        
         items: [ 

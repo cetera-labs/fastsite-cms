@@ -45,26 +45,25 @@ if ($_REQUEST['action'] == 'save') {
     $data = array();
     if (is_array($_REQUEST['children'])) foreach ($_REQUEST['children'] as $c)
 	{
-        list($t, $id, $table, $type) = explode('-', $c);
+        $f = explode('-', $c);
+        //list($t, $id, $table, $type)         
 		
-		if ($t == 'url')
-		{
+		if ($f[0] == 'url') {
 			$data[] = array(
-				'url'  => str_replace('%DASH%','-',$id),
-				'name' => str_replace('%DASH%','-',$type)
+				'url'  => str_replace('%DASH%','-',$f[1]),
+				'name' => str_replace('%DASH%','-',$f[3])
 			);
 		}
-		else 
-		{
+		else {
 		
-			if ($t != 'material') {
-				$table = Catalog::TABLE;
-				$type  = Catalog::TYPE;
+			if ($f[0] != 'material') {
+				f[2] = Catalog::TABLE;
+				f[3]  = Catalog::TYPE;
 			}
 			$data[] = array(
-				'id'    => $id,
-				'table' => $table,
-				'type'  => $type
+				'id'    => $f[1],
+				'table' => $f[2],
+				'type'  => f[3],
 			);
 		
 		}

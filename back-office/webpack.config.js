@@ -88,6 +88,7 @@ module.exports = async function (env) {
       devServer: {
         proxy: {
             '/cms/include':    'http://localhost:8080',
+            '/cms/plugins':    'http://localhost:8080',
             '/cms/lang':    'http://localhost:8080',
             '/themes': 'http://localhost:8080',
         },

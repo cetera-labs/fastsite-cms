@@ -417,7 +417,7 @@ Ext.define('Cetera.view.main.Tree', {
      
     getPropertyWindow: function() {
         if (!this.propertyWindow) {
-            this.propertyWindow = new Ext.Window({
+            this.propertyWindow = Ext.create('Ext.Window',{
                 closable:true,
                 width:500,
                 closeAction: 'hide',

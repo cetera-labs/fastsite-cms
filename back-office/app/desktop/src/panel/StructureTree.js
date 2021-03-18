@@ -3,7 +3,11 @@ Ext.define('Cetera.panel.StructureTree', {
 	extend: 'Ext.tree.Panel',
 	alias : 'widget.structuretree',
 
-    requires: ['Cetera.Ajax','Cetera.field.File'],
+    requires: [
+        'Cetera.Ajax',
+        'Cetera.field.File',
+        'Ext.Responsive',       
+    ],
 	
 	rootVisible:false,
 	useArrows: true,
@@ -13,7 +17,7 @@ Ext.define('Cetera.panel.StructureTree', {
 	initComponent : function() {
 		
         this.reloadAction = Ext.create('Ext.Action', {
-            iconCls: 'icon-reload', 
+            iconCls: 'x-fa fa-sync', 
             tooltip: _('Обновить'),
             scope: this,
             handler: function () { this.reload(this.getSelectedPath()); },
@@ -22,8 +26,14 @@ Ext.define('Cetera.panel.StructureTree', {
 		
         var tbar = [
             this.reloadAction,
-            '-'
         ];	
+        
+        var create = {
+            xtype: 'splitbutton',
+            iconCls: 'x-fa fa-folder',
+            tooltip: _('Создать...'),
+            menu: []
+        };      
 
         if (Config.user.permissions.adminRootCat) {
 			
@@ -31,10 +41,10 @@ Ext.define('Cetera.panel.StructureTree', {
                 iconCls:'icon-server',
                 text: Config.Lang.createServer,
                 handler: this.create_new_server,
-                scope: this
+                scope: this,                  
 			});			
 		
-            Ext.Array.push(tbar, this.newServerAction);
+            Ext.Array.push(create.menu, this.newServerAction);
 		}
 		
 		this.newFolderAction = Ext.create('Ext.Action', {
@@ -50,39 +60,84 @@ Ext.define('Cetera.panel.StructureTree', {
                 scope: this
 		});	
 		this.propAction = Ext.create('Ext.Action', {
-                iconCls:'icon-props',
+                iconCls:'x-fa fa-edit',
                 text: Config.Lang.catProps,
+                tooltip: Config.Lang.catProps,
                 handler: this.edit,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        text: '',
+                    },
+                    large: {
+                        text: Config.Lang.catProps,
+                    }
+                },                  
 		});	
 		this.upAction = Ext.create('Ext.Action', {
-                iconCls:'icon-up',
+                iconCls:'x-fa fa-arrow-up',
                 text: Config.Lang.upper,
                 handler: this.move_up,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        text: '',
+                    },
+                    large: {
+                        text: Config.Lang.upper,
+                    }
+                }, 
 		});	
 		this.downAction = Ext.create('Ext.Action', {
-                iconCls:'icon-down',
+                iconCls:'x-fa fa-arrow-down',
                 text: Config.Lang.downer,
                 handler: this.move_down,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        text: '',
+                    },
+                    large: {
+                        text: Config.Lang.downer,
+                    }
+                }, 
 		});	
 		this.copyAction = Ext.create('Ext.Action', {
-                iconCls:'icon-copy',
+                iconCls:'x-fa fa-copy',
                 text: Config.Lang.copy,
                 handler: this.copy,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        text: '',
+                    },
+                    large: {
+                        text: Config.Lang.copy,
+                    }
+                }, 
 		});	
 		this.deleteAction = Ext.create('Ext.Action', {
-                iconCls:'icon-delete',
+                iconCls:'x-fa fa-trash',
                 text: Config.Lang.remove,
                 handler: this.delete_cat,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        text: '',
+                    },
+                    large: {
+                        text: Config.Lang.remove,
+                    }
+                }, 
 		});	
         
-        Ext.Array.push(tbar, 
+        Ext.Array.push(create.menu, 
             this.newFolderAction,
-			this.newLinkAction,
+			this.newLinkAction,        
+        );
+        
+        Ext.Array.push(tbar, 
+            create,
 			this.propAction,
 			this.upAction,
 			this.downAction,
@@ -93,20 +148,36 @@ Ext.define('Cetera.panel.StructureTree', {
         if (Config.user.permissions.adminRootCat) {
 			
 			this.exportAction = Ext.create('Ext.Action', {
-                iconCls:'icon-export',
+                iconCls:'x-fa fa-file-export',
                 text: _('Экспорт'),
                 handler: this.doExport,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        hidden: true,
+                    },
+                    large: {
+                        hidden: false,
+                    }
+                },                 
 			});		
 
 			this.importAction = Ext.create('Ext.Action', {
-                iconCls:'icon-import',
+                iconCls:'x-fa fa-file-import',
                 text: _('Импорт'),
                 handler: this.doImport,
-                scope: this
+                scope: this,
+                responsiveConfig: {
+                    small: {
+                        hidden: true,
+                    },
+                    large: {
+                        hidden: false,
+                    }
+                }, 
 			});				
 		
-            Ext.Array.push(tbar, '-', this.exportAction, this.importAction);
+            Ext.Array.push(tbar, this.exportAction, this.importAction);
 		}		
 
 		this.tbar = Ext.create('Ext.toolbar.Toolbar', {
@@ -115,32 +186,62 @@ Ext.define('Cetera.panel.StructureTree', {
 		
 		Ext.apply(this, {
 			
-			columns: [{
-				header: "ID", 
-				width: 50, 
-				align: 'right',
-				dataIndex: 'item_id'
-			},{
-                xtype: 'treecolumn', 
-                text: _('Раздел'),
-                flex: 2,
-                sortable: true,
-                dataIndex: 'name'
-            },{
-				header: "Alias", 
-				flex: 1, 
-				dataIndex: 'alias'
-			},{
-				header: _('Тип материалов'), 
-				width: 200, 
-				dataIndex: 'mtype_name'
-			},{
-				header: _('Дата создания'), 
-				width: 150, 
-				dataIndex: 'date',
-				xtype: 'datecolumn',   
-				format:'Y-m-d H:i:s' 
-			}]
+			columns: [
+                {
+                    header: "ID", 
+                    width: 50, 
+                    align: 'right',
+                    dataIndex: 'item_id',
+                    responsiveConfig: {
+                        small: {
+                            hidden: true
+                        },
+                        large: {
+                            hidden: false
+                        }
+                    }
+                },
+                {
+                    xtype: 'treecolumn', 
+                    text: _('Раздел'),
+                    flex: 2,
+                    sortable: true,
+                    dataIndex: 'name'
+                },
+                {
+                    header: "Alias", 
+                    flex: 1, 
+                    dataIndex: 'alias'
+                },
+                {
+                    header: _('Тип материалов'), 
+                    width: 200, 
+                    dataIndex: 'mtype_name',
+                    responsiveConfig: {
+                        small: {
+                            hidden: true
+                        },
+                        large: {
+                            hidden: false
+                        }
+                    }  
+                },
+                {
+                    header: _('Дата создания'), 
+                    width: 150, 
+                    dataIndex: 'date',
+                    xtype: 'datecolumn',   
+                    format:'Y-m-d H:i:s',
+                    responsiveConfig: {
+                        small: {
+                            hidden: true
+                        },
+                        large: {
+                            hidden: false
+                        }
+                    }                    
+                }
+            ]
 			
 		});
 		
