@@ -55,17 +55,15 @@ if ($_REQUEST['action'] == 'save') {
 			);
 		}
 		else {
-		
 			if ($f[0] != 'material') {
-				f[2] = Catalog::TABLE;
-				f[3]  = Catalog::TYPE;
+				$f[2] = Catalog::TABLE;
+				$f[3] = Catalog::TYPE;
 			}
 			$data[] = array(
 				'id'    => $f[1],
 				'table' => $f[2],
-				'type'  => f[3],
+				'type'  => $f[3],
 			);
-		
 		}
     }
     
