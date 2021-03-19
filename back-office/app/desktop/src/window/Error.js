@@ -5,7 +5,6 @@ Ext.define('Cetera.window.Error', {
     autoHeight: true,
     bodyBorder: false,
     buttonAlign: 'center',
-    bodyStyle:'background: none',
     border: false,
     modal: true,
     width:500,

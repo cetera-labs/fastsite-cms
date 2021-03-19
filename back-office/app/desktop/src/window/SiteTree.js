@@ -1,6 +1,10 @@
 Ext.define('Cetera.window.SiteTree', {
 
     extend:'Ext.Window',
+    
+    closeAction: 'hide',
+    layout: 'fit',
+    modal: true,   
 
     initComponent : function(){
        
@@ -26,9 +30,6 @@ Ext.define('Cetera.window.SiteTree', {
 
         if (!this.width) this.width = 500;
         if (!this.height) this.height = 500;
-        this.closeAction = 'hide';
-        this.layout = 'fit';
-        this.modal = true;
         this.items = [this.tree];
         
         if (this.dontclose) {
@@ -81,6 +82,7 @@ Ext.define('Cetera.window.SiteTree', {
         this.path = sn.getPath();
         var name = sn.get('text');
         if (sn) {
+            var node = sn;
             var a = sn.getId().split('-');
             var node_id = sn.get('node_id');
             var res = '';
@@ -103,6 +105,7 @@ Ext.define('Cetera.window.SiteTree', {
 				url:        url,
                 table:      a[3]?a[2]:'main',
 				type:       a[3]?a[3]:4,
+                node:       node,
             });
         }
         if (!this.dontclose) this.hide(); 

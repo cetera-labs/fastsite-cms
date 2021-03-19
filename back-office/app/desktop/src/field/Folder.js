@@ -134,10 +134,10 @@ Ext.define('Cetera.field.Folder', {
         this.setValue(0); 
     },
      
-	  onDestroy: function(){
+	onDestroy: function(){
 		this.window.close();
         this.callParent();
-	  }, 
+	}, 
     
     validator: function(value) {
         if (!this.allowBlank && !parseInt(value)) return this.blankText;

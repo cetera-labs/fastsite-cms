@@ -13263,355 +13263,366 @@ tr.x-grid-subtable-row {
     font-size: 20px;
     line-height: 24px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:67 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:66 */
+#tab-welcome-body .x-panel-body .about img {
+    width: 300px;
+}
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:71 */
 #tab-welcome-body .x-panel-body .x-autocontainer-innerCt {
     background-color: rgba(255, 255, 255, 0.8);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:73 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:77 */
 .tree-folder-visible {
     /* Catalogs tree */
     background-image: url(images/folder1.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:74 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:78 */
 .tree-folder-hidden {
     background-image: url(images/folder1_hidden.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:75 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:79 */
 .tree-folder-link {
     background-image: url(images/folder1_linked.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:76 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:80 */
 .tree-folder-locked {
     background-image: url(images/folder1_red.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:77 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:81 */
 .tree-help {
     background-image: url(images/help.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:78 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:82 */
 .tree-server {
     background-image: url(images/server.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:79 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:83 */
 .tree-material {
     background-image: url(images/math1.gif)!important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:80 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:84 */
 .x-tree-node-text span.tree-alias {
     color: #369;
     padding-right: 5px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:83 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:87 */
 .icon-expandall {
     /* Icons */
     background: url(images/expand-all.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:84 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:88 */
 .icon-reload {
     background: url(images/reload_micro.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:85 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:89 */
 .icon-server {
     background: url(images/server_tb.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:86 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:90 */
 .icon-new_folder {
     background: url(images/new_folder.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:87 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:91 */
 .icon-folder {
     background: url(images/folder1.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:88 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:92 */
 .icon-folder_delete {
     background: url(images/folder_delete.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:89 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:93 */
 .icon-new {
     background: url(images/new.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:90 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:94 */
 .icon-new1 {
     background: url(images/new1.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:91 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:95 */
 .icon-up {
     background: url(images/up.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:92 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:96 */
 .icon-down {
     background: url(images/down.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:93 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:97 */
 .icon-new_folder_linked {
     background: url(images/new_folder_linked.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:94 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:98 */
 .icon-new_folder_hardlinked {
     background: url(images/new_folder_linked_hard.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:95 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:99 */
 .icon-copy {
     background: url(images/copy.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:96 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:100 */
 .icon-delete {
     background: url(images/delete.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:97 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:101 */
 .icon-delete2 {
     background: url(images/16X16/delete.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:98 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:102 */
 .icon-edit {
     background: url(images/edit.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:99 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:103 */
 .icon-props {
     background: url(images/prop1.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:100 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:104 */
 .icon-pub {
     background: url(images/globe.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:101 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:105 */
 .icon-unpub {
     background: url(images/globe_c.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:102 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:106 */
 .icon-preview {
     background: url(images/preview.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:103 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:107 */
 .icon-move {
     background: url(images/move.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:104 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:108 */
 .icon-subs {
     background: url(images/subs.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:105 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:109 */
 .icon-new-user {
     background: url(images/user_new.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:106 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:110 */
 .icon-user {
     background: url(images/user.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:107 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:111 */
 .icon-user-disabled {
     background: url(images/user_disabled.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:108 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:112 */
 .icon-user-delete {
     background: url(images/user_delete.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:109 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:113 */
 .icon-cms {
     background: url(images/cmslogo_small.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:110 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:114 */
 .icon-users {
     background: url(images/users.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:111 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:115 */
 .icon-close {
     background: url(images/lock.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:112 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:116 */
 .icon-open {
     background: url(images/lock_open.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:113 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:117 */
 .icon-down {
     background: url(images/down.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:114 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:118 */
 .icon-upload {
     background: url(images/upload.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:115 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:119 */
 .icon-upload2 {
     background: url(images/upload_mega.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:116 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:120 */
 .icon-image-add {
     background: url(images/image_add.png) no-repeat 0 0 !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:117 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:121 */
 .icon-new-group {
     background: url(images/new_group.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:118 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:122 */
 .icon-lamp {
     background: url(images/lamp.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:119 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:123 */
 .icon-lamp_glow {
     background: url(images/lamp_glow.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:120 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:124 */
 .icon-pict {
     background: url(images/pict.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:121 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:125 */
 .icon-find {
     background: url(images/find.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:122 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:126 */
 .icon-instable {
     background: url(images/cal.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:123 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:127 */
 .icon-plus {
     background: url(images/plus.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:124 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:128 */
 .icon-minus {
     background: url(images/minus.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:125 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:129 */
 .icon-clean {
     background: url(images/clean.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:126 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:130 */
 .icon-thumbs {
     background: url(images/preview_view.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:127 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:131 */
 .icon-table {
     background: url(images/table_view.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:128 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:132 */
 .icon-plus {
     background: url(images/plus.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:129 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:133 */
 .icon-minus {
     background: url(images/minus.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:130 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:134 */
 .icon-clean {
     background: url(images/clean.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:131 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:135 */
 .icon-fb {
     background: url(images/facebook.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:132 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:136 */
 .icon-google {
     background: url(images/google-plus.png) no-repeat center center !important;
     background-size: contain !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:133 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:137 */
 .icon-tw {
     background: url(images/twitter.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:134 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:138 */
 .icon-vk {
     background: url(images/vk.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:135 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:139 */
 .icon-odno {
     background: url(images/odno.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:136 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:140 */
 .icon-help {
     background: url(images/16X16/help.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:137 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:141 */
 .icon-on {
     background: url(images/16X16/ball_green.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:138 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:142 */
 .icon-off {
     background: url(images/16X16/ball_red.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:139 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:143 */
 .icon-undo {
     background: url(images/16X16/undo.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:140 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:144 */
 .icon-setup {
     background: url(images/setup_small.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:141 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:145 */
 .icon-save {
     background: url(images/16X16/save.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:142 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:146 */
 .icon-save-as {
     background: url(images/16X16/save_as2.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:143 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:147 */
 .icon-settings {
     background: url(images/16X16/settings.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:144 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:148 */
 .icon-unpack {
     background: url(images/16X16/unpack.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:145 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:149 */
 .icon-crop {
     background: url(images/crop.png) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:146 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:150 */
 .icon-export {
     background: url(images/16X16/export.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:147 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:151 */
 .icon-import {
     background: url(images/16X16/import.gif) no-repeat center center !important;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:150 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:154 */
 .tab-welcome {
     /* Navigation tree */
     background-image: url(images/cmslogo_small.gif);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:151 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:155 */
 .tab-materials,
 .tree-materials .x-tree-node-icon {
     background-image: url(images/math2.gif);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:152 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:156 */
 .tab-templates,
 .tree-templates .x-tree-node-icon {
     background-image: url(images/xsl.gif);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:153 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:157 */
 .tab-templateshtml,
 .tree-templateshtml .x-tree-node-icon {
     background-image: url(images/html.gif);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:154 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:158 */
 .tab-types,
 .tree-types .x-tree-node-icon {
     background-image: url(images/setup_small.gif);
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:155 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:159 */
 .navigation-tree li.x-tree-node {
     padding: 0 0 2px 2px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:156 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/desktop/src/Application.scss:160 */
 .navigation-tree .x-grid-row-selected .x-grid-td {
     background-color: white !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/app/shared/sass/src.scss:1 */
-.launching {
+#launching {
     background-color: #5fa2dd;
     background-image: url('images/lock1.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/shared/sass/src.scss:8 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/shared/sass/src.scss:13 */
 #splash {
     color: white;
-    margin-top: 20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     font-family: Arial;
     font-size: 64px;
     text-align: center;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/app/shared/sass/src.scss:16 */
+/* E:/Cetera CMS/cetera-cms/back-office/app/shared/sass/src.scss:23 */
 .inner-circle {
     background-image: url(images/cmslogo.png);
     background-size: cover;
@@ -13620,6 +13631,7 @@ tr.x-grid-subtable-row {
     border-radius: 50px;
     width: 100px;
     height: 100px;
-    margin: 0 auto;
+    margin-top: -50px;
+    margin-left: -50px;
     position: relative;
 }

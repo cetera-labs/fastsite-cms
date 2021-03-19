@@ -11,8 +11,7 @@ Ext.define('Cetera.Application', {
       
 	launch: function () {
 		Ext.ariaWarn = Ext.emptyFn
-		Ext.getBody().removeCls('launching')
-		var elem = document.getElementById("splash")
+		var elem = document.getElementById("launching")
 		elem.parentNode.removeChild(elem)
 
 		var me = this;

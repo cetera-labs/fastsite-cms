@@ -7,7 +7,7 @@ Ext.define('Cetera.panel.Menu', {
     border: false,
     autoScroll : true,
     
-    layout: 'border',
+    layout: 'fit',
 
     initComponent : function(){
        
@@ -38,13 +38,21 @@ Ext.define('Cetera.panel.Menu', {
                 scope: this
             },'-',	
 			{
+                itemId: 'add_folder',
+                iconCls:'x-fa fa-folder-plus',
+                disabled: true,
+                text: _('Добавить раздел'),
+                handler: this.addFolder,
+                scope: this
+            },            
+			{
                 itemId: 'add_item',
                 iconCls:'x-fa fa-plus',
                 disabled: true,
                 text: _('Добавить ссылку'),
                 handler: this.addItem,
                 scope: this
-            },	
+            },
 			{
                 itemId: 'edit_item',
                 iconCls:'x-far fa-edit',
@@ -79,55 +87,13 @@ Ext.define('Cetera.panel.Menu', {
         
         
         this.menus = Ext.create('Ext.tree.TreePanel',{
-            region: 'west',
-            padding: 5,
+            region: 'center',
             width: 300,
             
             store: this.store,
             animate: true,
             rootVisible: false,
-            
-            viewConfig: {
-                plugins: {
-                    ddGroup: 'organizerDD',
-                    ptype  : 'treeviewdragdrop',
-                    displayField: 'name'
-                },
-                listeners : {
-                    drop : {
-                        fn : function(node, data, overModel, dropPosition, eOpts ) {
                         
-                            if (overModel.get('menu'))
-                                var t = overModel;
-                                else t = overModel.parentNode;                
-                        
-                            this.saveMenu(t);
-                              
-                        },
-                        scope: this
-                    },
-                    beforedrop : {
-                        fn : function(node, data, overModel, dropPosition, eOpts ) {
-                    
-                              var rec = data.records[0];
-                              
-                              if (rec.get('text')) {
-                                  var c = Ext.create('Cetera.model.Menu', {
-                                      children: [],
-                                      leaf: true,
-                                      data: rec.getId(),
-                                      iconCls: rec.get('iconCls'),
-                                      name: rec.get('text')    
-                                  });
-                                  data.records = [c];
-                              }
-
-                        },
-                        scope: this
-                    }
-                }
-            },
-            
             displayField: 'name',
             
             listeners : {
@@ -157,7 +123,8 @@ Ext.define('Cetera.panel.Menu', {
 				}
 				
 				var tb = this.getDockedItems('toolbar[dock="top"]')[0];
-				tb.getComponent("add_item").setDisabled( !node[0] );				
+				tb.getComponent("add_item").setDisabled( !node[0] );
+                tb.getComponent("add_folder").setDisabled( !node[0] );				
 				tb.getComponent("edit_item").setDisabled( !link );
 					
                 if (node[0] && menu) {
@@ -181,40 +148,12 @@ Ext.define('Cetera.panel.Menu', {
             },
             scope:this
         });
-        
-        //this.menus.on('itemdblclick', this.edit, this);
-        
-        this.tree = Ext.create('Cetera.catalog.SiteTree', {
-            region: 'center',
-            padding: '5 5 5 0',
-            
-            animate: true,
-            
-            viewConfig: {
-                plugins: {
-                    ddGroup: 'organizerDD',
-                    ptype  : 'treeviewdragdrop',
-                    displayField: 'name',
-                    enableDrag: true,
-                    enableDrop: false
-                },
-                allowCopy: true,
-                copy: true
-            },
-            
-            nolink: 1,
-            materials: 1,
-            norootselect: 1
-        });
-        
+                
         this.items = [
             this.menus,
-            this.tree
         ];
           
         this.callParent();
-        
-        this.tree.expandPath('/root/item-0-1', 'id', '/');
 
     },
     
@@ -315,7 +254,41 @@ Ext.define('Cetera.panel.Menu', {
 			
         },this,_('Заголовок'),'URL');
     
-    },	
+    },
+    
+    getFolderWindow: function() {
+        if (!this.folderWindow) {
+            this.folderWindow =  Ext.create('Cetera.window.SiteTree', {
+                title: _('Добавить раздел'),
+                materials   : false,
+                norootselect: 1,
+                listeners: {
+                    select: {
+                        fn: function(res) {
+                            console.log(res);
+                            var c = Ext.create('Cetera.model.Menu', {
+                                children: [],
+                                leaf: true,
+                                data: res.node.getId(),
+                                iconCls: res.node.get('iconCls'),
+                                name: res.name,
+                            });
+                                        
+                            var n = this.getSelectedMenuNode();
+                            n.appendChild(c);
+                            this.saveMenu(n);                        
+                        },
+                        scope: this
+                    }
+                }
+            }); 
+        }
+        return this.folderWindow;
+    },
+    
+    addFolder: function() {
+        this.getFolderWindow().show();
+    },
 	
     editItem: function() {
     
@@ -416,6 +389,13 @@ Ext.define('Cetera.panel.Menu', {
             'children[]': children,
             id: node.get('menu')
         }, true);    
-    }
+    },
+    
+	onDestroy: function(){
+		if (this.folderWindow) {
+            this.folderWindow.destroy();
+        }
+        this.callParent();
+	},     
     
 });

@@ -1,13 +1,20 @@
-.launching {
+#launching {
     background-color: $base-color;
     background-image: url('images/lock1.jpg');
     background-size: cover;
-    background-repeat: no-repeat;    
+    background-repeat: repeat;   
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 #splash {
     color: white;
-    margin-top:20%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     font-family:Arial;
     font-size:64px;
     text-align:center;
@@ -23,6 +30,7 @@
     
     width: 100px;
     height: 100px;
-    margin: 0 auto;
+    margin-top: -50px;
+    margin-left: -50px;
     position: relative;
 }

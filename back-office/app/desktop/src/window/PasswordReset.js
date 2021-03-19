@@ -13,6 +13,15 @@ Ext.define('Cetera.window.PasswordReset', {
             header: false,
             width: 415,
             
+            responsiveConfig: {
+                portrait: {
+                    width: '90%',
+                },
+                landscape: {
+                    width: 415,
+                }
+            },            
+            
             url: '/cms/include/action_login.php',
             
             layout: {

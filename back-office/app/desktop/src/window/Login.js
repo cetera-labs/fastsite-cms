@@ -2,6 +2,7 @@ Ext.define('Cetera.window.Login', {
     extend: 'Cetera.window.LockingWindow',
     
     title: Config.appName + ' v' + Config.appVersion + ' - Login',
+   
 
     items: [
         {
@@ -12,6 +13,15 @@ Ext.define('Cetera.window.Login', {
             cls: 'auth-dialog auth-dialog-login',
             header: false,
             width: 415,
+            
+            responsiveConfig: {
+                portrait: {
+                    width: '90%',
+                },
+                landscape: {
+                    width: 415,
+                }
+            },            
             
             layout: {
                 type: 'vbox',

@@ -9,7 +9,8 @@ Ext.define('Cetera.window.LockingWindow', {
     controller: 'lockingwindowcontroller',
 
     requires: [
-        'Ext.layout.container.VBox'
+        'Ext.layout.container.VBox',
+        'Ext.Responsive'       
     ],
 
     cls: 'auth-locked-window',

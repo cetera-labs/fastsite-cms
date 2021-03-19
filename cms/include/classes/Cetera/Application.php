@@ -638,7 +638,10 @@ class Application {
         try {
             $this->_session = new Container(SESSION_NAMESPACE);     
         }
-        catch (\Exception $e) {}     
+        catch (\Exception $e) {
+            session_start();
+            session_regenerate_id();
+        }  
         
         if (isset($this->_session->locale) && $this->_session->locale) {
             $this->_locale = $this->_session->locale;
