@@ -21,7 +21,7 @@ Ext.define('Cetera.eventlog.Setup', {
                     },                   
                     reader: {
                         type: 'json',
-                        root: 'rows'
+                        rootProperty: 'rows'
                     },
                     writer: {
                         type: 'json',

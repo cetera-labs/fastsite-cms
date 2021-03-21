@@ -150,8 +150,7 @@ Ext.define('Cetera.users.Groups', {
             simpleSortMode: true,
             reader: {
                 type: 'json',
-                rootProperty: 'rows',
-				root: 'rows'
+                rootProperty: 'rows'
             }
         }
     }),

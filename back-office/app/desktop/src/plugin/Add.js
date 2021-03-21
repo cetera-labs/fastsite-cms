@@ -17,7 +17,7 @@ Ext.define('Cetera.plugin.Add', {
                 url:  '/cms/include/data_plugins_lib.php',
                 reader: {
                     type: 'json',
-                    root: 'rows'
+                    rootProperty: 'rows'
                 }
             }
         });   

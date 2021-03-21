@@ -17,7 +17,7 @@ Ext.define('Cetera.theme.Add', {
                 url:  '/cms/include/data_themes_lib.php',
                 reader: {
                     type: 'json',
-                    root: 'rows'
+                    rootProperty: 'rows'
                 }
             }
         });   

@@ -31,7 +31,7 @@ if ($node == 'root') {
         'id'   => 'item-0-1',
 	    'item_id'  => 0,
         'node_id'  => 0,
-        'iconCls'  => 'tree-folder-visible',
+        'iconCls'  => 'tree-folder-visible x-fa fa-chess-rook',
         'qtip' => '',
         'leaf' => FALSE,
         'mtype' => 0,
@@ -69,7 +69,7 @@ if ($node == 'root') {
                 $nodes[] = array(
                     'text' => $name,
                     'id'   => 'material-'.$material->id.'-'.$material->table.'-'.$material->type,
-                    'iconCls'  => 'tree-material',
+                    'iconCls'  => 'tree-material x-fa fa-file-alt',
                     'qtip' => '',
                     'leaf' => TRUE,
                     'disabled' => FALSE
@@ -102,10 +102,10 @@ function process_child($child, $rule, $only, $nolink, $exclude, $nocatselect) {
 	  
 	if (($child->isLink())&&($nolink)) $right = 0;
 
-    $cls = 'tree-folder-visible';
-    if ($child instanceof Server) $cls = 'tree-server';
-    if ($child->isLink()) $cls = 'tree-folder-link';
-    if ($child->hidden) $cls = 'tree-folder-hidden';
+    $cls = 'tree-folder-visible x-fas fa-folder';
+    if ($child instanceof Server) $cls = 'tree-server x-fas fa-server';
+    if ($child->isLink()) $cls = 'tree-folder-link x-fas fa-folder-plus';
+    if ($child->hidden) $cls = 'tree-folder-hidden x-far fa-folder';
 	
 	try {
 		if ($child->materialsType) {

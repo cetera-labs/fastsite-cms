@@ -75,8 +75,7 @@ Ext.define('Cetera.Application', {
 			root: {
 				text: 'root',
 				id: 'root',
-				expanded: true,
-				iconCls: 'tree-folder-visible'
+				expanded: true
 			}
 		});	
         

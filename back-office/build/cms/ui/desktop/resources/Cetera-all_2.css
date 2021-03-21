@@ -1,318 +1,3 @@
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:172 */
-.x-resizable-proxy {
-    border: 1px dashed #3b5a82;
-    position: absolute;
-    overflow: hidden;
-    z-index: 50000;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:180 */
-.x-resizable-handle-over,
-.x-resizable-pinned .x-resizable-handle {
-    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    opacity: 1;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:186 */
-.x-resizable-handle-east-over,
-.x-resizable-handle-west-over,
-.x-resizable-pinned > .x-resizable-handle-east,
-.x-resizable-pinned > .x-resizable-handle-west {
-    font: 16px/1 'Font Awesome 5 Free';
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-east-over:before,
-.x-resizable-handle-west-over:before,
-.x-resizable-pinned > .x-resizable-handle-east:before,
-.x-resizable-pinned > .x-resizable-handle-west:before {
-    content: '\f142';
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:198 */
-.x-resizable-handle-south-over,
-.x-resizable-handle-north-over,
-.x-resizable-pinned > .x-resizable-handle-south,
-.x-resizable-pinned > .x-resizable-handle-north {
-    font: 16px/10px 'Font Awesome 5 Free';
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-south-over:before,
-.x-resizable-handle-north-over:before,
-.x-resizable-pinned > .x-resizable-handle-south:before,
-.x-resizable-pinned > .x-resizable-handle-north:before {
-    content: '\f141';
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:210 */
-.x-resizable-handle-southeast-over,
-.x-resizable-pinned > .x-resizable-handle-southeast {
-    font: 16px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-southeast-over:before,
-.x-resizable-pinned > .x-resizable-handle-southeast:before {
-    content: "\e60c";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:220 */
-.x-resizable-handle-northwest-over,
-.x-resizable-pinned > .x-resizable-handle-northwest {
-    font: 16px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-northwest-over:before,
-.x-resizable-pinned > .x-resizable-handle-northwest:before {
-    content: "\e609";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:230 */
-.x-resizable-handle-northeast-over,
-.x-resizable-pinned > .x-resizable-handle-northeast {
-    font: 16px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-northeast-over:before,
-.x-resizable-pinned > .x-resizable-handle-northeast:before {
-    content: "\e60a";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/resizer/Resizer.scss:240 */
-.x-resizable-handle-southwest-over,
-.x-resizable-pinned > .x-resizable-handle-southwest {
-    font: 16px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-resizable-handle-southwest-over:before,
-.x-resizable-pinned > .x-resizable-handle-southwest:before {
-    content: "\e60b";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:2 */
-.x-slider:before {
-    border: 1px solid #d0d0d0;
-    content: '';
-    position: absolute;
-    border-radius: 2px;
-    background-color: #eee;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:20 */
-.x-slider-thumb {
-    background-color: #f6f6f6;
-    border: 1px solid #d0d0d0;
-    border-radius: 2px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:28 */
-.x-slider-thumb:before {
-    color: #d0d0d0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:33 */
-.x-slider-thumb-over {
-    background-color: #fcfcfc;
-    border-color: #c8cdd2;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:36 */
-.x-slider-thumb-over:before {
-    color: #d0d0d0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:42 */
-.x-keyboard-mode .x-slider-focus .x-slider-thumb {
-    background-color: #f6f6f6;
-    border-color: #5fa2dd;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:45 */
-.x-keyboard-mode .x-slider-focus .x-slider-thumb:before {
-    color: #a6c7e5;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:52 */
-.x-keyboard-mode .x-slider-focus .x-slider-thumb-over {
-    background-color: #fcfcfc;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:57 */
-.x-slider-thumb-drag {
-    background-color: #f1f1f1;
-    border-color: #c0c8cf;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:60 */
-.x-slider-thumb-drag:before {
-    color: #d0d0d0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:66 */
-.x-keyboard-mode .x-slider-focus .x-slider-thumb-drag {
-    background-color: #f1f1f1;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:79 */
-.x-slider-horz {
-    padding-left: 10px;
-    background: no-repeat 0 -20px;
-    margin: 6px 0 6px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:86 */
-.x-slider-horz .x-slider-end {
-    padding-right: 10px;
-    background: no-repeat right -40px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:91 */
-.x-slider-horz .x-slider-inner {
-    height: 20px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:96 */
-.x-slider-horz:before {
-    height: 10px;
-    width: 100%;
-    top: 50%;
-    left: 0;
-    margin-top: -5px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:106 */
-.x-slider-horz .x-slider-thumb {
-    width: 20px;
-    height: 20px;
-    margin-left: -10px;
-    font: 12px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-slider-horz .x-slider-thumb:before {
-    content: "\e612";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:148 */
-.x-rtl.x-slider-horz {
-    padding-left: 0;
-    padding-right: 10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:155 */
-.x-rtl.x-slider-horz .x-slider-end {
-    padding-right: 0;
-    padding-left: 10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:163 */
-.x-rtl.x-slider-horz .x-slider-thumb {
-    margin-right: -10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:170 */
-.x-slider-ct-vert {
-    /* Vertical styles */
-    height: 100%;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:174 */
-.x-slider-vert {
-    padding-top: 10px;
-    height: 100%;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:181 */
-.x-slider-vert > .x-slider-end {
-    height: 100%;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:183 */
-.x-slider-vert > .x-slider-end > .x-slider-inner {
-    height: 100%;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:189 */
-.x-slider-vert:before {
-    width: 10px;
-    height: 100%;
-    left: 10px;
-    top: 0;
-    margin-left: -5px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:199 */
-.x-slider-vert .x-slider-end {
-    padding-bottom: 10px;
-    background: no-repeat -20px bottom;
-    width: 20px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:205 */
-.x-slider-vert .x-slider-inner {
-    width: 20px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:209 */
-.x-slider-vert .x-slider-thumb {
-    width: 20px;
-    height: 20px;
-    margin-bottom: -10px;
-    font: 12px/1 ExtJS;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/etc/mixins/font-icon.scss:132 */
-.x-slider-vert .x-slider-thumb:before {
-    content: "\e605";
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/src/slider/Multi.scss:262 */
-.x-slider-default-cell > .x-grid-cell-inner,
-.x-sliderwidget-default-cell > .x-grid-cell-inner {
-    padding-top: 0px;
-    padding-bottom: 0px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
-.x-tab-default-top {
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -ms-border-radius: 0;
-    -o-border-radius: 0;
-    border-radius: 0;
-    padding: 8px 10px 8px 10px;
-    border-width: 0;
-    border-style: solid;
-    background-color: transparent;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:237 */
-.x-tab-default-top-mc {
-    background-color: transparent;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:264 */
-.x-nbr .x-tab-default-top {
-    padding: 0 !important;
-    border-width: 0 !important;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -ms-border-radius: 0px;
-    -o-border-radius: 0px;
-    border-radius: 0px;
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:281 */
-.x-tab-default-top-frameInfo {
-    font-family: th-0-0-0-0-0-0-0-0-8-10-8-10;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:347 */
-.x-tab-default-top-tl {
-    background-position: 0 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:351 */
-.x-tab-default-top-tr {
-    background-position: right 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:355 */
-.x-tab-default-top-bl {
-    background-position: 0 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:359 */
-.x-tab-default-top-br {
-    background-position: right 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:363 */
-.x-tab-default-top-ml {
-    background-position: 0 top;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:371 */
-.x-tab-default-top-mr {
-    background-position: right top;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:379 */
-.x-tab-default-top-tc {
-    background-position: 0 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:383 */
-.x-tab-default-top-bc {
-    background-position: 0 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:388 */
-.x-tab-default-top-tr,
-.x-tab-default-top-br,
-.x-tab-default-top-mr {
-    padding-right: 0;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:394 */
-.x-tab-default-top-tl,
-.x-tab-default-top-bl,
-.x-tab-default-top-ml {
-    padding-left: 0;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:400 */
 .x-tab-default-top-tc {
     height: 0;
@@ -324,12 +9,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-tab-default-top-mc {
     padding: 8px 10px 8px 10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:0 0 0 0" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-tab-default-bottom {
@@ -426,12 +105,6 @@
 .x-tab-default-bottom-mc {
     padding: 8px 10px 8px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:0 0 0 0" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-tab-default-left {
     -moz-border-radius-topleft: 0;
@@ -527,12 +200,6 @@
 .x-tab-default-left-mc {
     padding: 8px 10px 8px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:0 0 0 0" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-tab-default-right {
     -moz-border-radius-topleft: 0;
@@ -627,12 +294,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-tab-default-right-mc {
     padding: 8px 10px 8px 10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:0 0 0 0" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/tab/Tab.scss:2672 */
 .x-tab-default {
@@ -1551,150 +1212,6 @@
     padding-right: 0px;
     padding-left: 16px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-focus-corners.gif), sides:url(images/tab/tab-default-top-focus-sides.gif), frame-bg:url(images/tab/tab-default-top-focus-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-focus-corners.gif), sides:url(images/tab/tab-default-right-focus-sides.gif), frame-bg:url(images/tab/tab-default-right-focus-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-focus-corners.gif), sides:url(images/tab/tab-default-bottom-focus-sides.gif), frame-bg:url(images/tab/tab-default-bottom-focus-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-focus-corners.gif), sides:url(images/tab/tab-default-left-focus-sides.gif), frame-bg:url(images/tab/tab-default-left-focus-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-over.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-over-corners.gif), sides:url(images/tab/tab-default-top-over-sides.gif), frame-bg:url(images/tab/tab-default-top-over-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-over.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-over-corners.gif), sides:url(images/tab/tab-default-right-over-sides.gif), frame-bg:url(images/tab/tab-default-right-over-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-over.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-over-corners.gif), sides:url(images/tab/tab-default-bottom-over-sides.gif), frame-bg:url(images/tab/tab-default-bottom-over-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-over.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-over-corners.gif), sides:url(images/tab/tab-default-left-over-sides.gif), frame-bg:url(images/tab/tab-default-left-over-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-active.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-active-corners.gif), sides:url(images/tab/tab-default-top-active-sides.gif), frame-bg:url(images/tab/tab-default-top-active-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-active.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-active-corners.gif), sides:url(images/tab/tab-default-right-active-sides.gif), frame-bg:url(images/tab/tab-default-right-active-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-active.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-active-corners.gif), sides:url(images/tab/tab-default-bottom-active-sides.gif), frame-bg:url(images/tab/tab-default-bottom-active-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-active.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-active-corners.gif), sides:url(images/tab/tab-default-left-active-sides.gif), frame-bg:url(images/tab/tab-default-left-active-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-over.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-focus-over-corners.gif), sides:url(images/tab/tab-default-top-focus-over-sides.gif), frame-bg:url(images/tab/tab-default-top-focus-over-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-over.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-focus-over-corners.gif), sides:url(images/tab/tab-default-right-focus-over-sides.gif), frame-bg:url(images/tab/tab-default-right-focus-over-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-over.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-focus-over-corners.gif), sides:url(images/tab/tab-default-bottom-focus-over-sides.gif), frame-bg:url(images/tab/tab-default-bottom-focus-over-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-over.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-focus-over-corners.gif), sides:url(images/tab/tab-default-left-focus-over-sides.gif), frame-bg:url(images/tab/tab-default-left-focus-over-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-active.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-focus-active-corners.gif), sides:url(images/tab/tab-default-top-focus-active-sides.gif), frame-bg:url(images/tab/tab-default-top-focus-active-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-active.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-focus-active-corners.gif), sides:url(images/tab/tab-default-right-focus-active-sides.gif), frame-bg:url(images/tab/tab-default-right-focus-active-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-active.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-focus-active-corners.gif), sides:url(images/tab/tab-default-bottom-focus-active-sides.gif), frame-bg:url(images/tab/tab-default-bottom-focus-active-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-focus.x-tab-active.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-focus-active-corners.gif), sides:url(images/tab/tab-default-left-focus-active-sides.gif), frame-bg:url(images/tab/tab-default-left-focus-active-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-disabled.x-tab-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-top-disabled-corners.gif), sides:url(images/tab/tab-default-top-disabled-sides.gif), frame-bg:url(images/tab/tab-default-top-disabled-fbg.gif), frame:0 0 0 0, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-disabled.x-tab-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-right-disabled-corners.gif), sides:url(images/tab/tab-default-right-disabled-sides.gif), frame-bg:url(images/tab/tab-default-right-disabled-fbg.gif), frame:0 0 0 0, stretch:left" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-disabled.x-tab-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-bottom-disabled-corners.gif), sides:url(images/tab/tab-default-bottom-disabled-sides.gif), frame-bg:url(images/tab/tab-default-bottom-disabled-fbg.gif), frame:0 0 0 0, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-disabled.x-tab-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, corners:url(images/tab/tab-default-left-disabled-corners.gif), sides:url(images/tab/tab-default-left-disabled-sides.gif), frame-bg:url(images/tab/tab-default-left-disabled-fbg.gif), frame:0 0 0 0, stretch:right" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/tab/Bar.scss:389 */
 .x-tab-bar-default {
     background-color: #5fa2dd;
@@ -1917,30 +1434,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/tab/Bar.scss:807 */
 .x-box-scroller-tab-bar-default .x-ie8 .x-box-scroller-plain {
     background-color: #fff;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-bar-default-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-bar-default-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-bar-default-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-tab-bar-default-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:left" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/toolbar/Breadcrumb.scss:406 */
 .x-breadcrumb-btn-default {
@@ -2401,12 +1894,6 @@
 .x-btn-plain-toolbar-small-mc {
     padding: 7px 7px 7px 7px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:1px 1px 1px 1px" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:2463 */
 .x-btn-plain-toolbar-small {
     border-color: transparent;
@@ -2851,42 +2338,6 @@
     border-width: 1px;
     border-color: #5fa2dd;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-focus-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-focus-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-over.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-over.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-focus-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-focus-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-pressed.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-focus-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-focus-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-disabled.x-btn-plain-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-small-disabled-corners.gif), sides:url(images/btn/btn-plain-toolbar-small-disabled-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:3294 */
 .x-button-plain-toolbar-small-cell > .x-grid-cell-inner {
     padding-top: 0px;
@@ -2983,12 +2434,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-btn-plain-toolbar-medium-mc {
     padding: 8px 8px 8px 8px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:1px 1px 1px 1px" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:2463 */
 .x-btn-plain-toolbar-medium {
@@ -3434,42 +2879,6 @@
     border-width: 1px;
     border-color: #5fa2dd;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-focus-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-focus-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-over.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-over.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-focus-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-focus-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-pressed.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-focus-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-focus-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-disabled.x-btn-plain-toolbar-medium:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-medium-disabled-corners.gif), sides:url(images/btn/btn-plain-toolbar-medium-disabled-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:3294 */
 .x-button-plain-toolbar-medium-cell > .x-grid-cell-inner {
     padding-top: 0;
@@ -3566,12 +2975,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-btn-plain-toolbar-large-mc {
     padding: 9px 9px 9px 9px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:1px 1px 1px 1px" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:2463 */
 .x-btn-plain-toolbar-large {
@@ -4017,42 +3420,6 @@
     border-width: 1px;
     border-color: #5fa2dd;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-focus-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-focus-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-over.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-over.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-focus-over-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-focus-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-pressed.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-pressed.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-focus-pressed-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-focus-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-disabled.x-btn-plain-toolbar-large:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-plain-toolbar-large-disabled-corners.gif), sides:url(images/btn/btn-plain-toolbar-large-disabled-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:3294 */
 .x-button-plain-toolbar-large-cell > .x-grid-cell-inner {
     padding-top: 0;
@@ -4286,30 +3653,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/panel/Panel.scss:1300 */
 .x-panel .x-panel-header-light-collapsed-border-left {
     border-right-width: 1px !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:top" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:right" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:left" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/panel/Panel.scss:1336 */
 .x-panel-header-light-horizontal .x-tool-after-title {
@@ -4776,12 +4119,6 @@
 .x-panel-light-framed-mc {
     padding: 0px 0px 0px 0px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-light-framed:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 2px, corners:url(images/panel/panel-light-framed-corners.gif), sides:url(images/panel/panel-light-framed-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-top {
     -moz-border-radius-topleft: 0;
@@ -4893,12 +4230,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-panel-header-light-framed-top-mc {
     padding: 10px 14px 10px 14px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 0 2px, corners:url(images/panel-header/panel-header-light-framed-top-corners.gif), sides:url(images/panel-header/panel-header-light-framed-top-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-right {
@@ -5026,12 +4357,6 @@
 .x-panel-header-light-framed-right-mc {
     padding: 14px 10px 14px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 0, corners:url(images/panel-header/panel-header-light-framed-right-corners.gif), corners-rtl:url(images/panel-header/panel-header-light-framed-right-corners-rtl.gif), sides:url(images/panel-header/panel-header-light-framed-right-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-bottom {
     -moz-border-radius-topleft: 0;
@@ -5143,12 +4468,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-panel-header-light-framed-bottom-mc {
     padding: 10px 14px 10px 14px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:0 2px 2px 2px, corners:url(images/panel-header/panel-header-light-framed-bottom-corners.gif), sides:url(images/panel-header/panel-header-light-framed-bottom-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-left {
@@ -5276,12 +4595,6 @@
 .x-panel-header-light-framed-left-mc {
     padding: 14px 10px 14px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 0 2px 2px, corners:url(images/panel-header/panel-header-light-framed-left-corners.gif), corners-rtl:url(images/panel-header/panel-header-light-framed-left-corners-rtl.gif), sides:url(images/panel-header/panel-header-light-framed-left-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-collapsed-top {
     -moz-border-radius-topleft: 0;
@@ -5393,12 +4706,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-panel-header-light-framed-collapsed-top-mc {
     padding: 10px 14px 10px 14px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-collapsed-top:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 2px, corners:url(images/panel-header/panel-header-light-framed-collapsed-top-corners.gif), sides:url(images/panel-header/panel-header-light-framed-collapsed-top-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-collapsed-right {
@@ -5526,12 +4833,6 @@
 .x-panel-header-light-framed-collapsed-right-mc {
     padding: 14px 10px 14px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-collapsed-right:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 2px, corners:url(images/panel-header/panel-header-light-framed-collapsed-right-corners.gif), corners-rtl:url(images/panel-header/panel-header-light-framed-collapsed-right-corners-rtl.gif), sides:url(images/panel-header/panel-header-light-framed-collapsed-right-sides.gif)" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-collapsed-bottom {
     -moz-border-radius-topleft: 0;
@@ -5643,12 +4944,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-panel-header-light-framed-collapsed-bottom-mc {
     padding: 10px 14px 10px 14px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-collapsed-bottom:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 2px, corners:url(images/panel-header/panel-header-light-framed-collapsed-bottom-corners.gif), sides:url(images/panel-header/panel-header-light-framed-collapsed-bottom-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:187 */
 .x-panel-header-light-framed-collapsed-left {
@@ -5775,12 +5070,6 @@
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/frame.scss:464 */
 .x-panel-header-light-framed-collapsed-left-mc {
     padding: 14px 10px 14px 10px;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-panel-header-light-framed-collapsed-left:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:2px 2px 2px 2px, corners:url(images/panel-header/panel-header-light-framed-collapsed-left-corners.gif), corners-rtl:url(images/panel-header/panel-header-light-framed-collapsed-left-corners-rtl.gif), sides:url(images/panel-header/panel-header-light-framed-collapsed-left-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/panel/Panel.scss:1188 */
 .x-panel .x-panel-header-light-framed-top {
@@ -12721,12 +12010,6 @@ tr.x-grid-subtable-row {
 .x-btn-toolbutton-toolbar-small-mc {
     padding: 5px 10px 5px 10px;
 }
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, frame:1px 1px 1px 1px" !important;
-}
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:2463 */
 .x-btn-toolbutton-toolbar-small {
     border-color: transparent;
@@ -13168,42 +12451,6 @@ tr.x-grid-subtable-row {
 .x-keyboard-mode .x-nbr .x-segmented-button-item.x-btn-focus.x-btn-pressed.x-btn-toolbutton-toolbar-small:after {
     border-width: 1px;
     border-color: #5fa2dd;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-focus-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-focus-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-over.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-over-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-over.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-focus-over-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-focus-over-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-pressed.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-pressed-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-focus.x-btn-pressed.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-focus-pressed-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-focus-pressed-sides.gif)" !important;
-}
-/* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-base/sass/etc/mixins/slicer.scss:83 */
-.x-cmd-slicer.x-btn-disabled.x-btn-toolbutton-toolbar-small:before {
-    /*<if slicer>*/
-    display: none;
-    content: "x-slicer:, stretch:bottom, frame:2px 2px 2px 2px, corners:url(images/btn/btn-toolbutton-toolbar-small-disabled-corners.gif), sides:url(images/btn/btn-toolbutton-toolbar-small-disabled-sides.gif)" !important;
 }
 /* E:/Cetera CMS/cetera-cms/back-office/node_modules/@sencha/ext-classic-theme-neutral/sass/var/button/Button.scss:3294 */
 .x-button-toolbutton-toolbar-small-cell > .x-grid-cell-inner {

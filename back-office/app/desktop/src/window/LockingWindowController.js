@@ -14,7 +14,7 @@ Ext.define('Cetera.window.LockingWindowController', {
                 success: function(form, action) {
                     btn.up('window').close();
                     Ext.Loader.loadScript({
-                        url: '/cms/config.php',
+                        url: '/cms/include/config.php',
                         scope: this,
                         onLoad: function() { 
                             Cetera.getApplication().launchBackOffice();                            

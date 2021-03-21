@@ -10,7 +10,7 @@ Ext.define('Cetera.theme.Install', {
 
 		this.contentsStore = new Ext.data.JsonStore({
 			fields: ['id', 'title','locale'],
-			root: 'rows',
+			rootProperty: 'rows',
 			autoLoad: true,
 			proxy: {
 				type: 'ajax',
