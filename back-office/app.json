@@ -96,6 +96,10 @@
       "path": "${build.out.css.path}",
       "bundle": true,
       "exclude": ["fashion"]
+    },
+    {
+        "path": "node_modules/cropperjs/dist/cropper.min.css",
+        "remote": true
     }
   ],
   "loader": {

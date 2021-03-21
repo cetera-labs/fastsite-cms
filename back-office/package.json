@@ -34,7 +34,8 @@
     "@sencha/ext-modern": "^7.0.0",
     "@sencha/ext-modern-theme-triton": "^7.0.0",
     "@sencha/ext-ux": "^7.0.0",
-    "ace-builds": "^1.4.12"
+    "ace-builds": "^1.4.12",
+    "cropperjs": "^1.5.11"
   },
   "devDependencies": {
     "@sencha/ext-webpack-plugin": "~7.0.0",

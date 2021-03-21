@@ -52,7 +52,7 @@ Ext.define('Cetera.window.ImageCrop', {
 			minValue: 1,
 			padding: '0 0 0 5',
 			labelWidth: 30,
-			width: 80,
+			width: 150,
 			itemId: 'aspect_width',
 			stateId: 'stateCropWidth',
 			stateful: true,				
@@ -69,7 +69,7 @@ Ext.define('Cetera.window.ImageCrop', {
 			minValue: 1,
 			padding: '0 0 0 5',
 			labelWidth: 30,
-			width: 80,
+			width: 150,
 			itemId: 'aspect_height',
 			stateId: 'stateCropHeight',
 			stateful: true,					
@@ -87,7 +87,7 @@ Ext.define('Cetera.window.ImageCrop', {
 		boxready: function() {
 			var image = this.getEl().query('img.edit')[0];
 
-			this.cropper = new Cropper(image, {
+			this.cropper = new Ext.xCropper(image, {
 				movable: true,
 				zoomable: true,
 				rotatable: false,

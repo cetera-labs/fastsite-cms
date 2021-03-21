@@ -2,6 +2,12 @@ Ext.define('Cetera.fileselect.Window', {
 
     extend: 'Ext.Window',
 
+    width: '80%',
+    height: '90%',
+    layout: 'fit',
+    modal: true,
+    border: false,
+
     initComponent : function(){
         
         if (!this.title) this.title = Config.Lang.fileSelect;
@@ -14,12 +20,7 @@ Ext.define('Cetera.fileselect.Window', {
             activePanel: this.activePanel
         });
                       
-        this.width = '80%';
-        this.height = '90%';
-        this.layout = 'fit';
-        this.modal = true;
         this.items = this.panel;
-        this.border = false; 
         
         this.panel.on('select', function(url) {
             this.fireEvent('select', url);

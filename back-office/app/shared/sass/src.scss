@@ -34,3 +34,53 @@
     margin-left: -50px;
     position: relative;
 }
+
+.images-view {
+	font: 11px Arial, Helvetica, sans-serif;
+	overflow: auto;
+}
+
+.images-view .thumb-wrap{
+	float: left;
+	margin: 4px;
+	margin-right: 0;
+	padding: 5px;
+	width: 190px;
+	height: 205px;
+	text-align: center;
+}
+
+.images-view .thumb{
+	background: #dddddd;
+	padding: 3px;
+	height: 155px;
+}
+
+.images-view .thumb td{
+	text-align: center;
+}
+
+.images-view .thumb-wrap span{
+	display: block;
+	overflow: hidden;
+	text-align: center;
+	width: 170px;
+}
+
+.images-view .x-view-over {
+    border:1px solid #dddddd;
+    background: #efefef;
+	padding: 4px;
+	height: 205px;
+}
+
+.images-view .x-item-selected {
+	background: #eff5fb url(images/selected.gif) no-repeat right bottom;
+	border:1px solid #99bbe8;
+	padding: 4px;
+	height: 205px;
+}
+
+.images-view .x-view-selected .thumb {
+	background:transparent;
+}

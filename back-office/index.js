@@ -1,2 +1,3 @@
 //this file exists so the webpack build process will succeed
-require('ace-builds');
+Ext.xAce = require('ace-builds');
+Ext.xCropper = require('cropperjs');

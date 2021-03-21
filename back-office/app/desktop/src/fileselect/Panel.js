@@ -22,7 +22,7 @@ Ext.define('Cetera.fileselect.Panel', {
 				overflow: 'hidden'
 			},		
 			buttonConfig: {
-				iconCls:'icon-upload',
+				iconCls:'x-fa fa-upload',
 				text: _('Загрузить файл')
 			},
             disabled: true,
@@ -41,7 +41,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
                 
         this.btnFolderCreate = new Ext.Button({
-            iconCls:'x-fa fa-folder',
+            iconCls:'x-fa fa-folder-plus',
             disabled: true,
             tooltip:  _('Создать каталог'),
             handler: this.createFolder,
@@ -91,7 +91,7 @@ Ext.define('Cetera.fileselect.Panel', {
             this.btnUpload,'-',
             this.btnCropFile, this.btnDeleteFile,'-',
             this.btnFolderCreate,this.btnFolderDelete,'-',{
-                iconCls: 'icon-table',
+                iconCls: 'x-fa fa-list',
                 toggleGroup: '1',
                 pressed: (this.activePanel==0)?true:false,
                 tooltip: Config.Lang.fvTable,
@@ -101,7 +101,7 @@ Ext.define('Cetera.fileselect.Panel', {
                     if (b.pressed) this.filesSite.getLayout().setActiveItem(0);
                 }
             },{
-                iconCls: 'icon-thumbs',
+                iconCls: 'x-fa fa-image',
                 toggleGroup: '1',
                 pressed: (this.activePanel==1)?true:false,
                 tooltip: Config.Lang.fvPreview,
@@ -381,7 +381,7 @@ Ext.define('Cetera.fileselect.Panel', {
 					layout: 'hbox',
 					items: [{
 						xtype: 'numberfield',
-						width: 50,
+						width: 100,
 						itemId: 'width',
 						flex: 1,
 						value: 1600,
@@ -393,7 +393,7 @@ Ext.define('Cetera.fileselect.Panel', {
 						value: 'x'
 					},{
 						xtype: 'numberfield',
-						width: 50,
+						width: 100,
 						itemId:  'height',
 						flex: 1,
 						value: 1200,
