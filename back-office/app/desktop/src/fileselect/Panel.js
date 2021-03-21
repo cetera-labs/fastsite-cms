@@ -41,7 +41,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
                 
         this.btnFolderCreate = new Ext.Button({
-            iconCls:'icon-new_folder',
+            iconCls:'x-fa fa-folder',
             disabled: true,
             tooltip:  _('Создать каталог'),
             handler: this.createFolder,
@@ -49,7 +49,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
         
         this.btnFolderDelete = new Ext.Button({
-            iconCls:'icon-folder_delete',
+            iconCls:'x-fa fa-folder-minus',
             disabled: true,
             tooltip:  _('Удалить каталог'),
             handler: this.deleteFolder,
@@ -57,7 +57,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
         
         this.btnDeleteFile = new Ext.Button({
-            iconCls:'icon-delete',
+            iconCls:'x-fa fa-trash',
             disabled: true,
             text:  _('Удалить файл'),
             handler: this.deleteFile,
@@ -65,7 +65,7 @@ Ext.define('Cetera.fileselect.Panel', {
         });
 		
         this.btnCropFile = new Ext.Button({
-            iconCls:'icon-crop',
+            iconCls:'x-fa fa-crop-alt',
             disabled: true,
             text:  _('Кадрировать'),
             handler: this.cropFile,
@@ -75,7 +75,7 @@ Ext.define('Cetera.fileselect.Panel', {
         this.tbar = new Ext.Toolbar({
             region: 'north',
             items: [{
-                iconCls:'icon-reload',
+                iconCls:'x-fa fa-sync',
                 tooltip: _('Обновить'),
                 handler: function () { 
                     var sn = this.tree.getSelectionModel().getLastSelected();

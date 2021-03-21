@@ -49,7 +49,7 @@ function read_dir($path, $walk) {
         $nodes[] = array(
             'text'     => $fileinfo->getFilename(),
             'id'       => str_replace('/','|',$localpath),
-            'iconCls'  => $w?'tree-folder-visible':'tree-folder-locked',
+            'iconCls'  => $w?'tree-folder-visible x-fa fa-folder':'tree-folder-locked x-far fa-folder',
             'qtip'     => '',
             'leaf'     => FALSE,
             'disabled' => FALSE,
