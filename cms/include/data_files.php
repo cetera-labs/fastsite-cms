@@ -31,14 +31,16 @@ $path = rtrim(str_replace('|','/',$_REQUEST['path']),'/');
 $path = str_replace(DOCROOT, '', $path);
 
 $iterator = new \DirectoryIterator(DOCROOT.$path);
-if ($_REQUEST['extension']) {
+if (isset($_REQUEST['extension'])) {
     $ext = explode(',',$_REQUEST['extension']);
 } else $ext = false;
 foreach ($iterator as $fileinfo) {
     if (!$fileinfo->isFile()) continue;
     
     $path_parts = pathinfo($fileinfo->getPathname());
-    if ($ext) if (!in_array(strtolower($path_parts['extension']),$ext)) continue;
+    if ($ext) {
+        if (!isset($path_parts['extension']) || !in_array(strtolower($path_parts['extension']),$ext)) continue;
+    }
     
     $name = htmlentities( $fileinfo->getFilename(), ENT_QUOTES, 'utf-8', FALSE);
     if (!$name) continue;

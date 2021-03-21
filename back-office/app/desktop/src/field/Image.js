@@ -193,7 +193,7 @@ Ext.define('Cetera.field.Image', {
 
         this.btnSelect = Ext.create('Ext.Button',{
             text  : Config.Lang.selectFile,
-            iconCls: 'icon-folder',
+            iconCls: 'x-fa fa-folder',
             scope   : this,
             width   : '100%',
             handler : function() {
@@ -203,7 +203,7 @@ Ext.define('Cetera.field.Image', {
 
         this.btnUpload = Ext.create('Ext.Button',{
             text  : Config.Lang.upload2,
-            iconCls: 'icon-upload',
+            iconCls: 'x-fa fa-upload',
             scope   : this,
             width   : '100%',
             handler : function() {
@@ -213,7 +213,7 @@ Ext.define('Cetera.field.Image', {
 
         this.btnDelete = Ext.create('Ext.Button',{
             text    : Config.Lang.remove,
-            iconCls : 'icon-delete',
+            iconCls : 'x-fa fa-trash',
             hidden  : true,
             scope   : this,
             width   : '100%',
@@ -224,7 +224,7 @@ Ext.define('Cetera.field.Image', {
 
         this.btnCrop = Ext.create('Ext.Button',{
             text    : _('Кадрировать'),
-            iconCls : 'icon-crop',
+            iconCls : 'x-fa fa-crop-alt',
             hidden  : true,
             scope   : this,
             width   : '100%',
@@ -235,7 +235,7 @@ Ext.define('Cetera.field.Image', {
 
         this.btnRestore = Ext.create('Ext.Button',{
             text  : _('Восстановить'),
-			iconCls : 'icon-undo',
+			iconCls : 'x-fa fa-undo',
             hidden: true,
             scope   : this,
             width   : 200,
