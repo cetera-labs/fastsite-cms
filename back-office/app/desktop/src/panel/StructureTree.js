@@ -295,7 +295,7 @@ Ext.define('Cetera.panel.StructureTree', {
 					this.newServerAction.disable();
 				}
     
-                Cetera.getApplication().buildBoLink();
+                //Cetera.getApplication().buildBoLink();
             },
             scope:this
         });

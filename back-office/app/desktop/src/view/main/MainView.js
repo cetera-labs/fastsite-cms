@@ -28,59 +28,54 @@ Ext.define('Cetera.view.main.MainView', {
         margins:'0 0 0 5',
         layout: 'border',
         closeAction: 'hide',
+        closable: false,
                 
         responsiveConfig: {
             small: {
                 width: '100%',
                 floatable: true,
-                closable: true,
+                hidden: true,
             },
             large: {
                 margins:'0 0 0 5',
+                floatable: false,
                 width: 350,
                 split:true,
                 collapsed: false,
                 collapsible: false,
-                closable: false,
                 hidden: false,
             }
         },        
         items: [ 
             {
                 id:'main_navigation',
-                xtype: 'mainnavigation',
+                xtype: 'treelist',
                 region: 'center',
                 height: '50%',
-            },            
+                store: 'navigationMain',
+                ui: 'nav',
+                listeners: {
+                    selectionchange: 'onNavigationTreeSelectionChange'
+                }                
+            },  
             {
-                xtype: 'panel',
+                hidden: true,
+                id: 'main_tree',
+                xtype: 'maintree',
                 region:'south',
-                height: '50%',
-                layout:'fit',
+                height: '50%',    
                 split: true,
                 stateId: 'stateMainStructure',
-                stateful: true,						
-                
-                items:  [{
-                    xtype: 'tabpanel',
-                    border: false,
-                    activeTab: 0,
-                    deferredRender:false,                           
-                    items: [
-                        {
-                            id: 'main_tree',
-                            xtype: 'maintree',
-                        },
-                    ]
-                }]
-            } 
+                stateful: true,	                
+            }, 
         ]
     },   
     
     { xtype: 'headerview', reference: 'headerview', region: 'north', docked: 'top',    weight: -2 },
     {
-        id:'main_tabs',
-        xtype: 'tabpanel',
+        id:'main_panel',
+        xtype: 'panel',
+        layout: 'card',
         region:'center',
         deferredRender:false,
         activeTab:0,
@@ -92,10 +87,6 @@ Ext.define('Cetera.view.main.MainView', {
         listeners: {
             tabchange : function( tp , tab ) {
                 tab.updateLayout();
-                Cetera.getApplication().buildBoLink();
-            },
-            remove : function() {
-                Cetera.getApplication().buildBoLink();
             },
             beforetabchange : function(tp, newTab, currentTab) { 
                 if (currentTab && currentTab.content) currentTab.content.fireEvent('deactivate');

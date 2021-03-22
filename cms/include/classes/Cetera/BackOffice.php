@@ -169,13 +169,11 @@ class BackOffice {
             $translator = $this->application->getTranslator();
             $this->_modules = [
                 'structure' => [
-                	  'position'  => MENU_SITE,
                       'name' 	  => $translator->_('Структура и материалы'),
 					  'iconCls'   => 'x-fa fa-folder',
                       'class'     => 'Cetera.panel.Structure'
                 ],			
                 'materials' => [
-                	  'position'  => MENU_SITE,
                       'name' 	  => $translator->_('Материалы'),
                 	  'icon'      => 'images/math2.gif',
 					  'iconCls'   => 'x-fa fa-file-alt',
@@ -191,7 +189,6 @@ class BackOffice {
                 	  'icon'     => 'images/widget_icon.png',
 					  'iconCls'  => 'x-fa fa-file-code',
                 	  'class'    => 'Cetera.widget.templates.Panel',
-					  'ext6_compat'=> true
                 );
 		*/
         /*
@@ -204,7 +201,6 @@ class BackOffice {
                 ); 
         */        
                 $this->_modules['menus'] = array(
-                	  'position' => MENU_SITE,
                       'name' 	   => $translator->_('Меню'),
                 	  'icon'     => 'images/icon_menu.png',
 					  'iconCls'  => 'x-fa fa-bars',
@@ -212,15 +208,15 @@ class BackOffice {
                 );   
 
                 $this->_modules['setup'] = array(
-                			'position' => MENU_SERVICE,
+                			'position' => MENU_ADMIN,
                             'name' 	   => $translator->_('Настройки'),
                 			'icon'     => 'images/setup_small.gif',
-							'iconCls'  => 'x-fa fa-cog',
+							'iconCls'  => 'x-fa fa-tools',
                 			'class'    => 'Cetera.panel.Setup'
                 );				
             
                 $this->_modules['types'] = array(
-                			'position' => MENU_SERVICE,
+                			'position' => MENU_ADMIN,
                             'name' 	   => $translator->_('Типы материалов'),
                 			'icon'     => 'images/setup_small.gif',
 							'iconCls'  => 'x-fab fa-firstdraft',
@@ -228,7 +224,7 @@ class BackOffice {
                 );
                 
                 $this->_modules['users'] = array(
-                			'position' => MENU_SERVICE,
+                			'position' => MENU_ADMIN,
                             'name' 	   => $translator->_('Пользователи'),
                 			'icon'     => 'images/user.gif',
 							'iconCls'  => 'x-fa fa-user',
@@ -236,7 +232,7 @@ class BackOffice {
                 );
                 
                 $this->_modules['groups'] = array(
-                	  'position' => MENU_SERVICE,
+                	  'position' => MENU_ADMIN,
                       'name' 	   => $translator->_('Группы пользователей'),
                       //'url'      => 'include/ui_groups.php',
                 	  'icon'     => 'images/users.gif',
@@ -245,7 +241,7 @@ class BackOffice {
                 );
                 
                 $this->_modules['eventlog'] = array(
-					'position' => MENU_SERVICE,
+					'position' => MENU_ADMIN,
 					'name' 	   => $translator->_('Журнал'),
 					'icon'     => 'images/audit1.gif',
 					'class'    => 'EventlogPanel',
@@ -254,16 +250,14 @@ class BackOffice {
                 ); 
                 
                 $this->_modules['dbrepair'] = array(
-					'position' => MENU_SERVICE,
+					'position' => MENU_ADMIN,
 					'name' 	   => $translator->_('Проверка и ремонт БД'),
 					'icon'     => 'images/icon_repair.gif',
 					'iconCls'  => 'x-fa fa-medkit',
-					'class'    => 'Cetera.panel.Repair',
-					'ext6_compat'=> true
+					'class'    => 'Cetera.panel.Repair'
                 );
 				
                 $this->_modules['mail_templates'] = array(
-					'position' => MENU_SERVICE,
 					'name' 	   => $translator->_('Почтовые шаблоны'),
 					'icon'     => 'images/mail.gif',
 					'iconCls'  => 'x-fa fa-envelope',
@@ -271,7 +265,7 @@ class BackOffice {
                 );				
                 
                 $this->_modules['plugins'] = array(
-					'position' => MENU_SERVICE,
+					'position' => MENU_ADMIN,
 					'name' 	   => $translator->_('Установленные модули'),
 					'icon'     => 'images/plugin.png',
 					'class'    => 'Cetera.plugin.List',
@@ -279,7 +273,6 @@ class BackOffice {
                 );
                 
                 $this->_modules['themes'] = array(
-					'position' => MENU_SERVICE,
 					'name' 	   => $translator->_('Темы'),
 					'icon'     => 'images/16X16/gallery.gif',
 					'iconCls'  => 'x-fa fa-leaf',

@@ -28,20 +28,14 @@ $components = array(
     )
 );
 
-$menu = array(
-    MENU_SERVICE => array(
-        'name'  => $translator->_('Сервис'),
-        'items' => array()
-    ),
-    MENU_SITE => array(
-        'name'  => $translator->_('Сайт'),
-        'items' => array()
-    ),
-    MENU_PLUGINS => array(
-        'name'  => $translator->_('Модули'),
-        'items' => array()
-    ),            
-);
+$menu = [
+    MENU_ADMIN => array(
+        'name'  => $translator->_('Администрирование'),
+        'expanded' => true,
+        'iconCls' => 'x-fa fa-toolbox',
+        'items' => []
+    ),    
+];
 
 foreach ($application->getBo()->getModules() as $id => $component) {
 
@@ -60,7 +54,7 @@ foreach ($application->getBo()->getModules() as $id => $component) {
           );
       }    
   } else {
-      $menu[MENU_PLUGINS]['items'][] = $component;
+      $menu[] = $component;
   }
   
   if (isset($component['url']))  $component['url']  = truePath($component['url'],$root_folder);

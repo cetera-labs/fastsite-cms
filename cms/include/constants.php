@@ -102,6 +102,7 @@ define('USER_DELETED', 4);
 define('MENU_SITE', 100);
 define('MENU_SERVICE', 200);
 define('MENU_PLUGINS', 300);
+define('MENU_ADMIN', 400);
 define('MENU_INTERACTIVES', MENU_SITE);
 
 define('ADMIN_ID', 1); // ID администратора

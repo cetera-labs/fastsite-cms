@@ -15,23 +15,31 @@ Ext.define('Cetera.panel.Structure', {
 	
 	initComponent : function() {
 		
-		this.structure = Ext.create('Cetera.panel.StructureTree',{
-			region:'center'
+		var tree = Ext.create('Cetera.panel.StructureTree',{
+			region:'north',
+            height: '40%',
+            split:true,
 		});
+        
+        tree.expandPath('/root/item-0-1', 'id', '/', function(bSuccess, oLastNode) {
+            if (bSuccess && oLastNode.firstChild) {
+                tree.getSelectionModel().doSingleSelect(oLastNode.firstChild);
+                tree.expandNode(oLastNode.firstChild);
+            }
+        });        
 		
 		this.items = [
-			this.structure,
+			tree,
 			{
-				height: '70%',
+				height: '60%',
 				title: _('Материалы'),
-				region:'south',
+				region:'center',
 				border: true,	
-				xtype: 'structurematerials',
-				collapsible: true,
+				xtype: 'materials-by-catalog',
 				split:true,
 				stateId: 'stateStructureMaterials',
 				stateful: true,
-				structureTree: this.structure
+				structureTree: tree
 			} 
 		];
 		

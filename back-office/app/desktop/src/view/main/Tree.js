@@ -25,7 +25,7 @@ Ext.define('Cetera.view.main.Tree', {
         };
         if (Config.user.permissions.adminRootCat)
             Ext.Array.push(create.menu, {
-                id:'tb_new_s',
+                itemId:'tb_new_s',
                 iconCls:'icon-server',
                 text: _('Создать сервер'),
                 handler: this.create_new_server,
@@ -34,21 +34,21 @@ Ext.define('Cetera.view.main.Tree', {
             
         Ext.Array.push(create.menu, 
             {
-                id:'tb_new_f',
+                itemId:'tb_new_f',
                 iconCls:'icon-new_folder',
                 text: _('Создать раздел'),
                 handler: this.create_new,
                 scope: this
             },
             {
-                id:'tb_new_l',
+                itemId:'tb_new_l',
                 iconCls:'icon-new_folder_linked',
                 text: _('Создать ссылку на раздел'),
                 handler: this.create_link,
                 scope: this
             },
             {
-                id:'tb_new_hard_link',
+                itemId:'tb_new_hard_link',
                 iconCls:'icon-new_folder_hardlinked',
                 text: _('Создать жесткую ссылку'),
                 handler: this.create_hard_link,
@@ -69,35 +69,35 @@ Ext.define('Cetera.view.main.Tree', {
         
         Ext.Array.push(this.tbar,           
             {
-                id:'tb_prop',
+                itemId:'tb_prop',
                 iconCls:'x-fa fa-edit',
                 tooltip: Config.Lang.catProps,
                 handler: this.edit,
                 scope: this
             },{
-                id:'tb_up',
+                itemId:'tb_up',
                 iconCls:'x-fa fa-arrow-up',
                 tooltip: Config.Lang.upper,
                 handler: this.move_up,
                 scope: this
             },{
-                id:'tb_down',
+                itemId:'tb_down',
                 iconCls:'x-fa fa-arrow-down',
                 tooltip: Config.Lang.downer,
                 handler: this.move_down,
                 scope: this
             },{
-                id:'tb_copy',
+                itemId:'tb_copy',
                 iconCls:'x-fa fa-copy',
                 tooltip: Config.Lang.copy,
                 handler: this.copy,
                 scope: this
             },{
-                id:'tb_delete',
+                itemId:'tb_delete',
                 iconCls:'x-fa fa-trash',
                 tooltip: Config.Lang.remove,
                 handler: this.delete_cat,
-                scope: this
+                scope: this,
             }
         );
         
@@ -108,70 +108,70 @@ Ext.define('Cetera.view.main.Tree', {
                 if(!this.menu) this.createContextMenu();
                 
                 node = node[0];
-                           
+                
                 if (node && node.get('link')) {
-                    Ext.getCmp('tb_new_f').disable();
-                    Ext.getCmp('tb_new_l').disable();  
+                    this.findButton('tb_new_f').disable();
+                    this.findButton('tb_new_l').disable();  
                     if (this.menu) {
-                        Ext.getCmp('m_new_f').disable();
-                        Ext.getCmp('m_new_l').disable();       
+                        this.menu.getComponent('m_new_f').disable();
+                        this.menu.getComponent('m_new_l').disable();       
                     }   
                 } else {
-                    Ext.getCmp('tb_new_f').enable();
-                    Ext.getCmp('tb_new_l').enable();  
+                    this.findButton('tb_new_f').enable();
+                    this.findButton('tb_new_l').enable();  
                     if (this.menu) {
-                        Ext.getCmp('m_new_f').enable();
-                        Ext.getCmp('m_new_l').enable();       
+                        this.menu.getComponent('m_new_f').enable();
+                        this.menu.getComponent('m_new_l').enable();       
                     }        
                 }
                 
                 if(node && node.getId() != 'item-0-1'){
-                    Ext.getCmp('tb_up').enable();
-                    Ext.getCmp('tb_down').enable();
-                    Ext.getCmp('tb_copy').enable();
-                    Ext.getCmp('tb_delete').enable();
-                    Ext.getCmp('tb_prop').enable();
+                    this.findButton('tb_up').enable();
+                    this.findButton('tb_down').enable();
+                    this.findButton('tb_copy').enable();
+                    this.findButton('tb_delete').enable();
+                    this.findButton('tb_prop').enable();
                     if (this.menu) {
-                        Ext.getCmp('m_up').enable();
-                        Ext.getCmp('m_down').enable();
-                        Ext.getCmp('m_copy').enable();
-                        Ext.getCmp('m_delete').enable();
-                        Ext.getCmp('m_prop').enable();           
+                        this.menu.getComponent('m_up').enable();
+                        this.menu.getComponent('m_down').enable();
+                        this.menu.getComponent('m_copy').enable();
+                        this.menu.getComponent('m_delete').enable();
+                        this.menu.getComponent('m_prop').enable();           
                     }
                 } else {
-                    Ext.getCmp('tb_up').disable();
-                    Ext.getCmp('tb_down').disable();
-                    Ext.getCmp('tb_copy').disable();
-                    Ext.getCmp('tb_delete').disable();
+                    this.findButton('tb_up').disable();
+                    this.findButton('tb_down').disable();
+                    this.findButton('tb_copy').disable();
+                    this.findButton('tb_delete').disable();
 
                     if(Config.user.permissions.admin && node && node.getId() == 'item-0')
-                        Ext.getCmp('tb_prop').enable();
-                        else Ext.getCmp('tb_prop').disable();
+                        this.findButton('tb_prop').enable();
+                        else this.findButton('tb_prop').disable();
                         
                     if (this.menu) {
-                        Ext.getCmp('m_up').disable();
-                        Ext.getCmp('m_down').disable();
-                        Ext.getCmp('m_copy').disable();
-                        Ext.getCmp('m_delete').disable(); 
+                        this.menu.getComponent('m_up').disable();
+                        this.menu.getComponent('m_down').disable();
+                        this.menu.getComponent('m_copy').disable();
+                        this.menu.getComponent('m_delete').disable(); 
                         if(Config.user.permissions.admin && node && node.getId() == 'item-0')
-                            Ext.getCmp('m_prop').enable();
-                            else Ext.getCmp('m_prop').disable();                 
+                            this.menu.getComponent('m_prop').enable();
+                            else this.menu.getComponent('m_prop').disable();                 
                     }
                 }
                 
                 if (Config.user.permissions.adminRootCat) {
                 
                     if (node && node.getDepth() == 1) {
-                        Ext.getCmp('tb_new_s').enable();
-                        if (this.menu) Ext.getCmp('m_new_s').enable();
+                        this.findButton('tb_new_s').enable();
+                        if (this.menu) this.menu.getComponent('m_new_s').enable();
                     } else {
-                        Ext.getCmp('tb_new_s').disable();
-                        if (this.menu) Ext.getCmp('m_new_s').disable();
+                        this.findButton('tb_new_s').disable();
+                        if (this.menu) this.menu.getComponent('m_new_s').disable();
                     }
                     
                 }
-    
-                Cetera.getApplication().buildBoLink();
+ 
+                //Cetera.getApplication().buildBoLink();
             },
             scope:this
         });
@@ -185,6 +185,11 @@ Ext.define('Cetera.view.main.Tree', {
             return false;
         }, this);
 
+    },
+    
+    findButton: function(id) {
+        var b = Ext.ComponentQuery.query('#'+id, this);
+        return b[0];
     },
 
     reload: function(path, callback) {
@@ -438,7 +443,7 @@ Ext.define('Cetera.view.main.Tree', {
     
         var items = [
                 {
-                    id:'m_prop',
+                    itemId:'m_prop',
                     disabled: true,
                     iconCls:'icon-props',
                     text: Config.Lang.catProps,
@@ -449,7 +454,7 @@ Ext.define('Cetera.view.main.Tree', {
         
         if (Config.user.permissions.adminRootCat)
             Ext.Array.push(items, {
-                    id:'m_new_s',
+                    itemId:'m_new_s',
                     disabled: true,
                     iconCls:'icon-server',
                     text: Config.Lang.createServer,
@@ -459,42 +464,42 @@ Ext.define('Cetera.view.main.Tree', {
             
         Ext.Array.push(items, 
                 {
-                    id:'m_new_f',
+                    itemId:'m_new_f',
                     iconCls:'icon-new_folder',
                     text: Config.Lang.newCatalog,
                     handler: this.create_new,
                     scope: this
                 }
                 ,{
-                    id:'m_new_l',
+                    itemId:'m_new_l',
                     iconCls:'icon-new_folder_linked',
                     text: Config.Lang.newLink,
                     handler: this.create_link,
                     scope: this
                 }
                 ,{
-                    id:'m_up',
+                    itemId:'m_up',
                     iconCls:'icon-up',
                     text: Config.Lang.upper,
                     handler: this.move_up,
                     scope: this
                 }
                 ,{
-                    id:'m_down',
+                    itemId:'m_down',
                     iconCls:'icon-down',
                     text: Config.Lang.downer,
                     handler: this.move_down,
                     scope: this
                 }
                 ,{
-                    id:'m_copy',
+                    itemId:'m_copy',
                     iconCls:'icon-copy',
                     text: Config.Lang.copy,
                     handler: this.copy,
                     scope: this
                 }
                 ,{
-                    id:'m_delete',
+                    itemId:'m_delete',
                     iconCls:'icon-delete',
                     text: Config.Lang.remove,
                     handler: this.delete_cat,
@@ -503,7 +508,7 @@ Ext.define('Cetera.view.main.Tree', {
         );                   
     
         this.menu = Ext.create('Ext.menu.Menu', {
-            id:'feeds-ctx',
+            itemId:'feeds-ctx',
             items: items
         });
 

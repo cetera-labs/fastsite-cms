@@ -8,6 +8,12 @@ Ext.define('Cetera.Application', {
     ],  
     
     scriptsLoading: 0,
+    showAfterBuild: null,
+    
+    routes: {
+        ':module/:params': 'showModule',
+        ':module': 'showModule',
+    },     
       
 	launch: function () {
 		Ext.ariaWarn = Ext.emptyFn
@@ -77,104 +83,65 @@ Ext.define('Cetera.Application', {
 				id: 'root',
 				expanded: true
 			}
-		});	
+		});
         
-        Ext.create({xtype: 'mainview', plugins: 'viewport'});
+		Ext.create('Ext.data.TreeStore', {
+			storeId: 'navigationMain',
+            root: {
+                text: 'root',
+                expanded: true,
+                children: this.getNavigation()
+            }
+		});	        
         
-        var mainTree = Ext.getCmp('main_tree');
-        
-        if (window.location.hash) {
-            this.openBoLink(window.location.hash.substr(1));
-        }
-        else {    
-            mainTree.expandPath('/root/item-0-1', 'id', '/', function(bSuccess, oLastNode) {
-                if (bSuccess && oLastNode.firstChild) {
-                    mainTree.getSelectionModel().doSingleSelect(oLastNode.firstChild);
-                    mainTree.expandNode(oLastNode.firstChild);
-                }
-            });
-            
-            this.activateModule('welcome');
-        }          
-    },
-
-    buildBoLink: function() {
+        Ext.create({
+            xtype: 'mainview', 
+            plugins: 'viewport',
+        });
         
         var mainTree = Ext.getCmp('main_tree');
-        var tabs = Ext.getCmp('main_tabs');
-        var link = 'catalog:' + mainTree.getSelectedPath();
         
-        if (tabs.items.getCount()) {
-            m = [];
-            var active = '';
-            var act = tabs.getActiveTab();
-            for (var i = 0; i < tabs.items.getCount(); i++) {
-                var a = tabs.items.getAt(i).id.split('-');
-                m[i] = a[1];
-                if (act && tabs.items.getAt(i).id == act.id) active = a[1];
-            }
-            
-            link += '$modules:' + m + '$active:' + active;
+        if (this.showAfterBuild)  {
+            this.showModule(this.showAfterBuild.module, this.showAfterBuild.params, this.showAfterBuild.callback);
         }
-        window.location.hash = link;
-
-    },
-    
-    openBoLink: function(link){
-        var mainTree = Ext.getCmp('main_tree');
-        var actions = link.split('$');
-        
-        for(var i=0; i<actions.length; i++) {
-            var data = actions[i].split(':');
-            
-            if (data[0] == 'catalog') {
-                mainTree.selectPath(data[1], 'id');
-            }
-            
-            if (data[0] == 'modules') {
-                var m = data[1].split(',');
-                for(var j=0; j<m.length; j++) this.activateModule(m[j]);
-            }
-            
-            if (data[0] == 'active') {
-                this.activateModule(data[1]);
-            }
-            
-            if (data[0] == 'user') {
-                this.activateModule('users', function(obj) {
-                    obj.edit(data[1]);
-                });
-            }
-			
-			if (data[0] == 'material') {
-                this.activateModule('materials', function(obj) {
-				    obj.edit(0,data[1],data[2]);
-                });
-            }
-            
+        else {
+            this.redirectTo('welcome');
         }
     },
-    
-    activateModule: function(module, callback) {
-        var tabs = Ext.getCmp('main_tabs');
+        
+    showModule: function(module, params, callback) {
+               
+        var tabs = Ext.getCmp('main_panel');
+        
+        if (!tabs) {
+            this.showAfterBuild = {
+                module: module,
+                params: params,
+                callnack: callback
+            }
+            return;
+        }
+        
+        //console.log(module);
+        
         var tab_id = 'tab-'+module;
         var tab = tabs.query('#'+tab_id);
     
         if (tab && tab != '') {
-            tabs.setActiveTab(tab_id);
+            tabs.setActiveItem(tab_id);
             if (callback) callback(Config.ui.modules[module]['object']);
         } 
 		else if (Config.ui.modules[module]) {
             var tab = tabs.add({
                 id: tab_id,
                 layout: 'fit',
+                closable: false,
                 title: Config.ui.modules[module]['name'],
                 iconCls: Config.ui.modules[module]['iconCls']?Config.ui.modules[module]['iconCls']:'tab-'+module
             });
-            tabs.setActiveTab(tab_id);
+            tabs.setActiveItem(tab_id);
     
             if (Config.ui.modules[module]['html']) {
-            
                 tab.add({
                     border: false,
                     loader: {
@@ -200,7 +167,7 @@ Ext.define('Cetera.Application', {
     
             }
             
-        }
+        }        
     },
     
     createModulePanel: function(tab, module, callback) {
@@ -249,5 +216,56 @@ Ext.define('Cetera.Application', {
             m.hide();
 			if (!delay) delay=1000;
             m.slideIn('t').ghost("t", { delay: delay, remove: true});
+    },
+    
+    getNavigation: function() {
+    
+        var children = [];
+        
+        Ext.Object.each(Config.ui.menu, function(key, value) {
+            if (value.items && value.items.length) {
+                
+                children.push({
+                    text: value.name, 
+                    name: value.name, 
+                    expanded:true,
+                    children: this.buildMenu(value.items)             
+                });
+                
+                //var c = this.buildMenu(value.items);
+                //children = Ext.Array.merge(children, c);
+            }
+        }, this);
+ 
+
+        return children;
+    },
+    
+    buildMenu: function(items) {
+        
+        var res = [];
+        Ext.Object.each(items, function(key, value) {
+            var item = {
+                text    : value.name,
+                iconCls : value.iconCls?value.iconCls:'tab-'+value.id,
+                id      : value.id,
+                children: []            
+            }     
+            
+            if (value.submenu && value.submenu.length) {
+                Ext.Object.each(value.submenu, function(k, v) {
+                    item.children.push({
+                        text    : v.name,
+                        iconCls : v.iconCls?v.iconCls:'tab-'+value.id + '_' + k,
+                        id      : value.id + '_' + k,
+                        children: []            
+                    });     
+                }, this);              
+            }
+               
+            res.push(item);
+        }, this);  
+        
+        return res;  
     },    
 });

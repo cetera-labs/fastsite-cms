@@ -1,6 +1,7 @@
 Ext.define('Cetera.panel.Materials', {
 
     extend:'Ext.grid.Panel',
+    alias : 'widget.materials',
 
     mat_type: 0,   
 	
