@@ -12,18 +12,7 @@ Ext.define('Cetera.main.Navigation', {
 	border:true,
        
     initComponent : function() {
-    
-        var children = [];
         
-        Ext.Object.each(Config.menu, function(key, value) {
-                children.push({
-                    text: value.name,  
-                    iconCls: value.iconCls, 
-                    expanded: value.items && value.items.length > 0,
-                    children: (value.items && value.items.length > 0)?this.buildMenu(value.items):[]
-                });
-        }, this);
-    
         this.store = Ext.create('Ext.data.TreeStore', {
             proxy: {
                 type: 'ajax'
@@ -31,7 +20,7 @@ Ext.define('Cetera.main.Navigation', {
             root: {
                 text: 'root',
                 expanded: true,
-                children: children
+                children: this.buildMenu(Config.menu)
             }
         });  
 
@@ -51,18 +40,23 @@ Ext.define('Cetera.main.Navigation', {
         Ext.Object.each(items, function(key, value) {
             var item = {
                 text    : value.name,
-                iconCls : 'tab-'+value.id,
+                iconCls : value.iconCls?value.iconCls:'tab-'+value.id,
                 id      : value.id,
+                leaf    : !value.items || value.items.length == 0,
                 children: []            
             }     
             
             if (value.items && value.items.length) {
                 Ext.Object.each(value.items, function(k, v) {
+                    var id = v.id;
+                    if (value.id) {
+                        id = value.id + '-' + id;
+                    }
                     item.children.push({
                         text    : v.name,
-                        iconCls : v.iconCls?v.iconCls:'tab-'+value.id + '_' + k,
-                        id      : value.id + '_' + k,
-                        children: []            
+                        iconCls : v.iconCls?v.iconCls:'tab-'+id,
+                        id      : id,
+                        leaf    : true,          
                     });     
                 }, this);              
             }

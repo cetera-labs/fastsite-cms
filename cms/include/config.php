@@ -69,7 +69,7 @@ foreach ($application->getBo()->getModules() as $id => $component) {
           if (isset($menu_subitem['html'])) $menu_subitem['html'] = truePath($menu_subitem['html'],$root_folder);
           if (isset($menu_subitem['tree'])) $menu_subitem['tree'] = 'catalogs'; 
           
-          $components[$ii] = $menu_subitem;              
+          $components[$id.'-'.$menu_subitem['id']] = $menu_subitem;              
      }                 
 
 }

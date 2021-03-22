@@ -220,25 +220,8 @@ Ext.define('Cetera.Application', {
     
     getNavigation: function() {
     
-        var children = [];
-        
-        console.log(Config.ui.menu);
-        
-        Ext.Object.each(Config.ui.menu, function(key, value) {
-            
-                children.push({
-                    text: value.name,  
-                    iconCls: value.iconCls, 
-                    expanded: value.items && value.items.length > 0,
-                    children: (value.items && value.items.length > 0)?this.buildMenu(value.items):[]
-                });
-                
-                //var c = this.buildMenu(value.items);
-                //children = Ext.Array.merge(children, c);
-        }, this);
- 
+        return this.buildMenu(Config.ui.menu);
 
-        return children;
     },
     
     buildMenu: function(items) {
@@ -249,16 +232,21 @@ Ext.define('Cetera.Application', {
                 text    : value.name,
                 iconCls : value.iconCls?value.iconCls:'tab-'+value.id,
                 id      : value.id,
+                leaf    : !value.items || value.items.length == 0,
                 children: []            
             }     
             
             if (value.items && value.items.length) {
                 Ext.Object.each(value.items, function(k, v) {
+                    var id = v.id;
+                    if (value.id) {
+                        id = value.id + '-' + id;
+                    }
                     item.children.push({
                         text    : v.name,
-                        iconCls : v.iconCls?v.iconCls:'tab-'+value.id + '_' + k,
-                        id      : value.id + '_' + k,
-                        children: []            
+                        iconCls : v.iconCls?v.iconCls:'tab-'+id,
+                        id      : id,
+                        leaf    : true,          
                     });     
                 }, this);              
             }
