@@ -222,6 +222,8 @@ Ext.define('Cetera.Application', {
     
         var children = [];
         
+        console.log(Config.ui.menu);
+        
         Ext.Object.each(Config.ui.menu, function(key, value) {
             
                 children.push({
