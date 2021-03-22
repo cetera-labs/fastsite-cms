@@ -16,12 +16,11 @@ Ext.define('Cetera.main.Navigation', {
         var children = [];
         
         Ext.Object.each(Config.menu, function(key, value) {
-            if (value.items && value.items.length)
                 children.push({
-                    text: value.name, 
-                    name: value.name, 
-                    expanded:true,
-                    children: this.buildMenu(value.items)             
+                    text: value.name,  
+                    iconCls: value.iconCls, 
+                    expanded: value.items && value.items.length > 0,
+                    children: (value.items && value.items.length > 0)?this.buildMenu(value.items):[]
                 });
         }, this);
     
@@ -57,11 +56,11 @@ Ext.define('Cetera.main.Navigation', {
                 children: []            
             }     
             
-            if (value.submenu && value.submenu.length) {
-                Ext.Object.each(value.submenu, function(k, v) {
+            if (value.items && value.items.length) {
+                Ext.Object.each(value.items, function(k, v) {
                     item.children.push({
                         text    : v.name,
-                        iconCls : 'tab-'+value.id + '_' + k,
+                        iconCls : v.iconCls?v.iconCls:'tab-'+value.id + '_' + k,
                         id      : value.id + '_' + k,
                         children: []            
                     });     

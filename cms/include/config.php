@@ -37,6 +37,7 @@ $menu = [
     ),    
 ];
 
+$i = 0;
 foreach ($application->getBo()->getModules() as $id => $component) {
 
   $root_folder = '/'.CMS_DIR.'/';
@@ -44,27 +45,24 @@ foreach ($application->getBo()->getModules() as $id => $component) {
           
   $component['id'] = $id;          
           
-  if ($component['position']) {
+  if (isset($component['position'])) {
       if (isset($menu[$component['position']])) {
           $menu[$component['position']]['items'][] = $component;
       } else {
-          $menu[$component['position']] = array(
-              'name'  => isset($component['position_name'])?$component['position_name']:$component['name'],
-              'items' => array($component)              
-          );
+          $menu[$i++] = $component;
       }    
   } else {
-      $menu[] = $component;
+      $menu[$i++] = $component;
   }
-  
+    
   if (isset($component['url']))  $component['url']  = truePath($component['url'],$root_folder);
   if (isset($component['icon'])) $component['icon'] = truePath($component['icon'],$root_folder);
   if (isset($component['html'])) $component['html'] = truePath($component['html'],$root_folder);
   if (!isset($component['tree'])) $component['tree'] = 'catalogs';
   $components[$id] = $component;   
   
-  if (isset($component['submenu']) && is_array($component['submenu'])) 
-     foreach ($component['submenu'] as $ii => $menu_subitem) {
+  if (isset($component['items']) && is_array($component['items'])) 
+     foreach ($component['items'] as $ii => $menu_subitem) {
      
           if (isset($menu_subitem['url'])) $menu_subitem['url'] = truePath($menu_subitem['url'],$root_folder);
           if (isset($menu_subitem['icon'])) $menu_subitem['icon'] = truePath($menu_subitem['icon'],$root_folder);
@@ -75,6 +73,7 @@ foreach ($application->getBo()->getModules() as $id => $component) {
      }                 
 
 }
+
 ksort($menu);
 
 function truePath($path, $root) {
