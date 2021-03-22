@@ -40,6 +40,7 @@ Ext.define('Cetera.main.Navigation', {
         Ext.Object.each(items, function(key, value) {
             var item = {
                 text    : value.name,
+                icon    : value.icon,
                 iconCls : value.iconCls?value.iconCls:'tab-'+value.id,
                 id      : value.id,
                 leaf    : !value.items || value.items.length == 0,
@@ -54,6 +55,7 @@ Ext.define('Cetera.main.Navigation', {
                     }
                     item.children.push({
                         text    : v.name,
+                        icon    : v.icon,
                         iconCls : v.iconCls?v.iconCls:'tab-'+id,
                         id      : id,
                         leaf    : true,          
