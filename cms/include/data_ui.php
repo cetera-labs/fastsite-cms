@@ -29,6 +29,7 @@ $menu = array(
     ),            
 );
 
+$i = 0;
 foreach ($application->getBo()->getModules() as $id => $component) {
 
   $root_folder = '/'.CMS_DIR.'/';
@@ -40,10 +41,10 @@ foreach ($application->getBo()->getModules() as $id => $component) {
       if (isset($menu[$component['position']])) {
           $menu[$component['position']]['items'][] = $component;
       } else {
-          $menu[] = $component;
+          $menu[$i++] = $component;
       }    
   } else {
-      $menu[] = $component;
+      $menu[$i++] = $component;
   }
   
   if (isset($component['url']))  $component['url']  = truePath($component['url'],$root_folder);

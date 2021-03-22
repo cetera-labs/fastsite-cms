@@ -99,7 +99,7 @@ Ext.define('Cetera.Application', {
             plugins: 'viewport',
         });
         
-        var mainTree = Ext.getCmp('main_tree');
+        //var mainTree = Ext.getCmp('main_tree');
         
         if (this.showAfterBuild)  {
             this.showModule(this.showAfterBuild.module, this.showAfterBuild.params, this.showAfterBuild.callback);
@@ -121,6 +121,9 @@ Ext.define('Cetera.Application', {
             }
             return;
         }
+        
+        var nav = Ext.getCmp('main_navigation');
+        nav.setSelection(module);
         
         //console.log(module);
         

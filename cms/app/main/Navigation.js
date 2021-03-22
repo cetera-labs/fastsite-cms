@@ -44,6 +44,7 @@ Ext.define('Cetera.main.Navigation', {
                 iconCls : value.iconCls?value.iconCls:'tab-'+value.id,
                 id      : value.id,
                 leaf    : !value.items || value.items.length == 0,
+                expanded: true,
                 children: []            
             }     
             
