@@ -116,9 +116,11 @@ Microloader.appUpdate)},1E3)},checksum:function(content,hash){if(!content||!hash
 304===result.status||Boot.env.phantom||0===result.status&&0<result.content.length?rst.content=result.content:rst.error=!0:rst.error=!0;return rst}};return Microloader}();Ext.manifest=Ext.manifest||'bootstrap';Ext.Microloader.run();</script>
  
 </head>
-  <body class="launching" id="main_body">
-    <div id="splash">      
-      <div class="fa fa-spin inner-circle"></div>
+  <body id="main_body">
+    <div id="launching">
+        <div id="splash">      
+          <div class="fa fa-spin inner-circle"></div>
+        </div>
     </div>
   </body>
 </html>
