@@ -182,7 +182,7 @@ Config = {
 			<?php
 			$f = true;
 			foreach ($application->getRegisteredWidgets() as $item) {
-				if (isset($item['not_placeable'])) continue;
+				if (isset($item['not_placeable']) && $item['not_placeable']) continue;
 				if (!$f) print ',';
 				print "{\n";
 				print '    icon:    "'.$item['icon']."\",\n";
