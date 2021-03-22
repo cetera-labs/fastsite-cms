@@ -16,8 +16,8 @@ Ext.define('Cetera.field.Ace', {
 
     initEditor : function(){
 		var me = this;
-		
-		me.editor = ace.edit(me.id + '-inputEl');
+        		
+		me.editor = Ext.xAce.edit(me.id + '-inputEl');
 		me.editor.getSession().setMode("ace/mode/html");	
 		me.editor.getSession().setUseWrapMode(true);
        
@@ -26,11 +26,11 @@ Ext.define('Cetera.field.Ace', {
 		});
     },
 	
-    onResize : function(){
+    onResize : function(w,h){
 		var me = this;
         this.callParent(arguments);
 		if (me.editor) {
-			me.editor.resize();				
+			me.editor.resize(true);				
 		}        
     },	
 	

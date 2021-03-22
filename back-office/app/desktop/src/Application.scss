@@ -83,16 +83,12 @@ $blank-page-color: dynamic(#cacaca);
 .icon-new_folder { background:url(images/new_folder.gif) no-repeat center center !important; }
 .icon-folder { background:url(images/folder1.gif) no-repeat center center !important; }
 .icon-folder_delete { background:url(images/folder_delete.gif) no-repeat center center !important; }
-.icon-new { background:url(images/new.gif) no-repeat center center !important; }
 .icon-new1 { background:url(images/new1.gif) no-repeat center center !important; }
 .icon-up { background:url(images/up.gif) no-repeat center center !important; }
 .icon-down { background:url(images/down.gif) no-repeat center center !important; }
 .icon-new_folder_linked { background:url(images/new_folder_linked.gif) no-repeat center center !important; }
 .icon-new_folder_hardlinked { background:url(images/new_folder_linked_hard.png) no-repeat center center !important;}
 .icon-copy { background:url(images/copy.gif) no-repeat center center !important; }
-.icon-delete { background:url(images/delete.gif) no-repeat center center !important; }
-.icon-delete2 { background:url(images/16X16/delete.gif) no-repeat center center !important; }
-.icon-edit { background:url(images/edit.gif) no-repeat center center !important; }
 .icon-props { background:url(images/prop1.gif) no-repeat center center !important; }
 .icon-pub { background:url(images/globe.gif) no-repeat center center !important; }
 .icon-unpub { background:url(images/globe_c.gif) no-repeat center center !important; }
@@ -122,32 +118,7 @@ $blank-page-color: dynamic(#cacaca);
 .icon-clean { background:url(images/clean.png) no-repeat center center !important; }
 .icon-thumbs { background:url(images/preview_view.gif) no-repeat center center !important; }
 .icon-table { background:url(images/table_view.gif) no-repeat center center !important; }
-.icon-plus { background:url(images/plus.gif) no-repeat center center !important; }
-.icon-minus { background:url(images/minus.gif) no-repeat center center !important; }
-.icon-clean { background:url(images/clean.png) no-repeat center center !important; }
-.icon-fb { background:url(images/facebook.png) no-repeat center center !important; }
-.icon-google { background:url(images/google-plus.png) no-repeat center center !important; background-size:contain !important; }
-.icon-tw { background:url(images/twitter.png) no-repeat center center !important; }
-.icon-vk { background:url(images/vk.png) no-repeat center center !important; }
-.icon-odno { background:url(images/odno.png) no-repeat center center !important; }
-.icon-help { background:url(images/16X16/help.gif) no-repeat center center !important; }
-.icon-on { background:url(images/16X16/ball_green.gif) no-repeat center center !important; }
-.icon-off { background:url(images/16X16/ball_red.gif) no-repeat center center !important; }
-.icon-undo { background:url(images/16X16/undo.gif) no-repeat center center !important; }
-.icon-setup { background:url(images/setup_small.gif) no-repeat center center !important; }
-.icon-save { background:url(images/16X16/save.gif) no-repeat center center !important; }
-.icon-save-as { background:url(images/16X16/save_as2.gif) no-repeat center center !important; }
-.icon-settings { background:url(images/16X16/settings.gif) no-repeat center center !important; }
-.icon-unpack { background:url(images/16X16/unpack.gif) no-repeat center center !important; }
-.icon-crop { background:url(images/crop.png) no-repeat center center !important; }
-.icon-export { background:url(images/16X16/export.gif) no-repeat center center !important; }
-.icon-import { background:url(images/16X16/import.gif) no-repeat center center !important; }
+
 
 /* Navigation tree */
 .tab-welcome { background-image:url(images/cmslogo_small.gif);}
-.tab-materials, .tree-materials .x-tree-node-icon { background-image:url(images/math2.gif);}
-.tab-templates, .tree-templates .x-tree-node-icon { background-image:url(images/xsl.gif);}
-.tab-templateshtml, .tree-templateshtml .x-tree-node-icon { background-image:url(images/html.gif);}
-.tab-types, .tree-types .x-tree-node-icon { background-image:url(images/setup_small.gif);}
-.navigation-tree li.x-tree-node {padding: 0 0 2px 2px;}
-.navigation-tree .x-grid-row-selected .x-grid-td { background-color: white !important; }

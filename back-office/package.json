@@ -38,23 +38,24 @@
     "cropperjs": "^1.5.11"
   },
   "devDependencies": {
-    "@sencha/ext-webpack-plugin": "~7.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "base-href-webpack-plugin": "~2.0.0",
-    "cross-env": "^5.2.0",
-    "portfinder": "^1.0.21",
-    "webpack": "~4.39.2",
-    "webpack-cli": "~3.3.6",
-    "webpack-dev-server": "~3.8.0",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/plugin-transform-async-to-generator": "^7.5.0",
     "@babel/plugin-transform-regenerator": "^7.4.5",
     "@babel/preset-env": "^7.5.5",
-    "babel-plugin-add-module-exports": "^1.0.2",
+    "@sencha/ext-webpack-plugin": "~7.0.0",
     "babel-loader": "^8.0.6",
+    "babel-plugin-add-module-exports": "^1.0.2",
+    "base-href-webpack-plugin": "~2.0.0",
+    "cross-env": "^5.2.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^3.2.0",
     "lodash.find": "^4.6.0",
-    "replace": "^1.1.1"
+    "portfinder": "^1.0.21",
+    "replace": "^1.1.1",
+    "webpack": "~4.39.2",
+    "webpack-cli": "~3.3.6",
+    "webpack-dev-server": "~3.8.0"
   }
 }
