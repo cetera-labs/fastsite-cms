@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const ExtWebpackPlugin = require('@sencha/ext-webpack-plugin');
+const ExtWebpackPluginWebpack5 = require('./ext-webpack-plugin-webpack5');
 const portfinder = require('portfinder');
 const replace = require("replace");
 
@@ -50,7 +51,7 @@ module.exports = async function (env) {
     const plugins = [
       new HtmlWebpackPlugin({ template: "index.html", hash: true, inject: "body" }),
       new BaseHrefWebpackPlugin({ baseHref: basehref }),
-      new ExtWebpackPlugin({
+      new ExtWebpackPluginWebpack5({
         framework: framework,
         toolkit: toolkit,
         theme: theme,
@@ -93,6 +94,7 @@ module.exports = async function (env) {
             '/themes':         'http://localhost:8080',
             '/uploads':        'http://localhost:8080',
             '/imagetransform': 'http://localhost:8080',
+            '/plugins':        'http://localhost:8080',
         },
         contentBase: outputFolder,
         hot: isProd,
