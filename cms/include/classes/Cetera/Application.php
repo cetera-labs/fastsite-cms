@@ -1052,14 +1052,14 @@ class Application {
         $this->_plugins_loaded = array();
 
         $translator = $this->getTranslator();
+        
+        $inflector = \Doctrine\Inflector\InflectorFactory::create()->build();
                 
         foreach (Plugin::enum() as $plugin) {
             if (!$plugin->isEnabled()) continue;	
             if (!$plugin->composer && file_exists($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CLASSES) && is_dir($plugin->getPath().DIRECTORY_SEPARATOR.PLUGIN_CLASSES)) {
 			    $loader = new \Composer\Autoload\ClassLoader();				
-				$parts = explode('_',$plugin->name);
-				$prefix = '';
-				foreach ($parts as $p) $prefix .= ucfirst($p);				
+				$prefix = $inflector->classify($plugin->name);				
                 $loader->add($prefix, DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$plugin->name.DIRECTORY_SEPARATOR.PLUGIN_CLASSES);
                 $loader->register();
             }            
@@ -1084,9 +1084,7 @@ class Application {
 			{
                 $loader = new \Composer\Autoload\ClassLoader();
 				
-				$parts = explode('_',$theme->name);
-				$prefix = '';
-				foreach ($parts as $p) $prefix .= ucfirst($p);				
+				$prefix = $inflector->classify($theme->name);				
 				
                 $loader->add($prefix, DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.'classes');
                 $loader->register();
@@ -1096,6 +1094,7 @@ class Application {
 				include(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG);  
 			} 
 			catch (\Exception $e) {
+                print $e->getMessage()."\n";
 			}					
 		
 		}
