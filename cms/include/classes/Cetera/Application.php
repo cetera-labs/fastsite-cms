@@ -1094,7 +1094,6 @@ class Application {
 				include(DOCROOT.THEME_DIR.DIRECTORY_SEPARATOR.$theme->name.DIRECTORY_SEPARATOR.PLUGIN_CONFIG);  
 			} 
 			catch (\Exception $e) {
-                print $e->getMessage()."\n";
 			}					
 		
 		}
