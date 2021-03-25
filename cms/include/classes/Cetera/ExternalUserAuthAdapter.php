@@ -50,7 +50,9 @@ abstract class ExternalUserAuthAdapter implements AdapterInterface {
             'user_id'  => $user->id
         );
         
-        Application::getInstance()->getSession()->getManager()->rememberMe(REMEMBER_ME_SECONDS);	
+        if (Application::getInstance()->getSession()) {
+            Application::getInstance()->getSession()->getManager()->rememberMe(REMEMBER_ME_SECONDS);
+        }   	
         return $this->_authenticateCreateAuthResult();
     }
 }
