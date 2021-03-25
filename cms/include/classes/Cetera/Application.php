@@ -633,7 +633,7 @@ class Application {
         }
         
         $sessionManager = new SessionManager();
-        $sessionManager->setSaveHandler(new SessionSaveHandler());  
+        //$sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
         try {
             $this->_session = new Container(SESSION_NAMESPACE);     
