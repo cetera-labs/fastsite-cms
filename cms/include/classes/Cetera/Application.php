@@ -632,6 +632,7 @@ class Application {
             
         }
         
+        session_start();
         $sessionManager = new SessionManager();
         //$sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
@@ -639,7 +640,6 @@ class Application {
             $this->_session = new Container(SESSION_NAMESPACE);     
         }
         catch (\Exception $e) {
-            session_start();
             session_regenerate_id();
         }  
         
