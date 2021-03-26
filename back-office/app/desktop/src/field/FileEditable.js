@@ -35,15 +35,13 @@ Ext.define('Cetera.field.FileEditable', {
                  scope: this,
                  'beforeSave': function( wnd, editor ) {
                       if ( this.protectedValue == wnd.file ) {
-							var parts = wnd.file.split('\.');
+							var parts = wnd.file.split('.');
 							var i = 0;
 							if (parts.length > 1) i = parts.length - 2;
-							if (this.getFileSuffix)
-							{
+							if (this.getFileSuffix) {
 								parts[i] += this.getFileSuffix();
 							}
-							else
-							{
+							else {
 								parts[i] += '_user';
 							}
 							
