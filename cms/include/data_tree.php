@@ -22,7 +22,7 @@ if ($only) {
 	$only = $od->id;	
 }
 
-if ($user->hasRight(GROUP_CONTENT)) {
+if (!$user->hasRight(GROUP_CONTENT)) {
     $nodes[] = array(
         'text' => 'root',
 	    'name' => 'root',
