@@ -946,17 +946,20 @@ class Application {
             }
             elseif (is_array($handler)) {
             
-                if ( is_object($handler[0]) )
+                if ( is_object($handler[0]) ) {
                     $handler[0]->$handler[1]($result); 
-                    else {
-						$handler[0]::{$handler[1]}($result); 
-					}
+                }
+                else {
+					$handler[0]::{$handler[1]}($result); 
+				}
             
-            } elseif (function_exists($handler)) {
+            } 
+            elseif (function_exists($handler)) {
             
                 $handler($result);
                 
-            } elseif (file_exists($handler)) {
+            } 
+            elseif (file_exists($handler)) {
             
                 include($handler);
             
@@ -1005,26 +1008,32 @@ class Application {
     {
         if (!sizeof($this->_groups)) {
             $translator = $this->getTranslator();
-            $this->_groups = array(
-                GROUP_ALL => array(
+            $this->_groups = [
+                GROUP_ALL => [
                     'id' => GROUP_ALL,
                     'name' => $translator->_('Все'),
                     'describ' => '',
                     'user_defined' => 0
-                ),
-                GROUP_BACKOFFICE => array(
+                ],
+                GROUP_BACKOFFICE => [
                     'id' => GROUP_BACKOFFICE,
                     'name' => $translator->_('Пользователи BackOffice'),
                     'describ' => $translator->_('Имеют право входа в систему управления сайтом'),
                     'user_defined' => 0
-                ),
-                GROUP_ADMIN => array(
+                ],
+                GROUP_ADMIN => [
                     'id' => GROUP_ADMIN,
                     'name' => $translator->_('Администраторы'),
                     'describ' => $translator->_('Администраторы имеют полные, ничем неограниченные права доступа'),
                     'user_defined' => 0
-                ),
-            );
+                ],
+                GROUP_CONTENT => [
+                    'id' => GROUP_CONTENT,
+                    'name' => $translator->_('Контент-редакторы'),
+                    'describ' => $translator->_('Имеют доступ к управлению разделами и материалами'),
+                    'user_defined' => 0
+                ],                
+            ];
         }
         return $this->_groups + $this->_user_groups;
     }

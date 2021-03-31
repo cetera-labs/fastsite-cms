@@ -24,15 +24,12 @@ $application->initPlugins();
 $application->ping();
 
 $user = $application->getUser();
-if (!$user || !$user->allowBackOffice())
-{
-    if ($_SERVER['SCRIPT_NAME'] != '/'.CMS_DIR.'/login.php' && (empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest'))
-	{
+if (!$user || !$user->allowBackOffice()) {
+    if ($_SERVER['SCRIPT_NAME'] != '/'.CMS_DIR.'/login.php' && (empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest')) {
         header('Location: /'.CMS_DIR.'/login.php');
         die();
     }
-	else
-	{
+	else {
         throw new \Cetera\Exception\Auth();
     }
 }

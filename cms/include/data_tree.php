@@ -14,16 +14,29 @@ $norootselect = Util::get('norootselect', TRUE);
 $exclude_mat = Util::get('exclude_mat', TRUE);
 $matsort = Util::get('matsort');
 
-$nodes = array();
+$nodes = [];
 $node = $_REQUEST['node'];
 
-if ($only)
-{
+if ($only) {
 	$od = ObjectDefinition::findById($only); 
 	$only = $od->id;	
 }
 
-if ($node == 'root') {
+if ($user->hasRight(GROUP_CONTENT)) {
+    $nodes[] = array(
+        'text' => 'root',
+	    'name' => 'root',
+        'id'   => 'item-0-1',
+	    'item_id'  => 0,
+        'node_id'  => 0,
+        'iconCls'  => 'tree-folder-visible x-fa fa-times',
+        'qtip' => '',
+        'leaf' => true,
+        'mtype' => 0,
+        'disabled' => true
+    );    
+}
+elseif ($node == 'root') {
 
     $nodes[] = array(
         'text' => 'root',
@@ -38,7 +51,8 @@ if ($node == 'root') {
         'disabled' => ($nocatselect || $norootselect || $only > 0)?TRUE:FALSE
     );
 
-} else {
+} 
+else {
     
     $dummy = explode('-',$node);
     $id = isset($dummy[1])?$dummy[1]:null;

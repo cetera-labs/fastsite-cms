@@ -167,19 +167,23 @@ class BackOffice {
         if (!$this->_modules) {
         
             $translator = $this->application->getTranslator();
-            $this->_modules = [
-                'structure' => [
+            $this->_modules = [];
+            
+            if ($this->application->getUser() && $this->application->getUser()->hasRight(GROUP_CONTENT)) {
+            
+                $this->_modules['structure'] = [
                       'name' 	  => $translator->_('Структура и материалы'),
 					  'iconCls'   => 'x-fa fa-folder',
                       'class'     => 'Cetera.panel.Structure'
-                ],			
-                'materials' => [
+                ];		
+                $this->_modules['materials'] = [
                       'name' 	  => $translator->_('Материалы'),
                 	  'icon'      => 'images/math2.gif',
 					  'iconCls'   => 'x-fa fa-file-alt',
                       'class'     => 'Cetera.panel.MaterialsByCatalog'
-                ]
-            ];          
+                ];
+                
+            }         
             
             if ($this->application->getUser() && $this->application->getUser()->allowAdmin()) {
         /*

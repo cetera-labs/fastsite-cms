@@ -114,6 +114,7 @@ define('GROUP_ADMIN',       -3);  // Администраторы
 define('GROUP_EXTERNAL',    -4);  // Пользователи внешние
 define('GROUP_ANONYMOUS',   -5);  // Анонимы
 define('GROUP_LOCAL',       -6);  // Зарегистрированные
+define('GROUP_CONTENT',     -7);  // Контент-редакторы
 
 define('USER_OPENID',        -4);  // Пользователи OpenID
 define('USER_ANONYMOUS',     -5);  // Анонимы

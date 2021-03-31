@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html manifest="">
+<head><base href="/">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=10, user-scalable=yes">
+	<title>Fastsite CMS</title>
+  
+  <script type="text/javascript" src="/cms/include/config.php"></script>	
+  <script type="text/javascript">
+    var Ext = Ext || {};
+    Ext.beforeLoad = function (tags) {
+    
+        var s = location.search,  // the query string (ex "?foo=1&bar")
+            profile = 'desktop';
+
+        // For testing look for "?classic" or "?modern" in the URL to override
+        // device detection default.
+        //
+        if (s.match(/\bclassic\b/)) {
+            profile = 'desktop';
+        }
+        else if (s.match(/\bmodern\b/)) {
+            profile = 'modern';
+        }
+        // uncomment this if you have added native build profiles to your app.json
+        /*else if (tags.webview) {
+            if (tags.ios) {
+                profile = 'ios';
+            }
+            // add other native platforms here
+        }*/
+        else {
+            //profile = tags.desktop ? 'classic' : 'modern';
+            //profile = tags.phone ? 'modern' : 'classic';
+        }
+            
+        Ext.manifest ='cms/ui/'+profile+'.json';
+    };    
+  </script>
+
+  <!-- The line below must be kept intact for Sencha Cmd to build your application -->
+  <script id="microloader" data-app="fd801804-cc21-4375-a588-f37860b52809" type="text/javascript" src="cms/ui/bootstrap.js"></script>
+ 
+</head>
+  <body id="main_body">
+    <div id="launching">
+        <div id="splash">      
+          <div class="fa fa-spin inner-circle"></div>
+        </div>
+    </div>
+  <script type="text/javascript" src="main.js?f39a1850e9294b401a94"></script></body>
+</html>
