@@ -86,10 +86,14 @@ abstract class Base {
 		foreach ($fields as $k => $f) {
             
             if (!is_array($f)) {
-                $k = $f;
+                $value = $this->$f;
+                if (gettype($k) == 'integer') {
+                    $k = $f;
+                }
             }
-            
-            $value = $this->$k;
+            else {            
+                $value = $this->$k;
+            }
             
             if ($value instanceof Base) {
                 if (!is_array($f)) {

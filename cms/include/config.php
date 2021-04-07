@@ -74,6 +74,10 @@ foreach ($application->getBo()->getModules() as $id => $component) {
 
 }
 
+if (!count($menu[MENU_ADMIN]['items'])) {
+    unset($menu[MENU_ADMIN]);
+}
+
 ksort($menu);
 
 function truePath($path, $root) {
