@@ -20,6 +20,8 @@ class Plugin implements \ArrayAccess  {
     
     private static $disabled = null;
     
+    private static $plugins = null;
+    
     public $name;
     public $composer;
     
@@ -30,30 +32,32 @@ class Plugin implements \ArrayAccess  {
 	*/	
     public static function enum()
     {
-        $plugins = array();
-        
-        if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR)) {
-        	while (($__item = readdir($__dir)) !== false) {
-          		if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item)) continue;
-        	    if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item.DIRECTORY_SEPARATOR.PLUGIN_INFO)) continue;
-                $plugins[$__item] = new self($__item);
-        	}  
-        	closedir($__dir);
-        }
-
-        if (file_exists(VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php')) {
-            $composer_plugins = include( VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
-            foreach($composer_plugins as $k => $p) {
-                $p['path'] = VENDOR_PATH . DIRECTORY_SEPARATOR . $k;
-                if (isset($p['schema'])) {
-                    $p['schema'] = $p['path'] . '/' . basename($p['schema']);
-                }
-                $plugins[$p['name']] = new self($p);
+        if (!self::$plugins) {
+            self::$plugins = [];
+            
+            if (file_exists(DOCROOT.PLUGIN_DIR) && is_dir(DOCROOT.PLUGIN_DIR) && $__dir = opendir(DOCROOT.PLUGIN_DIR)) {
+                while (($__item = readdir($__dir)) !== false) {
+                    if($__item=="." or $__item==".." or !is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item)) continue;
+                    if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$__item.DIRECTORY_SEPARATOR.PLUGIN_INFO)) continue;
+                    self::$plugins[$__item] = new self($__item);
+                }  
+                closedir($__dir);
             }
+
+            if (file_exists(VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php')) {
+                $composer_plugins = include( VENDOR_PATH . DIRECTORY_SEPARATOR . 'cetera-labs' . DIRECTORY_SEPARATOR . 'cetera-cms-plugins.php' );
+                foreach($composer_plugins as $k => $p) {
+                    $p['path'] = VENDOR_PATH . DIRECTORY_SEPARATOR . $k;
+                    if (isset($p['schema'])) {
+                        $p['schema'] = $p['path'] . '/' . basename($p['schema']);
+                    }
+                    self::$plugins[$p['name']] = new self($p);
+                }
+            }
+            
+            ksort(self::$plugins);
         }
-        
-		ksort($plugins);
-        return $plugins;
+        return self::$plugins;
     }
     
 	/**
@@ -63,9 +67,11 @@ class Plugin implements \ArrayAccess  {
 	*/	
     public static function find($name)
     {
-        if (!is_dir(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$name)) return false;
-        if (!file_exists(DOCROOT.PLUGIN_DIR.DIRECTORY_SEPARATOR.$name.DIRECTORY_SEPARATOR.PLUGIN_INFO)) return false;
-        return new self($name);
+        $plugins = self::enum();
+        if (isset($plugins[$name])) {
+            return $plugins[$name];
+        }
+        return null;
     }    
     
     private function __construct($data)

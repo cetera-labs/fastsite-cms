@@ -1,21 +1,35 @@
 .auth-locked-window {
-    .x-window-body {
-        background-image: url('images/lock3.jpg');
-        background-size: cover;
-        background-repeat: repeat;
-    }
 
     &.x-window-default {
         border: none;
         border-radius: 0;
         padding: 0;
     }
+    
+    .x-box-target {
+        bottom: 0;
+    }
+    
+    &-wrapper {
+        position: absolute;
+        left: -20px;
+        right: -20px;
+        top: -20px;
+        bottom: -20px;
+        
+        background-image: url('images/lock3.jpg');
+        background-size: cover;
+        background-repeat: repeat;        
+    }    
 }
 
 $create-account-background-color: dynamic(#a1a1a2);
 $dialog-trigger-color: dynamic(#e5e5e5);
 
 .auth-dialog {
+
+    z-index: 100;
+
     .auth-profile-wrap {
         background: $base-color;
         color: $lightest-color;

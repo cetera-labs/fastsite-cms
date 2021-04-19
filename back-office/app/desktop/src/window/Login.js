@@ -2,7 +2,6 @@ Ext.define('Cetera.window.Login', {
     extend: 'Cetera.window.LockingWindow',
     
     title: Config.appName + ' v' + Config.appVersion + ' - Login',
-   
 
     items: [
         {

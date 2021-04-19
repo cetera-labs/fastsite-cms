@@ -47,6 +47,12 @@ abstract class AbstractController extends AbstractActionController
         }
     }
     
+    public function notFoundAction()
+    {
+        $this->response->setStatusCode(404);
+        return '404: Not found';
+    }    
+    
     public function serverErrorAction($exception)
     {
         $this->getResponse()->setStatusCode(500);
