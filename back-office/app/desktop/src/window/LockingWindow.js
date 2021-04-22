@@ -12,6 +12,8 @@ Ext.define('Cetera.window.LockingWindow', {
         'Ext.layout.container.VBox',
         'Ext.Responsive'       
     ],
+    
+    html: '<div class="auth-locked-window-wrapper"></div>',    
 
     cls: 'auth-locked-window',
     closable: false,
@@ -27,5 +29,29 @@ Ext.define('Cetera.window.LockingWindow', {
         align: 'center',
         pack: 'center'
     },
+    
+    afterRender: function() {
+        var wrapper = this.getEl();//.down('.auth-locked-window-wrapper');
+        
+        wrapper.on('mousemove', function(e,t){
+            
+            var elm = Ext.get(e.currentTarget.id);
+            var wrapper = elm.down('.auth-locked-window-wrapper');
+            
+            var x = parseInt(20*e.pageX/elm.getWidth())-10;
+            var y = parseInt(20*e.pageY/elm.getHeight())-10;
+            
+            wrapper.setStyle({
+                left:  (-20 + x)+'px',
+                right: (-20 - x)+'px',
+                top:  (-20 + y)+'px',
+                bottom: (-20 - y)+'px',                
+            });            
+                        
+            
+        });
+        
+        this.callParent();
+    }
     
 });
