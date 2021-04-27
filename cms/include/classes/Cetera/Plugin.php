@@ -117,11 +117,11 @@ class Plugin implements \ArrayAccess  {
 		$translator  = $application->getTranslator();
 		
 		// требуется более свежая CMS
-		if ($this->cms_version_min && version_compare($this->cms_version_min, $application->getVersion()) > 0 ) {
+		if (isset($this->cms_version_min) && version_compare($this->cms_version_min, $application->getVersion()) > 0 ) {
 			throw new \Exception(sprintf($translator->_('Не подходящая версия Fastsite CMS. Требуется %s или выше'), $this->cms_version_min));
 		}
 		// CMS слишком новая
-		if ($this->cms_version_max && version_compare($this->cms_version_max, $application->getVersion()) <= 0 ) {
+		if (isset($this->cms_version_max) && version_compare($this->cms_version_max, $application->getVersion()) <= 0 ) {
 			throw new \Exception(sprintf($translator->_('Не подходящая версия Fastsite CMS. Требуется не выше %s'), $this->cms_version_max));
 		}		
 		

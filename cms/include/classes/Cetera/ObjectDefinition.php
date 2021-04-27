@@ -34,6 +34,13 @@ class ObjectDefinition extends Base {
     private static $dataById = [];
     private static $dataByAlias = [];
 
+    /**
+     * Описание полей типа материалов 
+     *         
+     * @var array    
+     */  
+    private static $fields_def = []; 
+
 	/**
 	 * @internal
 	 */    
@@ -63,13 +70,6 @@ class ObjectDefinition extends Base {
       	'material_links',
       	'material_tags'
     );  
-    
-    /**
-     * Описание полей типа материалов 
-     *         
-     * @var array    
-     */  
-    private $fields_def = null; 
     
 	/**
 	 * @internal
@@ -698,16 +698,16 @@ class ObjectDefinition extends Base {
      **/
     private function _get_fields() {
     
-        if (!$this->fields_def) {	
-			$this->fields_def = [];
+        if (!isset(self::$fields_def[$this->table])) {
+			self::$fields_def[$this->table] = [];
 			$r = DbConnection::getDbConnection()->fetchAll('SELECT * FROM types_fields WHERE id=? ORDER BY tag', [$this->id]);
 			foreach($r as $f) {
 				$key = $f['name'];
-				while (isset($this->fields_def[$key])) $key .= '_';
-				$this->fields_def[$key] = ObjectField::factory($f, $this);
+				while (isset(self::$fields_def[$this->table][$key])) $key .= '_';
+				self::$fields_def[$this->table][$key] = ObjectField::factory($f, $this);
 			} 
         }
-        return $this->fields_def;
+        return self::$fields_def[$this->table];
     }
    
     /**
