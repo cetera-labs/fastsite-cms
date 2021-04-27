@@ -30,6 +30,8 @@ class Menu extends Templateable {
     );  
 	
     private $_menu = null;
+    private $_children = null;
+    private $_submenu = [];
     
     public function getMenu()
     {
@@ -55,18 +57,23 @@ class Menu extends Templateable {
         
     public function getChildren()
     {		
-		try {
-			if ($this->getMenu()) 
-				return $this->getMenu();		
-			
-			if ($this->getCatalog()) 
-				return $this->getCatalog()->children->where('hidden<>1');
-			
-			return [];
-		}
-		catch (\Exception $e) {
-			return [];
-		}		
+        if (!$this->_children) {
+            try {
+                if ($this->getMenu()) {
+                    $this->_children = $this->getMenu();		
+                }
+                elseif ($this->getCatalog()) {
+                    $this->_children = $this->getCatalog()->children->where('hidden<>1');
+                }
+                else {
+                    $this->_children = [];
+                }
+            }
+            catch (\Exception $e) {
+                $this->_children = [];
+            }
+        }
+        return $this->_children;
     }  
 
     public function setCatalog($c)
@@ -91,22 +98,30 @@ class Menu extends Templateable {
 	
 	public function showSubmenu($c)
 	{		
-		array_push( $this->stack, $this->getCatalog() );
-		array_push( $this->stack, $this->getParam('css_class') );
-		$this->setCatalog($c);
-		$this->level++;
-		$html = null;
-		if ($this->hasSubmenu()) {
-			if ($this->getParam('css_class_submenu') === false) {
-				$this->setParam('css_class_submenu', 'nested '.$this->getParam('css_class') );
-			}
-			$this->setParam('css_class', $this->getParam('css_class_submenu') );
-			$html = $this->getHtml();
-		}
-		$this->level--;
-		$this->setParam('css_class', array_pop($this->stack) );
-		$this->setCatalog( array_pop($this->stack) );
-		return $html;
+        if (!isset($this->_submenu[$c->id])) {
+            array_push( $this->stack, $this->getCatalog() );
+            array_push( $this->stack, $this->getParam('css_class') );
+            array_push( $this->stack, $this->_children );
+            $this->_children = null;
+            $this->setCatalog($c);
+            $this->level++;
+            $html = null;
+            if ($this->hasSubmenu()) {
+                if ($this->getParam('css_class_submenu') === false) {
+                    $this->setParam('css_class_submenu', 'nested '.$this->getParam('css_class') );
+                }
+                $this->setParam('css_class', $this->getParam('css_class_submenu') );
+                $html = $this->getHtml();
+            }
+            $this->level--;
+            $this->_children = array_pop($this->stack);
+            $this->setParam('css_class', array_pop($this->stack) );
+            $this->setCatalog( array_pop($this->stack) );
+            
+            $this->_submenu[$c->id] = $html;
+            //return $html;
+        }
+        return $this->_submenu[$c->id];
 	}
 	
 	public function getMaterials()
