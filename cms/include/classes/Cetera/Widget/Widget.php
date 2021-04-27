@@ -151,6 +151,7 @@ class Widget {
     public function getHtml()
     {
         if ($this->widgetDisabled) return false;
+        $this->application->debug(DEBUG_COMMON, 'Execute widget '.$this->widgetName.' '.$this->widgetTitle);
         return $this->_getHtml();
     }
     

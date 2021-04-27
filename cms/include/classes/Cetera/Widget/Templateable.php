@@ -9,7 +9,6 @@ class Templateable extends Widget {
     {
         if ($this->_templateFile === FALSE)
 		{
-
             $this->_templateFile = 'default.twig';
             		
 			if ($this->getParam('template')) $this->_templateFile = $this->getParam('template');
@@ -24,7 +23,8 @@ class Templateable extends Widget {
 
         if ($tpl = $this->getTemplateFile())
 		{
-			
+            $this->application->debug(DEBUG_COMMON, 'Widget template: '.$tpl);
+            
 			try
 			{
                 
