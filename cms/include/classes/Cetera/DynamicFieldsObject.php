@@ -327,7 +327,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */   
     public function getDynamicField($name)
     {                              
-        $fields = $this->objectDefinition->getFields()
+        $fields = $this->objectDefinition->getFields();
         
         if (!isset($fields[$name])) {
             if (isset($this->fields[$name]))
