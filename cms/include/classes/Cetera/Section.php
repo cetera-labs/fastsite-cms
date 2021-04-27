@@ -554,9 +554,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         if (!$this->_parent) {
         
             $fields = self::getDbConnection()->fetchAssoc( 
-                " SELECT A.*
-                  FROM dir_data A, dir_structure B, dir_structure C 
-                  WHERE C.data_id=? and B.data_id=A.id and B.lft<C.lft and B.rght>C.rght and B.level=C.level-1", 
+                "SELECT A.* FROM dir_data A, dir_structure B, dir_structure C 
+                 WHERE C.data_id=? and B.data_id=A.id and B.lft<C.lft and B.rght>C.rght and B.level=C.level-1", 
                 array( (int)$this->id )
             );        
         

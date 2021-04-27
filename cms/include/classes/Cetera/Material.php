@@ -116,16 +116,6 @@ class Material extends DynamicFieldsObject implements SiteItem {
 	}
     
     /**
-     * Возвращает описание полей объекта
-     *         
-     * @return array    
-     */ 
-    public function getFieldsDef()
-    {
-        return $this->objectDefinition->getFields($this->getCatalog());
-    }     
-    
-    /**
      * Возвращает абсолютный URL материала
      *           
      * @return string

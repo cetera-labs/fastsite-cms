@@ -101,12 +101,11 @@ class Catalog extends \Cetera\Iterator\DynamicObject implements \RecursiveIterat
 	 */ 
     public function has($catalog)
     {
-		if ($catalog instanceof \Cetera\Catalog)
-		{
+        $cid = null;
+		if ($catalog instanceof \Cetera\Catalog) {
 			$cid = $catalog->id;
 		}
-		else
-		{
+		elseif (is_scalar($catalog)) {
 			$cid = (int)$catalog;
 		}
         foreach($this as $c) if ($c->id == $cid) return true;
