@@ -44,6 +44,8 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 	/** @internal Алиас материалов раздела строится на основе ID */  
 	const AUTOALIAS_ID          = 256;
 	   
+    protected static $sectionInstances = [];
+       
     /** @internal Дочерние разделы */ 
     private $_children = FALSE;
     
@@ -292,20 +294,20 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
                 return parent::fetch($data);
             }
         } else {
-            if (!isset(self::$instances[$data])) {
+            if (!isset(self::$sectionInstances[$data])) {
                 $fields = self::getDbConnection()->fetchAssoc('SELECT A.*, B.level, B.id as node_id FROM `'.self::TABLE.'` A LEFT JOIN dir_structure B ON (A.id=B.data_id) WHERE A.id = ?', array($data));
                 if ($fields) {
                     if ($i_am_server) {
-                        self::$instances[$data] = parent::fetch($fields);
+                        self::$sectionInstances[$data] = parent::fetch($fields);
                     }
                     else {
-                        self::$instances[$data] = static::fetch($fields);
+                        self::$sectionInstances[$data] = static::fetch($fields);
                     }
                 } else {
-                    self::$instances[$data] = parent::fetch($data);
+                    self::$sectionInstances[$data] = parent::fetch($data);
                 }
             }
-            return self::$instances[$data];
+            return self::$sectionInstances[$data];
         }
     }
 
