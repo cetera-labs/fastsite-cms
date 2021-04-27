@@ -21,8 +21,16 @@ grand_parent: Руководство разработчика
 	; Если этот параметр отсутствует, то работает перенаправление на скрипт установки
 	setup_done=1
 
-	; Посылать отладочные сообщения в FirePHP
+	; Режим отладки
 	debug_level=1
+    debug_sql=1
+    
+    [monolog]
+    ; обработчики
+    ;handler[firephp]=\Monolog\Handler\FirePHPHandler
+    handler[stream]=\Monolog\Handler\StreamHandler
+    ; параметры, передающиеся в конструктор обработчика, разделенные ';'
+    params[stream]=../../logs/fastsitecms.log    
 
 	; Использовать memcached (если установлен) для кэширования
 	cache_memcache=1

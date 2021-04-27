@@ -131,7 +131,7 @@ class Plugin implements \ArrayAccess  {
 	
 		$translator = Application::getInstance()->getTranslator();
 	
-		if (is_array($this->requires)) {			
+		if (isset($this->requires) && is_array($this->requires)) {			
 			foreach ($this->requires as $r) {				
 				$pl = self::find( $r['plugin'] );
 				if (!$pl) {

@@ -230,6 +230,8 @@ class Application {
 	private $cronLog = false;
 	private $exitCode = 0;
     
+    public $queryCount = 0;
+    
     /**
      * Singleton instance
      * @var Application

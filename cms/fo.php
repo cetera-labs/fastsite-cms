@@ -273,6 +273,7 @@ $_time_template = Cetera\Util::utime()-$_start;
 
 $_time_total = Cetera\Util::utime() - $_init;
 
+$application->debug(DEBUG_COMMON, 'SQL Query count: '.$application->queryCount);
 $application->debug(DEBUG_COMMON, '== BENCHMARK ==');
 $application->debug(DEBUG_COMMON, 'Init: '.sprintf("%.3f", $_time_init));
 $application->debug(DEBUG_COMMON, 'Parse URL: '.sprintf("%.3f", $_time_uri));
