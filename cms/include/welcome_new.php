@@ -223,7 +223,7 @@ Ext.create('Ext.Button', {
                 <div class="about">
                     <img src="https://www.fastsite.ru/logo-fastsite.svg"/>
                     <br />
-                    <?=$translator->_('Система контент-менеджмента веб-сайтов');?><br /><?=APP_NAME?> v<?=VERSION?>
+                    <?=$translator->_('Система контент-менеджмента веб-сайтов');?><br /><?=APP_NAME?> <?=VERSION?>
                 </div>
             </td></tr>
 			
