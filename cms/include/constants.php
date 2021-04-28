@@ -10,9 +10,6 @@
  * @author Roman Romanov <nicodim@mail.ru> 
  **/
 
-/** Версия */
-define('VERSION', '3.69.0');
-
 /** Название продукта */
 define('APP_NAME', 'Fastsite CMS');
 

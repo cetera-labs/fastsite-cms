@@ -36,9 +36,12 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 if (COMPOSER_INSTALL) {
 	
 	include VENDOR_PATH.'/autoload.php';
+    define('VERSION', \Composer\InstalledVersions::getVersion("cetera-labs/cetera-cms") );
 	
 }
 else {
+    
+    define('VERSION', '3.69.0');
     
     if (!file_exists(DOCROOT.LIBRARY_PATH)) {
         
@@ -58,7 +61,6 @@ else {
 
 	$loader = new \Composer\Autoload\ClassLoader();
 	$loader->add('Cetera', __DIR__.'/classes');
-	$loader->add('Dklab', __DIR__.'/classes');
 	$loader->register();
 
 }
