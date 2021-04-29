@@ -36,7 +36,13 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 if (COMPOSER_INSTALL) {
 	
 	include VENDOR_PATH.'/autoload.php';
-    define('VERSION', \Composer\InstalledVersions::getVersion("cetera-labs/cetera-cms") );
+    try {
+        
+        define('VERSION', \PackageVersions\Versions::getVersion("cetera-labs/cetera-cms") );
+    }
+    catch (\Exception $e) {
+        define('VERSION', 'undefined' );
+    }
 	
 }
 else {
