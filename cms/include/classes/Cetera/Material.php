@@ -326,9 +326,7 @@ class Material extends DynamicFieldsObject implements SiteItem {
 			throw new \Exception('No objectDefinition is set for the material');
 		}
 		Event::trigger(EVENT_CORE_MATERIAL_BEFORE_SAVE, ['material' => $this]);
-		
-        $this->getFieldsDef();
-        
+		       
 		$type = isset($this->raw_fields['type'])?$this->raw_fields['type']:0;
 
         if ($this->published) $type = $type | MATH_PUBLISHED;
@@ -346,6 +344,9 @@ class Material extends DynamicFieldsObject implements SiteItem {
 
 		$generateAlias = false;
         if ($this->idcat >= 0) {
+            
+            $this->sectionForFields = $this->idcat;
+            
             if (!$this->alias) {
 				list($catname, $t) = $this->getDbConnection()->fetchArray("SELECT tablename,type from dir_data where id=".(int)$this->idcat);
               	if ($t & Catalog::AUTOALIAS) {
