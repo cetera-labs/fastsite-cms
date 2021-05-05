@@ -40,7 +40,8 @@
         "componavt/phpmorphy": "*",
         "firebase/php-jwt": "*",
         "phpseclib/phpseclib": "^3.0",
-        "monolog/monolog": "*"
+        "monolog/monolog": "*",
+        "composer/package-versions-deprecated": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
