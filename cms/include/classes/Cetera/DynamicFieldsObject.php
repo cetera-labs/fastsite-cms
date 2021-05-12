@@ -41,6 +41,8 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */  
     public $_objectDefinition = FALSE;
     
+    protected $sectionForFields = null;
+    
     /**
      * Созданные экземпляры объектов 
      * 
@@ -315,7 +317,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     public function getFieldsDef()
     {
 		if (!$this->objectDefinition) throw new \Exception('no objectDefinition');
-        return $this->objectDefinition->getFields();
+        return $this->objectDefinition->getFields( $this->sectionForFields );
     }
 
     /**

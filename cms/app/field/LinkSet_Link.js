@@ -117,7 +117,7 @@ Ext.define('Cetera.field.LinkSet_Link', {
 					itemId:  'tb_mat_new',
 					iconCls: 'icon-new',
 					tooltip: Config.Lang.newMaterial,
-					handler: function () { this.edit(0); },
+					handler: function () { this.edit(0,this.mat_type); },
 					scope:   this
 				},
 				this.editAction,
