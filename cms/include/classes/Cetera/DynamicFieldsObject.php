@@ -934,7 +934,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	 * @internal
 	 * @ignore
 	*/
-	private function confirm_added($tbl, $user_id) {		
+	private function confirm_added($tbl) {		
     
         $user_id = 0;
         $u = Application::getInstance()->getUser();
