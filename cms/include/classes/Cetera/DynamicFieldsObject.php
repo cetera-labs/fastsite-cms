@@ -810,7 +810,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
             	} 
 				elseif ( $type == FIELD_LINKSET || $type==FIELD_MATSET ) {
             	  	 $this->insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
-					 if ($type==FIELD_MATSET) $this->confirm_added($tbl, Application::getInstance()->getUser()->id);
+					 if ($type==FIELD_MATSET) $this->confirm_added($tbl);
                 }
 				elseif ( $type == FIELD_LINKSET2 ) {
             	  	 $this->insert_links2($this->fields[$name], $this->table, $tbl, $name, $this->id);
@@ -857,7 +857,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				}
         
                 if ($type == FIELD_MATSET || $type==FIELD_MATERIAL) {
-					$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
+					$this->confirm_added($tbl);
 				}
 				
 				if ( $type==FIELD_LINK ) {
@@ -933,10 +933,16 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	 * @ignore
 	*/
 	private function confirm_added($tbl, $user_id) {		
+    
+        $user_id = 0;
+        $u = Application::getInstance()->getUser();
+        if ($u) {
+            $user_id = $u->id;
+        }
+    
 		$not_added = ~ MATH_ADDED;
 		$r1 = $this->getDbConnection()->query("select id from $tbl where autor=".(int)$user_id." and type & ".MATH_DELETED." > 0");
-		while ($f1 = $r1->fetch(\PDO::FETCH_NUM))
-		{ 
+		while ($f1 = $r1->fetch(\PDO::FETCH_NUM)) { 
 			 $m = Material::getById($f1[0], 0, $tbl);
 			 $m->delete();
 		}
@@ -1096,7 +1102,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 				
 		if (is_iterable($value)) {			
             $this->insert_links($value, $math, $tbl, $name, $id2, $type, ObjectDefinition::findByAlias($tbl)->id, true);
-			$this->confirm_added($tbl, Application::getInstance()->getUser()->id);
+			$this->confirm_added($tbl);
 			return;					 
 		}
 		
