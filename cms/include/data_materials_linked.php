@@ -93,7 +93,7 @@ try {
         $mat_type = (int)$_REQUEST['mat_type'];
         $field_name = $_REQUEST['field_name'];
 
-        $list = $m->getLinkedObjects($mat_type, $field_name);
+        $list = $m->getLinkedObjects($mat_type, $field_name)->orderBy('id');
         
         if (isset($_REQUEST['limit']) && isset($_REQUEST['page'])) {
             $list->setItemCountPerPage($_REQUEST['limit'])->setCurrentPageNumber($_REQUEST['page']);
