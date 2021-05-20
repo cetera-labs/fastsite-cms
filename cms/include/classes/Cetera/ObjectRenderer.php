@@ -267,16 +267,20 @@ class ObjectRenderer {
           
         	$_editor = (int)$f['editor'];
           
-        	if ($f['pseudo_type']) 
-                $f['type'] = $f['pseudo_type'];
+        	if ($f['pseudo_type']) {
+                $type = $f['pseudo_type'];
+            }
+            else {
+                $type = $f['type'];
+            }
               
         	if (isset($editors[EDITOR_HIDDEN])) 
                 $this->fields_def[$id]['editor_str'] = $editors[EDITOR_HIDDEN];
               
-        	if (isset($field_editors[$f['type']]) && is_array($field_editors[$f['type']])) {
+        	if (isset($field_editors[$type]) && is_array($field_editors[$type])) {
           
-        	    if (!in_array($_editor, $field_editors[$f['type']])) 
-        			   $_editor = $field_editors[$f['type']][0];
+        	    if (!in_array($_editor, $field_editors[$type])) 
+        			   $_editor = $field_editors[$type][0];
                  
         		  if ($_editor == EDITOR_USER) {
         		      if (file_exists(PLUGIN_MATH_DIR.'/'.$f['editor_user'].'.php')) {
@@ -284,7 +288,7 @@ class ObjectRenderer {
         				      include_once(PLUGIN_MATH_DIR.'/'.$f['editor_user'].'.php');	        
         		      } 
 					  else {
-						  $_editor = $field_editors[$f['type']][0];
+						  $_editor = $field_editors[$type][0];
 					  }
         	    }
         
