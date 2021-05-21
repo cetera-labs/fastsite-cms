@@ -41,7 +41,7 @@ class AbstractController extends AbstractRestfulController
         return new JsonModel([
             'success' => false,
             'error' => [
-                'message' => $exception->getMessage().' '.$exception->getFile().':'.$exception->getLine()
+                'message' => $exception->getMessage()
             ]
         ]);        
     }        
