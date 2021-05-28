@@ -126,8 +126,8 @@ class AbstractController extends AbstractRestfulController
         }
         
         $user = null;
-		if (isset($this->params['login'])) $user = User::getByLogin($this->params['login']);  
-		if (!$user && isset($this->params['email'])) $user = User::getByEmail($this->params['email']);
+		if (isset($this->params['login'])) $user = \Cetera\User::getByLogin($this->params['login']);  
+		if (!$user && isset($this->params['email'])) $user = \Cetera\User::getByEmail($this->params['email']);
 
 		if (!$user || !$user->isEnabled()) {
 			throw new \Exception('Пользователь не найден');
@@ -145,9 +145,15 @@ class AbstractController extends AbstractRestfulController
            "data" => array(
                "id" => $user->id,
            )
-        ];       
-        
-        return JWT::encode($token, $this->getJwtKey());    
+        ];  
+
+        return new JsonModel([
+            'success' => true,
+            'data' => [
+                'token' => JWT::encode($token, $this->getJwtKey()),
+            ]
+        ]);
+   
     }
 
 }
