@@ -88,7 +88,7 @@ class AbstractController extends AbstractRestfulController
     {
         try {
             $decoded = JWT::decode($this->getBearerToken(), $this->getJwtKey(), ['HS256']);
-            $this->user = \Cetera\User::getByToken( $decoded->data->id );
+            $this->user = \Cetera\User::getById( $decoded->data->id );
             \Cetera\Application::getInstance()->setUser($this->user);
         }
         catch (\Exception $e){
