@@ -93,7 +93,7 @@ class AbstractController extends AbstractRestfulController
         }
         catch (\Exception $e){
             $this->getResponse()->setStatusCode(401);
-            throw new \Exception('Ошибка авторизации');
+            throw new \Exception('Ошибка авторизации: '.$e->getMessage());
         }
         if (is_array($groups)) {
             foreach ($groups as $g) {
@@ -117,7 +117,15 @@ class AbstractController extends AbstractRestfulController
             throw new \Exception('Не задан api_jwt_key');
         }
         return $key;
-    }        
+    }  
+
+    protected function getJwtLifetime() {
+        $t = (int)\Cetera\Application::getInstance()->getVar('api_jwt_lifetime');
+        if (!$key) {
+            $t = 60*60*24;
+        }
+        return $t;
+    }    
 
     public function getTokenAction() {
         
@@ -142,6 +150,7 @@ class AbstractController extends AbstractRestfulController
            "aud" => "http://any-site.com",
            "iat" => time(),
            "nbf" => time(),
+           "exp" => time() + $this->getJwtLifetime(),
            "data" => array(
                "id" => $user->id,
            )
