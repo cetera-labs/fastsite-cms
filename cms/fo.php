@@ -187,7 +187,12 @@ if ( $match ) {
         $class = $match->getParam('__NAMESPACE__').'\\'.ucfirst($class).'Controller';
     }
        
-    $controller = new $class();
+    try {
+        $controller = new $class(); 
+    }
+    catch (\Exception $e) {
+        throw new \Cetera\Exception\HTTP(404, 'Controller '.$class.' is not found');
+    }
     
     if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
                                 
