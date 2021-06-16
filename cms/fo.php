@@ -262,7 +262,7 @@ else {
         if (!file_exists($template_file))
             throw new Cetera\Exception\CMS('Шаблон не найден '.$template_file);
         ob_start();
-        include($template_file);
+        include_once($template_file);
         $response->setContent(ob_get_contents());
         ob_end_clean();
         
