@@ -187,43 +187,44 @@ if ( $match ) {
         $class = $match->getParam('__NAMESPACE__').'\\'.ucfirst($class).'Controller';
     }
        
-    try {
-        $controller = new $class(); 
-    }
-    catch (\Exception $e) {
-        throw new \Cetera\Exception\HTTP(404, 'Controller '.$class.' is not found');
-    }
-    
-    if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
-                                
-        $event = new Zend\Mvc\MvcEvent();
-        $event->setRouter($router);
-        $event->setRouteMatch($match);     
-        
-        $controller->setEvent($event);       
-        $res = $controller->dispatch($request,$response);
-        if (is_object($res)) {        
-            $view = new \Zend\View\View();
-            $view->setRequest($request);
-            $view->setResponse($response);
-            
-            $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
-            $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
-            $jsonStrategy->attach($view->getEventManager(), 100);
-            
-            $view->render($res);
-        }
-        else {
-            $response->setContent($res);
-        }
-                
+    if (!class_exists($class)) {
+        $response->setStatusCode(404);
+        $response->setContent('404: Not found');
     }
     else {
-        ob_start();
-        $method = $match->getParam('action');
-        $controller->$method($match->getParams());
-        $response->setContent(ob_get_contents());
-        ob_end_clean();         
+        $controller = new $class(); 
+        
+        if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
+                                    
+            $event = new Zend\Mvc\MvcEvent();
+            $event->setRouter($router);
+            $event->setRouteMatch($match);     
+            
+            $controller->setEvent($event);       
+            $res = $controller->dispatch($request,$response);
+            if (is_object($res)) {        
+                $view = new \Zend\View\View();
+                $view->setRequest($request);
+                $view->setResponse($response);
+                
+                $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
+                $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
+                $jsonStrategy->attach($view->getEventManager(), 100);
+                
+                $view->render($res);
+            }
+            else {
+                $response->setContent($res);
+            }
+                    
+        }
+        else {
+            ob_start();
+            $method = $match->getParam('action');
+            $controller->$method($match->getParams());
+            $response->setContent(ob_get_contents());
+            ob_end_clean();         
+        }        
     }
     
 }
