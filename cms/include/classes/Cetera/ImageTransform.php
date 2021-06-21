@@ -646,9 +646,10 @@ class ImageTransform {
 			$img->display();
 		}
 		else {
-			$p = parse_url(urldecode($_SERVER['REQUEST_URI']));
+            $url = rtrim(urldecode($_SERVER['REQUEST_URI']),'/');
+			$p = parse_url($url);
 			$img->save(WWWROOT.$p['path']);		
-			header('Location: '.$_SERVER['REQUEST_URI'] );
+			header('Location: '.$url );
 		}
 		
 		die();
