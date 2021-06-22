@@ -122,7 +122,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      */ 
     public function count()
     {
-        return count($this->getElements());
+        return $this->getCountAll();
     }
 	
     /**
