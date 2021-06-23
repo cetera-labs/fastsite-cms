@@ -63,7 +63,7 @@ class Section extends Templateable {
 				else {
 					$alias = $this->getParam('material_alias');
 					if (!$alias) {
-						$alias = current(explode('/', $this->application->getUnparsedUrl() ));
+						$alias = $this->application->getUnparsedUrl();
 						if (!$alias && $this->getParam('display_index'))	{
 							$this->_material = $c->getMaterialByAlias('index');
 						} 
