@@ -31,9 +31,11 @@ $path = rtrim(str_replace('|','/',$_REQUEST['path']),'/');
 $path = str_replace(DOCROOT, '', $path);
 
 $iterator = new \DirectoryIterator(DOCROOT.$path);
-if (isset($_REQUEST['extension'])) {
+if (isset($_REQUEST['extension']) && $_REQUEST['extension']) {
     $ext = explode(',',$_REQUEST['extension']);
-} else $ext = false;
+} else {
+    $ext = false;
+}
 foreach ($iterator as $fileinfo) {
     if (!$fileinfo->isFile()) continue;
     
