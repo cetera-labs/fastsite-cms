@@ -938,6 +938,15 @@ class Application {
     {
         $result = $this->getResponse()->getContent();
         
+        if (is_array($result)) {
+            if (isset($result['content'])) {
+                $result = $result['content'];
+            }
+            else {
+                $result = var_export($result, true);
+            }
+        }          
+        
         $this->parseWidgets($result);
 		$this->parseParams($result);
         
