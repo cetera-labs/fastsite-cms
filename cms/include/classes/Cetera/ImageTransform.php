@@ -212,13 +212,12 @@ class ImageTransform {
 		}	
 
 		if ($this->src_exists) {
-		
-			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$this->src_info['mime']);
-			
+					
 			switch ($this->src_info[2]) {
 				case 1: $suf = 'gif'; break;
 				case 2: $suf = 'jpeg'; break;
 				case 3: $suf = 'png'; break;
+                case 18: $suf = 'webp'; break;
 			}
 			
 			// -------------------------------------------------------
