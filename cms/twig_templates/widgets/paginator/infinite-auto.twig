@@ -13,7 +13,9 @@
 				marker.remove();
             }
         });
-		jQuery(window).scroll();
+        setTimeout(function(){
+            jQuery(window).scroll();
+        },1000);
     });
     {% endset %}
     {% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
