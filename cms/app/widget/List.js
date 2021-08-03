@@ -147,10 +147,6 @@ Ext.define('Cetera.widget.List', {
 			widget: 'List'
         },
 		{
-            name: 'where',
-            fieldLabel: _('Where'),
-        },        
-		{
             name: 'filter',
             fieldLabel: _('Доп. фильтр'),
         },
