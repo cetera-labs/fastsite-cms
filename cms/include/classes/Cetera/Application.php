@@ -938,6 +938,15 @@ class Application {
     {
         $result = $this->getResponse()->getContent();
         
+        if (is_array($result)) {
+            if (isset($result['content'])) {
+                $result = $result['content'];
+            }
+            else {
+                $result = var_export($result, true);
+            }
+        }          
+        
         $this->parseWidgets($result);
 		$this->parseParams($result);
         
@@ -1644,6 +1653,9 @@ class Application {
 	}
 		       
     public function parseWidgets(& $result) {
+        if (is_array($result)) {
+            return;
+        }
         preg_match_all('@\<cms_widget(.+)\>\<\/cms_widget\>@iU',$result,$matches);
         if (sizeof($matches[0])) foreach ($matches[0] as $i => $widget_str) {
         

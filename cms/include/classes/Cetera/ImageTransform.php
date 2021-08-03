@@ -212,13 +212,12 @@ class ImageTransform {
 		}	
 
 		if ($this->src_exists) {
-		
-			if ($this->src_info[2] >= 4) throw new \Exception('No support for '.$this->src_info['mime']);
-			
+					
 			switch ($this->src_info[2]) {
 				case 1: $suf = 'gif'; break;
 				case 2: $suf = 'jpeg'; break;
 				case 3: $suf = 'png'; break;
+                case 18: $suf = 'webp'; break;
 			}
 			
 			// -------------------------------------------------------
@@ -646,9 +645,10 @@ class ImageTransform {
 			$img->display();
 		}
 		else {
-			$p = parse_url(urldecode($_SERVER['REQUEST_URI']));
+            $url = rtrim(urldecode($_SERVER['REQUEST_URI']),'/');
+			$p = parse_url($url);
 			$img->save(WWWROOT.$p['path']);		
-			header('Location: '.$_SERVER['REQUEST_URI'] );
+			header('Location: '.$url );
 		}
 		
 		die();

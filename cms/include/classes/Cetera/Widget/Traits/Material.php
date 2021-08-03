@@ -30,7 +30,7 @@ trait Material {
 						$alias = $this->getParam('material_alias');
 						if (!$alias) {
 							if (!$useApp) throw new \Exception('Material alias required');
-							$alias = current(explode('/', $this->application->getUnparsedUrl() ));
+                            $alias = $this->application->getUnparsedUrl();
 							if (!$alias) $alias = 'index';
 						}
 						$this->_material = $c->getMaterialByAlias($alias, null, (boolean)$this->getParam('unpublished'));

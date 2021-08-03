@@ -4,11 +4,13 @@ namespace Cetera\Api;
 use Zend\Mvc\Controller\AbstractRestfulController,
     Zend\View\Model\JsonModel;
 use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;    
+use Zend\Stdlib\ResponseInterface as Response;  
+use \Firebase\JWT\JWT;
 
 class AbstractController extends AbstractRestfulController
 {
     protected $params = [];
+    public $user = null;
     
     public function dispatch(Request $request, Response $response = null)
     {
@@ -41,7 +43,7 @@ class AbstractController extends AbstractRestfulController
         return new JsonModel([
             'success' => false,
             'error' => [
-                'message' => $exception->getMessage().' '.$exception->getFile().':'.$exception->getLine()
+                'message' => $exception->getMessage()
             ]
         ]);        
     }        
@@ -84,24 +86,83 @@ class AbstractController extends AbstractRestfulController
     */
     public function checkAuth($groups = null)
     {
-        $user = \Cetera\Application::getInstance()->getUser();
-        if (!$user){
+        try {
+            $decoded = JWT::decode($this->getBearerToken(), $this->getJwtKey(), ['HS256']);
+            $this->user = \Cetera\User::getById( $decoded->data->id );
+            \Cetera\Application::getInstance()->setUser($this->user);
+        }
+        catch (\Exception $e){
             $this->getResponse()->setStatusCode(401);
-            throw new \Exception('Ошибка авторизации');
-        } elseif (is_array($groups)) {
+            throw new \Exception('Ошибка авторизации: '.$e->getMessage());
+        }
+        if (is_array($groups)) {
             foreach ($groups as $g) {
-                if (!$user->hasRight($g)) {
+                if (!$this->user->hasRight($g)) {
                     $this->getResponse()->setStatusCode(401);
                     throw new \Exception('Недостаточно полномочий');                    
                 }
             }
         }
         elseif( is_integer($groups) ) {
-            if (!$user->hasRight($groups)) {
+            if (!$this->user->hasRight($groups)) {
                 $this->getResponse()->setStatusCode(401);
                 throw new \Exception('Недостаточно полномочий');                    
             }            
         }
+    }
+    
+    protected function getJwtKey() {
+        $key = \Cetera\Application::getInstance()->getVar('api_jwt_key');
+        if (!$key) {
+            throw new \Exception('Не задан api_jwt_key');
+        }
+        return $key;
+    }  
+
+    protected function getJwtLifetime() {
+        $t = (int)\Cetera\Application::getInstance()->getVar('api_jwt_lifetime');
+        if (!$key) {
+            $t = 60*60*24;
+        }
+        return $t;
     }    
+
+    public function getTokenAction() {
+        
+        if (!$this->checkParams(['login']) || !$this->checkParams(['password'])) {
+            return $this->invalidParams();
+        }
+        
+        $user = null;
+		if (isset($this->params['login'])) $user = \Cetera\User::getByLogin($this->params['login']);  
+		if (!$user && isset($this->params['email'])) $user = \Cetera\User::getByEmail($this->params['email']);
+
+		if (!$user || !$user->isEnabled()) {
+			throw new \Exception('Пользователь не найден');
+		}
+        
+		if (!$user->checkPassword($this->params['password'])) {
+			throw new \Exception('Неправильный пароль');
+		}        
+        
+        $token = [
+           "iss" => "http://any-site.org",
+           "aud" => "http://any-site.com",
+           "iat" => time(),
+           "nbf" => time(),
+           "exp" => time() + $this->getJwtLifetime(),
+           "data" => array(
+               "id" => $user->id,
+           )
+        ];  
+
+        return new JsonModel([
+            'success' => true,
+            'data' => [
+                'token' => JWT::encode($token, $this->getJwtKey()),
+            ]
+        ]);
+   
+    }
 
 }

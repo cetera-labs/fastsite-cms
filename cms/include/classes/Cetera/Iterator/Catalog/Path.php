@@ -35,7 +35,12 @@ class Path extends Catalog implements \RecursiveIterator {
         else {
             $this->query->andWhere('c.data_id=:idcat')->setParameter('idcat', $this->catalog->id);
         }
-    } 	
+    }
+
+    public function getCountAll()
+    {
+		return count($this->getElements());
+    }  	
 	
 	/*
 	 * @internal
