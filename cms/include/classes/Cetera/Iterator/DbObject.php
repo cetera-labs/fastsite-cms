@@ -31,23 +31,18 @@ abstract class DbObject extends Base {
      * @param \Cetera\ObjectDefinition $object               
      * @return void  
      */ 
-    public function __construct()
-    {
-        
+    public function __construct() {
         $this->query = $this->getDbConnection()->createQueryBuilder();
 		$this->dontUsePaging = true;
-        
     }
 
-    function __clone()
-    {
+    function __clone() {
         if ($this->query) {
             $this->query = clone $this->query;
         }
     }	
     
-    public function fetchElements()
-    {
+    public function fetchElements() {
         if ($this->sync) return;
         $this->elements = array();
         
@@ -61,13 +56,9 @@ abstract class DbObject extends Base {
                     ->setFirstResult( $this->offset + ($this->pageNumber - 1)*$this->itemCountPerPage );
                     
         $this->fixQuery($query);
-                      
-        //print $query."\n\n";
                      
         $stmt = $query->execute(); 
         while ($row = $stmt->fetch()) {    
-			//print $this->objectDefinition->table.'<br>';
-			//print_r($row);
             $this->append( $this->fetchObject($row) , false);
         }
         $this->sync = true;
@@ -75,13 +66,11 @@ abstract class DbObject extends Base {
 	
     abstract protected function fetchObject($row);
     
-    protected function fixQuery($query)
-    {   
+    protected function fixQuery($query) {   
 		$this->fixWhere($query);
     }	
 	
-    protected function fixWhere($query)
-    {    
+    protected function fixWhere($query){    
     }		
     
     public function getQuery()
@@ -94,8 +83,7 @@ abstract class DbObject extends Base {
      *             
      * @return int  
      */     
-    public function getCountAll()
-    {
+    public function getCountAll() {
         if ($this->sync && $this->countAll !== null) return $this->countAll;
         
         $query = clone $this->query;
@@ -122,20 +110,17 @@ abstract class DbObject extends Base {
 		return $this->elements;
 	}	
 	                
-    public function setItemCountPerPage($itemCountPerPage = null)
-    {
+    public function setItemCountPerPage($itemCountPerPage = null) {
         $this->sync = false;
         return parent::setItemCountPerPage($itemCountPerPage);
     }
     
-    public function setCurrentPageNumber( $pageNumber )
-    {
+    public function setCurrentPageNumber( $pageNumber ) {
         $this->sync = false;
         return parent::setCurrentPageNumber( $pageNumber );
     }
     
-    public function setOffset( $offset )
-    {
+    public function setOffset( $offset ) {
         $this->sync = false;
         return parent::setOffset( $offset );
     }            
@@ -155,8 +140,7 @@ abstract class DbObject extends Base {
     }
     
         
-    public function select($select = null)
-    {
+    public function select($select = null) {
         if (!$select) return $this;
         $select = is_array($select) ? $select : func_get_args();
         $this->query->select($select);
@@ -164,8 +148,7 @@ abstract class DbObject extends Base {
         return $this;
     }  
     
-    public function where($where, $combination = 'AND')
-    {   
+    public function where($where, $combination = 'AND') {   
 		if (self::isSafe($where)) {
 			if ($combination == 'OR') {
 				$this->query->orWhere($where);
@@ -181,8 +164,7 @@ abstract class DbObject extends Base {
         return $this;
     }   
     
-    public function orderBy($order, $sort = null, $add = false)
-    {
+    public function orderBy($order, $sort = null, $add = false) {
 		if (self::isSafe($order) && self::isSafe($sort)) {
 			$this->query->add('orderBy', $order . ' ' . (!$sort ? 'ASC' : $sort), $add);
 			$this->sync = false;
@@ -203,7 +185,7 @@ abstract class DbObject extends Base {
 	
 	private static function isSafe($sql)
 	{
-		return !preg_match("#(update|insert|into|drop|alter|delete|from|create|table|select)+#is", $sql);
+		return !preg_match("#(update|insert into|alter table|delete from|create table)+#is", $sql);
 	}
 
 }
