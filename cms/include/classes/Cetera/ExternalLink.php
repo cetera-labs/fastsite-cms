@@ -38,7 +38,17 @@ class ExternalLink implements SiteItem {
 	{
 		$children = [];
         foreach ($this->children as $c) {
-            $children[] = new ExternalLink($c);
+            try {
+                if (isset($c['id']) && $c['id']) {
+                    $children[] = DynamicFieldsObject::getByIdType($c['id'], $c['type']);
+                }
+                elseif (isset($c['url']) && $c['url']) {
+                    $children[] = new ExternalLink($c);
+                }
+                else {
+                    throw new \Exception('Cant parse menu child');
+                }
+            } catch (\Exception $e) {}            
         }
         return $children;
 	}

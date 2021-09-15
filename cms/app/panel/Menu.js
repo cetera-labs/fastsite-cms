@@ -96,11 +96,7 @@ Ext.define('Cetera.panel.Menu', {
                 listeners : {
                     drop : {
                         fn : function(node, data, overModel, dropPosition, eOpts ) {
-                        
-                            if (overModel.get('menu'))
-                                var t = overModel;
-                                else t = overModel.parentNode;                
-                        
+                            var t = this.getMenuNode(overModel);
                             this.saveMenu(t);
                               
                         },
@@ -128,16 +124,7 @@ Ext.define('Cetera.panel.Menu', {
                 }
             },
             
-            displayField: 'name',
-            
-            listeners : {
-                itemmove : {
-                    fn : function(node, oldParent, newParent, index, eOpts) {
-                          if (oldParent != newParent) this.saveMenu(oldParent);
-                    },
-                    scope: this
-                }
-            }
+            displayField: 'name'
             
         });
         
@@ -367,12 +354,16 @@ Ext.define('Cetera.panel.Menu', {
 	
     getSelectedMenuNode: function() {
         var sn = this.menus.getSelectionModel().getLastSelected();
-        if (!sn) return 0;
-        while (!sn.get('menu')) {
-			sn = sn.parentNode;
+        return this.getMenuNode(sn);
+    },
+
+    getMenuNode: function(node) {
+        if (!node) return 0;
+        while (!node.get('menu')) {
+			node = node.parentNode;
 		}
-		return sn;
-    },	
+		return node;        
+    },
     
     getSelectedMenuId: function() {
         var sn = this.menus.getSelectionModel().getLastSelected();
@@ -396,7 +387,7 @@ Ext.define('Cetera.panel.Menu', {
     deleteItem: function() {
         var sn = this.menus.getSelectionModel().getLastSelected(); 
         if (!sn || sn.get('menu')) return;
-        var parent = sn.parentNode;
+        var parent = this.getSelectedMenuNode();
         sn.remove();   
         this.saveMenu(parent);
     },
