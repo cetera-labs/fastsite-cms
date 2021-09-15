@@ -647,7 +647,7 @@ class Theme implements \ArrayAccess  {
 			throw new \Exception( $d['message'] );
 		}	
 		
-		$mail = new \PHPMailer(true);
+		$mail = new PHPMailer(true);
 		$mail->AddAddress('5@cetera.ru');					
 		$mail->CharSet = 'utf-8';
 		$mail->ContentType = 'text/plain';

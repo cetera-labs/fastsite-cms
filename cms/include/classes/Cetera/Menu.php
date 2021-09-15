@@ -148,7 +148,7 @@ class Menu extends Base {
 							$this->_children[] = DynamicFieldsObject::getByIdType($d['id'], $d['type']);
 						}
 						elseif (isset($d['url']) && $d['url']) {
-							$this->_children[] = new ExternalLink($d['name'], $d['url']);
+							$this->_children[] = new ExternalLink($d);
 						}
 						else {
 							throw new \Exception('Cant parse menu child');

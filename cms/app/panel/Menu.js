@@ -302,16 +302,16 @@ Ext.define('Cetera.panel.Menu', {
 			
 			var c = Ext.create('Cetera.model.Menu', {
 				children: [],
-                leaf: true,
+                leaf: false,
                 data: 'url-'+this.replaceDash(values.alias)+'-name-'+this.replaceDash(values.name),
-                iconCls: '',
+                iconCls: 'tree-folder-link',
                 name: values.name + ' ['+values.alias+']',
 				link: 1
             });
 						
-			var n = this.getSelectedMenuNode();
+			var n = this.getSelectedNodeToInsert();
 			n.appendChild(c);
-			this.saveMenu(n);
+			this.saveMenu( this.getSelectedMenuNode() );
 			
         },this,_('Заголовок'),'URL');
     
@@ -355,12 +355,20 @@ Ext.define('Cetera.panel.Menu', {
         },this);
     
     },
+    
+    getSelectedNodeToInsert: function() {
+        var sn = this.menus.getSelectionModel().getLastSelected();
+        if (!sn) return 0;
+        while (!sn.get('menu') && !sn.get('link')) {
+			sn = sn.parentNode;
+		}
+		return sn;        
+    },
 	
     getSelectedMenuNode: function() {
         var sn = this.menus.getSelectionModel().getLastSelected();
         if (!sn) return 0;
-        while (!sn.get('menu'))
-		{
+        while (!sn.get('menu')) {
 			sn = sn.parentNode;
 		}
 		return sn;
@@ -404,16 +412,25 @@ Ext.define('Cetera.panel.Menu', {
         });    
     },
     
-    saveMenu: function(node) {
-
+    nodeAsArray: function(node) {
+        if (node.isLeaf()) {
+            return false;
+        }
         var children = [];
         Ext.Array.each(node.childNodes, function(child) {
-            children[children.length] = child.get('data');
-        }, this);       
+            children[children.length] = {
+                data: child.get('data'),
+                children: this.nodeAsArray(child)
+            }
+        }, this); 
+
+        return children;
+    },
     
+    saveMenu: function(node) {
         this.call({ 
             action: 'save', 
-            'children[]': children,
+            'children': Ext.JSON.encode(this.nodeAsArray(node)),
             id: node.get('menu')
         }, true);    
     }

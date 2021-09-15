@@ -35,6 +35,7 @@ class Menu extends Templateable {
     
     public function getMenu()
     {
+        
         if ($this->_menu === null)
 		{
 			if ($this->getParam('menu'))
@@ -49,7 +50,7 @@ class Menu extends Templateable {
 				}
 			} 
 			elseif ($this->getParam('menu_alias'))
-				$this->_menu = \Cetera\Menu::getByAlias($this->getParam('alias'))->getChildren();
+				$this->_menu = \Cetera\Menu::getByAlias($this->getParam('menu_alias'))->getChildren();
 				else $this->_menu = false;
 		}
         return $this->_menu;
@@ -76,19 +77,6 @@ class Menu extends Templateable {
         return $this->_children;
     }  
 
-    public function setCatalog($c)
-    {
-		if ($c instanceof \Cetera\Catalog)
-		{
-			$this->_cat = $c;
-		} 
-		elseif ($c)
-		{
-			$this->_cat = \Cetera\Catalog::getById($c);
-		}
-		return $this;
-    }	
-	
     public function hasSubmenu()
 	{
 		if ($this->getParam('depth') && ( $this->level > $this->getParam('depth') )) return false;
@@ -98,28 +86,26 @@ class Menu extends Templateable {
 	
 	public function showSubmenu($c)
 	{		
-        if (!isset($this->_submenu[$c->id])) {
-            array_push( $this->stack, $this->getCatalog() );
+        if (!$c->id || !isset($this->_submenu[$c->id])) {
             array_push( $this->stack, $this->getParam('css_class') );
             array_push( $this->stack, $this->_children );
-            $this->_children = null;
-            $this->setCatalog($c);
+            $this->_children = $c->getChildren();
             $this->level++;
             $html = null;
-            if ($this->hasSubmenu()) {
+            if (count($this->_children) && $this->hasSubmenu()) {
                 if ($this->getParam('css_class_submenu') === false) {
                     $this->setParam('css_class_submenu', 'nested '.$this->getParam('css_class') );
                 }
                 $this->setParam('css_class', $this->getParam('css_class_submenu') );
                 $html = $this->getHtml();
             }
+               
             $this->level--;
             $this->_children = array_pop($this->stack);
             $this->setParam('css_class', array_pop($this->stack) );
-            $this->setCatalog( array_pop($this->stack) );
             
-            $this->_submenu[$c->id] = $html;
-            //return $html;
+            if ($c->id) $this->_submenu[$c->id] = $html;
+            return $html;
         }
         return $this->_submenu[$c->id];
 	}

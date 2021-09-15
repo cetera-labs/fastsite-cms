@@ -42,17 +42,28 @@ if ($_REQUEST['action'] == 'rename') {
 
 if ($_REQUEST['action'] == 'save') {
 
-    $data = array();
-    if (is_array($_REQUEST['children'])) foreach ($_REQUEST['children'] as $c)
-	{
-        $f = explode('-', $c);
+    $d = json_decode($_REQUEST['children'], true);    
+    $m = Menu::getById($_REQUEST['id']);
+    $m->_data = parse_data($d);
+    $m->save();
+}
+
+$res['success'] = true;
+
+echo json_encode($res); 
+
+function parse_data($d) {
+    $data = [];
+    foreach ($d as $c) {
+        $f = explode('-', $c['data']);
         //list($t, $id, $table, $type)         
 		
 		if ($f[0] == 'url') {
-			$data[] = array(
+			$data[] = [
 				'url'  => str_replace('%DASH%','-',$f[1]),
-				'name' => str_replace('%DASH%','-',$f[3])
-			);
+				'name' => str_replace('%DASH%','-',$f[3]),
+                'children' => parse_data($c['children']),
+			];
 		}
 		else {
 			if ($f[0] != 'material') {
@@ -66,12 +77,6 @@ if ($_REQUEST['action'] == 'save') {
 			);
 		}
     }
-    
-    $m = Menu::getById($_REQUEST['id']);
-    $m->_data = $data;
-    $m->save();
+
+     return $data;
 }
-
-$res['success'] = true;
-
-echo json_encode($res); 
