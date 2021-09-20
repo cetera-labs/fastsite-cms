@@ -29,7 +29,7 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 			'livejournal'   => USER_LJ
 	);	
 	
-	private $_external = FALSE;
+	protected $_external = FALSE;
 	
 	private $pwd = null;
     
