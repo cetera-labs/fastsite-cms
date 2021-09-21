@@ -16,7 +16,8 @@
         "forum": "http://community.fastsite.ru/"
     },
     "require": {
-        "php": ">=7.4.0",
+        "php": ">=7.2.0",
+        "cetera-labs/cetera-cms-plugin-controller": "*",
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.7.4",
@@ -39,7 +40,8 @@
         "componavt/phpmorphy": "*",
         "firebase/php-jwt": "*",
         "phpseclib/phpseclib": "^3.0",
-        "monolog/monolog": "*"
+        "monolog/monolog": "*",
+        "ocramius/package-versions": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
