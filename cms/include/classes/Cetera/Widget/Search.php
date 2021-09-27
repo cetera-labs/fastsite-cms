@@ -4,7 +4,7 @@ namespace Cetera\Widget;
 /**
  * Виджет "Поиск по сайту"
  * 
- * @package CeteraCMS
+ * @package FastsiteCMS
  */ 
 class Search extends Templateable {
 	
@@ -23,6 +23,8 @@ class Search extends Templateable {
 			'min_length'           => 3,
 			'sections'             => null,
 			'search_subsections'   => true,
+            'fulltext'             => false,
+            'fulltext_boolean'     => false,
 			'morphology'           => false,
 			'translit'             => false,
 			'fields'               => 'name, text, short',
@@ -109,7 +111,9 @@ class Search extends Templateable {
 					$this->results->where( $this->getParam('where') );
 				}	
 				
-				//print $this->results->getQuery();
+				if ($this->getParam('debug')) {
+                    print $this->results->getQuery();
+                }
 			}
 		}
 		return $this->results;
@@ -175,7 +179,127 @@ class Search extends Templateable {
 		
 		return $res;
 	}	
+		
+	protected function buildRelevance()
+	{
+        if ($this->getParam('fulltext')) {
+            return $this->buildFullTextQuery();
+        }
+        else {            
+            $fields = $this->getSearchFields();
+            $words = $this->splitQueryToWords();
+            
+            $res = '';
+            $i = 0;
+            foreach ($fields as $f) {
+                $f = '`'.$f.'`';
+                if ($res) $res .= ' + ';
+                $res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
+                
+                foreach ($words as $key => $word) {
+                    
+                    if (is_array($word)) {
+                        $weight = 500;
+                        foreach ($word as $w) {						
+                            if (strlen($w) < $this->getParam('min_length')) continue;
+                            $res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
+                            $weight = 100;
+                        }
+                    } else {
+                        if (strlen($key) < $this->getParam('min_length')) continue;
+                        $res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
+                    }				
+                    
+                }
+                
+                $i++;
+            }
+
+            return $res;
+        }
+	}		
 	
+	protected function buildWhere()
+	{
+        if ($this->getParam('fulltext')) {
+            return $this->buildFullTextQuery();
+        }
+        else {
+		
+            $fields = $this->getSearchFields();
+            $words = $this->splitQueryToWords();
+            
+            if (!count($words)) return false;
+            
+            $res = array();
+            foreach ($fields as $f) {
+                $f = '`'.$f.'`';
+                $res2 = array();
+                foreach ($words as $key => $word) {
+                    $res3 = array();
+                    if (is_array($word)) {
+                        foreach ($word as $w) {						
+                            if (strlen($w) < $this->getParam('min_length')) continue;
+                            $res3[] = $f.' LIKE "%'.$w.'%"';
+                        }
+                        $res2[] = '('.implode(' or ',$res3).')';
+                    } else {
+                        if (strlen($key) < $this->getParam('min_length')) continue;
+                        $res2[] = '('.$f.' LIKE "%'.$key.'%")';
+                    }
+                }
+                $res[] = '('.implode(' and ',$res2).')';
+            }
+            return '('.implode(' or ',$res).')';
+        
+        }
+	} 
+        
+    protected function buildFulltextQuery()
+    {
+        $words = $this->splitQueryToWords();
+
+        foreach ($words as $key => $word) {
+            if (is_array($word)) {
+                $s[] = '('.implode(' ',$word).')';
+            } else {
+                $s[] = $key;
+            }
+        }
+
+        if ($this->getParam('fulltext_boolean')) {
+            $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('+".implode(' +',$s)."' IN BOOLEAN MODE)";
+        }
+        else {
+            $res = "MATCH (".implode(',',$this->getSearchFields()).") AGAINST ('".implode(' ',$s)."')";
+        }
+
+        return $res;
+    }
+    
+
+	public function getCatalog() 
+	{
+		return $this->application->server;
+	}
+	
+	public function getChildren() 
+	{
+		return $this->getResults();
+	}	
+    
+	protected function getSearchFields()
+	{
+		$f = trim($this->getParam('fields'));
+		if (!$f) $f = 'name';
+		$fields = array();
+		foreach (explode(',', $f) as $field) {
+			$fields[] = trim($field);
+		}
+		
+		return $fields;
+	}	    
+
 	protected function splitQueryToWords()
 	{
 		$q = $this->queryValue();
@@ -188,7 +312,7 @@ class Search extends Templateable {
 		
 		if ($this->getParam('morphology')) {
 			$morphy = new \componavt\phpMorphy\Morphy();
-			$res = $morphy->getAllForms($words, \phpMorphy::IGNORE_PREDICT);
+			$res = $morphy->getAllForms($words);
 			foreach ($words as $w) {
 				if (isset($res[$w])) {
 					$words[$w] = $res[$w];
@@ -203,92 +327,46 @@ class Search extends Templateable {
 			}
 		}	
 		return $words;
-	}
+	}  
 
-	protected function getSearchFields()
-	{
-		$f = trim($this->getParam('fields'));
-		if (!$f) $f = 'name';
-		$fields = array();
-		foreach (explode(',', $f) as $field) {
-			$fields[] = trim($field);
-		}
-		
-		return $fields;
-	}		
-	
-	protected function buildRelevance()
-	{
-		$fields = $this->getSearchFields();
-		$words = $this->splitQueryToWords();
-		
-		$res = '';
-		$i = 0;
-		foreach ($fields as $f) {
-			$f = '`'.$f.'`';
-			if ($res) $res .= ' + ';
-			$res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
-			
-			foreach ($words as $key => $word) {
-				
-				if (is_array($word)) {
-					$weight = 500;
-					foreach ($word as $w) {						
-						if (strlen($w) < $this->getParam('min_length')) continue;
-						$res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
-						$weight = 100;
-					}
-				} else {
-					if (strlen($key) < $this->getParam('min_length')) continue;
-					$res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
-				}				
-				
-			}
-			
-			$i++;
-		}
+    public function highlight($text)
+    {
+        $rpl = '<b>$1</b>';
 
-		return $res;
-	}		
-	
-	protected function buildWhere()
-	{
-		
-		$fields = $this->getSearchFields();
-		$words = $this->splitQueryToWords();
-        
-		if (!count($words)) return false;
-		
-		$res = array();
-		foreach ($fields as $f) {
-			$f = '`'.$f.'`';
-			$res2 = array();
-			foreach ($words as $key => $word) {
-				$res3 = array();
-				if (is_array($word)) {
-					foreach ($word as $w) {						
-						if (strlen($w) < $this->getParam('min_length')) continue;
-						$res3[] = $f.' LIKE "%'.$w.'%"';
-					}
-					$res2[] = '('.implode(' or ',$res3).')';
-				} else {
-					if (strlen($key) < $this->getParam('min_length')) continue;
-					$res2[] = '('.$f.' LIKE "%'.$key.'%")';
-				}
-			}
-			$res[] = '('.implode(' and ',$res2).')';
-		}
-		return '('.implode(' or ',$res).')';
-	} 
+        $words = $this->getWords();
+        foreach ($words as $key => $word){
+            $wordsPattern[$key] = mb_strtolower('#(' . $word . ')#iuU');
+        }
 
-	public function getCatalog() 
-	{
-		return $this->application->server;
-	}
-	
-	public function getChildren() 
-	{
-		return $this->getResults();
-	}	
-      
+        foreach ($words as $word) {
+            $_word = mb_strtolower($word);
+            $_text = mb_strtolower($text);
+            $res = mb_strpos($_text, $_word);
+            if ($res) {
+                $s = mb_strpos($_text, $_word) - 500;
+                $e = mb_strrpos($_text, $_word) + 500;
+                if ($s < 0) $s = 0;
+                $n = '';
+                if ($s > 0) $n = '... ';
+                $n .= mb_substr($text, $s, $e - $s);
+
+                if ($e < mb_strlen($text)) $n .= ' ...';
+
+                if (mb_strlen($n) > 1000)
+                {
+                    $n = mb_substr($n, 0, 1000).' ...';
+                }
+
+
+                $n = preg_replace($wordsPattern, $rpl, ' '.$n.' ', -1);
+
+
+                return $n;
+
+            }
+        }
+
+        return mb_substr($text, 0, 1000).' ...';
+    }
+    
 }
