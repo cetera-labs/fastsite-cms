@@ -621,14 +621,20 @@ class Application {
                 $this->_uid = $a[0];
                 $this->_last_visit = $a[1];
             }
-            //setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
+            setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
             
         }
         
+        session_start();
         $sessionManager = new SessionManager();
-        $sessionManager->setSaveHandler(new SessionSaveHandler());  
+        //$sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
-        $this->_session = new Container(SESSION_NAMESPACE);        
+        try {
+            $this->_session = new Container(SESSION_NAMESPACE);     
+        }
+        catch (\Exception $e) {
+            session_regenerate_id();
+        }  
         
         if (isset($this->_session->locale) && $this->_session->locale) {
             $this->_locale = $this->_session->locale;
