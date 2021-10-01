@@ -496,7 +496,13 @@ class ObjectDefinition extends Base {
                 $def = str_replace('%',$params['len'],$this->field_def[$params['type']]);
                 $sql = "ALTER TABLE $alias ADD `".$params['name']."` $def";
                 $params['len'] = (integer) $params['len'];
-                DbConnection::getDbConnection()->executeQuery($sql);
+                try {
+                    DbConnection::getDbConnection()->executeQuery($sql);
+                } catch (\Doctrine\DBAL\Exception\NonUniqueFieldNameException $e) {
+                    if ($params['name'] != 'tag') {
+                        throw $e;
+                    }
+                }
             } 
 			else 
 			{    			

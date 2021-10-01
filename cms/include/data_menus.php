@@ -47,16 +47,17 @@ foreach (Menu::enum() as $menu) {
         );        
     }
 
-    $nodes[] = array(
-        name      => '<b>' . $menu->name . '</b>' . ' ['.$menu->alias.'][ID:' . $menu->id . ']',
-        menu      => $menu->id,
-        menu_name => $menu->name,
-        menu_alias=> $menu->alias,
-        allowDrag => false,
-        icon      => 'images/icon_menu.png',
-        children  => $children,
-        expanded  => true
-    );
+    $nodes[] = [
+        'name'      => '<b>' . $menu->name . '</b>' . ' ['.$menu->alias.'][ID:' . $menu->id . ']',
+        'menu'      => $menu->id,
+        'menu_name' => $menu->name,
+        'menu_alias'=> $menu->alias,
+        'allowDrag' => false,
+        'icon'      => 'images/icon_menu.png',
+        'iconCls'   => 'x-fa fa-bars',
+        'children'  => $children,
+        'expanded'  => true
+    ];
 
 }
 

@@ -192,7 +192,7 @@ class BackOffice {
                 	  'class'    => 'Cetera.widget.templates.Panel',
 					  'ext6_compat'=> true
                 );
-		
+                /*
                 $this->_modules['widget_areas'] = array(
                 	  'position' => MENU_SITE,
                       'name' 	 => $translator->_('Области'),
@@ -200,7 +200,7 @@ class BackOffice {
 					  'iconCls'  => 'x-fa fa-cog',
                 	  'class'    => 'Cetera.widget.Panel'
                 ); 
-                
+                */
                 $this->_modules['menus'] = array(
                 	  'position' => MENU_SITE,
                       'name' 	   => $translator->_('Меню'),
