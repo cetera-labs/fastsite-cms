@@ -41,7 +41,7 @@
         "firebase/php-jwt": "*",
         "phpseclib/phpseclib": "^3.0",
         "monolog/monolog": "*",
-        "composer/package-versions-deprecated": "*"
+        "ocramius/package-versions": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
