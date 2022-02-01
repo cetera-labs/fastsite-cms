@@ -1,7 +1,7 @@
 <?php
 namespace Cetera;
 
-use Zend\Authentication\Result;
+use Laminas\Authentication\Result;
 
 include_once('common.php');
 $translator = $application->getTranslator();  

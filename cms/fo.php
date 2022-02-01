@@ -1,5 +1,5 @@
 <?php
-use Zend\Authentication\Result;
+use Laminas\Authentication\Result;
 
 require_once('include/common.php');
 
@@ -20,7 +20,7 @@ $_ext = substr($url,-3);
 $_init = Cetera\Util::utime();
 
 $application->getRouter()->addRoute(\Cetera\ImageTransform::PREFIX,
-    \Zend\Router\Http\Regex::factory([
+    \Laminas\Router\Http\Regex::factory([
         'regex' => '/'.\Cetera\ImageTransform::PREFIX.'/(?<params>[a-zA-Z0-9_-]+)/(?<path>.+)',
         'defaults' => [
             'controller' => '\Cetera\ImageTransform',
@@ -31,7 +31,7 @@ $application->getRouter()->addRoute(\Cetera\ImageTransform::PREFIX,
 );
 
 $application->getRouter()->addRoute('api_entities',
-    \Zend\Router\Http\Segment::factory([
+    \Laminas\Router\Http\Segment::factory([
         'route' => '/api/entity[/:entity][/:action][/:id]',
         'constraints' => [
             'entity' => '[a-zA-Z][a-zA-Z0-9_-]+',
@@ -47,7 +47,7 @@ $application->getRouter()->addRoute('api_entities',
 );
 
 $application->getRouter()->addRoute('api_main',
-    \Zend\Router\Http\Segment::factory([
+    \Laminas\Router\Http\Segment::factory([
         'route' => '/api[/:controller][/:action][/:id]',
         'constraints' => [
             'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
@@ -194,21 +194,21 @@ if ( $match ) {
     else {
         $controller = new $class(); 
         
-        if ($controller instanceof Zend\Mvc\Controller\AbstractController) {
+        if ($controller instanceof Laminas\Mvc\Controller\AbstractController) {
                                     
-            $event = new Zend\Mvc\MvcEvent();
+            $event = new Laminas\Mvc\MvcEvent();
             $event->setRouter($router);
             $event->setRouteMatch($match);     
             
             $controller->setEvent($event);       
             $res = $controller->dispatch($request,$response);
             if (is_object($res)) {        
-                $view = new \Zend\View\View();
+                $view = new \Laminas\View\View();
                 $view->setRequest($request);
                 $view->setResponse($response);
                 
-                $jsonRenderer = new Zend\View\Renderer\JsonRenderer();
-                $jsonStrategy = new Zend\View\Strategy\JsonStrategy($jsonRenderer);        
+                $jsonRenderer = new Laminas\View\Renderer\JsonRenderer();
+                $jsonStrategy = new Laminas\View\Strategy\JsonStrategy($jsonRenderer);        
                 $jsonStrategy->attach($view->getEventManager(), 100);
                 
                 $view->render($res);
@@ -294,7 +294,7 @@ $application->debug(DEBUG_COMMON, 'Success hits: '.$be->successCalls.' ('.($be->
 $application->applyOutputHandler();
 
 foreach ($response->getHeaders() as $header) {
-    if ($header instanceof Zend\Http\Header\MultipleHeaderInterface) {
+    if ($header instanceof Laminas\Http\Header\MultipleHeaderInterface) {
         header($header->toString(), false);
         continue;
     }

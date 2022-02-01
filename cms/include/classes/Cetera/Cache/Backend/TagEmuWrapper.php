@@ -9,7 +9,7 @@
  
 namespace Cetera\Cache\Backend; 
 
-class TagEmuWrapper extends \Zend\Cache\Storage\Adapter\AbstractAdapter implements \Zend\Cache\Storage\TaggableInterface 
+class TagEmuWrapper extends \Laminas\Cache\Storage\Adapter\AbstractAdapter implements \Laminas\Cache\Storage\TaggableInterface 
 {
     
     private $backend = null;
@@ -17,7 +17,7 @@ class TagEmuWrapper extends \Zend\Cache\Storage\Adapter\AbstractAdapter implemen
     private $tags = [];
     
     
-    public function __construct(\Zend\Cache\Storage\Adapter\AbstractAdapter $backend)
+    public function __construct(\Laminas\Cache\Storage\Adapter\AbstractAdapter $backend)
     {
         $this->backend = $backend;
     }

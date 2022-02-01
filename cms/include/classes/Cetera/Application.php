@@ -9,13 +9,13 @@
  
 namespace Cetera; 
 
-use Zend\Authentication\AuthenticationService;
-use Zend\Authentication\Storage\Session;
-use Zend\Session\Config\StandardConfig;
-use Zend\Session\SessionManager;
-use Zend\Session\Container;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Http\PhpEnvironment\Response;
+use Laminas\Authentication\AuthenticationService;
+use Laminas\Authentication\Storage\Session;
+use Laminas\Session\Config\StandardConfig;
+use Laminas\Session\SessionManager;
+use Laminas\Session\Container;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Http\PhpEnvironment\Response;
 use PHPMailer\PHPMailer\PHPMailer;
  
 /**
@@ -31,19 +31,19 @@ class Application {
         
     /**
      * @internal     
-     * @var Zend\Router\RouteInterface
+     * @var Laminas\Router\RouteInterface
      */
     protected $router = null;       
     
     /**
      * @internal     
-     * @var Zend\Http\PhpEnvironment\Request
+     * @var Laminas\Http\PhpEnvironment\Request
      */
     protected $request = null;  
 
     /**
      * @internal     
-     * @var Zend\Http\PhpEnvironment\Response
+     * @var Laminas\Http\PhpEnvironment\Response
      */
     protected $response = null;     
 
@@ -64,7 +64,7 @@ class Application {
     /**
      * Сессия приложения
      * @internal     
-     * @var Zend\Session\Container
+     * @var Laminas\Session\Container
      */
     protected $_session;
        
@@ -378,7 +378,7 @@ class Application {
     /**
      * Сессия приложения
      *      
-     * @return Zend\Session\SessionManager
+     * @return Laminas\Session\SessionManager
      */
     public function getSession()
     {
@@ -2136,7 +2136,7 @@ class Application {
        
     public function getRouter() {
         if (!$this->router) {
-            $this->router = new \Zend\Router\Http\TreeRouteStack();
+            $this->router = new \Laminas\Router\Http\TreeRouteStack();
         }
         return $this->router;
     }

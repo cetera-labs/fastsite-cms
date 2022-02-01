@@ -1,10 +1,10 @@
 <?php
 namespace Cetera\Api;
 
-use Zend\Mvc\Controller\AbstractRestfulController,
-    Zend\View\Model\JsonModel;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;  
+use Laminas\Mvc\Controller\AbstractRestfulController,
+    Laminas\View\Model\JsonModel;
+use Laminas\Stdlib\RequestInterface as Request;
+use Laminas\Stdlib\ResponseInterface as Response;  
 use \Firebase\JWT\JWT;
 
 class AbstractController extends AbstractRestfulController

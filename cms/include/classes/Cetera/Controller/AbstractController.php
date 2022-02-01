@@ -1,9 +1,9 @@
 <?php
 namespace Cetera\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;    
+use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Stdlib\RequestInterface as Request;
+use Laminas\Stdlib\ResponseInterface as Response;    
 
 abstract class AbstractController extends AbstractActionController
 {

@@ -10,8 +10,8 @@
  
 namespace Cetera;
 
-use Zend\Authentication\Adapter\AdapterInterface;
-use Zend\Authentication\Result;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Result;
  
 class UserAuthAdapterULogin extends ExternalUserAuthAdapter implements AdapterInterface {
         

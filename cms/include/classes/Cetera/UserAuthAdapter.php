@@ -10,8 +10,8 @@
  
 namespace Cetera;
 
-use Zend\Authentication\Adapter\AdapterInterface;
-use Zend\Authentication\Result;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Authentication\Result;
  
 /**
  * Адаптер авторизации
@@ -78,18 +78,18 @@ class UserAuthAdapter implements AdapterInterface {
 	 *	))); <br>
      *<br>
 	 *	switch ($result->getCode()) {<br>
-	 *		case Zend\Authentication\Result::FAILURE_IDENTITY_NOT_FOUND:<br>
+	 *		case Laminas\Authentication\Result::FAILURE_IDENTITY_NOT_FOUND:<br>
 	 *			echo 'Пользователь не найден';<br>
 	 *			break;<br>
-	 *		case Zend\Authentication\Result::FAILURE_CREDENTIAL_INVALID:<br>
+	 *		case Laminas\Authentication\Result::FAILURE_CREDENTIAL_INVALID:<br>
 	 *			echo 'Неверный пароль';<br>
 	 *			break;<br>
-	 *		case Zend\Authentication\Result::SUCCESS:<br>
+	 *		case Laminas\Authentication\Result::SUCCESS:<br>
 	 * 			echo 'Добро пожаловать!';<br>
 	 * 			break;<br>
 	 *	}<br>
      *
-	 * @return Zend\Authentication\Result
+	 * @return Laminas\Authentication\Result
 	 */	
     public function authenticate()
     {

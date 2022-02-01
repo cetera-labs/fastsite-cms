@@ -1,5 +1,5 @@
 <?php
-use Zend\Authentication\Result;
+use Laminas\Authentication\Result;
 
 require_once('include/common.php');
 

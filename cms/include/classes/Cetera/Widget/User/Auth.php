@@ -1,7 +1,7 @@
 <?php
 namespace Cetera\Widget\User; 
 
-use Zend\Authentication\Result;
+use Laminas\Authentication\Result;
 
 /**
  * Виджет "Постраничная навигация"

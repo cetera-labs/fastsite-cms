@@ -40,7 +40,7 @@ class Backend {
 				if ( $app->getVar('memcache_server') ) {
 					$o['servers'] = $app->getVar('memcache_server');
 				}
-                $backend = new TagEmuWrapper(new \Zend\Cache\Storage\Adapter\Memcache($o));
+                $backend = new TagEmuWrapper(new \Laminas\Cache\Storage\Adapter\Memcache($o));
 			}
             elseif ($app->getVar('cache_memcached')!='off'&& $app->getVar('cache_memcached')!='disable' && $app->getVar('cache_memcached')!='0' && self::isMemcachedAvailable()) {
                 $o = array(
@@ -51,15 +51,15 @@ class Backend {
 				if ( $app->getVar('memcached_server') ) {
 					$o['servers'] = $app->getVar('memcached_server');
 				}				
-                $backend =  new TagEmuWrapper(new \Zend\Cache\Storage\Adapter\Memcached($o));
+                $backend =  new TagEmuWrapper(new \Laminas\Cache\Storage\Adapter\Memcached($o));
             } 
 			elseif ($app->getVar('cache_file') && self::isFilecacheAvailable()) {
-                $backend = new \Zend\Cache\Storage\Adapter\Filesystem([
+                $backend = new \Laminas\Cache\Storage\Adapter\Filesystem([
                     'cache_dir'=>FILECACHE_DIR,
                 ]);
             } 
 			else {
-                 $backend = new \Zend\Cache\Storage\Adapter\BlackHole();
+                 $backend = new \Laminas\Cache\Storage\Adapter\BlackHole();
             }
         
             self::$_instance = new Profiler($backend);

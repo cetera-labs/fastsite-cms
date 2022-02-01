@@ -8,7 +8,7 @@
  **/
 namespace Cetera;
 
-use Zend\I18n\Translator\Translator;
+use Laminas\I18n\Translator\Translator;
  
 class TranslatorWrapper extends Translator {
     

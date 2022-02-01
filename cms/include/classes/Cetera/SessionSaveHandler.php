@@ -10,7 +10,7 @@
  
 namespace Cetera; 
 
-use Zend\Session\SaveHandler\SaveHandlerInterface;
+use Laminas\Session\SaveHandler\SaveHandlerInterface;
 
 /**
  *  

@@ -1,11 +1,11 @@
 <?php
 namespace Cetera\Api;
 
-use Zend\View\Model\JsonModel;
+use Laminas\View\Model\JsonModel;
 use Cetera\Application;
 use Doctrine\Inflector\InflectorFactory;
-use Zend\Stdlib\RequestInterface as Request;
-use Zend\Stdlib\ResponseInterface as Response;  
+use Laminas\Stdlib\RequestInterface as Request;
+use Laminas\Stdlib\ResponseInterface as Response;  
 use Cetera\ORM\Paginator;
 
 class EntityController extends AbstractController
