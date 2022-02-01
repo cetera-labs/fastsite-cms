@@ -1,7 +1,7 @@
 <?php
 namespace Cetera\Api;
 
-use Zend\View\Model\JsonModel;
+use Laminas\View\Model\JsonModel;
 
 class StructureController extends AbstractController
 {

@@ -1,8 +1,8 @@
 <?php
 namespace Cetera\Api;
 
-use Zend\Mvc\Controller\AbstractRestfulController,
-    Zend\View\Model\JsonModel;
+use Laminas\Mvc\Controller\AbstractRestfulController,
+    Laminas\View\Model\JsonModel;
 
 class IndexController extends AbstractRestfulController
 {

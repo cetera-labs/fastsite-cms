@@ -1,8 +1,8 @@
 <?php
 namespace Cetera\ORM\Mapping;
 
-use \Doctrine\Common\Persistence\Mapping\Driver\MappingDriver;
-use \Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use \Doctrine\Persistence\Mapping\Driver\MappingDriver;
+use \Doctrine\Persistence\Mapping\ClassMetadata;
 use \Doctrine\DBAL\Schema\AbstractSchemaManager;
 use \Doctrine\DBAL\Schema\Table;
 use \Doctrine\DBAL\Schema\Column;

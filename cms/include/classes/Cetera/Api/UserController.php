@@ -1,8 +1,8 @@
 <?php
 namespace Cetera\Api;
 
-use Zend\View\Model\JsonModel;
-use Zend\Authentication\Result;
+use Laminas\View\Model\JsonModel;
+use Laminas\Authentication\Result;
 use Cetera\UserAuthAdapter;
 use Cetera\Event;
 use Cetera\Application;

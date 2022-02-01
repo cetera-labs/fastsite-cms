@@ -97,7 +97,7 @@ class Slot {
     public function addTag($tag)
     {
         if ($tag->getBackend() !== $this->_getBackend()) {
-            \Zend_Cache::throwException("Backends for tag " . get_class($tag) . " and slot " . get_class($this) . " must be same");
+            Laminas\Cache::throwException("Backends for tag " . get_class($tag) . " and slot " . get_class($this) . " must be same");
         }
         $this->_tags[] = $tag;
     }
