@@ -35,7 +35,7 @@ Ext.define('Cetera.field.LinkSet_Link', {
 					'field_name'  : this.field_name,
 					'parent_type' : this.parent_type,
 					'parent_id'   : this.parent_id,
-					//'limit'       : Config.defaultPageSize
+					'limit'       : 0
 				}
 			}		
 		
