@@ -1,3 +1,5 @@
+Ext.require('Cetera.widget.List');
+
 Ext.define('Cetera.widget.Panel', {
 
     extend: 'Ext.Panel',

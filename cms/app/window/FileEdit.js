@@ -36,11 +36,7 @@ Ext.define('Cetera.window.FileEdit', {
 					handler: this.closeWindow
 				}
 		];
-		
-		Ext.Loader.loadScript({
-			url: '/library/ace/ace.js'
-		});		
-    
+		    
         this.callParent();
 			
 
