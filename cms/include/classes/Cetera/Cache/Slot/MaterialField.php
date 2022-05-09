@@ -22,6 +22,7 @@ class MaterialField extends Slot {
 	
     public function load()
     {
+        return false;
         //$raw = $this->_getBackend()->load($this->_id);
         //return unserialize($raw);
 		// TODO
