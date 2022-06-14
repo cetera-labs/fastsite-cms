@@ -60,7 +60,6 @@ Ext.define('Cetera.window.SiteTree', {
         this.callParent();
         
         this.on('show',function() {
-			if (this.expand) this.tree.expandPath(this.expand, 'id', '/');
             if (this.path) this.tree.selectPath(this.path, 'id', '/');
         } , this);
 		
