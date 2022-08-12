@@ -958,7 +958,7 @@ class Application {
             elseif (is_array($handler)) {
             
                 if ( is_object($handler[0]) ) {
-                    $handler[0]->$handler[1]($result); 
+                    $handler[0]->{$handler[1]}($result); 
                 }
                 else {
 					$handler[0]::{$handler[1]}($result); 
