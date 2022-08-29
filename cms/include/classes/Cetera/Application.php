@@ -633,8 +633,14 @@ class Application {
             setcookie('ccms',$this->_uid.'.'.time(),time()+REMEMBER_ME_SECONDS,'/');
             
         }
-        
-        session_start();
+
+        try {
+            session_start();
+        } catch (\Exception $e) {
+            unset($_COOKIE[session_name()]);
+            session_start();
+        }
+
         $sessionManager = new SessionManager();
         //$sessionManager->setSaveHandler(new SessionSaveHandler());  
         Container::setDefaultManager($sessionManager);
