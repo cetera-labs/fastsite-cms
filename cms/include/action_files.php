@@ -206,7 +206,7 @@ if ($_REQUEST['action'] == 'upload_path') {
 }
 
 if ($_REQUEST['action'] == 'delete') {
-    if (!unlink(DOCROOT . ltrim(rtrim($_REQUEST['path'], '.htaccess'), '/'))) throw new Exception\CMS($translator->_('Не удалось удалить файл.'));
+    if (!unlink(DOCROOT . ltrim($_REQUEST['path'], '/'))) throw new Exception\CMS($translator->_('Не удалось удалить файл.'));
     $res['success'] = true;
 }
 
