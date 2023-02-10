@@ -76,7 +76,7 @@ class Search extends Templateable {
 	
 	public function getResults()
 	{
-		if (!$this->results)
+		if (!isset($this->results))
 		{
 			
 			$sections = [];
@@ -84,7 +84,7 @@ class Search extends Templateable {
 			{
 				if ($c->isHidden()) continue;
 				
-				if ($where) $where .= ' or ';
+				if (isset($where)) $where .= ' or ';
 				if ($this->getParam('search_subsections'))
 					$sections =  array_merge($sections, $this->getSubsections($c));
 					else $sections[] = $c->id;
@@ -309,7 +309,8 @@ class Search extends Templateable {
 		foreach ($www as $w) {
 			if (strlen(trim($w)) >= $this->getParam('min_length')) $words[$w] = $w;
 		}	
-		
+
+		/* 
 		if ($this->getParam('morphology')) {
 			$morphy = new \componavt\phpMorphy\Morphy();
 			$res = $morphy->getAllForms($words);
@@ -319,7 +320,7 @@ class Search extends Templateable {
 				}
 			}
 		}	
-
+*/
 		if ($this->getParam('translit')) {
 			foreach ($words as $w => $v) {
 				if (!is_array($v)) $words[$w] = [$w];
