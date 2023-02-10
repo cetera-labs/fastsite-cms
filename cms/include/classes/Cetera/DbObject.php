@@ -108,7 +108,7 @@ abstract class DbObject {
         $method = 'get' . ucfirst($name);
         if (method_exists($this, $method)) return $this->$method();
     
-        return $this->fields[$name];
+        if (isset($this->fields[$name])) return $this->fields[$name];
     }
 
     /**
