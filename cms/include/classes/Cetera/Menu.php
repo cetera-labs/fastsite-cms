@@ -95,7 +95,7 @@ class Menu extends Base {
             $m = self::getByAlias($alias);
         } catch (\Exception $e) {}
         
-        if ($m) throw new Exception\CMS('Меню c таким алиасом уже существует.');
+        if (isset($m)) throw new Exception\CMS('Меню c таким алиасом уже существует.');
         
         self::getDbConnection()->insert('menus', array(
 			'alias' => $alias,
@@ -124,7 +124,7 @@ class Menu extends Base {
             $m = self::getByAlias($this->alias);
         } catch (\Exception $e) {}
         
-        if ($m && $m->id != $this->id) throw new Exception\CMS('Меню c таким алиасом уже существует.');
+        if (isset($m) && $m->id != $this->id) throw new Exception\CMS('Меню c таким алиасом уже существует.');
         
 		self::getDbConnection()->update('menus',
 			array(
