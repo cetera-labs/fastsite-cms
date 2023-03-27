@@ -18,11 +18,13 @@ trait Paginator {
     {
 		$query = $_GET;
 		$query[$this->getParam('page_param')] = '{page}';
+
 		$trans = array(
-			'{catalog}'     => $this->getCatalog()->url, 
+			'{catalog}'     => $this->getCatalogPath(),
 			'{page_param}'  => $this->getParam('page_param'),
 			'{query_string}'=> urldecode(http_build_query($query)),
 		);
+		
 		$url = strtr($this->getParam('paginator_url'), $trans);
 		
 		return $this->application->getWidget('Paginator',array(
@@ -32,4 +34,9 @@ trait Paginator {
 		))->getHtml();
 	}	
 
+	private function getCatalogPath() {
+		$dir = explode("/", $_SERVER['REQUEST_URI']);
+
+		return ($dir[1] != 'search') ? $this->getCatalog()->url : '';
+	}
 }
