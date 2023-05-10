@@ -102,11 +102,11 @@ try {
     }
     
     if ($idcat > 0) {
-		
 		$section = Section::getById( $idcat );		
     	$cat_type = $application->getConn()->fetchColumn("select type from dir_data where id=?", array($idcat));
-		
-    } else {
+    } 
+	else {
+		$section = null;
         $cat_type = 0;
     }
        

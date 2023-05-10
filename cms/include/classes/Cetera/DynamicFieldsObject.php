@@ -395,6 +395,9 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
      */   
     private function getPlainField($field)
     {
+		if (!isset($this->fields['id'])) {
+			return null;
+		}
         if (!isset($this->fields[$field['name']])) {                     
 			$this->fields[$field['name']] = $this->getDbConnection()->fetchColumn('SELECT `'.$field['name'].'` FROM '.$this->table.' WHERE id='.(int)$this->fields['id']);
 		}
