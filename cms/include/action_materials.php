@@ -58,6 +58,7 @@ if ($action == 'clear_lock') {
 }
 
 if ($_REQUEST['action'] == 'get_path_info') {
+    $res['displayPath'] = '';   	
     try {
         $m = Material::getById((int)$_REQUEST['mat_id'], new ObjectDefinition($_REQUEST['type']));
         if ($m->catalog && !$m->catalog->isRoot()) $res['displayPath'] = $m->catalog->getPath()->implode().' / ';
