@@ -140,6 +140,9 @@ elseif ($step == 5) {
     
         $schema = new Schema();
         foreach($schema->schemas as $key => $schm) {
+	    if(!isset($schm['name'])) {
+	        $schm['name'] = '-';
+	    }
             if ($schm['schema']) {
                 $str .= '<tr><td class="left">'.$translator->_('Структура').' <b>'.$schm['name'].'</b></td><td>';
                 try {
