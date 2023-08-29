@@ -735,7 +735,9 @@ class ObjectDefinition extends Base {
             $od = self::findByAlias($params['len']);
             $params['len'] = $od->id;
         } 
-       
+
+	if (!isset($params['page'])) $params['page'] = null;
+	if (!isset($params['tag'])) $params['tag'] = 0;
         
         return $params;    
     } 
