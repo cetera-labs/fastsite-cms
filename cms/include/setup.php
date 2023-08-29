@@ -143,7 +143,7 @@ elseif ($step == 5) {
 	    if(!isset($schm['name'])) {
 	        $schm['name'] = '-';
 	    }
-            if ($schm['schema']) {
+            if (isset($schm['schema'])) {
                 $str .= '<tr><td class="left">'.$translator->_('Структура').' <b>'.$schm['name'].'</b></td><td>';
                 try {
                     $schema->readSchema($key);
@@ -155,7 +155,7 @@ elseif ($step == 5) {
                 $str .= '</td></tr>';
             }
             
-            if ($schm['sql']) {
+            if (isset($schm['sql'])) {
                 $str .= '<tr><td class="left">'.$translator->_('Данные').' <b>'.$schm['name'].'</b></td><td>';
                 try {
                     $schema->readDump($key);
