@@ -133,7 +133,7 @@ class Sections implements XmlInterface {
 					$new_sid = $parent->createChild(array(
 						'name'		=> $xml->getAttribute('name'),
 						'alias'		=> $xml->getAttribute('alias'),
-						'typ'	  	=> \Cetera\ObjectDefinition::findByTable( $xml->getAttribute('materialsType') ),
+						'typ'	  	=> \Cetera\ObjectDefinition::findByTable( $xml->getAttribute('materialsType') )->id,
 						'link'		=> 0,
 						'server'    => 0,
 						'autoalias' => $xml->getAttribute('autoalias')
