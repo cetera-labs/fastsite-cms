@@ -64,7 +64,12 @@ class Sections implements XmlInterface {
 				$parentSection = array_pop($stack);
 			}
 			if (in_array($xml->nodeType, array(\XMLReader::TEXT, \XMLReader::CDATA))) {
-                $fields[$field] .= $xml->value;	
+				if (!isset($fields[$field])) {
+					$fields[$field] = $xml->value;	
+				}
+				else {
+                			$fields[$field] .= $xml->value;	
+				}
 			}            
 		}		
 	}
