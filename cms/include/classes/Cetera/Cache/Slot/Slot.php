@@ -42,7 +42,7 @@ class Slot {
      */
     public function __construct($id, $lifetime)
     {
-        $this->_id = getenv('SERVER_NAME').'_'.str_replace(['/',':'],'_',$id);
+        $this->_id = getenv('SERVER_NAME').'_'.str_replace(['/',':','.'],'_',$id);
         $this->_lifetime = $lifetime;
         $this->_tags = array();
     }
