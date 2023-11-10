@@ -192,6 +192,16 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
     }
 
     /**
+     * Переход к предыдущему элементу              
+     *             
+     * @return void  
+     */
+    public function prev()
+    {
+        $this->position--;
+    }
+    
+    /**
      * Текущий элемент существует?              
      *             
      * @return bool 
