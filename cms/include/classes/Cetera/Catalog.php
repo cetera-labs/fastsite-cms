@@ -8,11 +8,4 @@
  **/
 namespace Cetera; 
  
-/**
- * Раздел сайта
- *
- * @deprecated
- *
- **/ 
-class Catalog extends Section {
-}
+class_alias('\Cetera\Section', '\Cetera\Catalog');
