@@ -17,6 +17,8 @@ namespace Cetera;
  **/
 class Server extends Catalog {
 
+    public static $extension = null;
+
     /**
      * Флаг, указывающий, что сервер является основным
 	 * @internal
