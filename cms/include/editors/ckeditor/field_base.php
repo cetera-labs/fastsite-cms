@@ -15,7 +15,7 @@ Ext.define('CKFieldBase', {
 
             
             Ext.Loader.loadScript({
-                url: 'https://cdn.ckeditor.com/4.11.2/full/ckeditor.js',
+                url: '/cms/include/editors/ckeditor/ckeditor.js',
                 onLoad: this.initEditor,
                 scope: this
             });
