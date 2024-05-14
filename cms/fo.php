@@ -148,7 +148,7 @@ if (sizeof($pieces)) $template = $pieces[0];
 if ($template)
 {
     $template = $template.'.php';
-    if (!file_exists($td.'/'.$template)) 
+    if ($template == BOOTSTRAP_SCRIPT || !file_exists($td.'/'.$template)) 
         $template = false;
     
 } 
