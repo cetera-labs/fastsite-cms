@@ -132,7 +132,7 @@ if ($action == 'delete_link' && is_array($sel)) {
 
 if (($action == 'up' || $action == 'down' || $action == 'pub' || $action == 'unpub' || $action == 'move' || $action == 'copy') && is_array($sel)) {
 
-    if ($_POST['math_subs'])
+    if (isset($_POST['math_subs']))
       $cats = 'A.idcat IN ('.implode(',',$catalog->subs).')';
       else $cats = "A.idcat=$id";
 
