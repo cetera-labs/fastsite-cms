@@ -624,7 +624,7 @@ class Application {
         if (php_sapi_name() != 'cli') {
         
             if (!isset($_COOKIE['ccms'])) {
-                $this->_uid = md5($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT'].rand());
+                $this->_uid = md5(($_SERVER['REMOTE_ADDR'] ?? "").($_SERVER['HTTP_USER_AGENT'] ?? "").rand());
             } else {
                 $a = explode('.', $_COOKIE['ccms']);
                 $this->_uid = $a[0];
