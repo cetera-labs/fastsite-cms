@@ -664,7 +664,7 @@ class Application {
     public static function shutdown()
     {    
 				
-		if (self::$_instance->cronMode) {
+		if (self::$_instance && self::$_instance->cronMode) {
 			if ( php_sapi_name() == 'cli' ) {
 				$txt = ob_get_contents();
 				ob_end_clean();
@@ -676,7 +676,7 @@ class Application {
 		}
 		
 		if ( php_sapi_name() != 'cli' ) {
-			if (self::$_instance->exitCode) {
+			if (self::$_instance && self::$_instance->exitCode) {
 				http_response_code(500);
 			}	
 		}		
