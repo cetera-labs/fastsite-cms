@@ -161,7 +161,7 @@ class Application {
 	 * Обработчики результата FO	   
 	 * @var array
 	 */ 
-	private $_result_handler = array();
+	private $_resufhalt_handler = array();
   
   /*
    * @internal
@@ -278,8 +278,8 @@ class Application {
     protected function __construct()
     {
 		register_shutdown_function('\Cetera\Application::shutdown');
-		set_exception_handler('\Cetera\Application::exception_handler');
-		set_error_handler('\Cetera\Application::error_handler');		
+		//set_exception_handler('\Cetera\Application::exception_handler');
+		//set_error_handler('\Cetera\Application::error_handler');		
 		
         $this->_locale = 'ru';
   	
