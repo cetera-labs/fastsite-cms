@@ -2107,6 +2107,7 @@ class Application {
 				 '<tr><td align="center"><div class="panel"><b>'.$exception->getMessage().'</b><br /><br />'.
 				 '<div style="text-align: left; padding: 10px">'.$ext_message.'</div></div></td></tr></table></div></body>'); 
 		}
+		die();
 	}	
     
     public function getLocaleList() {
