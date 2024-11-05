@@ -2051,7 +2051,7 @@ class Application {
 	}	
 	
 	public static function exception_handler($exception) {
-
+restore_exception_handler();
 		// Ошибка во время cronJob
 		if (self::$_instance && self::$_instance->cronMode) {
 			print 'ERROR. '.$exception->getMessage()."\n";
@@ -2107,8 +2107,6 @@ class Application {
 				 '<tr><td align="center"><div class="panel"><b>'.$exception->getMessage().'</b><br /><br />'.
 				 '<div style="text-align: left; padding: 10px">'.$ext_message.'</div></div></td></tr></table></div></body>'); 
 		}
-		print_r($exception);
-		die();
 	}	
     
     public function getLocaleList() {
