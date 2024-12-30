@@ -754,7 +754,7 @@ class Application {
     public function getServer()
     {
         if (!$this->_server) {
-            $this->_server = Server::getByDomain($_SERVER['HTTP_HOST']);
+            $this->_server = Server::getByDomain(getenv('HTTP_HOST'));
             if ($this->_server)
                 $this->debug(DEBUG_COMMON, 'Server ID: '.$this->_server->id);
         }
