@@ -95,8 +95,8 @@ class CDBTree {
 			$fld_names = implode(',', array_keys($data)).',';
 			$fld_values = '\''.implode('\',\'', array_values($data)).'\',';
 		}
-		$fld_names .= $this->left.','.$this->right.','.$this->level.','.$this->parent_id;
-		$fld_values .= ($rightId).','.($rightId+1).','.($level+1).','.($ID);
+		$fld_names .= $this->left.','.$this->right.','.$this->level;
+		$fld_values .= ($rightId).','.($rightId+1).','.($level+1);
 
 		// creating a place for the record being inserted
 		if($ID) {

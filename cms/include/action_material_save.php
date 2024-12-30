@@ -22,7 +22,7 @@ $res = array(
 $math = $_REQUEST['table'];
 
 $od = ObjectDefinition::findByTable($_REQUEST['table']);
-if (!$_POST['id']) {
+if (!isset($_POST['id']) || $_POST['id'] == 0) {
 	$m = DynamicFieldsObject::fetch($_POST, $od);
 }
 else {

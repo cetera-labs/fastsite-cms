@@ -1,21 +1,22 @@
 <?php
-namespace Cetera\Widget; 
+namespace Cetera\Widget;
 
 /**
  * Виджет "Поиск по сайту"
- * 
+ *
  * @package FastsiteCMS
- */ 
+ */
 class Search extends Templateable {
-	
+
 	use Traits\Paginator;
-	
+
 	public static $name = 'Search';
-	
+
+    protected $subsections = [];
 	protected $results = null;
 	protected $query = null;
 	protected $_sections = null;
-		
+
 	protected function initParams()
 	{
 		$this->_params = array(
@@ -45,17 +46,17 @@ class Search extends Templateable {
 			'show_path'            => true,
 			'where'                => null,
 			'template'			   => 'default.twig',
-		);  		
-	}		
+		);
+	}
 
 	public function querySubmitted()
 	{
-		
+
 		return isset( $_REQUEST[$this->getParam('query_param')] );
 	}
-	
+
 	public function queryValue()
-	{	
+	{
 		if ($this->query === null)
 		{
 			$this->query = $_REQUEST[$this->getParam('query_param')];
@@ -64,53 +65,58 @@ class Search extends Templateable {
 		return $this->query;
 	}
 
-	private function getSubsections($section)	
+	private function getSubsections($section)
 	{
-		$result = [$section->id];
+        if (isset($this->subsections[$section->id])) {
+            return;
+        }
+        $this->subsections[$section->id] = true;
 		foreach ($section->children as $c) {
 			if ($c->isHidden()) continue;
-			$result = array_merge($result, $this->getSubsections($c));
+			$this->getSubsections($c);
 		}
-		return $result;
+		return array_keys($this->subsections);
 	}
-	
+
 	public function getResults()
 	{
 		if (!isset($this->results))
 		{
-			
+
 			$sections = [];
-			foreach ($this->getSections() as $c)
-			{
-				if ($c->isHidden()) continue;
-				
-				if (isset($where)) $where .= ' or ';
-				if ($this->getParam('search_subsections'))
-					$sections =  array_merge($sections, $this->getSubsections($c));
-					else $sections[] = $c->id;
+			foreach ($this->getSections() as $c) {
+                if ($c->isHidden()) continue;
+
+                if (isset($where)) $where .= ' or ';
+                if ($this->getParam('search_subsections')) {
+                    $this->subsections = [];
+                    $sections = array_merge($sections, $this->getSubsections($c));
+                }
+                else
+                    $sections[] = $c->id;
 			}
 			$where = '`idcat` IN ('.implode(',', array_unique($sections)) .')';
-			
+
 			$where2 = $this->buildWhere();
-						
+
 			if ($where2)
 			{
 				$fields = $this->getSearchFields();
 				$fields[] = $this->buildRelevance().' AS relevance';
-				
+
 				$this->results = new \Cetera\Iterator\DynamicObjectMultiple( $this->getObjectDefinitions(), $fields );
-				
+
 				$this->results
 					->orderBy( $this->getSortField(), $this->getSortDirection() )
 					->where( $where )
 					->where( $where2 )
 					->setItemCountPerPage( $this->getItemCountPerPage() )
 					->setCurrentPageNumber( $this->getPage() );
-					
+
 				if ($this->getParam('where')) {
 					$this->results->where( $this->getParam('where') );
-				}	
-				
+				}
+
 				if ($this->getParam('debug')) {
                     print $this->results->getQuery();
                 }
@@ -118,7 +124,7 @@ class Search extends Templateable {
 		}
 		return $this->results;
 	}
-	
+
 	public function getSections()
 	{
 		if (!$this->_sections)
@@ -129,7 +135,7 @@ class Search extends Templateable {
 				if ($sections) {
 					$sections = explode(',', $sections);
 					array_walk($sections, 'intval');
-				}				
+				}
 				if (!$sections || !count($sections)) {
 					$sections = array( $this->application->getServer()->id );
 				}
@@ -143,24 +149,24 @@ class Search extends Templateable {
 
 		return $this->_sections;
 	}
-	
+
 	protected function getSortField()
 	{
-		return $this->getParam('sort_field','dat');		
-	}	
+		return $this->getParam('sort_field','dat');
+	}
 
 	protected function getSortDirection()
 	{
-		return $this->getParam('sort_direction','DESC');			
-	}	
-	
+		return $this->getParam('sort_direction','DESC');
+	}
+
 	protected function getItemCountPerPage()
 	{
 		$value = (int)$this->getParam('items_per_page');
 		if (!$value) $value = 20;
 		return $value;
-	}			
-	
+	}
+
 	protected function getObjectDefinitions()
 	{
 		$types = $this->getParam('type');
@@ -169,38 +175,38 @@ class Search extends Templateable {
 			$type_id = (int)$this->getParam('type');
 			if (!$type_id) $type_id = 1;
 			$types = array($type_id);
-		}	
+		}
 		$res = array();
-		
+
 		foreach ($types as $t)
 		{
 			$res[] = \Cetera\ObjectDefinition::findById($t);
 		}
-		
+
 		return $res;
-	}	
-		
+	}
+
 	protected function buildRelevance()
 	{
         if ($this->getParam('fulltext')) {
             return $this->buildFullTextQuery();
         }
-        else {            
+        else {
             $fields = $this->getSearchFields();
             $words = $this->splitQueryToWords();
-            
+
             $res = '';
             $i = 0;
             foreach ($fields as $f) {
                 $f = '`'.$f.'`';
                 if ($res) $res .= ' + ';
                 $res .= 'IF('.$f.' LIKE "%'.$this->queryValue().'%",'.(5000-$i*10).',0)';
-                
+
                 foreach ($words as $key => $word) {
-                    
+
                     if (is_array($word)) {
                         $weight = 500;
-                        foreach ($word as $w) {						
+                        foreach ($word as $w) {
                             if (strlen($w) < $this->getParam('min_length')) continue;
                             $res .= ' + IF ('.$f.' LIKE "%'.$w.'%",'.($weight-$i).',0)';
                             $weight = 100;
@@ -208,29 +214,29 @@ class Search extends Templateable {
                     } else {
                         if (strlen($key) < $this->getParam('min_length')) continue;
                         $res .= ' + IF ('.$f.' LIKE "%'.$key.'%",'.(500-$i).',0)';
-                    }				
-                    
+                    }
+
                 }
-                
+
                 $i++;
             }
 
             return $res;
         }
-	}		
-	
+	}
+
 	protected function buildWhere()
 	{
         if ($this->getParam('fulltext')) {
             return $this->buildFullTextQuery();
         }
         else {
-		
+
             $fields = $this->getSearchFields();
             $words = $this->splitQueryToWords();
-            
+
             if (!count($words)) return false;
-            
+
             $res = array();
             foreach ($fields as $f) {
                 $f = '`'.$f.'`';
@@ -238,7 +244,7 @@ class Search extends Templateable {
                 foreach ($words as $key => $word) {
                     $res3 = array();
                     if (is_array($word)) {
-                        foreach ($word as $w) {						
+                        foreach ($word as $w) {
                             if (strlen($w) < $this->getParam('min_length')) continue;
                             $res3[] = $f.' LIKE "%'.$w.'%"';
                         }
@@ -251,10 +257,10 @@ class Search extends Templateable {
                 $res[] = '('.implode(' and ',$res2).')';
             }
             return '('.implode(' or ',$res).')';
-        
+
         }
-	} 
-        
+	}
+
     protected function buildFulltextQuery()
     {
         $words = $this->splitQueryToWords();
@@ -276,18 +282,18 @@ class Search extends Templateable {
 
         return $res;
     }
-    
 
-	public function getCatalog() 
+
+	public function getCatalog()
 	{
 		return $this->application->server;
 	}
-	
-	public function getChildren() 
+
+	public function getChildren()
 	{
 		return $this->getResults();
-	}	
-    
+	}
+
 	protected function getSearchFields()
 	{
 		$f = trim($this->getParam('fields'));
@@ -296,9 +302,9 @@ class Search extends Templateable {
 		foreach (explode(',', $f) as $field) {
 			$fields[] = trim($field);
 		}
-		
+
 		return $fields;
-	}	    
+	}
 
 	protected function splitQueryToWords()
 	{
@@ -308,9 +314,9 @@ class Search extends Templateable {
 		$words = array();
 		foreach ($www as $w) {
 			if (strlen(trim($w)) >= $this->getParam('min_length')) $words[$w] = $w;
-		}	
+		}
 
-		/* 
+		/*
 		if ($this->getParam('morphology')) {
 			$morphy = new \componavt\phpMorphy\Morphy();
 			$res = $morphy->getAllForms($words);
@@ -319,16 +325,16 @@ class Search extends Templateable {
 					$words[$w] = $res[$w];
 				}
 			}
-		}	
+		}
 */
 		if ($this->getParam('translit')) {
 			foreach ($words as $w => $v) {
 				if (!is_array($v)) $words[$w] = [$w];
 				$words[$w][] = translit($w);
 			}
-		}	
+		}
 		return $words;
-	}  
+	}
 
     public function highlight($text)
     {
@@ -369,5 +375,5 @@ class Search extends Templateable {
 
         return mb_substr($text, 0, 1000).' ...';
     }
-    
+
 }

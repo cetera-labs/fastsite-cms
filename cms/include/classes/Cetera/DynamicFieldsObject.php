@@ -800,25 +800,24 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	/** @internal */
     protected function saveDynimicLinks()
     {
-		
         $fields = $this->getFieldsDef();
         if (is_array($fields)) foreach ($fields as $name => $field) {
             $type = $field['type'];
             
             if ($type==FIELD_LINKSET || $type==FIELD_MATSET) {
-				$tbl = ObjectDefinition::get_table($type, $field['len'], $this->objectDefinition->id, $field['pseudo_type']);
-			}
+		$tbl = ObjectDefinition::get_table($type, $field['len'], $this->objectDefinition->id, $field['pseudo_type']);
+	    }
             
             if (isset($this->fields[$name])) {
                 if ($field['pseudo_type'] == PSEUDO_FIELD_TAGS) {
                       $this->process_tags($this->fields[$name], $this->table, $tbl, $name, $this->id, $type);
             	} 
-				elseif ( $type == FIELD_LINKSET || $type==FIELD_MATSET ) {
-            	  	 $this->insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
-					 if ($type==FIELD_MATSET) $this->confirm_added($tbl);
+		elseif ( $type == FIELD_LINKSET || $type==FIELD_MATSET ) {
+            	    $this->insert_links($this->fields[$name], $this->table, $tbl, $name, $this->id, $type, $field['len']);
+		    if ($type==FIELD_MATSET) $this->confirm_added($tbl);
                 }
-				elseif ( $type == FIELD_LINKSET2 ) {
-            	  	 $this->insert_links2($this->fields[$name], $this->table, $tbl, $name, $this->id);
+		elseif ( $type == FIELD_LINKSET2 ) {
+            	    $this->insert_links2($this->fields[$name], $this->table, $name, $this->id);
                 }				
             }
         } 
@@ -973,7 +972,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
 	/**
 	 * @internal
 	*/
-	private function insert_links2($values, $math, $tbl, $name, $id2) {
+	private function insert_links2($values, $math, $name, $id2) {
 		
 		$this->getDbConnection()->executeQuery("delete from ".$math."_".$name." where id=$id2"); 
 		

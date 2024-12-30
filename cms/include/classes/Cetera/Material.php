@@ -67,11 +67,11 @@ class Material extends DynamicFieldsObject implements SiteItem {
         }  
 		if (isset($fields['type'])) {
 					
-			$this->_published = $fields['type'] & MATH_PUBLISHED ? true : false;
-			$this->_show_future = $fields['type'] & MATH_SHOW_FUTURE ? true : false;
+			$this->_published = (int)$fields['type'] & MATH_PUBLISHED ? true : false;
+			$this->_show_future = (int)$fields['type'] & MATH_SHOW_FUTURE ? true : false;
 
-			$fields['publish'] = $fields['type'] & MATH_PUBLISHED ? true : false;
-			$fields['show_future'] = $fields['type'] & MATH_SHOW_FUTURE ? true : false;
+			$fields['publish'] = (int)$fields['type'] & MATH_PUBLISHED ? true : false;
+			$fields['show_future'] = (int)$fields['type'] & MATH_SHOW_FUTURE ? true : false;
 			
 			unset($fields['type']);
 		}

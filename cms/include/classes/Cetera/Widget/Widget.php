@@ -42,6 +42,7 @@ class Widget {
 	private static $data = array();
 	protected static $uniquePrefix = 'x_widget_';
 	protected $uniqueId = null;
+	protected $uniqueCount = 0;
     
 	 /**
 	 * Контейнеры, в которых находится виджет
