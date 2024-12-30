@@ -3,12 +3,7 @@ use Laminas\Authentication\Result;
 
 require_once('include/common.php');
 
-if (!isset($_SERVER['HTTP_HOST'])) {
-    print_r($_SERVER);
-    die();
-}
-
-if (stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
+if (isset($_SERVER['HTTP_HOST']) && stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
    $idn = new \True\Punycode();
    $_SERVER['HTTP_HOST'] = $idn->decode($_SERVER['HTTP_HOST']);
 }
