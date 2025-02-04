@@ -1306,13 +1306,13 @@ class Application {
 		
 		$data = self::getDbConnection()->fetchAll('SELECT * FROM mail_templates WHERE active=1 and event = ?', array($event));		
 		foreach ($data as $template) {
-			$twig = new \Twig_Environment(
-				new \Twig_Loader_Array( $template ),
+			$twig = new \Twig\Environment(
+				new \Twig\Loader\ArrayLoader( $template ),
 				array(
 					'autoescape' => false,
 				)
 			);	
-			$twig->addFunction(new \Twig_SimpleFunction('_', function($text) {
+			$twig->addFunction(new \Twig\TwigFunction('_', function($text) {
 				return \Cetera\Application::getInstance()->getTranslator()->_($text);
 			}));
 		
@@ -1761,14 +1761,14 @@ class Application {
 	/**
 	* Создает и возвращает шаблонизатор Twig
 	*
-	* @return Twig_Environment
+	* @return \Twig\Environment
 	*/		
 	public function getTwig()
 	{
 		
 		if (!$this->twig)
 		{
-			$loader = new \Twig_Loader_Filesystem( [$this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH, CMSROOT.'/twig_templates/pages'], getcwd() );
+			$loader = new \Twig\Loader\FilesystemLoader( [$this->getTemplateDir().'/'.TWIG_TEMPLATES_PATH, CMSROOT.'/twig_templates/pages'], getcwd() );
 			
 			if (file_exists($this->getTemplateDir().'/widgets'))
 				$loader->addPath( $this->getTemplateDir().'/widgets' ,'widget' );
@@ -1790,26 +1790,26 @@ class Application {
 				$options['debug'] = true;
 			}
 			
-			$this->twig = new \Twig_Environment($loader, $options);
+			$this->twig = new \Twig\Environment($loader, $options);
 
 			$this->twig->addTokenParser( new Twig\TokenParser\Widget() );
-			$this->twig->addExtension( new \Twig_Extensions_Extension_Text() );	
-			$this->twig->addExtension(new \Twig_Extensions_Extension_I18n());
-			$this->twig->addExtension(new \Twig_Extension_Debug());
+			//$this->twig->addExtension( new \Twig\Extensions\Extension_Text() );	
+			//$this->twig->addExtension(new \Twig_Extensions_Extension_I18n());
+			$this->twig->addExtension(new \Twig\Extension\DebugExtension());
 
-			$this->twig->addFunction(new \Twig_SimpleFunction('_', function($text) {
+			$this->twig->addFunction(new \Twig\TwigFunction('_', function($text) {
 				return Application::getInstance()->getTranslator()->_($text);
 			}));
 			
-			$this->twig->addFilter( new \Twig_SimpleFilter('phone', function($num) {
+			$this->twig->addFilter( new \Twig\TwigFilter('phone', function($num) {
 				
 				return preg_replace('/[^\+^\d]/i','', $num);
 				
 			} ) );
             
-            $this->twig->addFilter( new \Twig_SimpleFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
+            $this->twig->addFilter( new \Twig\TwigFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
             
-            $this->twig->addFilter( new \Twig_SimpleFilter('encode', '\\Cetera\\Util::dsCrypt' ));
+            $this->twig->addFilter( new \Twig\TwigFilter('encode', '\\Cetera\\Util::dsCrypt' ));
 			
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());
