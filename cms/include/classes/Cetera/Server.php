@@ -213,7 +213,7 @@ class Server extends Catalog {
      *           
      * @return string
      */      
-    public function setTheme(Theme $theme = null)
+    public function setTheme(?Theme $theme = null)
     {
         $theme_path = null;
         if ($theme) $theme_path = THEME_DIR.'/'.$theme->name;
