@@ -12,7 +12,7 @@ class AbstractController extends AbstractRestfulController
     protected $params = [];
     public $user = null;
     
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, ?Response $response = null)
     {
         if ($this->requestHasContentType($request, self::CONTENT_TYPE_JSON)) {
             $data = $this->jsonDecode($request->getContent());
