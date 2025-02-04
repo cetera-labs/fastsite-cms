@@ -1,7 +1,7 @@
 <?php
 namespace Cetera\Twig\TokenParser; 
 
-class Widget extends \Twig_TokenParser
+class Widget extends \Twig\TokenParser\AbstractTokenParser
 {
     /**
      * Parses a token and returns a node.
@@ -10,7 +10,7 @@ class Widget extends \Twig_TokenParser
      *
      * @return Twig_NodeInterface A Twig_NodeInterface instance
      */
-    public function parse(\Twig_Token $token)
+    public function parse(\Twig\Token $token)
     {
         $expr = $this->parser->getExpressionParser()->parseExpression();
 
@@ -23,12 +23,12 @@ class Widget extends \Twig_TokenParser
     {
         $stream = $this->parser->getStream();
 
-		$variables = new \Twig_Node_Expression_Array( [],0 );
-        if ($stream->nextIf(\Twig_Token::NAME_TYPE, 'with')) {
+		$variables = new \Twig\Node\Expression\ArrayExpression( [],0 );
+        if ($stream->nextIf(\Twig\Token::NAME_TYPE, 'with')) {
             $variables = $this->parser->getExpressionParser()->parseExpression();
         }
 
-        $stream->expect(\Twig_Token::BLOCK_END_TYPE);
+        $stream->expect(\Twig\Token::BLOCK_END_TYPE);
 
         return $variables;
     }
