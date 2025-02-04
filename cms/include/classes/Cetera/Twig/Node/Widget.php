@@ -1,11 +1,14 @@
 <?php
-namespace Cetera\Twig\Node; 
+namespace Cetera\Twig\Node;
 
+use Twig\Attribute\YieldReady;
+
+#[YieldReady]
 class Widget extends \Twig\Node\Node implements \Twig\Node\NodeOutputInterface
 {
-    public function __construct(\Twig\Node\Expression\AbstractExpression $expr, \Twig\Node\Expression\AbstractExpression $variables, $lineno, $tag = null)
+    public function __construct(\Twig\Node\Expression\AbstractExpression $expr, \Twig\Node\Expression\AbstractExpression $variables, $lineno)
     {
-        parent::__construct(array('expr' => $expr, 'variables' => $variables), array(), $lineno, $tag);
+        parent::__construct(array('expr' => $expr, 'variables' => $variables), array(), $lineno);
     }
 
     /**
@@ -36,8 +39,8 @@ class Widget extends \Twig\Node\Node implements \Twig\Node\NodeOutputInterface
                 ->outdent()
                 ->write("} catch (\\Exception \$e) {\n")
                 ->indent()
-                //->write("echo '<div class=\"callout alert\">'.\$e->getMessage().'</div>';\n")
-				->write("echo '<!-- '.\$e->getMessage().' '.\$e->getFile().' '.\$e->getLine().' -->';\n")
+                //->write("yield '<div class=\"callout alert\">'.\$e->getMessage().'</div>';\n")
+				->write("yield '<!-- '.\$e->getMessage().' '.\$e->getFile().' '.\$e->getLine().' -->';\n")
                 ->outdent()
                 ->write("}\n\n")
         ;		 
