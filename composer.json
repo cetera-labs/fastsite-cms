@@ -16,7 +16,7 @@
         "forum": "http://community.fastsite.ru/"
     },
     "require": {
-        "php": ">=7.4.0",
+        "php": ">=8.1",
         "cetera-labs/cetera-cms-plugin-controller": "*",
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.12",
