@@ -15,7 +15,7 @@ class EntityController extends AbstractController
     private $em;
     private $entity;
 
-    public function dispatch(Request $request, Response $response = null)
+    public function dispatch(Request $request, ?Response $response = null)
     {
         $this->inflector = InflectorFactory::create()->build();
         $this->em = Application::getInstance()->getEntityManager();
