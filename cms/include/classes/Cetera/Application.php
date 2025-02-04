@@ -2039,9 +2039,8 @@ class Application {
 		
 		$application = self::$_instance;
 		
-		if ($errno == E_STRICT || $errno == E_NOTICE || $errno == E_DEPRECATED) {
+		if ($errno == E_NOTICE || $errno == E_DEPRECATED) {
 			$errno = 'NOTICE';
-			if ($errno == E_STRICT) $errno = 'STRICT';
 			if ($errno == E_DEPRECATED) $errno = 'DEPRECATED';
 			if ($application) $application->debug(DEBUG_ERROR_PHP, $errno.' '.$errstr.' '.$errfile.' Line: '.$errline);
 			return;
