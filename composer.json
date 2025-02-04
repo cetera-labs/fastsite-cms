@@ -38,7 +38,7 @@
         "twig/twig": "~3.0",
         "guzzlehttp/guzzle": "~7.0",
         "ifsnop/mysqldump-php":"2.*",
-        "phing/phing": "2.*",
+        "phing/phing": "3.*",
         "componavt/phpmorphy": "*",
         "firebase/php-jwt": "*",
         "phpseclib/phpseclib": "^3.0",
