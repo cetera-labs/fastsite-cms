@@ -1,9 +1,9 @@
 <?php
 namespace Cetera\Twig\Node; 
 
-class Widget extends \Twig_Node implements \Twig_NodeOutputInterface
+class Widget extends \Twig\Node\Node implements \Twig\Node\NodeOutputInterface
 {
-    public function __construct(\Twig_Node_Expression $expr, \Twig_Node_Expression $variables, $lineno, $tag = null)
+    public function __construct(\Twig\Node\Expression\AbstractExpression $expr, \Twig\Node\Expression\AbstractExpression $variables, $lineno, $tag = null)
     {
         parent::__construct(array('expr' => $expr, 'variables' => $variables), array(), $lineno, $tag);
     }
@@ -13,7 +13,7 @@ class Widget extends \Twig_Node implements \Twig_NodeOutputInterface
      *
      * @param Twig_Compiler $compiler A Twig_Compiler instance
      */
-    public function compile(\Twig_Compiler $compiler)
+    public function compile(\Twig\Compiler $compiler)
     {
         $compiler->addDebugInfo($this);
 		
