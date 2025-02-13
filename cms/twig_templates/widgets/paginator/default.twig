@@ -12,7 +12,8 @@
 		{% endif %}
 	</li>  
 
-    {% for i in range(1,3) if i <= widget.getIterator().getPageCount() %}
+    {% for i in range(1,3)  %}
+        {% if i <= widget.getIterator().getPageCount() %}
             <li{% if i == widget.getIterator().getCurrentPageNumber() %} class="current"{% endif %}>
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
@@ -20,13 +21,15 @@
                     <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
+        {% endif %}
     {% endfor %}   
     {% if widget.getIterator().getCurrentPageNumber() > 5 and widget.getIterator().getPageCount() > 6 %}                    
             <li class="unavailable"><a>&hellip;</a></li>
     {% endif %}
 
 
-    {% for i in range(widget.getIterator().getCurrentPageNumber() - 1, widget.getIterator().getCurrentPageNumber() + 1) if (i > 3 and i < widget.getIterator().getPageCount()-2 and (widget.getIterator().getCurrentPageNumber() != 3 or i != 2) and (widget.getIterator().getCurrentPageNumber() != widget.getIterator().getPageCount() - 2 or i != widget.getIterator().getPageCount() - 1) ) %}
+    {% for i in range(widget.getIterator().getCurrentPageNumber() - 1, widget.getIterator().getCurrentPageNumber() + 1) %}
+        {%  if (i > 3 and i < widget.getIterator().getPageCount()-2 and (widget.getIterator().getCurrentPageNumber() != 3 or i != 2) and (widget.getIterator().getCurrentPageNumber() != widget.getIterator().getPageCount() - 2 or i != widget.getIterator().getPageCount() - 1) ) %}
         <li{% if i == widget.getIterator().getCurrentPageNumber() %} class="current"{% endif %}>
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
@@ -34,13 +37,15 @@
                     <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}" aria-label="Page {{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
+        {% endif %}
     {% endfor %} 
 
 
     {% if widget.getIterator().getCurrentPageNumber() < widget.getIterator().getPageCount() - 4 and widget.getIterator().getPageCount() > 6 %}                    
             <li class="unavailable">&hellip;</li>
     {% endif %}                      
-    {% for i in range(widget.getIterator().getPageCount() - 2, widget.getIterator().getPageCount()) if i > 3 %}
+    {% for i in range(widget.getIterator().getPageCount() - 2, widget.getIterator().getPageCount())  %}
+        {% if i > 3 %}
             <li{% if i == widget.getIterator().getCurrentPageNumber() %} class="current"{% endif %}>
                 {% if i == widget.getIterator().getCurrentPageNumber() %}
                     <span class="show-for-sr">{{ _('Вы на странице') }} </span>{{ i }}
@@ -48,6 +53,7 @@
                     <a href="{{ widget.getUrl(i) }}" data-page="{{ i }}" aria-label="Page {{ i }}">{{ i }}</a>
                 {% endif %}
             </li>
+        {% endif %}
     {% endfor %}   
 
 	<li class="pagination-next{% if widget.getIterator().getPageCount() <= widget.getIterator().getCurrentPageNumber() %} disabled{% endif %}">
