@@ -1,66 +1,89 @@
-{% if loading is not defined %}{% set loading %}{{ _('Подождите ...') }}{% endset %}{% endif %}
+{% if loading is not defined %}
+    {% set loading = _('Подождите ...') %}
+{% endif %}
+
 {% set script %}
-	{% block script %} 
-		{% if widget.getParam('ajax') and not widget.getParam('ajaxCall') %}
+    {% block script %}
+        {% if widget.getParam('ajax') and not widget.getParam('ajaxCall') %}
+            // Добавляем обработчик на загрузку документа
+            document.addEventListener('DOMContentLoaded', function () {
+                {{ widget.uniqueId|replace({'-': '_'}) }}_hook_links();
+            });
 
-		document.addEventListener('DOMContentLoaded', function () {
-			{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
-		});
-		function {{ widget.uniqueId|replace({'-':'_'}) }}_hook_links(){
-			var pageLink = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages a");
-			for (var i = 0; i  < pageLink.length; i++) pageLink[i].addEventListener("click", {{ widget.uniqueId|replace({'-':'_'}) }}_pageClick);
-		}
+            // Функция для добавления обработчиков кликов на ссылки пагинации
+            function {{ widget.uniqueId|replace({'-': '_'}) }}_hook_links() {
+                var pageLinks = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages a");
+                for (var i = 0; i < pageLinks.length; i++) {
+                    pageLinks[i].addEventListener("click", {{ widget.uniqueId|replace({'-': '_'}) }}_pageClick);
+                }
+            }
 
-		function {{ widget.uniqueId|replace({'-':'_'}) }}_pageClick(e)
-		{
-			e.preventDefault();
-			{{ widget.uniqueId|replace({'-':'_'}) }}_loadpage( this.dataset.page );
-		}
-		
-		var {{ widget.uniqueId|replace({'-':'_'}) }}_currentpage = 1;
-		function {{ widget.uniqueId|replace({'-':'_'}) }}_loadpage( page )
-		{
-		    {{ widget.uniqueId|replace({'-':'_'}) }}_currentpage = page;
-			
-			var widget = document.querySelector("#{{ widget.uniqueId }}-wrapper");
-			
-			
-			var loading = '<div id="{{ widget.uniqueId }}-loading">{{ loading|replace({"\n":'',"\r":'',"'":"\'"})|raw }}</div>';
-			{% if widget.getParam('infinite') %}
-				widget.innerHTML += loading;
-				var p = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages");
-				for (var i = 0; i  < p.length; i++) p[i].parentNode.removeChild(p[i]);
-			{% else %}
-				widget.innerHTML = loading;
-			{% endif %}
-			
-			var request = new XMLHttpRequest();
-			var body = '{% for name,value in widget.params %}params[{{ name }}]={% if name == "page" %}' + page + '{% else %}{{ value|encode|url_encode }}{% endif %}&{% endfor %}params[ajaxCall]=1';
-			request.open('POST', '{{ widget.getAjaxUrl()|raw }}', true);
-			request.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-			request.onload = function (e) {
-				if (request.readyState === 4) {
+            // Обработчик клика по ссылке пагинации
+            function {{ widget.uniqueId|replace({'-': '_'}) }}_pageClick(e) {
+                e.preventDefault();
+                {{ widget.uniqueId|replace({'-': '_'}) }}_loadpage(this.dataset.page);
+            }
 
-					// Проверяем успешность GET-запроса
-					if (request.status === 200) {
-						var ldr = document.querySelector("#{{ widget.uniqueId }}-loading");
-						ldr.outerHTML = request.responseText;
-						{{ widget.uniqueId|replace({'-':'_'}) }}_hook_links();
-						jQuery(document).foundation();
-					} else {
-						console.error(request.statusText);
-					}
-				}
-			};
+            // Текущая страница
+            var {{ widget.uniqueId|replace({'-': '_'}) }}_currentpage = 1;
 
-			request.onerror = function (e) {
-				console.error(request.statusText);
-			};
+            // Функция загрузки страницы через AJAX
+            function {{ widget.uniqueId|replace({'-': '_'}) }}_loadpage(page) {
+                {{ widget.uniqueId|replace({'-': '_'}) }}_currentpage = page;
 
-			request.send(body);		
-		
-		}
-		{% endif %}
-	{% endblock %}	
+                var widgetWrapper = document.querySelector("#{{ widget.uniqueId }}-wrapper");
+
+                // Создаем HTML для индикатора загрузки
+                var loadingHtml = '<div id="{{ widget.uniqueId }}-loading">' +
+                    '{{ loading|e('js')|replace({"\n": "", "\r": "", "'": "\\'"})|raw }}' +
+                    '</div>';
+
+                // Добавляем или заменяем индикатор загрузки в зависимости от параметра infinite
+                {% if widget.getParam('infinite') %}
+                    widgetWrapper.innerHTML += loadingHtml;
+                    var paginationElements = document.querySelectorAll("#{{ widget.uniqueId }}-wrapper .x-pages");
+                    for (var i = 0; i < paginationElements.length; i++) {
+                        paginationElements[i].parentNode.removeChild(paginationElements[i]);
+                    }
+                {% else %}
+                    widgetWrapper.innerHTML = loadingHtml;
+                {% endif %}
+
+                // Создаем XMLHttpRequest для отправки POST-запроса
+                var request = new XMLHttpRequest();
+                var body = '';
+                {% for name, value in widget.params %}
+                    body += 'params[{{ name|e('js') }}]={{ value|e('js')|url_encode }}&';
+                {% endfor %}
+                body += 'params[ajaxCall]=1';
+
+                request.open('POST', '{{ widget.getAjaxUrl()|e('js') }}', true);
+                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                // Обработка ответа сервера
+                request.onload = function () {
+                    if (request.readyState === 4 && request.status === 200) {
+                        var loadingElement = document.querySelector("#{{ widget.uniqueId }}-loading");
+                        if (loadingElement) {
+                            loadingElement.outerHTML = request.responseText;
+                        }
+                        {{ widget.uniqueId|replace({'-': '_'}) }}_hook_links();
+                        jQuery(document).foundation();
+                    } else {
+                        console.log('Ошибка загрузки страницы:', request.statusText);
+                    }
+                };
+
+                // Обработка ошибок запроса
+                request.onerror = function () {
+                    console.log('Ошибка соединения:', request.statusText);
+                };
+
+                // Отправляем запрос
+                request.send(body);
+            }
+        {% endif %}
+    {% endblock %}
 {% endset %}
-{% do widget.application.addHeadString( "<script>#{script}</script>" ) %}
+
+{% do widget.application.addHeadString('<script>' ~ script ~ '</script>') %}
