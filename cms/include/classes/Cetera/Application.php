@@ -1810,6 +1810,19 @@ class Application {
             $this->twig->addFilter( new \Twig\TwigFilter('encode_image', '\\Cetera\\ImageTransform::encode' ));
             
             $this->twig->addFilter( new \Twig\TwigFilter('encode', '\\Cetera\\Util::dsCrypt' ));
+
+            $this->twig->addFilter( new \Twig\TwigFilter('truncate', function($value, $length = 30, $preserve = false, $separator = '...') {
+                if (mb_strlen($value) > $length) {
+                    if ($preserve) {
+                        if (false === ($breakpoint = mb_strpos($value, ' ', $length))) {
+                            return $value;
+                        }        
+                        $length = $breakpoint;
+                    }        
+                    return rtrim(mb_substr($value, 0, $length)).$separator;
+                }        
+                return $value;				
+			} ) );
 			
 			$this->twig->addGlobal('application', $this);
 			$this->twig->addGlobal('t', $this->getTranslator());
