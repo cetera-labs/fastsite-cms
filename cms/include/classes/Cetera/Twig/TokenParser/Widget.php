@@ -12,7 +12,7 @@ class Widget extends \Twig\TokenParser\AbstractTokenParser
      */
     public function parse(\Twig\Token $token)
     {
-        $expr = $this->parser->getExpressionParser()->parseExpression();
+        $expr = $this->parser->parseExpression();
 
         $variables = $this->parseArguments();
 
@@ -25,7 +25,7 @@ class Widget extends \Twig\TokenParser\AbstractTokenParser
 
 		$variables = new \Twig\Node\Expression\ArrayExpression( [],0 );
         if ($stream->nextIf(\Twig\Token::NAME_TYPE, 'with')) {
-            $variables = $this->parser->getExpressionParser()->parseExpression();
+            $variables = $this->parser->parseExpression();
         }
 
         $stream->expect(\Twig\Token::BLOCK_END_TYPE);
