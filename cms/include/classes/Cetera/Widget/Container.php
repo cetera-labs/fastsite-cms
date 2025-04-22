@@ -63,7 +63,7 @@ class Container extends Templateable {
             } catch (\Exception $e) {}				
         }
 		
-		if ($params['data']) {
+		if (isset($params['data']) && $params['data']) {
 			$data = json_decode($params['data'], true);
 			foreach ($data as $params) try {
 				$this->widgets[] = $this->application->getWidget( $params );
