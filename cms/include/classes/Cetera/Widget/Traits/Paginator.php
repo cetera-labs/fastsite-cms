@@ -37,6 +37,6 @@ trait Paginator {
 	private function getCatalogPath() {
 		$dir = explode("/", $_SERVER['REQUEST_URI']);
 
-		return ($dir[1] != 'search') ? $this->getCatalog()->url : '';
+		return (!in_array('search', $dir)) ? $this->getCatalog()->url : '';
 	}
 }
