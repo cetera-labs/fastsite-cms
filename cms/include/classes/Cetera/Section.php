@@ -648,18 +648,20 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
         } else {
              $pieces = $path;
         }
-            
+
         if (!sizeof($pieces)) return $this;
 
         if ($alias = array_shift($pieces)) {
-
+            try {
                 $c = $this->getChildByAlias($alias);
                 if (sizeof($pieces)) {
                     return $c->getChildByPath($pieces);
                 } else {
                     return $c;
                 }
-
+            }
+            catch (\Exception $e){
+            }
         }
         return $this;
     }
