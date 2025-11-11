@@ -46,6 +46,7 @@ class ListSections extends Templateable {
 			'css_row'            => '',
 			'template'		     => 'default.twig',
 			'filter'			 => false,
+			'inherit'			 => true, // Добавляем параметр inherit по умолчанию true для обратной совместимости
 		); 
 		
 	}
@@ -62,7 +63,8 @@ class ListSections extends Templateable {
 	 */ 	
     public function getChildren()
     {
-		if (!$this->_children)
+		// Если inherit=false, то не используем кэшированный _children
+		if (!$this->getParam('inherit', true) || !$this->_children)
 		{
 			if ($this->getParam('iterator')) {
 				$this->_children = $this->getParam('iterator');
