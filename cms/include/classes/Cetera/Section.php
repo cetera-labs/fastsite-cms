@@ -45,10 +45,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
 	const AUTOALIAS_ID          = 256;
 	   
     protected static $sectionInstances = [];
-       
-    /** @internal Дочерние разделы */ 
-    private $_children = FALSE;
-    
+          
     /**
      * Id структуры в которой находится раздел
      * @internal          
@@ -493,12 +490,7 @@ class Section extends DynamicFieldsObjectPredefined implements SiteItem {
      */ 
     public function getChildren() 
     {
-        if (!$this->_children) { 
-
-			$this->_children = new Iterator\Catalog\Children( $this );          
-        
-        }
-        return $this->_children;
+        return new Iterator\Catalog\Children( $this );          
     }
     
     /**
