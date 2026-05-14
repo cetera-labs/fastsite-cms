@@ -104,8 +104,19 @@
     <target name="plugins">
 
         <php class="\Cetera\Phing" function="plugins" returnProperty="PLUGINS" />
-        <foreach list="${PLUGINS}" param="PLUGIN" target="plugin" />
-    
+
+        <if>
+            <and>
+                <isset property="PLUGINS"/>
+                <not>
+                    <equals arg1="${PLUGINS}" arg2=""/>
+                </not>
+            </and>
+            <then>
+                <foreach list="${PLUGINS}" param="PLUGIN" target="plugin" />
+            </then>
+        </if>
+
     </target>  
     
     <target name="plugin">
