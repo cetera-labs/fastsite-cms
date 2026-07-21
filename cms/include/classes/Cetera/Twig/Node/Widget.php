@@ -16,7 +16,7 @@ class Widget extends \Twig\Node\Node implements \Twig\Node\NodeOutputInterface
      *
      * @param Twig_Compiler $compiler A Twig_Compiler instance
      */
-    public function compile(\Twig\Compiler $compiler)
+    public function compile(\Twig\Compiler $compiler): void
     {
         $compiler->addDebugInfo($this);
 		
