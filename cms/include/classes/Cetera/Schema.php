@@ -631,9 +631,9 @@ class Schema {
 				continue;		    
 			}
 			
-			$def   = $this->getFieldDef($field);
-			$dbdef = $this->getFieldDef($dbtable['fields'][$fname]);
-			if ($def != $dbdef) 
+			$def   = $this->normalizeIntWidth($this->getFieldDef($field));
+			$dbdef = $this->normalizeIntWidth($this->getFieldDef($dbtable['fields'][$fname]));
+			if ($def != $dbdef)
 				$res[] = array(
 					'error'  => self::FIELD_DONT_MATCH,
 					'field'  => $fname,
@@ -739,7 +739,19 @@ class Schema {
     	if ($auto_increment && isset($field['auto_increment']) && $field['auto_increment']) $sql .= " auto_increment";
     	return $sql;
     }
-    
+
+    /*
+     * Убирает display width у целочисленных типов (MySQL 8.0.19+ не возвращает
+     * его в DESCRIBE, кроме ZEROFILL, из-за чего сравнение со схемой из XML ложно падает)
+     *
+     * @param string $def часть SQL запроса с описанием поля
+     * @return string
+     */
+    private function normalizeIntWidth($def)
+    {
+    	return preg_replace('/\b(tinyint|smallint|mediumint|int|bigint)\(\d+\)/i', '$1', $def);
+    }
+
     /*
      * Формирует часть SQL запроса с описанием индекса таблицы
      * 
