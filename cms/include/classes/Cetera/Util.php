@@ -26,15 +26,19 @@ class Util {
         
     public static function dsCrypt($input,$decrypt=false) {
         
-        $cipher = new \phpseclib3\Crypt\AES('ctr');
-        $cipher->setIV(substr(str_repeat(Application::getInstance()->getVar('dbname'),16),0,16));
-        $cipher->setKey(substr(str_repeat(Application::getInstance()->getVar('dbpass'),16),0,16));
+        $cipher = new \phpseclib3\Crypt\AES('gcm');
+        $cipher->setKey(hash('sha256', Application::getInstance()->getVar('dbpass'), true));
         
         if ($decrypt) {
-            return $cipher->decrypt($input);
+            $cipher->setNonce(substr($input,0,12));
+            $cipher->setTag(substr($input,12,16));
+            return $cipher->decrypt(substr($input,28));
         }
         else {
-            return $cipher->encrypt($input);
+            $nonce = random_bytes(12);
+            $cipher->setNonce($nonce);
+            $encrypted = $cipher->encrypt($input);
+            return $nonce.$cipher->getTag().$encrypted;
         }
     }
         
