@@ -11,7 +11,7 @@ $menu = array();
 
 foreach ($application->getBo()->getModules() as $id => $component) {
 
-	if (!$component['ext6_compat']) continue;
+	if (empty($component['ext6_compat'])) continue;
 
 	$component['id'] = $id;
 	$component['text'] = $component['name'];
