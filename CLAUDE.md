@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозиторий — composer-пакет `fastsite-labs/fastsite-cms` (type `library`),
 который ставится в `vendor/cetera-labs/cetera-cms` сайта; сам по себе не запускается. Тестов, линтеров и CI в репозитории нет.
+Задачи ведутся в Jira-проекте **CCTM** («NA 8 CeteraCMSTM»): https://pm.cetera.ru/projects/CCTM
+(REST: `https://pm.cetera.ru/rest/api/2/...`, ключи задач `CCTM-N`).
 Документация для разработчиков (на русском) — `docs/docs/developer-guide/` (виджеты, плагины, темы, внутреннее устройство).
 
 ## Сборка
