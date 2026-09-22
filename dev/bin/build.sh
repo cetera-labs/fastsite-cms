@@ -17,7 +17,9 @@ step() { printf '\n== %s\n' "$*"; }
 
 step 'composer install'
 cp "$SRC/dev/site/composer.json" "$SITE/composer.json"
-composer install --no-interaction --no-progress --working-dir="$SITE"
+# composer.lock сайта не хранится в репозитории: если он разошёлся с composer.json, обновляем
+composer install --no-interaction --no-progress --working-dir="$SITE" \
+    || composer update --no-interaction --no-progress --working-dir="$SITE"
 
 step 'www'
 mkdir -p "$SITE/tmp" "$WWW/plugins" "$WWW/themes" "$WWW/uploads" "$WWW/.cache" "$CMS/css" "$CMS/js"

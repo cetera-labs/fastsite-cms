@@ -1,5 +1,8 @@
 # Скрипты выполняются внутри Linux-контейнеров
 *.sh text eol=lf
+Makefile text eol=lf
 # Окружение для разработки не нужно на сайтах, которые ставят CMS через composer
 /dev export-ignore
 /Makefile export-ignore
+/tests export-ignore
+/phpunit.xml.dist export-ignore

@@ -20,6 +20,7 @@ usage() {
   reset    удалить сайт и БД и поставить CMS заново
   build    пересобрать сайт: composer install, www/cms, css/global.css, js/vendor.js
   install  пройти мастер установки CMS, если она ещё не установлена
+  test     запустить тесты (PHPUnit), аргументы передаются phpunit: dev/dev.sh test --filter Http
   bash     shell в php-контейнере (/var/www/site)
   mysql    консоль MySQL
   logs     логи контейнеров (docker compose logs -f)
@@ -47,6 +48,7 @@ case $cmd in
     reset)   dc down -v && "$0" up ;;
     build)   php_exec sh vendor/cetera-labs/cetera-cms/dev/bin/build.sh ;;
     install) php_exec sh vendor/cetera-labs/cetera-cms/dev/bin/install.sh ;;
+    test)    php_exec php vendor/bin/phpunit -c vendor/cetera-labs/cetera-cms/phpunit.xml.dist "$@" ;;
     bash)    php_exec bash ;;
     mysql)   dc exec db mysql -ucetera -pcetera cetera ;;
     logs)    dc logs -f "$@" ;;

@@ -6,6 +6,9 @@
     "require": {
         "fastsite-labs/fastsite-cms": "dev-master"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [

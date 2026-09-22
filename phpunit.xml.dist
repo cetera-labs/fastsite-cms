@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Запуск: sh dev/dev.sh test (внутри Docker-окружения, см. dev/README.md) -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../phpunit/phpunit/phpunit.xsd"
+         bootstrap="tests/bootstrap.php"
+         colors="true"
+         cacheDirectory="/var/www/site/tmp/phpunit"
+         displayDetailsOnTestsThatTriggerWarnings="true">
+    <testsuites>
+        <testsuite name="smoke">
+            <directory>tests/Smoke</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>
