@@ -1,0 +1,11 @@
+{
+    "name": "fastsite-cms-e2e",
+    "private": true,
+    "description": "E2e-проверки CMS в браузере, запуск: sh dev/dev.sh e2e (см. dev/README.md)",
+    "scripts": {
+        "test": "playwright test"
+    },
+    "devDependencies": {
+        "@playwright/test": "1.58.2"
+    }
+}

@@ -54,6 +54,20 @@ services:
     depends_on:
       - php
 
+  # Playwright для e2e-проверок (dev/dev.sh e2e); в обычном up не стартует
+  e2e:
+    image: mcr.microsoft.com/playwright:v1.58.2-noble
+    profiles: [e2e]
+    working_dir: /e2e
+    environment:
+      CMS_TEST_URL: http://nginx
+      CI: ${CI:-}
+    volumes:
+      - ../e2e:/e2e
+      - e2e_node_modules:/e2e/node_modules
+    depends_on:
+      - nginx
+
   memcached:
     image: memcached
 
@@ -65,3 +79,4 @@ services:
 volumes:
   site:
   db:
+  e2e_node_modules:

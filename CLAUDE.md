@@ -16,7 +16,7 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
 `sh dev/dev.sh up` (или `make up`) — Docker-окружение с чистым сайтом, на который установлена CMS из репозитория:
 сайт http://localhost:8090/, админка `/cms/` (`admin` / `admin`), почта http://localhost:10081/. Правки PHP/JS/Twig видны
 сразу, `dev.sh build` нужен после изменения CSS старого UI или `composer.json`, `dev.sh reset` — переустановка с нуля.
-Тесты — `sh dev/dev.sh test` (~20 с, `tests/`, конфиг `phpunit.xml.dist`). Подробности — `dev/README.md`. `make` на Windows нет, поэтому основная команда — `dev/dev.sh` из Git Bash.
+Тесты — `sh dev/dev.sh test` (PHPUnit, ~20 с, `tests/`) и `sh dev/dev.sh e2e` (Playwright, ~50 с, `e2e/`). Подробности — `dev/README.md`. `make` на Windows нет, поэтому основная команда — `dev/dev.sh` из Git Bash.
 
 ## Сборка
 

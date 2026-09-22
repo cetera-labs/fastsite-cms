@@ -6,3 +6,4 @@ Makefile text eol=lf
 /Makefile export-ignore
 /tests export-ignore
 /phpunit.xml.dist export-ignore
+/e2e export-ignore

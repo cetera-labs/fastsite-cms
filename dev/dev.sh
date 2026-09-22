@@ -21,6 +21,7 @@ usage() {
   build    пересобрать сайт: composer install, www/cms, css/global.css, js/vendor.js
   install  пройти мастер установки CMS, если она ещё не установлена
   test     запустить тесты (PHPUnit), аргументы передаются phpunit: dev/dev.sh test --filter Http
+  e2e      проверки в браузере (Playwright), аргументы передаются playwright: dev/dev.sh e2e -g Меню
   bash     shell в php-контейнере (/var/www/site)
   mysql    консоль MySQL
   logs     логи контейнеров (docker compose logs -f)
@@ -49,6 +50,7 @@ case $cmd in
     build)   php_exec sh vendor/cetera-labs/cetera-cms/dev/bin/build.sh ;;
     install) php_exec sh vendor/cetera-labs/cetera-cms/dev/bin/install.sh ;;
     test)    php_exec php vendor/bin/phpunit -c vendor/cetera-labs/cetera-cms/phpunit.xml.dist "$@" ;;
+    e2e)     dc run --rm e2e sh -c 'npm ci --no-audit --no-fund --loglevel=error && npx playwright test "$@"' e2e "$@" ;;
     bash)    php_exec bash ;;
     mysql)   dc exec db mysql -ucetera -pcetera cetera ;;
     logs)    dc logs -f "$@" ;;
