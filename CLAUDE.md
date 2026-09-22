@@ -19,6 +19,16 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
 - Новый back-office (`back-office/`, Ext JS 7 + webpack + Sencha ext-webpack-plugin):
   `npm run dev:desktop` (dev-сервер), `npm run build:desktop` (прод-сборка в `back-office/build/cms/ui` + `ui.html`).
   Собранный `back-office/build/` закоммичен — после изменений в `back-office/app` нужно пересобирать.
+  Подводные камни сборки back-office:
+  - `back-office/.npmrc` задаёт `legacy-peer-deps=true`: без него npm 7+ ставит внутрь `@sencha/ext-webpack-plugin` лишний webpack 4 (peer от старого html-webpack-plugin).
+  - Пакеты `@sencha/*` берутся из публичного GPL-фида `sencha.myget.org` (прописан в lock-файле).
+  - Postinstall `@sencha/cmd` на Node 20+ молча не срабатывает (spawn `npm.cmd` без shell), и сборка падает с `sencha.exe ENOENT`.
+    Поставить вручную: в `node_modules/@sencha/cmd` выполнить `npm install --no-save @sencha/cmd-windows-64-jre@7.0.0 --@sencha:registry=https://sencha.myget.org/F/gpl/npm/`,
+    затем `node -e "require('@sencha/cmd-windows-64-jre/install.js')(process.cwd())"`.
+  - Sencha Cmd 7.0 виснет на «Processing Build Descriptor», потому что не может дочитать каталог `cdn.sencha.com`. Нужные пакеты лежат локально, так что удалённые репозитории можно отключить:
+    `node_modules/@sencha/cmd/dist/sencha repo remove -n sencha` (и `-n sencha-beta`).
+  - Прод-сборка перезаписывает исходные `back-office/index.html` (это шаблон HtmlWebpackPlugin) и `main.js`, а `rimraf build` удаляет закоммиченный `build/` —
+    не коммитить эти побочные изменения без необходимости (`git checkout -- index.html main.js`).
 
 ## Архитектура
 

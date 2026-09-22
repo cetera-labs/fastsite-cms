@@ -54,7 +54,7 @@
     "lodash.find": "^4.6.0",
     "portfinder": "^1.0.21",
     "replace": "^1.2.1",
-    "webpack": "^5.40.0",
+    "webpack": "^5.111.1",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   }
