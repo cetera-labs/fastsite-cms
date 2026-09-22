@@ -210,7 +210,7 @@ Ext.create('Ext.Button', {
 			
             <tr height="100%"><td align="center">
                 <div class="about">
-                    <img src="https://www.fastsite.ru/logo-fastsite.svg"/>
+                    <img src="/<?=CMS_DIR?>/images/logo-fastsite.svg" width="323" height="40" />
                     <br />
                     <?=$translator->_('Система контент-менеджмента веб-сайтов');?><br /><?=APP_NAME?> <?=VERSION?>
                 </div>
