@@ -75,7 +75,6 @@ class User extends DynamicFieldsObjectPredefined implements User\UserInterface {
 		$data['external_id'] = $id;
 		
         switch (  $network ) {
-            case USER_OPENID:        return User\OpenId::fetch($data);
             case USER_FACEBOOK:      return User\Facebook::fetch($data);
             case USER_TWITTER:       return User\Twitter::fetch($data);
             case USER_VK:            return User\VK::fetch($data);

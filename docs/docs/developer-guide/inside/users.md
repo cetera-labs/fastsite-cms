@@ -18,7 +18,7 @@ grand_parent: Руководство разработчика
 **getById($id)**|Статический. Возвращает пользователя с данным ID.
 **getByLogin($username)**|Статический. Возвращает пользователя по его логину.
 **getByLogin($email)**|Статический. Возвращает пользователя по его e-mail.
-**getExternal($network, $id)**|Статический. Возвращает пользователя по ID внешней сети. $network — USER_FACEBOOK, USER_TWITTER, USER_VK, USER_LJ, USER_GOOGLE, USER_ODNOKLASSNIKI, USER_OPENID
+**getExternal($network, $id)**|Статический. Возвращает пользователя по ID внешней сети. $network — USER_FACEBOOK, USER_TWITTER, USER_VK, USER_LJ, USER_GOOGLE, USER_ODNOKLASSNIKI
 **create($type)**|Статический. Создает пользователя.
 **delete()**|Удаляет пользователя.
 **save()**|Сохраняет пользователя в БД.

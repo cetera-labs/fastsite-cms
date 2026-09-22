@@ -113,7 +113,6 @@ define('GROUP_ANONYMOUS',   -5);  // Анонимы
 define('GROUP_LOCAL',       -6);  // Зарегистрированные
 define('GROUP_CONTENT',     -7);  // Контент-редакторы
 
-define('USER_OPENID',        -4);  // Пользователи OpenID
 define('USER_ANONYMOUS',     -5);  // Анонимы
 define('USER_FACEBOOK',      -6);  // Пользователи FB
 define('USER_TWITTER',       -7);  // Пользователи twitter
