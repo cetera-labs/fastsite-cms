@@ -7,12 +7,12 @@ if (!$user->allowAdmin())  throw new Exception\CMS(Exception\CMS::NO_RIGHTS);
 $plugins = Plugin::enum();
 $client = new \GuzzleHttp\Client();
 
+$data = [];
+
 // проверка обновлений плагинов
 if (sizeof($plugins)) {
     $query = '?plugins[]='.implode('&plugins[]=', array_keys($plugins));
-    
-    $data = array();
-    
+
     try {
     
 		$res = $client->get(PLUGINS_INFO.$query);

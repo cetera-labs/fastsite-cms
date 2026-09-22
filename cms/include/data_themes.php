@@ -19,13 +19,13 @@ if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'update') {
 $themes = Theme::enum();
 $client = new \GuzzleHttp\Client();
 
+$data = [];
+
 // проверка обновлений плагинов
 if (sizeof($themes)) {
 
     $query = '?themes[]='.implode('&themes[]=', array_keys($themes));
-    
-    $data = array();
-    
+
     try {
 		$res = $client->get(THEMES_INFO.$query, ['verify'=>false]);
         $themes_lib = json_decode( $res->getBody(), true);
