@@ -1,0 +1,67 @@
+# Локальное окружение для разработки CMS (CCTM-1589).
+# Запуск — через dev/dev.sh или make, см. dev/README.md.
+#
+# Сайт живёт в томе site (/var/www/site): composer.json, vendor, www, .prefs.
+# Код CMS из репозитория подмонтирован в vendor/cetera-labs/cetera-cms,
+# а www/cms состоит из симлинков на него — правки видны сразу, без phing.
+name: fastsite-cms-dev
+
+x-site-volumes: &site-volumes
+  - site:/var/www/site
+  - ..:/var/www/site/vendor/cetera-labs/cetera-cms
+
+services:
+  db:
+    image: percona:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: cetera
+      MYSQL_USER: cetera
+      MYSQL_PASSWORD: cetera
+      TZ: Europe/Moscow
+    volumes:
+      - db:/var/lib/mysql
+      - ./mysql/server.cnf:/etc/my.cnf.d/server.cnf:ro
+    ports:
+      - "127.0.0.1:${DEV_DB_PORT:-53307}:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-ucetera", "-pcetera"]
+      interval: 3s
+      retries: 40
+
+  php:
+    image: registry.cetera.su/boilerplate/docker/php:${DEV_PHP_VERSION:-8.4-fpm}
+    working_dir: /var/www/site
+    environment:
+      RUN_MODE: development
+      TZ: Europe/Moscow
+      COMPOSER_ALLOW_SUPERUSER: 1
+    volumes: *site-volumes
+    depends_on:
+      db:
+        condition: service_healthy
+
+  nginx:
+    image: registry.cetera.su/boilerplate/docker/nginx:1.29.0-1
+    volumes:
+      - site:/var/www/site:ro
+      - ..:/var/www/site/vendor/cetera-labs/cetera-cms:ro
+      # при старте образ копирует этот каталог поверх /etc/nginx (nwtf-update),
+      # поэтому монтировать файлы прямо в /etc/nginx нельзя
+      - ./nginx:/usr/src/docker-nginx/conf:ro
+    ports:
+      - "127.0.0.1:${DEV_HTTP_PORT:-8090}:80"
+    depends_on:
+      - php
+
+  memcached:
+    image: memcached
+
+  mailcatcher:
+    image: registry.cetera.su/boilerplate/docker/mailcatcher:latest
+    ports:
+      - "127.0.0.1:${DEV_MAIL_PORT:-10081}:1080"
+
+volumes:
+  site:
+  db:

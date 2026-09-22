@@ -1,0 +1,35 @@
+{
+    "name": "fastsite-labs/dev-site",
+    "description": "Сайт для локальной разработки CMS, см. dev/README.md",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "fastsite-labs/fastsite-cms": "dev-master"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "vendor/cetera-labs/cetera-cms",
+            "options": {
+                "symlink": true,
+                "versions": { "fastsite-labs/fastsite-cms": "dev-master" }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "cetera-labs/library",
+                "version": "13",
+                "dist": {
+                    "url": "https://cms.cetera.ru/lib.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "config": {
+        "allow-plugins": true
+    }
+}
