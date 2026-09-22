@@ -69,6 +69,16 @@ PHPUnit 10 (ставится в dev-сайт), конфиг `phpunit.xml.dist`, 
   без установки темы (сайт с темой по умолчанию).
 - nginx — образ и конфиг ceteracms из boilerplate сайтов, php-fpm — образ boilerplate.
 
+## Выпуск версии
+
+```sh
+sh dev/release.sh 3.81.0
+```
+
+Меняет `VERSION` в `cms/include/common.php`, коммитит «Версия 3.81.0», ставит тег `3.81.0` и пушит master
+вместе с тегом — Packagist подхватывает его сам. Запускается из master, совпадающего с origin.
+GitHub Action `.github/workflows/version.yml` на каждый тег проверяет, что тег совпадает с `VERSION`.
+
 ## Подводные камни
 
 - Docker Desktop на Hyper-V при первом монтировании каталога спрашивает разрешение на доступ к файлам.

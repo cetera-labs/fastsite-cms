@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозиторий — composer-пакет `fastsite-labs/fastsite-cms` (type `library`),
 который ставится в `vendor/cetera-labs/cetera-cms` сайта (на Packagist — под старым именем `cetera-labs/cetera-cms`).
-Линтеров и CI нет; smoke-тесты (PHPUnit) запускаются в Docker-окружении — см. «Локальный запуск».
+Линтеров нет, CI — только GitHub Action `.github/workflows/version.yml` (тег релиза = `VERSION`); smoke-тесты (PHPUnit) запускаются в Docker-окружении — см. «Локальный запуск».
 Задачи ведутся в Jira-проекте **CCTM** («NA 8 CeteraCMSTM»): https://pm.cetera.ru/projects/CCTM
 (REST: `https://pm.cetera.ru/rest/api/2/...`, ключи задач `CCTM-N`).
 Документация для разработчиков (на русском) — `docs/docs/developer-guide/` (виджеты, плагины, темы, внутреннее устройство).
@@ -37,6 +37,11 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
     `node_modules/@sencha/cmd/dist/sencha repo remove -n sencha` (и `-n sencha-beta`).
   - Прод-сборка перезаписывает исходные `back-office/index.html` (это шаблон HtmlWebpackPlugin) и `main.js`, а `rimraf build` удаляет закоммиченный `build/` —
     не коммитить эти побочные изменения без необходимости (`git checkout -- index.html main.js`).
+
+## Версии и релизы
+
+Версия CMS — константа `VERSION` в `cms/include/common.php`, git-тег релиза — тот же номер без префикса `v` (Packagist берёт версии из тегов).
+Выпуск — `sh dev/release.sh X.Y.Z`: меняет `VERSION`, коммитит, ставит тег и пушит master с тегом.
 
 ## Архитектура
 

@@ -1,0 +1,21 @@
+# Тег релиза должен совпадать с VERSION в cms/include/common.php (см. dev/release.sh)
+name: Проверка версии
+
+on:
+  push:
+    tags: ['*']
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Тег совпадает с VERSION
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          VERSION=$(sed -n "s/^define('VERSION', '\([^']*\)');.*/\1/p" cms/include/common.php)
+          echo "Тег: $GITHUB_REF_NAME, VERSION в common.php: $VERSION"
+          if [ "$TAG" != "$VERSION" ]; then
+            echo "::error file=cms/include/common.php::Тег $GITHUB_REF_NAME не совпадает с VERSION $VERSION. Выпускайте версии через dev/release.sh"
+            exit 1
+          fi
