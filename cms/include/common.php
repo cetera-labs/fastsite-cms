@@ -29,6 +29,9 @@ error_reporting (E_ALL ^ E_NOTICE);
 require_once(__DIR__.'/path_detect.php');
 require_once(__DIR__.'/constants.php');
 
+// Версия CMS. При выпуске релиза увеличить и поставить git-тег с тем же номером.
+define('VERSION', '3.80.0');
+
 mb_internal_encoding("UTF-8");
 
 ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'include/classes'.PATH_SEPARATOR.DOCROOT.LIBRARY_PATH);
@@ -36,18 +39,9 @@ ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'inclu
 if (COMPOSER_INSTALL) {
 	
 	include VENDOR_PATH.'/autoload.php';
-    try {
-        
-        define('VERSION', \PackageVersions\Versions::getVersion("cetera-labs/cetera-cms") );
-    }
-    catch (\Exception $e) {
-        define('VERSION', 'undefined' );
-    }
 	
 }
 else {
-    
-    define('VERSION', '3.69.0');
     
     if (!file_exists(DOCROOT.LIBRARY_PATH)) {
         

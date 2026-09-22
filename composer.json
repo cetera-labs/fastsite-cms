@@ -42,8 +42,7 @@
         "componavt/phpmorphy": "*",
         "firebase/php-jwt": "*",
         "phpseclib/phpseclib": "^3.0",
-        "monolog/monolog": "*",
-        "ocramius/package-versions": "*"
+        "monolog/monolog": "*"
     },
     "minimum-stability": "dev",
     "autoload": {
