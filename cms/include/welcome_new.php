@@ -113,17 +113,6 @@ td {
 .big-button .x-btn-inner {
 	font-size: 150%;
 }
-
-table.partner {
-	margin: 0 auto;
-}
-
-table.partner td {
-	font-size: 120%;
-	padding: 1rem 2rem;
-	margin: 10px;
-	background: #efefef;
-}
     </style>
 	
 <?php if ($setup_theme) : ?>
@@ -227,18 +216,7 @@ Ext.create('Ext.Button', {
                 </div>
             </td></tr>
 			
-			<tr height="0">
-				<td>
-					<table class="partner">
-						<tr>
-							<td><a href="https://ceteralabs.com/partnership/partners/" target="_blank"><?=$translator->_('Наши партнеры');?></a></td>
-							<td><a href="https://ceteralabs.com/partnership/" target="_blank"><?=$translator->_('Партнерская программа');?></a></td>
-							<td><a href="https://ceteralabs.com/partnership/become/" target="_blank"><?=$translator->_('Стать партнером');?></a></td>
-						</tr>
-					</table>
-				</td>
-			</tr>				
-            
+
             <tr height="0"><td>
                 <hr noshade />
                 <div align="left">
