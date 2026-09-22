@@ -74,7 +74,7 @@ class Menu extends Base {
   	public static function getByName($name) 
     {
 		$f = self::getDbConnection()->fetchAssoc('SELECT * FROM menus WHERE name=?',array($name));
-		if (!$f) new Exception\CMS('Меню name='.$id.' не найдено');
+		if (!$f) throw new Exception\CMS('Меню name='.$name.' не найдено');
 		return new self($f);
   	}
     
