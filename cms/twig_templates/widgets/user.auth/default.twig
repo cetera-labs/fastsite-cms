@@ -36,17 +36,6 @@
 				{% endif %}
 					
 			</form>
-			
-			{% if widget.param('social') %}
-			  <p class="social">Войти через: 
-				  <span data-ulogin="display=buttons;fields=email;optional=nickname,first_name,last_name,photo;redirect_uri={{ widget.redirect }}" id="uLogin">				  
-					  &nbsp;<a data-uloginbutton="vkontakte" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-vk fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="twitter" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="facebook" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></a>
-					  <a data-uloginbutton="google" class="fa-stack fa-lg text-tertiary" href="#" title=""><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-google-plus fa-stack-1x fa-inverse"></i></a>  
-				  </span>
-			  </p>
-			{% endif %}
 		{% endblock %}
 		</div>
 		

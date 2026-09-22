@@ -15,7 +15,6 @@ class Auth extends \Cetera\Widget\Templateable {
 	public $password_error = false;
 	public $login_error = false;
 	public $login = '';
-	public $redirect = '';
 		 
     protected $_params = array(
 		'register_url'        => '/register',
@@ -23,7 +22,6 @@ class Auth extends \Cetera\Widget\Templateable {
 		'recover_password_url'=> false,
 	    'template'            => 'default.twig',
 		'authorized_redirect' => false,
-		'social'			  => false,
 		'ajax'                => false,
     ); 
 
@@ -43,34 +41,6 @@ class Auth extends \Cetera\Widget\Templateable {
 					$this->password_error = $this->t->_('Неправильный пароль');
 					break;
 			}			
-		}
-		
-		if ($this->getParam('social')) {
-		
-			if (isset($_POST['token'])) {
-				
-				$client = new \GuzzleHttp\Client();
-				$res = $client->get('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);		
-				$u = json_decode( $res->getBody(), true);
-				if ($u && $u['uid']) {
-					
-					$user = $this->application->getUser();
-					if ($user)
-					{
-						$user->addExternal( $u['network'], $u['uid'] );
-					}
-					else 
-					{
-						\Cetera\User::getExternal($u['network'], $u['uid']);
-						$this->application->getAuth()->authenticate(new \Cetera\UserAuthAdapterULogin($u, false));
-					}
-					
-				}
-			}
-			else {
-				$this->application->addScript('//ulogin.ru/js/ulogin.js');
-				$this->redirect = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-			}
 		}
 		
 		if ($this->application->getUser() && $this->getParam('authorized_redirect') && !$this->getParam('ajaxCall'))

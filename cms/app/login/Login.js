@@ -115,13 +115,7 @@ Ext.define('Cetera.login.Login', {
                     html: '<div style="text-align: center; padding-top: 10px"><img src="images/logo-fastsite.svg" width="323" height="40" /></div>',
                     bodyStyle: 'border-bottom: 3px solid #b13330'
                 }),
-                this.form,
-                Ext.create('Ext.Panel',{
-                    height: 50,
-                    border: false,
-                    html: '<div id="uLogin" style="text-align: center; padding-top: 10px" data-ulogin="display=panel;fields=nickname,email,first_name,last_name;providers=vkontakte,facebook,google;hidden=;redirect_uri=http%3A%2F%2F' + Config.serverName + Config.cmsPath + 'index.php"></div><p style="color:red; text-align: center; margin: 0">' + userMessage + '</p>',
-                    bodyStyle: 'background: none;'
-                }),                
+                this.form
             ],
 
             buttons: [{

@@ -12,7 +12,7 @@ grand_parent: Руководство разработчика
 
 ## Пример вызова в Twig
 
-	{% raw %}{% widget 'User.Auth' with { social: 0 } %}{% endraw %}
+	{% raw %}{% widget 'User.Auth' %}{% endraw %}
 
 ## Описание параметров
 
@@ -23,5 +23,4 @@ grand_parent: Руководство разработчика
 **profile_url**|URL страницы личного кабинета пользователя. По умолчанию "**/personal**"
 **recover_password_url**|URL страницы с формой восстановления пароля. По умолчанию **FALSE**
 **authorized_redirect**|URL для перенаправления после успешной авторизации. По умолчанию **FALSE** - остаться на текущей странице
-**social**|`[TRUE|FALSE]` Показать кнопки авторизации через соцсети. По умолчанию **FALSE**
 **ajax**|`[TRUE|FALSE]` AJAX-режим. По умолчанию **FALSE**

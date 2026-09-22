@@ -67,20 +67,6 @@ grand_parent: Руководство разработчика
 	echo 'Добро пожаловать, '.$user->name;
  
 
-## Авторизация через соцсети
-
-Для авторизации через соцсети используется сервис [http://ulogin.ru/](http://ulogin.ru/)
-
-Виджет авторизации делаем в конструкторе [http://ulogin.ru/constructor.php](http://ulogin.ru/constructor.php) и вставляем на сайт
-
-Код авторизации удобно разместить в файле bootstrap.php, тогда в качестве обратной ссылки можно указать любую страницу сайта:
-
-	if (isset($_POST['token'])) {
-	    $s = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
-	    $u = json_decode($s, true);
-	    if ($u && $u['uid']) \Cetera\Application::getInstance()->getAuth()->authenticate(new \Cetera\UserAuthAdapterULogin($u));
-	}
- 
 ## Создание пользователя (регистрация)
 
 	$user = \Cetera\User::create();
