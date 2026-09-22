@@ -87,24 +87,27 @@ module.exports = async function (env) {
       optimization: { noEmitOnErrors: true },
       node: false,
       devServer: {
-        proxy: {
-            '/cms/include':    'http://localhost:8080',
-            '/cms/plugins':    'http://localhost:8080',
-            '/cms/lang':       'http://localhost:8080',
-            '/themes':         'http://localhost:8080',
-            '/uploads':        'http://localhost:8080',
-            '/imagetransform': 'http://localhost:8080',
-            '/plugins':        'http://localhost:8080',
+        proxy: [{
+            context: [
+                '/cms/include',
+                '/cms/plugins',
+                '/cms/lang',
+                '/themes',
+                '/uploads',
+                '/imagetransform',
+                '/plugins',
+            ],
+            target: 'http://localhost:8080',
+        }],
+        static: {
+            directory: path.join(__dirname, outputFolder),
+            watch: false
         },
-        contentBase: outputFolder,
         hot: isProd,
         historyApiFallback: true,
         host: '0.0.0.0',
         port: port,
-        disableHostCheck: false,
-        compress: isProd,
-        inline:!isProd,
-        stats: 'none'
+        compress: isProd
       }
     }
   })
