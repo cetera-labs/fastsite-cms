@@ -98,10 +98,6 @@ Ext.define('Cetera.view.main.header.HeaderView', {
             text: _('Руководство разработчика'),
             href: 'https://cetera-labs.github.io/fastsite-cms/docs/developer-guide',
             hrefTarget: '_blank'
-        },{
-            text: _('Вопросы и ответы'),
-            href: 'http://www.fastsite.ru/help/faq/',
-            hrefTarget: '_blank'
         }]
     },
     { xtype: 'tbseparator' },

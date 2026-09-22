@@ -169,10 +169,6 @@ msgstr ""
 msgid "Руководство разработчика"
 msgstr ""
 
-#: app/main/Header.js:44
-msgid "Вопросы и ответы"
-msgstr ""
-
 #: app/panel/Menu.js:22 app/panel/Menu.js:289
 msgid "Добавить меню"
 msgstr ""

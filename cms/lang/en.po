@@ -212,10 +212,6 @@ msgstr "User guide"
 msgid "Руководство разработчика"
 msgstr "Developer guide"
 
-#: app/main/Header.js:44
-msgid "Вопросы и ответы"
-msgstr "FAQ"
-
 #: app/main/Navigation.js:11
 msgid "Навигация"
 msgstr "Navigation"
