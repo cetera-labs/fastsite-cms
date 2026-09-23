@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=8.1",
-        "cetera-labs/cetera-cms-plugin-controller": "*",
+        "cetera-labs/cetera-cms-plugin-controller": "^1.1",
         "cetera-labs/library":"13",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.10",
@@ -27,9 +27,9 @@
 		"laminas/laminas-i18n": "^2.9",
 		"laminas/laminas-servicemanager": "~3.7",
 		"laminas/laminas-cache": "~3.2",
-        "laminas/laminas-cache-storage-adapter-memcached": "*",
-        "laminas/laminas-cache-storage-adapter-filesystem": "*",
-        "laminas/laminas-cache-storage-adapter-blackhole": "*",
+        "laminas/laminas-cache-storage-adapter-memcached": "^2.6",
+        "laminas/laminas-cache-storage-adapter-filesystem": "^2.5",
+        "laminas/laminas-cache-storage-adapter-blackhole": "^2.5",
         "laminas/laminas-http": "^2.10",
 		"laminas/laminas-router": "^3.3",
         "laminas/laminas-mvc": "^3.1",        
@@ -37,14 +37,15 @@
         "symfony/polyfill-intl-idn": "^1.42",
         "twig/twig": "~3.0",
         "guzzlehttp/guzzle": "~7.0",
-        "ifsnop/mysqldump-php":"2.*",
-        "phing/phing": "3.*",
-        "componavt/phpmorphy": "*",
-        "firebase/php-jwt": "*",
+        "ifsnop/mysqldump-php":"^2.13",
+        "phing/phing": "^3.1",
+        "componavt/phpmorphy": "^0.3",
+        "firebase/php-jwt": "^7.2",
         "phpseclib/phpseclib": "^3.0",
-        "monolog/monolog": "*"
+        "monolog/monolog": "^3.12"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-0": { 
 			"Cetera\\": "cms/include/classes/"
