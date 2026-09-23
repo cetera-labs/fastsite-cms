@@ -8,8 +8,8 @@ if (!isset($_SERVER['HTTP_HOST']) && isset($_SERVER['SERVER_NAME'])) {
 }
 
 if (isset($_SERVER['HTTP_HOST']) && stripos($_SERVER['HTTP_HOST'], 'xn--')!==false) {
-   $idn = new \True\Punycode();
-   $_SERVER['HTTP_HOST'] = $idn->decode($_SERVER['HTTP_HOST']);
+   $host = idn_to_utf8($_SERVER['HTTP_HOST'], IDNA_DEFAULT, INTL_IDNA_VARIANT_UTS46);
+   if ($host !== false) $_SERVER['HTTP_HOST'] = $host;
 }
 
 $application = Cetera\Application::getInstance();
