@@ -30,7 +30,7 @@ require_once(__DIR__.'/path_detect.php');
 require_once(__DIR__.'/constants.php');
 
 // Версия CMS. При выпуске релиза увеличить и поставить git-тег с тем же номером.
-define('VERSION', '3.80.0');
+define('VERSION', '3.80.1');
 
 mb_internal_encoding("UTF-8");
 
