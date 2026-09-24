@@ -6,14 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозиторий — composer-пакет `fastsite-labs/fastsite-cms` (type `library`),
 который ставится в `vendor/cetera-labs/cetera-cms` сайта (на Packagist — под старым именем `cetera-labs/cetera-cms`).
-Линтеров нет, CI — только GitHub Action `.github/workflows/version.yml` (тег релиза = `VERSION`); smoke-тесты (PHPUnit) запускаются в Docker-окружении — см. «Локальный запуск».
+Линтеров нет. CI — GitHub Actions: `.github/workflows/tests.yml` гоняет PHPUnit и Playwright на каждый push и pull request в том же Docker-окружении, что и локально, `.github/workflows/version.yml` проверяет тег релиза (= `VERSION`).
 Задачи ведутся в Jira-проекте **CCTM** («NA 8 CeteraCMSTM»): https://pm.cetera.ru/projects/CCTM
 (REST: `https://pm.cetera.ru/rest/api/2/...`, ключи задач `CCTM-N`).
 Документация для разработчиков (на русском) — `docs/docs/developer-guide/` (виджеты, плагины, темы, внутреннее устройство).
 
 ## Локальный запуск
 
-`sh dev/dev.sh up` (или `make up`) — Docker-окружение с чистым сайтом, на который установлена CMS из репозитория:
+`sh dev/dev.sh up` (или `make up`) — Docker-окружение на публичных образах (php-fpm собирается из `dev/php/Dockerfile`) с чистым сайтом, на который установлена CMS из репозитория:
 сайт http://localhost:8090/, админка `/cms/` (`admin` / `admin`), почта http://localhost:10081/. Правки PHP/JS/Twig видны
 сразу, `dev.sh build` нужен после изменения CSS старого UI или `composer.json`, `dev.sh reset` — переустановка с нуля.
 Тесты — `sh dev/dev.sh test` (PHPUnit, ~20 с, `tests/`) и `sh dev/dev.sh e2e` (Playwright, ~50 с, `e2e/`). Подробности — `dev/README.md`. `make` на Windows нет, поэтому основная команда — `dev/dev.sh` из Git Bash.

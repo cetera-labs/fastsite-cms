@@ -1,4 +1,5 @@
 # Локальное окружение для разработки CMS (CCTM-1589).
+# Образы публичные, поэтому окружение поднимается и на раннерах CI (CCTM-1603).
 # Запуск — через dev/dev.sh или make, см. dev/README.md.
 #
 # Сайт живёт в томе site (/var/www/site): composer.json, vendor, www, .prefs.
@@ -30,7 +31,11 @@ services:
       retries: 40
 
   php:
-    image: registry.cetera.su/boilerplate/docker/php:${DEV_PHP_VERSION:-8.4-fpm}
+    image: fastsite-cms-php:${DEV_PHP_VERSION:-8.4-fpm}
+    build:
+      context: ./php
+      args:
+        PHP_VERSION: ${DEV_PHP_VERSION:-8.4-fpm}
     working_dir: /var/www/site
     environment:
       RUN_MODE: development
@@ -42,13 +47,11 @@ services:
         condition: service_healthy
 
   nginx:
-    image: registry.cetera.su/boilerplate/docker/nginx:1.29.0-1
+    image: nginx:1.29-alpine
     volumes:
       - site:/var/www/site:ro
       - ..:/var/www/site/vendor/cetera-labs/cetera-cms:ro
-      # при старте образ копирует этот каталог поверх /etc/nginx (nwtf-update),
-      # поэтому монтировать файлы прямо в /etc/nginx нельзя
-      - ./nginx:/usr/src/docker-nginx/conf:ro
+      - ./nginx/site.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
       - "127.0.0.1:${DEV_HTTP_PORT:-8090}:80"
     depends_on:
@@ -72,7 +75,7 @@ services:
     image: memcached
 
   mailcatcher:
-    image: registry.cetera.su/boilerplate/docker/mailcatcher:latest
+    image: dockage/mailcatcher:0.9.0
     ports:
       - "127.0.0.1:${DEV_MAIL_PORT:-10081}:1080"
 

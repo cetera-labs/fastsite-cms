@@ -16,7 +16,7 @@ sh dev/dev.sh up      # первый запуск: composer install, сборк�
 | `127.0.0.1:53307` | MySQL, база/логин/пароль `cetera` |
 
 Порты меняются переменными `DEV_HTTP_PORT`, `DEV_MAIL_PORT`, `DEV_DB_PORT`,
-версия PHP — `DEV_PHP_VERSION` (тег образа `registry.cetera.su/boilerplate/docker/php`, по умолчанию `8.4-fpm`).
+версия PHP — `DEV_PHP_VERSION` (тег официального образа `php`, по умолчанию `8.4-fpm`).
 
 ## Команды
 
@@ -67,7 +67,16 @@ PHPUnit 10 (ставится в dev-сайт), конфиг `phpunit.xml.dist`, 
 - Новый back-office берётся из `back-office/build` — после `npm run build:desktop` виден без пересборки сайта.
 - CMS ставится `dev/bin/install.sh`: он проходит мастер `cms/setup.php` теми же запросами, что его UI,
   без установки темы (сайт с темой по умолчанию).
-- nginx — образ и конфиг ceteracms из boilerplate сайтов, php-fpm — образ boilerplate.
+- Образы публичные, приватный реестр не нужен: php-fpm собирается из `dev/php/Dockerfile`
+  (официальный `php` плюс расширения боевого образа), nginx — официальный образ с конфигом
+  `dev/nginx/site.conf`, который повторяет правила ceteracms из boilerplate сайтов.
+  Благодаря этому то же окружение поднимается в CI.
+
+## CI
+
+`.github/workflows/tests.yml` на каждый push и pull request поднимает это же окружение
+(`dev/dev.sh up`) и прогоняет PHPUnit и Playwright. При падении сохраняются отчёт Playwright
+и последние строки логов контейнеров. Отдельный `version.yml` проверяет теги релизов.
 
 ## Выпуск версии
 
