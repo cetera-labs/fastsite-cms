@@ -1,4 +1,7 @@
 # Fastsite CMS
+
+[![Тесты](https://github.com/cetera-labs/fastsite-cms/actions/workflows/tests.yml/badge.svg)](https://github.com/cetera-labs/fastsite-cms/actions/workflows/tests.yml)
+
 ## About
 Fastsite CMS — innovative content management and eCommerce-product, based at 10-years of experience and agile development methodologies. Fastsite CMS helps to start your internet sales in 5 minutes. Fastsite CMS is free and licensed under MIT. Product is open source and published at GitHub.
 ## Features, editions, screenshots
