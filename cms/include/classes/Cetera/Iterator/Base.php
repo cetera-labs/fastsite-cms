@@ -120,6 +120,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return int  
      */ 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return $this->getCountAll();
@@ -140,6 +141,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return void  
      */ 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->position = 0;
@@ -166,6 +168,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return FSObject  
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
 		return $this->getElements()[$this->getPosition()];
@@ -176,6 +179,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return int  
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->position;
@@ -186,6 +190,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return void  
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->position++;
@@ -206,6 +211,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *             
      * @return bool 
      */
+    #[\ReturnTypeWillChange]
     public function valid()
     {
 		if ($this->dontUsePaging || !$this->itemCountPerPage)
@@ -317,6 +323,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *               
      * @return void   
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value) {
 		$this->getElements();
         $this->elements[$this->getPosition($offset)] = $value;
@@ -328,6 +335,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @param int $offser позиция                  
      * @return bool  
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset) {
 		$this->getElements();
         return isset($this->elements[$this->getPosition($offset)]);
@@ -338,6 +346,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      *               
      * @return void   
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset) {
 		$this->getElements();
         unset( $this->elements[$this->getPosition($offset)] );
@@ -349,6 +358,7 @@ class Base implements \Countable, \Iterator, \ArrayAccess {
      * @param int $offser позиция                  
      * @return FSObject   
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset) {
 		$this->getElements();
         return isset($this->elements[$this->getPosition($offset)]) ? $this->elements[$this->getPosition($offset)] : null;

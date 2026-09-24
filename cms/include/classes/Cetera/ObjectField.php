@@ -56,6 +56,7 @@ class ObjectField implements \ArrayAccess {
         $this->parentObjectDefinition = $od;
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value) {
         if (is_null($offset)) {
             $this->container[] = $value;
@@ -65,16 +66,19 @@ class ObjectField implements \ArrayAccess {
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset) {
         $offset = $this->fixOffset($offset);
         return isset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset) {
         $offset = $this->fixOffset($offset);
         unset($this->container[$offset]);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset) {
         $offset = $this->fixOffset($offset);
 		if ($offset == 'describ') {

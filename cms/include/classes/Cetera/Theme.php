@@ -259,6 +259,7 @@ class Theme implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetExists ( $offset ) {     
         $this->grabInfo();
         return array_key_exists ( $offset , $this->_info );    
@@ -267,6 +268,7 @@ class Theme implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetGet ( $offset ) {    
         $this->grabInfo();
         return isset($this->_info[ $offset ])?$this->_info[ $offset ]:null;    
@@ -275,6 +277,7 @@ class Theme implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetSet ( $offset , $value ) {
         $this->_info[ $offset ] = $value;
     }
@@ -282,6 +285,7 @@ class Theme implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetUnset ( $offset ) {} 
     
 	/**

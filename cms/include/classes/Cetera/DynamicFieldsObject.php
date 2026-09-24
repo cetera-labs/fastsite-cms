@@ -365,6 +365,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     }
     
 	/** @internal */
+    #[\ReturnTypeWillChange]
     public function offsetExists ( $offset )
     { 
     
@@ -373,6 +374,7 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     }
     
 	/** @internal */
+    #[\ReturnTypeWillChange]
     public function offsetGet ( $offset )
     {
     
@@ -381,9 +383,11 @@ abstract class DynamicFieldsObject extends Base implements \ArrayAccess {
     }
     
 	/** @internal */
+    #[\ReturnTypeWillChange]
     public function offsetSet ( $offset , $value ) {}
     
 	/** @internal */
+    #[\ReturnTypeWillChange]
     public function offsetUnset ( $offset ) {}
 
     /**

@@ -198,6 +198,7 @@ class Plugin implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {     
         $this->grabInfo();
@@ -207,6 +208,7 @@ class Plugin implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetGet ( $offset )
     {    
         $this->grabInfo();
@@ -216,6 +218,7 @@ class Plugin implements \ArrayAccess  {
 	/**
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetSet ( $offset , $value ) {
         $this->_info[ $offset ] = $value;
     }
@@ -223,6 +226,7 @@ class Plugin implements \ArrayAccess  {
 	/** 
 	* @ignore
 	*/	
+    #[\ReturnTypeWillChange]
     public function offsetUnset ( $offset ) {} 
     
 	/**

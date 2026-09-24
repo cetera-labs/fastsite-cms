@@ -27,6 +27,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      * @param string $save_path
      * @param string $name
      */
+    #[\ReturnTypeWillChange]
     public function open($save_path, $name)
     {
         //print "open $save_path, $name";
@@ -37,6 +38,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      * Close Session - free resources
      *
      */
+    #[\ReturnTypeWillChange]
     public function close()
     {
 		return true;
@@ -47,6 +49,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      *
      * @param string $id
      */
+    #[\ReturnTypeWillChange]
     public function read($id)
     { 
         try {
@@ -64,6 +67,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      * @param string $id
      * @param mixed $data
      */
+    #[\ReturnTypeWillChange]
     public function write($id, $data)
     {
         try {
@@ -81,6 +85,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      *
      * @param string $id
      */
+    #[\ReturnTypeWillChange]
     public function destroy($id)
     {
         try {

@@ -61,6 +61,7 @@ class Catalog extends \Cetera\Iterator\DynamicObject implements \RecursiveIterat
      *     
      * @return bool           
      */  
+    #[\ReturnTypeWillChange]
     public function hasChildren()
     {
         if (!($this->current() instanceof \Cetera\Catalog)) return false;
@@ -72,6 +73,7 @@ class Catalog extends \Cetera\Iterator\DynamicObject implements \RecursiveIterat
      *     
      * @return Catalog_Iterator            
      */ 
+    #[\ReturnTypeWillChange]
     public function getChildren()
     {
         return $this->current()->getChildren();
