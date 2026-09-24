@@ -1,0 +1,44 @@
+# Тесты на каждый push и pull request (CCTM-1603).
+# Поднимается то же окружение, что и локально (dev/dev.sh), образы публичные.
+name: Тесты
+
+on:
+  push:
+    branches: ['**']
+    tags-ignore: ['**']
+  pull_request:
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Окружение и установка CMS
+        run: sh dev/dev.sh up
+
+      - name: PHPUnit
+        run: sh dev/dev.sh test
+
+      - name: Playwright
+        run: sh dev/dev.sh e2e
+
+      - name: Отчёт Playwright
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            e2e/playwright-report
+            e2e/test-results
+          retention-days: 7
+          if-no-files-found: ignore
+
+      - name: Логи контейнеров
+        if: failure()
+        run: docker compose -f dev/docker-compose.yml logs --no-color --tail 200
