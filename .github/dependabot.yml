@@ -1,0 +1,32 @@
+# Автообновление зависимостей (CCTM-1605).
+#
+# back-office здесь нет намеренно: это сборочная оснастка старого back-office на Ext JS 7,
+# который заморожен и удаляется в 4.0 (CCTM-1609). Её пакеты не попадают на сайты — в репозитории
+# лежит уже собранный back-office/build, а node_modules на сайтах не ставится. Обновить их можно
+# только мажорными версиями @sencha/ext-webpack-plugin и webpack-dev-server, что сломает сборку.
+version: 2
+
+updates:
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'CCTM-1605'
+
+  - package-ecosystem: npm
+    directory: /e2e
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: 'CCTM-1605'
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: 'CCTM-1605'
