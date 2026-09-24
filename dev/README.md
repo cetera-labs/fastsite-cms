@@ -72,10 +72,20 @@ PHPUnit 10 (ставится в dev-сайт), конфиг `phpunit.xml.dist`, 
   `dev/nginx/site.conf`, который повторяет правила ceteracms из boilerplate сайтов.
   Благодаря этому то же окружение поднимается в CI.
 
+## Статический анализ
+
+`sh dev/dev.sh phpstan` — PHPStan (уровень 1) по ядру `cms/include/classes`. Конфигурация —
+`phpstan.neon.dist`, накопленные замечания — `phpstan-baseline.neon`: анализ падает только на новых.
+Псевдоним `Cetera\Catalog` создаётся в рантайме через `class_alias`, поэтому для анализатора он
+объявлен в `dev/phpstan-stubs/Catalog.php`, а константы ядра задаёт `dev/phpstan-bootstrap.php`.
+
+Когда замечание из baseline исправлено, файл перегенерируется:
+`sh dev/dev.sh phpstan --generate-baseline`.
+
 ## CI
 
 `.github/workflows/tests.yml` на каждый push и pull request поднимает это же окружение
-(`dev/dev.sh up`) и прогоняет PHPUnit и Playwright. При падении сохраняются отчёт Playwright
+(`dev/dev.sh up`) и прогоняет PHPUnit, PHPStan и Playwright. При падении сохраняются отчёт Playwright
 и последние строки логов контейнеров. Отдельный `version.yml` проверяет теги релизов.
 
 ## Выпуск версии

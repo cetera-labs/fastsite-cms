@@ -25,6 +25,9 @@ jobs:
       - name: PHPUnit
         run: sh dev/dev.sh test
 
+      - name: PHPStan
+        run: sh dev/dev.sh phpstan --no-progress
+
       - name: Playwright
         run: sh dev/dev.sh e2e
 

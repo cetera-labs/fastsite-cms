@@ -1,0 +1,25 @@
+# Статический анализ ядра (CCTM-1604). Запуск — dev/dev.sh phpstan.
+# Анализ идёт внутри dev-сайта: код CMS подмонтирован в его vendor, поэтому
+# доступны все зависимости. Накопленные замечания — в phpstan-baseline.neon,
+# CI падает только на новых.
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 1
+    paths:
+        - cms/include/classes
+    scanDirectories:
+        - cms/include
+    excludePaths:
+        analyse:
+            - cms/include/classes/Cetera/Phing.php
+    bootstrapFiles:
+        # автозагрузчик dev-сайта: код CMS лежит в его vendor, рядом же все зависимости
+        - ../../../vendor/autoload.php
+        - dev/phpstan-bootstrap.php
+    # класс-псевдоним, который в рантайме создаётся через class_alias
+    scanFiles:
+        - dev/phpstan-stubs/Catalog.php
+    treatPhpDocTypesAsCertain: false
+    reportUnmatchedIgnoredErrors: false

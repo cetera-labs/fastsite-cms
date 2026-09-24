@@ -1,0 +1,787 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Static method Firebase\\JWT\\JWT\:\:encode\(\) invoked with 2 parameters, 3\-5 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: cms/include/classes/Cetera/Api/AbstractController.php
+
+		-
+			message: '#^Undefined variable\: \$key$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Api/AbstractController.php
+
+		-
+			message: '#^Call to function unset\(\) contains undefined variable \$disabled\.$#'
+			identifier: unset.variable
+			count: 1
+			path: cms/include/classes/Cetera/Application.php
+
+		-
+			message: '#^Function mysql_query not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Application.php
+
+		-
+			message: '#^Function mysql_select_db not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Application.php
+
+		-
+			message: '#^Variable \$h might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Application.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''class'' \(''class'', ''class''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: cms/include/classes/Cetera/BackOffice.php
+
+		-
+			message: '#^Call to static method getRoot\(\) on an unknown class Cetera\\Backup\\Catalog\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Materials.php
+
+		-
+			message: '#^Variable \$field might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: cms/include/classes/Cetera/Backup/Materials.php
+
+		-
+			message: '#^Variable \$fields might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Backup/Materials.php
+
+		-
+			message: '#^Variable \$od might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Materials.php
+
+		-
+			message: '#^Variable \$section might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Materials.php
+
+		-
+			message: '#^Variable \$od_data might not be defined\.$#'
+			identifier: variable.undefined
+			count: 3
+			path: cms/include/classes/Cetera/Backup/ObjectDefinitions.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Backup\\Sections\:\:\$catalogType\.$#'
+			identifier: property.notFound
+			count: 3
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Call to an undefined method Cetera\\Backup\\Sections\:\:backupMaterial\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Variable \$field might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Variable \$fields might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Variable \$permissions might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Variable \$section might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Backup/Sections.php
+
+		-
+			message: '#^Variable \$fld_names might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/CDBTree.php
+
+		-
+			message: '#^Variable \$fld_values might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/CDBTree.php
+
+		-
+			message: '#^Instantiated class Laminas\\Cache\\Storage\\Adapter\\Memcache not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Cache/Backend/Backend.php
+
+		-
+			message: '#^Method Cetera\\Cache\\Backend\\TagEmuWrapper\:\:clearByTags\(\) should return bool but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: cms/include/classes/Cetera/Cache/Backend/TagEmuWrapper.php
+
+		-
+			message: '#^Method Cetera\\Cache\\Backend\\TagEmuWrapper\:\:setTags\(\) should return bool but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: cms/include/classes/Cetera/Cache/Backend/TagEmuWrapper.php
+
+		-
+			message: '#^Call to static method throwException\(\) on an unknown class Cetera\\Cache\\Slot\\Laminas\\Cache\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Cache/Slot/Slot.php
+
+		-
+			message: '#^Deprecated in PHP 8\.4\: Parameter \#2 \$response \(Laminas\\Stdlib\\ResponseInterface\) is implicitly nullable via default value null\.$#'
+			identifier: parameter.implicitlyNullable
+			count: 1
+			path: cms/include/classes/Cetera/Controller/AbstractController.php
+
+		-
+			message: '#^Call to private method extractTypeValues\(\) of class Doctrine\\DBAL\\Connection\.$#'
+			identifier: method.private
+			count: 2
+			path: cms/include/classes/Cetera/Database/Connection.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 2
+			path: cms/include/classes/Cetera/DbObject.php
+
+		-
+			message: '#^Access to an undefined property \$this\(Cetera\\DynamicFieldsObject\)\:\:\$table\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\DynamicFieldsObject\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\DynamicFieldsObject\:\:\$objectDefinition\.$#'
+			identifier: property.notFound
+			count: 15
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\DynamicFieldsObject\:\:\$table\.$#'
+			identifier: property.notFound
+			count: 18
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Call to an undefined method Cetera\\DynamicFieldsObject\:\:get_plain_field\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Instantiated class Cetera\\Iterator\\Object not found\.$#'
+			identifier: class.notFound
+			count: 2
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Variable \$od might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Variable \$old might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Variable \$path might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Variable \$tbl might not be defined\.$#'
+			identifier: variable.undefined
+			count: 5
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Variable \$type_id might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/DynamicFieldsObject.php
+
+		-
+			message: '#^Access to undefined constant static\(Cetera\\DynamicFieldsObjectPredefined\)\:\:TABLE\.$#'
+			identifier: classConstant.notFound
+			count: 3
+			path: cms/include/classes/Cetera/DynamicFieldsObjectPredefined.php
+
+		-
+			message: '#^Access to undefined constant static\(Cetera\\DynamicFieldsObjectPredefined\)\:\:TYPE\.$#'
+			identifier: classConstant.notFound
+			count: 6
+			path: cms/include/classes/Cetera/DynamicFieldsObjectPredefined.php
+
+		-
+			message: '#^Instantiated class Cetera\\Entity\\ArrayCollection not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Entity/AbstractSection.php
+
+		-
+			message: '#^Deprecated in PHP 8\.4\: Parameter \#1 \$parent \(Cetera\\Entity\\Node\) is implicitly nullable via default value null\.$#'
+			identifier: parameter.implicitlyNullable
+			count: 1
+			path: cms/include/classes/Cetera/Entity/Node.php
+
+		-
+			message: '#^Parameter \$section of method Cetera\\Entity\\Node\:\:setSection\(\) has invalid type Cetera\\Entity\\Section\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Entity/Node.php
+
+		-
+			message: '#^Call to an undefined static method Cetera\\Filter\:\:t\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Filter.php
+
+		-
+			message: '#^Variable \$suf might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/ImageTransform.php
+
+		-
+			message: '#^Access to an undefined property \$this\(Cetera\\Material\)\:\:\$idcat\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property \$this\(Cetera\\Material\)\:\:\$table\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$alias\.$#'
+			identifier: property.notFound
+			count: 3
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$catalog\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$idcat\.$#'
+			identifier: property.notFound
+			count: 4
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 5
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$objectDefinition\.$#'
+			identifier: property.notFound
+			count: 4
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$published\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$table\.$#'
+			identifier: property.notFound
+			count: 9
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Material\:\:\$type\.$#'
+			identifier: property.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Result of method Cetera\\DynamicFieldsObject\:\:setFields\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: cms/include/classes/Cetera/Material.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: cms/include/classes/Cetera/MaterialUser.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Menu\:\:\$alias\.$#'
+			identifier: property.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Menu.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Menu\:\:\$data\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Menu.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Menu\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Menu.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\ORM\\Mapping\\Driver\:\:\$namespace\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/ORM/Mapping/Driver.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\ObjectDefinition\:\:\$descriptionDisplay\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/ObjectDefinition.php
+
+		-
+			message: '#^Undefined variable\: \$alias$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/ObjectDefinition.php
+
+		-
+			message: '#^Method Cetera\\ObjectRenderer\:\:getFieldsForEdit\(\) should return array but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: cms/include/classes/Cetera/ObjectRenderer.php
+
+		-
+			message: '#^Method Cetera\\ObjectRenderer\:\:getLinks\(\) should return array but return statement is missing\.$#'
+			identifier: return.missing
+			count: 1
+			path: cms/include/classes/Cetera/ObjectRenderer.php
+
+		-
+			message: '#^Path in include_once\(\) "editors/editor_linkset_link\.php" is not a file or it does not exist\.$#'
+			identifier: includeOnce.fileNotFound
+			count: 2
+			path: cms/include/classes/Cetera/ObjectRenderer.php
+
+		-
+			message: '#^Variable \$res might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/ObjectRenderer.php
+
+		-
+			message: '#^Instantiated class Cetera\\Exception not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Plugin.php
+
+		-
+			message: '#^Path in include\(\) "/var/www/site/vendor/cetera\-labs/cetera\-cms/dev/site/\.\./vendor/cetera\-labs/cetera\-cms\-plugins\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: cms/include/classes/Cetera/Plugin.php
+
+		-
+			message: '#^Path in include\(\) "/var/www/site/vendor/cetera\-labs/cetera\-cms/dev/site/\.\./vendor/cetera\-labs\\cetera\-cms\-plugins\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: cms/include/classes/Cetera/Plugin.php
+
+		-
+			message: '#^Path in include\(\) "/var/www/site/vendor/cetera\-labs/cetera\-cms/dev/site/\.\./vendor\\cetera\-labs/cetera\-cms\-plugins\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: cms/include/classes/Cetera/Plugin.php
+
+		-
+			message: '#^Path in include\(\) "/var/www/site/vendor/cetera\-labs/cetera\-cms/dev/site/\.\./vendor\\cetera\-labs\\cetera\-cms\-plugins\.php" is not a file or it does not exist\.$#'
+			identifier: include.fileNotFound
+			count: 1
+			path: cms/include/classes/Cetera/Plugin.php
+
+		-
+			message: '#^Variable \$field might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Schema.php
+
+		-
+			message: '#^Variable \$key might not be defined\.$#'
+			identifier: variable.undefined
+			count: 7
+			path: cms/include/classes/Cetera/Schema.php
+
+		-
+			message: '#^Variable \$table might not be defined\.$#'
+			identifier: variable.undefined
+			count: 4
+			path: cms/include/classes/Cetera/Schema.php
+
+		-
+			message: '#^Variable \$widget might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Schema.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$catalogType\.$#'
+			identifier: property.notFound
+			count: 3
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$hidden\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$inheritFields\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$materialsCount\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$materialsObjectDefinition\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$materialsTable\.$#'
+			identifier: property.notFound
+			count: 6
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$materialsType\.$#'
+			identifier: property.notFound
+			count: 7
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$parent\.$#'
+			identifier: property.notFound
+			count: 12
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$prototype\.$#'
+			identifier: property.notFound
+			count: 6
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$template\.$#'
+			identifier: property.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$templateDir\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Section\:\:\$visual_constructor\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Array has 2 duplicate keys with value ''template'' \(''template'', ''template''\)\.$#'
+			identifier: array.duplicateKey
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Call to an undefined method Cetera\\Section\:\:getAliases\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Caught class Cetera\\Exception not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: cms/include/classes/Cetera/Section.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Server\:\:\$template\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Server.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Server\:\:\$templateDir\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Server.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\Theme\:\:\$version\.$#'
+			identifier: property.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Theme.php
+
+		-
+			message: '#^Instantiated class Cetera\\Exception not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Theme.php
+
+		-
+			message: '#^Static call to instance method Cetera\\Util\:\:rcopy\(\)\.$#'
+			identifier: method.staticCall
+			count: 1
+			path: cms/include/classes/Cetera/Theme.php
+
+		-
+			message: '#^Static call to instance method Cetera\\Widget\\Container\:\:enum\(\)\.$#'
+			identifier: method.staticCall
+			count: 1
+			path: cms/include/classes/Cetera/Theme.php
+
+		-
+			message: '#^Class Cetera\\TranslatorWrapper extends @final class Laminas\\I18n\\Translator\\Translator\.$#'
+			identifier: class.extendsFinalByPhpDoc
+			count: 1
+			path: cms/include/classes/Cetera/TranslatorWrapper.php
+
+		-
+			message: '#^Class Cetera\\Twig\\Node\\Widget constructor invoked with 4 parameters, 3 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: cms/include/classes/Cetera/Twig/TokenParser/Widget.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$email\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$groups\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$login\.$#'
+			identifier: property.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$password\.$#'
+			identifier: property.notFound
+			count: 3
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Access to an undefined property Cetera\\User\:\:\$table\.$#'
+			identifier: property.notFound
+			count: 4
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Caught class Cetera\\Exception not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Result of method Cetera\\DynamicFieldsObject\:\:setFields\(\) \(void\) is used\.$#'
+			identifier: staticMethod.void
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Unsafe usage of new static\(\)\.$#'
+			identifier: new.static
+			count: 1
+			path: cms/include/classes/Cetera/User.php
+
+		-
+			message: '#^Undefined variable\: \$this$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/User/Anonymous.php
+
+		-
+			message: '#^Access to constant TABLE on an unknown class Cetera\\User\\User\.$#'
+			identifier: class.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Facebook.php
+
+		-
+			message: '#^Call to an undefined static method Cetera\\User\\Facebook\:\:getByResult\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Facebook.php
+
+		-
+			message: '#^Access to constant TABLE on an unknown class Cetera\\User\\User\.$#'
+			identifier: class.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Google.php
+
+		-
+			message: '#^Call to an undefined static method Cetera\\User\\Google\:\:getByResult\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Google.php
+
+		-
+			message: '#^Access to constant TABLE on an unknown class Cetera\\User\\User\.$#'
+			identifier: class.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Twitter.php
+
+		-
+			message: '#^Call to an undefined static method Cetera\\User\\Twitter\:\:getByResult\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/Twitter.php
+
+		-
+			message: '#^Access to constant TABLE on an unknown class Cetera\\User\\User\.$#'
+			identifier: class.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/VK.php
+
+		-
+			message: '#^Call to an undefined static method Cetera\\User\\VK\:\:getByResult\(\)\.$#'
+			identifier: staticMethod.notFound
+			count: 2
+			path: cms/include/classes/Cetera/User/VK.php
+
+		-
+			message: '#^Function each not found\.$#'
+			identifier: function.notFound
+			count: 2
+			path: cms/include/classes/Cetera/Util.php
+
+		-
+			message: '#^Function rrmdir not found\.$#'
+			identifier: function.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Util.php
+
+		-
+			message: '#^Variable \$text might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Util.php
+
+		-
+			message: '#^Instantiated class Twig_Environment not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Widget/File.php
+
+		-
+			message: '#^Instantiated class Twig_Loader_Filesystem not found\.$#'
+			identifier: class.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Widget/File.php
+
+		-
+			message: '#^Call to an undefined method Cetera\\Widget\\Search\:\:getWords\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: cms/include/classes/Cetera/Widget/Search.php
+
+		-
+			message: '#^Undefined variable\: \$where$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Widget/Search.php
+
+		-
+			message: '#^Variable \$s might not be defined\.$#'
+			identifier: variable.undefined
+			count: 2
+			path: cms/include/classes/Cetera/Widget/Search.php
+
+		-
+			message: '#^Variable \$where in isset\(\) is never defined\.$#'
+			identifier: isset.variable
+			count: 1
+			path: cms/include/classes/Cetera/Widget/Search.php
+
+		-
+			message: '#^Variable \$wordsPattern might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Widget/Search.php
+
+		-
+			message: '#^Variable \$u might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: cms/include/classes/Cetera/Widget/User/Recover.php
