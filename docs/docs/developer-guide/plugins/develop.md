@@ -263,6 +263,8 @@ a:6:{s:4:"name";s:0:"";s:7:"catalog";s:2:"14";s:5:"limit";s:1:"8";s:5:"order";s:
 
 Классы должны иметь префикс Plugin.<имяплагина>.
 
+Интерфейс плагина пишется для старого back-office на ExtJS 4. Новый back-office на Ext JS 7 заморожен и для плагинов не развивается, см. [Интерфейсы back-office]({{site.baseurl}}/docs/developer-guide/back-office.html).
+
 ## Каталог lang
 
 Место для хранения файлов с переводом на другие языки

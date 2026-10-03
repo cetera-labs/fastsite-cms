@@ -69,6 +69,8 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
 **Два UI back-office:** `cms/app/` + `cms/app.js` — старый ExtJS 4 (идёт в `cms/js/app.js` через Phing);
 `back-office/app/{desktop,modern,shared}` — новый Ext JS 7 (namespace `Cetera`). Компоненты часто продублированы в обоих
 (например `cms/app/field/*` ↔ `back-office/app/desktop/src/field/*`) — при правке проверять, нужно ли менять оба.
+Новый back-office на Ext JS 7 **заморожен** (в 4.0 его заменит админка на Vue 3): новых функций в `back-office/` не делать,
+только исправления ошибок; в старом ExtJS 4 — тоже в основном исправления (`docs/docs/developer-guide/back-office.md`).
 
 **Виджеты:** PHP-классы `Cetera\Widget\*` (наследуют `Widget\Widget`, шаблонные — от `Widget\Templateable`) +
 Twig-шаблоны `cms/twig_templates/widgets/<name>/` + редакторы в BO (`widget/*.js`). Получение — `Application::getWidget($name, $params)`,

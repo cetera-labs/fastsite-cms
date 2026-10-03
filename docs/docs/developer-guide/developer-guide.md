@@ -49,4 +49,10 @@ permalink: /docs/developer-guide
 
 Документация по API Fastsite CMS
 
+---
+
+## [Интерфейсы back-office]({{site.baseurl}}/docs/developer-guide/back-office.html)
+
+Старый back-office на ExtJS 4 и замороженный новый на Ext JS 7: где вести доработки
+
 
