@@ -18,19 +18,14 @@ define('APP_WWW', 'www.cetera.ru');
 
 define('PHP_VER', '7.0.0');
 define('MYSQL_VER', '5.0.3');
-define('LIBRARY_VERSION_REQ', 13);
 
 define("DISTRIB_HOST", 'https://cms.cetera.ru/');
-define("DISTRIB_INFO", DISTRIB_HOST.'info.json'); 
 define("PLUGINS_INFO", DISTRIB_HOST.'plugins/plugins.php'); 
 define("THEMES_INFO",  DISTRIB_HOST.'themes/themes.php'); 
 define("PING_URL",     DISTRIB_HOST.'net/ping.php'); 
-define("DISTRIB_FILE", 'cms.zip'); 
-define("LIBRARY_FILE", 'library.zip'); 
 
 define("TRANSLATIONS", 'lang'); 
 
-define("UPGRADE_FILE",   'upgrade.zip');
 define("UPGRADE_SCRIPT", 'upgrade.php');
 define("INSTALL_SCRIPT", 'install.php');
 

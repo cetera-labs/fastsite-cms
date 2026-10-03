@@ -14,21 +14,17 @@ if (!defined('DOCROOT')) {
 	define('DOCROOT', $dr );
 }
 
-if (file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
-	define('COMPOSER_INSTALL', true);
-	define('VENDOR_PATH', DOCROOT.'../vendor');
-    define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
-    define('LIBRARY_PATH', 'library');
+// CMS ставится только через composer: DOCROOT/../vendor/cetera-labs/cetera-cms
+if (!file_exists(DOCROOT.'../vendor/cetera-labs/cetera-cms')) {
+    header('HTTP/1.1 500 Internal Server Error');
+    die('Fastsite CMS is not installed: run composer install in the site root (../vendor/cetera-labs/cetera-cms not found)');
 }
-else {
-    define('LIBRARY_PATH', 'library');
-	define('COMPOSER_INSTALL', false);
-	define('VENDOR_PATH', DOCROOT.'/'.LIBRARY_PATH.'/vendor');
-	
-	if (file_exists(DOCROOT.LIBRARY_PATH.'/library.php')) {
-		include_once(DOCROOT.LIBRARY_PATH.'/library.php');
-	} else {
-		define('LIBRARY_VERSION', 1);
-	}	
-    define('CMSROOT', str_replace('include','',__DIR__) );
-}
+
+define('VENDOR_PATH', DOCROOT.'../vendor');
+define('CMSROOT', DOCROOT.'../vendor/cetera-labs/cetera-cms/cms/' );
+
+/** @deprecated Всегда true: установка без composer (каталог library/) не поддерживается. Будет удалена в 4.0 */
+define('COMPOSER_INSTALL', true);
+
+/** Каталог library/ в корне сайта, оставшийся от установки без composer: закрыт для файлового менеджера */
+define('LIBRARY_PATH', 'library');

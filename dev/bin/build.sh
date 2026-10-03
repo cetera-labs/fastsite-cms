@@ -23,7 +23,6 @@ composer install --no-interaction --no-progress --working-dir="$SITE" \
 
 step 'www'
 mkdir -p "$SITE/tmp" "$WWW/plugins" "$WWW/themes" "$WWW/uploads" "$WWW/.cache" "$CMS/css" "$CMS/js"
-ln -sfn ../vendor/cetera-labs/library "$WWW/library"
 
 # Всё содержимое cms/, кроме css и скрытых файлов, — симлинками
 for f in "$SRC"/cms/*; do

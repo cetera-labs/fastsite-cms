@@ -278,14 +278,6 @@ class Util {
              '<tr><td align="center"><div class="panel"><h2>Внимание!</h2><b>'.$msg.'</b></div></td></tr></table></div>';
     }
     
-    public static function commonHead() {
-        echo '<link rel="stylesheet" type="text/css" href="/'.LIBRARY_PATH.'/extjs4/resources/css/ext-all.css">'. 
-             '<script type="text/javascript" src="/'.LIBRARY_PATH.'/extjs4/ext-all.js"></script>'.
-             '<script type="text/javascript" src="/'.LIBRARY_PATH.'/extjs4/compatibility/ext3-core-compat.js"></script>'.
-             '<script type="text/javascript" src="/'.LIBRARY_PATH.'/extjs4/compatibility/ext3-compat.js"></script>'.
-             '<link rel="stylesheet" type="text/css" href="/'.CMS_DIR.'/css/main.css">';
-    }
-    
     public static function utime()
     {
     	$time = explode( " ", microtime());

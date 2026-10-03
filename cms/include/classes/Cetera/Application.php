@@ -1845,22 +1845,10 @@ class Application {
 		$u = $this->getUser();
 		if ($u && $u->allowBackOffice())
 		{
-            if (COMPOSER_INSTALL) {
-                $this->addCSS('/cms/css/global.css');
-                $this->addScript('/cms/js/vendor.js');
-                $this->addScript('/cms/config.php');
-                $this->addScript('/cms/js/admin-panel.js');
-            }
-            else {
-                $this->addCSS('/'.LIBRARY_PATH.'/extjs4/resources/css/ext-all.css');
-                $this->addCSS('/'.LIBRARY_PATH.'/cropper/cropper.min.css');
-                $this->addCSS('/cms/css/main.css');
-                $this->addScript('/'.LIBRARY_PATH.'/extjs4/ext-all.js');
-                $this->addScript('/'.LIBRARY_PATH.'/ace/ace.js');
-                $this->addScript('/'.LIBRARY_PATH.'/cropper/cropper.min.js');
-                $this->addScript('/cms/config.php');
-                $this->addScript('/cms/admin-panel.js');
-            }
+            $this->addCSS('/cms/css/global.css');
+            $this->addScript('/cms/js/vendor.js');
+            $this->addScript('/cms/config.php');
+            $this->addScript('/cms/js/admin-panel.js');
 		}
 	}	
 		

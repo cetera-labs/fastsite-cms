@@ -71,9 +71,6 @@
                 <include name="widgets/***" />
                 <include name="include/*.php" />
                 <include name="include/editors/**" />  
-                
-                <exclude name="library_install.php" />
-                <exclude name="upgrade.php" />                
             </fileset>
         </copy>
         

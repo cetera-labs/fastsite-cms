@@ -8,13 +8,24 @@ grand_parent: Руководство разработчика
 
 # Файловая структура Fastsite CMS
 
+CMS ставится composer-пакетом в каталог `vendor` уровнем выше корня сайта:
+
+```
+<КОРЕНЬ ПРОЕКТА>
++---composer.json            — зависимости сайта: CMS, плагины
++---vendor/                  — пакеты composer
+|   +---cetera-labs/cetera-cms/  — Fastsite CMS
++---www/                     — <DOCUMENT_ROOT>
+```
+
+Структура `<DOCUMENT_ROOT>`:
+
 ```
 <DOCUMENT_ROOT>
 +---.prefs            — основные настройки CMS
 +---.htaccess         — настройки прав доступа и url rewrite
 +---robots.txt    
-+---cms/                     — скрипты Fastsite CMS
-+---library/                 — сторонние библиотеки, используемые Fastsite CMS
++---cms/                     — скрипты и статика Fastsite CMS, собираются из vendor/cetera-labs/cetera-cms при composer update
 +---uploads/                 — каталог по умолчанию для файлов, загружаемых пользователями через интерфейс CMS
 +---plugins/                 — каталог с дополнительными модулями
 +---themes/                  — каталог с темами (редакциями)

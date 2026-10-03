@@ -47,8 +47,8 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
 
 ## Архитектура
 
-**Два режима установки** (`cms/include/path_detect.php`): если существует `DOCROOT/../vendor/cetera-labs/cetera-cms` —
-`COMPOSER_INSTALL=true`, `CMSROOT` указывает в vendor; иначе — legacy-режим с `DOCROOT/library`. Весь код должен
+**Установка только через composer** (`cms/include/path_detect.php`): CMS лежит в `DOCROOT/../vendor/cetera-labs/cetera-cms`,
+`CMSROOT` указывает туда; legacy-режим с `DOCROOT/library` удалён (`COMPOSER_INSTALL` всегда `true`, оставлена для совместимости). Весь код должен
 работать через константы (`DOCROOT`, `CMSROOT`, `CMS_DIR`, `VENDOR_PATH` и т.д. из `cms/include/constants.php`), а не через жёсткие пути.
 Конфиг сайта — ini-файл `DOCROOT/.prefs` (+ `.prefs.local`), читается через `$application->getVar()`; параметры описаны в `FAQ.txt`.
 
