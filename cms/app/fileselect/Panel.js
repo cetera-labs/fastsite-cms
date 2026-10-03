@@ -514,7 +514,8 @@ Ext.define('Cetera.fileselect.Panel', {
 			if (this.path+this.file != this.url)
     		this.url = this.path+this.file;  
 			var ext = this.file.split('.').pop().toLowerCase();
-			if (ext == 'jpeg' ||ext == 'jpg' ||ext == 'gif' ||ext == 'png')
+			// avif браузеры не умеют сохранять из canvas, поэтому обрезка для него недоступна
+			if (ext == 'jpeg' ||ext == 'jpg' ||ext == 'gif' ||ext == 'png' ||ext == 'webp')
 				this.isImage = true;
 		}
 		else{

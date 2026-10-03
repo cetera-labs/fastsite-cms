@@ -123,6 +123,9 @@ Ext.define('Cetera.window.ImageCrop', {
 		var contentType = false;
 		if (ext == 'jpg' || ext == 'jpeg') {
 			contentType = 'image/jpeg';
+		}
+		else if (ext == 'webp') {
+			contentType = 'image/webp';
 		}	
 		var p = me.value.split('/');
 		var baseName = p.pop().replace('.'+ext,'_crop.'+ext);

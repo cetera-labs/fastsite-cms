@@ -57,7 +57,7 @@ foreach ($iterator as $fileinfo) {
 	if ($path_parts['extension'] == 'svg') {
 		$info['type'] = 99;
 	}
-    elseif ($path_parts['extension'] == 'jpg' || $path_parts['extension'] == 'gif' || $path_parts['extension'] == 'png') {
+    elseif (in_array($path_parts['extension'], ['jpg', 'jpeg', 'gif', 'png', 'webp', 'avif'])) {
         $size = getimagesize($fileinfo->getPathname());
         if ($size) {
             $info['width'] = $size[0];

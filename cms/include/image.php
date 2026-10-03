@@ -105,13 +105,8 @@ function image($src = '', $width = 0, $height = 0, $quality = 100, $dontenlarge 
 	
     if ($src_exists) {
     
-        if ($info[2] >= 4) return die('No support for '.$info['mime']);
-        
-        switch ($info[2]) {
-            case 1: $suf = 'gif'; break;
-            case 2: $suf = 'jpeg'; break;
-            case 3: $suf = 'png'; break;
-        }
+        $suf = \Cetera\ImageTransform::gdSuffix($info[2]);
+        if (!$suf) return die('No support for '.$info['mime']);
                
         $ox = 0;
         $oy = 0;

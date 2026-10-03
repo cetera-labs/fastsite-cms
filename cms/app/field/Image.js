@@ -101,7 +101,7 @@ Ext.define('Cetera.field.Image', {
     
     getWindow : function() {
         this.window = Ext.create('Cetera.fileselect.Window', {
-            extension: 'gif,jpg,jpeg,png,svg',
+            extension: 'gif,jpg,jpeg,png,webp,avif,svg',
             activePanel: 1
         });
         

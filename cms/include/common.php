@@ -67,7 +67,8 @@ function check_upload_file_name(&$name)
 function check_upload_file($name) {
     $a = \Cetera\Application::getInstance();
     $info = getimagesize($name);
-    if ($info && ($a->getVar('file_upload_max_width') || $a->getVar('file_upload_max_height')) )
+    // форматы, которые GD на сервере не умеет читать и писать, сохраняются как есть, без уменьшения
+    if ($info && \Cetera\ImageTransform::gdSuffix($info[2]) && ($a->getVar('file_upload_max_width') || $a->getVar('file_upload_max_height')) )
     {
         require_once(__DIR__.'/image.php');
         $res = image($name, (int)$a->getVar('file_upload_max_width'), (int)$a->getVar('file_upload_max_height'), 100, 1, 1, 0);

@@ -83,6 +83,30 @@ class ImageTransform {
 		return $this;
 	}
 	
+	/**
+	 * Суффикс функций GD (imagecreatefromXXX/imageXXX) для типа картинки из getimagesize()
+	 *
+	 * @param int $type константа IMAGETYPE_*
+	 * @return string|null null, если GD на сервере не умеет читать и записывать этот формат
+	 */
+	public static function gdSuffix($type)
+	{
+		$types = [
+			IMAGETYPE_GIF  => 'gif',
+			IMAGETYPE_JPEG => 'jpeg',
+			IMAGETYPE_PNG  => 'png',
+			IMAGETYPE_WEBP => 'webp',
+		];
+		if (defined('IMAGETYPE_AVIF')) {
+			$types[IMAGETYPE_AVIF] = 'avif';
+		}
+		$suf = $types[$type] ?? null;
+		if (!$suf || !function_exists('imagecreatefrom'.$suf) || !function_exists('image'.$suf)) {
+			return null;
+		}
+		return $suf;
+	}
+
 	public function setQuality($quality)
 	{
 		$this->quality = (int)$quality;
@@ -213,12 +237,8 @@ class ImageTransform {
 
 		if ($this->src_exists) {
 					
-			switch ($this->src_info[2]) {
-				case 1: $suf = 'gif'; break;
-				case 2: $suf = 'jpeg'; break;
-				case 3: $suf = 'png'; break;
-                case 18: $suf = 'webp'; break;
-			}
+			$suf = self::gdSuffix($this->src_info[2]);
+			if (!$suf) throw new \Exception('No support for '.$this->src_info['mime']);
 			
 			// -------------------------------------------------------
 			// корректировка размеров результата, если опция enlarge=0	
@@ -599,7 +619,9 @@ class ImageTransform {
             }
             else {
                 $pathinfo = pathinfo(WWWROOT.$file);
-                if (!in_array(strtolower($pathinfo['extension']),['jpg','png','gif','jpeg'])) {
+                $info = getimagesize(WWWROOT.$file);
+                // картинки, которые GD на сервере не умеет обрабатывать (например, avif без libavif), отдаются как есть
+                if (!in_array(strtolower($pathinfo['extension']),['jpg','png','gif','jpeg','webp','avif']) || !$info || !self::gdSuffix($info[2])) {
                     header('Location: /'.$file );
                     die();
                 }
