@@ -1,3 +1,18 @@
+3.81.0
+
+    * CCTM-1603 Локальное окружение переведено на публичные образы
+    * CCTM-1603 Тесты PHPUnit и Playwright запускаются в CI на каждый push
+    * CCTM-1603 Бейдж состояния тестов в README
+    * CCTM-1604 Методы ArrayAccess, Iterator и обработчика сессий помечены ReturnTypeWillChange
+    * CCTM-1604 Статический анализ PHPStan с baseline и его запуск в CI
+    * CCTM-1605 Dependabot следит за composer, e2e и действиями GitHub
+    * CCTM-1609 Документация: новый back-office на Ext JS 7 заморожен, доработки — в старом
+    * CCTM-1607 Удалён режим установки без composer (каталог library/ в корне сайта)
+    * CCTM-1606 CLAUDE.md: почему phing в require и откуда берётся cetera-labs/library
+    * CCTM-1578 Картинки webp и avif загружаются через админку, уменьшаются и показываются в превью
+    * CCTM-1607 Каталог library/ сайта остаётся в include_path для кода старых сайтов
+    * CCTM-1180 Ошибки виджетов на сайте: администраторам — блок callout alert, посетителям — HTML-комментарий
+
 3.80.1
 
     * CCTM-1577 Скрипт выпуска версии и проверка тега на GitHub
