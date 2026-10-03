@@ -34,7 +34,8 @@ define('VERSION', '3.80.1');
 
 mb_internal_encoding("UTF-8");
 
-ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'include/classes');
+// library/ в include_path — для кода старых сайтов, который подключает файлы из оставшегося там каталога
+ini_set('include_path', '.'.PATH_SEPARATOR.CMSROOT.PATH_SEPARATOR.CMSROOT.'include/classes'.PATH_SEPARATOR.DOCROOT.LIBRARY_PATH);
 
 include VENDOR_PATH.'/autoload.php';
 
