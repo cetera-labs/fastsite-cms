@@ -21,6 +21,9 @@ Fastsite CMS (бывш. Cetera CMS) — PHP-CMS/eCommerce. Репозитори�
 ## Сборка
 
 - PHP: `composer install` (PHP >= 8.1). Пакет `cetera-labs/library` скачивается zip-архивом с cms.cetera.ru (ExtJS 4, ace, cropper и пр.).
+  Блок `repositories` с этим архивом composer читает только из корневого `composer.json`, поэтому он продублирован в `composer.json` каждого сайта.
+- `phing/phing` — в `require`, а не в `require-dev`: сайты вызывают `phing -f vendor/cetera-labs/cetera-cms/build.xml` в своём `post-update-cmd`,
+  в том числе на боевых серверах (`--no-dev`), а `require-dev` зависимостей composer не ставит.
 - `build.xml` (Phing, target `dist`) — деплой в соседний сайт: пути относительные (`../../../www/cms`, `../library`),
   т.е. рассчитан на запуск из `www/../vendor/cetera-labs/cetera-cms`. Склеивает `cms/js/vendor.js`, `cms/css/global.css`,
   копирует `cms/*` в `www/cms`, собранный UI из `back-office/build` и статику включённых плагинов (через `\Cetera\Phing`).
