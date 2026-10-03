@@ -72,7 +72,7 @@ class Templateable extends Widget {
 						include( CMSROOT.'/widgets/'.$tpl );
 					}
 					else {
-						print 'Template '.$tpl.' is not found';
+						print self::errorHtml('Template '.$tpl.' is not found');
 					}
 				  
 					$result = ob_get_contents();
@@ -83,7 +83,7 @@ class Templateable extends Widget {
 			
 			}
 			catch (\Exception $e) {
-				return 'Error in '.$e->getFile().':'.$e->getLine();
+				return self::errorHtml($e);
 			}
 
         } 

@@ -164,6 +164,31 @@ class Widget {
     public function display() {
          print $this->getHtml();
     }
+
+    /**
+     * HTML вместо виджета, который не удалось вывести.
+     *
+     * Пользователям back-office ошибка показывается блоком Foundation (callout alert),
+     * чтобы она была заметна и оформлена в стиле сайта; посетителям — только в HTML-комментарии.
+     *
+     * @param \Throwable|string $error
+     * @return string
+     */
+    public static function errorHtml($error)
+    {
+        $message = $error instanceof \Throwable ? $error->getMessage() : (string)$error;
+
+        $user = null;
+        try {
+            $user = \Cetera\Application::getInstance()->getUser();
+        } catch (\Throwable $e) {
+        }
+
+        if ($user && $user->allowBackOffice()) {
+            return '<div class="callout alert widget-error">'.htmlspecialchars($message).'</div>';
+        }
+        return '<!-- '.str_replace('--', '- -', $message).' -->';
+    }
 	
     public function __toString() {
          return $this->getHtml();

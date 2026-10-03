@@ -1413,7 +1413,7 @@ class Application {
         }
         catch (\Exception $e) {
             $widget = new Widget\Html(0, [
-                'template' => $e->getMessage().' In '.$e->getFile().':'.$e->getLine()
+                'template' => Widget\Widget::errorHtml($e)
             ]);
         } 	
         
@@ -1638,7 +1638,7 @@ class Application {
 						$result = str_replace($str, $widget->getHtml(), $result);	
 					} 
 					catch (\Exception $e) {
-						$result = str_replace($str,'<!-- '.$e->getMessage().' -->', $result);	
+						$result = str_replace($str, Widget\Widget::errorHtml($e), $result);
 					}
 					break;
 					
@@ -1686,7 +1686,7 @@ class Application {
                     $result = str_replace($widget_str, $widget->getHtml(), $result);
                 }
                 catch (\Exception $e) {
-                    $result = str_replace($widget_str, $e->getMessage(), $result);
+                    $result = str_replace($widget_str, Widget\Widget::errorHtml($e), $result);
                 }
             }
             
