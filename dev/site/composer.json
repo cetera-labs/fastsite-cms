@@ -20,17 +20,6 @@
                 "symlink": true,
                 "versions": { "fastsite-labs/fastsite-cms": "dev-master" }
             }
-        },
-        {
-            "type": "package",
-            "package": {
-                "name": "cetera-labs/library",
-                "version": "13",
-                "dist": {
-                    "url": "https://cms.cetera.ru/lib.zip",
-                    "type": "zip"
-                }
-            }
         }
     ],
     "config": {

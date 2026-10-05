@@ -18,7 +18,7 @@
     "require": {
         "php": ">=8.1",
         "cetera-labs/cetera-cms-plugin-controller": "^1.1",
-        "cetera-labs/library":"13",
+        "cetera-labs/library": "^13.0",
         "doctrine/dbal": "^2.12",
         "doctrine/orm": "^2.10",
         "gedmo/doctrine-extensions": "^3",       
@@ -50,20 +50,5 @@
         "psr-0": { 
 			"Cetera\\": "cms/include/classes/"
 		}
-    },
-	
-    "repositories":[
-        {
-            "type":"package",
-            "package":{
-                "name":"cetera-labs/library",
-                "version":"13",
-                "dist":{
-                    "url":"https://cms.cetera.ru/lib.zip",
-                    "type":"zip"
-                }
-            }
-        }
-    ]	
-
+    }
 }
