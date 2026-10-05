@@ -33,7 +33,7 @@
         "laminas/laminas-http": "^2.10",
 		"laminas/laminas-router": "^3.3",
         "laminas/laminas-mvc": "^3.1",        
-        "phpmailer/phpmailer": "~6.5",
+        "phpmailer/phpmailer": "~6.5 || ~7.0",
         "symfony/polyfill-intl-idn": "^1.42",
         "twig/twig": "~3.0",
         "guzzlehttp/guzzle": "~7.0",
