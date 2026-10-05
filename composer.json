@@ -36,7 +36,7 @@
         "phpmailer/phpmailer": "~6.5",
         "symfony/polyfill-intl-idn": "^1.42",
         "twig/twig": "~3.0",
-        "guzzlehttp/guzzle": "~7.0",
+        "guzzlehttp/guzzle": "~7.0 || ~8.0",
         "ifsnop/mysqldump-php":"^2.13",
         "phing/phing": "^3.1",
         "componavt/phpmorphy": "^0.3",
