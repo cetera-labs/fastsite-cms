@@ -687,7 +687,7 @@ class Schema {
 				foreach ($dbtable['keys'] as $kid => $key) 
 				    $res[] = array(
 						'error'  => self::EXTRA_KEY,
-						'field'  => $key['name'].' ('.implode(',', $key['columns']).')',
+						'field'  => $this->getIndexDef($key),
 						'table'  => $table['name'],
 						'module' => $module,
 						'found'	 => $key['name'],
