@@ -67,7 +67,8 @@ try {
       // новый материал по шаблону
       if ($duplicate) {
       
-          $fields = $application->getConn()->fetchAssoc("SELECT * from $math WHERE id=?", array($id));
+          $math_q = $application->getConn()->quoteIdentifier($math);
+          $fields = $application->getConn()->fetchAssoc("SELECT * from $math_q WHERE id=?", array($id));
           $id = null;
       	  $fields['alias'] = '';
           $fields['idcat'] = $idcat;
