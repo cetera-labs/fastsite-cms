@@ -31,7 +31,8 @@ echo json_encode($nodes);
 function get_children($node) {
     
     $children = [];
-    foreach ($node->getChildren() as $c) {
+    foreach ($node->getItems() as $it) {
+        $c = $it['item'];
     
 		$link = 0;
         $subs = [];
@@ -56,8 +57,11 @@ function get_children($node) {
             $icon = 'tree-material';        
         }
     
+        if ($it['hidden']) $name = '<span style="opacity:.5;text-decoration:line-through">'.$name.'</span>';
+
         $children[] = [
             'name'    => $name,
+            'hidden'  => $it['hidden'] ? 1 : 0,
             'data'    => $data,
             'iconCls' => $icon,
             'leaf'    => (boolean)(1-$link),
