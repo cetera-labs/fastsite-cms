@@ -101,6 +101,7 @@ class SessionSaveHandler implements SaveHandlerInterface
      *
      * @param int $maxlifetime
      */
+    #[\ReturnTypeWillChange]
     public function gc($maxlifetime)
     {
         try {
