@@ -136,28 +136,48 @@ class Menu extends Base {
 		);
   	}  
     
+    /**
+     * Разбирает массив данных меню в объекты вместе с флагом скрытия.
+     */
+    public static function resolveItems(array $data)
+    {
+        $items = array();
+        foreach ($data as $d) {
+            try {
+                if (isset($d['id']) && $d['id']) {
+                    $o = DynamicFieldsObject::getByIdType($d['id'], $d['type']);
+                }
+                elseif (isset($d['url']) && $d['url']) {
+                    $o = new ExternalLink($d);
+                }
+                else {
+                    throw new \Exception('Cant parse menu child');
+                }
+                $items[] = array('item' => $o, 'hidden' => !empty($d['hidden']), 'data' => $d);
+            } catch (\Exception $e) {}
+        }
+        return $items;
+    }
+
+    /**
+     * Все элементы меню, включая скрытые (для админки).
+     */
+    public function getItems()
+    {
+        return is_array($this->_data) ? self::resolveItems($this->_data) : array();
+    }
+
     public function getChildren()
     {
         if (!is_array($this->_children)) {
             $this->_children = array();
             if (is_array($this->_data)) {
-                $check = array();
-                foreach ($this->_data as $d) {
-                    try {
-						if (isset($d['id']) && $d['id']) {
-							$this->_children[] = DynamicFieldsObject::getByIdType($d['id'], $d['type']);
-						}
-						elseif (isset($d['url']) && $d['url']) {
-							$this->_children[] = new ExternalLink($d);
-						}
-						else {
-							throw new \Exception('Cant parse menu child');
-						}
-                        $check[] = $d;
-                    } catch (\Exception $e) {}
+                $items = self::resolveItems($this->_data);
+                foreach ($items as $i) {
+                    if (!$i['hidden']) $this->_children[] = $i['item'];
                 }
-                if (sizeof($check) < sizeof($this->_data)) {
-                    $this->_data = $check;
+                if (sizeof($items) < sizeof($this->_data)) {
+                    $this->_data = array_column($items, 'data');
                     $this->save();
                 }
             }

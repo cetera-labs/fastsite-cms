@@ -64,6 +64,7 @@ function parse_data($d) {
 				'name' => str_replace('%DASH%','-',$f[3]),
                 'children' => parse_data($c['children']),
 			];
+			if (!empty($c['hidden'])) $data[sizeof($data)-1]['hidden'] = 1;
 		}
 		else {
 			if ($f[0] != 'material') {
@@ -75,6 +76,7 @@ function parse_data($d) {
 				'table' => $f[2],
 				'type'  => $f[3],
 			);
+			if (!empty($c['hidden'])) $data[sizeof($data)-1]['hidden'] = 1;
 		}
     }
 

@@ -100,14 +100,15 @@ class SessionSaveHandler implements SaveHandlerInterface
      * than $maxlifetime (in seconds)
      *
      * @param int $maxlifetime
+     * @return int|false количество удалённых сессий
      */
-    public function gc($maxlifetime)
+    public function gc($maxlifetime): int|false
     {
         try {
-            $this->getDbConnection()->executeQuery('DELETE FROM session_data WHERE timestamp<?',[time()-$maxlifetime]);
+            return (int)$this->getDbConnection()->executeStatement('DELETE FROM session_data WHERE timestamp<?',[time()-$maxlifetime]);
         } catch (\Exception $e) {
-        }            
-		return true;
+            return false;
+        }
     }
 
 }

@@ -54,6 +54,14 @@ Ext.define('Cetera.panel.Menu', {
                 scope: this
             },				
 			{
+                itemId: 'toggle_item',
+                iconCls:'icon-edit',
+                disabled: true,
+                text: _('Скрыть/показать'),
+                handler: this.toggleItem,
+                scope: this
+            },
+			{
                 id: 'tb_menu_deleteitem',
                 iconCls:'icon-delete',
                 disabled: true,
@@ -146,6 +154,7 @@ Ext.define('Cetera.panel.Menu', {
 				var tb = this.getDockedItems('toolbar[dock="top"]')[0];
 				tb.getComponent("add_item").setDisabled( !node[0] );				
 				tb.getComponent("edit_item").setDisabled( !link );
+				tb.getComponent("toggle_item").setDisabled( !node[0] || !!menu );
 					
                 if (node[0] && menu) {
                 
@@ -384,6 +393,18 @@ Ext.define('Cetera.panel.Menu', {
         }, this);    
     },
     
+    toggleItem: function() {
+        var sn = this.menus.getSelectionModel().getLastSelected();
+        if (!sn || sn.get('menu')) return;
+        sn.set('hidden', sn.get('hidden') ? 0 : 1);
+        var m = this.getSelectedMenuNode();
+        this.call({
+            action: 'save',
+            'children': Ext.JSON.encode(this.nodeAsArray(m)),
+            id: m.get('menu')
+        });
+    },
+
     deleteItem: function() {
         var sn = this.menus.getSelectionModel().getLastSelected(); 
         if (!sn || sn.get('menu')) return;
@@ -411,6 +432,7 @@ Ext.define('Cetera.panel.Menu', {
         Ext.Array.each(node.childNodes, function(child) {
             children[children.length] = {
                 data: child.get('data'),
+                hidden: child.get('hidden') ? 1 : 0,
                 children: this.nodeAsArray(child)
             }
         }, this); 
