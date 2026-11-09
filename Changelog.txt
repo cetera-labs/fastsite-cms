@@ -1,3 +1,10 @@
+3.81.2
+
+    * feat: Флаг «скрыть» у пунктов меню
+    * fix: SessionSaveHandler::gc() помечен ReturnTypeWillChange
+    * fix: SessionSaveHandler::gc() возвращает int|false вместо заглушки
+    * CCTM-1625 fix: в ссылке бэкофиса терялся id вложенного модуля
+
 3.81.1
 
     * CCTM-1606 cetera-labs/library подключается с Packagist (^13.0), а не архивом с cms.cetera.ru
