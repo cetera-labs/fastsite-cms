@@ -14,7 +14,7 @@ include_once('include/common.php');
     <?php if ($application->getVar('setup_done')) : ?>    
     
         <script type="text/javascript" src="/cms/config.php"></script>	
-        <script type="text/javascript" src="/cms/js/app.js"></script>
+        <script type="text/javascript" src="/cms/js/app.js?v=<?php echo VERSION; ?>"></script>
     <?php else : ?> 
         <?php include('setup.php'); ?>         
     <?php endif ?>     
