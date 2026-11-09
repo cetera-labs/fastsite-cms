@@ -263,9 +263,11 @@ Ext.application({
             var active = '';
             var act = tabs.getActiveTab();
             for (var i = 0; i < tabs.items.getCount(); i++) {
-                var a = tabs.items.getAt(i).id.split('-');
-                m[i] = a[1];
-                if (act && tabs.items.getAt(i).id == act.id) active = a[1];
+                // id вкладки - 'tab-' + id модуля. У вложенных модулей (addModule с items)
+                // id составной: группа-модуль, поэтому берём его целиком, а не второе слово
+                var id = tabs.items.getAt(i).id.replace(/^tab-/, '');
+                m[i] = id;
+                if (act && tabs.items.getAt(i).id == act.id) active = id;
             }
             
             link += '$modules:' + m + '$active:' + active;
@@ -310,6 +312,11 @@ Ext.application({
     },
     
     activateModule: function(module, callback) {
+        var config = Config.modules[module];
+
+        // группа меню (у неё только items) вкладкой не открывается: показывать в ней нечего
+        if (config && !config['class'] && !config['html'] && !config['url']) return;
+
         var tab_id = 'tab-'+module;
         var tab = tabs.query('#'+tab_id);
     
